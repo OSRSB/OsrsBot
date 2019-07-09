@@ -3,10 +3,13 @@ package net.runelite.client.rsb.methods;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.wrappers.*;
+import net.runelite.client.ui.DrawManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Consumer;
 
 /**
  * Inventory related operations.
@@ -14,6 +17,106 @@ import java.util.LinkedList;
  * @author Jacmob, Aut0r, kiko
  */
 public class Inventory extends MethodProvider {
+
+	//Identifies whether an item is selected or not
+	public volatile boolean isSelected = false;
+
+	/**
+	 * Enumerations of the group IDs for item containers
+	 * Used in class to identify the different interfaces for inventory
+	 */
+	private enum InventoryInterfaceId {
+		//INVENTORY_CONTAINER_GROUP_ID
+		INVENTORY(WidgetInfo.INVENTORY.getGroupId()),
+		//BANK_INVENTORY_CONTAINER_GROUP_ID
+		BANK(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId()),
+		//STORE_INVENTORY_CONTAINER_GROUP_ID
+		STORE(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId()),
+		//GRAND_EXCHANGE_INVENTORY_GROUP_ID
+		GRAND_EXCHANGE(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER.getGroupId());
+
+		private int index;
+
+		InventoryInterfaceId(int index) {
+			this.index = index;
+		}
+
+		int getIndex() {
+			return index;
+		}
+
+	}
+
+	/**
+	 * Holds the widget and name of the widget for in file use
+	 */
+	private class InventoryInterface {
+		private String name;
+		private RSWidget widget;
+		InventoryInterface(RSWidget widget, String name) {
+			this.widget = widget;
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public RSWidget getWidget() {
+			return widget;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setWidget(RSWidget widget) {
+			this.widget = widget;
+		}
+	}
+
+	/**
+	 * Possibly unnecessary, but used in the selection methods
+	 * Holds values for the return of the <type>BufferedImage</type>
+	 * method getRGB
+	 */
+	private class Color {
+		// Components will be in the range of 0..255:
+		int blue;
+		int green;
+		int red;
+		int alpha;
+
+		Color(int color) {
+			blue = color & 0xff;
+			green = (color & 0xff00) >> 8;
+			red = (color & 0xff0000) >> 16;
+			alpha = (color & 0xff000000) >>> 24;
+		}
+
+		Color(int red, int green, int blue, int alpha) {
+			this.blue = blue;
+			this.green = green;
+			this.red = red;
+			this.alpha = alpha;
+		}
+
+		private boolean equals(Color color) {
+			if (this.red != color.red) {
+				return false;
+			}
+			if (this.blue != color.blue) {
+				return false;
+			}
+			if (this.green != color.green) {
+				return false;
+			}
+			if (this.alpha != color.alpha) {
+				return false;
+			}
+			return true;
+		}
+	}
 
 	Inventory(MethodContext ctx) {
 		super(ctx);
@@ -24,20 +127,20 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @return the inventory interface
 	 */
-	public RSWidget getInterface() {
-		if (methods.interfaces.get(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId()).isValid()) {
-			RSWidget bankInv = methods.interfaces.getComponent(
-					WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0);
-			if (bankInv != null && bankInv.getAbsoluteX() > 50) {
-				return bankInv;
-			}
+	public InventoryInterface getInterface() {
+		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange";
+		RSWidget inventoryWidget = methods.interfaces.getComponent(WidgetInfo.INVENTORY.getGroupId(), 0),
+				bankWidget = methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0),
+				storeWidget = methods.interfaces.getComponent(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0),
+				grandExchangeWidget = methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0);
+		if (bankWidget.isValid() && bankWidget.isVisible()) {
+				return new InventoryInterface(bankWidget, BANK);
 		}
-		if (methods.interfaces.get(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId()).isValid()) {
-			RSWidget shopInv = methods.interfaces.getComponent(
-					WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0);
-			if (shopInv != null && shopInv.getAbsoluteX() > 50) {
-				return shopInv;
-			}
+		if (storeWidget.isValid() && storeWidget.isVisible()) {
+				return new InventoryInterface(storeWidget, STORE);
+		}
+		if (grandExchangeWidget.isValid() && grandExchangeWidget.isVisible()) {
+				return new InventoryInterface(grandExchangeWidget, GRAND_EXCHANGE);
 		}
 
 		// Tab has to be open for us to get content
@@ -46,8 +149,9 @@ public class Inventory extends MethodProvider {
 			sleep(random(400, 900));
 		}
 
-		return methods.interfaces.getComponent(WidgetInfo.INVENTORY.getGroupId(), 0);
+		return new InventoryInterface(inventoryWidget, INVENTORY);
 	}
+
 
 	/**
 	 * Destroys any inventory items with the given ID.
@@ -62,8 +166,8 @@ public class Inventory extends MethodProvider {
 			return false;
 		}
 		while (item != null) {
-			if (methods.interfaces.get(94).isValid()) {
-				methods.interfaces.getComponent(94, 3).doClick();
+			if (methods.interfaces.get(WidgetInfo.DESTROY_ITEM.getGroupId()).isValid()) {
+				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM.getGroupId(), WidgetInfo.DESTROY_ITEM_YES.getChildId()).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
@@ -355,9 +459,16 @@ public class Inventory extends MethodProvider {
 	 *         selected.
 	 */
 	public String getSelectedItemName() {
-		String name = getInterface().getComponents()[getSelectedItemIndex()].getName();
-		return !isItemSelected() || name == null ? null : name.replaceAll(
-				"<[\\w\\d]+=[\\w\\d]+>", "");
+		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+			String name = new RSItem(methods, getInterface().getWidget().getWidgetItems()[getSelectedItemIndex()]).getName();
+			return !isItemSelected() || name == null ? null : name.replaceAll(
+					"<[\\w\\d]+=[\\w\\d]+>", "");
+		}
+		else {
+			String name = getInterface().getWidget().getComponents()[getSelectedItemIndex()].getName();
+			return !isItemSelected() || name == null ? null : name.replaceAll(
+					"<[\\w\\d]+=[\\w\\d]+>", "");
+		}
 	}
 
 	/**
@@ -366,14 +477,83 @@ public class Inventory extends MethodProvider {
 	 * @return The index of current selected item, or -1 if none is selected.
 	 */
 	public int getSelectedItemIndex() {
-		RSWidget[] comps = getInterface().getComponents();
-		for (int i = 0; i < Math.min(28, comps.length); ++i) {
-			if (comps[i].getBorderThickness() == 2) {
-				return i;
+		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+			RSWidgetItem[] comps = getInterface().getWidget().getWidgetItems();
+			for (int i = 0; i < Math.min(28, comps.length); ++i) {
+				try {
+					isSelected = false;
+					checkIsSelected(new RSItem(methods, comps[i]));
+					if (isSelected) {
+						return i;
+					}
+				} catch (NullPointerException e) {
+					//This means the selected item is null so we return here -1;
+					return -1;
+				}
+			}
+
+		}
+		else {
+			RSWidget[] comps = getInterface().getWidget().getComponents();
+			for (int i = 0; i < Math.min(28, comps.length); ++i) {
+				if (comps[i].getBorderThickness() == 2) {
+					return i;
+				}
 			}
 		}
 		return -1;
 	}
+
+	/**
+	 * Uses a callback to get the last drawn image and then performs the method getSelected to update the
+	 * isSelectedValue
+	 *
+	 * @param item the item to check if is selected
+	 */
+	public void checkIsSelected(RSItem item) {
+		Consumer<Image> imageCallback = (img) ->
+		{
+			// This callback is on the game thread, move to executor thread
+			methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(() ->
+			getSelected(img, item));
+		};
+
+		methods.runeLite.getInjector().getInstance(DrawManager.class).requestNextFrameListener(imageCallback);
+	}
+
+	/**
+	 * Checks the image for the item position and then checks that set of bounds for any pure white pixels
+	 * which would indicate that the item is selected (No items use 255, 255, 255)
+	 * If it finds any the isSelected value is updated to true
+	 *
+	 * @param img the client image
+	 * @param item the item to check for if it is selected
+	 */
+	public void getSelected(Image img, RSItem item) {
+		int x = item.getItem().getItemLocation().getX();
+		int y = item.getItem().getItemLocation().getY();
+		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics graphics = im.getGraphics();
+		graphics.drawImage(img, 0, 0, null);
+		BufferedImage itemImage = methods.runeLite.getItemManager().getImage(item.getID());
+		int height = itemImage.getHeight();
+		int width = itemImage.getWidth();
+
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < 2; j++) {
+				if (i + j < width) {
+					int colorValue = im.getRGB(x + i + j, y + i);
+					Color color = new Color(colorValue);
+					Color white = new Color(255, 255, 255, 255);
+					if (color.equals(white)) {
+						isSelected = true;
+						return;
+					}
+				}
+			}
+		}
+	}
+
 
 	/**
 	 * Gets the selected inventory item.
@@ -414,7 +594,12 @@ public class Inventory extends MethodProvider {
 	 * @return The item, or <tt>null</tt> if not found.
 	 */
 	public RSItem getItemAt(final int index) {
-		RSWidget comp = getInterface().getComponent(index);
+		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+			RSWidgetItem comp = getInterface().getWidget().getWidgetItems()[index];
+			return 0 <= index && index < 28 && comp != null ? new RSItem(methods,
+					comp) : null;
+		}
+		RSWidget comp = getInterface().getWidget().getComponent(index);
 		return 0 <= index && index < 28 && comp != null ? new RSItem(methods,
 				comp) : null;
 	}
@@ -426,28 +611,24 @@ public class Inventory extends MethodProvider {
 	 *         <tt>RSItem[0]</tt>.
 	 */
 	public RSItem[] getItems() {
-		RSWidget invIface = getInterface();
-		if (invIface != null) {
-			if (invIface.getComponents().length > 0) {
-				int len = 0;
-				RSWidget[] comps = invIface.getComponents();
-				for (RSWidget com : comps) {
-					if (com.getType() == 5) {
-						++len;
-					}
+		RSWidget invIface = getInterface().getWidget();
+		if (invIface.getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+			if (invIface != null) {
+				RSWidgetItem[] invItems = invIface.getWidgetItems();
+				RSItem[] items = new RSItem[invItems.length];
+				for (int i = 0; i < invItems.length; i++) {
+					items[i] = new RSItem(methods, invItems[i]);
 				}
-				RSItem[] inv = new RSItem[len];
-				for (int i = 0; i < len; ++i) {
-					RSWidget item = comps[i];
-					int idx = WidgetInfo.TO_CHILD(item.getId());
-					if (idx >= 0) {
-						inv[idx] = new RSItem(methods, item);
-					} else {
-						return new RSItem[0];
-					}
-				}
-				return inv;
+				return items;
 			}
+		}
+		if (invIface != null) {
+			RSWidget[] invItems = invIface.getComponents();
+			RSItem[] items = new RSItem[invItems.length];
+			for (int i = 0; i < invItems.length; i++) {
+				items[i] = new RSItem(methods, invItems[i]);
+			}
+			return items;
 		}
 
 		return new RSItem[0];
@@ -480,31 +661,26 @@ public class Inventory extends MethodProvider {
 	 *         <tt>RSItem[0]</tt>.
 	 */
 	public RSItem[] getCachedItems() {
-		RSWidget invIface = methods.interfaces.getComponent(
-				WidgetInfo.INVENTORY.getGroupId(), 0);
-		if (invIface != null) {
-			if (invIface.getComponents().length > 0) {
-				int len = 0;
-				for (RSWidget com : invIface.getComponents()) {
-					if (com.getType() == 5) {
-						++len;
-					}
+		RSWidget invIface = getInterface().getWidget();
+		if (invIface.getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+			if (invIface != null) {
+				RSWidgetItem[] invItems = invIface.getWidgetItems();
+				RSItem[] items = new RSItem[invItems.length];
+				for (int i = 0; i < invItems.length; i++) {
+					items[i] = new RSItem(methods, invItems[i]);
 				}
-
-				RSItem[] inv = new RSItem[len];
-				for (int i = 0; i < len; ++i) {
-					RSWidget item = invIface.getComponents()[i];
-					int idx = WidgetInfo.TO_CHILD(item.getId());
-					if (idx >= 0) {
-						inv[idx] = new RSItem(methods, item);
-					} else {
-						return new RSItem[0];
-					}
-				}
-
-				return inv;
+				return items;
 			}
 		}
+		if (invIface != null) {
+			RSWidget[] invItems = invIface.getComponents();
+			RSItem[] items = new RSItem[invItems.length];
+			for (int i = 0; i < invItems.length; i++) {
+				items[i] = new RSItem(methods, invItems[i]);
+			}
+			return items;
+		}
+
 
 		return new RSItem[0];
 	}

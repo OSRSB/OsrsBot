@@ -235,6 +235,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
         return client = injector.getInstance(Client.class);
     }
 
+    public ItemManager getItemManager() { return injector.getInstance(ItemManager.class);}
+
     public MethodContext getMethodContext() {
         return methods;
     }

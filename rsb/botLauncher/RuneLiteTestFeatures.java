@@ -6,10 +6,13 @@ import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.methods.Inventory;
+import net.runelite.client.rsb.util.OutputObjectComparer;
+import net.runelite.client.rsb.util.Parameters;
 import net.runelite.client.rsb.wrappers.RSNPC;
 import net.runelite.client.rsb.wrappers.RSPlayer;
 
 import java.awt.*;
+import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 @Slf4j
@@ -17,7 +20,8 @@ public class RuneLiteTestFeatures {
 
     static boolean onWelcomeScreen = true;
     static RSNPC enemy = null;
-
+    static HashMap<String, Object> lastOutputs = new HashMap<>();
+    static OutputObjectComparer test = null;
 
     public static void init(RuneLite bot) {
         while (true) {
@@ -38,7 +42,7 @@ public class RuneLiteTestFeatures {
                 // use later bot.getClient().getCurrentLoginField()
                 bot.getMethodContext().keyboard.sendText("SampleMarco.Reca@gmail.com", true);
                 bot.getMethodContext().keyboard.sendText("xKFOfUnC", true);
-                sleep(6000);
+                sleep(18000);
                 //Authenticator
                 if (bot.getClient().getLoginIndex() == 4) {
 
@@ -52,18 +56,17 @@ public class RuneLiteTestFeatures {
                 Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
                 bot.getMethodContext().mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
                 bot.getMethodContext().mouse.click(true);
-                sleep(5000);
+                sleep(8000);
             }
         }
     }
 
     private static void testFeature(RuneLite bot) throws InterruptedException {
+        sleep(2000);
             if (bot.getClient() != null && bot.getClient().getLocalPlayer() != null) {
-                sleep(2000);
-                Client player = bot.getInjector().getInstance(Client.class);
                 if (enemy == null || (new RSPlayer(bot.getMethodContext(), bot.getClient().getLocalPlayer())).getInteracting() != enemy.getAccessor()) {
-                    log.warn("Name: " + bot.getMethodContext().inventory.getItems()[1].getName());
-                    //bot.getMethodContext().game.setChatOption(Game.ChatOptions.CHAT_OPTION_PUBLIC, Game.ChatMode.OFF);
+
+
                     //enemy = bot.getMethodContext().npcs.getNearest("Chicken");
                     //bot.getMethodContext().game.logout();
                     //bot.getMethodContext().bank.close();
@@ -80,7 +83,7 @@ public class RuneLiteTestFeatures {
     }
 
     public static boolean conditional(Integer x) {
-        return (x < 800 && x >= 0);
+        return (x < 28 && x >= 0);
 
     }
 
