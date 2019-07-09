@@ -251,6 +251,22 @@ public class RSWidget extends MethodProvider {
         return components;
     }
 
+    public RSWidgetItem[] getWidgetItems() {
+        if (widget.getWidgetItems() != null) {
+            WidgetItem[] widgetItems = widget.getWidgetItems().toArray(new WidgetItem[]{});
+            RSWidgetItem[] items = new RSWidgetItem[widgetItems.length];
+            for (int i = 0; i < items.length; i++) {
+                items[i] = new RSWidgetItem(methods, widgetItems[i]);
+            }
+            return items;
+        }
+        return null;
+    }
+
+    public RSWidgetItem getWidgetItem(int idx) {
+        return new RSWidgetItem(methods, widget.getWidgetItem(idx));
+    }
+
     public RSWidget getDynamicComponent(int idx) {
         return new RSWidget(methods, widget.getChild(idx));
     }
@@ -408,6 +424,24 @@ public class RSWidget extends MethodProvider {
     public RSWidget getParent() {
         return new RSWidget(methods, parentWidget.getParentId(), parentId);
     }
+
+    /**
+     * Gets the group index of this widget
+     * @return the group index
+     */
+    public int getGroupIndex() {
+        return WidgetInfo.TO_GROUP(widget.getId());
+    }
+
+    /**
+     * Gets the child index of this widget
+     * @return the child index
+     */
+    public int getChildIndex() {
+        return WidgetInfo.TO_CHILD(widget.getId());
+    }
+
+
 
     /**
      * Gets the absolute position of the child

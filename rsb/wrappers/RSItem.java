@@ -15,18 +15,22 @@ public class RSItem extends MethodProvider {
 	private final int id;
 	private final int stack;
 	private RSWidget component;
+	private RSWidgetItem item;
 
-	public RSItem(final MethodContext ctx, final int id, final int stack) {
+	public RSItem(final MethodContext ctx, final RSWidgetItem item) {
 		super(ctx);
-		this.id = id;
-		this.stack = stack;
+		this.id = item.getItemId();
+		this.stack = item.getStackSize();
+		this.item = item;
 	}
 
 	public RSItem(final MethodContext ctx, final Item item) {
 		super(ctx);
 		id = item.getId();
 		stack = item.getQuantity();
+		//This is only used for ground objects and thus does not need component declared
 	}
+
 
 	public RSItem(final MethodContext ctx, final RSWidget item) {
 		super(ctx);
@@ -72,6 +76,14 @@ public class RSItem extends MethodProvider {
 		return getDefinition() != null;
 	}
 
+	/**Gets the item wrapped by this RSItem
+	 *
+	 * @return The wrapped item or <code>null</code>
+	 */
+	public RSWidgetItem getItem() {
+		return item;
+	}
+
 	/**
 	 * Gets the component wrapped by this RSItem.
 	 *
@@ -87,8 +99,18 @@ public class RSItem extends MethodProvider {
 	 * @return <tt>true</tt> if there is a visible wrapped component.
 	 */
 	public boolean isComponentValid() {
-		return component != null && component.isValid();
+		return component != null && component.isVisible();
 	}
+
+	/**
+	 * Checks whether or not a valid item is being wrapped.
+	 *
+	 * @Return <tt>true</tt> if there is a visible wrapped item
+	 */
+	public boolean isItemValid() {
+		return item.isValid();
+	}
+
 
 	/**
 	 * Gets the name of this item using the wrapped component's name
@@ -130,7 +152,7 @@ public class RSItem extends MethodProvider {
 	 *         successfully; otherwise <tt>false</tt>.
 	 */
 	public boolean doAction(final String action, final String option) {
-		return component != null && component.doAction(action, option);
+		return (component != null) ?  component.doAction(action, option) : item.doAction(action, option);
 	}
 
 	/**
@@ -142,7 +164,7 @@ public class RSItem extends MethodProvider {
 	 *         successfully; otherwise <tt>false</tt>.
 	 */
 	public boolean doClick(boolean left) {
-		return component != null && component.doClick(left);
+		return (component != null) ? component.doClick(left) : item.doClick(left);
 	}
 
 }

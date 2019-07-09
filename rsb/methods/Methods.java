@@ -133,6 +133,11 @@ public class Methods {
 	 */
 	protected Web web;
 
+	/**
+	 * The singleton of GrandExchange
+	 */
+	protected GrandExchange grandExchange;
+
 
 	/**
 	 * For internal use only: initializes the method providers.
@@ -150,6 +155,7 @@ public class Methods {
 		this.camera = ctx.camera;
 		this.npcs = ctx.npcs;
 		this.game = ctx.game;
+		this.grandExchange = ctx.grandExchange;
 		this.combat = ctx.combat;
 		this.interfaces = ctx.interfaces;
 		this.mouse = ctx.mouse;

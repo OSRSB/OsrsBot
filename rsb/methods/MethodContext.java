@@ -6,6 +6,9 @@ import net.runelite.client.rsb.internal.input.VirtualKeyboard;
 import net.runelite.client.rsb.internal.input.VirtualMouse;
 import net.runelite.client.rsb.internal.InputManager;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.ui.ClientUI;
+
+import javax.swing.*;
 
 import static java.lang.Thread.sleep;
 
@@ -170,6 +173,11 @@ public class MethodContext {
 	public final Equipment equipment = new Equipment(this);
 
 	/**
+	 * The singleton of GrandExchange
+	 */
+	public final GrandExchange grandExchange = new GrandExchange(this);
+
+	/**
 	 * The singleton of virtual mouse
 	 */
 	public final VirtualMouse virtualMouse = new VirtualMouse(this);
@@ -185,23 +193,13 @@ public class MethodContext {
 	public final Client client;
 
 
-
-
 	public final RuneLite runeLite;
 
-	//public final ClientUI clientUI;
-
-	//public final JPanel clientPanel;
 
 	public MethodContext(RuneLite runeLite) {
 		this.runeLite = runeLite;
 		this.client = runeLite.getInjector().getInstance(Client.class);
-		//this.clientUI = runeLite.getClientUI();
-		//this.client = injector.getInstance(Client.class);
-		//this.clientUI = injector.getInstance(ClientUI.class);
-		//this.clientPanel = injector.getInstance(ClientUI.class).container;
 		this.inputManager = runeLite.getInputManager();
-
 	}
 
 }
