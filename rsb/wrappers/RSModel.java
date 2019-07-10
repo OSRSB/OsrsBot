@@ -22,7 +22,7 @@ import java.util.LinkedList;
  *
  * @author Jacmob, SpeedWing
  */
-public abstract class RSModel extends MethodProvider {
+public class RSModel extends MethodProvider {
 
 	/**
 	 * Returns a filter that matches against the array of point indices for the
@@ -39,6 +39,8 @@ public abstract class RSModel extends MethodProvider {
 		};
 	}
 
+	protected Model model;
+
 	protected int[] xPoints;
 	protected int[] yPoints;
 	protected int[] zPoints;
@@ -49,6 +51,7 @@ public abstract class RSModel extends MethodProvider {
 
 	public RSModel(MethodContext ctx, Model model) {
 		super(ctx);
+		this.model = model;
 		xPoints = model.getVerticesX();
 		yPoints = model.getVerticesY();
 		zPoints = model.getVerticesZ();
@@ -57,11 +60,15 @@ public abstract class RSModel extends MethodProvider {
 		indices3 = model.getTrianglesZ();
 	}
 
-	protected abstract int getLocalX();
+	protected int getLocalX() {
+		return -1;
+	}
 
-	protected abstract int getLocalY();
+	protected int getLocalY() {
+		return -1;
+	}
 
-	protected abstract void update();
+	protected void update(){}
 
 	/**
 	 * @param p A point on the screen

@@ -91,4 +91,14 @@ public abstract class MethodProvider {
 		}
 	}
 
+	/**
+	 * Gets the digit at the index of the number
+	 * @param number the number to get the digit from
+	 * @param index the position to check
+	 *
+	 * @return the digit in the number
+	 */
+	int nth ( int number, int index ) {
+		return (int)(number / java.lang.Math.pow(10, index)) % 10;
+	}
 }

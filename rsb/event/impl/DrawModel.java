@@ -23,10 +23,10 @@ public class DrawModel implements PaintListener, MouseListener {
 	private static final HashMap<RSObject.Type, Color> color_map = new HashMap<RSObject.Type, Color>();
 
 	static {
-		color_map.put(RSObject.Type.BOUNDARY, Color.BLACK);
-		color_map.put(RSObject.Type.FLOOR_DECORATION, Color.YELLOW);
-		color_map.put(RSObject.Type.INTERACTABLE, Color.WHITE);
-		color_map.put(RSObject.Type.WALL_DECORATION, Color.GRAY);
+		color_map.put(RSObject.Type.GROUND, Color.BLACK);
+		color_map.put(RSObject.Type.DECORATIVE, Color.YELLOW);
+		color_map.put(RSObject.Type.GAME, Color.WHITE);
+		color_map.put(RSObject.Type.WALL, Color.GRAY);
 	}
 
 	private static final String[] OPTIONS = {"Objects", "Players", "NPCs", "Piles"};

@@ -13,11 +13,6 @@ import java.util.Set;
  */
 public class Objects extends MethodProvider {
 
-    public static final int TYPE_INTERACTABLE = 1;
-    public static final int TYPE_FLOOR_DECORATION = 2;
-    public static final int TYPE_BOUNDARY = 4;
-    public static final int TYPE_WALL_DECORATION = 8;
-
     /**
      * A filter that accepts all matches.
      */
@@ -216,11 +211,11 @@ public class Objects extends MethodProvider {
                 y += methods.client.getBaseY();
 
                 for (GameObject gameObject : tile.getGameObjects()) {
-                    objects.add((RSObject) gameObject);
+                    objects.add(new RSObject(methods, gameObject, RSObject.Type.GAME, plane));
                 }
-                objects.add((RSObject) tile.getDecorativeObject());
-                objects.add((RSObject) tile.getGroundObject());
-                objects.add((RSObject) tile.getWallObject());
+                objects.add(new RSObject(methods, tile.getDecorativeObject(), RSObject.Type.DECORATIVE, plane));
+                objects.add(new RSObject(methods, tile.getGroundObject(), RSObject.Type.GROUND, plane));
+                objects.add(new RSObject(methods, tile.getWallObject(), RSObject.Type.WALL, plane));
             }
         } catch (Exception ignored) {
         }

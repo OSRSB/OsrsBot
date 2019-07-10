@@ -37,6 +37,7 @@ public class RSCharacterModel extends RSModel {
 	 * 0, 1, 0
 	 * -sin(t), 0, cos(t)]
 	 */
+	@Override
 	protected void update() {
 		int theta = c.getOrientation() & 0x3fff;
 		int sin = Calculations.SIN_TABLE[theta];

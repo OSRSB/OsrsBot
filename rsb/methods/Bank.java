@@ -163,7 +163,8 @@ public class Bank extends MethodProvider {
 			if (!isOpen()) {
 				boolean match = false;
 				for (int i = 0; i < 28; i++) {
-					RSWidget comp = methods.interfaces.get(11).getComponent(17).getComponent(i);
+					RSWidget comp = methods.interfaces.get(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId(),
+							WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId()).getDynamicComponent(i);
 					if (comp.getId() == itemID) {
 						itemCount += comp.getStackSize();
 						if (!match) {
@@ -184,10 +185,10 @@ public class Bank extends MethodProvider {
 			}
 			switch (number) {
 				case 0:
-					item.doAction(itemCount > 1 ? "Deposit-All" : "Deposit");
+					item.doAction(itemCount > 1 ? "Deposit-All" : "Deposit-1");
 					break;
 				case 1:
-					item.doAction("Deposit");
+					item.doClick();
 					break;
 				case 5:
 					item.doAction("Deposit-" + number);
@@ -236,7 +237,8 @@ public class Bank extends MethodProvider {
 			outer:
 			for (int i = 0; i < 28; i++) {
 				RSWidget item = isOpen() ? methods.inventory.getItemAt(i).getComponent() :
-						methods.interfaces.get(11).getComponent(17).getComponent(i);
+						methods.interfaces.get(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId(),
+								WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId()).getDynamicComponent(i);
 				if (item != null && item.getId() != -1) {
 					for (int id : items) {
 						if (item.getId() == id) {
@@ -331,7 +333,7 @@ public class Bank extends MethodProvider {
 	 * @return The deposit box <code>RSWidget</code>.
 	 */
 	public RSWidget getBoxInterface() {
-		return methods.interfaces.get(INTERFACE_BANK);
+		return methods.interfaces.get(INTERFACE_DEPOSIT_BOX);
 	}
 
 	/**

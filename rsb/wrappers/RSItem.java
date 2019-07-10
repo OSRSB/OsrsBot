@@ -34,7 +34,7 @@ public class RSItem extends MethodProvider {
 
 	public RSItem(final MethodContext ctx, final RSWidget item) {
 		super(ctx);
-		id = item.getId();
+		id = item.getItemId();
 		stack = item.getStackSize();
 		component = item;
 	}

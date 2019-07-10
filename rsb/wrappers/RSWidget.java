@@ -387,6 +387,19 @@ public class RSWidget extends MethodProvider {
         return -1;
     }
 
+    /**
+     * Gets the item ID of this component
+     *
+     * @return the item ID or -1 if null
+     */
+    public int getItemId() {
+        final Widget inter = this.widget;
+        if (inter != null) {
+            return inter.getItemId();
+        }
+
+        return -1;
+    }
 
     /**
      * Gets the model ID of this component

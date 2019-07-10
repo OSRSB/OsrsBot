@@ -11,8 +11,8 @@ import java.awt.geom.Area;
 
 public class RSObject extends MethodProvider {
 
-	public static enum Type {
-		INTERACTABLE, FLOOR_DECORATION, BOUNDARY, WALL_DECORATION
+	public enum Type {
+		GAME, DECORATIVE, GROUND, WALL;
 	}
 
 	private final TileObject obj;
@@ -105,11 +105,13 @@ public class RSObject extends MethodProvider {
 	 */
 	public RSModel getModel() {
 		if (obj instanceof GameObject) {
-			return (RSModel) ((GameObject) obj).getRenderable().getModel();
+			return new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
 		} else if (obj instanceof WallObject) {
-			return (RSModel) ((WallObject) obj).getRenderable1().getModel();
+			return new RSModel(methods, ((WallObject) obj).getRenderable1().getModel());
 		} else if (obj instanceof GroundObject) {
-			return (RSModel) ((GroundObject) obj).getRenderable().getModel();
+			return new RSModel(methods, ((GroundObject) obj).getRenderable().getModel());
+		} else if (obj instanceof DecorativeObject) {
+			return new RSModel(methods, ((DecorativeObject) obj).getRenderable().getModel());
 		}
 		return null;
 	}

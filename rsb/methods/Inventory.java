@@ -27,13 +27,13 @@ public class Inventory extends MethodProvider {
 	 */
 	private enum InventoryInterfaceId {
 		//INVENTORY_CONTAINER_GROUP_ID
-		INVENTORY(WidgetInfo.INVENTORY.getGroupId()),
-		//BANK_INVENTORY_CONTAINER_GROUP_ID
-		BANK(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId()),
+		INVENTORY(149),
+		//BANK_INVENTORY_ITEMS_CONTAINER_GROUP_ID
+		BANK(15),
 		//STORE_INVENTORY_CONTAINER_GROUP_ID
-		STORE(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId()),
+		STORE(301),
 		//GRAND_EXCHANGE_INVENTORY_GROUP_ID
-		GRAND_EXCHANGE(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER.getGroupId());
+		GRAND_EXCHANGE(467);
 
 		private int index;
 
@@ -129,10 +129,10 @@ public class Inventory extends MethodProvider {
 	 */
 	public InventoryInterface getInterface() {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange";
-		RSWidget inventoryWidget = methods.interfaces.getComponent(WidgetInfo.INVENTORY.getGroupId(), 0),
-				bankWidget = methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0),
-				storeWidget = methods.interfaces.getComponent(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0),
-				grandExchangeWidget = methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER.getGroupId(), 0);
+		RSWidget inventoryWidget = methods.interfaces.getComponent(InventoryInterfaceId.INVENTORY.getIndex(), 0),
+				bankWidget = methods.interfaces.getComponent(InventoryInterfaceId.BANK.getIndex(), 3),
+				storeWidget = methods.interfaces.getComponent(InventoryInterfaceId.STORE.getIndex(), 0),
+				grandExchangeWidget = methods.interfaces.getComponent(InventoryInterfaceId.GRAND_EXCHANGE.getIndex(), 0);
 		if (bankWidget.isValid() && bankWidget.isVisible()) {
 				return new InventoryInterface(bankWidget, BANK);
 		}
