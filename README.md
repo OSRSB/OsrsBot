@@ -21,9 +21,11 @@ rsb folder.
 The line to modify is:
 
 // Draw clientUI overlays
+
 clientUi.paintOverlays(graphics2d);
 
 One can use ctrl+f to locate it and replace it with:
+
 		if (clientUi.getTrayIcon() != null) {
 			// Draw clientUI overlays
 			clientUi.paintOverlays(graphics2d);
@@ -32,17 +34,22 @@ One can use ctrl+f to locate it and replace it with:
 Now the bot is completely set up.
 
 To run you'll need to modify your program arguments to the following depending on how you wish it to run:
+
 --bot
 This will run the bot with all of its interface and features activated
+
 --bot-runelite
 This runs the bot in a pseudo-bot mode, it uses the runelite interface and runs any bot code placed in
 rsb/botLauncher/RuneLiteTestFeatures.java
 It's excellent for testing scripts or verifying functionality of features.
+
 --runelite
 This runs the bot in runelite stock form. It has no additions and behaves normally.
+
 --ea
 This enables assertations, it should never be used with either bot mode.
 It does need to be enabled for base runelite to use --developer-mode
+
 --developer-mode
 Enables the developer features in runelite stock and runelite bot modes. 
 It does nothing in bot mode as it lacks the runelite interface and plugins to utilize it.
