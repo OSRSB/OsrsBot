@@ -65,7 +65,7 @@ public class RuneLiteTestFeatures {
         sleep(2000);
             if (bot.getClient() != null && bot.getClient().getLocalPlayer() != null) {
                 if (enemy == null || (new RSPlayer(bot.getMethodContext(), bot.getClient().getLocalPlayer())).getInteracting() != enemy.getAccessor()) {
-                    bot.getMethodContext().grandExchange.sellItem("Bronze axe", 1, 3);
+                    //bot.getMethodContext().grandExchange.sellItem("Bronze axe", 1, 3);
                     //enemy = bot.getMethodContext().npcs.getNearest("Chicken");
                     //bot.getMethodContext().game.logout();
                     //bot.getMethodContext().bank.close();

@@ -33,8 +33,9 @@ public class Inventory extends MethodProvider {
 		//STORE_INVENTORY_CONTAINER_GROUP_ID
 		STORE(301),
 		//GRAND_EXCHANGE_INVENTORY_GROUP_ID
-		GRAND_EXCHANGE(467);
-
+		GRAND_EXCHANGE(467),
+		//TRADE_INVENTORY_GROUP_ID
+		TRADE(336);
 		private int index;
 
 		InventoryInterfaceId(int index) {
@@ -128,11 +129,12 @@ public class Inventory extends MethodProvider {
 	 * @return the inventory interface
 	 */
 	public InventoryInterface getInterface() {
-		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange";
+		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		RSWidget inventoryWidget = methods.interfaces.getComponent(InventoryInterfaceId.INVENTORY.getIndex(), 0),
 				bankWidget = methods.interfaces.getComponent(InventoryInterfaceId.BANK.getIndex(), 3),
 				storeWidget = methods.interfaces.getComponent(InventoryInterfaceId.STORE.getIndex(), 0),
-				grandExchangeWidget = methods.interfaces.getComponent(InventoryInterfaceId.GRAND_EXCHANGE.getIndex(), 0);
+				grandExchangeWidget = methods.interfaces.getComponent(InventoryInterfaceId.GRAND_EXCHANGE.getIndex(), 0),
+				tradeWidget = methods.interfaces.getComponent(InventoryInterfaceId.TRADE.getIndex(), 0);
 		if (bankWidget.isValid() && bankWidget.isVisible()) {
 				return new InventoryInterface(bankWidget, BANK);
 		}
@@ -140,7 +142,10 @@ public class Inventory extends MethodProvider {
 				return new InventoryInterface(storeWidget, STORE);
 		}
 		if (grandExchangeWidget.isValid() && grandExchangeWidget.isVisible()) {
-				return new InventoryInterface(grandExchangeWidget, GRAND_EXCHANGE);
+			return new InventoryInterface(grandExchangeWidget, GRAND_EXCHANGE);
+		}
+		if (tradeWidget.isValid() && tradeWidget.isVisible()) {
+			return new InventoryInterface(tradeWidget, TRADE);
 		}
 
 		// Tab has to be open for us to get content

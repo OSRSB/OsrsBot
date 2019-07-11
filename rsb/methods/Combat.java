@@ -148,7 +148,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getLifePoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_HEALTH_ORB.getGroupId(), Game.INTERFACE_HP_ORB).getText());
+			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_HEALTH_ORB.getGroupId(), Game.INTERFACE_HP_ORB_AMOUNT).getText());
 		} catch (NumberFormatException ex) {
 			return 0;
 		}
@@ -209,7 +209,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getSpecialBarEnergy() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), Game.INTERFACE_SPECIAL_ORB).getText()
+			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), Game.INTERFACE_SPEC_ORB_AMOUNT).getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;
@@ -223,7 +223,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_PRAYER_ORB.getGroupId(), Game.INTERFACE_PRAYER_ORB).getText()
+			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_PRAYER_ORB.getGroupId(), Game.INTERFACE_PRAYER_ORB_AMOUNT).getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;

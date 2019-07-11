@@ -91,10 +91,10 @@ public class Game extends MethodProvider {
 	public static final int INTERFACE_WELCOME_SCREEN_CHILD = 150;
 	public static final int INTERFACE_WELCOME_SCREEN_PLAY = 18;
 
-	public static final int INTERFACE_HP_ORB = 5;
-	public static final int INTERFACE_PRAYER_ORB = 15;
-	public static final int INTERFACE_RUN_ORB = 23;
-	public static final int INTERFACE_SPECIAL_ORB = 31;
+	public static final int INTERFACE_HP_ORB_AMOUNT = 5;
+	public static final int INTERFACE_PRAYER_ORB_AMOUNT = 15;
+	public static final int INTERFACE_RUN_ORB_AMOUNT = 23;
+	public static final int INTERFACE_SPEC_ORB_AMOUNT = 31;
 
 	public static final int CHATBOX_TALK_INTERFACE = 561;
 

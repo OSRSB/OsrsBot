@@ -4,6 +4,8 @@ import net.runelite.client.rsb.wrappers.RSPlayer;
 import net.runelite.client.rsb.wrappers.RSWidget;
 
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Trade handling.
@@ -17,16 +19,23 @@ public class Trade extends MethodProvider {
 
 	public static final int INTERFACE_TRADE_MAIN = 335;
 	public static final int INTERFACE_TRADE_SECOND = 334;
-	public static final int INTERFACE_TRADE_MAIN_NAME = 15;
-	public static final int INTERFACE_TRADE_SECOND_NAME = 54;
-	public static final int INTERFACE_TRADE_MAIN_OUR = 30;
-	public static final int INTERFACE_TRADE_MAIN_THEIR = 33;
-	public static final int INTERFACE_TRADE_MAIN_ACCEPT = 17;
-	public static final int INTERFACE_TRADE_MAIN_DECLINE = 19;
-	public static final int INTERFACE_TRADE_SECOND_ACCEPT = 36;
-	public static final int INTERFACE_TRADE_SECOND_DECLINE = 37;
 
-	private final static int INTERFACE_TRADE_MAIN_INV_SLOTS = 21;
+	public static final int INTERFACE_TRADE_MAIN_NAME = 31;
+	public static final int INTERFACE_TRADE_SECOND_NAME = 30;
+
+	public static final int INTERFACE_TRADE_MAIN_OUR = 25;
+	public static final int INTERFACE_TRADE_MAIN_THEIR = 28;
+
+	public static final int INTERFACE_TRADE_SECOND_OUR = 28;
+	public static final int INTERFACE_TRADE_SECOND_THEIR = 29;
+
+	public static final int INTERFACE_TRADE_MAIN_ACCEPT = 10;
+	public static final int INTERFACE_TRADE_MAIN_DECLINE = 13;
+
+	public static final int INTERFACE_TRADE_SECOND_ACCEPT = 13;
+	public static final int INTERFACE_TRADE_SECOND_DECLINE = 14;
+
+	private final static int INTERFACE_TRADE_MAIN_INV_SLOTS = 9;
 
 	public static final int TRADE_TYPE_MAIN = 0;
 	public static final int TRADE_TYPE_SECONDARY = 1;
@@ -227,13 +236,17 @@ public class Trade extends MethodProvider {
 
 	/**
 	 * Returns the total number of free slots the other player has
-	 *
+	 *  ElevenGolden has 10 free inventory slots.
 	 * @return The number of free slots.
 	 */
 	private int getFreeSlots() {
 		if (inTradeMain()) {
 			String text = methods.interfaces.get(INTERFACE_TRADE_MAIN).getComponent(
-					INTERFACE_TRADE_MAIN_INV_SLOTS).getText().substring(4, 6);
+					INTERFACE_TRADE_MAIN_INV_SLOTS).getText();
+			//
+			Matcher matcher = Pattern.compile("(has (.*\\d) free inventory slot)").matcher(text);
+			while (matcher.find())
+				text = matcher.group(2);
 			text = text.trim();
 			try {
 				return Integer.parseInt(text);
@@ -242,5 +255,4 @@ public class Trade extends MethodProvider {
 		}
 		return 0;
 	}
-
 }

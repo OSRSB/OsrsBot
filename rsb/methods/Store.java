@@ -11,8 +11,11 @@ import java.util.ArrayList;
 public class Store extends MethodProvider {
 
 	public static final int INTERFACE_STORE = WidgetInfo.SHOP_ITEMS_CONTAINER.getGroupId();
-	public static final int INTERFACE_STORE_BUTTON_CLOSE = 18;
+	public static final int INTERFACE_STORE_DYNAMIC_COMPONENTS = 1;
 	public static final int INTERFACE_STORE_ITEMS = WidgetInfo.SHOP_ITEMS_CONTAINER.getChildId();
+
+	//This seems to be universal in interfaces for the close component.
+	public static final int DYNAMIC_CLOSE_BUTTON = 11;
 
 	Store(final MethodContext ctx) {
 		super(ctx);
@@ -89,7 +92,7 @@ public class Store extends MethodProvider {
 		}
 
 		if (methods.interfaces.getComponent(INTERFACE_STORE,
-				INTERFACE_STORE_BUTTON_CLOSE).doClick()) {
+				INTERFACE_STORE_DYNAMIC_COMPONENTS).getDynamicComponent(DYNAMIC_CLOSE_BUTTON).doClick()) {
 			sleep(random(500, 600));
 			return !isOpen();
 		} else {
