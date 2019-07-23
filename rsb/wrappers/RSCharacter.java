@@ -42,7 +42,7 @@ public abstract class RSCharacter extends MethodProvider {
      * @param option The option of the menu entry to be clicked (if available).
      * @return <tt>true</tt> if the option was found; otherwise <tt>false</tt>.
      */
-    public boolean doAction(final String action, final String option) {
+    public boolean doAction(final String action, final String... option) {
         RSModel model = this.getModel();
         return model != null && this.isValid() && this.getModel().doAction(action, option);
     }

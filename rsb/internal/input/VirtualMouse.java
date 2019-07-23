@@ -80,7 +80,6 @@ public class VirtualMouse {
     }
 
     public final void mouseClicked(MouseEvent e) {
-        //log.debug("X: " + e.getX() + "\nY: " + e.getY() +"\n");
         clientX = e.getX();
         clientY = e.getY();
     }

@@ -58,7 +58,6 @@ public class LoginBot extends Random {
     public boolean activateCondition() {
         GameState idx = game.getClientState();
         return ((idx == GameState.LOGIN_SCREEN || idx == GameState.LOGGING_IN) && account.getName() != null);
-
     }
 
     @Override

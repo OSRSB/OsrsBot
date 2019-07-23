@@ -1,34 +1,26 @@
 package net.runelite.client.rsb.methods;
 
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.MenuEntry;
 import net.runelite.client.rsb.wrappers.RSItem;
+import net.runelite.client.ui.FontManager;
 
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 /**
  * Context menu related operations.
  */
-@Slf4j
 public class Menu extends MethodProvider {
 
     private static final Pattern HTML_TAG = Pattern
             .compile("(^[^<]+>|<[^>]+>|<[^>]+$)");
 
-
-    private Method menuX;
-    private Method menuY;
-
-    final int TOP_OF_MENU_BAR = 18;
-    final int MENU_ENTRY_LENGTH = 15;
-    final int ESTIMATED_FONT_SIZE = 7;
-    final int CANVAS_LENGTH = 503;
+    static final int TOP_OF_MENU_BAR = 18;
+    static final int MENU_ENTRY_LENGTH = 15;
+    static final int MENU_SIDE_BORDER = 7;
+    static final int MAX_DISPLAYABLE_ENTRIES = 32;
 
     Menu(final MethodContext ctx) {
         super(ctx);
@@ -55,17 +47,22 @@ public class Menu extends MethodProvider {
      * @return <tt>true</tt> if the menu item was clicked; otherwise
      * <tt>false</tt>.
      */
-    public boolean doAction(final String action, final String target) {
-        final int idx = getIndex(action, target);
+    public boolean doAction(final String action, final String... target) {
+        int idx = getIndex(action, target);
         if (!isOpen()) {
             if (idx == -1) {
                 return false;
             }
-            if (idx == getEntries().length - 1) {
+            if (idx > MAX_DISPLAYABLE_ENTRIES) {
+                return false;
+            }
+            if (idx == 0) {
                 methods.mouse.click(true);
                 return true;
             }
             methods.mouse.click(false);
+            sleep(random(50,90));
+            idx = getIndex(action, target);
             return clickIndex(idx);
         } else if (idx == -1) {
             while (isOpen()) {
@@ -77,28 +74,6 @@ public class Menu extends MethodProvider {
         return clickIndex(idx);
     }
 
-    /**
-     * Checks whether or not a given action (or action substring) is present in
-     * the menu.
-     *
-     * @param action The action or action substring.
-     * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
-     */
-    public boolean contains(final String action) {
-        return getIndex(action) != -1;
-    }
-
-    /**
-     * Checks whether or not a given action with given target is present
-     * in the menu.
-     *
-     * @param action The action or action substring.
-     * @param target The target or target substring.
-     * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
-     */
-    public boolean contains(final String action, final String target) {
-        return getIndex(action, target) != -1;
-    }
 
     /**
      * Determines if the item contains the desired action.
@@ -139,20 +114,20 @@ public class Menu extends MethodProvider {
             return false;
         }
         if (!isCollapsed()) {
-            return clickMain(methods.client.getMenuEntries(), i);
+            return clickMain(i);
         }
         return false;
     }
 
-    private boolean clickMain(MenuEntry[] entries, final int i) {
-        //Indexes in the menu entries are reversed in game so we need to accommodate for this
-        int inGameIndexPosition = entries.length - i;
+    private boolean clickMain(final int i) {
+        MenuEntry[] entries = getEntries();
         String item = (entries[i].getOption() + " " + entries[i].getTarget().replaceAll("<.*?>", ""));
         Point menu = getLocation();
-        //Lower bounds of random are just low numbers and could be any other low number really
-        int xOff = random(4, item.length() * ESTIMATED_FONT_SIZE);
-        int yOff = TOP_OF_MENU_BAR + (((MENU_ENTRY_LENGTH * (inGameIndexPosition - 1)) + random(1, (MENU_ENTRY_LENGTH - 2))));
-        methods.mouse.move(menu.x + xOff, menu.y + yOff, 2, 2);
+        FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
+        int xOff = random(1, (fm.stringWidth(item) + MENU_SIDE_BORDER) - 1);
+        int yOff = TOP_OF_MENU_BAR + (((MENU_ENTRY_LENGTH * i) + random(1, MENU_ENTRY_LENGTH - 1)));
+        methods.mouse.move(menu.x + xOff, menu.y + yOff);
+        sleep(random(100, 200));
         if (isOpen()) {
             methods.mouse.click(true);
             return true;
@@ -160,92 +135,9 @@ public class Menu extends MethodProvider {
         return false;
     }
 
-
-    /**
-     * Returns the index in the menu for a given action. Starts at 0.
-     *
-     * @param action The action that you want the index of.
-     * @return The index of the given target in the context menu; otherwise -1.
-     */
-    public int getIndex(String action) {
-        action = action.toLowerCase();
-        MenuEntry[] entries = getEntries();
-        for (int i = 0; i < entries.length; i++) {
-            if (entries[i].getOption().toLowerCase().contains(action)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Returns the index in the menu for a given action with a given target.
-     * Starts at 0.
-     *
-     * @param action The action of the menu entry of which you want the index.
-     * @param target The target of the menu entry of which you want the index.
-     *               If target is null, operates like getIndex(String action).
-     * @return The index of the given target in the context menu; otherwise -1.
-     */
-    public int getIndex(String action, String target) {
-        if (target == null) {
-            return getIndex(action);
-        }
-        action = action.toLowerCase();
-        target = target.toLowerCase();
-        String[] actions = getActions();
-        String[] targets = getTargets();
-        /* Throw exception if lenghts unequal? */
-        for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
-            if (actions[i].toLowerCase().contains(action) &&
-                    targets[i].toLowerCase().contains(target)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public MenuEntry[] getEntries() {
-        return methods.client.getMenuEntries();
-    }
-
-    public String[] getActions() {
-        String[] actions = new String[getEntries().length];
-        for (int i = 0; i < getSize(); i++) {
-            actions[i] = getEntries()[i].getOption();
-        }
-        return actions;
-    }
-
-    public String[] getTargets() {
-        String[] targets = new String[getEntries().length];
-        for (int i = 0; i < getSize(); i++) {
-            targets[i] = getEntries()[i].getTarget();
-        }
-        return targets;
-    }
-
-    /**
-     * Returns the menu's location.
-     *
-     * @return The screen space point if the menu is open; otherwise null.
-     */
     public Point getLocation() {
-        if (isOpen()) {
-            return new Point(this.getMenuX(), this.getMenuY());
-        }
-        return null;
+        return new Point(calculateX(), calculateY());
     }
-
-    /**
-     * Returns the menu's item count.
-     *
-     * @return The menu size.
-     */
-    public int getSize() {
-        return getEntries().length;
-    }
-
 
     /**
      * Checks whether or not the menu is collapsed.
@@ -275,70 +167,166 @@ public class Menu extends MethodProvider {
         return HTML_TAG.matcher(input).replaceAll("");
     }
 
-
-    /**
-     * Assigns the respective methods in this class by going through the
-     * injected client's methods and finding the method so we can assign
-     * it to a variable for later use
-     */
-    public void assignMethods() {
         /**
-         * The names inside the client for the respective method
+         * Calculates the width of the menu
+         *
+         * @return the menu width
          */
-        final String GET_X_METHOD = "nx";
-        final String GET_Y_METHOD = "et";
-        Class<?> clientClass = methods.runeLite.getInjector().getInstance(Client.class).getClass();
-        for (Method i : clientClass.getDeclaredMethods()) {
-            i.setAccessible(true);
-            if (i.getReturnType().toString().equalsIgnoreCase("int")) {
-                if (i.getParameterCount() == 0) {
-                    if (i.getModifiers() == 1) {
-                        if (i.getName() == GET_X_METHOD) {
-                            menuX = i;
-                        }
-                        if (i.getName() == GET_Y_METHOD) {
-                            menuY = i;
+        private int calculateWidth() {
+            MenuEntry[] entries = getEntries();
+            final int MIN_MENU_WIDTH = 102;
+            FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
+            int longestEntry = 0;
+            for (MenuEntry entry : entries) {
+                int entryLength = fm.stringWidth(entry.getOption() + " " + entry.getTarget().replaceAll("<.*?>", ""));
+                if (entryLength > longestEntry) {
+                    longestEntry = entryLength;
+                }
+            }
+            return (longestEntry + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? MIN_MENU_WIDTH : longestEntry + MENU_SIDE_BORDER;
+        }
+
+        /**
+         * Calculates the height of the menu
+         *
+         * @return the menu height
+         */
+        private int calculateHeight() {
+            MenuEntry[] entries = getEntries();
+            int numberOfEntries = entries.length;
+            return MENU_ENTRY_LENGTH * numberOfEntries + TOP_OF_MENU_BAR;
+        }
+
+
+        /**
+         * Calculates the top left corner X of the menu
+         *
+         * @return the menu x
+         */
+        private int calculateX() {
+            if (isOpen()) {
+                final int MIN_MENU_WIDTH = 102;
+                int width = calculateWidth();
+                return (width + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? (methods.virtualMouse.getClientPressX() - (MIN_MENU_WIDTH / 2)) : (methods.virtualMouse.getClientPressX() - (width / 2));
+            }
+            return -1;
+        }
+
+        /**
+         * Calculates the top left corner Y of the menu
+         *
+         * @return the menu y
+         */
+        private int calculateY() {
+            if (isOpen()) {
+                final int CANVAS_LENGTH = 503;
+                MenuEntry[] entries = getEntries();
+                int offset = CANVAS_LENGTH - (methods.virtualMouse.getClientPressY() + calculateHeight());
+                return methods.virtualMouse.getClientPressY() + ((offset < 0 && entries.length <= MAX_DISPLAYABLE_ENTRIES) ? offset : 0);
+            }
+            return -1;
+        }
+
+        public MenuEntry[] getEntries() {
+            MenuEntry[] entries = methods.client.getMenuEntries();
+            MenuEntry[] reversed = new MenuEntry[entries.length];
+            for (int i = entries.length - 1, x = 0; i >= 0; i--, x++)
+                reversed[i] = entries[x];
+            return reversed;
+        }
+
+        public String[] getActions() {
+            MenuEntry[] entries = getEntries();
+            String[] actions = new String[entries.length];
+            for (int i = 0; i < entries.length; i++) {
+                actions[i] = entries[i].getOption();
+            }
+            return actions;
+        }
+
+        public String[] getTargets() {
+            MenuEntry[] entries = getEntries();
+            String[] targets = new String[entries.length];
+            for (int i = 0; i < entries.length; i++) {
+                targets[i] = entries[i].getTarget();
+            }
+            return targets;
+        }
+
+
+        /**
+         * Returns the index in the menu for a given action. Starts at 0.
+         *
+         * @param action The action that you want the index of.
+         * @return The index of the given target in the context menu; otherwise -1.
+         */
+        public int getIndex(String action) {
+            MenuEntry[] entries = getEntries();
+            action = action.toLowerCase();
+            for (int i = 0; i < entries.length; i++) {
+                if (entries[i].getOption().toLowerCase().contains(action)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        /**
+         * Returns the index in the menu for a given action with a given target.
+         * Starts at 0.
+         *
+         * @param action The action of the menu entry of which you want the index.
+         * @param target The target of the menu entry of which you want the index.
+         *               If target is null, operates like getIndex(String action).
+         * @return The index of the given target in the context menu; otherwise -1.
+         */
+        public int getIndex(String action, String... target) {
+            if (target == null) {
+                return getIndex(action);
+            }
+            action = action.toLowerCase();
+            String[] actions = getActions();
+            String[] targets = getTargets();
+            /* Throw exception if lenghts unequal? */
+            for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
+                if (actions[i].toLowerCase().contains(action)) {
+                    boolean targetMatch = false;
+                    for (String targetPart : target) {
+                        if (targets[i].toLowerCase().contains(targetPart.toLowerCase())) {
+                            targetMatch = true;
+                        } else {
+                            targetMatch = false;
                         }
                     }
+                    if (targetMatch)
+                        return i;
                 }
-
             }
+            return -1;
         }
-    }
 
-    /**
-     * Gets the top left corner X of the menu on screen from invoking the method used in the injected client
-     *
-     * @return the menu x
-     */
-    public int getMenuX() {
-        Class<?> clientClass = methods.runeLite.getInjector().getInstance(Client.class).getClass();
-        try {
-            return (int) menuX.invoke(clientClass.newInstance());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+
+        /**
+         * Checks whether or not a given action (or action substring) is present in
+         * the menu.
+         *
+         * @param action The action or action substring.
+         * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
+         */
+        public boolean contains(final String action) {
+            return getIndex(action) != -1;
         }
-        return -1;
-    }
 
-    /**
-     * Gets the top left corner Y of the menu on screen
-     *
-     * @return the menu y
-     */
-    public int getMenuY() {
-        int numberOfEntries = getEntries().length;
-        int mousePositionY = methods.virtualMouse.getClientPressY();
-        int menuHeight = MENU_ENTRY_LENGTH * numberOfEntries + TOP_OF_MENU_BAR;
-        int offset = CANVAS_LENGTH - (mousePositionY + menuHeight);
-        if (numberOfEntries <= 32)
-            return mousePositionY +  ((offset < 0) ? offset : 0);
-        return 0;
-    }
-
-
+        /**
+         * Checks whether or not a given action with given target is present
+         * in the menu.
+         *
+         * @param action The action or action substring.
+         * @param target The target or target substring.
+         * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
+         */
+        public boolean contains(final String action, final String target) {
+            return getIndex(action, target) != -1;
+        }
+        
 }

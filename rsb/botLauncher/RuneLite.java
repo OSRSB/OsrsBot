@@ -442,7 +442,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
     public void setMethodContext() {
         methods = new MethodContext(this);
         methods.bank.assignConstants();
-        methods.menu.assignMethods();
     }
 
     public void shutdown() {

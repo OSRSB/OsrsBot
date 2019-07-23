@@ -116,7 +116,7 @@ public class RSModel extends MethodProvider {
 	 * @param target the option of the action to be clicked in the menu
 	 * @return true if clicked, false if failed.
 	 */
-	public boolean doAction(String action, String target) {
+	public boolean doAction(String action, String... target) {
 		try {
 			for (int i = 0; i < 10; i++) {
 				methods.mouse.move(getPoint());

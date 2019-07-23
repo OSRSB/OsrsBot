@@ -133,14 +133,13 @@ public class Game extends MethodProvider {
 	 * @return The last message spoken by a player or "" if none
 	 */
 	public String getLastMessage() {
-		RSWidget chatBox = methods.interfaces.get(CHAT_OPTION);
-		for (int i = 279; i >= 180; i--) {// Valid text is from 180 to 279, was
-			// 58-157
-			String text = chatBox.getComponent(i).getText();
-			if (!text.isEmpty() && text.contains("<")) {
-				return text;
+		final int CHAT_MESSAGES = 58;
+		RSWidget messages = methods.interfaces.get(CHAT_OPTION, CHAT_MESSAGES);
+			if (!messages.getDynamicComponent(0).getText().isEmpty()) {
+				if (messages.getDynamicComponent(1).isVisible() && !messages.getDynamicComponent(1).getText().isEmpty())
+					return messages.getDynamicComponent(1).getText();
+				return messages.getDynamicComponent(0).getText();
 			}
-		}
 		return "";
 	}
 
