@@ -88,23 +88,12 @@ public class RuneLiteTestFeatures {
                 if (enemy != null) {
 
                     if (!enemy.isInteractingWithLocalPlayer()) {
-
-                        enemy.doAction("Examine", "Grand Exchange Clerk");
-                        sleep(800);
-                        welcome += 2;
-                        RSWidget messages = bot.getMethodContext().interfaces.get(CHAT_OPTION, 58);
-                        if (!messages.getDynamicComponent(welcome).containsText("Welcome to Old School RuneScape")) {
-                            log.warn("Miss");
-                            welcome -= 2;
-                        } else if (!bot.getMethodContext().game.getLastMessage().toLowerCase().contains("he can set up offers on the exchange for you.")) {
-                           log.warn("Miss");
-                        } else {
-                            log.warn("Hit");
+                        if (!enemy.isOnScreen()) {
+                            enemy.turnTo();
                         }
-                        //
-                        //log.warn(bot.getMethodContext().;
-                        // enemy.turnTo();
-                        //
+                        else {
+                            //enemy.doAction("Examine", "Grand Exchange Clerk");
+                        }
                     }
                 }
             }

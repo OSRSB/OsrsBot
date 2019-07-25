@@ -363,7 +363,8 @@ public class Camera extends MethodProvider {
 	public int getAngle() {
 		// the client uses fixed point radians 0 - 2^14
 		// degrees = yaw * 360 / 2^14 = yaw / 45.5111...
-		return (int) (methods.client.getCameraYaw() / 45.51);
+		// This leaves it on a scale of 45 versus a scale of 360 so we multiply it by 8 to fix that.
+		return (int) Math.abs(methods.client.getCameraYaw() / 45.51 * 8);
 	}
 
 	/**

@@ -191,7 +191,7 @@ public class RSModel extends MethodProvider {
 	 *         of an object.
 	 */
 	public Point getPointOnScreen() {
-		ArrayList<Point> list = new ArrayList<Point>();
+		ArrayList<Point> list = new ArrayList<>();
 		try {
 			Polygon[] tris = getTriangles();
 			for (Polygon p : tris) {

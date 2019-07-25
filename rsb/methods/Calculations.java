@@ -95,11 +95,8 @@ public class Calculations extends MethodProvider {
 	 */
 	public boolean pointOnScreen(Point check) {
 		int x = check.getX(), y = check.getY();
-		if (!methods.game.isFixed()) {
-			return x > 4 && x < methods.game.getWidth() - 253 && y > 4 && y < methods.game.getHeight() - 169;
-		} else {
-			return x > 0 && x < methods.game.getWidth() - 260 && y > 0 && y < methods.game.getHeight() - 149;
-		}
+		return x > methods.client.getViewportXOffset() && x < methods.client.getViewportWidth()
+				&& y > methods.client.getViewportYOffset() && y < methods.client.getViewportHeight();
 	}
 
 	/**
