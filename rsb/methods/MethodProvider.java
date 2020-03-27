@@ -99,6 +99,6 @@ public abstract class MethodProvider {
 	 * @return the digit in the number
 	 */
 	int nth ( int number, int index ) {
-		return (int)(number / java.lang.Math.pow(10, index)) % 10;
+		return (int)(number / Math.pow(10, index)) % 10;
 	}
 }

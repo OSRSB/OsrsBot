@@ -3,6 +3,8 @@ package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
+import net.runelite.api.Tile;
+import net.runelite.api.TileItem;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
 
@@ -24,7 +26,7 @@ public class RSItem extends MethodProvider {
 		this.item = item;
 	}
 
-	public RSItem(final MethodContext ctx, final Item item) {
+	public RSItem(final MethodContext ctx, final TileItem item) {
 		super(ctx);
 		id = item.getId();
 		stack = item.getQuantity();

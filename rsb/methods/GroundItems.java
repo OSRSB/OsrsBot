@@ -1,9 +1,8 @@
 package net.runelite.client.rsb.methods;
 
-import net.runelite.api.HashTable;
 import net.runelite.api.Item;
 import net.runelite.api.NodeCache;
-import net.runelite.client.rsb.internal.wrappers.Deque;
+import net.runelite.api.TileItem;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSGroundItem;
 import net.runelite.client.rsb.wrappers.RSItem;
@@ -154,7 +153,7 @@ public class GroundItems extends MethodProvider {
 
 		RSTile tile = new RSTile(x, y, methods.client.getPlane());
 
-		for (Item item : tile.getTile(methods).getGroundItems()) {
+		for (TileItem item : tile.getTile(methods).getGroundItems()) {
 			list.add(new RSGroundItem(methods, tile, new RSItem(methods, item)));
 		}
 
