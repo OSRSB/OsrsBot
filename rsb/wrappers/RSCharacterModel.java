@@ -2,13 +2,8 @@ package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.Actor;
 import net.runelite.api.Model;
-import net.runelite.api.Node;
-import net.runelite.api.model.Triangle;
-import net.runelite.api.model.Vertex;
 import net.runelite.client.rsb.methods.Calculations;
 import net.runelite.client.rsb.methods.MethodContext;
-
-import java.util.List;
 
 /**
  * @author Jacmob

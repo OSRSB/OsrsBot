@@ -52,8 +52,8 @@ public class RuneLiteTestFeatures {
             bot.getMethodContext().keyboard.sendText("\n", false);
             if (bot.getClient().getLoginIndex() == 2) {
                 // use later bot.getClient().getCurrentLoginField()
-                bot.getMethodContext().keyboard.sendText("SampleMarco.Reca@gmail.com", true);
-                bot.getMethodContext().keyboard.sendText("xKFOfUnC", true);
+                bot.getMethodContext().keyboard.sendText("", true);
+                bot.getMethodContext().keyboard.sendText("", true);
                 sleep(18000);
                 //Authenticator
                 if (bot.getClient().getLoginIndex() == 4) {

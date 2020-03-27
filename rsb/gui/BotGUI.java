@@ -253,19 +253,14 @@ public class BotGUI extends JFrame implements ActionListener, ScriptListener, Pa
         }
 
         try {
-            final RuneLite bot = new RuneLite();
+            RuneLite bot = new RuneLite();
 
             new Thread(new Runnable() {
                 public void run() {
                     synchronized (bot) {
                         try {
                             bot.launch(args);
-                            while (bot.getClient() == null) {
-                                bot.wait();
-                            }
-
                             bot.setPanel(new ClientPanel(bot.getLoader()));
-                           // panel.add(bot.getPanel());
                             bot.setMethodContext();
                             bot.getScriptHandler().init();
                             bots.add(bot);

@@ -1,11 +1,6 @@
 package net.runelite.client.rsb.wrappers;
 
-import net.runelite.api.Client;
 import net.runelite.api.Model;
-import net.runelite.api.Perspective;
-import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.model.Triangle;
-import net.runelite.api.model.Vertex;
 import net.runelite.api.Point;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.methods.MethodContext;
@@ -13,7 +8,6 @@ import net.runelite.client.rsb.methods.MethodProvider;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 import java.util.LinkedList;
 
