@@ -16,13 +16,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 
-/**
- * @author Jacmob
- */
 public class ScriptSelector extends JDialog implements ScriptListener {
 
 	public static void main(String[] args) {
@@ -32,20 +35,36 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private static final long serialVersionUID = 5475451138208522511L;
 
 	private static final String[] COLUMN_NAMES = new String[]{"", "Name", "Version", "Author", "Description"};
-
 	private static final ScriptSource SRC_SOURCES;
 	private static final ScriptSource SRC_PRECOMPILED;
 	private static final ScriptSource SRC_BUNDLED;
+	private static final ScriptSource SRC_TEST;
+	private static final String TEST_PATH;
+	private static final String JAVA_EXT = ".java";
+	private static final String CLASS_EXT = ".class";
+	private static final String NO_EXT = "";
+	private static final String TMP_REGEX = "^tmp[0-9]+";
 	private final RuneLite bot;
 	private JTable table;
 	private JTextField search;
 	private JComboBox accounts;
 	private final ScriptTableModel model;
 	private final List<ScriptDefinition> scripts;
+	private final List<String> tmpFileNames;
 	private JButton submit;
 	private boolean connected = true;
 
 	static {
+		/**
+		 * Gets the testsScripts path compiled path and replaces the path with the values needed to direct it to the non-compiled path with the .java file to edit
+		 */
+		StringBuilder temp = new StringBuilder(net.runelite.client.rsb.testsScript.Test.class.getResource("Test.class").getPath().replace("Test.class", ""));
+		temp = temp.replace(temp.indexOf("target"), temp.indexOf("target") + "target".length(), "main");
+		temp = temp.insert(temp.indexOf("main") - 1, temp.charAt(temp.indexOf("main") - 1) + "src");
+		temp = temp.replace(temp.indexOf("classes"), temp.indexOf("classes") + "classes".length(), "java");
+		TEST_PATH = temp.toString();
+
+		SRC_TEST = new FileScriptSource(new File(TEST_PATH));
 		SRC_SOURCES = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsSourcesDirectory()));
 		SRC_PRECOMPILED = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsPrecompiledDirectory()));
 		if (GlobalConfiguration.RUNNING_FROM_JAR) {
@@ -55,10 +74,73 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
+	/**
+	 * @author GigiaJ
+	 * Description: It takes the testsScripts path in the IDE *unsure if it does it works compiled. Unlikely*
+	 * This is necessary simply due to the fact that ScriptClassLoader loads class files WITHOUT package declarations
+	 * (This even occurs if you tried to take the compiled file and placed it in the folder)
+	 * In order to allow our testsScript package to be used it must be worked around so we reconstruct our file in a temporary
+	 * file which will be cleaned up on the next start up.
+	 *
+	 * So by copying the data of our files to temporary files they can be passed through a buffered reader and scanned for
+	 * removing the package declaration and replacing the class name in the file so it can be compiled
+	 * Then using jaxax.Compiler it is compiled and is created as a temporary file in memory (could cause memory issues)
+	 *
+	 */
+	private void generateTestScripts() {
+			File testScriptDir = new File(TEST_PATH.toString());
+			try {
+				if (testScriptDir.isDirectory()) {
+					for (File file : testScriptDir.listFiles()) {
+						if (!file.getName().replace(JAVA_EXT, NO_EXT).matches(TMP_REGEX)) {
+							File tmp = File.createTempFile("tmp", JAVA_EXT, testScriptDir);
+							tmpFileNames.add(tmp.getName().replace(JAVA_EXT, NO_EXT));
+							String s = "";
+
+							BufferedReader br = new BufferedReader(new FileReader(file));
+							String st;
+							while ((st = br.readLine()) != null) {
+								if (!st.contains("package")) {
+									if (!st.contains("public class " + file.getName().replace(JAVA_EXT, NO_EXT))) {
+										s += st + "\n";
+									} else {
+										s += st.replace("public class " + file.getName().replace(JAVA_EXT, NO_EXT), "public class " + tmp.getName().replace(JAVA_EXT, NO_EXT)) + "\n";
+									}
+								}
+							}
+							Files.write(tmp.toPath(), s.getBytes(StandardCharsets.UTF_8));
+							JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+							compiler.run(null, null, null, tmp.getPath());
+							new File(tmp.getPath().replace(JAVA_EXT, CLASS_EXT)).deleteOnExit();
+							tmp.deleteOnExit();
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+
+	/**
+	 * Deletes the temporary files made in the testScriptDirectory
+	 */
+	private synchronized void deleteTemporaryFiles() {
+		File testScriptDir = new File(TEST_PATH.toString());
+		if (testScriptDir.isDirectory()) {
+			for (int x = 0; x < testScriptDir.listFiles().length; x++) {
+				File file = testScriptDir.listFiles()[x];
+				if (file.getName().replace(JAVA_EXT, NO_EXT).matches(TMP_REGEX) || file.getName().replace(CLASS_EXT, NO_EXT).matches(TMP_REGEX)) {
+					file.delete();
+				}
+			}
+		}
+	}
+
 	public ScriptSelector(Frame frame, RuneLite bot) {
 		super(frame, "Script Selector");
 		this.bot = bot;
 		this.scripts = new ArrayList<ScriptDefinition>();
+		this.tmpFileNames = new ArrayList<String>();
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
@@ -80,10 +162,14 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 	private void load() {
 		scripts.clear();
+		deleteTemporaryFiles();
 		scripts.addAll(SRC_BUNDLED.list());
 		scripts.addAll(SRC_PRECOMPILED.list());
 		scripts.addAll(SRC_SOURCES.list());
+		generateTestScripts();
+		scripts.addAll(SRC_TEST.list());
 		model.search(search.getText());
+		deleteTemporaryFiles();
 	}
 
 	private void init() {
