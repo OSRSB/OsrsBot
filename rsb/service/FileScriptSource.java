@@ -52,6 +52,7 @@ public class FileScriptSource implements ScriptSource {
 		return defs;
 	}
 
+
 	public Script load(ScriptDefinition def) throws ServiceException {
 		if (!(def instanceof FileScriptDefinition)) {
 			throw new IllegalArgumentException("Invalid definition!");
@@ -135,6 +136,10 @@ public class FileScriptSource implements ScriptSource {
 
 		Class<?> clazz;
 
+	}
+
+	public String toString() {
+		return this.file.getAbsolutePath();
 	}
 
 }

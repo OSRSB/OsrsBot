@@ -92,7 +92,7 @@ public class RuneLiteTestFeatures {
                             enemy.turnTo();
                         }
                         else {
-                            //enemy.doAction("Examine", "Grand Exchange Clerk");
+                            enemy.doAction("Examine", "Grand Exchange Clerk");
                         }
                     }
                 }

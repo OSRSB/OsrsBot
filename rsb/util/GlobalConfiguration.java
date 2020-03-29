@@ -18,7 +18,7 @@ public class GlobalConfiguration {
 	public static class Paths {
 
 		public static class Resources {
-			public static final String ROOT = "C:/Users/Greatest/Desktop/Icons Test";//resources/rsb";
+			public static final String ROOT = "/rsb";
 			public static final String ROOT_IMG = ROOT + "/images";
 			public static final String ICON = ROOT_IMG + "/icon.png";
 			public static final String ICON_DELETE = ROOT_IMG + "/delete.png";
@@ -115,6 +115,7 @@ public class GlobalConfiguration {
 		public static String getScriptsDirectory() {
 			return Paths.getHomeDirectory() + File.separator + Paths.SCRIPTS_NAME_OUT;
 		}
+		
 
 		public static String getScriptsSourcesDirectory() {
 			return Paths.getScriptsDirectory() + File.separator + "Sources";
@@ -184,6 +185,9 @@ public class GlobalConfiguration {
 		public static final int MESSAGES = 3;
 	}
 
+	/**
+	 * When executed it starts up the general configurations and paths as well as determines what files will be auto-generated
+	 */
 	static {
 		final URL resource = GlobalConfiguration.class.getClassLoader().getResource(Paths.Resources.VERSION);
 		if (resource != null) {
@@ -200,15 +204,22 @@ public class GlobalConfiguration {
 			CURRENT_OS = OperatingSystem.UNKNOWN;
 		}
 		final ArrayList<String> dirs = new ArrayList<String>();
+		//This is where folders and files are generated on start-up
 		dirs.add(Paths.getHomeDirectory());
 		dirs.add(Paths.getLogsDirectory());
 		dirs.add(Paths.getCacheDirectory());
 		dirs.add(Paths.getSettingsDirectory());
+		dirs.add(Paths.getScriptsDirectory());
+		dirs.add(Paths.getScriptsSourcesDirectory());
+		dirs.add(Paths.getScriptsPrecompiledDirectory());
+		/*
 		if (GlobalConfiguration.RUNNING_FROM_JAR) {
 			dirs.add(Paths.getScriptsDirectory());
 			dirs.add(Paths.getScriptsSourcesDirectory());
 			dirs.add(Paths.getScriptsPrecompiledDirectory());
 		}
+		 */
+
 		for (final String name : dirs) {
 			final File dir = new File(name);
 			if (!dir.exists()) {
