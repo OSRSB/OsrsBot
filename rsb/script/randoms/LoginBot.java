@@ -99,7 +99,7 @@ public class LoginBot extends Random {
         } catch (Exception e) {
 
         }
-        return 0;
+        return -1;
     }
 
     private boolean switchingWorlds() {
