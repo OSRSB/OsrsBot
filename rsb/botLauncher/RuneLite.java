@@ -53,6 +53,7 @@ import net.runelite.client.rsb.methods.*;
 import net.runelite.client.rsb.internal.InputManager;
 import net.runelite.client.rsb.internal.BotHooks;
 import net.runelite.client.rsb.internal.BotModule;
+import net.runelite.client.rsb.internal.input.Canvas;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.FatalErrorDialog;
@@ -308,7 +309,25 @@ public class RuneLite extends net.runelite.client.RuneLite {
         if (client == null) {
             return null;
         }
-        return client.getCanvas();
+        if (client.getCanvas() instanceof java.awt.Canvas) {
+            return new Canvas(client.getCanvas());
+        }
+        return null;
+    }
+
+    public Graphics getBufferGraphics(MainBufferProvider mainBufferProvider) {
+        Graphics back = mainBufferProvider.getImage().getGraphics();
+        paintEvent.graphics = back;
+        textPaintEvent.graphics = back;
+        textPaintEvent.idx = 0;
+        eventManager.processEvent(paintEvent);
+        eventManager.processEvent(textPaintEvent);
+        back.dispose();
+        image.getGraphics().drawImage(backBuffer, 0, 0, null);
+        if (panel != null) {
+            panel.repaint();
+        }
+        return backBuffer.getGraphics();
     }
 
     public Applet getLoader() {
