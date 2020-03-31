@@ -15,22 +15,6 @@ to compile after.
 Once one has set up the RuneLite api in their IDE (IntelliJ is their recommended IDE)
 they may then proceed to drag and drop the rsb folder into 
 runelite-client->src->main->java->net.runelite.client
-and modify 
-the file Hooks within the package callback in the same location that you placed the
-rsb folder.
-The line to modify is:
-
-// Draw clientUI overlays
-
-clientUi.paintOverlays(graphics2d);
-
-One can use ctrl+f to locate it and replace it with:
-
-		if (clientUi.getTrayIcon() != null) {
-			// Draw clientUI overlays
-			clientUi.paintOverlays(graphics2d);
-		}
-
 Now the bot is completely set up.
 
 To run you'll need to modify your program arguments to the following depending on how you wish it to run:
@@ -62,7 +46,4 @@ Activates debug log messages
 After entering the program arguements you wish to enable (one mode only --runelite/--bot-runelite/--bot)
 it is ready to run.
 
-
-Currently optimizations are needed for creating/compiling scripts as the best solution is to place
-them into testScript and compile them there and go to the intellij(or other IDE) directory and drag
-the class file to the bot's script directory.
+To make and test scripts look at the corresponding wiki pages.
