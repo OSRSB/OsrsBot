@@ -46,7 +46,6 @@ import net.runelite.client.rsb.event.EventManager;
 import net.runelite.client.rsb.event.events.PaintEvent;
 import net.runelite.client.rsb.event.events.TextPaintEvent;
 import net.runelite.client.rsb.gui.AccountManager;
-import net.runelite.client.rsb.gui.ClientPanel;
 import net.runelite.client.rsb.internal.BreakHandler;
 import net.runelite.client.rsb.internal.PassiveScriptHandler;
 import net.runelite.client.rsb.internal.ScriptHandler;
@@ -160,7 +159,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     private String account;
     private MethodContext methods;
-    private ClientPanel panel;
+    private Component panel;
     private PaintEvent paintEvent;
     private TextPaintEvent textPaintEvent;
     private EventManager eventManager;
@@ -282,11 +281,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
         return image;
     }
 
-    public ClientPanel getPanel() {
+    public Component getPanel() {
         return this.panel;
     }
 
-    public void setPanel(ClientPanel c) {
+    public void setPanel(Component c) {
         this.panel = c;
     }
 
