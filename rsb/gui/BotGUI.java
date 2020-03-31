@@ -243,7 +243,7 @@ public class BotGUI extends JFrame implements ActionListener, ScriptListener, Pa
     public RuneLite getBot(Object o) {
         ClassLoader cl = o.getClass().getClassLoader();
         for (RuneLite bot : bots) {
-            if (cl == bot.getClient().getClass().getClassLoader()) {
+            if (cl == bot.getClass().getClassLoader()) {
                 panel.offset();
                 return bot;
             }

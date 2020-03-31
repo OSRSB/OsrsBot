@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.internal.input;
 
+import net.runelite.api.MainBufferProvider;
+import net.runelite.client.rsb.botLauncher.Application;
 import net.runelite.client.rsb.botLauncher.RuneLite;
 //import net.runelite.client.Application;
 
@@ -22,15 +24,21 @@ public class Canvas extends java.awt.Canvas {
 	private boolean visible;
 	private boolean focused;
 
-	public Canvas() {
-		init();
-	}
 
 	public Canvas(GraphicsConfiguration c) {
 		super(c);
-		init();
 	}
-/*
+
+	public Canvas(java.awt.Canvas c) {
+		this(c.getGraphicsConfiguration());
+		this.setBounds(c.getBounds());
+		this.setSize(c.getSize());
+		//This may need more variables set in the future
+	}
+
+
+
+
 	@Override
 	public final Graphics getGraphics() {
 		if (bot == null) {
@@ -41,13 +49,30 @@ public class Canvas extends java.awt.Canvas {
 				toshi = true;
 			}
 		}
+		/*
+		We aren't actually controlling the thread
 		try {
 			Thread.sleep(bot.disableCanvas ? DISABLE_GRAPHICS_DELAY : bot.disableRendering ? SLOW_GRAPHICS_DELAY : GRAPHICS_DELAY);
 		} catch (InterruptedException ignored) {
 		}
-		return bot.getBufferGraphics();
+		 */
+
+		return super.getGraphics();//return bot.getBufferGraphics();
 	}
-*/
+
+
+	public final Graphics getGraphics(MainBufferProvider mainBufferProvider) {
+		if (bot == null) {
+			if (toshi) {
+				return super.getGraphics();
+			} else {
+				bot = Application.getBot(this);
+				toshi = true;
+			}
+		}
+		return bot.getBufferGraphics(mainBufferProvider);
+	}
+
 	@Override
 	public final boolean hasFocus() {
 		return focused;
@@ -76,7 +101,9 @@ public class Canvas extends java.awt.Canvas {
 		}
 		return Application.getPanelSize();
 	}
-*/
+
+
+	 */
 	@Override
 	public final void setVisible(boolean visible) {
 		super.setVisible(visible);

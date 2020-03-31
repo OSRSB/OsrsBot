@@ -20,7 +20,7 @@ import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MainBufferProvider;
-import net.runelite.client.RuneLite;
+import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.rsb.gui.BotGUI;
 
@@ -42,11 +42,17 @@ public class BotHooks extends Hooks {
     }
 
     Injector injector = RuneLite.getInjector();
-    Client client = injector.getInstance(Client.class);
+    RuneLite bot = injector.getInstance(RuneLite.class);
 
     @Override
     public void draw(MainBufferProvider mainBufferProvider, Graphics graphics, int x, int y) {
         try {
+
+            /*
+            Preferably initialize the value of bot with the current bot on screen
+            IE Application.getBot or similar manner.
+             */
+
 
             if (graphics == null) {
                 return;
@@ -77,23 +83,27 @@ public class BotHooks extends Hooks {
             }
 
             //We then simply invoke the method as needed here. It should perform similar to how it does in RuneLite
-            final Graphics2D graphics2d = (Graphics2D) ((Method) SUPERCLASS_MAP.get(GETGRAPHICS)).invoke(this,
-                    mainBufferProvider);
+            //final Graphics2D graphics2d = (Graphics2D) ((Method) SUPERCLASS_MAP.get(GETGRAPHICS)).invoke(this,
+             //       mainBufferProvider);
+
+            final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(mainBufferProvider);
 
             // Draw bot overlays
-            BotGUI.paintOverlays(client, graphics2d);
+            BotGUI.paintOverlays(bot.getClient(), g2d);
 
             Image image = mainBufferProvider.getImage();
 
             // Draw the image onto the game canvas
-            graphics.drawImage(image, 0, 0, client.getCanvas());
+            graphics.drawImage(image, 0, 0, bot.getCanvas());
+
 
             // finalImage is backed by the client buffer which will change soon. make a copy
             // so that callbacks can safely use it later from threads.
             // drawManager.processDrawComplete(() -> copy(image));
 
         } catch (Exception e) {
-            log.warn("Bot hooks failed to paint properly");
+            e.printStackTrace();
+            //log.warn("Bot hooks failed to paint properly");
         }
     }
 }
