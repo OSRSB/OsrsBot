@@ -27,9 +27,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.client.ClientSessionManager;
-import net.runelite.client.RuneLiteModule;
 import net.runelite.client.account.SessionManager;
-import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.CommandManager;
 import net.runelite.client.config.ConfigManager;
@@ -48,11 +46,14 @@ import net.runelite.client.rsb.event.EventManager;
 import net.runelite.client.rsb.event.events.PaintEvent;
 import net.runelite.client.rsb.event.events.TextPaintEvent;
 import net.runelite.client.rsb.gui.AccountManager;
+import net.runelite.client.rsb.gui.ClientPanel;
 import net.runelite.client.rsb.internal.BreakHandler;
 import net.runelite.client.rsb.internal.PassiveScriptHandler;
 import net.runelite.client.rsb.internal.ScriptHandler;
 import net.runelite.client.rsb.methods.*;
 import net.runelite.client.rsb.internal.InputManager;
+import net.runelite.client.rsb.internal.BotHooks;
+import net.runelite.client.rsb.internal.BotModule;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.FatalErrorDialog;
@@ -151,7 +152,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private Provider<ChatboxPanelManager> chatboxPanelManager;
 
     @Inject
-    private Provider<Hooks> hooks;
+    private Provider<BotHooks> hooks;
 
     @Inject
     @Nullable
@@ -159,7 +160,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     private String account;
     private MethodContext methods;
-    private Component panel;
+    private ClientPanel panel;
     private PaintEvent paintEvent;
     private TextPaintEvent textPaintEvent;
     private EventManager eventManager;
@@ -281,11 +282,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
         return image;
     }
 
-    public Component getPanel() {
+    public ClientPanel getPanel() {
         return this.panel;
     }
 
-    public void setPanel(Component c) {
+    public void setPanel(ClientPanel c) {
         this.panel = c;
     }
 
@@ -399,7 +400,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             final long start = System.currentTimeMillis();
 
-            injector = Guice.createInjector(new RuneLiteModule(
+            injector = Guice.createInjector(new BotModule(
                     clientLoader,
                     false,
                     options.valueOf(sessionfile),

@@ -1,6 +1,11 @@
 package net.runelite.client.rsb.gui;
 
+import net.runelite.api.Client;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.botLauncher.RuneLite;
+import net.runelite.client.rsb.event.impl.TFPS;
+import net.runelite.client.rsb.event.impl.TMousePosition;
 import net.runelite.client.rsb.internal.PassiveScriptHandler;
 import net.runelite.client.rsb.internal.ScriptHandler;
 import net.runelite.client.rsb.internal.TextAreaLogHandler;
@@ -18,6 +23,7 @@ import net.runelite.client.rsb.util.WindowUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.List;
@@ -551,4 +557,20 @@ public class BotGUI extends JFrame implements ActionListener, ScriptListener, Pa
 
     public void scriptStopped(PassiveScriptHandler handler, PassiveScript script) {
     }
+
+    /**
+     * Paint UI related overlays to target graphics
+     * @param graphics target graphics
+     */
+    public static void paintOverlays(final Client client, final Graphics2D graphics)
+    {
+        if (!(client instanceof Client))
+        {
+            return;
+        }
+
+        //PaintDebugs()
+        //PaintScriptVisuals
+    }
+
 }

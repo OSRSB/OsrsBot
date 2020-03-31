@@ -62,44 +62,48 @@ public class LoginBot extends Random {
 
     @Override
     public int loop() {
-
-        try {
-            if (ctx.client.getLocalPlayer() == null) {
-                String username = account.getName().toLowerCase().trim();
-                if (ctx.client.getLoginIndex() == 0) {
-                    ctx.keyboard.sendText("\n", false);
-                    sleep(random(1000, 5000));
-                }
-                if (ctx.client.getLoginIndex() == 2) {
-                    if (ctx.client.getCurrentLoginField() == 0) {
-                        ctx.keyboard.sendText(username, true);
+        Widget welcomeScreenMotW = null;
+        if (welcomeScreenMotW == null && game.getClientState() != GameState.LOGGED_IN) {
+            try {
+                if (ctx.client.getLocalPlayer() == null) {
+                    String username = account.getName().toLowerCase().trim();
+                    if (ctx.client.getLoginIndex() == 0) {
+                        ctx.keyboard.sendText("\n", false);
                         sleep(random(1000, 5000));
-                        if (ctx.client.getCurrentLoginField() == 1) {
-                            ctx.keyboard.sendText(AccountManager.getPassword(account.getName()), true);
-                            sleep(random(5000, 10000));
+                    }
+                    if (ctx.client.getLoginIndex() == 2) {
+                        if (ctx.client.getCurrentLoginField() == 0) {
+                            ctx.keyboard.sendText(username, true);
+                            sleep(random(1000, 5000));
+                            if (ctx.client.getCurrentLoginField() == 1) {
+                                ctx.keyboard.sendText(AccountManager.getPassword(account.getName()), true);
+                                sleep(random(5000, 10000));
+                            }
                         }
                     }
-                }
-                //Authenticator
-                if (ctx.client.getLoginIndex() == 4) {
+                    //Authenticator
+                    if (ctx.client.getLoginIndex() == 4) {
 
 
+                    }
                 }
+                welcomeScreenMotW = ctx.client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
+                if (welcomeScreenMotW != null) {
+                    if (welcomeScreenMotW.getTextColor() != -1) {
+                        Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
+                        ctx.mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
+                        ctx.mouse.click(true);
+                        sleep(5000);
+                    }
+                }
+            } catch (Exception e) {
+                log.error("Login failed. Try again.");
             }
-            Widget welcomeScreenMotW = ctx.client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
-            if (welcomeScreenMotW != null) {
-                if (welcomeScreenMotW.getTextColor() != -1) {
-                    Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
-                    ctx.mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
-                    ctx.mouse.click(true);
-                    sleep(5000);
-                }
-            }
-
-        } catch (Exception e) {
-
+            return 0;
         }
-        return 0;
+        else {
+            return -1;
+        }
     }
 
     private boolean switchingWorlds() {
