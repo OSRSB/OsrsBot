@@ -1,7 +1,6 @@
 package net.runelite.client.rsb.testsScript;
 
 import net.runelite.client.rsb.event.impl.TFPS;
-import net.runelite.client.rsb.gui.ClientPanel;
 import net.runelite.client.rsb.methods.Magic;
 import net.runelite.client.rsb.script.Script;
 import net.runelite.client.rsb.script.ScriptManifest;
