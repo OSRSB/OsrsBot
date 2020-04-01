@@ -14,6 +14,8 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Constructor;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.nio.file.Paths;
 import java.util.*;
 import javax.annotation.Nullable;
@@ -383,6 +385,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     }
                 });
 
+        final ArgumentAcceptingOptionSpec<String> proxyInfo = parser
+                .accepts("proxy")
+                .withRequiredArg().ofType(String.class);
+
+
         parser.accepts("help", "Show this text").forHelp();
         OptionSet options = parser.parse(args);
 
@@ -390,6 +397,36 @@ public class RuneLite extends net.runelite.client.RuneLite {
         if (options.has("help")) {
             parser.printHelpOn(System.out);
             System.exit(0);
+        }
+
+        if (options.has("proxy"))
+        {
+            String[] proxy = options.valueOf(proxyInfo).split(":");
+
+            if (proxy.length >= 2)
+            {
+                System.setProperty("socksProxyHost", proxy[0]);
+                System.setProperty("socksProxyPort", proxy[1]);
+            }
+
+            if (proxy.length >= 4)
+            {
+                System.setProperty("java.net.socks.username", proxy[2]);
+                System.setProperty("java.net.socks.password", proxy[3]);
+
+                final String user = proxy[2];
+                final char[] pass = proxy[3].toCharArray();
+
+                Authenticator.setDefault(new Authenticator()
+                {
+                    private PasswordAuthentication auth = new PasswordAuthentication(user, pass);
+
+                    protected PasswordAuthentication getPasswordAuthentication()
+                    {
+                        return auth;
+                    }
+                });
+            }
         }
 
 
