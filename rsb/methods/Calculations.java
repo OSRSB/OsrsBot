@@ -181,8 +181,12 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + dX) * 512),
-				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + dY) * 512), height);
+		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, tile.getWorldLocation()), height);
+		/*
+		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + 0.5)),
+				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + 0.5)), height);
+
+		 */
 	}
 
 	/**
@@ -372,12 +376,15 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point groundToScreen(final int x, final int y, final int height) {
+		return Perspective.localToCanvas(methods.client, x, y, height);
+		/*
 		if ((methods.client.getTileSettings() == null) || (methods.client.getTileHeights() == null) || (x < 512) ||
-				(y < 512) || (x > 52224) || (y > 52224)) {
+				(y < 512) || (x > 13056) || (y > 52224)) {
 			return new Point(-1, -1);
 		}
 		int z = tileHeight(x, y) + height;
 		return worldToScreen(x, y, z);
+		 */
 	}
 
 	/**
@@ -425,7 +432,7 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point worldToScreen(int x, int y, int z) {
-		return Perspective.localToCanvas(methods.client, x, y, z);
+		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, x, y), z);
 	}
 
 	// ---- Internal ----

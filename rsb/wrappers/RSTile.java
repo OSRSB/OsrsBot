@@ -17,6 +17,12 @@ public class RSTile {
 
     private int plane;
 
+    public RSTile(Tile tile) {
+        this.x = tile.getWorldLocation().getX();
+        this.y = tile.getWorldLocation().getY();
+        this.plane = tile.getWorldLocation().getPlane();
+    }
+
     public RSTile(int x, int y, int plane) {
         this.x = x;
         this.y = y;
@@ -51,7 +57,7 @@ public class RSTile {
         WorldPoint worldPoint = new WorldPoint(x, y, plane);
         if (worldPoint.isInScene(ctx.client)) {
             LocalPoint localPoint = LocalPoint.fromWorld(ctx.client, worldPoint);
-            return ctx.client.getScene().getTiles()[worldPoint.getPlane()][localPoint.getX()][localPoint.getY()];
+            return ctx.client.getScene().getTiles()[worldPoint.getPlane()][localPoint.getSceneX()][localPoint.getSceneY()];
         }
         return null;
     }

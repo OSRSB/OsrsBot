@@ -30,7 +30,7 @@ public class DrawInventory implements PaintListener {
 
 		for (RSItem inventoryItem : inventoryItems) {
 			if (inventoryItem.getID() != -1) {
-				final Point location = inventoryItem.getComponent().getCenter();
+				final Point location = new Point (inventoryItem.getItem().getItemLocation().getX(), inventoryItem.getItem().getItemLocation().getY() + 20);
 				render.drawString("" + inventoryItem.getID(), location.x, location.y);
 			}
 		}
