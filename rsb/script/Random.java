@@ -98,7 +98,7 @@ public abstract class Random extends Methods implements PaintListener {
 
 	public final void run(Script ctx) {
 		script = ctx;
-		//name = getClass().getAnnotation(ScriptManifest.class).name();
+		name = getClass().getAnnotation(ScriptManifest.class).name();
 		ctx.ctx.runeLite.getEventManager().removeListener(ctx);
 		for (Script s : ctx.delegates) {
 			ctx.ctx.runeLite.getEventManager().removeListener(s);

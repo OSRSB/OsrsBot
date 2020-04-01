@@ -23,8 +23,9 @@ public class DrawNPCs implements PaintListener {
 
 		final FontMetrics metrics = render.getFontMetrics();
 		for (RSNPC npc : ctx.npcs.getAll()) {
-			final Point location = ctx.calc.tileToScreen(npc.getLocation(), npc.getHeight() / 2);
-			if (!ctx.calc.pointOnScreen(location)) {
+			final Point location = ctx.calc.tileToScreen(npc.getLocation(), ctx.client.getPlane());
+			//Point location = npc.getScreenLocation();
+			if (location == null || !ctx.calc.pointOnScreen(location)) {
 				continue;
 			}
 			render.setColor(Color.RED);

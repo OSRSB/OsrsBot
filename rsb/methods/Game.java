@@ -42,18 +42,39 @@ public class Game extends MethodProvider {
 		VIEW, ON, FRIENDS, OFF, HIDE, AUTOCHAT, STANDARD, CLEAR, SWITCH
 	}
 	
-	public static final int TAB_ATTACK = WidgetInfo.FIXED_VIEWPORT_COMBAT_TAB.getChildId();
-	public static final int TAB_STATS = WidgetInfo.FIXED_VIEWPORT_STATS_TAB.getChildId();
-	public static final int TAB_QUESTS = WidgetInfo.FIXED_VIEWPORT_QUESTS_TAB.getChildId();
-	public static final int TAB_INVENTORY = WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB.getChildId();
-	public static final int TAB_EQUIPMENT = WidgetInfo.FIXED_VIEWPORT_EQUIPMENT_TAB.getChildId();
-	public static final int TAB_PRAYER = WidgetInfo.FIXED_VIEWPORT_PRAYER_TAB.getChildId();
-	public static final int TAB_MAGIC = WidgetInfo.FIXED_VIEWPORT_MAGIC_TAB.getChildId();
-	public static final int TAB_FRIENDS = WidgetInfo.FIXED_VIEWPORT_FRIENDS_TAB.getChildId();
-	public static final int TAB_CLAN_CHAT = WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId();
-	public static final int TAB_OPTIONS = WidgetInfo.FIXED_VIEWPORT_OPTIONS_TAB.getChildId();
-	public static final int TAB_MUSIC = WidgetInfo.FIXED_VIEWPORT_MUSIC_TAB.getChildId();
-	public static final int TAB_LOGOUT = WidgetInfo.FIXED_VIEWPORT_LOGOUT_TAB.getChildId();
+	public static int TAB_ATTACK;
+	public static int TAB_STATS;
+	public static int TAB_QUESTS;
+	public static int TAB_INVENTORY;
+	public static int TAB_EQUIPMENT;
+	public static int TAB_PRAYER;
+	public static int TAB_MAGIC;
+	public static int TAB_FRIENDS;
+	public static int TAB_CLAN_CHAT;
+	public static int TAB_OPTIONS;
+	public static int TAB_MUSIC;
+	public static int TAB_LOGOUT;
+
+	public static int[] TABS =
+	{
+		TAB_ATTACK = WidgetInfo.FIXED_VIEWPORT_COMBAT_TAB.getChildId(),
+		TAB_STATS = WidgetInfo.FIXED_VIEWPORT_STATS_TAB.getChildId(),
+		TAB_QUESTS = WidgetInfo.FIXED_VIEWPORT_QUESTS_TAB.getChildId(),
+		TAB_INVENTORY = WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB.getChildId(),
+		TAB_EQUIPMENT = WidgetInfo.FIXED_VIEWPORT_EQUIPMENT_TAB.getChildId(),
+		TAB_PRAYER = WidgetInfo.FIXED_VIEWPORT_PRAYER_TAB.getChildId(),
+		TAB_MAGIC = WidgetInfo.FIXED_VIEWPORT_MAGIC_TAB.getChildId(),
+		TAB_FRIENDS = WidgetInfo.FIXED_VIEWPORT_FRIENDS_TAB.getChildId(),
+		TAB_CLAN_CHAT = WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId(),
+		TAB_OPTIONS = WidgetInfo.FIXED_VIEWPORT_OPTIONS_TAB.getChildId(),
+		TAB_MUSIC = WidgetInfo.FIXED_VIEWPORT_MUSIC_TAB.getChildId(),
+		TAB_LOGOUT = WidgetInfo.FIXED_VIEWPORT_LOGOUT_TAB.getChildId()
+	};
+
+	public static final String[] TAB_NAMES = new String[]{"Combat Styles", "Stats", "Quest Journals", "Inventory",
+			"Worn Equipment", "Prayer List", "Magic Spellbook",
+			"Friends List", "Clan Chat", "Options",
+			"Music Player", "Exit"};
 	
 	public static final int INDEX_LOGIN_SCREEN = 3;
 	public static final int INDEX_LOBBY_SCREEN = 7;
@@ -102,13 +123,6 @@ public class Game extends MethodProvider {
 			242, 102, 161, 249, 243, 64, 65, 244, 255, 249, 230, 372,
 			421};
 	public static final int[] INTERFACE_OPTIONS = new int[]{230, 228};
-
-	public static final String[] TAB_NAMES = new String[]{"Combat Styles",
-			"Task System", "Stats", "Quest Journals", "Inventory",
-			"Worn Equipment", "Prayer List", "Magic Spellbook", "",
-			"Friends List", "Friends Chat", "Clan Chat", "Options",
-			"Emotes",
-			"Music Player", "Notes", "Exit"};
 
 	Game(final MethodContext ctx) {
 		super(ctx);
@@ -258,42 +272,17 @@ public class Game extends MethodProvider {
 	 * @return The currently open tab or the logout tab by default.
 	 */
 	public int getCurrentTab() {
-		/*We declare these here for convenience and grouping
-		  Originally this used an invasive method into the RuneLite API, but upon removing this would've
-		  Required far more effort to fix.*/
-		class Tabs {
-			public  final int TAB_ATTACK = WidgetInfo.FIXED_VIEWPORT_COMBAT_TAB.getChildId();
-			public  final int TAB_STATS = WidgetInfo.FIXED_VIEWPORT_STATS_TAB.getChildId();
-			public  final int TAB_QUESTS = WidgetInfo.FIXED_VIEWPORT_QUESTS_TAB.getChildId();
-			public  final int TAB_INVENTORY = WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB.getChildId();
-			public  final int TAB_EQUIPMENT = WidgetInfo.FIXED_VIEWPORT_EQUIPMENT_TAB.getChildId();
-			public  final int TAB_PRAYER = WidgetInfo.FIXED_VIEWPORT_PRAYER_TAB.getChildId();
-			public  final int TAB_MAGIC = WidgetInfo.FIXED_VIEWPORT_MAGIC_TAB.getChildId();
-			public  final int TAB_FRIENDS = WidgetInfo.FIXED_VIEWPORT_FRIENDS_TAB.getChildId();
-			public  final int TAB_CLAN_CHAT = WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId();
-			public  final int TAB_OPTIONS = WidgetInfo.FIXED_VIEWPORT_OPTIONS_TAB.getChildId();
-			public  final int TAB_MUSIC = WidgetInfo.FIXED_VIEWPORT_MUSIC_TAB.getChildId();
-			public  final int TAB_LOGOUT = WidgetInfo.FIXED_VIEWPORT_LOGOUT_TAB.getChildId();
-		}
-		Tabs tabs = new Tabs();
-		try {
-			for (Field i : tabs.getClass().getDeclaredFields()) {
-				int x = Integer.valueOf(i.get(tabs).toString());
-
-					net.runelite.api.widgets.Widget tab = methods.gui.getTab(x);
-					if (tab == null) {
-						continue;
-					}
-
-					if (tab.getSpriteId() != -1) {
-						return x;
-					}
+		for (int i : TABS) {
+				net.runelite.api.widgets.Widget tab = methods.gui.getTab(i);
+				if (tab == null) {
+					continue;
 				}
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return -1; // no selected ones. (never happens, always return
-		// TAB_LOGOUT)
+
+				if (tab.getSpriteId() != -1) {
+					return i;
+				}
+			}
+		return -1; // no selected ones. (never happens, always return TAB_LOGOUT
 	}
 
 	/**

@@ -38,14 +38,15 @@ public class DrawObjects implements PaintListener {
 		}
 		final FontMetrics metrics = render.getFontMetrics();
 		final RSTile location = player.getLocation();
-		final int locX = location.getWorldLocation().getX();
-		final int locY = location.getWorldLocation().getY();
+		final int locX = location.getTile(ctx).getWorldLocation().getX();//location.getWorldLocation().getX();
+		final int locY = location.getTile(ctx).getWorldLocation().getY();//location.getWorldLocation().getY();
+		final int locPlane = location.getTile(ctx).getPlane();
 		final int tHeight = metrics.getHeight();
 		for (int x = locX - 25; x < locX + 25; x++) {
 			for (int y = locY - 25; y < locY + 25; y++) {
-				RSTile tile = new RSTile(x, y, ctx.client.getPlane());
+				RSTile tile = new RSTile(x, y, locPlane);
 				final Point screen = ctx.calc.tileToScreen(tile);
-				if (!ctx.calc.pointOnScreen(screen)) {
+				if (screen == null || !ctx.calc.pointOnScreen(screen)) {
 					continue;
 				}
 				final RSObject[] objects = ctx.objects.getAllAt(tile);

@@ -152,9 +152,12 @@ public class GroundItems extends MethodProvider {
 		int id = x | y << 14 | methods.client.getPlane() << 28;
 
 		RSTile tile = new RSTile(x, y, methods.client.getPlane());
+		List<TileItem> groundItems = tile.getTile(methods).getGroundItems();
 
-		for (TileItem item : tile.getTile(methods).getGroundItems()) {
-			list.add(new RSGroundItem(methods, tile, new RSItem(methods, item)));
+		if (groundItems != null && !groundItems.isEmpty()) {
+			for (TileItem item : groundItems) {
+				list.add(new RSGroundItem(methods, tile, new RSItem(methods, item)));
+			}
 		}
 
 		return list.toArray(new RSGroundItem[list.size()]);

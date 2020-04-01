@@ -47,8 +47,9 @@ public class NPCs extends MethodProvider {
         NPC[] npcs = getNPCs();
         Set<RSNPC> rsNPCs = new HashSet<RSNPC>();
         for (NPC npc : npcs) {
-            if (filter.accept((RSNPC) npc)) {
-                rsNPCs.add((RSNPC) npc);
+            RSNPC rsnpc = new RSNPC(methods, npc);
+            if (filter.accept(rsnpc)) {
+                rsNPCs.add(rsnpc);
             }
         }
         return rsNPCs.toArray(new RSNPC[rsNPCs.size()]);

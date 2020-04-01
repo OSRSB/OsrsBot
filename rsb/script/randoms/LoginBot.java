@@ -20,8 +20,9 @@ import java.awt.event.KeyEvent;
 import static java.lang.Thread.sleep;
 
 /**
- * @author Iscream, Aut0r, Doout, Pervy
+ * @author Gigiaj
  */
+@ScriptManifest(authors = {"GigiaJ"}, name = "Login", version = 1.0)
 @Slf4j
 public class LoginBot extends Random {
 
