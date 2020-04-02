@@ -58,15 +58,13 @@ public class LoginBot extends Random {
     @Override
     public boolean activateCondition() {
         GameState idx = game.getClientState();
-        return ((idx == GameState.LOGIN_SCREEN || idx == GameState.LOGGING_IN) && account.getName() != null);
+        return ((ctx.menu.getIndex("Play") == 0 || (idx == GameState.LOGIN_SCREEN || idx == GameState.LOGGING_IN)) && account.getName() != null);
     }
 
     @Override
     public int loop() {
-        Widget welcomeScreenMotW = null;
-        if (welcomeScreenMotW == null && game.getClientState() != GameState.LOGGED_IN) {
+        if (game.getClientState() != GameState.LOGGED_IN) {
             try {
-                if (ctx.client.getLocalPlayer() == null) {
                     String username = account.getName().toLowerCase().trim();
                     if (ctx.client.getLoginIndex() == 0) {
                         ctx.keyboard.sendText("\n", false);
@@ -84,27 +82,23 @@ public class LoginBot extends Random {
                     }
                     //Authenticator
                     if (ctx.client.getLoginIndex() == 4) {
-
-
                     }
-                }
-                welcomeScreenMotW = ctx.client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
-                if (welcomeScreenMotW != null) {
-                    if (welcomeScreenMotW.getTextColor() != -1) {
-                        Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
-                        ctx.mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
-                        ctx.mouse.click(true);
-                        sleep(5000);
-                    }
-                }
+                    Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
+                    ctx.mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
+                    sleep(5000);
             } catch (Exception e) {
                 log.error("Login failed. Try again.");
             }
-            return 0;
         }
-        else {
-            return -1;
+        if (game.getClientState() == GameState.LOGGED_IN) {
+            Widget welcomeScreenMotW = ctx.client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
+            if (welcomeScreenMotW != null) {
+                if (welcomeScreenMotW.getTextColor() != -1) {
+                    ctx.mouse.click(true);
+                }
+            }
         }
+        return -1;
     }
 
     private boolean switchingWorlds() {
