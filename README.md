@@ -47,3 +47,7 @@ After entering the program arguements you wish to enable (one mode only --runeli
 it is ready to run.
 
 To make and test scripts look at the corresponding wiki pages.
+
+
+IF THE BOT FAILS TO START TEST THE RUNELITE RUN ARGUMENT IT IS LIKELY AN ISSUE WITH THE RUNELITE MAVEN BUILD
+Check their wiki for info on how to fix the install
