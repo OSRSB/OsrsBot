@@ -1,6 +1,8 @@
 package net.runelite.client.rsb.event.impl;
 
+import net.runelite.api.Perspective;
 import net.runelite.api.Point;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.client.rsb.event.listener.PaintListener;
 import net.runelite.client.rsb.methods.MethodContext;
@@ -23,7 +25,7 @@ public class DrawNPCs implements PaintListener {
 
 		final FontMetrics metrics = render.getFontMetrics();
 		for (RSNPC npc : ctx.npcs.getAll()) {
-			final Point location = ctx.calc.tileToScreen(npc.getLocation(), ctx.client.getPlane());
+			final Point location = ctx.calc.tileToScreen(npc.getLocation(), npc.getHeight());
 			//Point location = npc.getScreenLocation();
 			if (location == null || !ctx.calc.pointOnScreen(location)) {
 				continue;

@@ -1,7 +1,8 @@
 package net.runelite.client.rsb.wrappers;
 
-import net.runelite.api.Model;
+import net.runelite.api.*;
 import net.runelite.api.Point;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
@@ -45,13 +46,18 @@ public class RSModel extends MethodProvider {
 
 	public RSModel(MethodContext ctx, Model model) {
 		super(ctx);
-		this.model = model;
-		xPoints = model.getVerticesX();
-		yPoints = model.getVerticesY();
-		zPoints = model.getVerticesZ();
-		indices1 = model.getTrianglesX();
-		indices2 = model.getTrianglesY();
-		indices3 = model.getTrianglesZ();
+		if (model != null) {
+			this.model = model;
+			xPoints = model.getVerticesX();
+			yPoints = model.getVerticesY();
+			zPoints = model.getVerticesZ();
+			indices1 = model.getTrianglesX();
+			indices2 = model.getTrianglesY();
+			indices3 = model.getTrianglesZ();
+		}
+		else {
+			this.model = null;
+		}
 	}
 
 	protected int getLocalX() {
@@ -252,29 +258,44 @@ public class RSModel extends MethodProvider {
 	 *
 	 * @return The on screen triangles of this model.
 	 */
-
 	public Polygon[] getTriangles() {
 		update();
-		LinkedList<Polygon> polygons = new LinkedList<Polygon>();
-		int locX = getLocalX();
-		int locY = getLocalY();
-		int len = indices1.length;
-		int height = methods.calc.tileHeight(locX, locY);
-		for (int i = 0; i < len; ++i) {
-			Point one = methods.calc.worldToScreen(locX + xPoints[indices1[i]],
-					locY + zPoints[indices1[i]], height + yPoints[indices1[i]]);
-			Point two = methods.calc.worldToScreen(locX + xPoints[indices2[i]],
-					locY + zPoints[indices2[i]], height + yPoints[indices2[i]]);
-			Point three = methods.calc.worldToScreen(locX
-					+ xPoints[indices3[i]], locY + zPoints[indices3[i]], height
-					+ yPoints[indices3[i]]);
-
-			if (one.getX() >= 0 && two.getX() >= 0 && three.getX() >= 0) {
-				polygons.add(new Polygon(new int[]{one.getX(), two.getX(), three.getX()},
-						new int[]{one.getY(), two.getY(), three.getY()}, 3));
-			}
+		if (model == null)
+		{
+			return null;
 		}
-		return polygons.toArray(new Polygon[polygons.size()]);
+
+		int[] x2d = new int[model.getVerticesCount()];
+		int[] y2d = new int[model.getVerticesCount()];
+
+		int localX = getLocalX();
+		int localY = getLocalY();
+
+		final int tileHeight = Perspective.getTileHeight(methods.client, new LocalPoint(localX, localY), methods.client.getPlane());
+
+		Perspective.modelToCanvas(methods.client, model.getVerticesCount(), localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
+		ArrayList polys = new ArrayList(model.getTrianglesCount());
+
+		int[] trianglesX = model.getTrianglesX();
+		int[] trianglesY = model.getTrianglesY();
+		int[] trianglesZ = model.getTrianglesZ();
+
+		for (int triangle = 0; triangle < model.getTrianglesCount(); ++triangle)
+		{
+			int[] xx =
+					{
+							x2d[trianglesX[triangle]], x2d[trianglesY[triangle]], x2d[trianglesZ[triangle]]
+					};
+
+			int[] yy =
+					{
+							y2d[trianglesX[triangle]], y2d[trianglesY[triangle]], y2d[trianglesZ[triangle]]
+					};
+
+			polys.add(new Polygon(xx, yy, 3));
+		}
+
+		return (Polygon[]) polys.toArray(new Polygon[0]);
 	}
 
 	/**
@@ -308,42 +329,17 @@ public class RSModel extends MethodProvider {
 		int locX = getLocalX();
 		int locY = getLocalY();
 		int height = methods.calc.tileHeight(locX, locY);
-		for (int i = start; i < end; ++i) {
-			Point one = methods.calc.worldToScreen(locX + xPoints[indices1[i]],
-					locY + zPoints[indices1[i]], height + yPoints[indices1[i]]);
-			int x = -1, y = -1;
-			if (one.getX()>= 0) {
-				x = one.getX();
-				y = one.getY();
-			}
-			Point two = methods.calc.worldToScreen(locX + xPoints[indices2[i]],
-					locY + zPoints[indices2[i]], height + yPoints[indices2[i]]);
-			if (two.getX()>= 0) {
-				if (x >= 0) {
-					x = (x + two.getX()) / 2;
-					y = (y + two.getY()) / 2;
-				} else {
-					x = two.getX();
-					y = two.getY();
-				}
-			}
-			Point three = methods.calc.worldToScreen(locX
-					+ xPoints[indices3[i]], locY + zPoints[indices3[i]], height
-					+ yPoints[indices3[i]]);
-			if (three.getX()>= 0) {
-				if (x >= 0) {
-					x = (x + three.getX()) / 2;
-					y = (y + three.getY()) / 2;
-				} else {
-					x = three.getX();
-					y = three.getY();
-				}
-			}
-			if (x >= 0) {
-				return new Point(x, y);
+		Polygon[] triangles = this.getTriangles();
+		for (int i = start; i < end; i++) {
+			for (int n = 0; n < triangles[i].npoints; n++) {
+				return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
 			}
 		}
 		return null;
+	}
+
+	public int getOrientation() {
+		return 0;
 	}
 
 }

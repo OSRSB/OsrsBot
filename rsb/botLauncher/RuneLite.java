@@ -444,6 +444,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
         {
             final ClientLoader clientLoader = new ClientLoader(options.valueOf(updateMode));
 
+
             new Thread(() ->
             {
                 clientLoader.get();
@@ -503,7 +504,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         eventManager.start();
 
-        SplashScreen.stop();
     }
 
     public void setMethodContext() {

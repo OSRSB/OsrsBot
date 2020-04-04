@@ -2,6 +2,7 @@ package net.runelite.client.rsb.methods;
 
 import net.runelite.api.Item;
 import net.runelite.api.NodeCache;
+import net.runelite.api.Tile;
 import net.runelite.api.TileItem;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSGroundItem;
@@ -15,6 +16,9 @@ import java.util.List;
  * Provides access to ground items.
  */
 public class GroundItems extends MethodProvider {
+	
+	//This will hold the maximum number of tiles away the client can render
+	private static final int MAX_RENDER_RANGE = 25;
 
 	public static final Filter<RSGroundItem> ALL_FILTER = new Filter<RSGroundItem>() {
 		public boolean accept(RSGroundItem item) {
@@ -32,7 +36,7 @@ public class GroundItems extends MethodProvider {
 	 * @return All ground items in the loaded area.
 	 */
 	public RSGroundItem[] getAll() {
-		return getAll(52, ALL_FILTER);
+		return getAll(MAX_RENDER_RANGE, ALL_FILTER);
 	}
 
 	/**
@@ -42,7 +46,7 @@ public class GroundItems extends MethodProvider {
 	 * @return All ground items
 	 */
 	public RSGroundItem[] getAll(Filter<RSGroundItem> filter) {
-		return getAll(52, filter);
+		return getAll(MAX_RENDER_RANGE, filter);
 	}
 
 	/**
@@ -73,7 +77,8 @@ public class GroundItems extends MethodProvider {
 		for (int x = minX; x < maxX; x++) {
 			for (int y = minY; y < maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
-				for (RSGroundItem item : items) {
+				if (items != null)
+ 				for (RSGroundItem item : items) {
 					if (filter.accept(item)) {
 						temp.add(item);
 					}
@@ -94,8 +99,8 @@ public class GroundItems extends MethodProvider {
 		int dist = 9999999;
 		int pX = methods.players.getMyPlayer().getLocation().getWorldLocation().getX();
 		int pY = methods.players.getMyPlayer().getLocation().getWorldLocation().getY();
-		int minX = pX - 52, minY = pY - 52;
-		int maxX = pX + 52, maxY = pY + 52;
+		int minX = pX - MAX_RENDER_RANGE, minY = pY - MAX_RENDER_RANGE;
+		int maxX = pX + MAX_RENDER_RANGE, maxY = pY + MAX_RENDER_RANGE;
 		RSGroundItem itm = null;
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
@@ -151,12 +156,17 @@ public class GroundItems extends MethodProvider {
 		NodeCache itemNC = methods.client.getItemCompositionCache();
 		int id = x | y << 14 | methods.client.getPlane() << 28;
 
-		RSTile tile = new RSTile(x, y, methods.client.getPlane());
-		List<TileItem> groundItems = tile.getTile(methods).getGroundItems();
+		RSTile rsTile = new RSTile(x, y, methods.client.getPlane());
+		Tile tile = rsTile.getTile(methods);
+		if (tile == null) {
+			return null;
+		}
+
+		List<TileItem> groundItems = tile.getGroundItems();
 
 		if (groundItems != null && !groundItems.isEmpty()) {
 			for (TileItem item : groundItems) {
-				list.add(new RSGroundItem(methods, tile, new RSItem(methods, item)));
+				list.add(new RSGroundItem(methods, rsTile, new RSItem(methods, item)));
 			}
 		}
 

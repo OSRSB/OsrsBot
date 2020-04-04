@@ -31,12 +31,23 @@ public class RSGroundItem extends MethodProvider {
 		Tile tile = location.getTile(methods);
 
 		if (tile != null) {
-			GroundObject obj = tile.getGroundObject();
-			if (obj != null) {
-				Model model = tile.getGroundObject().getRenderable().getModel();
-				if (model != null) {
-					return (RSModel) model;
+			if (!tile.getGroundItems().isEmpty()) {
+				//if (obj != null) {
+				for (int i = 0; i < tile.getGroundItems().size(); i++) {
+					if (!tile.getGroundItems().isEmpty()) {
+
+						return (tile.getItemLayer().getTop() != null) ?
+								new RSGroundItemModel(methods,  tile.getItemLayer().getTop().getModel(), tile):
+								new RSGroundItemModel(methods, tile.getGroundItems().get(i).getModel(), tile);
+					}
 				}
+				/*
+				Model model = tile.getGroundItems().get(0).getModel();
+				if (model != null) {
+					return new RSModel(methods, model);
+				}
+
+				 */
 			}
 		}
 		return null;

@@ -2,6 +2,7 @@ package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
+import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
@@ -104,16 +105,28 @@ public class RSObject extends MethodProvider {
 	 * @return The RSModel, or null if unavailable.
 	 */
 	public RSModel getModel() {
-		if (obj instanceof GameObject) {
-			return new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
-		} else if (obj instanceof WallObject) {
-			return new RSModel(methods, ((WallObject) obj).getRenderable1().getModel());
-		} else if (obj instanceof GroundObject) {
-			return new RSModel(methods, ((GroundObject) obj).getRenderable().getModel());
-		} else if (obj instanceof DecorativeObject) {
-			return new RSModel(methods, ((DecorativeObject) obj).getRenderable().getModel());
+		try {
+			Model model = ((GameObject) obj).getRenderable().getModel();
+			if (model != null && model.getVerticesX() != null) {
+				return new RSObjectModel(methods, model, (GameObject) obj);
+			}
+		} catch (AbstractMethodError ignored) {
 		}
 		return null;
+		/*
+		 if (obj instanceof WallObject) {
+			model = new RSModel(methods, ((WallObject) obj).getRenderable1().getModel());
+		} else if (obj instanceof GroundObject) {
+			model = new RSModel(methods, ((GroundObject) obj).getRenderable().getModel());
+		} else if (obj instanceof DecorativeObject) {
+			model = new RSModel(methods, ((DecorativeObject) obj).getRenderable().getModel());
+		} else if (obj instanceof ItemLayer) {
+			 //model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
+		} else if (obj instanceof GameObject) {
+			 model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
+		 }
+
+		 */
 	}
 
 
@@ -246,5 +259,4 @@ public class RSObject extends MethodProvider {
 		}
 		return false;
 	}
-
 }
