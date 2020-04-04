@@ -181,7 +181,7 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, tile.getWorldLocation()), height);
+		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, tile.getWorldLocation()), methods.client.getPlane(), height);
 		/*
 		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + 0.5)),
 				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + 0.5)), height);
@@ -396,30 +396,8 @@ public class Calculations extends MethodProvider {
 	 *         .
 	 */
 	public int tileHeight(final int x, final int y) {
-		int p = methods.client.getPlane();
-		int x1 = x >> 9;
-		int y1 = y >> 9;
-		return Perspective.getTileHeight(methods.client, new LocalPoint(x, y), p);
-		/*
-		byte[][][] settings = methods.client.getTileSettings();
-		if ((settings != null) && (x1 >= 0) && (x1 < 104) && (y1 >= 0) && (y1 < 104)) {
-			if ((p <= 3) && ((settings[1][x1][y1] & 2) != 0)) {
-				++p;
-			}
-			int[][][] planes = methods.client.getTileHeights();
-			if (planes != null && p < planes.length && planes[p] != null) {
-				int[][] heights = planes[p];
-				if (heights != null) {
-					int x2 = x & 512 - 1;
-					int y2 = y & 512 - 1;
-					int start_h = (heights[x1][y1] * (512 - x2) + heights[x1 + 1][y1] * x2) >> 9;
-					int end_h = (heights[x1][1 + y1] * (512 - x2) + heights[x1 + 1][y1 + 1] * x2) >> 9;
-					return start_h * (512 - y2) + end_h * y2 >> 9;
-				}
-			}
-		}
-		return 0;
-		 */
+		return Perspective.getTileHeight(methods.client, new LocalPoint(x, y), methods.client.getPlane());
+
 	}
 
 	/**
@@ -432,7 +410,28 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point worldToScreen(int x, int y, int z) {
-		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, x, y), z);
+		LocalPoint local = LocalPoint.fromWorld(methods.client, x, y);
+		if (local == null) {
+			local = new LocalPoint(x, y);
+		}
+		return Perspective.localToCanvas(methods.client, local, z);
+	}
+
+	/**
+	 * Returns the screen location of a given 3D point in the game world.
+	 *
+	 * @param x x value on the game plane.
+	 * @param y y value on the game plane.
+	 * @param z z value on the game plane.
+	 * @return <code>Point</code> based on screen; otherwise
+	 *         <code>new Point(-1, -1)</code>.
+	 */
+	public Point worldToScreen(int x, int y, int plane, int z) {
+		LocalPoint local = LocalPoint.fromWorld(methods.client, x, y);
+		if (local == null) {
+			local = new LocalPoint(x, y);
+		}
+		return Perspective.localToCanvas(methods.client, local, plane, z);
 	}
 
 	// ---- Internal ----

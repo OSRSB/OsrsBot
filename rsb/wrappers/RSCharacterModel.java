@@ -56,4 +56,6 @@ public class RSCharacterModel extends RSModel {
 		return c.getLocalLocation().getY();
 	}
 
+	@Override
+	public int getOrientation() {return c.getOrientation();}
 }

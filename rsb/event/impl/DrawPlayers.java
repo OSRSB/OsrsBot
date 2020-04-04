@@ -30,7 +30,7 @@ public class DrawPlayers implements PaintListener {
 				continue;
 			}
 			final RSPlayer player = element;
-			final Point location = ctx.calc.tileToScreen(player.getLocation(), ctx.client.getPlane());
+			final Point location = ctx.calc.tileToScreen(player.getLocation(), player.getHeight());
 			if (location == null || !ctx.calc.pointOnScreen(location)) {
 				continue;
 			}

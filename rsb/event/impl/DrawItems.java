@@ -29,8 +29,8 @@ public class DrawItems implements PaintListener {
 		}
 		final FontMetrics metrics = render.getFontMetrics();
 		final RSTile location = player.getLocation();
-		final int locX = location.getTile(ctx).getWorldLocation().getX();//location.getWorldLocation().getX();
-		final int locY = location.getTile(ctx).getWorldLocation().getY();//location.getWorldLocation().getY();
+		final int locX = location.getTile(ctx).getWorldLocation().getX();
+		final int locY = location.getTile(ctx).getWorldLocation().getY();
 		final int locPlane = location.getTile(ctx).getPlane();
 		final int tHeight = metrics.getHeight();
 		for (int x = locX - 25; x < locX + 25; x++) {
