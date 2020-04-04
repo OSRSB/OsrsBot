@@ -53,8 +53,6 @@ public class Calculations extends MethodProvider {
 	 * @see #tileToMinimap(RSTile)
 	 */
 	public boolean tileOnMap(RSTile t) {
-		// Point p = tileToMinimap(t);
-		// return p != null && p.x != -1 && p.y != -1;
 		return distanceTo(t) < 15;
 	}
 
@@ -66,7 +64,7 @@ public class Calculations extends MethodProvider {
 	 *         <tt>false</tt>.
 	 */
 	public boolean tileOnScreen(RSTile t) {
-		return pointOnScreen(tileToScreen(t, 0.5, 0.5, 0));
+		return pointOnScreen(tileToScreen(t));
 	}
 
 	/**
@@ -167,29 +165,6 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * Returns the screen location of a Tile with given 3D x, y and height
-	 * offset values.
-	 *
-	 * @param tile   RSTile for which the screen location should be calculated.
-	 * @param dX     Distance from bottom left of the tile to bottom right. Ranges
-	 *               from 0-1;
-	 * @param dY     Distance from bottom left of the tile to top left. Ranges from
-	 *               0-1;
-	 * @param height Height offset (normal to the ground) to return the
-	 *               <code>Point</code> at.
-	 * @return <code>Point</code> based on position on the game plane; otherwise
-	 *         <code>new Point(-1, -1)</code>.
-	 */
-	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, tile.getWorldLocation()), methods.client.getPlane(), height);
-		/*
-		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + 0.5)),
-				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + 0.5)), height);
-
-		 */
-	}
-
-	/**
 	 * Returns the screen location of a Tile with a given 3D height offset.
 	 *
 	 * @param tile   RSTile for which the screen location should be calculated.
@@ -197,10 +172,13 @@ public class Calculations extends MethodProvider {
 	 *               <code>Point</code> at.
 	 * @return <code>Point</code> based on position on the game plane; if null
 	 *         <code>new Point(-1, -1)</code>.
-	 * @see #tileToScreen(RSTile, double, double, int)
 	 */
 	public Point tileToScreen(final RSTile tile, final int height) {
-		return tileToScreen(tile, 0.5, 0.5, height);
+		LocalPoint point = LocalPoint.fromWorld(methods.client, tile.getWorldLocation());
+		if (point != null) {
+			return Perspective.localToCanvas(methods.client, point, methods.client.getPlane(), height);
+		}
+		return new Point(-1, -1);
 	}
 
 	/**
@@ -212,7 +190,7 @@ public class Calculations extends MethodProvider {
 	 * @see #tileToScreen(RSTile, int)
 	 */
 	public Point tileToScreen(final RSTile tile) {
-		return tileToScreen(tile, 0);
+		return tileToScreen(tile, tileHeight(tile.getLocalLocation(methods).getX(), tile.getLocalLocation(methods).getY()));
 	}
 
 	/**

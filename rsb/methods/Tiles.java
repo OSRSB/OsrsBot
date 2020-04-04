@@ -34,7 +34,7 @@ public class Tiles extends MethodProvider {
 
 	public boolean doAction(final RSTile tile, final double xd,
 	                        final double yd, final int h, final String action, final String option) {
-		Point location = methods.calc.tileToScreen(tile, xd, yd, h);
+		Point location = methods.calc.tileToScreen(tile, h);
 		if (location.getX() != -1 && location.getY() != -1) {
 			methods.mouse.move(location, 3, 3);
 			sleep(random(20, 100));
