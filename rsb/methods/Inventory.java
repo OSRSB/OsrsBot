@@ -1,6 +1,6 @@
 package net.runelite.client.rsb.methods;
 
-import net.runelite.api.ItemComposition;
+import net.runelite.api.ItemDefinition;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
@@ -231,7 +231,7 @@ public class Inventory extends MethodProvider {
 		if (item == null) {
 			return false;
 		}
-		ItemComposition itemDef = item.getDefinition();
+		ItemDefinition itemDef = item.getDefinition();
 		if (itemDef != null) {
 			for (String a : itemDef.getInventoryActions()) {
 				if (a != null && a.equalsIgnoreCase(action)) {
@@ -700,7 +700,7 @@ public class Inventory extends MethodProvider {
 		RSItem[] items = getItems();
 		int slot = -1;
 		for (RSItem item : items) {
-			ItemComposition def = item.getDefinition();
+			ItemDefinition def = item.getDefinition();
 			if (def != null && def.getName().contains(name)) {
 				slot = item.getID();
 				break;

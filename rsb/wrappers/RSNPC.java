@@ -32,7 +32,7 @@ public class RSNPC extends RSCharacter {
 
 
     public String[] getActions() {
-        NPCComposition def = getDefInternal();
+        NPCDefinition def = getDefInternal();
 
         if (def != null) {
             return def.getActions();
@@ -41,7 +41,7 @@ public class RSNPC extends RSCharacter {
     }
 
     public int getID() {
-        NPCComposition def = getDefInternal();
+        NPCDefinition def = getDefInternal();
         if (def != null) {
             return def.getId();
         }
@@ -50,7 +50,7 @@ public class RSNPC extends RSCharacter {
 
     @Override
     public String getName() {
-        NPCComposition def = getDefInternal();
+        NPCDefinition def = getDefInternal();
         if (def != null) {
             return def.getName();
         }
@@ -97,12 +97,12 @@ public class RSNPC extends RSCharacter {
 */
 
 
-    NPCComposition getDefInternal() {
+    NPCDefinition getDefInternal() {
         NPC c = npc.get();
         if (c == null) {
             return null;
         } else {
-            return c.getComposition();
+            return c.getDefinition();
         }
     }
 

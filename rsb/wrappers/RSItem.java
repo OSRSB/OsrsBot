@@ -1,9 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
 
-import net.runelite.api.Item;
-import net.runelite.api.ItemComposition;
-import net.runelite.api.Tile;
+import net.runelite.api.ItemDefinition;
 import net.runelite.api.TileItem;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
@@ -46,7 +44,7 @@ public class RSItem extends MethodProvider {
 	 *
 	 * @return The RSItemDef; or <code>null</code> if unavailable.
 	 */
-	public ItemComposition getDefinition() {
+	public ItemDefinition getDefinition() {
 		return methods.client.getItemDefinition(id);
 	}
 
@@ -124,7 +122,7 @@ public class RSItem extends MethodProvider {
 		if (component != null && component.getName() != null) {
 			return component.getName();
 		} else {
-			ItemComposition definition = getDefinition();
+			ItemDefinition definition = getDefinition();
 			if (definition != null) {
 				return definition.getName();
 			}

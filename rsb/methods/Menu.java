@@ -1,6 +1,6 @@
 package net.runelite.client.rsb.methods;
 
-import net.runelite.api.ItemComposition;
+import net.runelite.api.ItemDefinition;
 import net.runelite.api.MenuEntry;
 import net.runelite.client.rsb.wrappers.RSItem;
 import net.runelite.client.ui.FontManager;
@@ -88,7 +88,7 @@ public class Menu extends MethodProvider {
         if (item == null) {
             return false;
         }
-        ItemComposition itemDef = item.getDefinition();
+        ItemDefinition itemDef = item.getDefinition();
         if (itemDef != null) {
             for (String a : itemDef.getInventoryActions()) {
                 if (a.equalsIgnoreCase(action)) {

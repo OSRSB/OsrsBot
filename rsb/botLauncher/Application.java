@@ -47,8 +47,8 @@ public class Application {
 		if (options.has("bot") && !options.has("bot-runelite") && !options.has("runelite")) {
 			bootstrap();
 			new Extractor(args).run();
-			SwingUtil.setFont(FontManager.getRunescapeFont());
 			gui = new BotGUI(args);
+			gui.setFont(FontManager.getRunescapeFont());
 			gui.setVisible(true);
 			gui.addBot(args);
 		}

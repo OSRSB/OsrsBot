@@ -35,7 +35,7 @@ import net.runelite.client.chat.CommandManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.discord.DiscordService;
 import net.runelite.client.eventbus.EventBus;
-import net.runelite.client.externalplugins.ExternalPluginManager;
+import net.runelite.client.plugins.ExternalPluginManager;
 import net.runelite.client.game.ClanManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.LootManager;
@@ -58,7 +58,6 @@ import net.runelite.client.rsb.internal.BotModule;
 import net.runelite.client.rsb.internal.input.Canvas;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
-import net.runelite.client.ui.FatalErrorDialog;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.OverlayRenderer;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
@@ -66,7 +65,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxOverlay;
 import net.runelite.client.ui.overlay.tooltip.TooltipOverlay;
 import net.runelite.client.ui.overlay.worldmap.WorldMapOverlay;
 import net.runelite.client.ws.PartyService;
-import net.runelite.client.ui.SplashScreen;
+import net.runelite.client.ui.RuneLiteSplashScreen;
 
 
 @Singleton
@@ -458,9 +457,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             injector = Guice.createInjector(new BotModule(
                     clientLoader,
-                    false,
-                    options.valueOf(sessionfile),
                     options.valueOf(configfile)));
+
 
             RuneLite.setInjector(injector);
 
@@ -479,10 +477,9 @@ public class RuneLite extends net.runelite.client.RuneLite {
         }
         catch (Exception e)
         {
-            log.warn("Failure during startup", e);
-            SwingUtilities.invokeLater(() ->
-                    new FatalErrorDialog("RuneLite has encountered an unexpected error during startup.")
-                            .open());
+            JOptionPane.showMessageDialog(ClientUI.getFrame(), "Encountered an unexpected error during startup.", "Error!",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }
 

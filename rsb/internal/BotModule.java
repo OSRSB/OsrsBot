@@ -34,13 +34,12 @@ public class BotModule extends RuneLiteModule {
     private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
 
 
-    public BotModule(Supplier<Applet> clientLoader, boolean developerMode, File sessionfile, File config) {
-        super(clientLoader, developerMode, sessionfile, config);
+    public BotModule(Supplier<Applet> clientLoader, File config) {
+        super(clientLoader, config);
         this.clientLoader = clientLoader;
-        this.developerMode = developerMode;
-        this.sessionfile = sessionfile;
         this.config = config;
     }
+
 
     @Override
     protected void configure()

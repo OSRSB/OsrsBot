@@ -2,12 +2,9 @@ package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
-import java.awt.*;
-import java.awt.geom.Area;
 
 
 public class RSObject extends MethodProvider {
@@ -66,7 +63,7 @@ public class RSObject extends MethodProvider {
 	 *
 	 * @return The RSObjectDef if available, otherwise <code>null</code>.
 	 */
-	public ObjectComposition getDef() {
+	public ObjectDefinition getDef() {
 		return methods.client.getObjectDefinition(getID());
 	}
 
@@ -95,7 +92,7 @@ public class RSObject extends MethodProvider {
 	 * @return The object name if the definition is available; otherwise "".
 	 */
 	public String getName() {
-		ObjectComposition objectDef = getDef();
+		ObjectDefinition objectDef = getDef();
 		return objectDef != null ? objectDef.getName() : "";
 	}
 
@@ -106,7 +103,7 @@ public class RSObject extends MethodProvider {
 	 */
 	public RSModel getModel() {
 		try {
-			Model model = ((GameObject) obj).getRenderable().getModel();
+			Model model = ((GameObject) obj).getEntity().getModel();
 			if (model != null && model.getVerticesX() != null) {
 				return new RSObjectModel(methods, model, (GameObject) obj);
 			}

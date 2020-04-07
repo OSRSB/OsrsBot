@@ -152,8 +152,7 @@ public class GroundItems extends MethodProvider {
 			return new RSGroundItem[0];
 		}
 		List<RSGroundItem> list = new ArrayList<>();
-
-		NodeCache itemNC = methods.client.getItemCompositionCache();
+		NodeCache itemNC = methods.client.getItemDefinitionCache();
 		int id = x | y << 14 | methods.client.getPlane() << 28;
 
 		RSTile rsTile = new RSTile(x, y, methods.client.getPlane());

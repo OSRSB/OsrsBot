@@ -126,7 +126,7 @@ public class Objects extends MethodProvider {
     public RSObject getNearest(final String... names) {
         return getNearest(new Filter<RSObject>() {
             public boolean accept(RSObject o) {
-                ObjectComposition def = o.getDef();
+                ObjectDefinition def = o.getDef();
                 if (def != null) {
                     for (String name : names) {
                         if (name.equals(def.getName())) {
