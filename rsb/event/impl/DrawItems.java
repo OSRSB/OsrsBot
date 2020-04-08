@@ -49,16 +49,14 @@ public class DrawItems implements PaintListener {
 						}
 					}
 				}
-				if (items.length>0) {
-					for (int i = 0; i < items.length; i++) {
-						render.setColor(Color.RED);
-						render.fillRect((int) screen.getX() - 1, (int) screen.getY() - 1, 2, 2);
-						final String s = "" + items[i].getItem().getID();
-						final int ty = screen.getY() - tHeight * (i + 1) + tHeight / 2;
-						final int tx = screen.getX() - metrics.stringWidth(s) / 2;
-						render.setColor(Color.green);
-						render.drawString(s, tx, ty);
-					}
+				for (int i = 0; i < items.length; i++) {
+					render.setColor(Color.RED);
+					render.fillRect((int) screen.getX() - 1, (int) screen.getY() - 1, 2, 2);
+					final String s = "" + items[i].getItem().getID();
+					final int ty = screen.getY() - tHeight * (i + 1) + tHeight / 2;
+					final int tx = screen.getX() - metrics.stringWidth(s) / 2;
+					render.setColor(Color.green);
+					render.drawString(s, tx, ty);
 				}
 			}
 		}

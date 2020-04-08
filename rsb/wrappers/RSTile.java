@@ -77,4 +77,21 @@ public class RSTile {
         }
         return new RSTile(x, y);
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof RSTile) {
+            final RSTile tile = (RSTile) obj;
+            return (tile.x == x) && (tile.y == y) && (tile.plane == plane);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "(X: " + x + ", Y:" + y + ", Plane:" + plane + ")";
+    }
 }

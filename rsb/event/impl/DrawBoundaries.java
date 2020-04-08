@@ -35,7 +35,10 @@ public class DrawBoundaries implements PaintListener {
 					mini = null;
 				}
 				minimapPoints[i][j] = mini;
-				Point screen = ctx.calc.tileToScreen(new RSTile(x, y, ctx.client.getPlane()), 0);
+				Point screen = ctx.calc.tileToScreen(new RSTile(x, y, ctx.client.getPlane()), 0, 0, 0);
+				if ((screen.getX() == -1) || (screen.getY() == -1)) {
+					screen = null;
+				}
 				screenPoints[i][j] = screen;
 			}
 		}
@@ -80,6 +83,27 @@ public class DrawBoundaries implements PaintListener {
 						render.drawLine(miniBL.getX(), miniBL.getY(), miniBR.getX(), miniBR.getY());
 					}
 				}
+				/*
+														 * render.setColor(Color.cyan); if ((curBlock & (1<<20)) != 0) {
+														 * if (miniBL != null && miniBR != null && miniTR != null &&
+														 * miniTL != null) { render.fillPolygon(new
+														 * int[]{miniBL.getX(),miniBR.getX(),miniTR.getX(),miniTL.getX()}, new
+														 * int[]{miniBL.getY(),miniBR.getY(),miniTR.getY(),miniTL.getY()},4); } if (tl !=
+														 * null && br != null && tr != null && bl != null) {
+														 * render.fillPolygon(new int[]{bl.getX(),br.getX(),tr.getX(),tl.getX()}, new
+														 * int[]{bl.getY(),br.getY(),tr.getY(),tl.getY()},4); } }
+														 */
+				// Point miniCent = Calculations.worldToMinimap(i+ baseX, j+
+				// baseY);
+				// Point cent = Calculations.tileToScreen(i+ baseX, j+ baseY,
+				// 0.5,0.5, 0);
+				/*
+														 * if (cent.getX() != -1 && cent.getY() != -1) {
+														 * render.setColor(Color.yellow); render.drawString("" +
+														 * Calculations.getRealDistanceTo(cur.getX()-baseX,
+														 * cur.getY()-baseY, i, j, false), (int)cent.getX(),
+														 * (int)cent.getY()); }
+														 */
 			}
 		}
 		final Point mini = ctx.players.getMyPlayer().getMinimapLocation();
