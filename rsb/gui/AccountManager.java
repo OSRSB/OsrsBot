@@ -188,7 +188,7 @@ public class AccountManager extends JDialog implements ActionListener {
 	private JTable table;
 	private JButton removeButton;
 
-	private AccountManager() {
+	public AccountManager() {
 		super(Frame.getFrames()[0], "Account Manager", true);
 	}
 

@@ -280,8 +280,18 @@ public class RSModel extends MethodProvider {
 		int[] trianglesY = model.getTrianglesY();
 		int[] trianglesZ = model.getTrianglesZ();
 
-		for (int triangle = 0; triangle < model.getTrianglesCount(); ++triangle)
-		{
+		for (int triangle = 0; triangle < model.getTrianglesCount(); ++triangle) {
+			if (trianglesX.length < model.getTrianglesCount() || trianglesY.length < model.getTrianglesCount() || trianglesZ.length < model.getTrianglesCount()) {
+				if (trianglesX.length < triangle + 1) {
+					break;
+				}
+				if (trianglesY.length < triangle + 1) {
+					break;
+				}
+				if (trianglesZ.length < triangle + 1) {
+					break;
+				}
+			}
 			int[] xx =
 					{
 							x2d[trianglesX[triangle]], x2d[trianglesY[triangle]], x2d[trianglesZ[triangle]]

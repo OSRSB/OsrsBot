@@ -44,14 +44,15 @@ public class BotHooks extends Hooks {
     Injector injector = RuneLite.getInjector();
     RuneLite bot = injector.getInstance(RuneLite.class);
 
+    /*
     @Override
     public void draw(MainBufferProvider mainBufferProvider, Graphics graphics, int x, int y) {
         try {
 
-            /*
-            Preferably initialize the value of bot with the current bot on screen
-            IE Application.getBot or similar manner.
-             */
+
+            //Preferably initialize the value of bot with the current bot on screen
+           // IE Application.getBot or similar manner.
+
 
 
             if (graphics == null) {
@@ -106,4 +107,6 @@ public class BotHooks extends Hooks {
             //log.warn("Bot hooks failed to paint properly");
         }
     }
+
+     */
 }

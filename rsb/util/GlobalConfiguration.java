@@ -18,7 +18,7 @@ public class GlobalConfiguration {
 	public static class Paths {
 
 		public static class Resources {
-			public static final String ROOT = "/rsb";
+			public static final String ROOT = "runelite-client/src/main/java/net/runelite/client/rsb";
 			public static final String ROOT_IMG = ROOT + "/images";
 			public static final String ICON = ROOT_IMG + "/icon.png";
 			public static final String ICON_DELETE = ROOT_IMG + "/delete.png";

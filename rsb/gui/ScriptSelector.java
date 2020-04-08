@@ -74,6 +74,18 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
+	public ScriptSelector(Frame frame, RuneLite bot) {
+		super(frame, "Script Selector", true);
+		this.bot = bot;
+		this.scripts = new ArrayList<ScriptDefinition>();
+		this.tmpFileNames = new ArrayList<String>();
+		this.model = new ScriptTableModel(this.scripts);
+	}
+
+	public static ScriptSelector getInstance(RuneLite bot) {
+		return new ScriptSelector(Frame.getFrames()[0], bot);
+	}
+
 	/**
 	 * @author GigiaJ
 	 * Description: It takes the testsScripts path in the IDE *unsure if it does it works compiled. Unlikely*
@@ -136,19 +148,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
-	public ScriptSelector(Frame frame, RuneLite bot) {
-		super(frame, "Script Selector");
-		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
-		this.model = new ScriptTableModel(this.scripts);
-	}
 
 	public void showGUI() {
 		init();
 		update();
-		setVisible(true);
 		load();
+		setVisible(true);
 	}
 
 	public void update() {
@@ -238,6 +243,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 				table.revalidate();
 			}
 		});
+
 		submit = new JButton("Start Script", new ImageIcon(
 				GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_START)));
 		final JButton connect = new JButton(new ImageIcon(
