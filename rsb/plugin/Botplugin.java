@@ -11,6 +11,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.account.AccountPlugin;
 import net.runelite.client.plugins.info.InfoPanel;
 import net.runelite.client.rsb.botLauncher.RuneLite;
+import net.runelite.client.rsb.util.GlobalConfiguration;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.util.ImageUtil;
@@ -38,9 +39,12 @@ public class Botplugin extends Plugin
         panel.associateBot(new BasePanel(injector.getInstance(RuneLite.class)));
 
         final BufferedImage icon = ImageUtil.getResourceStreamFromClass(AccountPlugin.class, "login_icon.png");
+        //Think the image might not be working? Will need to look at it more.
+        //final BufferedImage icon = ImageUtil.bufferedImageFromImage((GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_BOT)));
+
 
         navButton = NavigationButton.builder()
-                .tooltip("bot")
+                .tooltip("Bot Interface")
                 .icon(icon)
                 .priority(10)
                 .panel(panel)
