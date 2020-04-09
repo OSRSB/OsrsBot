@@ -44,7 +44,7 @@ public class BotHooks extends Hooks {
     Injector injector = RuneLite.getInjector();
     RuneLite bot = injector.getInstance(RuneLite.class);
 
-    /*
+
     @Override
     public void draw(MainBufferProvider mainBufferProvider, Graphics graphics, int x, int y) {
         try {
@@ -87,7 +87,7 @@ public class BotHooks extends Hooks {
             //final Graphics2D graphics2d = (Graphics2D) ((Method) SUPERCLASS_MAP.get(GETGRAPHICS)).invoke(this,
              //       mainBufferProvider);
 
-            final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(mainBufferProvider);
+            final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(bot, mainBufferProvider);
 
             // Draw bot overlays
             BotGUI.paintOverlays(bot.getClient(), g2d);
@@ -108,5 +108,4 @@ public class BotHooks extends Hooks {
         }
     }
 
-     */
 }

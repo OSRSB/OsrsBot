@@ -325,11 +325,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
         eventManager.processEvent(paintEvent);
         eventManager.processEvent(textPaintEvent);
         back.dispose();
-        image.getGraphics().drawImage(backBuffer, 0, 0, null);
-        if (panel != null) {
-            panel.repaint();
-        }
-        return backBuffer.getGraphics();
+        back.drawImage(backBuffer, 0, 0, null);
+        return back;
     }
 
     public Applet getLoader() {
