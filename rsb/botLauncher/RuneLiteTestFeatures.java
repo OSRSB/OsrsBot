@@ -76,19 +76,17 @@ public class RuneLiteTestFeatures {
     }
 
     private static void testFeature(RuneLite bot) throws InterruptedException {
-        sleep(2000);
+        sleep(5000);
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-
-            if (object == null) {
                 object = bot.getMethodContext().objects.getNearest("Gate");
                 if (object != null) {
                     if (!object.isOnScreen()) {
                         object.turnTo();
                     } else {
+                        object.doAction("Close", "Gate");
                         object.doAction("Open", "Gate");
                     }
                 }
-            }
         }
     }
 

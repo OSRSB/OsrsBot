@@ -104,6 +104,7 @@ public class RSObject extends MethodProvider {
 
 	/**
 	 * Gets the Model of this object.
+	 * Checks what kind of object it is and returns the model of the object based on that
 	 *
 	 * @return The RSModel, or null if unavailable.
 	 */
@@ -111,24 +112,29 @@ public class RSObject extends MethodProvider {
 		try {
 			Model model;
 			if (obj instanceof WallObject) {
-				model = ((WallObject) obj).getRenderable1().getModel();
+				model = (Model) ((WallObject) obj).getRenderable1();
 				if (model != null && model.getVerticesX() != null)
-					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+					if (((WallObject) obj).getRenderable2() != null)
+					return new RSWallObjectModel(methods, model, (Model) ((WallObject) obj).getRenderable2(), obj);
+					else {
+						return new RSWallObjectModel(methods, model, obj);
+					}
+				return new RSWallObjectModel(methods, null, obj);
 			} else if (obj instanceof GroundObject) {
-				model = ((GroundObject) obj).getRenderable().getModel();
+				model = (Model) ((GroundObject) obj).getRenderable();
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof DecorativeObject) {
-				model = ((DecorativeObject) obj).getRenderable().getModel();
+				model = (Model) ((DecorativeObject) obj).getRenderable();
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof ItemLayer) {
 				//model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
 			} else if (obj instanceof GameObject) {
+				model =  ((GameObject) obj).getRenderable().getModel();
 				if (model != null && model.getVerticesX() != null)
 					return new RSObjectModel(methods, model, (GameObject) obj);
 			}
-
 		} catch (AbstractMethodError ignored) {
 		}
 		return null;
