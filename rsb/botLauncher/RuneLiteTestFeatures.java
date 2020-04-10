@@ -78,7 +78,8 @@ public class RuneLiteTestFeatures {
     private static void testFeature(RuneLite bot) throws InterruptedException {
         sleep(2000);
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            if (object == null || new RSPlayer(bot.getMethodContext(), bot.getMethodContext().client.getLocalPlayer()).getInteracting() == object) {
+
+            if (object == null) {
                 object = bot.getMethodContext().objects.getNearest("Gate");
                 if (object != null) {
                     if (!object.isOnScreen()) {
