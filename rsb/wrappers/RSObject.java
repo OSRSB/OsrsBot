@@ -125,10 +125,8 @@ public class RSObject extends MethodProvider {
 			} else if (obj instanceof ItemLayer) {
 				//model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
 			} else if (obj instanceof GameObject) {
-				model =  ((GameObject) obj).getRenderable().getModel();
 				if (model != null && model.getVerticesX() != null)
 					return new RSObjectModel(methods, model, (GameObject) obj);
-
 			}
 
 		} catch (AbstractMethodError ignored) {

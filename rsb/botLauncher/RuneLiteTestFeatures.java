@@ -78,6 +78,7 @@ public class RuneLiteTestFeatures {
     private static void testFeature(RuneLite bot) throws InterruptedException {
         sleep(2000);
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
+
             if (object == null) {
                 object = bot.getMethodContext().objects.getNearest("Gate");
                 if (object != null) {
