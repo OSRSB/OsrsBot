@@ -36,7 +36,8 @@ public class Botplugin extends Plugin
     protected void startUp() throws Exception
     {
         BotPanel panel = injector.getInstance(BotPanel.class);
-        panel.associateBot(new BasePanel(injector.getInstance(RuneLite.class)));
+        RuneLite bot = injector.getInstance(RuneLite.class);
+        panel.associateBot(new BasePanel(bot), new ScriptPanel(bot));
 
         final BufferedImage icon = ImageUtil.getResourceStreamFromClass(AccountPlugin.class, "login_icon.png");
         //Think the image might not be working? Will need to look at it more.

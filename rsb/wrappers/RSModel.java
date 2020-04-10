@@ -150,7 +150,7 @@ public class RSModel extends MethodProvider {
 	 */
 	public Point getPoint() {
 		update();
-		int len = indices1.length;
+		int len = model.getVerticesCount();
 		int sever = random(0, len);
 		Point point = getPointInRange(sever, len);
 		if (point != null) {
@@ -259,39 +259,30 @@ public class RSModel extends MethodProvider {
 	 * @return The on screen triangles of this model.
 	 */
 	public Polygon[] getTriangles() {
-		update();
-		if (model == null)
-		{
+		if (model == null) {
 			return null;
 		}
 
-		int[] x2d = new int[model.getVerticesCount()];
-		int[] y2d = new int[model.getVerticesCount()];
+		int count = model.getVerticesCount();
+
+		int[] x2d = new int[count];
+		int[] y2d = new int[count];
 
 		int localX = getLocalX();
 		int localY = getLocalY();
 
 		final int tileHeight = Perspective.getTileHeight(methods.client, new LocalPoint(localX, localY), methods.client.getPlane());
 
-		Perspective.modelToCanvas(methods.client, model.getVerticesCount(), localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
+
+
+		Perspective.modelToCanvas(methods.client, count, localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
 		ArrayList polys = new ArrayList(model.getTrianglesCount());
 
 		int[] trianglesX = model.getTrianglesX();
 		int[] trianglesY = model.getTrianglesY();
 		int[] trianglesZ = model.getTrianglesZ();
 
-		for (int triangle = 0; triangle < model.getTrianglesCount(); ++triangle) {
-			if (trianglesX.length < model.getTrianglesCount() || trianglesY.length < model.getTrianglesCount() || trianglesZ.length < model.getTrianglesCount()) {
-				if (trianglesX.length < triangle + 1) {
-					break;
-				}
-				if (trianglesY.length < triangle + 1) {
-					break;
-				}
-				if (trianglesZ.length < triangle + 1) {
-					break;
-				}
-			}
+		for (int triangle = 0; triangle < count; ++triangle) {
 			int[] xx =
 					{
 							x2d[trianglesX[triangle]], x2d[trianglesY[triangle]], x2d[trianglesZ[triangle]]
@@ -341,8 +332,10 @@ public class RSModel extends MethodProvider {
 		int height = methods.calc.tileHeight(locX, locY);
 		Polygon[] triangles = this.getTriangles();
 		for (int i = start; i < end; i++) {
-			for (int n = 0; n < triangles[i].npoints; n++) {
-				return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
+			if (i < triangles.length) {
+				for (int n = 0; n < triangles[i].npoints; n++) {
+					return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
+				}
 			}
 		}
 		return null;

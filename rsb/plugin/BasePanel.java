@@ -42,6 +42,9 @@ public class BasePanel extends PluginPanel implements ScriptListener {
 		ScriptSelector.getInstance(bot).showGUI();
 	}
 
+	/*
+	This will likely be modified and added later, feel free to edit it to make it look better
+	 */
 	private void initComponents() {
 		scrollPane1 = new JScrollPane();
 		table1 = new JTable();
@@ -54,10 +57,13 @@ public class BasePanel extends PluginPanel implements ScriptListener {
 		add(buttonAccounts);
 		buttonAccounts.setBounds(new Rectangle(new Point(15, 375), buttonAccounts.getPreferredSize()));
 
+
+		/*
 		buttonScripts.setText("View Scripts");
 		buttonScripts.addActionListener(e -> buttonScriptsActionPerformed(e));
 		add(buttonScripts);
 		buttonScripts.setBounds(new Rectangle(new Point(120, 375), buttonScripts.getPreferredSize()));
+		 */
 
 		{
 			// compute preferred size

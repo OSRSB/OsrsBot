@@ -61,16 +61,19 @@ class BotPanel extends PluginPanel
 	 * @author GigiaJ
 	 *
 	 * @description
-	 * Associates the bot plugin panel with the base panel. Since the Bot Plugin has access to the injector the instance
-	 * of RuneLite must be passed forward through the basePanel constructor for script selection to work.
+	 * Associates the bot plugin panel with the script panel. Since the Bot Plugin has access to the injector the instance
+	 * of RuneLite must be passed forward through the scriptPanel constructor for script selection to work.
 	 *
 	 * @param basePanel
+	 * @param scriptPanel
 	 */
-	protected void associateBot(BasePanel basePanel) {
+	protected void associateBot(BasePanel basePanel, ScriptPanel scriptPanel) {
 		MaterialTab  baseTab = new MaterialTab("Bot", tabGroup, basePanel);
+		MaterialTab scriptTab = new MaterialTab("Scripts", tabGroup, scriptPanel);
 
 		tabGroup.setBorder(new EmptyBorder(5, 0, 0, 0));
 		tabGroup.addTab(baseTab);
+		tabGroup.addTab(scriptTab);
 		tabGroup.select(baseTab);
 
 		add(tabGroup, BorderLayout.NORTH);

@@ -218,6 +218,7 @@ public class Objects extends MethodProvider {
                 objects.add(new RSObject(methods, tile.getWallObject(), RSObject.Type.WALL, plane));
             }
         } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
         return objects;
     }

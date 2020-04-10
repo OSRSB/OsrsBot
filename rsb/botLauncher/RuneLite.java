@@ -374,9 +374,10 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withRequiredArg().ofType(String.class);
 
 
+
         parser.accepts("help", "Show this text").forHelp();
         OptionSet options = parser.parse(args);
-
+        final boolean developerMode = options.has("developer-mode");
 
         if (options.has("help")) {
             parser.printHelpOn(System.out);
@@ -442,7 +443,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             injector = Guice.createInjector(new BotModule(
                     clientLoader,
-                    false,
+                    developerMode,
                     options.valueOf(sessionfile),
                     options.valueOf(configfile)));
 

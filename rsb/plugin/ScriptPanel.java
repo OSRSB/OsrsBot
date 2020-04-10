@@ -1,32 +1,88 @@
 package net.runelite.client.rsb.plugin;
 
+import net.runelite.client.rsb.botLauncher.RuneLite;
+import net.runelite.client.rsb.gui.AccountManager;
+import net.runelite.client.rsb.gui.BotToolBar;
+import net.runelite.client.rsb.gui.ScriptSelector;
+import net.runelite.client.rsb.internal.ScriptHandler;
+import net.runelite.client.rsb.script.Script;
+import net.runelite.client.rsb.script.ScriptManifest;
+
 import java.awt.event.*;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 
 public class ScriptPanel extends JPanel {
-	public ScriptPanel() {
+	private RuneLite bot;
+	private JScrollPane scrollPane1;
+	private JTable table1;
+	private JComboBox comboBoxAccounts;
+	private JButton buttonStart;
+	private JButton buttonPause;
+	private JButton buttonStop;
+
+	public ScriptPanel(RuneLite bot) {
+		this.bot = bot;
 		initComponents();
 	}
 
-	private void buttonStartActionPerformed(ActionEvent e) {
-		// TODO add your code here
-	}
-
+	/**
+	 * @author GigiaJ
+	 * @description Sets the action to occur when the pause button is pressed.
+	 *
+	 * @param e
+	 */
 	private void buttonPauseActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		ScriptHandler sh = bot.getScriptHandler();
+		Map<Integer, Script> running = sh.getRunningScripts();
+		if (running.size() > 0) {
+			int id = running.keySet().iterator().next();
+			sh.pauseScript(id);
+			//Swaps the displayed text
+			if (buttonPause.getText().equals("Pause")) {
+				buttonPause.setText("Play");
+			}
+			else {
+				buttonPause.setText("Pause");
+			}
+		}
 	}
 
+	/**
+	 * @author GigiaJ
+	 * @description Sets the action to occur when the stop button is pressed.
+	 *
+	 * @param e
+	 */
 	private void buttonStopActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		//Sets the value back to Pause
+		if (buttonPause.getText().equals("Play")) {
+			buttonPause.setText("Pause");
+		}
+		ScriptHandler sh = bot.getScriptHandler();
+		Map<Integer, Script> running = sh.getRunningScripts();
+		if (running.size() > 0) {
+			int id = running.keySet().iterator().next();
+			Script s = running.get(id);
+			//ScriptManifest prop = s.getClass().getAnnotation(ScriptManifest.class);
+			//int result = JOptionPane.showConfirmDialog(this, "Would you like to stop the script " + prop.name() + "?", "Script", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			//if (result == JOptionPane.OK_OPTION) {
+				sh.stopScript(id);
+			//}
+		}
 	}
 
 	private void initComponents() {
+		ScriptSelector scriptSelector = new ScriptSelector(bot);
 		scrollPane1 = new JScrollPane();
-		table1 = new JTable();
-		comboBoxAccounts = new JComboBox();
-		buttonStart = new JButton();
+		table1 = scriptSelector.getTable(0, 70, 30, 70);
+		comboBoxAccounts = scriptSelector.getAccounts();
+		buttonStart = scriptSelector.getSubmit();
+		//Make a search area
+		scriptSelector.getSearch();
+		scriptSelector.load();
 		buttonPause = new JButton();
 		buttonStop = new JButton();
 
@@ -41,11 +97,6 @@ public class ScriptPanel extends JPanel {
 		{
 			scrollPane1.setViewportView(table1);
 		}
-
-
-		//---- buttonStart ----
-		buttonStart.setText("Start");
-		buttonStart.addActionListener(e -> buttonStartActionPerformed(e));
 
 		//---- buttonPause ----
 		buttonPause.setText("Pause");
@@ -90,11 +141,4 @@ public class ScriptPanel extends JPanel {
 					.addGap(0, 60, Short.MAX_VALUE))
 		);
 	}
-
-	private JScrollPane scrollPane1;
-	private JTable table1;
-	private JComboBox comboBoxAccounts;
-	private JButton buttonStart;
-	private JButton buttonPause;
-	private JButton buttonStop;
 }
