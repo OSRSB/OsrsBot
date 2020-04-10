@@ -283,6 +283,15 @@ public class RSModel extends MethodProvider {
 		int[] trianglesZ = model.getTrianglesZ();
 
 		for (int triangle = 0; triangle < count; ++triangle) {
+			if (trianglesX.length < triangle) {
+				break;
+			}
+			if (trianglesY.length < triangle) {
+				break;
+			}
+			if (trianglesZ.length < triangle) {
+				break;
+			}
 			int[] xx =
 					{
 							x2d[trianglesX[triangle]], x2d[trianglesY[triangle]], x2d[trianglesZ[triangle]]
@@ -326,7 +335,7 @@ public class RSModel extends MethodProvider {
 		return false;
 	}
 
-	private Point getPointInRange(int start, int end) {
+	protected Point getPointInRange(int start, int end) {
 		int locX = getLocalX();
 		int locY = getLocalY();
 		int height = methods.calc.tileHeight(locX, locY);
