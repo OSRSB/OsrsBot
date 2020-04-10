@@ -112,20 +112,23 @@ public class RSObject extends MethodProvider {
 			Model model;
 			if (obj instanceof WallObject) {
 				model = ((WallObject) obj).getRenderable1().getModel();
-				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+				if (model != null && model.getVerticesX() != null)
+					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof GroundObject) {
 				model = ((GroundObject) obj).getRenderable().getModel();
-				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+				if (model != null && model.getVerticesX() != null)
+					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof DecorativeObject) {
 				model = ((DecorativeObject) obj).getRenderable().getModel();
-				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+				if (model != null && model.getVerticesX() != null)
+					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof ItemLayer) {
 				//model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
 			} else if (obj instanceof GameObject) {
 				model =  ((GameObject) obj).getRenderable().getModel();
-				if (model != null && model.getVerticesX() != null) {
+				if (model != null && model.getVerticesX() != null)
 					return new RSObjectModel(methods, model, (GameObject) obj);
-				}
+
 			}
 
 		} catch (AbstractMethodError ignored) {

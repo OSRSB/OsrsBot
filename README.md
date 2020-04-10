@@ -19,31 +19,25 @@ Now the bot is completely set up.
 
 To run you'll need to modify your program arguments to the following depending on how you wish it to run:
 
---bot
-This will run the bot with all of its interface and features activated
-
 --bot-runelite
-This runs the bot in a pseudo-bot mode, it uses the runelite interface and runs any bot code placed in
-rsb/botLauncher/RuneLiteTestFeatures.java
-It's excellent for testing scripts or verifying functionality of features.
+This runs the bot, it uses the runelite interface
 
 --runelite
 This runs the bot in runelite stock form. It has no additions and behaves normally.
 
 --ea
-This enables assertations, it should never be used with either bot mode.
+This enables assertations, it should never be used with bot mode.
 It does need to be enabled for base runelite to use --developer-mode
 
 --developer-mode
 Enables the developer features in runelite stock and runelite bot modes. 
-It does nothing in bot mode as it lacks the runelite interface and plugins to utilize it.
 
 VM args:
 -debug
 Activates debug log messages
 
 
-After entering the program arguements you wish to enable (one mode only --runelite/--bot-runelite/--bot)
+After entering the program arguements you wish to enable (one mode only --runelite/--bot-runelite)
 it is ready to run.
 
 To make and test scripts look at the corresponding wiki pages.
