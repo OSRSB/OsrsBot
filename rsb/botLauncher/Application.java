@@ -55,8 +55,8 @@ public class Application {
 		else if (options.has("bot-runelite") && !options.has("runelite")) {
 			RuneLite bot = new RuneLite();
 			bot.launch(args);
-			bot.setMethodContext();
-			RuneLiteTestFeatures.init(bot);
+			//bot.setMethodContext();
+			//RuneLiteTestFeatures.init(bot);
 		}
 		else {
 			String[] nonBotArgs = new String[args.length];
@@ -83,6 +83,7 @@ public class Application {
 	 * @return The Bot for the client.
 	 */
 	public static RuneLite getBot(Object o) {
+
 		return gui.getBot(o);
 	}
 

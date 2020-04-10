@@ -12,6 +12,7 @@ import net.runelite.client.rsb.methods.Menu;
 import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.util.Parameters;
 import net.runelite.client.rsb.wrappers.RSNPC;
+import net.runelite.client.rsb.wrappers.RSObject;
 import net.runelite.client.rsb.wrappers.RSPlayer;
 import net.runelite.client.rsb.wrappers.RSWidget;
 import net.runelite.client.ui.FontManager;
@@ -31,6 +32,7 @@ public class RuneLiteTestFeatures {
 
     static boolean onWelcomeScreen = true;
     static RSNPC enemy = null;
+    static RSObject object = null;
     static HashMap<String, Object> lastOutputs = new HashMap<>();
     static OutputObjectComparer test = null;
     static int welcome = 0;
@@ -75,25 +77,14 @@ public class RuneLiteTestFeatures {
 
     private static void testFeature(RuneLite bot) throws InterruptedException {
         sleep(2000);
-        if (bot.getClient() != null && bot.getClient().getLocalPlayer() != null) {
-            if (enemy == null || (new RSPlayer(bot.getMethodContext(), bot.getClient().getLocalPlayer())).getInteracting() != enemy.getAccessor()) {
-                //bot.getMethodContext().grandExchange.sellItem("Bronze axe", 1, 3);
-                enemy = bot.getMethodContext().npcs.getNearest("Grand Exchange Clerk");
-                RSWidget widget = bot.getMethodContext().interfaces.getComponent(553, 1);
-                if (widget.isValid()) {
-                    if (widget.getDynamicComponent(11).isValid() && widget.getDynamicComponent(11).isVisible()) {
-                        widget.getDynamicComponent(11).doClick();
-                    }
-                }
-                if (enemy != null) {
-
-                    if (!enemy.isInteractingWithLocalPlayer()) {
-                        if (!enemy.isOnScreen()) {
-                            enemy.turnTo();
-                        }
-                        else {
-                            enemy.doAction("Examine", "Grand Exchange Clerk");
-                        }
+        if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
+            if (object == null || new RSPlayer(bot.getMethodContext(), bot.getMethodContext().client.getLocalPlayer()).getInteracting() == object) {
+                object = bot.getMethodContext().objects.getNearest("Gate");
+                if (object != null) {
+                    if (!object.isOnScreen()) {
+                        object.turnTo();
+                    } else {
+                        object.doAction("Open", "Gate");
                     }
                 }
             }

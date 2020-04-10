@@ -56,6 +56,7 @@ import net.runelite.client.rsb.internal.InputManager;
 import net.runelite.client.rsb.internal.BotHooks;
 import net.runelite.client.rsb.internal.BotModule;
 import net.runelite.client.rsb.internal.input.Canvas;
+import net.runelite.client.rsb.plugin.Botplugin;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.FatalErrorDialog;
@@ -66,7 +67,6 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxOverlay;
 import net.runelite.client.ui.overlay.tooltip.TooltipOverlay;
 import net.runelite.client.ui.overlay.worldmap.WorldMapOverlay;
 import net.runelite.client.ws.PartyService;
-import net.runelite.client.ui.SplashScreen;
 
 
 @Singleton
@@ -168,7 +168,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private EventManager eventManager;
     private BufferedImage backBuffer;
     private BufferedImage image;
-    private final InputManager im;
+    private InputManager im;
     private ScriptHandler sh;
     private PassiveScriptHandler psh;
     private BreakHandler bh;
@@ -325,11 +325,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
         eventManager.processEvent(paintEvent);
         eventManager.processEvent(textPaintEvent);
         back.dispose();
-        image.getGraphics().drawImage(backBuffer, 0, 0, null);
-        if (panel != null) {
-            panel.repaint();
-        }
-        return backBuffer.getGraphics();
+        back.drawImage(backBuffer, 0, 0, null);
+        return back;
     }
 
     public Applet getLoader() {
@@ -337,19 +334,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
     }
 
     public RuneLite() {
-        im = new InputManager(this);
-        if (Application.getPanelSize() != null) {
-            final Dimension size = Application.getPanelSize();
-            backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-            image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-        }
-        psh = new PassiveScriptHandler(this);
-        eventManager = new EventManager();
-        sh = new ScriptHandler(this);
-        bh = new BreakHandler(this);
-        paintEvent = new PaintEvent();
-        textPaintEvent = new TextPaintEvent();
-        listeners = new TreeMap<>();
     }
 
     public static void launch(String[] args) throws Exception {
@@ -390,9 +374,10 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withRequiredArg().ofType(String.class);
 
 
+
         parser.accepts("help", "Show this text").forHelp();
         OptionSet options = parser.parse(args);
-
+        final boolean developerMode = options.has("developer-mode");
 
         if (options.has("help")) {
             parser.printHelpOn(System.out);
@@ -458,7 +443,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             injector = Guice.createInjector(new BotModule(
                     clientLoader,
-                    false,
+                    developerMode,
                     options.valueOf(sessionfile),
                     options.valueOf(configfile)));
 
@@ -466,7 +451,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         if (options.has("bot-runelite")) {
             setInjector();
-            injector.getInstance(RuneLite.class).start();
+            injector.getInstance(RuneLite.class).init();
         }
         else {
             injector.getInstance(RuneLite.class).init();
@@ -487,23 +472,25 @@ public class RuneLite extends net.runelite.client.RuneLite {
     }
 
     public void init() throws Exception {
-
-        // Load RuneLite or Vanilla client
-        final boolean isOutdated = client == null;
-
-        if (!isOutdated) {
-            // Inject members into client
-            injector.injectMembers(client);
+        im = new InputManager(this);
+        if (Application.getPanelSize() != null) {
+            final Dimension size = Application.getPanelSize();
+            backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+            image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
         }
-
-
-        configManager.load();
-        // Load the session, including saved configuration
-        sessionManager.loadSession();
-
+        psh = new PassiveScriptHandler(this);
+        eventManager = new EventManager();
+        sh = new ScriptHandler(this);
+        bh = new BreakHandler(this);
+        paintEvent = new PaintEvent();
+        textPaintEvent = new TextPaintEvent();
+        listeners = new TreeMap<>();
+        pluginManager.add(new Botplugin(injector));
+        setMethodContext();
 
         eventManager.start();
 
+        this.start();
     }
 
     public void setMethodContext() {

@@ -76,7 +76,10 @@ public class RSObject extends MethodProvider {
 	 * @return The ID.
 	 */
 	public int getID() {
-		return obj.getId();
+		if (obj != null) {
+			return obj.getId();
+		}
+		return 0;
 	}
 
 	/**
@@ -106,27 +109,30 @@ public class RSObject extends MethodProvider {
 	 */
 	public RSModel getModel() {
 		try {
-			Model model = ((GameObject) obj).getRenderable().getModel();
-			if (model != null && model.getVerticesX() != null) {
-				return new RSObjectModel(methods, model, (GameObject) obj);
+			Model model;
+			if (obj instanceof WallObject) {
+				model = ((WallObject) obj).getRenderable1().getModel();
+				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+			} else if (obj instanceof GroundObject) {
+				model = ((GroundObject) obj).getRenderable().getModel();
+				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+			} else if (obj instanceof DecorativeObject) {
+				model = ((DecorativeObject) obj).getRenderable().getModel();
+				return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
+			} else if (obj instanceof ItemLayer) {
+				//model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
+			} else if (obj instanceof GameObject) {
+				model =  ((GameObject) obj).getRenderable().getModel();
+				if (model != null && model.getVerticesX() != null) {
+					return new RSObjectModel(methods, model, (GameObject) obj);
+				}
 			}
+
 		} catch (AbstractMethodError ignored) {
 		}
 		return null;
-		/*
-		 if (obj instanceof WallObject) {
-			model = new RSModel(methods, ((WallObject) obj).getRenderable1().getModel());
-		} else if (obj instanceof GroundObject) {
-			model = new RSModel(methods, ((GroundObject) obj).getRenderable().getModel());
-		} else if (obj instanceof DecorativeObject) {
-			model = new RSModel(methods, ((DecorativeObject) obj).getRenderable().getModel());
-		} else if (obj instanceof ItemLayer) {
-			 //model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
-		} else if (obj instanceof GameObject) {
-			 model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
-		 }
 
-		 */
+
 	}
 
 
@@ -241,7 +247,10 @@ public class RSObject extends MethodProvider {
 
 	@Override
 	public int hashCode() {
-		return obj.hashCode();
+		if (obj != null) {
+			return obj.hashCode();
+		}
+		return 0;
 	}
 	
 	/**

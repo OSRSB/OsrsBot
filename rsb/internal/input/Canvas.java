@@ -36,32 +36,7 @@ public class Canvas extends java.awt.Canvas {
 		//This may need more variables set in the future
 	}
 
-
-
-
-	@Override
-	public final Graphics getGraphics() {
-		if (bot == null) {
-			if (toshi) {
-				return super.getGraphics();
-			} else {
-				bot = Application.getBot(this);
-				toshi = true;
-			}
-		}
-		/*
-		We aren't actually controlling the thread
-		try {
-			Thread.sleep(bot.disableCanvas ? DISABLE_GRAPHICS_DELAY : bot.disableRendering ? SLOW_GRAPHICS_DELAY : GRAPHICS_DELAY);
-		} catch (InterruptedException ignored) {
-		}
-		 */
-
-		return super.getGraphics();//return bot.getBufferGraphics();
-	}
-
-
-	public final Graphics getGraphics(MainBufferProvider mainBufferProvider) {
+	public final Graphics getGraphics(RuneLite bot, MainBufferProvider mainBufferProvider) {
 		if (bot == null) {
 			if (toshi) {
 				return super.getGraphics();

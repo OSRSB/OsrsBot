@@ -219,7 +219,7 @@ public class Menu extends MethodProvider {
          */
         private int calculateY() {
             if (isOpen()) {
-                final int CANVAS_LENGTH = 503;
+                final int CANVAS_LENGTH = methods.client.getCanvasHeight();
                 MenuEntry[] entries = getEntries();
                 int offset = CANVAS_LENGTH - (methods.virtualMouse.getClientPressY() + calculateHeight());
                 return methods.virtualMouse.getClientPressY() + ((offset < 0 && entries.length <= MAX_DISPLAYABLE_ENTRIES) ? offset : 0);

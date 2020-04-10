@@ -44,13 +44,13 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private static final String CLASS_EXT = ".class";
 	private static final String NO_EXT = "";
 	private static final String TMP_REGEX = "^tmp[0-9]+";
-	private final RuneLite bot;
+	private RuneLite bot;
 	private JTable table;
 	private JTextField search;
 	private JComboBox accounts;
-	private final ScriptTableModel model;
-	private final List<ScriptDefinition> scripts;
-	private final List<String> tmpFileNames;
+	private ScriptTableModel model;
+	private List<ScriptDefinition> scripts;
+	private List<String> tmpFileNames;
 	private JButton submit;
 	private boolean connected = true;
 
@@ -74,9 +74,29 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
+	public ScriptSelector(RuneLite bot) {
+		super(Frame.getFrames()[0], "Script Selector", false);
+		this.bot = bot;
+		this.scripts = new ArrayList<ScriptDefinition>();
+		this.tmpFileNames = new ArrayList<String>();
+		this.model = new ScriptTableModel(this.scripts);
+	}
+
+	public ScriptSelector(Frame frame, RuneLite bot) {
+		super(frame, "Script Selector", true);
+		this.bot = bot;
+		this.scripts = new ArrayList<ScriptDefinition>();
+		this.tmpFileNames = new ArrayList<String>();
+		this.model = new ScriptTableModel(this.scripts);
+	}
+
+	public static ScriptSelector getInstance(RuneLite bot) {
+		return new ScriptSelector(Frame.getFrames()[0], bot);
+	}
+
 	/**
 	 * @author GigiaJ
-	 * Description: It takes the testsScripts path in the IDE *unsure if it does it works compiled. Unlikely*
+	 * @description It takes the testsScripts path in the IDE *unsure if it does it works compiled. Unlikely*
 	 * This is necessary simply due to the fact that ScriptClassLoader loads class files WITHOUT package declarations
 	 * (This even occurs if you tried to take the compiled file and placed it in the folder)
 	 * In order to allow our testsScript package to be used it must be worked around so we reconstruct our file in a temporary
@@ -136,19 +156,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
-	public ScriptSelector(Frame frame, RuneLite bot) {
-		super(frame, "Script Selector");
-		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
-		this.model = new ScriptTableModel(this.scripts);
-	}
 
 	public void showGUI() {
 		init();
 		update();
-		setVisible(true);
 		load();
+		setVisible(true);
 	}
 
 	public void update() {
@@ -160,7 +173,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		table.clearSelection();
 	}
 
-	private void load() {
+	public void load() {
 		scripts.clear();
 		deleteTemporaryFiles();
 		scripts.addAll(SRC_BUNDLED.list());
@@ -183,82 +196,18 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 				dispose();
 			}
 		});
-		table = new JTable(model);
-		table.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
-					final int row = table.rowAtPoint(e.getPoint());
-					table.getSelectionModel().setSelectionInterval(row, row);
-					showMenu(e);
-				}
-			}
-
-			private void showMenu(MouseEvent e) {
-				final int row = table.rowAtPoint(e.getPoint());
-				final ScriptDefinition def = model.getDefinition(row);
-
-				JPopupMenu contextMenu = new JPopupMenu();
-				JMenuItem visit = new JMenuItem();
-				visit.setText("Visit Site");
-				visit.setIcon(new ImageIcon(GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_WEBLINK)));
-				visit.addMouseListener(new MouseAdapter() {
-					public void mousePressed(MouseEvent e) {
-						BotGUI.openURL(def.website);
-					}
-				});
-				contextMenu.add(visit);
-
-				if (def.website == null || def.website.isEmpty()) {
-					visit.setEnabled(false);
-				}
-
-				contextMenu.show(table, e.getX(), e.getY());
-			}
-		});
-		table.setRowHeight(20);
-		table.setIntercellSpacing(new Dimension(1, 1));
-		table.setShowGrid(false);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.getSelectionModel().addListSelectionListener(new TableSelectionListener());
-		setColumnWidths(table, 30, 175, 50, 100);
+		getTable(30, 175, 50, 100);
+		getSearch();
 		JToolBar toolBar = new JToolBar();
 		toolBar.setMargin(new Insets(1, 1, 1, 1));
 		toolBar.setFloatable(false);
-		search = new JTextField();
-		search.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				table.clearSelection();
-			}
-		});
-		search.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				model.search(search.getText());
-				table.revalidate();
-			}
-		});
-		submit = new JButton("Start Script", new ImageIcon(
-				GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_START)));
+
+		getSubmit();
+
 		final JButton connect = new JButton(new ImageIcon(
 				GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_CONNECT)));
-		submit.setEnabled(false);
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				ScriptDefinition def = model.getDefinition(table.getSelectedRow());
-				try {
-					bot.setAccount((String) accounts.getSelectedItem());
-					bot.getScriptHandler().runScript(def.source.load(def));
-					bot.getScriptHandler().removeScriptListener(ScriptSelector.this);
-					dispose();
-				} catch (ServiceException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		accounts = new JComboBox(AccountManager.getAccountNames());
-		accounts.setMinimumSize(new Dimension(200, 20));
-		accounts.setPreferredSize(new Dimension(200, 20));
+		getAccounts();
+
 		toolBar.add(search);
 		toolBar.add(Box.createHorizontalStrut(5));
 		toolBar.add(accounts);
@@ -278,6 +227,134 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		setLocationRelativeTo(getParent());
 		search.requestFocus();
 	}
+
+	/**
+	 * @author GigiaJ
+	 * @description Generates and returns the script table
+	 *
+	 * @return script table
+	 */
+	public JTable getTable(int icon, int name, int version, int desc) {
+		bot.getScriptHandler().addScriptListener(ScriptSelector.this);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(final WindowEvent e) {
+				bot.getScriptHandler().removeScriptListener(ScriptSelector.this);
+				dispose();
+			}
+		});
+		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
+					final int row = table.rowAtPoint(e.getPoint());
+					table.getSelectionModel().setSelectionInterval(row, row);
+					showMenu(e);
+				}
+			}
+
+
+			/**
+			 * @author GigiaJ
+			 * @description Changes the right click menu
+			 *
+			 * @param e
+			 */
+			private void showMenu(MouseEvent e) {
+				final int row = table.rowAtPoint(e.getPoint());
+				final ScriptDefinition def = model.getDefinition(row);
+
+				JPopupMenu contextMenu = new JPopupMenu();
+				JMenuItem visit = new JMenuItem();
+				visit.setText("GitHub");
+				visit.setIcon(new ImageIcon(GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_WEBLINK)));
+				visit.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						BotGUI.openURL(def.website); //Update later
+					}
+				});
+				contextMenu.add(visit);
+
+				if (def.website == null || def.website.isEmpty()) {
+					visit.setEnabled(false);
+				}
+
+				contextMenu.show(table, e.getX(), e.getY());
+			}
+		});
+		table.setRowHeight(20);
+		table.setIntercellSpacing(new Dimension(1, 1));
+		table.setShowGrid(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(new TableSelectionListener());
+		setColumnWidths(table, icon, name, version, desc);
+		return table;
+	}
+
+	/**
+	 * @author GigiaJ
+	 * @description Generates and returns the start button
+	 *
+	 * @return start button
+	 */
+	public JButton getSubmit() {
+		submit = new JButton("Start");
+		submit.setEnabled(false);
+		submit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				ScriptDefinition def = model.getDefinition(table.getSelectedRow());
+				try {
+					bot.setAccount((String) accounts.getSelectedItem());
+					bot.getScriptHandler().runScript(def.source.load(def));
+					bot.getScriptHandler().removeScriptListener(ScriptSelector.this);
+					dispose();
+				} catch (ServiceException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		return submit;
+	}
+
+	/**
+	 * @author GigiaJ
+	 * @description Generates and returns the search button
+	 *
+	 * @return search button
+	 */
+	public JTextField getSearch() {
+		search = new JTextField();
+		search.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				table.clearSelection();
+			}
+		});
+		search.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				model.search(search.getText());
+				table.revalidate();
+			}
+		});
+		return search;
+	}
+
+	/**
+	 * @author GigiaJ
+	 * @description Generates and returns the accounts from the AccountManager
+	 *
+	 * @return account combo box
+	 */
+	public JComboBox<?> getAccounts(){
+		accounts = new JComboBox(AccountManager.getAccountNames());
+		accounts.setMinimumSize(new Dimension(200, 20));
+		accounts.setPreferredSize(new Dimension(200, 20));
+		return accounts;
+	}
+
+
+
 
 	private void setColumnWidths(JTable table, int... widths) {
 		for (int i = 0; i < widths.length; ++i) {
