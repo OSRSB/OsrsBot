@@ -11,10 +11,7 @@ import net.runelite.client.rsb.methods.Inventory;
 import net.runelite.client.rsb.methods.Menu;
 import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.util.Parameters;
-import net.runelite.client.rsb.wrappers.RSNPC;
-import net.runelite.client.rsb.wrappers.RSObject;
-import net.runelite.client.rsb.wrappers.RSPlayer;
-import net.runelite.client.rsb.wrappers.RSWidget;
+import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.ui.FontManager;
 
 import java.awt.*;
@@ -75,18 +72,14 @@ public class RuneLiteTestFeatures {
         }
     }
 
-    private static void testFeature(RuneLite bot) throws InterruptedException {
+    static RSArea logbalanceStart = new RSArea(new RSTile(2471, 3436, 0), new RSTile(2478, 3438, 0));
+    public static void testFeature(RuneLite bot) throws InterruptedException {
         sleep(5000);
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-                object = bot.getMethodContext().objects.getNearest("Gate");
-                if (object != null) {
-                    if (!object.isOnScreen()) {
-                        object.turnTo();
-                    } else {
-                        object.doAction("Close", "Gate");
-                        object.doAction("Open", "Gate");
-                    }
-                }
+            if (logbalanceStart.contains(bot.getMethodContext().players.getMyPlayer().getLocation().getWorldLocation().getX(),
+                    bot.getMethodContext().players.getMyPlayer().getLocation().getWorldLocation().getY())) {
+                System.out.println("Log Balance Area");
+            }
         }
     }
 

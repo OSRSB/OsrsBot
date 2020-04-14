@@ -1,16 +1,14 @@
 package net.runelite.client.rsb.testsScript;
 
 import net.runelite.api.Point;
+import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.client.rsb.botLauncher.RuneLiteTestFeatures;
 import net.runelite.client.rsb.event.impl.TFPS;
 import net.runelite.client.rsb.event.listener.PaintListener;
 import net.runelite.client.rsb.methods.Magic;
 import net.runelite.client.rsb.script.Script;
 import net.runelite.client.rsb.script.ScriptManifest;
-import net.runelite.client.rsb.wrappers.RSNPC;
-import net.runelite.client.rsb.wrappers.RSObject;
-import net.runelite.client.rsb.wrappers.RSPlayer;
-import net.runelite.client.rsb.wrappers.RSWidget;
+import net.runelite.client.rsb.wrappers.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,33 +21,12 @@ public class Test extends Script implements PaintListener {
     public boolean up = false;
     RSNPC enemy = null;
     RSObject object = null;
+    RSArea logbalanceStart = new RSArea(new RSTile(2471, 3436, 0), new RSTile(2478, 3438, 0));
     public int loop() {
         if (ctx.client != null && ctx.client.getLocalPlayer() != null) {
-            if (object == null) {
-                object = ctx.objects.getNearest("Tree");
-                RuneLiteTestFeatures.init(ctx.runeLite);
-                if (object != null) {
-                    if (!object.isOnScreen()) {
-                        object.turnTo();
-                    } else {
-                        object.doAction("Chop down", "Tree");
-                    }
-                }
-
-            /*
-            if (enemy == null || (new RSPlayer(ctx, ctx.client.getLocalPlayer())).getInteracting() != enemy.getAccessor()) {
-                enemy = ctx.npcs.getNearest("Grand Exchange Clerk");
-                if (enemy != null) {
-                    if (!enemy.isInteractingWithLocalPlayer()) {
-                        if (!enemy.isOnScreen()) {
-                            enemy.turnTo();
-                        } else {
-                            enemy.doAction("Examine", "Grand Exchange Clerk");
-                        }
-                    }
-                }
-            }
-            */
+            if (logbalanceStart.contains(ctx.players.getMyPlayer().getLocation().getWorldLocation().getX(),
+                    ctx.players.getMyPlayer().getLocation().getWorldLocation().getY())) {
+                log("Log Balance Area");
             }
         }
         return random(1000, 1000);
