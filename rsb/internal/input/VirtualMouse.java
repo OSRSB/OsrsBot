@@ -26,19 +26,6 @@ public class VirtualMouse {
         this.methods = ctx;
     }
 
-    /*
-    public VirtualMouse(Mouse mouseData) {
-        this.clientX = mouseData.getX();
-        this.clientY = mouseData.getY();
-        this.clientPressX = mouseData.getPressX();
-        this.clientPressY = mouseData.getPressY();
-        this.clientPressTime = mouseData.getPressTime();
-        this.clientPresent = mouseData.isPresent();
-        this.clientPressed = mouseData.isPressed();
-        this.clientInFocus = mouseData.isInFocus();
-    }
-     */
-
     public int getClientX() {
         return clientX;
     }

@@ -165,6 +165,10 @@ public abstract class RSCharacter extends MethodProvider {
         return getAccessor() == methods.client.getLocalPlayer().getInteracting();
     }
 
+    public boolean isAnimating(){
+        return (getAnimation() != -1);
+    }
+
     /*
     public boolean isMoving() {
 

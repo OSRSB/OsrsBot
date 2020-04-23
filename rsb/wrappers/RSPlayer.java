@@ -36,7 +36,7 @@ public class RSPlayer extends RSCharacter {
 
 	public boolean isLocalPlayerMoving() {
 		if (methods.client.getLocalDestinationLocation() != null) {
-			return methods.client.getLocalPlayer().getLocalLocation() != methods.client.getLocalDestinationLocation();
+			return methods.client.getLocalPlayer().getLocalLocation() == methods.client.getLocalDestinationLocation();
 		}
 		return false;
 	}
