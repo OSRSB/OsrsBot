@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
+import net.runelite.api.Tile;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class RSArea {
 
-	private final Polygon area;
+	private final TileArea area;
 	private final int plane;
 
 	/**
@@ -141,8 +143,8 @@ public class RSArea {
 		ArrayList<RSTile> list = new ArrayList<RSTile>();
 		for (int x = this.getX(); x <= (this.getX() + this.getWidth()); x++) {
 			for (int y = this.getY(); y <= (this.getY() + this.getHeight()); y++) {
-				if (this.area.contains(x, y)) {
-					list.add(new RSTile(x, y));
+				if (this.area.contains(new Point(x, y))) {
+					list.add(new RSTile(x, y, plane));
 				}
 			}
 		}
@@ -160,7 +162,7 @@ public class RSArea {
 		RSTile[][] tiles = new RSTile[this.getWidth()][this.getHeight()];
 		for (int i = 0; i < this.getWidth(); ++i) {
 			for (int j = 0; j < this.getHeight(); ++j) {
-				if (this.area.contains(this.getX() + i, this.getY() + j)) {
+				if (this.area.contains(new Point(this.getX() + i, this.getY() + j))) {
 					tiles[i][j] = new RSTile(this.getX() + i, this.getY() + j);
 				}
 			}
@@ -219,11 +221,12 @@ public class RSArea {
 	 * @param tiles The <b>RSTile</b> of the Polygon.
 	 * @return The Polygon of the <b>RSTile</b>.
 	 */
-	private Polygon tileArrayToPolygon(RSTile[] tiles) {
-		Polygon poly = new Polygon();
+	private TileArea tileArrayToPolygon(RSTile[] tiles) {
+		TileArea poly = new TileArea();
 		for (RSTile t : tiles) {
 			poly.addPoint(t.getWorldLocation().getX(), t.getWorldLocation().getY());
 		}
+
 		return poly;
 	}
 
@@ -238,4 +241,45 @@ public class RSArea {
 				* (curr.getWorldLocation().getY() - dest.getWorldLocation().getY()));
 	}
 
+
+	class TileArea extends Polygon {
+		Point[] points = new Point[]{};
+
+		TileArea() {
+			super();
+		}
+
+		@Override
+		public void addPoint(int x, int y) {
+			super.addPoint(x, y);
+			Point[] previousPoints = points;
+			points = new Point[previousPoints.length+1];
+			for (int i = 0; i < previousPoints.length; i++) {
+				points[i] = previousPoints[i];
+			}
+			points[previousPoints.length] = new Point(x, y);
+		}
+
+		@Override
+		public boolean contains(Point test) {
+			int i;
+			int j;
+			//boolean result = false;
+
+			for (i = 0, j = points.length - 1; i < points.length; j = i++) {
+				boolean checkOne = (points[i].y > test.y) != (points[j].y > test.y) &&
+						(test.x < (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x);
+				boolean checkTwo = (points[i].y >= test.y) != (points[j].y >= test.y) &&
+						(test.x < (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x);
+				boolean checkThree = (points[i].y >= test.y) != (points[j].y >= test.y) &&
+						(test.x <= (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x);
+				boolean checkFour = (points[i].y > test.y) != (points[j].y > test.y) &&
+						(test.x <= (points[j].x - points[i].x) * (test.y - points[i].y) / (points[j].y-points[i].y) + points[i].x);
+				if (checkOne || checkTwo || checkThree || checkFour) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 }

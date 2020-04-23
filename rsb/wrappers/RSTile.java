@@ -85,7 +85,7 @@ public class RSTile {
         }
         if (obj instanceof RSTile) {
             final RSTile tile = (RSTile) obj;
-            return (tile.x == x) && (tile.y == y) && (tile.plane == plane);
+            return (tile.x == x) && (tile.y == y) && ((tile.plane != NO_PLANE_SET && this.plane != NO_PLANE_SET) && (tile.plane == plane));
         }
         return false;
     }

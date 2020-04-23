@@ -21,13 +21,12 @@ public class Test extends Script implements PaintListener {
     public boolean up = false;
     RSNPC enemy = null;
     RSObject object = null;
-    RSArea logbalanceStart = new RSArea(new RSTile(2471, 3436, 0), new RSTile(2478, 3438, 0));
+
+
+
     public int loop() {
         if (ctx.client != null && ctx.client.getLocalPlayer() != null) {
-            if (logbalanceStart.contains(ctx.players.getMyPlayer().getLocation().getWorldLocation().getX(),
-                    ctx.players.getMyPlayer().getLocation().getWorldLocation().getY())) {
-                log("Log Balance Area");
-            }
+            RuneLiteTestFeatures.testFeature(getBot());
         }
         return random(1000, 1000);
     }
