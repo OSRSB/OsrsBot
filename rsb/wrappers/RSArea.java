@@ -1,6 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.Tile;
+import net.runelite.api.coords.WorldPoint;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,6 +63,10 @@ public class RSArea {
 	 */
 	public RSArea(int swX, int swY, int neX, int neY) {
 		this(new RSTile(swX, swY), new RSTile(neX, neY), 0);
+	}
+
+	public boolean contains(WorldPoint point) {
+		return this.contains(new RSTile(point));
 	}
 
 	/**
@@ -264,7 +269,6 @@ public class RSArea {
 		public boolean contains(Point test) {
 			int i;
 			int j;
-			//boolean result = false;
 
 			for (i = 0, j = points.length - 1; i < points.length; j = i++) {
 				boolean checkOne = (points[i].y > test.y) != (points[j].y > test.y) &&
