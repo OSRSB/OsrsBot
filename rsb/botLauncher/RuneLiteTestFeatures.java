@@ -60,14 +60,13 @@ public class RuneLiteTestFeatures {
         }
     }
 
+
+
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
+            /**Insert Test Code Here**/
         }
     }
 
-    public static boolean conditional(Integer x) {
-        return (x < 1000 && x >= -6);
-
-    }
 
 }
