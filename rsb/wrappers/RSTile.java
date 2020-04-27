@@ -32,7 +32,12 @@ public class RSTile {
     public RSTile(int x, int y) {
         this.x = x;
         this.y = y;
-        this.plane = -99;
+        try {
+            this.plane = NO_PLANE_SET;
+            throw new NoPlaneException("No Plane Set. Defaulting to -99.");
+        } catch (NoPlaneException e) {
+            e.printStackTrace();
+        }
     }
 
     public RSTile(WorldPoint worldPoint) {
@@ -93,5 +98,12 @@ public class RSTile {
     @Override
     public String toString() {
         return "(X: " + x + ", Y:" + y + ", Plane:" + plane + ")";
+    }
+
+
+    class NoPlaneException extends Exception {
+        NoPlaneException(String message) {
+            super(message);
+        }
     }
 }

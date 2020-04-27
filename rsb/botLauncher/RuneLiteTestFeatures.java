@@ -65,6 +65,8 @@ public class RuneLiteTestFeatures {
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
             /**Insert Test Code Here**/
+            bot.getMethodContext().walking.walkTileMM(new RSTile(3104, 3264, 0));
+
         }
     }
 

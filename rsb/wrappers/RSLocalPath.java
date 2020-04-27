@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
+import net.runelite.api.Tile;
+import net.runelite.api.coords.WorldArea;
 import net.runelite.client.rsb.methods.MethodContext;
 
 import java.util.*;
@@ -207,6 +209,7 @@ public class RSLocalPath extends RSPath {
 			return null;
 		}
 		return findPath(start, pull(end));
+
 	}
 
 	private RSTile pull(RSTile tile) {

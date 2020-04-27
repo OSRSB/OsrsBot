@@ -291,15 +291,19 @@ public class Menu extends MethodProvider {
             for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
                 if (actions[i].toLowerCase().contains(action)) {
                     boolean targetMatch = false;
-                    for (String targetPart : target) {
-                        if (targets[i].toLowerCase().contains(targetPart.toLowerCase())) {
-                            targetMatch = true;
-                        } else {
-                            targetMatch = false;
+                    if (target[0] != null) {
+                        for (String targetPart : target) {
+                            if (targets[i].toLowerCase().contains(targetPart.toLowerCase())) {
+                                targetMatch = true;
+                            } else {
+                                targetMatch = false;
+                            }
                         }
-                    }
-                    if (targetMatch)
+                        if (targetMatch)
+                            return i;
+                    } else {
                         return i;
+                    }
                 }
             }
             return -1;
