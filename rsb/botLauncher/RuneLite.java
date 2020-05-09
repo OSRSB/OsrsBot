@@ -447,10 +447,10 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     options.valueOf(sessionfile),
                     options.valueOf(configfile)));
 
-            RuneLite.setInjector(injector);
+            setInjector(injector);
 
         if (options.has("bot-runelite")) {
-            setInjector();
+            //setInjector();
             injector.getInstance(RuneLite.class).init();
         }
         else {

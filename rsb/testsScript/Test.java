@@ -19,10 +19,6 @@ public class Test extends Script implements PaintListener {
     public int i = 50;
 
     public boolean up = false;
-    RSNPC enemy = null;
-    RSObject object = null;
-
-
 
     public int loop() {
         if (ctx.client != null && ctx.client.getLocalPlayer() != null) {

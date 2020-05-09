@@ -17,10 +17,6 @@ import java.util.function.Consumer;
  * @author Jacmob, Aut0r, kiko
  */
 public class Inventory extends MethodProvider {
-
-	//Identifies whether an item is selected or not
-	public volatile boolean isSelected = false;
-
 	/**
 	 * Enumerations of the group IDs for item containers
 	 * Used in class to identify the different interfaces for inventory
@@ -465,12 +461,18 @@ public class Inventory extends MethodProvider {
 	 */
 	public String getSelectedItemName() {
 		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
-			String name = new RSItem(methods, getInterface().getWidget().getWidgetItems()[getSelectedItemIndex()]).getName();
+			int index = getSelectedItemIndex();
+			if (index == -1)
+				return null;
+			String name = new RSItem(methods, getInterface().getWidget().getWidgetItems()[index]).getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
 		}
 		else {
-			String name = getInterface().getWidget().getComponents()[getSelectedItemIndex()].getName();
+			int index = getSelectedItemIndex();
+			if (index == -1)
+				return null;
+			String name = getInterface().getWidget().getComponents()[index].getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
 		}
@@ -484,18 +486,8 @@ public class Inventory extends MethodProvider {
 	public int getSelectedItemIndex() {
 		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
 			RSWidgetItem[] comps = getInterface().getWidget().getWidgetItems();
-			for (int i = 0; i < Math.min(28, comps.length); ++i) {
-				try {
-					isSelected = false;
-					checkIsSelected(new RSItem(methods, comps[i]));
-					if (isSelected) {
-						return i;
-					}
-				} catch (NullPointerException e) {
-					//This means the selected item is null so we return here -1;
-					return -1;
-				}
-			}
+			return checkIsSelected(comps);
+
 
 		}
 		else {
@@ -513,17 +505,43 @@ public class Inventory extends MethodProvider {
 	 * Uses a callback to get the last drawn image and then performs the method getSelected to update the
 	 * isSelectedValue
 	 *
-	 * @param item the item to check if is selected
+	 * @param comps the item to check if is selected
 	 */
-	public void checkIsSelected(RSItem item) {
-		Consumer<Image> imageCallback = (img) ->
+	public int checkIsSelected(RSWidgetItem[] comps) {
+		class Selector {
+			int selected = -1;
+			public void setSelected(int selection) {
+				selected = selection;
+			}
+			public int getSelected() {
+				return selected;
+			}
+		}
+
+		Selector selector = new Selector();
+		Consumer<Image> imageCallback = (img)->
 		{
 			// This callback is on the game thread, move to executor thread
-			methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(() ->
-			getSelected(img, item));
+			{
+				methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(()-> {
+					selector.setSelected(getSelected(img, comps));
+					synchronized (selector) {
+						selector.notify();
+					}
+				});
+			}
 		};
 
 		methods.runeLite.getInjector().getInstance(DrawManager.class).requestNextFrameListener(imageCallback);
+
+		synchronized (selector) {
+			try {
+				selector.wait();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+ 		}
+		return selector.getSelected();
 	}
 
 	/**
@@ -532,31 +550,34 @@ public class Inventory extends MethodProvider {
 	 * If it finds any the isSelected value is updated to true
 	 *
 	 * @param img the client image
-	 * @param item the item to check for if it is selected
+	 * @param comps the item to check for if it is selected
 	 */
-	public void getSelected(Image img, RSItem item) {
-		int x = item.getItem().getItemLocation().getX();
-		int y = item.getItem().getItemLocation().getY();
+	public int getSelected(Image img, RSWidgetItem[] comps) {
 		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = im.getGraphics();
 		graphics.drawImage(img, 0, 0, null);
-		BufferedImage itemImage = methods.runeLite.getItemManager().getImage(item.getID());
-		int height = itemImage.getHeight();
-		int width = itemImage.getWidth();
 
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < 2; j++) {
-				if (i + j < width) {
-					int colorValue = im.getRGB(x + i + j, y + i);
-					Color color = new Color(colorValue);
-					Color white = new Color(255, 255, 255, 255);
-					if (color.equals(white)) {
-						isSelected = true;
-						return;
+		for (int c = 0; c < Math.min(comps.length, 28); ++c) {
+			RSItem item = new RSItem(methods, comps[c]);
+			int x = item.getItem().getItemLocation().getX();
+			int y = item.getItem().getItemLocation().getY();
+			BufferedImage itemImage = methods.runeLite.getItemManager().getImage(item.getID());
+			int height = itemImage.getHeight();
+			int width = itemImage.getWidth();
+			for (int i = 0; i < height; i++) {
+				for (int j = 0; j < 2; j++) {
+					if (i + j < width) {
+						int colorValue = im.getRGB(x + i + j, y + i);
+						Color color = new Color(colorValue);
+						Color white = new Color(255, 255, 255, 255);
+						if (color.equals(white)) {
+							return c;
+						}
 					}
 				}
 			}
 		}
+		return -1;
 	}
 
 
