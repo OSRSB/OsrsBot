@@ -65,15 +65,10 @@ public class RuneLiteTestFeatures {
 
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            RSGroundItem[] items = bot.getMethodContext().groundItems.getAll();
-            String test = "";
-            if (items.length > 0) {
-                for (int i = 0; i < items.length; i++) {
-                    test += items[i].getItem().getName() + " ";
-                }
+            RSGroundItem item = bot.getMethodContext().groundItems.getNearest(1718);
+            if(item != null){
+                item.doAction("Take");
             }
-            System.err.println(test);
-            System.err.println(bot.getMethodContext().inventory.getSelectedItemName());
 
         }
     }
