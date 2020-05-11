@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.client.rsb.methods.GroundItems;
 import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.wrappers.*;
 
@@ -64,7 +65,11 @@ public class RuneLiteTestFeatures {
 
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            /**Insert Test Code Here**/
+            RSGroundItem item = bot.getMethodContext().groundItems.getNearest(1718);
+            if(item != null){
+                item.doAction("Take");
+            }
+
         }
     }
 

@@ -1,8 +1,12 @@
 package net.runelite.client.rsb.methods;
 
-import net.runelite.api.CollisionData;
-import net.runelite.client.rsb.wrappers.*;
+import net.runelite.api.*;
 import net.runelite.api.Point;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldArea;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.rsb.wrappers.*;
+
 import java.awt.*;
 
 /**
@@ -113,7 +117,7 @@ public class Walking extends MethodProvider {
 				yy -= random(0, y);
 			}
 		}
-		RSTile dest = new RSTile(xx, yy);
+		RSTile dest = new RSTile(xx, yy, t.getWorldLocation().getPlane());
 		if (!methods.calc.tileOnMap(dest)) {
 			dest = getClosestTileOnMap(dest);
 		}
@@ -268,7 +272,22 @@ public class Walking extends MethodProvider {
 	 * @return the collision flags.
 	 */
 	public int[][] getCollisionFlags(final int plane) {
-		return methods.client.getCollisionMaps()[plane].getFlags();
+		Tile[][][] tiles = methods.client.getScene().getTiles();//[plane][x][y]
+		int[][] flags = new int[tiles[plane].length][tiles[plane][0].length];
+		for (int x = 0; x < tiles[plane].length; x++) {
+			for (int y = 0; y < tiles[plane][x].length; y++) {
+				for (int dx = -1; dx <= 1; dx++) {
+					for (int dy = -1; dy <= 1; dy++) {
+						if ((((y+dy) < tiles[plane][x].length) && (y+dy) > 0) && ((x+dx) < tiles[plane].length) && ((x+dx) > 0)) {
+							WorldPoint point = WorldPoint.fromScene(methods.client, x, y, plane);
+							boolean check = new WorldArea(point.getX(), point.getY(), tiles[plane].length, tiles[plane].length, plane).canTravelInDirection(methods.client, dx, dy);
+							flags[x + dx][y + dy] = (check && flags[x+dx][y+dy] > 0) ? 0 : 0;
+						}
+					}
+				}
+			}
+		}
+		return flags;
 	}
 
 	// DEPRECATED

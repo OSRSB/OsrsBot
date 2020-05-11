@@ -65,6 +65,21 @@ public class RSArea {
 		this(new RSTile(swX, swY), new RSTile(neX, neY), 0);
 	}
 
+	/**
+	 * @param swX The X axle of the <i>South West</i> <b>RSTile</b> of the
+	 *            <b>RSArea</b>
+	 * @param swY The Y axle of the <i>South West</i> <b>RSTile</b> of the
+	 *            <b>RSArea</b>
+	 * @param neX The X axle of the <i>North East</i> <b>RSTile</b> of the
+	 *            <b>RSArea</b>
+	 * @param neY The Y axle of the <i>North East</i> <b>RSTile</b> of the
+	 *            <b>RSArea</b>
+	 * @param p The plane of the <b>RSArea</b>
+	 */
+	public RSArea(int swX, int swY, int neX, int neY, int p) {
+		this(new RSTile(swX, swY), new RSTile(neX, neY), p);
+	}
+
 	public boolean contains(WorldPoint point) {
 		return this.contains(new RSTile(point));
 	}

@@ -30,14 +30,16 @@ class GameGUI extends MethodProvider {
 	 * @return The compasses <tt>RSInterface</tt>;otherwise null.
 	 */
 	public synchronized Widget getCompass() {
-		return methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT.getId(), 10);
+		//TO DO Add resizable support for compass
+		return (methods.game.isFixed()) ? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT.getId(), 10) : null;
 	}
 
 	/**
 	 * @return The minimaps <tt>RSInterface</tt>; otherwise null.
 	 */
 	public synchronized Widget getMinimapInterface() {
-		return methods.client.getWidget(WidgetInfo.TO_GROUP(WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()), WidgetInfo.TO_CHILD(WidgetInfo.FIXED_VIEWPORT_MINIMAP.getId()));
+		return (methods.game.isFixed()) ? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP) :
+				methods.client.getWidget(WidgetInfo.RESIZABLE_MINIMAP_WIDGET);
 	}
 
 	/**
@@ -45,7 +47,8 @@ class GameGUI extends MethodProvider {
 	 * @return The specified tab <tt>RSInterface</tt>; otherwise null.
 	 */
 	public synchronized Widget getTab(final int id) {
-		return methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT.getGroupId(), id);
+		return (methods.game.isFixed() ? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT.getGroupId(), id) :
+				methods.client.getWidget(WidgetInfo.RESIZABLE_VIEWPORT_OLD_SCHOOL_BOX.getGroupId(), id));
 	}
 
 	/**

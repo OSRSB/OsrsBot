@@ -105,6 +105,7 @@ public class GroundItems extends MethodProvider {
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
+				if (items != null)
 				for (RSGroundItem item : items) {
 					if (filter.accept(item)
 							&& methods.calc.distanceTo(item.getLocation()) < dist) {
@@ -152,9 +153,6 @@ public class GroundItems extends MethodProvider {
 			return new RSGroundItem[0];
 		}
 		List<RSGroundItem> list = new ArrayList<>();
-
-		NodeCache itemNC = methods.client.getItemCompositionCache();
-		int id = x | y << 14 | methods.client.getPlane() << 28;
 
 		RSTile rsTile = new RSTile(x, y, methods.client.getPlane());
 		Tile tile = rsTile.getTile(methods);

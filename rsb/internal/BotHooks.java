@@ -10,10 +10,12 @@ package net.runelite.client.rsb.internal;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.inject.Injector;
@@ -23,10 +25,15 @@ import net.runelite.api.MainBufferProvider;
 import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.rsb.gui.BotGUI;
+import net.runelite.client.ui.DrawManager;
 
 @Singleton
 @Slf4j
 public class BotHooks extends Hooks {
+
+
+    @Inject
+    private DrawManager drawManager;
 
     private LinkedHashMap SUPERCLASS_MAP = new LinkedHashMap();
 
@@ -59,6 +66,8 @@ public class BotHooks extends Hooks {
                 return;
             }
             // We only want do do this once because this would MASSIVELY affect performance.
+
+            /*
             if (SUPERCLASS_MAP.get(SUPERCLASS_MAP.keySet().iterator().next()) == null) {
 
                 for (Method method : this.getClass().getSuperclass().getDeclaredMethods()) {
@@ -82,30 +91,42 @@ public class BotHooks extends Hooks {
                     }
                 }
             }
-
+             */
             //We then simply invoke the method as needed here. It should perform similar to how it does in RuneLite
             //final Graphics2D graphics2d = (Graphics2D) ((Method) SUPERCLASS_MAP.get(GETGRAPHICS)).invoke(this,
              //       mainBufferProvider);
 
-            final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(bot, mainBufferProvider);
-
-            // Draw bot overlays
-            BotGUI.paintOverlays(bot.getClient(), g2d);
-
             Image image = mainBufferProvider.getImage();
+            // finalImage is backed by the client buffer which will change soon. make a copy
+            // so that callbacks can safely use it later from threads.
+            drawManager.processDrawComplete(() -> copy(image));
+
+            final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(bot, mainBufferProvider);
 
             // Draw the image onto the game canvas
             graphics.drawImage(image, 0, 0, bot.getCanvas());
-
-
-            // finalImage is backed by the client buffer which will change soon. make a copy
-            // so that callbacks can safely use it later from threads.
-            // drawManager.processDrawComplete(() -> copy(image));
 
         } catch (Exception e) {
             e.printStackTrace();
             //log.warn("Bot hooks failed to paint properly");
         }
     }
+
+    /**
+     * Copy an image
+     * @param src
+     * @return
+     */
+    private static Image copy(Image src)
+    {
+        final int width = src.getWidth(null);
+        final int height = src.getHeight(null);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics graphics = image.getGraphics();
+        graphics.drawImage(src, 0, 0, width, height, null);
+        graphics.dispose();
+        return image;
+    }
+
 
 }

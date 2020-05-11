@@ -317,6 +317,11 @@ public class Calculations extends MethodProvider {
 	 *         <tt>new Point(-1, -1)</tt>.
 	 */
 	public Point worldToMinimap(double x, double y) {
+		LocalPoint test = LocalPoint.fromWorld(methods.client, (int) x, (int) y);
+		if (test!=null)
+			return Perspective.localToMinimap(methods.client,  test, 2500);
+		return null;
+		/*
 		if (distanceBetween(methods.players.getMyPlayer().getLocation(), new RSTile((int) x, (int) y)) > 17) {
 			return new Point(-1, -1);
 		}
@@ -329,7 +334,7 @@ public class Calculations extends MethodProvider {
 			if (mm == null) {
 				return new Point(-1, -1);
 			}
-			final RSWidget mm2 = methods.interfaces.getComponent(mm.getParent().getIndex(), mm.getIndex());
+			final RSWidget mm2 = new RSWidget(methods, mm);
 			final int actDistSq = calculatedX * calculatedX + calculatedY * calculatedY;
 			final int mmDist = 10 + Math.max(mm2.getWidth() / 2, mm2.getHeight() / 2);
 			if (mmDist * mmDist >= actDistSq) {
@@ -338,13 +343,16 @@ public class Calculations extends MethodProvider {
 
 				int cs = Calculations.SIN_TABLE[angle];
 				int cc = Calculations.COS_TABLE[angle];
-				/*
+
+
 				if (methods.client.isResized()) {
 					final int fact = 256 + methods.client.getWidget(WidgetInfo.RESIZABLE_MINIMAP_DRAW_AREA).getModelZoom();
 					cs = 256 * cs / fact;
 					cc = 256 * cc / fact;
 				}
-				 */
+
+
+
 				final int calcCenterX = cc * calculatedX + cs * calculatedY >> 15;
 				final int calcCenterY = cc * calculatedY - cs * calculatedX >> 15;
 				final int screenx = calcCenterX + mm2.getAbsoluteX() + mm2.getWidth() / 2;
@@ -360,9 +368,12 @@ public class Calculations extends MethodProvider {
 				// return new Point(-1, -1);
 			}
 		} catch (final NullPointerException ignored) {
+			ignored.printStackTrace();
 		}
 
 		return new Point(-1, -1);
+
+		 */
 	}
 
 	/**
