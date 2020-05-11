@@ -59,9 +59,11 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		 * Gets the testsScripts path compiled path and replaces the path with the values needed to direct it to the non-compiled path with the .java file to edit
 		 */
 		StringBuilder temp = new StringBuilder(net.runelite.client.rsb.testsScript.Test.class.getResource("Test.class").getPath().replace("Test.class", ""));
-		temp = temp.replace(temp.indexOf("target"), temp.indexOf("target") + "target".length(), "main");
-		temp = temp.insert(temp.indexOf("main") - 1, temp.charAt(temp.indexOf("main") - 1) + "src");
-		temp = temp.replace(temp.indexOf("classes"), temp.indexOf("classes") + "classes".length(), "java");
+		if (GlobalConfiguration.RUNNING_FROM_JAR) {
+			temp = temp.replace(temp.indexOf("target"), temp.indexOf("target") + "target".length(), "main");
+			temp = temp.insert(temp.indexOf("main") - 1, temp.charAt(temp.indexOf("main") - 1) + "src");
+			temp = temp.replace(temp.indexOf("classes"), temp.indexOf("classes") + "classes".length(), "java");
+		}
 		TEST_PATH = temp.toString();
 
 		SRC_TEST = new FileScriptSource(new File(TEST_PATH));
