@@ -67,7 +67,11 @@ public class RSObject extends MethodProvider {
 	 * @return The RSObjectDef if available, otherwise <code>null</code>.
 	 */
 	public ObjectComposition getDef() {
-		return methods.client.getObjectDefinition(getID());
+		int id = getID();
+		if (id != 0) {
+			return methods.client.getObjectDefinition(id);
+		}
+		return null;
 	}
 
 	/**
