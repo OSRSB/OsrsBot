@@ -483,7 +483,7 @@ public class Game extends MethodProvider {
 	 * @return The region base tile.
 	 */
 	public RSTile getMapBase() {
-		return new RSTile(methods.client.getBaseX(), methods.client.getBaseY());
+		return new RSTile(methods.client.getBaseX(), methods.client.getBaseY(), methods.client.getPlane());
 	}
 
 	/**
