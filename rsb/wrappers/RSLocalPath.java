@@ -1,7 +1,9 @@
 package net.runelite.client.rsb.wrappers;
 
+import net.runelite.api.CollisionData;
 import net.runelite.api.Tile;
 import net.runelite.api.coords.WorldArea;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 
 import java.util.*;
@@ -132,7 +134,7 @@ public class RSLocalPath extends RSPath {
 		}
 
 		public RSTile toRSTile(RSTile baseTile) {
-			return new RSTile(x + baseTile.getWorldLocation().getX(), y + baseTile.getWorldLocation().getX(), baseTile.getWorldLocation().getPlane());
+			return new RSTile(x + baseTile.getWorldLocation().getX(), y + baseTile.getWorldLocation().getY(), baseTile.getWorldLocation().getPlane());
 		}
 
 	}

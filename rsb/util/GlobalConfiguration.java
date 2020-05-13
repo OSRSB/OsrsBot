@@ -18,7 +18,7 @@ public class GlobalConfiguration {
 	public static class Paths {
 
 		public static class Resources {
-			public static final String ROOT = "runelite-client/src/main/java/net/runelite/client/rsb";
+			public static final String ROOT = "../../../rsb";//"runelite-client/src/main/java/net/runelite/client/rsb";
 			public static final String ROOT_IMG = ROOT + "/images";
 			public static final String ICON = ROOT_IMG + "/icon.png";
 			public static final String ICON_DELETE = ROOT_IMG + "/delete.png";
@@ -189,8 +189,8 @@ public class GlobalConfiguration {
 	 * When executed it starts up the general configurations and paths as well as determines what files will be auto-generated
 	 */
 	static {
-		final URL resource = GlobalConfiguration.class.getClassLoader().getResource(Paths.Resources.VERSION);
-		if (resource != null) {
+		final URL resource = GlobalConfiguration.class.getProtectionDomain().getCodeSource().getLocation();
+		if (resource.toString().contains("jar")) {
 			GlobalConfiguration.RUNNING_FROM_JAR = true;
 		}
 		final String os = System.getProperty("os.name");
@@ -212,13 +212,14 @@ public class GlobalConfiguration {
 		dirs.add(Paths.getScriptsDirectory());
 		dirs.add(Paths.getScriptsSourcesDirectory());
 		dirs.add(Paths.getScriptsPrecompiledDirectory());
-		/*
+
+
 		if (GlobalConfiguration.RUNNING_FROM_JAR) {
 			dirs.add(Paths.getScriptsDirectory());
 			dirs.add(Paths.getScriptsSourcesDirectory());
 			dirs.add(Paths.getScriptsPrecompiledDirectory());
 		}
-		 */
+
 
 		for (final String name : dirs) {
 			final File dir = new File(name);
@@ -257,7 +258,7 @@ public class GlobalConfiguration {
 	}
 	
 	public static URL getResourceURL(final String path) throws MalformedURLException {
-		return RUNNING_FROM_JAR ? GlobalConfiguration.class.getResource("/" + path) : new File(path).toURI().toURL();
+		return new File(path).toURI().toURL();
 	}
 
 	public static Image getImage(String resource) {

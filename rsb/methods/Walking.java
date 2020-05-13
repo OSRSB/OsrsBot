@@ -5,9 +5,14 @@ import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.wrappers.*;
 
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 
 /**
  * Walking related operations.
@@ -23,6 +28,7 @@ public class Walking extends MethodProvider {
 	private RSPath lastPath;
 	private RSTile lastDestination;
 	private RSTile lastStep;
+	private Field  collisionField = null;
 
 	/**
 	 * Creates a new path based on a provided array of tile waypoints.
@@ -261,8 +267,9 @@ public class Walking extends MethodProvider {
 	 * @return The current destination tile, or null.
 	 */
 	public RSTile getDestination() {
-		return new RSTile(methods.client.getLocalDestinationLocation().getX(),
-				methods.client.getLocalDestinationLocation().getY(), methods.client.getPlane());
+
+		return (methods.client.getLocalDestinationLocation() != null) ? new RSTile(methods.client.getLocalDestinationLocation().getX(),
+				methods.client.getLocalDestinationLocation().getY(), methods.client.getPlane()) : null;
 	}
 
 	/**
@@ -272,23 +279,63 @@ public class Walking extends MethodProvider {
 	 * @return the collision flags.
 	 */
 	public int[][] getCollisionFlags(final int plane) {
-		Tile[][][] tiles = methods.client.getScene().getTiles();//[plane][x][y]
-		int[][] flags = new int[tiles[plane].length][tiles[plane][0].length];
-		for (int x = 0; x < tiles[plane].length; x++) {
-			for (int y = 0; y < tiles[plane][x].length; y++) {
-				for (int dx = -1; dx <= 1; dx++) {
-					for (int dy = -1; dy <= 1; dy++) {
-						if ((((y+dy) < tiles[plane][x].length) && (y+dy) > 0) && ((x+dx) < tiles[plane].length) && ((x+dx) > 0)) {
-							WorldPoint point = WorldPoint.fromScene(methods.client, x, y, plane);
-							boolean check = new WorldArea(point.getX(), point.getY(), tiles[plane].length, tiles[plane].length, plane).canTravelInDirection(methods.client, dx, dy);
-							flags[x + dx][y + dy] = (check && flags[x+dx][y+dy] > 0) ? 0 : 0;
-						}
+		int[][] flags = null;
+		if (getCollisionField() == null) {
+			setCollisionField();
+		}
+		getCollisionField().setAccessible(true);
+		try {
+			flags = ((CollisionData[]) getCollisionField().get(methods.client))[plane].getFlags();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return flags;
+	}
+
+	/**
+	 * Sets the reflective field to access for CollisionMaps
+	 */
+	private void setCollisionField() {
+		for (Field field : methods.client.getClass().getDeclaredFields()) {
+			//Checks if the field type is an array and if the name is shorter than 5 characters
+			if (field.getType().getTypeName().contains("[]") && field.getType().getTypeName().length() < 5) {
+				if (field.getModifiers() == 8) {
+					field.setAccessible(true);
+					String obType = getObType(field);
+					if (obType != null) {
+						this.collisionField = field;
 					}
 				}
 			}
 		}
-		return flags;
 	}
+
+	/**
+	 * Gets the field for CollisionMaps
+	 * @return
+	 */
+	private Field getCollisionField() {
+		return this.collisionField;
+	}
+
+	/**
+	 * Checks the obfuscated field to determine if it is collisiondata or not. If it is, then the method will return
+	 * its obfuscated name.
+	 * @param field The field from the client class to check
+	 * @return The obfuscated type name for CollisionData[]
+	 */
+	public String getObType(Field field) {
+		String typeName = null;
+		try {
+			typeName = ((CollisionData[]) field.get(methods.client)).getClass().getTypeName();
+		} catch (IllegalAccessException | ClassCastException e) {
+			//This will cause a number of class cast exceptions while searching for a match
+			//This is a byproduct of using reflection and attempting to create an algorithm
+			//To find the field we want
+		}
+		return typeName;
+	}
+
 
 	// DEPRECATED
 

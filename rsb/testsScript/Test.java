@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-@ScriptManifest(authors={"Gigia"}, description="Example Script.", version=0.1, name="Example")
+@ScriptManifest(authors={"Gigia"}, description="Example Script.", version=0.1, name="Test")
 public class Test extends Script implements PaintListener {
     public int i = 50;
 

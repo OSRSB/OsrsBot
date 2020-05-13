@@ -65,11 +65,7 @@ public class RuneLiteTestFeatures {
 
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            RSGroundItem item = bot.getMethodContext().groundItems.getNearest(1718);
-            if(item != null){
-                item.doAction("Take");
-            }
-
+            bot.getMethodContext().walking.walkTo(new RSTile(3104, 3247, bot.getMethodContext().client.getPlane()));
         }
     }
 
