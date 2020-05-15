@@ -63,8 +63,8 @@ public class Skills extends MethodProvider {
 	
 	public static Skill getSkill(final int index) {
 		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().matches(Skills.getSkill(index).getName())) {
-				return Skills.getSkill(index);
+			if (field.getName().contains(Skill.values()[index].getName().toUpperCase())) {
+				return Skill.values()[index];
 			}
 		}
 		return null;
@@ -79,8 +79,8 @@ public class Skills extends MethodProvider {
 	 */
 	public static int getIndex(final String statName) {
 		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().matches(statName)) {
-				return Skill.valueOf(statName).ordinal();
+			if (field.getName().contains(statName.toUpperCase())) {
+				return Skill.valueOf(statName.toUpperCase()).ordinal();
 			}
 		}
 		return -1;

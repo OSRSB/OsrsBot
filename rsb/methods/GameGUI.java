@@ -8,7 +8,7 @@ import net.runelite.api.widgets.WidgetInfo;
  *
  * @author Qauters
  */
-class GameGUI extends MethodProvider {
+public class GameGUI extends MethodProvider {
 
 	private int ind_GUI;
 	private int ind_Minimap;

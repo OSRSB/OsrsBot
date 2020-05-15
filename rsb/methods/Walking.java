@@ -235,7 +235,7 @@ public class Walking extends MethodProvider {
 		if (!methods.calc.tileOnMap(tile) && methods.game.isLoggedIn()) {
 			RSTile loc = methods.players.getMyPlayer().getLocation();
 			RSTile walk = new RSTile((loc.getWorldLocation().getX() + tile.getWorldLocation().getX()) / 2,
-					(loc.getWorldLocation().getY() + tile.getWorldLocation().getY()) / 2);
+					(loc.getWorldLocation().getY() + tile.getWorldLocation().getY()) / 2, tile.getWorldLocation().getPlane());
 			return methods.calc.tileOnMap(walk) ? walk
 					: getClosestTileOnMap(walk);
 		}

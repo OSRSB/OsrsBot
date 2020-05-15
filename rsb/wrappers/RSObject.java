@@ -68,15 +68,41 @@ public class RSObject extends MethodProvider {
 	 */
 	public ObjectComposition getDef() {
 		int id = getID();
-		if (id != 0) {
-			try {
-				return methods.client.getObjectDefinition(id);
-			} catch (Exception e) {
-				//Somehow the object definition has returned null for a valid ID
-				e.printStackTrace();
+		class Composition {
+			ObjectComposition def;
+
+			Composition() {
+				this.def = null;
+			}
+
+			void setDef(ObjectComposition def) {
+				this.def = def;
+			}
+
+			ObjectComposition getDef(){
+				return def;
 			}
 		}
-		return null;
+
+		Composition def = new Composition();
+
+		if (id != 0) {
+			new Thread(() -> {
+				def.setDef(methods.client.getObjectDefinition(id));
+				synchronized (def) {
+					def.notify();
+				}
+			}).start();
+			synchronized (def) {
+				try {
+					def.wait();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return def.getDef();
 	}
 
 	/**
