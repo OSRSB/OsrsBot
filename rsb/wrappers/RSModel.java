@@ -169,7 +169,6 @@ public class RSModel extends MethodProvider {
 	 * Returns a random screen point.
 	 *
 	 * @return A screen point, or Point(-1, -1) if the model is not on screen.
-	 * @see #getCentralPoint()
 	 * @see #getPointOnScreen()
 	 */
 	public Point getPoint() {
@@ -400,4 +399,11 @@ public class RSModel extends MethodProvider {
 		return 0;
 	}
 
+	public int getIndexCount() {
+		return (model != null) ? model.getTrianglesCount() : 0;
+	}
+
+	public int getVertexCount() {
+		return (model != null) ? model.getVerticesCount() : 0;
+	}
 }

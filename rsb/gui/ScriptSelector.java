@@ -272,7 +272,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 				visit.setIcon(new ImageIcon(GlobalConfiguration.getImage(GlobalConfiguration.Paths.Resources.ICON_WEBLINK)));
 				visit.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						BotGUI.openURL(def.website); //Update later
+						//OldBotGUI.openURL(def.website); //Update later
 					}
 				});
 				contextMenu.add(visit);

@@ -5,6 +5,7 @@ import net.runelite.client.rsb.wrappers.RSGroundItem;
 import net.runelite.client.rsb.wrappers.RSObject;
 import net.runelite.client.rsb.wrappers.RSWidget;
 
+import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +29,7 @@ public class Magic extends MethodProvider {
     /**
      * Provides Magic Book(s) Information.
      *
-     * @author Jacmob
+     * @author GigiaJ
      */
     public static enum Book {
 
@@ -277,6 +278,21 @@ public class Magic extends MethodProvider {
      */
     public boolean isAutoCasting() {
         return methods.combat.getFightMode() == 4;
+    }
+
+
+
+    public int getSpell(String name) {
+        for (Field field : this.getClass().getDeclaredFields()) {
+            if (field.getName().contains(name.toUpperCase())) {
+                try {
+                    return (int) field.get(this);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return -1;
     }
 
     /**

@@ -1,13 +1,24 @@
 package net.runelite.client.rsb.wrappers;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.util.OutputObjectComparer;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Comparator;
 //import java.awt.Point;
 
+@Slf4j
 public abstract class RSCharacter extends MethodProvider {
+
+    private ArrayList<Field> pathFields = new ArrayList<>();
+    private static int pathXIndex = -1;
+    private static int pathYIndex = -1;
 
     public RSCharacter(MethodContext ctx) {
         super(ctx);
@@ -24,6 +35,59 @@ public abstract class RSCharacter extends MethodProvider {
 
 
     protected abstract Actor getInteracting();
+
+    public int[] getPathX() {
+        if (pathFields.isEmpty()) {
+            setPathFields();
+        }
+        try {
+            return (int[]) pathFields.get(pathXIndex).get(getAccessor());
+        } catch (IllegalAccessException e) {
+            log.warn("Path field failed getting a value", e.getCause());
+        }
+        return null;
+    }
+
+    public int[] getPathY() {
+        if (pathFields.isEmpty()) {
+            setPathFields();
+        }
+        try {
+            return (int[]) pathFields.get(pathYIndex).get(getAccessor());
+        } catch (IllegalAccessException e) {
+            log.warn("Path field failed getting a value", e.getCause());
+        }
+        return null;
+    }
+
+    private void setPathFields() {
+        Player actor = (Player) this.getAccessor();
+        for (Field field : actor.getClass().getSuperclass().getDeclaredFields()) {
+
+            if (field.getType().getTypeName().equals("int[]")) {
+                field.setAccessible(true);
+
+                try {
+                    if (OutputObjectComparer.unpack(field.get(actor)).length == 10) {
+
+                        pathFields.add(field);
+
+                    }
+                } catch (IllegalAccessException e) {
+                    log.error("Accessed reflected object incorrectly", e.getCause());
+                }
+            }
+        }
+        pathFields.sort(Comparator.comparing(Field::getName));
+            try {
+            if (methods.client.getLocalPlayer() != null)
+                //Attempt to accurately decide which set is which (Hopefully this is never relied on)
+                pathXIndex = (((int[]) pathFields.get(0).get(methods.client.getLocalPlayer()))[0] == methods.client.getLocalPlayer().getLocalLocation().getSceneX()) ? 0 : 1;
+            pathYIndex = (pathXIndex == 0) ? 1 : 0;
+        } catch (IllegalAccessException e) {
+            log.error("Accessed reflected object incorrectly", e.getCause());
+        }
+    }
 
     /**
      * Performs an action on a humanoid character (tall and skinny).

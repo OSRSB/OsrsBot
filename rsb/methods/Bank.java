@@ -444,6 +444,30 @@ public class Bank extends MethodProvider {
 		}
 	}
 
+	public Object getNearest() {
+		RSObject bankBooth = methods.objects.getNearest(BANK_BOOTHS);
+		RSNPC banker = methods.npcs.getNearest(new ReachableBankerFilter());
+		RSObject bankChest = methods.objects.getNearest(BANK_CHESTS);
+		/* Find closest one, others are set to null. Remember distance and tile. */
+		int lowestDist = Integer.MAX_VALUE;
+		RSTile tile = null;
+		if (bankBooth != null) {
+			tile = bankBooth.getLocation();
+			lowestDist = methods.calc.distanceTo(tile);
+		}
+		if (banker != null && methods.calc.distanceTo(banker) < lowestDist) {
+			tile = banker.getLocation();
+			lowestDist = methods.calc.distanceTo(tile);
+			bankBooth = null;
+		}
+		if (bankChest != null && methods.calc.distanceTo(bankChest) < lowestDist) {
+			bankBooth = null;
+			banker = null;
+		}
+		return (bankChest == null) ? (banker == null) ? bankBooth : banker : bankChest;
+	}
+
+
 	/**
 	 * Opens one of the supported banker NPCs, booths, or chests nearby. If they
 	 * are not nearby, and they are not null, it will automatically walk to the
@@ -463,7 +487,7 @@ public class Bank extends MethodProvider {
 			RSObject bankBooth = methods.objects.getNearest(BANK_BOOTHS);
 			RSNPC banker = methods.npcs.getNearest(new ReachableBankerFilter());
 			RSObject bankChest = methods.objects.getNearest(BANK_CHESTS);
-			/* Find closese one, others are set to null. Remember distance and tile. */
+			/* Find closest one, others are set to null. Remember distance and tile. */
 			int lowestDist = Integer.MAX_VALUE;
 			RSTile tile = null;
 			if (bankBooth != null) {

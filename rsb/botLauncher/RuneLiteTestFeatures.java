@@ -65,7 +65,13 @@ public class RuneLiteTestFeatures {
 
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-
+            int[] pathX = bot.getMethodContext().players.getMyPlayer().getPathX();
+            String test = "";
+            if (pathX != null)
+                for (int i : pathX) {
+                    test += i + " ";
+                }
+            System.out.println(test);
         }
     }
 

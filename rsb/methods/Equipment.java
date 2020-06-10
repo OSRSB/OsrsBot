@@ -1,6 +1,7 @@
 package net.runelite.client.rsb.methods;
 
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSItem;
 import net.runelite.client.rsb.wrappers.RSWidget;
 
@@ -83,6 +84,24 @@ public class Equipment extends MethodProvider {
 	public RSItem getItem(int index) {
 		return new RSItem(methods, getInterface().getComponent(index));
 	}
+
+
+	public RSItem[] find(final Filter<RSItem> filter) {
+		RSItem[] rsItems = getItems();
+		RSItem[] filterItems = new RSItem[]{};
+		for (RSItem item : rsItems) {
+			if (item == null) {
+				continue;
+			}
+			if (filter.accept(item)) {
+				RSItem[] addItems = new RSItem[filterItems.length+1];
+				addItems[filterItems.length] = item;
+				filterItems = addItems;
+			}
+		}
+		return filterItems;
+	}
+
 
 	/**
 	 * Returns the number of items equipped excluding stack sizes.

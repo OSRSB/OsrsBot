@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.wrappers;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.Angle;
@@ -9,7 +10,7 @@ import net.runelite.client.rsb.methods.MethodProvider;
 import java.awt.*;
 import java.awt.geom.Area;
 
-
+@Slf4j
 public class RSObject extends MethodProvider {
 
 	public enum Type {
@@ -88,7 +89,11 @@ public class RSObject extends MethodProvider {
 
 		if (id != 0) {
 			new Thread(() -> {
-				def.setDef(methods.client.getObjectDefinition(id));
+				try {
+					def.setDef(methods.client.getObjectDefinition(id));
+				} catch (NullPointerException e) {
+					log.warn("Object definition returned a null pointer.", e.getCause());
+				}
 				synchronized (def) {
 					def.notify();
 				}
@@ -97,7 +102,7 @@ public class RSObject extends MethodProvider {
 				try {
 					def.wait();
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.warn("Object definition failed to apply properly.", e.getCause());
 				}
 			}
 		}

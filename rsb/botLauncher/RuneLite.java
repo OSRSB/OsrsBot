@@ -18,6 +18,8 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import javax.annotation.Nullable;
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -473,11 +475,14 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     public void init() throws Exception {
         im = new InputManager(this);
-        if (Application.getPanelSize() != null) {
-            final Dimension size = Application.getPanelSize();
-            backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-            image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-        }
+        Executors.newSingleThreadScheduledExecutor().submit(() -> {
+            while(this.getClient() == null){}
+            if (Application.getPanelSize() != null) {
+                final Dimension size = Application.getPanelSize();
+                backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+                image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+            }
+        });
         psh = new PassiveScriptHandler(this);
         eventManager = new EventManager();
         sh = new ScriptHandler(this);

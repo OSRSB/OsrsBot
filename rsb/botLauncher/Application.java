@@ -18,11 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Application {
-	private static BotGUI gui;
+
+	static RuneLite[] bots = new RuneLite[]{};
 
 	public static void main(final String[] args) throws Exception {
-
-
 		final OptionParser parser = new OptionParser();
 		parser.accepts("developer-mode", "Enable developer tools");
 		parser.accepts("debug", "Show extra debugging output");
@@ -45,18 +44,14 @@ public class Application {
 		parser.accepts("help", "Show this text").forHelp();
 		OptionSet options = parser.parse(args);
 		if (options.has("bot") && !options.has("bot-runelite") && !options.has("runelite")) {
-			bootstrap();
-			new Extractor(args).run();
-			SwingUtil.setFont(FontManager.getRunescapeFont());
-			gui = new BotGUI(args);
-			gui.setVisible(true);
-			gui.addBot(args);
+
+
+
 		}
 		else if (options.has("bot-runelite") && !options.has("runelite")) {
 			RuneLite bot = new RuneLite();
+			addBot(bot);
 			bot.launch(args);
-			//bot.setMethodContext();
-			//RuneLiteTestFeatures.init(bot);
 		}
 		else {
 			String[] nonBotArgs = new String[args.length];
@@ -75,6 +70,7 @@ public class Application {
 
 	}
 
+
 	/**
 	 * Returns the Bot for any object loaded in its client. For internal use
 	 * only (not useful for script writers).
@@ -83,8 +79,31 @@ public class Application {
 	 * @return The Bot for the client.
 	 */
 	public static RuneLite getBot(Object o) {
+		ClassLoader cl = o.getClass().getClassLoader();
+		for (RuneLite bot : bots) {
+			if (cl == bot.getClass().getClassLoader()) {
+				return bot;
+			}
+		}
+		return null;
+	}
 
-		return gui.getBot(o);
+	/**
+	 * Adds a bot to the bot array
+	 *
+	 * @param bot the bot to be added to the array
+	 */
+	public static void addBot(RuneLite bot) {
+		RuneLite[] update = new RuneLite[bots.length+1];
+		for (int i = 0; i < bots.length; i++) {
+			update[i] = bots[i];
+		}
+		update[bots.length] = bot;
+		bots = update;
+	}
+
+	public static RuneLite[] getBots() {
+		return bots;
 	}
 
 	/**
@@ -94,8 +113,8 @@ public class Application {
 	 * @return The client panel size.
 	 */
 	public static Dimension getPanelSize() {
-		if (gui != null)
-			return gui.getPanel().getSize();
+		if (bots[0] != null)
+			return bots[0].getPanel().getSize();
 		return null;
 	}
 
