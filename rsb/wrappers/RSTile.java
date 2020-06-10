@@ -32,11 +32,18 @@ public class RSTile {
     public RSTile(int x, int y) {
         this.x = x;
         this.y = y;
+
+        //Creates a debug for later development to fix instances in the API where this occurs
+        String debugMsg =
+                "\n This exception is thrown when the plane is not set when creating a new tile. It isn't necessarily an issue." +
+                "\n However,it is useful for fixing potential issues within the API. If the exception is thrown within the API report " +
+                "\n this exception.";
+        NoPlaneException exception = new NoPlaneException("No Plane Set. Defaulting to -99.");
         try {
             this.plane = NO_PLANE_SET;
-            throw new NoPlaneException("No Plane Set. Defaulting to -99.");
+            throw exception;
         } catch (NoPlaneException e) {
-            e.printStackTrace();
+            log.debug(debugMsg, exception);
         }
     }
 

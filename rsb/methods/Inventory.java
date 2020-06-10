@@ -2,11 +2,13 @@ package net.runelite.client.rsb.methods;
 
 import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
@@ -746,6 +748,22 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return null;
+	}
+
+	public RSItem[] find(final Filter<RSItem> filter) {
+		RSItem[] rsItems = getItems();
+		RSItem[] filterItems = new RSItem[]{};
+		for (RSItem item : rsItems) {
+			if (item == null) {
+				continue;
+			}
+			if (filter.accept(item)) {
+				RSItem[] addItems = new RSItem[filterItems.length+1];
+				addItems[filterItems.length] = item;
+				filterItems = addItems;
+			}
+		}
+		return filterItems;
 	}
 
 	/**

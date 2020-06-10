@@ -121,6 +121,9 @@ public class RSItem extends MethodProvider {
 	 * @return The item's name or <code>null</code> if not found.
 	 */
 	public String getName() {
+		if (item == null) {
+			return null;
+		}
 		if (component != null && component.getName() != null) {
 			return component.getName();
 		} else {
@@ -131,6 +134,34 @@ public class RSItem extends MethodProvider {
 		}
 		return null;
 	}
+
+	/**
+	 * Provides a list of inventory actions for the given item.
+	 * @return The list of inventory actions for the item
+	 */
+	public String[] getInventoryActions() {
+		if (item == null) {
+			return null;
+		}
+		ItemComposition definition = getDefinition();
+		if (definition != null) {
+			return definition.getInventoryActions();
+		}
+		return null;
+	}
+
+	public String[] getGroundActions() {
+		if (item == null) {
+			return null;
+		}
+		ItemComposition definition = getDefinition();
+		if (definition != null) {
+			//Recreate method def.getGroundItems
+			return null;
+		}
+		return null;
+	}
+
 
 	/**
 	 * Performs the given action on the component wrapped by

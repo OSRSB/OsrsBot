@@ -30,11 +30,13 @@ public class Botplugin extends Plugin
 
     private NavigationButton navButton;
 
+
     @Override
     protected void startUp() throws Exception
     {
         BotPanel panel = injector.getInstance(BotPanel.class);
         RuneLite bot = injector.getInstance(RuneLite.class);
+
         panel.associateBot(new BasePanel(bot), new ScriptPanel(bot));
 
         final BufferedImage icon = ImageUtil.getResourceStreamFromClass(AccountPlugin.class, "login_icon.png");
@@ -54,4 +56,6 @@ public class Botplugin extends Plugin
     {
         clientToolbar.removeNavigation(navButton);
     }
+
+
 }
