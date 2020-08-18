@@ -13,8 +13,11 @@ import java.awt.event.KeyEvent;
  */
 public class Camera extends MethodProvider {
 
+	ROTATION_METHOD rotationMethod;
+
 	Camera(MethodContext ctx) {
 		super(ctx);
+		rotationMethod = ROTATION_METHOD.DEFAULT;
 	}
 
 	/**
@@ -167,6 +170,10 @@ public class Camera extends MethodProvider {
 		} else {
 			return setPitch(0);
 		}
+	}
+
+	public void setRotationMethod(ROTATION_METHOD rotationMethod) {
+		this.rotationMethod = rotationMethod;
 	}
 
 	/**
@@ -402,6 +409,12 @@ public class Camera extends MethodProvider {
 	 */
 	public int getZ() {
 		return methods.client.getCameraZ();
+	}
+
+
+
+	public enum ROTATION_METHOD {
+		DEFAULT, ONLY_KEYS, ONLY_MOUSE;
 	}
 
 }

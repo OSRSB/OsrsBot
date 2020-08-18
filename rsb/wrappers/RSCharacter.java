@@ -3,18 +3,24 @@ package net.runelite.client.rsb.wrappers;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
 import net.runelite.client.rsb.util.OutputObjectComparer;
+import net.runelite.client.rsb.wrappers.common.Clickable07;
+import net.runelite.client.rsb.wrappers.common.Positionable;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.function.Predicate;
+
+import static net.runelite.api.coords.Direction.*;
+import static net.runelite.api.coords.Direction.EAST;
 //import java.awt.Point;
 
 @Slf4j
-public abstract class RSCharacter extends MethodProvider {
+public abstract class RSCharacter extends MethodProvider implements Clickable07, Positionable {
 
     private ArrayList<Field> pathFields = new ArrayList<>();
     private static int pathXIndex = -1;
@@ -106,7 +112,7 @@ public abstract class RSCharacter extends MethodProvider {
      * @param option The option of the menu entry to be clicked (if available).
      * @return <tt>true</tt> if the option was found; otherwise <tt>false</tt>.
      */
-    public boolean doAction(final String action, final String... option) {
+    public boolean doAction(final String action, final String option) {
         RSModel model = this.getModel();
         return model != null && this.isValid() && this.getModel().doAction(action, option);
     }
@@ -141,12 +147,12 @@ public abstract class RSCharacter extends MethodProvider {
         return isInCombat() ? getAccessor().getHealthRatio() * 100 / 255 : 100;
     }
 
-    public RSTile getLocation() {
+    public WalkerTile getLocation() {
         Actor c = getAccessor();
         if (c == null) {
             return null;
         }
-        return new RSTile(c.getWorldLocation());
+        return new WalkerTile(c.getWorldLocation());
     }
 
     public String getMessage() {
@@ -189,12 +195,8 @@ public abstract class RSCharacter extends MethodProvider {
         }
     }
 
-    /**
-     * Hovers this Player/NPC
-     */
-    public void hover() {
-        this.getModel().hover();
-    }
+
+
 
     public boolean isBeingAttacked() {
         if (methods.game.isLoggedIn()) {
@@ -279,4 +281,98 @@ public abstract class RSCharacter extends MethodProvider {
                 .getMessage() : "Invalid") + "]";
     }
 */
+
+    /**
+     * Turns towards the RSCharacter.
+     * @return <tt>true</tt> - If RSCharacter is on screen after attempting to move camera angle.
+     */
+    public boolean turnTo() {
+        RSCharacter character = this;
+        if(character != null) {
+            if(!character.isOnScreen()) {
+                methods.camera.turnTo(character);
+                return character.isOnScreen();
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Hovers this Player/NPC
+     */
+    public boolean doHover() {
+        RSModel model = getModel();
+        if (model == null) {
+            return false;
+        }
+        this.getModel().hover();
+        return true;
+    }
+
+    public boolean doClick() {
+        RSModel model = getModel();
+        if (model == null) {
+            return false;
+        }
+        this.getModel().doClick(true);
+        return true;
+    }
+
+    public boolean doClick(boolean leftClick) {
+        RSModel model = getModel();
+        if (model == null) {
+            return false;
+        }
+        this.getModel().doClick(leftClick);
+        return true;
+    }
+
+    public boolean isClickable() {
+        RSModel model = getModel();
+        if (model == null) {
+            return false;
+        }
+        return model.getModel().isClickable();
+    }
+
+    public DIRECTION getDirectionFacing() {
+        int angle = this.getAccessor().getOrientation();
+        {
+            int round = angle >>> 9;
+            int up = angle & 128;
+            if (up != 0)
+            {
+                // round up
+                ++round;
+            }
+            switch (round & 7)
+            {
+                case 0:
+                    return DIRECTION.S;
+                case 1:
+                    return DIRECTION.SW;
+                case 2:
+                    return DIRECTION.W;
+                case 3:
+                    return DIRECTION.NW;
+                case 4:
+                    return DIRECTION.N;
+                case 5:
+                    return DIRECTION.NE;
+                case 6:
+                    return DIRECTION.E;
+                case 7:
+                    return DIRECTION.SE;
+                default:
+                    throw new IllegalStateException();
+            }
+        }
+    }
+
+    public enum DIRECTION {
+        N, S, E, W, NE, NW, SE, SW;
+    }
+
+
 }

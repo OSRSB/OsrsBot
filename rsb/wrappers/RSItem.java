@@ -7,12 +7,18 @@ import net.runelite.api.Tile;
 import net.runelite.api.TileItem;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.methods.Web;
+import net.runelite.client.rsb.wrappers.common.Clickable07;
+import net.runelite.client.rsb.wrappers.subwrap.RSMenuNode;
+
+import java.util.concurrent.Callable;
+import java.util.function.Predicate;
 
 /**
  * Represents an item (with an id and stack size). May or may not
  * wrap a component.
  */
-public class RSItem extends MethodProvider {
+public class RSItem extends MethodProvider implements Clickable07 {
 
 	private final int id;
 	private final int stack;
@@ -188,6 +194,16 @@ public class RSItem extends MethodProvider {
 		return (component != null) ?  component.doAction(action, option) : item.doAction(action, option);
 	}
 
+	public boolean doAction(Predicate<RSMenuNode> predicate) {
+		component.doClick(false);
+		for (RSMenuNode menuNode : Web.methods.chooseOption.getMenuNodes()) {
+			if (predicate.test(menuNode)) {
+				return (component != null) ? component.doAction(menuNode.getAction(), menuNode.getTarget()) : item.doAction(menuNode.getAction(), menuNode.getTarget());
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Clicks the component wrapped by this RSItem if possible.
 	 *
@@ -200,4 +216,17 @@ public class RSItem extends MethodProvider {
 		return (component != null) ? component.doClick(left) : item.doClick(left);
 	}
 
+	public boolean doClick() {
+		return (component != null) ? component.doClick(true) : item.doClick(true);
+	}
+
+
+	public boolean doHover() {
+		return (component != null) && component.doHover();
+	}
+
+
+	public boolean isClickable() {
+		return component.isValid() && component.isVisible() && component.isSelfVisible();
+	}
 }

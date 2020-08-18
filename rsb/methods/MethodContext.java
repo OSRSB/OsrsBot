@@ -6,6 +6,8 @@ import net.runelite.client.rsb.internal.input.VirtualKeyboard;
 import net.runelite.client.rsb.internal.input.VirtualMouse;
 import net.runelite.client.rsb.internal.InputManager;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.rsb.wrappers.subwrap.ChooseOption;
+import net.runelite.client.rsb.wrappers.subwrap.NPCChat;
 import net.runelite.client.ui.ClientUI;
 
 import javax.swing.*;
@@ -158,11 +160,6 @@ public class MethodContext {
 	public final Web web = new Web(this);
 
 	/**
-	 * The singleton of ClanChat
-	 */
-	public final ClanChat clanChat = new ClanChat(this);
-
-	/**
 	 * The singleton of Trade
 	 */
 	public final Trade trade = new Trade(this);
@@ -188,6 +185,11 @@ public class MethodContext {
 	public final VirtualKeyboard virtualKeyboard = new VirtualKeyboard(this);
 
 	/**
+	 * The singleton of WorldHopper
+	 */
+	public final WorldHopper worldHopper = new WorldHopper(this);
+
+	/**
 	 * The client
 	 */
 	public final Client client;
@@ -196,6 +198,16 @@ public class MethodContext {
 	public final RuneLite runeLite;
 
 
+	/**************************************/
+	/**EXTRA METHOD CONTEXT**/
+	public final ChooseOption chooseOption = new ChooseOption(this);
+
+	public final NPCChat npcChat = new NPCChat(this);
+
+	/**
+	 * Creates a method context for this client
+	 * @param runeLite The client to provide method contexts for
+	 */
 	public MethodContext(RuneLite runeLite) {
 		this.runeLite = runeLite;
 		this.client = runeLite.getInjector().getInstance(Client.class);

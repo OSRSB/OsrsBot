@@ -7,11 +7,15 @@ import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.wrappers.common.Clickable07;
+import net.runelite.client.rsb.wrappers.common.Positionable;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
+
 import java.awt.*;
 import java.awt.geom.Area;
 
 @Slf4j
-public class RSObject extends MethodProvider {
+public class RSObject extends MethodProvider implements Clickable07, Positionable {
 
 	public enum Type {
 		GAME, DECORATIVE, GROUND, WALL;
@@ -37,8 +41,8 @@ public class RSObject extends MethodProvider {
 	 * @return The central RSTile.
 	 * @see #getArea()
 	 */
-	public RSTile getLocation() {
-		return new RSTile(obj.getWorldLocation().getX(), obj.getWorldLocation().getY(), obj.getWorldLocation().getPlane());
+	public WalkerTile getLocation() {
+		return new WalkerTile(obj.getWorldLocation().getX(), obj.getWorldLocation().getY(), obj.getWorldLocation().getPlane());
 		//return new RSTile(methods.client.getBaseX() + obj.getLocation().getX() / 512,
 		//		methods.client.getBaseY() + obj.getLocation().getY() / 512, plane);
 	}
@@ -275,16 +279,19 @@ public class RSObject extends MethodProvider {
 	/**
 	 * Moves the mouse over this object.
 	 */
-	public void doHover() {
+	public boolean doHover() {
 		RSModel model = getModel();
 		if (model != null) {
 			model.hover();
+			return true;
 		} else {
 			Point p = methods.calc.tileToScreen(getLocation());
 			if (methods.calc.pointOnScreen(p)) {
 				methods.mouse.move(p);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -314,5 +321,13 @@ public class RSObject extends MethodProvider {
 			}
 		}
 		return false;
+	}
+
+	public boolean isClickable() {
+		RSModel model = getModel();
+		if (model == null) {
+			return false;
+		}
+		return model.getModel().isClickable();
 	}
 }

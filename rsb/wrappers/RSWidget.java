@@ -6,12 +6,13 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.wrappers.common.Clickable07;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class RSWidget extends MethodProvider {
+public class RSWidget extends MethodProvider implements Clickable07 {
 
     private final int id;
 
@@ -604,6 +605,31 @@ public class RSWidget extends MethodProvider {
         return -1;
     }
 
+    /**
+     * Gets the FontID of this component
+     *
+     * @return the fontID or -1 if null
+     */
+    public int getFontID() {
+        final Widget inter = this.widget;
+        if (inter != null) {
+            return inter.getFontId();
+        }
+        return -1;
+    }
+
+    /**
+     * Returns whether or not the text is shadowed
+     *
+     * @return true unless font isn't shadowed or component is null
+     */
+    public boolean isTextShadowed() {
+        final Widget inter = this.widget;
+        if (inter != null) {
+            return inter.getTextShadowed();
+        }
+        return false;
+    }
 
     /**
      * Gets the type of this component
@@ -725,6 +751,12 @@ public class RSWidget extends MethodProvider {
         return this.widget.hashCode();
     }
 
+
+
+
+    public boolean isClickable() {
+        return isVisible() && isValid() && isSelfVisible();
+    }
 
 
 }

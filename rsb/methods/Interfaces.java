@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Interfaces extends MethodProvider {
 
-	Interfaces(final MethodContext ctx) {
+	public Interfaces(final MethodContext ctx) {
 		super(ctx);
 	}
 
@@ -237,4 +237,14 @@ public class Interfaces extends MethodProvider {
 		}
 		return iface.isValid() == valid ? true : false;
 	}
+
+	public boolean isInterfaceSubstantiated(int index) {
+		return get(index).isVisible() && get(index).isValid() && get(index).isSelfVisible();
+	}
+
+	public boolean isValid(int index) {
+		return get(index).isValid();
+	}
+
+
 }

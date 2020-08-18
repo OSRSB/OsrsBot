@@ -3,6 +3,7 @@ package net.runelite.client.rsb.methods;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.MenuEntry;
 import net.runelite.client.rsb.wrappers.RSItem;
+import net.runelite.client.rsb.wrappers.subwrap.RSMenuNode;
 import net.runelite.client.ui.FontManager;
 
 
@@ -17,12 +18,14 @@ public class Menu extends MethodProvider {
     private static final Pattern HTML_TAG = Pattern
             .compile("(^[^<]+>|<[^>]+>|<[^>]+$)");
 
-    static final int TOP_OF_MENU_BAR = 18;
-    static final int MENU_ENTRY_LENGTH = 15;
-    static final int MENU_SIDE_BORDER = 7;
-    static final int MAX_DISPLAYABLE_ENTRIES = 32;
+    protected static final int TOP_OF_MENU_BAR = 18;
+    protected static final int MENU_ENTRY_LENGTH = 15;
+    protected static final int MENU_SIDE_BORDER = 7;
+    protected static final int MAX_DISPLAYABLE_ENTRIES = 32;
 
-    Menu(final MethodContext ctx) {
+    protected int lastIndex = -1;
+
+    protected Menu(final MethodContext ctx) {
         super(ctx);
     }
 
@@ -73,6 +76,7 @@ public class Menu extends MethodProvider {
         }
         return clickIndex(idx);
     }
+
 
 
     /**
@@ -163,7 +167,7 @@ public class Menu extends MethodProvider {
      * @param input The string you want to parse.
      * @return The parsed {@code String}.
      */
-    private String stripFormatting(String input) {
+    public String stripFormatting(String input) {
         return HTML_TAG.matcher(input).replaceAll("");
     }
 
@@ -172,17 +176,15 @@ public class Menu extends MethodProvider {
          *
          * @return the menu width
          */
-        private int calculateWidth() {
+        protected int calculateWidth() {
             MenuEntry[] entries = getEntries();
             final int MIN_MENU_WIDTH = 102;
             FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
             int longestEntry = 0;
-            for (MenuEntry entry : entries) {
-                int entryLength = fm.stringWidth(entry.getOption() + " " + entry.getTarget().replaceAll("<.*?>", ""));
-                if (entryLength > longestEntry) {
-                    longestEntry = entryLength;
-                }
-            }
+            for (MenuEntry entry : entries) longestEntry = (fm.stringWidth(entry.getOption() + " " +
+                    entry.getTarget().replaceAll("<.*?>", ""))
+                    > longestEntry) ? fm.stringWidth(entry.getOption() + " " +
+                    entry.getTarget().replaceAll("<.*?>", "")) : longestEntry;
             return (longestEntry + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? MIN_MENU_WIDTH : longestEntry + MENU_SIDE_BORDER;
         }
 
@@ -191,7 +193,7 @@ public class Menu extends MethodProvider {
          *
          * @return the menu height
          */
-        private int calculateHeight() {
+        protected int calculateHeight() {
             MenuEntry[] entries = getEntries();
             int numberOfEntries = entries.length;
             return MENU_ENTRY_LENGTH * numberOfEntries + TOP_OF_MENU_BAR;
@@ -203,7 +205,7 @@ public class Menu extends MethodProvider {
          *
          * @return the menu x
          */
-        private int calculateX() {
+        protected int calculateX() {
             if (isOpen()) {
                 final int MIN_MENU_WIDTH = 102;
                 int width = calculateWidth();
@@ -217,7 +219,7 @@ public class Menu extends MethodProvider {
          *
          * @return the menu y
          */
-        private int calculateY() {
+        protected int calculateY() {
             if (isOpen()) {
                 final int CANVAS_LENGTH = methods.client.getCanvasHeight();
                 MenuEntry[] entries = getEntries();
@@ -265,6 +267,7 @@ public class Menu extends MethodProvider {
             action = action.toLowerCase();
             for (int i = 0; i < entries.length; i++) {
                 if (entries[i].getOption().toLowerCase().contains(action)) {
+                    lastIndex = i;
                     return i;
                 }
             }
@@ -287,28 +290,49 @@ public class Menu extends MethodProvider {
             action = action.toLowerCase();
             String[] actions = getActions();
             String[] targets = getTargets();
-            /* Throw exception if lenghts unequal? */
-            for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
-                if (actions[i].toLowerCase().contains(action)) {
-                    boolean targetMatch = false;
-                    if (target[0] != null) {
-                        for (String targetPart : target) {
-                            if (targets[i].toLowerCase().contains(targetPart.toLowerCase())) {
-                                targetMatch = true;
-                            } else {
-                                targetMatch = false;
-                            }
-                        }
-                        if (targetMatch)
-                            return i;
-                    } else {
-                        return i;
+            /* Throw exception if lengths unequal? */
+            if (action != null) {
+                for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
+                    if (actions[i].toLowerCase().contains(action)) {
+                        lastIndex = checkTargetMatch(target, targets, i);
+                        return lastIndex;
                     }
+                }
+            }
+            else {
+                for (int i = 0; i < targets.length; i++) {
+                    lastIndex = checkTargetMatch(target, targets, i);
+                    return lastIndex;
                 }
             }
             return -1;
         }
 
+
+    /**
+     * Checks the target list to the menu targets for matches and returns the first index that matches
+     * @param target The list of targets to check
+     * @param targets The targets in the menu
+     * @param index The index of the last iteration of the loop acted upon this method
+     * @return The index of a matching target or -1
+     */
+        private int checkTargetMatch(String[] target, String[] targets, int index) {
+            boolean targetMatch = false;
+            if (target[0] != null) {
+                for (String targetPart : target) {
+                    if (targets[index].toLowerCase().contains(targetPart.toLowerCase())) {
+                        targetMatch = true;
+                    } else {
+                        targetMatch = false;
+                    }
+                }
+                if (targetMatch)
+                    return index;
+            } else {
+                return index;
+            }
+            return -1;
+        }
 
         /**
          * Checks whether or not a given action (or action substring) is present in
@@ -332,5 +356,5 @@ public class Menu extends MethodProvider {
         public boolean contains(final String action, final String target) {
             return getIndex(action, target) != -1;
         }
-        
+
 }

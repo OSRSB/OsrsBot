@@ -520,5 +520,4 @@ public class Mouse extends MethodProvider {
 				//((net.runelite.client.rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).isPressed();
 	}
 
-
 }

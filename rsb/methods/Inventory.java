@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Inventory related operations.
@@ -750,14 +751,14 @@ public class Inventory extends MethodProvider {
 		return null;
 	}
 
-	public RSItem[] find(final Filter<RSItem> filter) {
+	public RSItem[] find(final Predicate<RSItem> filter) {
 		RSItem[] rsItems = getItems();
 		RSItem[] filterItems = new RSItem[]{};
 		for (RSItem item : rsItems) {
 			if (item == null) {
 				continue;
 			}
-			if (filter.accept(item)) {
+			if (filter.test(item)) {
 				RSItem[] addItems = new RSItem[filterItems.length+1];
 				addItems[filterItems.length] = item;
 				filterItems = addItems;

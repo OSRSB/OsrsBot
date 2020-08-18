@@ -7,15 +7,15 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.rsb.methods.MethodContext;
 
 @Slf4j
-public class RSTile {
+public class RSTile  {
 
     private final int NO_PLANE_SET = -99;
 
-    private int x;
+    protected int x;
 
-    private int y;
+    protected int y;
 
-    private int plane;
+    protected int plane;
 
     public RSTile(Tile tile) {
         this.x = tile.getWorldLocation().getX();
@@ -113,4 +113,13 @@ public class RSTile {
             super(message);
         }
     }
+
+    /**
+     * Do not use
+     */
+    @Deprecated
+    public boolean turnTo() {
+        return false;
+    }
+
 }

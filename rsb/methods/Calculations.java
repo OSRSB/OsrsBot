@@ -7,6 +7,9 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.Point;
 import net.runelite.client.rsb.wrappers.*;
+import net.runelite.client.rsb.wrappers.common.Positionable;
+
+import java.awt.*;
 
 /**
  * Game world and projection calculations.
@@ -445,6 +448,15 @@ public class Calculations extends MethodProvider {
 		return Perspective.localToCanvas(methods.client, local, plane, z);
 	}
 
+
+	public Polygon getTileBoundsPoly(Positionable positionable, int additionalHeight) {
+		return Perspective.getCanvasTilePoly(methods.client, positionable.getLocation().getLocalLocation(methods));
+	}
+
+	public Point getRandomPolyPoint(Polygon polygon) {
+		return new Point(polygon.xpoints[random(0,polygon.npoints)], polygon.ypoints[random(0,polygon.npoints)]);
+	}
+
 	// ---- Internal ----
 
 	/**
@@ -597,5 +609,9 @@ public class Calculations extends MethodProvider {
 			}
 		}
 		return foundPath ? dist[curr_x][curr_y] : -1;
+	}
+
+	public static java.awt.Point convertRLPointToAWTPoint(Point point) {
+		return new java.awt.Point(point.getX(), point.getY());
 	}
 }
