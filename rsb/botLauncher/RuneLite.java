@@ -467,8 +467,10 @@ public class RuneLite extends net.runelite.client.RuneLite {
             final long start = System.currentTimeMillis();
 
             injector = Guice.createInjector(new BotModule(
+                    okHttpClient,
                     clientLoader,
                     developerMode,
+                    false,
                     options.valueOf(sessionfile),
                     options.valueOf(configfile)));
 

@@ -2,6 +2,7 @@ package net.runelite.client.rsb.wrappers;
 
 import net.runelite.api.Tile;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.rsb.wrappers.common.Positionable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -83,20 +84,22 @@ public class RSArea {
 	/**
 	 * Creates an area with the given tile as the center and the sides being the given radius from the center tile
 	 *
-	 * @param tile The tile to be the center of the area
+	 * @param positionable The tile to be the center of the area
 	 * @param radius The radius of the area
 	 */
-	public RSArea(RSTile tile, int radius) {
-		this.plane = tile.getWorldLocation().getPlane();
+	public RSArea(Positionable positionable, int radius) {
+		this.plane = positionable.getLocation().getWorldLocation().getPlane();
 		TileArea tileArea = new TileArea();
-		tileArea.addPoint(tile.getWorldLocation().getX() - radius, tile.getWorldLocation().getY() + radius);
-		tileArea.addPoint(tile.getWorldLocation().getX() + radius, tile.getWorldLocation().getY() + radius);
-		tileArea.addPoint(tile.getWorldLocation().getX() + radius, tile.getWorldLocation().getY() - radius);
-		tileArea.addPoint(tile.getWorldLocation().getX() - radius, tile.getWorldLocation().getY() - radius);
+		tileArea.addPoint(positionable.getLocation().getWorldLocation().getX() - radius, positionable.getLocation().getWorldLocation().getY() + radius);
+		tileArea.addPoint(positionable.getLocation().getWorldLocation().getX() + radius, positionable.getLocation().getWorldLocation().getY() + radius);
+		tileArea.addPoint(positionable.getLocation().getWorldLocation().getX() + radius, positionable.getLocation().getWorldLocation().getY() - radius);
+		tileArea.addPoint(positionable.getLocation().getWorldLocation().getX() - radius, positionable.getLocation().getWorldLocation().getY() - radius);
 		area = tileArea;
 	}
 
-	public boolean contains(WorldPoint point) {
+
+
+    public boolean contains(WorldPoint point) {
 		return this.contains(new RSTile(point));
 	}
 

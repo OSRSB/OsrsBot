@@ -27,18 +27,21 @@ import java.util.function.Supplier;
 
 public class BotModule extends RuneLiteModule {
 
-    private Supplier<Applet> clientLoader;
-    private boolean developerMode;
-    private File sessionfile;
-    private File config;
-    private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
+    private final OkHttpClient okHttpClient;
+    private final Supplier<Applet> clientLoader;
+    private final boolean developerMode;
+    private final boolean safeMode;
+    private final File sessionfile;
+    private final File config;
 
 
-    public BotModule(Supplier<Applet> clientLoader, boolean developerMode, File sessionfile, File config) {
-        super(clientLoader, developerMode, sessionfile, config);
+    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, boolean developerMode, boolean safeMode, File sessionfile, File config) {
+        super(okHttpClient, clientLoader, developerMode, safeMode, sessionfile, config);
+        this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
         this.developerMode = developerMode;
         this.sessionfile = sessionfile;
+        this.safeMode = safeMode;
         this.config = config;
     }
 
@@ -49,9 +52,7 @@ public class BotModule extends RuneLiteModule {
         bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
         bind(File.class).annotatedWith(Names.named("config")).toInstance(config);
         bind(ScheduledExecutorService.class).toInstance(new ExecutorServiceExceptionLogger(Executors.newSingleThreadScheduledExecutor()));
-        bind(OkHttpClient.class).toInstance(RuneLiteAPI.CLIENT.newBuilder()
-                .cache(new Cache(new File(RuneLite.CACHE_DIR, "okhttp"), MAX_OKHTTP_CACHE_SIZE))
-                .build());
+        bind(OkHttpClient.class).toInstance(okHttpClient);
         bind(MenuManager.class);
         bind(ChatMessageManager.class);
         bind(ItemManager.class);

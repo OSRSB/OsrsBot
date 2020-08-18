@@ -631,8 +631,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return false;
     }
 
-
-
     /**
      * Gets the type of this component
      *

@@ -242,6 +242,9 @@ public class Interfaces extends MethodProvider {
 		return get(index).isVisible() && get(index).isValid() && get(index).isSelfVisible();
 	}
 
+	public boolean isValid(int index) {
+		return get(index).isValid();
+	}
 
 
 }

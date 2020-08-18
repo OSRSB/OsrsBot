@@ -1,11 +1,9 @@
 package net.runelite.client.rsb.util;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BooleanSupplier;
 
