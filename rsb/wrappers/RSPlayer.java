@@ -67,6 +67,7 @@ public class RSPlayer extends RSCharacter {
 	}
 */
 	public boolean isIdle() {
+
 		return getAnimation() == -1 && isInCombat();
 		//return !isMoving() && (getAnimation() == -1) && !isInCombat();
 	}
@@ -78,7 +79,7 @@ public class RSPlayer extends RSCharacter {
 	}
 
 	@Override
-	public boolean doAction(final String action, final String... target) {
+	public boolean doAction(final String action, final String target) {
 		final RSModel model = getModel();
 		if (model != null && isValid()) {
 			return model.doAction(action, target);
@@ -115,6 +116,11 @@ public class RSPlayer extends RSCharacter {
 	@Override
 	public String toString() {
 		return "Player[" + getName() + "]" + super.toString();
+	}
+
+
+	public RSTile getPosition() {
+		return getLocation();
 	}
 
 }

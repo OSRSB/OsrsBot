@@ -1,8 +1,13 @@
 package net.runelite.client.rsb.wrappers;
 
+import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.Model;
+import net.runelite.api.Perspective;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.rsb.methods.MethodContext;
+
+import java.awt.*;
 
 class RSObjectModel extends RSModel {
 
@@ -30,6 +35,8 @@ class RSObjectModel extends RSModel {
     public int getOrientation() {
         return object.getOrientation().getAngle();
     }
+
+
 
 
 

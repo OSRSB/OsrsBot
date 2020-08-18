@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.geometry.SimplePolygon;
+import net.runelite.api.model.Jarvis;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
@@ -29,7 +31,7 @@ public class RSModel extends MethodProvider {
 	 */
 	public static Filter<RSModel> newVertexFilter(final int[] vertex_a) {
 		return new Filter<RSModel>() {
-			public boolean accept(RSModel m) {
+			public boolean test(RSModel m) {
 				return Arrays.equals(m.indices1, vertex_a);
 			}
 		};
@@ -406,4 +408,55 @@ public class RSModel extends MethodProvider {
 	public int getVertexCount() {
 		return (model != null) ? model.getVerticesCount() : 0;
 	}
+
+	public Model getModel() {
+		return model;
+	}
+
+	public Polygon getConvexHull() {
+		int ex = model.getExtremeX();
+		if (ex == -1)
+		{
+			// dynamic models don't get stored when they render where this normally happens
+			model.calculateBoundsCylinder();
+			model.calculateExtreme(0);
+			ex = model.getExtremeX();
+		}
+
+		int x1 = model.getCenterX();
+		int y1 = model.getCenterZ();
+		int z1 = model.getCenterY();
+
+		int ey = model.getExtremeZ();
+		int ez = model.getExtremeY();
+
+		int x2 = x1 + ex;
+		int y2 = y1 + ey;
+		int z2 = z1 + ez;
+
+		x1 -= ex;
+		y1 -= ey;
+		z1 -= ez;
+
+		int[] xa = new int[]{
+				x1, x2, x1, x2,
+				x1, x2, x1, x2
+		};
+		int[] ya = new int[]{
+				y1, y1, y2, y2,
+				y1, y1, y2, y2
+		};
+		int[] za = new int[]{
+				z1, z1, z1, z1,
+				z2, z2, z2, z2
+		};
+
+		int[] x2d = new int[8];
+		int[] y2d = new int[8];
+
+		Perspective.modelToCanvas(methods.client, 8, getLocalX(), getLocalY(), Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane()), getOrientation(), xa, ya, za, x2d, y2d);
+		SimplePolygon simplePolygon = Jarvis.convexHull(x2d, y2d);
+		return new Polygon(simplePolygon.getX(), simplePolygon.getY(), simplePolygon.size());
+	}
+
 }

@@ -104,7 +104,9 @@ public class BotHooks extends Hooks {
             final Graphics2D g2d = (Graphics2D) bot.getCanvas().getGraphics(bot, mainBufferProvider);
 
             // Draw the image onto the game canvas
-            graphics.drawImage(image, 0, 0, bot.getCanvas());
+            //graphics.drawImage(image, 0, 0, bot.getCanvas());
+            /**TODO: Verify BotHooks drawImage Change Works*/
+            g2d.drawImage(image, 0, 0, bot.getCanvas());
 
         } catch (Exception e) {
             e.printStackTrace();

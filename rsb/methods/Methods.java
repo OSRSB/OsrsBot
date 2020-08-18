@@ -2,6 +2,8 @@ package net.runelite.client.rsb.methods;
 
 import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.rsb.methods.*;
+import net.runelite.client.rsb.wrappers.subwrap.ChooseOption;
+import net.runelite.client.rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
 import java.util.logging.Level;
@@ -120,10 +122,6 @@ public class Methods {
 	 */
 	protected Prayer prayer;
 	/**
-	 * The singleton of FriendsChat
-	 */
-	protected ClanChat clanChat;
-	/**
 	 * The singleton of Trade
 	 */
 	protected Trade trade;
@@ -138,6 +136,20 @@ public class Methods {
 	 */
 	protected GrandExchange grandExchange;
 
+	/**
+	 * The singleton of WorldHopper
+	 */
+	protected WorldHopper worldHopper;
+
+	/**
+	 * The singleton of ChooseOption
+	 */
+	protected ChooseOption chooseOption;
+
+	/**
+	*  The singleton of NPCChat
+	 */
+	protected NPCChat npcChat;
 
 	/**
 	 * For internal use only: initializes the method providers.
@@ -172,8 +184,12 @@ public class Methods {
 		this.env = ctx.env;
 		this.prayer = ctx.prayer;
 		this.web = ctx.web;
-		this.clanChat = ctx.clanChat;
 		this.trade = ctx.trade;
+		this.worldHopper = ctx.worldHopper;
+
+		this.chooseOption = ctx.chooseOption;
+		this.npcChat = ctx.npcChat;
+
 	}
 
 	/**

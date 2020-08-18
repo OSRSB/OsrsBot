@@ -1,5 +1,14 @@
 package net.runelite.client.rsb.util;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RunnableFuture;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BooleanSupplier;
+
 /**
  * A Timer
  */
@@ -92,6 +101,37 @@ public class Timer {
 	 */
 	public String toRemainingString() {
 		return format(getRemaining());
+	}
+
+	public static long timeFromMark(long ms) {
+		return new AtomicLong(System.currentTimeMillis()).addAndGet((-1 * ms));
+	}
+
+	/**
+	 * Allows a condition to be passed to check and a timeout for the condition to pass
+	 * Continuously checks the condition in a while loop on an executor thread
+	 * @param condition
+	 * @param timeout
+	 * @return
+	 */
+	public static boolean waitCondition(BooleanSupplier condition, long timeout) {
+		long start = System.currentTimeMillis();
+		long end = start + timeout;
+
+		Callable<Boolean> future = () -> {
+				while (!condition.getAsBoolean()) {
+					if (System.currentTimeMillis() > end) {
+						return false;
+					}
+				}
+				return true;
+		};
+		try {
+			return Executors.newSingleThreadExecutor().submit(future).get();
+		} catch (ExecutionException | InterruptedException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

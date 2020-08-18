@@ -65,7 +65,6 @@ public class Game extends MethodProvider {
 		TAB_PRAYER = WidgetInfo.FIXED_VIEWPORT_PRAYER_TAB.getChildId(),
 		TAB_MAGIC = WidgetInfo.FIXED_VIEWPORT_MAGIC_TAB.getChildId(),
 		TAB_FRIENDS = WidgetInfo.FIXED_VIEWPORT_FRIENDS_TAB.getChildId(),
-		TAB_CLAN_CHAT = WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId(),
 		TAB_OPTIONS = WidgetInfo.FIXED_VIEWPORT_OPTIONS_TAB.getChildId(),
 		TAB_MUSIC = WidgetInfo.FIXED_VIEWPORT_MUSIC_TAB.getChildId(),
 		TAB_LOGOUT = WidgetInfo.FIXED_VIEWPORT_LOGOUT_TAB.getChildId()
@@ -339,6 +338,23 @@ public class Game extends MethodProvider {
 		return null;
 	}
 
+	public int getCrosshairState() {
+		String chooseOption = methods.chooseOption.getHoverText();
+		if (chooseOption != null) {
+			return 0;
+		}
+		if (methods.client.getViewportWidget().contains(methods.mouse.getPressLocation())) {
+			if (methods.mouse.getPressTime() >  System.currentTimeMillis() - 250) {
+				if (chooseOption.contains("Walk here")) {
+					return 1;
+				}
+				else {
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
 
 	/**
 	 * Checks whether or not the logout tab is selected.
@@ -484,6 +500,13 @@ public class Game extends MethodProvider {
 	 */
 	public RSTile getMapBase() {
 		return new RSTile(methods.client.getBaseX(), methods.client.getBaseY(), methods.client.getPlane());
+	}
+
+	/**
+	 * Gets the flags relating to the tiles in the scene
+	 */
+	public byte[][][] getSceneFlags() {
+		return methods.client.getTileSettings();
 	}
 
 	/**

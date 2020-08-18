@@ -5,6 +5,8 @@ import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSItem;
 import net.runelite.client.rsb.wrappers.RSWidget;
 
+import java.util.function.Predicate;
+
 /**
  * Equipment related operations.
  */
@@ -86,14 +88,14 @@ public class Equipment extends MethodProvider {
 	}
 
 
-	public RSItem[] find(final Filter<RSItem> filter) {
+	public RSItem[] find(final Predicate<RSItem> filter) {
 		RSItem[] rsItems = getItems();
 		RSItem[] filterItems = new RSItem[]{};
 		for (RSItem item : rsItems) {
 			if (item == null) {
 				continue;
 			}
-			if (filter.accept(item)) {
+			if (filter.test(item)) {
 				RSItem[] addItems = new RSItem[filterItems.length+1];
 				addItems[filterItems.length] = item;
 				filterItems = addItems;

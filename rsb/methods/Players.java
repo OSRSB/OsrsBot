@@ -16,7 +16,7 @@ public class Players extends MethodProvider {
 	 * A filter that accepts all matches.
 	 */
 	public static final Filter<RSPlayer> ALL_FILTER = new Filter<RSPlayer>() {
-		public boolean accept(RSPlayer player) {
+		public boolean test(RSPlayer player) {
 			return true;
 		}
 	};
@@ -55,7 +55,7 @@ public class Players extends MethodProvider {
 		for (Player player : playerArray) {
 			if (player != null) {
 				RSPlayer rsPlayer = new RSPlayer(methods, player);
-				if (filter.accept(rsPlayer)) {
+				if (filter.test(rsPlayer)) {
 					players.add(rsPlayer);
 				}
 			}
@@ -81,7 +81,7 @@ public class Players extends MethodProvider {
 				continue;
 			}
 			RSPlayer rsPlayer = new RSPlayer(methods, player);
-			if (filter.accept(rsPlayer)) {
+			if (filter.test(rsPlayer)) {
 				int distance = methods.calc.distanceTo(rsPlayer);
 				if (distance < min) {
 					min = distance;
@@ -103,7 +103,7 @@ public class Players extends MethodProvider {
 	 */
 	public RSPlayer getNearest(final String name) {
 		return getNearest(new Filter<RSPlayer>() {
-			public boolean accept(RSPlayer player) {
+			public boolean test(RSPlayer player) {
 				return player.getName().equals(name);
 			}
 		});
@@ -121,7 +121,7 @@ public class Players extends MethodProvider {
 	 */
 	public RSPlayer getNearest(final int level) {
 		return getNearest(new Filter<RSPlayer>() {
-			public boolean accept(RSPlayer player) {
+			public boolean test(RSPlayer player) {
 				return player.getCombatLevel() == level;
 			}
 		});

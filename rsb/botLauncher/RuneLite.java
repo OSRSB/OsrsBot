@@ -17,12 +17,19 @@ import java.lang.reflect.Constructor;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.nio.file.Paths;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.annotation.Nullable;
 import javax.inject.Provider;
 import javax.inject.Singleton;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.swing.*;
 
 import joptsimple.*;
@@ -31,6 +38,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.client.ClientSessionManager;
+import net.runelite.client.RuneLiteProperties;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.CommandManager;
@@ -38,7 +46,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.discord.DiscordService;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.externalplugins.ExternalPluginManager;
-import net.runelite.client.game.ClanManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.LootManager;
 import net.runelite.client.game.chatbox.ChatboxPanelManager;
@@ -62,6 +69,7 @@ import net.runelite.client.rsb.plugin.Botplugin;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.FatalErrorDialog;
+import net.runelite.client.ui.SplashScreen;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.OverlayRenderer;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
@@ -69,6 +77,9 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxOverlay;
 import net.runelite.client.ui.overlay.tooltip.TooltipOverlay;
 import net.runelite.client.ui.overlay.worldmap.WorldMapOverlay;
 import net.runelite.client.ws.PartyService;
+import net.runelite.http.api.RuneLiteAPI;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 
 @Singleton
@@ -82,6 +93,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     public static final File LOGS_DIR = new File(RUNELITE_DIR, "logs");
     public static final File DEFAULT_SESSION_FILE = new File(RUNELITE_DIR, "session");
     public static final File DEFAULT_CONFIG_FILE = new File(RUNELITE_DIR, "settings.properties");
+    private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
 
     @Getter
     private static Injector injector;
@@ -127,9 +139,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     @Inject
     private Provider<OverlayRenderer> overlayRenderer;
-
-    @Inject
-    private Provider<ClanManager> clanManager;
 
     @Inject
     private Provider<ChatMessageManager> chatMessageManager;
@@ -427,9 +436,23 @@ public class RuneLite extends net.runelite.client.RuneLite {
         });
 
 
+        OkHttpClient.Builder okHttpClientBuilder = RuneLiteAPI.CLIENT.newBuilder()
+                .cache(new Cache(new File(CACHE_DIR, "okhttp"), MAX_OKHTTP_CACHE_SIZE));
+
+        final boolean insecureSkipTlsVerification = options.has("insecure-skip-tls-verification");
+        if (insecureSkipTlsVerification || RuneLiteProperties.isInsecureSkipTlsVerification())
+        {
+            setupInsecureTrustManager(okHttpClientBuilder);
+        }
+
+        final OkHttpClient okHttpClient = okHttpClientBuilder.build();
+
+        net.runelite.client.ui.SplashScreen.init();
+        SplashScreen.stage(0, "Retrieving client", "");
+
         try
         {
-            final ClientLoader clientLoader = new ClientLoader(options.valueOf(updateMode));
+            final ClientLoader clientLoader = new ClientLoader(okHttpClient, options.valueOf(updateMode));
 
 
             new Thread(() ->
@@ -553,6 +576,39 @@ public class RuneLite extends net.runelite.client.RuneLite {
         public String valuePattern()
         {
             return null;
+        }
+    }
+
+    private static void setupInsecureTrustManager(OkHttpClient.Builder okHttpClientBuilder)
+    {
+        try
+        {
+            X509TrustManager trustManager = new X509TrustManager()
+            {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType)
+                {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType)
+                {
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers()
+                {
+                    return new X509Certificate[0];
+                }
+            };
+
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, new TrustManager[]{trustManager}, new SecureRandom());
+            okHttpClientBuilder.sslSocketFactory(sc.getSocketFactory(), trustManager);
+        }
+        catch (NoSuchAlgorithmException | KeyManagementException ex)
+        {
+            log.warn("unable to setup insecure trust manager", ex);
         }
     }
 }

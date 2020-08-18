@@ -1,12 +1,12 @@
 package net.runelite.client.rsb.methods;
 
 import net.runelite.api.*;
-import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSObject;
 import net.runelite.client.rsb.wrappers.RSTile;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Provides access to in-game physical objects.
@@ -16,8 +16,8 @@ public class Objects extends MethodProvider {
     /**
      * A filter that accepts all matches.
      */
-    public static final Filter<RSObject> ALL_FILTER = new Filter<RSObject>() {
-        public boolean accept(RSObject npc) {
+    public static final Predicate<RSObject> ALL_FILTER = new Predicate<RSObject>() {
+        public boolean test(RSObject npc) {
             return true;
         }
     };
@@ -43,12 +43,12 @@ public class Objects extends MethodProvider {
      * @return An <tt>RSObject[]</tt> of all the accepted objects in the loaded
      * region.
      */
-    public RSObject[] getAll(final Filter<RSObject> filter) {
+    public RSObject[] getAll(final Predicate<RSObject> filter) {
         Set<RSObject> objects = new LinkedHashSet<RSObject>();
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 for (RSObject o : getAtLocal(x, y, -1)) {
-                    if (filter.accept(o)) {
+                    if (filter.test(o)) {
                         objects.add(o);
                     }
                 }
@@ -66,14 +66,14 @@ public class Objects extends MethodProvider {
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
-    public RSObject getNearest(final Filter<RSObject> filter) {
+    public RSObject getNearest(final Predicate<RSObject> filter) {
         RSObject cur = null;
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 Set<RSObject> objs = getAtLocal(x, y, -1);
                 for (RSObject o : objs) {
-                    if (filter.accept(o)) {
+                    if (filter.test(o)) {
                         double distTmp = methods.calc.distanceBetween(
                                 methods.players.getMyPlayer().getLocation(),
                                 o.getLocation());
@@ -102,8 +102,8 @@ public class Objects extends MethodProvider {
      * current region.
      */
     public RSObject getNearest(final int... ids) {
-        return getNearest(new Filter<RSObject>() {
-            public boolean accept(RSObject o) {
+        return getNearest(new Predicate<RSObject>() {
+            public boolean test(RSObject o) {
                 for (int id : ids) {
                     if (o.getID() == id) {
                         return true;
@@ -124,8 +124,8 @@ public class Objects extends MethodProvider {
      * the current region.
      */
     public RSObject getNearest(final String... names) {
-        return getNearest(new Filter<RSObject>() {
-            public boolean accept(RSObject o) {
+        return getNearest(new Predicate<RSObject>() {
+            public boolean test(RSObject o) {
                 ObjectComposition def = o.getDef();
                 if (def != null) {
                     for (String name : names) {

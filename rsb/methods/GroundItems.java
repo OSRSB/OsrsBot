@@ -21,7 +21,7 @@ public class GroundItems extends MethodProvider {
 	private static final int MAX_RENDER_RANGE = 25;
 
 	public static final Filter<RSGroundItem> ALL_FILTER = new Filter<RSGroundItem>() {
-		public boolean accept(RSGroundItem item) {
+		public boolean test(RSGroundItem item) {
 			return true;
 		}
 	};
@@ -79,7 +79,7 @@ public class GroundItems extends MethodProvider {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
  				for (RSGroundItem item : items) {
-					if (filter.accept(item)) {
+					if (filter.test(item)) {
 						temp.add(item);
 					}
 				}
@@ -107,7 +107,7 @@ public class GroundItems extends MethodProvider {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
 				for (RSGroundItem item : items) {
-					if (filter.accept(item)
+					if (filter.test(item)
 							&& methods.calc.distanceTo(item.getLocation()) < dist) {
 						dist = methods.calc.distanceTo(item.getLocation());
 						itm = item;
@@ -129,7 +129,7 @@ public class GroundItems extends MethodProvider {
 	 */
 	public RSGroundItem getNearest(final int... ids) {
 		return getNearest(new Filter<RSGroundItem>() {
-			public boolean accept(RSGroundItem item) {
+			public boolean test(RSGroundItem item) {
 				int iid = item.getItem().getID();
 				for (int id : ids) {
 					if (id == iid) {

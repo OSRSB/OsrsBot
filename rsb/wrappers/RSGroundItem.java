@@ -5,13 +5,15 @@ import net.runelite.api.Model;
 import net.runelite.api.Tile;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.wrappers.common.Clickable;
+import net.runelite.client.rsb.wrappers.common.Clickable07;
+import net.runelite.client.rsb.wrappers.common.Positionable;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 /**
  * Represents an item on a tile.
- *
- * @author Jacmob
  */
-public class RSGroundItem extends MethodProvider {
+public class RSGroundItem extends MethodProvider implements Clickable07, Positionable {
 
 	private final RSItem groundItem;
 	private final RSTile location;
@@ -36,7 +38,7 @@ public class RSGroundItem extends MethodProvider {
 				for (int i = 0; i < tile.getGroundItems().size(); i++) {
 					if (!tile.getGroundItems().isEmpty()) {
 						return (tile.getItemLayer().getTop() != null) ?
-								new RSGroundObjectModel(methods,  tile.getItemLayer().getTop().getModel(), tile):
+								new RSGroundObjectModel(methods, tile.getItemLayer().getTop().getModel(), tile) :
 								new RSGroundObjectModel(methods, tile.getGroundItems().get(i).getModel(), tile);
 					}
 				}
@@ -51,6 +53,9 @@ public class RSGroundItem extends MethodProvider {
 		}
 		return null;
 	}
+
+
+
 
 	/**
 	 * Performs the given action on this RSGroundItem.
@@ -82,8 +87,8 @@ public class RSGroundItem extends MethodProvider {
 		return groundItem;
 	}
 
-	public RSTile getLocation() {
-		return location;
+	public WalkerTile getLocation() {
+		return new WalkerTile(location);
 	}
 
 	public boolean isOnScreen() {
@@ -95,4 +100,50 @@ public class RSGroundItem extends MethodProvider {
 		}
 	}
 
+	public boolean turnTo() {
+		RSGroundItem item = this;
+		if(item != null) {
+			if(!item.isOnScreen()) {
+				methods.camera.turnTo(item.getLocation());
+				return item.isOnScreen();
+			}
+		}
+		return false;
+	}
+
+	public boolean doHover() {
+		RSModel model = getModel();
+		if (model == null) {
+			return false;
+		}
+		this.getModel().hover();
+		return true;
+	}
+
+	public boolean doClick() {
+		RSModel model = getModel();
+		if (model == null) {
+			return false;
+		}
+		this.getModel().doClick(true);
+		return true;
+	}
+
+	public boolean doClick(boolean leftClick) {
+		RSModel model = getModel();
+		if (model == null) {
+			return false;
+		}
+		this.getModel().doClick(leftClick);
+		return true;
+	}
+
+	public boolean isClickable() {
+		RSModel model = getModel();
+		if (model == null) {
+			return false;
+		}
+		return model.getModel().isClickable();
+	}
 }
+

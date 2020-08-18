@@ -2,17 +2,9 @@ package net.runelite.client.rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.coords.WorldArea;
-import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.wrappers.*;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 
 /**
  * Walking related operations.
@@ -185,13 +177,15 @@ public class Walking extends MethodProvider {
 	/**
 	 * Turns run on or off using the game GUI controls.
 	 *
-	 * @param enable <tt>true</tt> to enable run, <tt>false</tt> to disable it.
-	 */
-	public void setRun(final boolean enable) {
+     * @param enable <tt>true</tt> to enable run, <tt>false</tt> to disable it.
+     * @return
+     */
+	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {
-			methods.interfaces.getComponent(INTERFACE_RUN_ORB, 0).doClick();
+			return methods.interfaces.getComponent(INTERFACE_RUN_ORB, 0).doClick();
 		}
-	}
+        return false;
+    }
 
 	/**
 	 * Generates a path from the player's current location to a destination
