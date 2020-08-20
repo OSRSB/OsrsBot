@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.wrappers.subwrap;
 
+import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
@@ -22,9 +23,9 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
     }
 
     public WalkerTile(WalkerTile tile) {
-        super(tile.getWorldLocation());
+        super(tile.getX(), tile.getY(), Web.methods.client.getPlane());
         this.ctx = Web.methods;
-        type = TYPES.WORLD;
+        type = tile.type;
     };
 
     public WalkerTile(WorldPoint point) {
@@ -37,6 +38,7 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
     public WalkerTile(int x, int y, int plane) {
         super(x, y, plane);
         this.ctx = Web.methods;
+        this.type = TYPES.WORLD;
     }
 
     public WalkerTile(int x, int y, int plane, TYPES type) {
@@ -57,34 +59,34 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
 
     @Override
     public boolean isClickable() {
-        return ctx.calc.tileOnScreen(this);
+        return ctx.calc.tileOnScreen(this.toWorldTile());
     }
 
 
     @Override
     public boolean doAction(String action) {
-        return ctx.tiles.doAction(this, action);
+        return ctx.tiles.doAction(this.toWorldTile(), action);
     }
 
     @Override
     public boolean doAction(String action, String option) {
-        return ctx.tiles.doAction(this, action, option);
+        return ctx.tiles.doAction(this.toWorldTile(), action, option);
     }
 
     @Override
     public boolean doClick() {
-        return ctx.tiles.doAction(this, "Walk here");
+        return ctx.tiles.doAction(this.toWorldTile(), "Walk here");
     }
 
     @Deprecated
     @Override
     public boolean doClick(boolean leftClick) {
-        return ctx.tiles.doAction(this, "Walk here");
+        return ctx.tiles.doAction(this.toWorldTile(), "Walk here");
     }
 
     @Override
     public boolean doHover() {
-        Point p = ctx.calc.tileToScreen(this);
+        Point p = ctx.calc.tileToScreen(this.toWorldTile());
         if (isClickable()) {
             ctx.mouse.move(p);
             return true;
@@ -95,37 +97,61 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
     @Override
     public boolean turnTo() {
         if (isClickable()) {
-            ctx.camera.turnTo(this);
+            ctx.camera.turnTo(this.toWorldTile());
             return true;
         }
         return false;
     }
 
     public boolean isOnScreen() {
-        return ctx.calc.tileOnScreen(this);
+        return ctx.calc.tileOnScreen(this.toWorldTile());
     }
 
     public WalkerTile toWorldTile() {
-        if (getLocalLocation() != (new LocalPoint(x, y))) {
-            return this;
+        WalkerTile walkerTile = new WalkerTile(this);
+        if (walkerTile.type == TYPES.LOCAL) {
+            WorldPoint point = WorldPoint.fromLocal(ctx.client, new LocalPoint(x, y));
+            walkerTile.x = point.getX();
+            walkerTile.y = point.getY();
+            walkerTile.plane = ctx.client.getPlane();
         }
-        WorldPoint point = getWorldLocation();
-        x = point.getX();
-        y = point.getY();
-        plane = ctx.client.getPlane();
-        type = TYPES.WORLD;
-        return this;
+        if (walkerTile.type == TYPES.SCENE) {
+            walkerTile.x = ctx.client.getBaseX() + x;
+            walkerTile.y = ctx.client.getBaseY() + y;
+            //WorldPoint.fromScene(ctx.client, x, y, plane);
+        }
+        walkerTile.type = TYPES.WORLD;
+        return walkerTile;
     }
 
     public WalkerTile toLocalTile() {
-        if (getWorldLocation() != (new WorldPoint(x, y, plane))) {
-            return this;
+        WalkerTile walkerTile = new WalkerTile(this);
+        if (walkerTile.type == TYPES.WORLD) {
+            int baseX = ctx.client.getBaseX();
+            int baseY = ctx.client.getBaseY();
+            LocalPoint point = LocalPoint.fromScene(x - baseX, y - baseY);
+            walkerTile.x = point.getX();
+            walkerTile.y = point.getY();
+        } if (walkerTile.type == TYPES.SCENE) {
+            LocalPoint point = LocalPoint.fromScene(x, y);
+            walkerTile.x = point.getX();
+            walkerTile.y = point.getY();
         }
-        LocalPoint point = getLocalLocation();
-        x = point.getX();
-        y = point.getY();
-        type = TYPES.LOCAL;
-        return this;
+        walkerTile.type = TYPES.LOCAL;
+        return walkerTile;
+    }
+
+    public WalkerTile toSceneTile() {
+        WalkerTile walkerTile = new WalkerTile(this);
+        if (walkerTile.type != TYPES.SCENE) {
+            if (walkerTile.type == TYPES.WORLD) {
+                walkerTile.toLocalTile();
+            }
+            walkerTile.x = walkerTile.x >>> Perspective.LOCAL_COORD_BITS;
+            walkerTile.y = walkerTile.y >>> Perspective.LOCAL_COORD_BITS;
+            walkerTile.type = TYPES.SCENE;
+        }
+        return walkerTile;
     }
 
     public int getX() {
@@ -145,7 +171,7 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
     }
 
     public enum TYPES {
-        ANIMABLE, LOCAL, WORLD;
+        ANIMABLE, LOCAL, WORLD, SCENE;
     }
 
     @Override
@@ -154,11 +180,11 @@ public class WalkerTile extends RSTile implements Clickable07, Positionable {
     }
 
     public int distanceTo(Positionable positionable) {
-        return (int) ctx.calc.distanceBetween(this, positionable.getLocation());
+        return (int) ctx.calc.distanceBetween(this.toWorldTile(), positionable.getLocation());
     }
 
     public double distanceToDouble(Positionable positionable) {
-        return ctx.calc.distanceBetween(this, positionable.getLocation());
+        return ctx.calc.distanceBetween(this.toWorldTile(), positionable.getLocation());
     }
 
     public WalkerTile translate(int x, int y) {

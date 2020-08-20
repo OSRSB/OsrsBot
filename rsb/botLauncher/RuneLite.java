@@ -447,7 +447,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         final OkHttpClient okHttpClient = okHttpClientBuilder.build();
 
-        net.runelite.client.ui.SplashScreen.init();
+        SplashScreen.init();
         SplashScreen.stage(0, "Retrieving client", "");
 
         try

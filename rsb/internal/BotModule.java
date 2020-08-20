@@ -40,8 +40,8 @@ public class BotModule extends RuneLiteModule {
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
         this.developerMode = developerMode;
-        this.sessionfile = sessionfile;
         this.safeMode = safeMode;
+        this.sessionfile = sessionfile;
         this.config = config;
     }
 
@@ -49,6 +49,7 @@ public class BotModule extends RuneLiteModule {
     protected void configure()
     {
         bindConstant().annotatedWith(Names.named("developerMode")).to(developerMode);
+        bindConstant().annotatedWith(Names.named("safeMode")).to(safeMode);
         bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
         bind(File.class).annotatedWith(Names.named("config")).toInstance(config);
         bind(ScheduledExecutorService.class).toInstance(new ExecutorServiceExceptionLogger(Executors.newSingleThreadScheduledExecutor()));

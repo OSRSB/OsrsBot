@@ -12,19 +12,19 @@ import java.util.function.Predicate;
  */
 public class Equipment extends MethodProvider {
 
-	public static final int ITEM_SLOTS = 10;
+	public static final int ITEM_SLOTS = 11;
 	public static final int INTERFACE_EQUIPMENT = WidgetInfo.EQUIPMENT.getGroupId();
-	public static final int HELMET = 6;
-	public static final int CAPE = 7;
-	public static final int NECK = 8;
-	public static final int WEAPON = 9;
-	public static final int BODY = 10;
-	public static final int SHIELD = 11;
-	public static final int LEGS = 12;
-	public static final int HANDS = 13;
-	public static final int FEET = 14;
-	public static final int RING = 15;
-	public static final int AMMO = 16;
+	public static final int HELMET = 14;
+	public static final int CAPE = 15;
+	public static final int NECK = 16;
+	public static final int WEAPON = 17;
+	public static final int BODY = 18;
+	public static final int SHIELD = 19;
+	public static final int LEGS = 20;
+	public static final int HANDS = 21;
+	public static final int FEET = 22;
+	public static final int RING = 23;
+	public static final int AMMO = 24;
 
 	Equipment(final MethodContext ctx) {
 		super(ctx);
@@ -55,8 +55,8 @@ public class Equipment extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget[] equip = getInterface().getComponents();
 		RSItem[] items = new RSItem[ITEM_SLOTS];
-		for (int i = HELMET; i < items.length + HELMET; i++) {
-			items[i] = new RSItem(methods, equip[i].getDynamicComponent(1));
+		for (int i = 0; i < items.length; i++) {
+			items[i] = new RSItem(methods, equip[i + HELMET].getDynamicComponent(1));
 		}
 		return items;
 	}

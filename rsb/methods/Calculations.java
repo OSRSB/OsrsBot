@@ -8,6 +8,7 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.Point;
 import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.rsb.wrappers.common.Positionable;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 import java.awt.*;
 
@@ -58,7 +59,7 @@ public class Calculations extends MethodProvider {
 	public boolean tileOnMap(RSTile t) {
 		// Point p = tileToMinimap(t);
 		// return p != null && p.x != -1 && p.y != -1;
-		return distanceTo(t) < 15;
+		return tileToMinimap(t) != null;
 	}
 
 	/**
@@ -69,7 +70,8 @@ public class Calculations extends MethodProvider {
 	 *         <tt>false</tt>.
 	 */
 	public boolean tileOnScreen(RSTile t) {
-		return pointOnScreen(tileToScreen(t, 0.5, 0.5, 0));
+		Point point = tileToScreen(t, 0.5, 0.5, 0);
+		return (point != null) && pointOnScreen(point);
 	}
 
 	/**
@@ -184,7 +186,8 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		return Perspective.localToCanvas(methods.client, LocalPoint.fromWorld(methods.client, tile.getWorldLocation()), methods.client.getPlane(), height);
+		WalkerTile walkerTile = new WalkerTile(tile).toLocalTile();
+		return Perspective.localToCanvas(methods.client, new LocalPoint(walkerTile.getX(), walkerTile.getY()), methods.client.getPlane(), height);
 		/*
 		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + 0.5)),
 				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + 0.5)), height);

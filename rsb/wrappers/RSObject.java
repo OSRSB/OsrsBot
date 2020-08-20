@@ -13,6 +13,9 @@ import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 import java.awt.*;
 import java.awt.geom.Area;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable {
@@ -92,6 +95,19 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		Composition def = new Composition();
 
 		if (id != 0) {
+
+			/*
+			Callable<ObjectComposition> future = () -> {
+				while (methods.client.getObjectDefinition(id) == null);
+				return methods.client.getObjectDefinition(id);
+			};
+			try {
+				return Executors.newSingleThreadExecutor().submit(future).get();
+			} catch (ExecutionException | InterruptedException e) {
+				e.printStackTrace();
+			}
+			*/
+			/*
 			new Thread(() -> {
 				try {
 					def.setDef(methods.client.getObjectDefinition(id));
@@ -109,6 +125,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 					log.warn("Object definition failed to apply properly.", e.getCause());
 				}
 			}
+
+			 */
 		}
 
 		return def.getDef();

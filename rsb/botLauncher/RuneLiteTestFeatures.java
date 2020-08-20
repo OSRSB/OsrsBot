@@ -6,6 +6,9 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.methods.GroundItems;
 import net.runelite.client.rsb.util.OutputObjectComparer;
+import net.runelite.client.rsb.walker.dax_api.api_lib.DaxWalker;
+import net.runelite.client.rsb.walker.dax_api.api_lib.models.DaxCredentials;
+import net.runelite.client.rsb.walker.dax_api.api_lib.models.DaxCredentialsProvider;
 import net.runelite.client.rsb.wrappers.*;
 
 import java.awt.*;
@@ -65,12 +68,6 @@ public class RuneLiteTestFeatures {
 
     public static void testFeature(RuneLite bot) {
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            int[] pathX = bot.getMethodContext().players.getMyPlayer().getPathX();
-            String test = "";
-            if (pathX != null)
-                for (int i : pathX) {
-                    test += i + " ";
-                }
             System.out.println(test);
         }
     }
