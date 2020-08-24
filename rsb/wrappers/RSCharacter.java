@@ -22,7 +22,7 @@ import static net.runelite.api.coords.Direction.EAST;
 @Slf4j
 public abstract class RSCharacter extends MethodProvider implements Clickable07, Positionable {
 
-    private ArrayList<Field> pathFields = new ArrayList<>();
+    private static ArrayList<Field> pathFields = new ArrayList<>();
     private static int pathXIndex = -1;
     private static int pathYIndex = -1;
 

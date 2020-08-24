@@ -1,6 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.Tile;
@@ -11,6 +12,10 @@ import net.runelite.client.rsb.methods.Web;
 import net.runelite.client.rsb.wrappers.common.Clickable07;
 import net.runelite.client.rsb.wrappers.subwrap.RSMenuNode;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 
@@ -18,12 +23,14 @@ import java.util.function.Predicate;
  * Represents an item (with an id and stack size). May or may not
  * wrap a component.
  */
+@Slf4j
 public class RSItem extends MethodProvider implements Clickable07 {
 
 	private final int id;
 	private final int stack;
 	private RSWidget component;
 	private RSWidgetItem item;
+	private static Field groundActionMethod;
 
 	public RSItem(final MethodContext ctx, final RSWidgetItem item) {
 		super(ctx);
@@ -146,7 +153,7 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	 * @return The list of inventory actions for the item
 	 */
 	public String[] getInventoryActions() {
-		if (item == null) {
+		if (id < 0 && stack < 0) {
 			return null;
 		}
 		ItemComposition definition = getDefinition();
@@ -157,15 +164,39 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	}
 
 	public String[] getGroundActions() {
-		if (item == null) {
-			return null;
+		if (id < 0 && stack < 0) {
+			return new String[]{""};
 		}
-		ItemComposition definition = getDefinition();
-		if (definition != null) {
-			//Recreate method def.getGroundItems
-			return null;
+		if (getDefinition() != null) {
+			if (groundActionMethod == null) {
+				setGroundActionsMethod();
+			}
+			try {
+				return (String[]) groundActionMethod.get(methods.client.getItemDefinition(id));
+			} catch (IllegalAccessException e) {
+				log.debug("Failed to get getGroundActions or getInventoryActions", e);
+			}
 		}
 		return null;
+	}
+
+	private void setGroundActionsMethod() {
+		String[] actions;
+		for (Field field : methods.client.getItemDefinition(id).getClass().getDeclaredFields()) {
+			System.out.println(field.getType().getTypeName());
+			if (field.getType().getTypeName().equals("java.lang.String[]")) {
+				System.out.println("TEST");
+				field.setAccessible(true);
+				try {
+					actions = (String[]) field.get(this.getDefinition());
+					if (!Arrays.equals(actions, getInventoryActions())) {
+						groundActionMethod = field;
+					}
+				} catch (IllegalAccessException e) {
+					log.debug("Failed to invoke getGroundActions or getInventoryActions", e);
+				}
+			}
+		}
 	}
 
 

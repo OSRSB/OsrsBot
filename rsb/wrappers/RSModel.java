@@ -1,6 +1,7 @@
 package net.runelite.client.rsb.wrappers;
 
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
@@ -20,6 +21,7 @@ import java.util.LinkedList;
  *
  * @author Jacmob, SpeedWing
  */
+@Slf4j
 public class RSModel extends MethodProvider {
 
 	/**
@@ -131,6 +133,7 @@ public class RSModel extends MethodProvider {
 				}
 			}
 		} catch (Exception ignored) {
+			log.debug("Model click error", ignored);
 		}
 		return false;
 	}
@@ -153,6 +156,7 @@ public class RSModel extends MethodProvider {
 				}
 			}
 		} catch (Exception ignored) {
+			log.debug("Model action perform error", ignored);
 		}
 		return false;
 	}
@@ -279,6 +283,7 @@ public class RSModel extends MethodProvider {
 				}
 			}
 		} catch (Exception ignored) {
+			log.debug("Model failed to get points on screen", ignored);
 		}
 		return list.size() > 0 ? list.get(random(0, list.size())) : null;
 	}

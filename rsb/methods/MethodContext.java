@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.methods;
 
+import com.google.inject.Provider;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.api.Client;
 import net.runelite.client.rsb.internal.input.VirtualKeyboard;
@@ -11,6 +13,9 @@ import net.runelite.client.rsb.wrappers.subwrap.NPCChat;
 import net.runelite.client.ui.ClientUI;
 
 import javax.swing.*;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.Thread.sleep;
 
@@ -196,6 +201,10 @@ public class MethodContext {
 
 
 	public final RuneLite runeLite;
+
+	public Provider<ClientThread> clientThreadProvider = null;
+
+	public final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 
 	/**************************************/

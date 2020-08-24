@@ -4,6 +4,7 @@ import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.util.EnumConverter;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.rs.ClientUpdateCheckMode;
 import net.runelite.client.rsb.gui.BotGUI;
 import net.runelite.client.rsb.internal.LogOutputStream;
@@ -17,11 +18,14 @@ import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+@Slf4j
 public class Application {
 
 	static RuneLite[] bots = new RuneLite[]{};
 
 	public static void main(final String[] args) throws Exception {
+
 		final OptionParser parser = new OptionParser();
 		parser.accepts("developer-mode", "Enable developer tools");
 		parser.accepts("debug", "Show extra debugging output");

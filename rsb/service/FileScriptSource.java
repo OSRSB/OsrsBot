@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.service;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.rsb.script.Script;
 import net.runelite.client.rsb.script.ScriptManifest;
 
@@ -16,9 +17,10 @@ import java.util.logging.Logger;
 /**
  * @author Jacmob
  */
+@Slf4j
 public class FileScriptSource implements ScriptSource {
 
-	private final Logger log = Logger.getLogger(getClass().getSimpleName());
+	//private final Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	private File file;
 
@@ -40,12 +42,14 @@ public class FileScriptSource implements ScriptSource {
 						}
 					}
 				} catch (IOException ignored) {
+					log.debug("Failed to list files", ignored);
 				}
 			} else if (isJar(file)) {
 				try {
 					ClassLoader ldr = new ScriptClassLoader(getJarUrl(file));
 					load(ldr, defs, new JarFile(file));
 				} catch (IOException ignored) {
+					log.debug("Failed to list files", ignored);
 				}
 			}
 		}
@@ -99,11 +103,10 @@ public class FileScriptSource implements ScriptSource {
 		try {
 			clazz = loader.loadClass(name);
 		} catch (Exception e) {
-			log.warning(name + " is not a valid script and was ignored!");
-			e.printStackTrace();
+			log.warn(name + " is not a valid script and was ignored!", e);
 			return;
 		} catch (VerifyError e) {
-			log.warning(name + " is not a valid script and was ignored!");
+			log.warn(name + " is not a valid script and was ignored!", e);
 			return;
 		}
 		if (clazz.isAnnotationPresent(ScriptManifest.class)) {

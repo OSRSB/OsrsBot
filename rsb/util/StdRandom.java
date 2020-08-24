@@ -274,13 +274,11 @@ public final class StdRandom {
      */
     public static double gaussian(double min, double max, double mu, double sigma) {
         // use the polar form of the Box-Muller transform
-        double r, x, y;
+        double x, y;
         do {
-            x = uniform(min, max);
-            y = uniform(min, max);
-            r = x*x + y*y;
-        } while (r >= 1 || r == 0);
-        return mu + sigma * (x * Math.sqrt(-2 * Math.log(r) / r));
+            x = gaussian(mu, sigma);
+        } while (x < min || x > max);
+        return x;
     }
 
     /**

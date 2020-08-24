@@ -51,10 +51,10 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     }
 
     public boolean isVisible() {
-        return !widget.isHidden();
+        return isValid() && !widget.isHidden();
     }
 
-    public boolean isSelfVisible() {return !widget.isSelfHidden();}
+    public boolean isSelfVisible() {return isValid() && !widget.isSelfHidden();}
 
     /**
      * Performs the given action on this RSInterfaceChild if it is
@@ -114,7 +114,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (!isValid()) {
             return false;
         }
-
         Rectangle rect = getArea();
         if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
             return false;
@@ -200,41 +199,44 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     }
         ArrayList<RSWidget> components = new ArrayList<>();
 
-        RSWidget[] childComponents = convertToRSWidget(widget.getDynamicChildren());
-        if (childComponents != null)
-        {
-            for (RSWidget component : childComponents)
-            {
-                RSWidget[] childNode = component.getComponents();
-                if (childNode != null)
-                {
-                    components.addAll(Arrays.asList(childNode));
+
+        Widget[] children = widget.getDynamicChildren();
+        RSWidget[] childComponents;
+        if (children != null) {
+            childComponents = convertToRSWidget(children);
+            if (childComponents != null) {
+                for (RSWidget component : childComponents) {
+                    RSWidget[] childNode = component.getComponents();
+                    if (childNode != null) {
+                        components.addAll(Arrays.asList(childNode));
+                    }
                 }
             }
         }
-
-        childComponents = convertToRSWidget(widget.getStaticChildren());
-        if (childComponents != null)
-        {
-            for (RSWidget component : childComponents)
+        children = widget.getStaticChildren();
+        if (children != null) {
+            childComponents = convertToRSWidget(children);
+            if (childComponents != null)
             {
-                RSWidget[] childNode = component.getComponents();
-                if (childNode != null)
+                for (RSWidget component : childComponents)
                 {
-                    components.addAll(Arrays.asList(childNode));
+                    RSWidget[] childNode = component.getComponents();
+                    if (childNode != null)
+                    {
+                        components.addAll(Arrays.asList(childNode));
+                    }
                 }
             }
         }
-
-        childComponents = convertToRSWidget(widget.getNestedChildren());
-        if (childComponents != null)
-        {
-            for (RSWidget component : childComponents)
-            {
-                RSWidget[] childNode = component.getComponents();
-                if (childNode != null)
-                {
-                    components.addAll(Arrays.asList(childNode));
+        children = widget.getNestedChildren();
+        if (children != null) {
+            childComponents = convertToRSWidget(children);
+            if (childComponents != null) {
+                for (RSWidget component : childComponents) {
+                    RSWidget[] childNode = component.getComponents();
+                    if (childNode != null) {
+                        components.addAll(Arrays.asList(childNode));
+                    }
                 }
             }
         }

@@ -1,17 +1,19 @@
 package net.runelite.client.rsb.botLauncher;
 
+import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.rsb.methods.GroundItems;
 import net.runelite.client.rsb.util.OutputObjectComparer;
-import net.runelite.client.rsb.walker.dax_api.api_lib.DaxWalker;
-import net.runelite.client.rsb.walker.dax_api.api_lib.models.DaxCredentials;
-import net.runelite.client.rsb.walker.dax_api.api_lib.models.DaxCredentialsProvider;
+import net.runelite.client.rsb.util.Parameters;
 import net.runelite.client.rsb.wrappers.*;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
@@ -67,8 +69,9 @@ public class RuneLiteTestFeatures {
 
 
     public static void testFeature(RuneLite bot) {
+
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
-            System.out.println(test);
+
         }
     }
 

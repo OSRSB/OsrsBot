@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -8,6 +10,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 
+@Slf4j
 public class Extractor implements Runnable {
 	private static void saveTo(InputStream in, String outPath) {
 		try {
@@ -20,6 +23,7 @@ public class Extractor implements Runnable {
 			in.close();
 			out.close();
 		} catch (Exception ignored) {
+			log.debug("Failed to save", ignored);
 		}
 	}
 
@@ -45,6 +49,7 @@ public class Extractor implements Runnable {
 				try {
 					p = URLDecoder.decode(p, "UTF-8");
 				} catch (final UnsupportedEncodingException ignored) {
+					log.debug("Extractor run encoding issue", ignored);
 				}
 				JarFile jar = new JarFile(new File(p));
 				File out = new File(GlobalConfiguration.Paths.getScriptsExtractedCache());

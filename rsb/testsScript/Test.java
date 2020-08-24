@@ -8,6 +8,7 @@ import net.runelite.client.rsb.event.listener.PaintListener;
 import net.runelite.client.rsb.methods.Magic;
 import net.runelite.client.rsb.script.Script;
 import net.runelite.client.rsb.script.ScriptManifest;
+import net.runelite.client.rsb.util.StdRandom;
 import net.runelite.client.rsb.wrappers.*;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class Test extends Script implements PaintListener {
         if (ctx.client != null && ctx.client.getLocalPlayer() != null) {
             RuneLiteTestFeatures.testFeature(getBot());
         }
+        sleep(StdRandom.uniform(1000, 1500));
         return random(1000, 1000);
     }
 

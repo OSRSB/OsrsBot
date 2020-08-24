@@ -20,9 +20,9 @@ public class ChooseOption extends Menu {
         MenuEntry[] entries = methods.client.getMenuEntries();
         RSMenuNode[] reversed = new RSMenuNode[entries.length];
         for (int i = entries.length - 1, x = 0; i >= 0; i--, x++) {
-            int yOff = TOP_OF_MENU_BAR + (MENU_ENTRY_LENGTH * x); //Offset from top of the menu to the entry itself
-            reversed[i] = new RSMenuNode(i, new Rectangle(calculateX(), yOff, calculateWidth(), calculateHeight()), entries[x].getOption(), entries[x].getTarget(), entries[x].getType(),
-                    entries[x].getIdentifier(), entries[x].getParam0(), entries[x].getParam1());
+            int yOff = calculateY() + TOP_OF_MENU_BAR + (MENU_ENTRY_LENGTH * x); //Offset from top of the menu to the entry itself
+            reversed[x] = new RSMenuNode(x, new Rectangle(calculateX(), yOff, calculateWidth(), MENU_ENTRY_LENGTH), entries[i].getOption(), entries[i].getTarget(), entries[i].getType(),
+                    entries[i].getIdentifier(), entries[i].getParam0(), entries[i].getParam1());
         }
         return reversed;
     }

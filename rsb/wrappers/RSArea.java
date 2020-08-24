@@ -39,9 +39,9 @@ public class RSArea {
 	 * @param plane The plane of the <b>RSArea</b>.
 	 */
 	public RSArea(RSTile sw, RSTile ne, int plane) {
-		this(new RSTile[]{sw, new RSTile(ne.getWorldLocation().getX() + 1, sw.getWorldLocation().getY()),
-				new RSTile(ne.getWorldLocation().getX() + 1, ne.getWorldLocation().getY() + 1),
-				new RSTile(sw.getWorldLocation().getX(), ne.getWorldLocation().getY() + 1)}, plane);
+		this(new RSTile[]{sw, new RSTile(ne.getWorldLocation().getX() + 1, sw.getWorldLocation().getY(), plane),
+				new RSTile(ne.getWorldLocation().getX() + 1, ne.getWorldLocation().getY() + 1, plane),
+				new RSTile(sw.getWorldLocation().getX(), ne.getWorldLocation().getY() + 1, plane)}, plane);
 	}
 
 	/**

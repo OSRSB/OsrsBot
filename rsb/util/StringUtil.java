@@ -1,5 +1,7 @@
 package net.runelite.client.rsb.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -10,6 +12,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class StringUtil {
 
 	private static final String[] COLOURS_STR = new String[]{"red", "green", "cyan", "purple", "white"};
@@ -78,6 +81,7 @@ public class StringUtil {
 								COLOR_MAP.put(colorName, cur);
 							}
 						} catch (Exception ignored) {
+							log.debug("Error with drawing line", ignored);
 						}
 					}
 					t = t.replace(colorName + "]", "");

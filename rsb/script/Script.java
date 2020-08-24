@@ -233,6 +233,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 		try {
 			start = onStart();
 		} catch (ThreadDeath ignored) {
+			log.error("Thread died", ignored);
 		} catch (Throwable ex) {
 			log.error("Error starting script: ", ex);
 		}

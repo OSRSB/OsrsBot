@@ -66,6 +66,8 @@ import net.runelite.client.rsb.internal.BotHooks;
 import net.runelite.client.rsb.internal.BotModule;
 import net.runelite.client.rsb.internal.input.Canvas;
 import net.runelite.client.rsb.plugin.Botplugin;
+import net.runelite.client.rsb.util.OutputObjectComparer;
+import net.runelite.client.rsb.util.Parameters;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.FatalErrorDialog;
@@ -123,7 +125,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private ClientSessionManager clientSessionManager;
 
     @Inject
-    private ClientUI clientUI;
+    public ClientUI clientUI;
 
     @Inject
     private InfoBoxManager infoBoxManager;
@@ -283,6 +285,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
             }
             return listener;
         } catch (Exception ignored) {
+            log.debug("Failed to instantiate listener", ignored);
         }
         return null;
     }

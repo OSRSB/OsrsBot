@@ -1,11 +1,14 @@
 package net.runelite.client.rsb.methods;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * A class that provides methods that use data from the game client. For
  * internal use.
  *
  * @author Jacmob
  */
+@Slf4j
 public abstract class MethodProvider {
 
 	public static MethodContext methods = null;
@@ -88,6 +91,7 @@ public abstract class MethodProvider {
 				Thread.sleep(start + toSleep - now);
 			}
 		} catch (InterruptedException ignored) {
+			log.debug("Method sleep disrupted", ignored);
 		}
 	}
 

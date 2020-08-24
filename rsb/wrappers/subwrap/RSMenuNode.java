@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.wrappers.subwrap;
 
+import net.runelite.client.rsb.methods.Menu;
 import net.runelite.client.rsb.wrappers.common.Clickable;
 
 import java.awt.*;
@@ -81,11 +82,11 @@ public class RSMenuNode {
     }
 
     public String getAction() {
-        return action;
+        return Menu.stripFormatting(action);
     }
 
     public String getTarget() {
-        return target;
+        return Menu.stripFormatting(target);
     }
 
     public int getType() {

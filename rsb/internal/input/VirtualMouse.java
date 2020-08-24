@@ -146,15 +146,15 @@ public class VirtualMouse {
                 try {
                     mouseWheelMoved((MouseWheelEvent) e);
                 } catch (AbstractMethodError ignored) {
-                    // it might not be implemented!
+                    log.debug("Mouse event might not be implemented", ignored);
+                    // !
                 }
             } else {
                 throw new InternalError(e.toString());
             }
             ((Applet) methods.client).getComponent(0).dispatchEvent(e);
         } catch (NullPointerException ignored) {
-            // client may throw NPE when a listener
-            // is being re-instantiated.
+            log.debug("Listener is being re-instantiated on the client", ignored);
         }
     }
 

@@ -1,32 +1,41 @@
 package net.runelite.client.rsb.wrappers;
 
+import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.methods.MethodProvider;
+import net.runelite.client.rsb.util.OutputObjectComparer;
+import net.runelite.client.rsb.util.Parameters;
 import net.runelite.client.rsb.wrappers.common.Clickable07;
 import net.runelite.client.rsb.wrappers.common.Positionable;
 import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
+import org.apache.commons.lang3.ObjectUtils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Area;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
+import java.lang.reflect.Field;
+import java.util.concurrent.*;
+
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable {
 
 	public enum Type {
-		GAME, DECORATIVE, GROUND, WALL;
+		GAME, DECORATIVE, GROUND, WALL, NULL
 	}
 
 	private final TileObject obj;
 	private final Type type;
 	private final int plane;
+
+	private ObjectComposition def = null;
 
 	public RSObject(final MethodContext ctx,
 					final TileObject obj, final Type type,
@@ -76,60 +85,97 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 */
 	public ObjectComposition getDef() {
 		int id = getID();
+		if (id != -1) {
+			try {
+
+				def = methods.executorService.submit(() -> methods.client.getObjectDefinition(id)).get(50, TimeUnit.MILLISECONDS);
+			} catch (Exception e) {
+				String errorMsg = "Object with ID " + id + " has thrown an error while attempting to get the object definition." +
+						"\n Object type is " + type + "\n Please restart the client.";
+				log.debug(errorMsg, e);
+				/**
+				 * A restart is needed, will be fixed at a later time.
+				 */
+			}
+		}
+		return def;
+		/*
 		class Composition {
 			ObjectComposition def;
+			boolean isSet;
 
 			Composition() {
-				this.def = null;
+				def = null;
+				isSet = false;
 			}
 
-			void setDef(ObjectComposition def) {
+			public void setDef(ObjectComposition def) {
 				this.def = def;
 			}
 
-			ObjectComposition getDef(){
+			public ObjectComposition getDef() {
 				return def;
 			}
+
+			public boolean isSet() {
+				return isSet;
+			}
+
+			public void setSet(boolean set) {
+				isSet = set;
+			}
 		}
-
-		Composition def = new Composition();
-
-		if (id != 0) {
-
-			/*
-			Callable<ObjectComposition> future = () -> {
-				while (methods.client.getObjectDefinition(id) == null);
-				return methods.client.getObjectDefinition(id);
-			};
+		Composition composition = new Composition();
+		if (def == null) {
 			try {
-				return Executors.newSingleThreadExecutor().submit(future).get();
-			} catch (ExecutionException | InterruptedException e) {
-				e.printStackTrace();
-			}
-			*/
-			/*
-			new Thread(() -> {
-				try {
-					def.setDef(methods.client.getObjectDefinition(id));
-				} catch (NullPointerException e) {
-					log.warn("Object definition returned a null pointer.", e.getCause());
+				if (methods.clientThreadProvider == null) {
+					setClientThreadProvider();
 				}
-				synchronized (def) {
-					def.notify();
-				}
-			}).start();
-			synchronized (def) {
-				try {
-					def.wait();
-				} catch (Exception e) {
-					log.warn("Object definition failed to apply properly.", e.getCause());
-				}
-			}
 
-			 */
+				methods.clientThreadProvider.get().invoke(()-> {
+					composition.setSet(true);
+					composition.setDef(methods.client.getObjectDefinition(getID()));
+				});
+			} catch (Exception e) {
+				//methods.clientThreadProvider.get().
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return def;
+
+
+		if (methods.clientThreadProvider == null) {
+			setClientThreadProvider();
 		}
 
-		return def.getDef();
+		methods.clientThreadProvider.get().invokeLater(()-> {
+				composition.setSet(true);
+				composition.setDef(methods.client.getObjectDefinition(id));
+		});
+
+		long start = System.currentTimeMillis();
+
+		while (!composition.isSet() || (start + 200 > System.currentTimeMillis()) );
+
+		return composition.getDef() != null ? composition.getDef() : null;
+		*/
+	}
+
+	/**
+	 * Gets the client thread provider from the clientUI to allow passing runnables to it
+	 */
+	public void setClientThreadProvider() {
+		for (Field field : methods.runeLite.clientUI.getClass().getDeclaredFields()) {
+			if (field.getName().equals("clientThreadProvider")) {
+				try {
+					field.setAccessible(true);
+					methods.clientThreadProvider = (Provider<ClientThread>) field.get(methods.runeLite.clientUI);
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	/**
@@ -141,7 +187,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		if (obj != null) {
 			return obj.getId();
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -198,6 +244,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 					return new RSObjectModel(methods, model, (GameObject) obj);
 			}
 		} catch (AbstractMethodError ignored) {
+			log.debug("Error", ignored);
 		}
 		return null;
 
@@ -342,10 +389,22 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	}
 
 	public boolean isClickable() {
+		if (obj == null) {
+			return false;
+		}
 		RSModel model = getModel();
 		if (model == null) {
 			return false;
 		}
-		return model.getModel().isClickable();
+		return true;
+		//return model.getModel().isClickable();
+	}
+
+	/**
+	 * Gets the TileObject associated with this RSObject
+	 * @return the TileObject else null
+	 */
+	public TileObject getObj() {
+		return obj;
 	}
 }

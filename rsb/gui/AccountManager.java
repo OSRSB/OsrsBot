@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.gui;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.rsb.util.AccountStore;
 import net.runelite.client.rsb.util.GlobalConfiguration;
 
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
  * @author Timer
  */
 @SuppressWarnings("serial")
+@Slf4j
 public class AccountManager extends JDialog implements ActionListener {
 
 	private static final String FILE_NAME = GlobalConfiguration.Paths.getAccountsFile();
@@ -41,8 +43,6 @@ public class AccountManager extends JDialog implements ActionListener {
 
 	private static final String[] VALID_KEYS = {"pin", "reward", "member", "take_breaks"};
 
-	private static final Logger log = Logger.getLogger(AccountManager.class.getName());
-
 	private static final AccountStore accountStore = new AccountStore(new File(FILE_NAME));
 
 	static {
@@ -50,6 +50,7 @@ public class AccountManager extends JDialog implements ActionListener {
 		try {
 			accountStore.load();
 		} catch (IOException ignored) {
+			log.debug("Failed to load accounts", ignored);
 		}
 	}
 

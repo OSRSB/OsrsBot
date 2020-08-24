@@ -1,9 +1,6 @@
 package net.runelite.client.rsb.methods;
 
-import net.runelite.api.Item;
-import net.runelite.api.NodeCache;
-import net.runelite.api.Tile;
-import net.runelite.api.TileItem;
+import net.runelite.api.*;
 import net.runelite.client.rsb.internal.wrappers.Filter;
 import net.runelite.client.rsb.wrappers.RSGroundItem;
 import net.runelite.client.rsb.wrappers.RSItem;
@@ -79,6 +76,9 @@ public class GroundItems extends MethodProvider {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
  				for (RSGroundItem item : items) {
+ 					if (item.getItem() == null) {
+ 						continue;
+					}
 					if (filter.test(item)) {
 						temp.add(item);
 					}
@@ -107,6 +107,9 @@ public class GroundItems extends MethodProvider {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
 				for (RSGroundItem item : items) {
+					if (item.getItem() == null) {
+						continue;
+					}
 					if (filter.test(item)
 							&& methods.calc.distanceTo(item.getLocation()) < dist) {
 						dist = methods.calc.distanceTo(item.getLocation());

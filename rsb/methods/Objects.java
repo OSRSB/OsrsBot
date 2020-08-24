@@ -3,6 +3,7 @@ package net.runelite.client.rsb.methods;
 import net.runelite.api.*;
 import net.runelite.client.rsb.wrappers.RSObject;
 import net.runelite.client.rsb.wrappers.RSTile;
+import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -48,6 +49,9 @@ public class Objects extends MethodProvider {
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 for (RSObject o : getAtLocal(x, y, -1)) {
+                    if (o.getObj() == null) {
+                        continue;
+                    }
                     if (filter.test(o)) {
                         objects.add(o);
                     }
@@ -67,12 +71,15 @@ public class Objects extends MethodProvider {
      * in the current region.
      */
     public RSObject getNearest(final Predicate<RSObject> filter) {
-        RSObject cur = null;
+        RSObject cur = new RSObject(methods, null, RSObject.Type.NULL, -99);
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 Set<RSObject> objs = getAtLocal(x, y, -1);
                 for (RSObject o : objs) {
+                    if (o.getObj() == null) {
+                        continue;
+                    }
                     if (filter.test(o)) {
                         double distTmp = methods.calc.distanceBetween(
                                 methods.players.getMyPlayer().getLocation(),
@@ -85,6 +92,48 @@ public class Objects extends MethodProvider {
                             dist = distTmp;
                         }
                         break;
+                    }
+                }
+            }
+        }
+        return cur;
+    }
+
+    /**
+     * Returns the <tt>RSObject</tt> that is nearest out of all objects that are
+     * accepted by the provided Filter.
+     *
+     * @param distance The distance away from the player to check
+     * @param filter Filters out unwanted objects.
+     * @return An <tt>RSObject</tt> representing the nearest object that was
+     * accepted by the filter; or null if there are no matching objects
+     * in the current region.
+     */
+    public RSObject getNearest(final int distance, final Predicate<RSObject> filter) {
+        RSObject cur = new RSObject(methods, null, RSObject.Type.NULL, -99);
+        double dist = -1;
+        for (int x = 0; x < 104; x++) {
+            for (int y = 0; y < 104; y++) {
+                int distanceToCheck = methods.calc.distanceTo(new WalkerTile(x, y, methods.client.getPlane(), WalkerTile.TYPES.SCENE).toWorldTile());
+                if (distanceToCheck < distance) {
+                    Set<RSObject> objs = getAtLocal(x, y, -1);
+                    for (RSObject o : objs) {
+                        if (o.getObj() == null) {
+                            continue;
+                        }
+                        if (filter.test(o)) {
+                            double distTmp = methods.calc.distanceBetween(
+                                    methods.players.getMyPlayer().getLocation(),
+                                    o.getLocation());
+                            if (cur.getObj() == null) {
+                                dist = distTmp;
+                                cur = o;
+                            } else if (distTmp < dist) {
+                                cur = o;
+                                dist = distTmp;
+                            }
+                            break;
+                        }
                     }
                 }
             }
@@ -125,6 +174,32 @@ public class Objects extends MethodProvider {
      */
     public RSObject getNearest(final String... names) {
         return getNearest(new Predicate<RSObject>() {
+            public boolean test(RSObject o) {
+                ObjectComposition def = o.getDef();
+                if (def != null) {
+                    for (String name : names) {
+                        if (name.equals(def.getName())) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Returns the <tt>RSObject</tt> that is nearest, out of all of the
+     * RSObjects with the provided name(s).
+     *
+     * @param distance The distance from the player to search within
+     * @param names The name(s) of the RSObject that you are searching.
+     * @return An <tt>RSObject</tt> representing the nearest object with one of
+     * the provided names; or null if there are no matching objects in
+     * the current region.
+     */
+    public RSObject findNearest(final int distance, final String... names) {
+        return getNearest(distance, new Predicate<RSObject>() {
             public boolean test(RSObject o) {
                 ObjectComposition def = o.getDef();
                 if (def != null) {

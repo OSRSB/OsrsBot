@@ -1,5 +1,6 @@
 package net.runelite.client.rsb.internal;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.rsb.botLauncher.RuneLite;
 import net.runelite.api.Client;
 import net.runelite.client.rsb.internal.input.Canvas;
@@ -7,6 +8,7 @@ import net.runelite.client.rsb.internal.input.Canvas;
 import java.applet.Applet;
 import java.awt.event.*;
 
+@Slf4j
 public class InputManager {
 
 	private final java.util.Random random = new java.util.Random();
@@ -348,6 +350,7 @@ public class InputManager {
 		try {
 			Thread.sleep(t);
 		} catch (final Exception ignored) {
+			log.debug("Sleep exception in input manager", ignored);
 		}
 	}
 

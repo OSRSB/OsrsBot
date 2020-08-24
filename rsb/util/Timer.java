@@ -3,6 +3,7 @@ package net.runelite.client.rsb.util;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BooleanSupplier;
@@ -15,6 +16,7 @@ public class Timer {
 	private long end;
 	private final long start;
 	private final long period;
+	private static ExecutorService executor = Executors.newSingleThreadExecutor();
 
 	/**
 	 * Instantiates a new Timer with a given time
@@ -125,7 +127,7 @@ public class Timer {
 				return true;
 		};
 		try {
-			return Executors.newSingleThreadExecutor().submit(future).get();
+			return executor.submit(future).get();
 		} catch (ExecutionException | InterruptedException e) {
 			e.printStackTrace();
 		}

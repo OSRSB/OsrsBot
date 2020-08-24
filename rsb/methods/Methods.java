@@ -6,6 +6,7 @@ import net.runelite.client.rsb.wrappers.subwrap.ChooseOption;
 import net.runelite.client.rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -151,6 +152,7 @@ public class Methods {
 	 */
 	protected NPCChat npcChat;
 
+
 	/**
 	 * For internal use only: initializes the method providers.
 	 *
@@ -186,6 +188,7 @@ public class Methods {
 		this.web = ctx.web;
 		this.trade = ctx.trade;
 		this.worldHopper = ctx.worldHopper;
+
 
 		this.chooseOption = ctx.chooseOption;
 		this.npcChat = ctx.npcChat;

@@ -167,7 +167,7 @@ public class Menu extends MethodProvider {
      * @param input The string you want to parse.
      * @return The parsed {@code String}.
      */
-    public String stripFormatting(String input) {
+    public static String stripFormatting(String input) {
         return HTML_TAG.matcher(input).replaceAll("");
     }
 
@@ -235,6 +235,15 @@ public class Menu extends MethodProvider {
             for (int i = entries.length - 1, x = 0; i >= 0; i--, x++)
                 reversed[i] = entries[x];
             return reversed;
+        }
+
+        public String[] getEntriesString() {
+            MenuEntry[] entries = getEntries();
+            String[] entryStrings = new String[entries.length];
+            for (int i = 0; i < entries.length; i++) {
+                entryStrings[i] = stripFormatting(entries[i].getOption()) + " " + ((entries[i].getTarget() != null) ? stripFormatting(entries[i].getTarget()) : "");
+            }
+            return entryStrings;
         }
 
         public String[] getActions() {
