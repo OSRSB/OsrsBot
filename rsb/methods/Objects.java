@@ -71,13 +71,13 @@ public class Objects extends MethodProvider {
      * in the current region.
      */
     public RSObject getNearest(final Predicate<RSObject> filter) {
-        RSObject cur = new RSObject(methods, null, RSObject.Type.NULL, -99);
+        RSObject cur = null;
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 Set<RSObject> objs = getAtLocal(x, y, -1);
                 for (RSObject o : objs) {
-                    if (o.getObj() == null) {
+                    if (o == null) {
                         continue;
                     }
                     if (filter.test(o)) {
@@ -110,7 +110,7 @@ public class Objects extends MethodProvider {
      * in the current region.
      */
     public RSObject getNearest(final int distance, final Predicate<RSObject> filter) {
-        RSObject cur = new RSObject(methods, null, RSObject.Type.NULL, -99);
+        RSObject cur = null;
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
@@ -118,14 +118,14 @@ public class Objects extends MethodProvider {
                 if (distanceToCheck < distance) {
                     Set<RSObject> objs = getAtLocal(x, y, -1);
                     for (RSObject o : objs) {
-                        if (o.getObj() == null) {
+                        if (o == null) {
                             continue;
                         }
                         if (filter.test(o)) {
                             double distTmp = methods.calc.distanceBetween(
                                     methods.players.getMyPlayer().getLocation(),
                                     o.getLocation());
-                            if (cur.getObj() == null) {
+                            if (cur == null) {
                                 dist = distTmp;
                                 cur = o;
                             } else if (distTmp < dist) {
@@ -279,9 +279,6 @@ public class Objects extends MethodProvider {
             Tile tile = client.getScene().getTiles()[plane][x][y];
 
             if (tile != null) {
-                RSObject rsObj;
-                TileObject obj;
-
                 x += methods.client.getBaseX();
                 y += methods.client.getBaseY();
 

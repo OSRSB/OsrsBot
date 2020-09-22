@@ -28,7 +28,7 @@ import static java.util.concurrent.Executors.newSingleThreadExecutor;
 public class RSObject extends MethodProvider implements Clickable07, Positionable {
 
 	public enum Type {
-		GAME, DECORATIVE, GROUND, WALL, NULL
+		GAME, DECORATIVE, GROUND, WALL
 	}
 
 	private final TileObject obj;

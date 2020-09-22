@@ -5,12 +5,15 @@ import net.runelite.api.ObjectID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.rsb.internal.wrappers.Filter;
+import net.runelite.client.rsb.walker.dax_api.walker.utils.AccurateMouse;
 import net.runelite.client.rsb.wrappers.*;
 
 import java.lang.Integer;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 @Slf4j
 /**
  * Bank related operations.
@@ -32,22 +35,22 @@ public class Bank extends MethodProvider {
 	public static final int DYNAMIC_CLOSE_BUTTON = 11;
 
 	public static final int INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS = 1;
-	public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 3;
+	public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
 
 	public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();//.BANK_GROUP_ID;
 	public static final int INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS = WidgetInfo.BANK_DEPOSIT_INVENTORY.getChildId();
 	public static final int INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS = WidgetInfo.BANK_DEPOSIT_EQUIPMENT.getChildId();
 	public static final int INTERFACE_BANK_BUTTON_INSERT = 19;
-	public static final int INTERFACE_BANK_BUTTON_ITEM = 23;
-	public static final int INTERFACE_BANK_BUTTON_NOTE = 25;
-	public static final int INTERFACE_BANK_BUTTON_SEARCH = 40;
+	public static final int INTERFACE_BANK_BUTTON_ITEM = 22;
+	public static final int INTERFACE_BANK_BUTTON_NOTE = 24;
+	public static final int INTERFACE_BANK_BUTTON_SEARCH = 39;
 	public static final int INTERFACE_BANK_BUTTON_SWAP = 17;
 
 
-	public static final int INTERFACE_BANK_INVENTORY = 13;
-	public static final int INTERFACE_BANK_ITEM_COUNT = 6;
+	public static final int INTERFACE_BANK_INVENTORY = 12;
+	public static final int INTERFACE_BANK_ITEM_COUNT = 5;
 	public static final int INTERFACE_BANK_ITEM_MAX = 8;
-	public static final int INTERFACE_BANK_SCROLLBAR = 14;
+	public static final int INTERFACE_BANK_SCROLLBAR = 13;
 
 	//Chatbox Parent interface stuff
 	public static final int INTERFACE_BANK_SEARCH = WidgetInfo.CHATBOX.getGroupId();
@@ -58,7 +61,7 @@ public class Bank extends MethodProvider {
 
 	public static final int INTERFACE_COLLECTION_BOX = 402;
 
-	public static final int INTERFACE_BANK_TAB = 11;
+	public static final int INTERFACE_BANK_TAB = 10;
 
 	public static final int INTERFACE_DEPOSIT_BOX = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId();
 
@@ -725,11 +728,11 @@ public class Bank extends MethodProvider {
 				sleep(random(800, 1300));
 			}
 		}
-		if (!methods.interfaces.scrollTo(item, (Bank.INTERFACE_BANK << 16) + Bank.INTERFACE_BANK_SCROLLBAR)) {
+		if (!methods.interfaces.scrollTo(item, new RSWidget(methods, methods.client.getWidget(Bank.INTERFACE_BANK, Bank.INTERFACE_BANK_SCROLLBAR)))) {
 			return false;
 		}
 		int invCount = methods.inventory.getCount(true);
-		item.doClick(count == 1 ? true : false);
+		//item.doClick(count == 1 ? true : false);
 		String defaultAction = "Withdraw-" + count;
 		String action = null;
 		switch (count) {
@@ -747,13 +750,14 @@ public class Bank extends MethodProvider {
 			default:
 				int i = -1;
 				try {
-					i = Integer.parseInt(item.getActions()[3].toLowerCase().trim().replaceAll("\\D", ""));
+					i = Integer.parseInt(item.getActions()[4].toLowerCase().trim().replaceAll("\\D", ""));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				if (i == count) {
 					action = defaultAction;
-				} else if (item.doAction("Withdraw-X")) {
+				}
+				else if (item.doAction("Withdraw-X")) {
 					sleep(random(1000, 1300));
 					methods.keyboard.sendText(String.valueOf(count), true);
 				}

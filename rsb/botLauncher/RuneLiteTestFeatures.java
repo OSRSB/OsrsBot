@@ -6,9 +6,13 @@ import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.rsb.methods.Game;
 import net.runelite.client.rsb.methods.GroundItems;
+import net.runelite.client.rsb.methods.MethodContext;
+import net.runelite.client.rsb.testsScript.Test;
 import net.runelite.client.rsb.util.OutputObjectComparer;
 import net.runelite.client.rsb.util.Parameters;
+import net.runelite.client.rsb.util.StdRandom;
 import net.runelite.client.rsb.wrappers.*;
 import net.runelite.client.rsb.wrappers.subwrap.WalkerTile;
 
@@ -32,7 +36,7 @@ public class RuneLiteTestFeatures {
         while (true) {
             try {
                 login(bot);
-                testFeature(bot);
+                //testFeature(bot);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -68,10 +72,84 @@ public class RuneLiteTestFeatures {
 
 
 
-    public static void testFeature(RuneLite bot) {
 
+    public static String[] itemNames = {"Guam leaf", "Vial of water"};
+    public static int[] itemIDs = {0, 0};
+
+    private static boolean maybe = true;
+
+    public static void testFeature(RuneLite bot, boolean startUp) {
+        MethodContext ctx = bot.getMethodContext();
         if (bot.getMethodContext().client != null && bot.getMethodContext().client.getLocalPlayer() != null) {
+            if (itemIDs[0] == 0) {
+                nap(StdRandom.uniform(500, 700));
+                start(ctx);
+            }
+            if (itemIDs[0] != 0) {
+                withdrawItems(ctx);
+                ctx.bank.close();
+                nap(StdRandom.uniform(100, 300));
+                if (!(ctx.game.getCurrentTab() == Game.TAB_INVENTORY)) {
+                    ctx.game.openTab(Game.TAB_INVENTORY);
+                }
+                ctx.inventory.useItem(itemIDs[0], itemIDs[1]);
+                nap(StdRandom.uniform(800, 1300));
+                ctx.interfaces.makeX(-1);
+                nap(StdRandom.uniform(14000,16000));
+                ctx.bank.open();
+                nap(StdRandom.uniform(830, 1000));
+                ctx.bank.depositAll();
+            }
+        }
+    }
 
+    public static void nap(long time) {
+        try {
+            sleep(time);
+        } catch (Exception e) {
+            log.debug("Error", e);
+        }
+    }
+
+    public static void withdrawItems(MethodContext ctx) {
+        ctx.bank.open();
+        RSWidget widget = new RSWidget(ctx, ctx.client.getWidget(402, 0));
+        if (widget.isVisible() && widget.isSelfVisible()) {
+            closeUnrelatedInterface(ctx);
+            ctx.bank.open();
+        }
+        try {
+            sleep(StdRandom.uniform(500, 1000));
+        } catch (Exception e) {
+            log.debug("Error", e);
+        }
+        ctx.bank.withdraw(itemIDs[0], 14);
+        ctx.bank.withdraw(itemIDs[1], 14);
+    }
+
+    public static void closeUnrelatedInterface(MethodContext ctx) {
+        RSWidget widget = new RSWidget(ctx, ctx.client.getWidget(402, 2));
+        widget.getDynamicComponent(11).doClick();
+    }
+
+    public static void start(MethodContext ctx) {
+        ctx.bank.open();
+        while (ctx.bank.isOpen()) {
+            for (int i = 0; i < itemNames.length; i++) {
+                if (itemIDs[i] > -1) {
+                    itemIDs[i] = ctx.bank.getItemID(itemNames[i]);
+                }
+            }
+            ctx.bank.close();
+        }
+        if (itemIDs[0] == -1) {
+            for (int i = 0; i < itemNames.length; i++) {
+                ctx.grandExchange.buy(itemNames[i], 13000, 10, true);
+                ctx.grandExchange.collect(true);
+            }
+            ctx.grandExchange.close();
+            ctx.bank.open();
+            ctx.bank.depositAll();
         }
     }
 

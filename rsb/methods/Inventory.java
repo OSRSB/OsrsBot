@@ -150,7 +150,7 @@ public class Inventory extends MethodProvider {
 		// Tab has to be open for us to get content
 		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
 			methods.game.openTab(Game.TAB_INVENTORY);
-			sleep(random(400, 900));
+			sleep(random(50, 100));
 		}
 
 		return new InventoryInterface(inventoryWidget, INVENTORY);
@@ -380,9 +380,12 @@ public class Inventory extends MethodProvider {
 		if (!item.doAction("Use")) {
 			return false;
 		}
+		/*
 		for (int c = 0; c < 5 && getSelectedItem() == null; c++) {
-			sleep(random(200, 300));
+			sleep(random(40, 60));
 		}
+		*/
+		sleep(random(60, 80));
 		selItem = getSelectedItem();
 		return selItem != null && selItem.getID() == itemID;
 	}

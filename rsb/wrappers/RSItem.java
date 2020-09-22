@@ -134,9 +134,7 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	 * @return The item's name or <code>null</code> if not found.
 	 */
 	public String getName() {
-		if (item == null) {
-			return null;
-		}
+
 		if (component != null && component.getName() != null) {
 			return component.getName();
 		} else {

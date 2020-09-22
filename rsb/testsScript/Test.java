@@ -6,6 +6,7 @@ import net.runelite.client.rsb.botLauncher.RuneLiteTestFeatures;
 import net.runelite.client.rsb.event.impl.TFPS;
 import net.runelite.client.rsb.event.listener.PaintListener;
 import net.runelite.client.rsb.methods.Magic;
+import net.runelite.client.rsb.methods.MethodContext;
 import net.runelite.client.rsb.script.Script;
 import net.runelite.client.rsb.script.ScriptManifest;
 import net.runelite.client.rsb.util.StdRandom;
@@ -14,21 +15,24 @@ import net.runelite.client.rsb.wrappers.*;
 import javax.swing.*;
 import java.awt.*;
 
-
 @ScriptManifest(authors={"Gigia"}, description="Example Script.", version=0.1, name="Test")
 public class Test extends Script implements PaintListener {
     public int i = 50;
 
     public boolean up = false;
+    private static boolean startUp = true;
 
     public int loop() {
         if (ctx.client != null && ctx.client.getLocalPlayer() != null) {
-            RuneLiteTestFeatures.testFeature(getBot());
+            RuneLiteTestFeatures.testFeature(getBot(), startUp);
         }
         sleep(StdRandom.uniform(1000, 1500));
         return random(1000, 1000);
     }
 
+    public static void started() {
+        startUp = false;
+    }
 
     public final void onRepaint(Graphics g) {
         Point p = mouse.getLocation();
@@ -46,5 +50,8 @@ public class Test extends Script implements PaintListener {
         g.fillRect(p.getX() + 1, p.getY() + 1, w - (p.getX() + 1), h - (p.getY() - 1));
         g.setColor(Color.RED);
         g.drawString("Script Active: " + getClass().getAnnotation(ScriptManifest.class).name(), 540, 20);
+        g.drawString("Mouse Position: ", 540, 40);
+        g.drawString("X: " + mouse.getLocation().getX(), 540, 60);
+        g.drawString("Y: " + mouse.getLocation().getY(), 540, 80);
     }
 }

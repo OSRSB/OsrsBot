@@ -129,7 +129,7 @@ public class Menu extends MethodProvider {
         Point menu = getLocation();
         FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
         int xOff = random(1, (fm.stringWidth(item) + MENU_SIDE_BORDER) - 1);
-        int yOff = TOP_OF_MENU_BAR + (((MENU_ENTRY_LENGTH * i) + random(1, MENU_ENTRY_LENGTH - 1)));
+        int yOff = TOP_OF_MENU_BAR + (((MENU_ENTRY_LENGTH * i) + random(2, MENU_ENTRY_LENGTH - 2)));
         methods.mouse.move(menu.x + xOff, menu.y + yOff);
         sleep(random(100, 200));
         if (isOpen()) {
@@ -224,7 +224,13 @@ public class Menu extends MethodProvider {
                 final int CANVAS_LENGTH = methods.client.getCanvasHeight();
                 MenuEntry[] entries = getEntries();
                 int offset = CANVAS_LENGTH - (methods.virtualMouse.getClientPressY() + calculateHeight());
-                return methods.virtualMouse.getClientPressY() + ((offset < 0 && entries.length <= MAX_DISPLAYABLE_ENTRIES) ? offset : 0);
+                if (offset < 0 && entries.length >= MAX_DISPLAYABLE_ENTRIES) {
+                    return 0;
+                }
+                if (offset < 0) {
+                    return methods.virtualMouse.getClientPressY() + offset;
+                }
+                return methods.virtualMouse.getClientPressY();
             }
             return -1;
         }
@@ -250,7 +256,12 @@ public class Menu extends MethodProvider {
             MenuEntry[] entries = getEntries();
             String[] actions = new String[entries.length];
             for (int i = 0; i < entries.length; i++) {
-                actions[i] = entries[i].getOption();
+                if (entries[i] != null) {
+                    actions[i] = entries[i].getOption();
+                }
+                else {
+                    actions[i] = "";
+                }
             }
             return actions;
         }
@@ -259,7 +270,12 @@ public class Menu extends MethodProvider {
             MenuEntry[] entries = getEntries();
             String[] targets = new String[entries.length];
             for (int i = 0; i < entries.length; i++) {
-                targets[i] = entries[i].getTarget();
+                if (entries[i] != null) {
+                    targets[i] = entries[i].getTarget();
+                }
+                else {
+                    targets[i] = "";
+                }
             }
             return targets;
         }

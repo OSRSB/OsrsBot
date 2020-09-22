@@ -169,6 +169,9 @@ public class Interfaces extends MethodProvider {
 		}
 
 		// Check scrollable area
+		if (scrollableArea.getId() == -1) {
+			return true;
+		}
 		if (scrollableArea.getScrollableContentHeight() == 0) {
 			return false;
 		}
@@ -246,5 +249,71 @@ public class Interfaces extends MethodProvider {
 		return get(index).isValid();
 	}
 
+	/**
+	 * Uses the make interface to make items
+	 * Use -1 to make all
+	 *
+	 * @param amount The number of items to make
+	 * @return <tt>true</tt> f the interface was interacted with; else <tt>false</tt>
+	 */
+	public boolean makeX(int amount) {
+		RSWidget widget = null;
+		if (amount == -1) {
+			//270.12
+			widget = new RSWidget(methods, methods.client.getWidget(270, 12));
+			if (!widget.isValid()) {
+				return false;
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 12)).getDynamicComponent(9);
+			//Determines if the widget is already selected
+			if (!widget.containsText("<col=ffffff>")) {
+				clickComponent(widget, "All");
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 14));
+			return clickComponent(widget, "Make");
+		} else
+		if (amount == 1) {
+			//270.7
+			widget = new RSWidget(methods, methods.client.getWidget(270, 7));
+			if (!widget.isValid()) {
+				return false;
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 7)).getDynamicComponent(9);
+			if (!widget.containsText("<col=ffffff>")) {
+				clickComponent(widget, "1");
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 14));
+			return clickComponent(widget, "Make " + Menu.stripFormatting(widget.getName()));
+		} else
+		if (amount == 5) {
+			//270.8
+			widget = new RSWidget(methods, methods.client.getWidget(270, 8));
+			if (!widget.isValid()) {
+				return false;
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 8)).getDynamicComponent(9);
+			if (!widget.containsText("<col=ffffff>")) {
+				clickComponent(widget, "5");
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 14));
+			return clickComponent(widget, "Make " + Menu.stripFormatting(widget.getName()));
+		}
+		else {
+			//270.11
+			widget = new RSWidget(methods, methods.client.getWidget(270, 11));
+			if (!widget.isValid()) {
+				return false;
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 11)).getDynamicComponent(9);
+			clickComponent(widget, "X");
+			methods.keyboard.sendText(String.valueOf(amount), true);
+			widget = new RSWidget(methods, methods.client.getWidget(270, 11)).getDynamicComponent(9);
+			if (!widget.containsText("<col=ffffff>")) {
+				clickComponent(widget, String.valueOf(amount));
+			}
+			widget = new RSWidget(methods, methods.client.getWidget(270, 14));
+			return clickComponent(widget, "Make " + Menu.stripFormatting(widget.getName()));
+		}
+	}
 
 }
