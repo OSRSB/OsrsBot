@@ -1,1 +1,0 @@
-package net.runelite.client.rsb.botLauncher;
