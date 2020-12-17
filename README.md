@@ -10,13 +10,6 @@ While certainly it would be easier to create one using a deobfuscator and their 
 it reduces the amount of effort needed to maintain our code by depending on their large number
 of contributers to keep it up to date and for this project to focus on its own goal.
 
-This API requires minimal modification of the RuneLite api and very little understanding
-to compile after.
-Once one has set up the RuneLite api in their IDE (IntelliJ is their recommended IDE)
-they may then proceed to drag and drop the rsb folder into 
-runelite-client->src->main->java->net.runelite.client
-Now the bot is completely set up.
-
 To run you'll need to modify your program arguments to the following depending on how you wish it to run:
 
 --bot-runelite
@@ -41,7 +34,3 @@ After entering the program arguements you wish to enable (one mode only --runeli
 it is ready to run.
 
 To make and test scripts look at the corresponding wiki pages.
-
-
-IF THE BOT FAILS TO START TEST THE RUNELITE RUN ARGUMENT IT IS LIKELY AN ISSUE WITH THE RUNELITE MAVEN BUILD
-Check their wiki for info on how to fix the install
