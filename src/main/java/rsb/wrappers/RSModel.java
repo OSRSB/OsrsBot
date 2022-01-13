@@ -56,9 +56,9 @@ public class RSModel extends MethodProvider {
 			xPoints = model.getVerticesX();
 			yPoints = model.getVerticesY();
 			zPoints = model.getVerticesZ();
-			indices1 = model.getTrianglesX();
-			indices2 = model.getTrianglesY();
-			indices3 = model.getTrianglesZ();
+			indices1 = model.getFaceIndices1();
+			indices2 = model.getFaceIndices2();
+			indices3 = model.getFaceIndices3();
 		}
 		else {
 			this.model = null;
@@ -312,11 +312,11 @@ public class RSModel extends MethodProvider {
 
 
 		Perspective.modelToCanvas(methods.client, count, localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
-		ArrayList polys = new ArrayList(model.getTrianglesCount());
+		ArrayList polys = new ArrayList(model.getFaceCount());
 
-		int[] trianglesX = model.getTrianglesX();
-		int[] trianglesY = model.getTrianglesY();
-		int[] trianglesZ = model.getTrianglesZ();
+		int[] trianglesX = model.getFaceIndices1();
+		int[] trianglesY = model.getFaceIndices2();
+		int[] trianglesZ = model.getFaceIndices3();
 
 		double averageTriangleLength = (trianglesX.length + trianglesY.length + trianglesZ.length) / 3;
 
@@ -407,7 +407,7 @@ public class RSModel extends MethodProvider {
 	}
 
 	public int getIndexCount() {
-		return (model != null) ? model.getTrianglesCount() : 0;
+		return (model != null) ? model.getFaceCount() : 0;
 	}
 
 	public int getVertexCount() {

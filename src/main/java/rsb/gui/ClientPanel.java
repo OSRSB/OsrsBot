@@ -24,20 +24,6 @@ final class ClientPanel extends JPanel
 			return;
 		}
 
-		client.setLayout(null);
-		client.setSize(Constants.GAME_FIXED_SIZE);
-
-		client.init();
-		client.start();
-
 		add(client, BorderLayout.CENTER);
-
-		// This causes the whole game frame to be redrawn each frame instead
-		// of only the viewport, so we can hook to MainBufferProvider#draw
-		// and draw anywhere without it leaving artifacts
-		if (client instanceof Client)
-		{
-			((Client)client).setGameDrawingMode(2);
-		}
 	}
 }

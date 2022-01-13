@@ -4,6 +4,7 @@ import com.google.inject.name.Names;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.client.RuneLite;
 import net.runelite.client.RuneLiteModule;
+import net.runelite.client.RuneLiteProperties;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import java.applet.Applet;
 import java.io.File;
+import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Supplier;
@@ -48,6 +50,12 @@ public class BotModule extends RuneLiteModule {
     @Override
     protected void configure()
     {
+        Properties properties = BotProperties.getProperties();
+        for (String key : properties.stringPropertyNames())
+        {
+            String value = properties.getProperty(key);
+            bindConstant().annotatedWith(Names.named(key)).to(value);
+        }
         bindConstant().annotatedWith(Names.named("developerMode")).to(developerMode);
         bindConstant().annotatedWith(Names.named("safeMode")).to(safeMode);
         bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
@@ -61,7 +69,7 @@ public class BotModule extends RuneLiteModule {
         bind(PluginManager.class);
         bind(SessionManager.class);
 
-        bind(Callbacks.class).to(BotHooks.class);
+        bind(Callbacks.class).to(NewHooks.class);
 
         bind(EventBus.class)
                 .toInstance(new EventBus());

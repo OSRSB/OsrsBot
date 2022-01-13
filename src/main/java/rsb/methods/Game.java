@@ -339,20 +339,6 @@ public class Game extends MethodProvider {
 	}
 
 	public int getCrosshairState() {
-		String chooseOption = methods.chooseOption.getHoverText();
-		if (chooseOption != null) {
-			return 0;
-		}
-		if (methods.client.getViewportWidget().contains(methods.mouse.getPressLocation())) {
-			if (methods.mouse.getPressTime() >  System.currentTimeMillis() - 250) {
-				if (chooseOption.contains("Walk here")) {
-					return 1;
-				}
-				else {
-					return 2;
-				}
-			}
-		}
 		return 0;
 	}
 

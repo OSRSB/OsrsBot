@@ -21,7 +21,7 @@ public class ChooseOption extends Menu {
         RSMenuNode[] reversed = new RSMenuNode[entries.length];
         for (int i = entries.length - 1, x = 0; i >= 0; i--, x++) {
             int yOff = calculateY() + TOP_OF_MENU_BAR + (MENU_ENTRY_LENGTH * x); //Offset from top of the menu to the entry itself
-            reversed[x] = new RSMenuNode(x, new Rectangle(calculateX(), yOff, calculateWidth(), MENU_ENTRY_LENGTH), entries[i].getOption(), entries[i].getTarget(), entries[i].getType(),
+            reversed[x] = new RSMenuNode(x, new Rectangle(calculateX(), yOff, calculateWidth(), MENU_ENTRY_LENGTH), entries[i].getOption(), entries[i].getTarget(), entries[i].getType().getId(),
                     entries[i].getIdentifier(), entries[i].getParam0(), entries[i].getParam1());
         }
         return reversed;
