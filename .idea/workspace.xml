@@ -4,53 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/BotProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Forgot a fairly important class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/util/Pair.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLiteTestFeatures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLiteTestFeatures.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenuActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenuActions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ClientPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BotHooks.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BotModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BotModule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/testsScript/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/testsScript/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/ChooseOption.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/ChooseOption.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ClientPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/ClientPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/BotHooks.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/BotModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/BotModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/subwrap/ChooseOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/subwrap/ChooseOption.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,6 +187,21 @@
       <option name="presentableId" value="Default" />
       <updated>1608232435561</updated>
     </task>
+    <task id="LOCAL-00001" summary="API is now functional. Updated a plethora of methods and revised the hook class. Some widget ids are likely broken and will need revisiting. I should really check on the shoddy built-in compilation sometime.">
+      <created>1642044439045</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1642044439045</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Forgot a fairly important class">
+      <created>1642044472440</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1642044472440</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -241,15 +214,16 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="API is now functional. Updated a plethora of methods and revised the hook class. Some widget ids are likely broken and will need revisiting. I should really check on the shoddy built-in compilation sometime." />
+    <MESSAGE value="Forgot a fairly important class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot a fairly important class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java</url>
           <line>62</line>

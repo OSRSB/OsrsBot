@@ -1,20 +1,12 @@
+/**
+ * @Author: GigiaJ
+ * The main application class that hosts all the bot instances
+ */
 package rsb.botLauncher;
 
-import javassist.*;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
-import joptsimple.util.EnumConverter;
-import joptsimple.ValueConverter;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.rs.ClientUpdateCheckMode;
-import rsb.internal.LogOutputStream;
-import rsb.internal.SystemConsoleHandler;
-
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Application {
 
@@ -22,46 +14,28 @@ public class Application {
 
 	public static void main(final String[] args) throws Throwable {
 		final OptionParser parser = new OptionParser();
-		parser.accepts("developer-mode", "Enable developer tools");
-		parser.accepts("debug", "Show extra debugging output");
-		parser.accepts("bot", "Starts the client in bot mode");
-		parser.accepts("runelite", "Starts the client in bot mode");
-		parser.accepts("bot-runelite", "Starts the client in RuneLite mode");
-
-		final ArgumentAcceptingOptionSpec<ClientUpdateCheckMode> updateMode = parser
-				.accepts("rs", "Select client type")
-				.withRequiredArg()
-				.ofType(ClientUpdateCheckMode.class)
-				.defaultsTo(ClientUpdateCheckMode.AUTO)
-				.withValuesConvertedBy(new EnumConverter<ClientUpdateCheckMode>(ClientUpdateCheckMode.class) {
-					@Override
-					public ClientUpdateCheckMode convert(String v) {
-						return super.convert(v.toUpperCase());
-					}
-				});
-
-		parser.accepts("help", "Show this text").forHelp();
+		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
 		OptionSet options = parser.parse(args);
-		if (options.has("bot") && !options.has("bot-runelite") && !options.has("runelite")) {
 
-
-		} else if (options.has("bot-runelite") && !options.has("runelite")) {
-			RuneLite bot = new RuneLite();
-			bot.launch(args);
-			addBot(bot);
-		} else {
-			String[] nonBotArgs = new String[args.length];
-			int o = 0;
-			for (int i = 0; i < args.length; i++) {
-				if (!args[i].equals("--runelite")) {
-					nonBotArgs[o] = args[i];
-					o++;
+		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
+			if (options.has("bot-runelite") && !options.has("runelite")) {
+				RuneLite bot = new RuneLite();
+				bot.launch(parser, optionSpecs, options);
+				addBot(bot);
+			} else {
+				String[] nonBotArgs = new String[args.length];
+				int o = 0;
+				for (int i = 0; i < args.length; i++) {
+					if (!args[i].equals("--runelite")) {
+						nonBotArgs[o] = args[i];
+						o++;
+					}
+					if (nonBotArgs[i] == null) {
+						nonBotArgs[i] = "";
+					}
 				}
-				if (nonBotArgs[i] == null) {
-					nonBotArgs[i] = "";
-				}
+				net.runelite.client.RuneLite.main(nonBotArgs);
 			}
-			net.runelite.client.RuneLite.main(nonBotArgs);
 		}
 
 	}
@@ -98,12 +72,12 @@ public class Application {
 		bots = update;
 	}
 
+	/**
+	 * Retrieves all running bot instances
+	 * @return	the bot instances
+	 */
 	public static RuneLite[] getBots() {
 		return bots;
 	}
 
-
-	public static String test() {
-		return "Test String";
-	}
 }
