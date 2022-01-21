@@ -265,7 +265,7 @@ public class BotGUI extends JFrame implements ActionListener, ScriptListener, Pa
                 public void run() {
                     synchronized (bot) {
                         try {
-                            bot.launch(args);
+                            //bot.launch(args);
                             bot.setPanel(new ClientPanel(bot.getLoader()));
                             bot.setMethodContext();
                             bot.getScriptHandler().init();

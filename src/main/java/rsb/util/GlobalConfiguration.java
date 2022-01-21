@@ -47,13 +47,13 @@ public class GlobalConfiguration {
 		}
 
 		public static class URLs {
-			private static final String BASE = "http://links.powerbot.org/";
-			public static final String DOWNLOAD = BASE + "download";
+			private static final String BASE = "https://github.com/OSRSB/";
+			public static final String DOWNLOAD = BASE + "releases";
 			public static final String UPDATE = BASE + "modscript";
 			public static final String WEB = BASE + "webwalker.gz";
-			public static final String VERSION = BASE + "version.txt";
-			public static final String PROJECT = BASE + "git-project";
-			public static final String SITE = BASE + "site";
+			public static final String PROJECT = BASE + "RSB";
+			public static final String VERSION = BASE + PROJECT +"/version.txt";
+			public static final String SITE = BASE + "RSBSite-PlaceHolder-";
 			public static final String SDN_CONTROL = BASE + "sdn-control";
 			public static final String AD_INFO = BASE + "botad-info";
 		}
