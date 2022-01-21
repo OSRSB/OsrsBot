@@ -5,72 +5,26 @@ import net.runelite.api.ObjectID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.wrappers.Filter;
-import rsb.walker.dax_api.walker.utils.AccurateMouse;
 import rsb.wrappers.*;
 
 import java.lang.Integer;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Slf4j
 /**
  * Bank related operations.
  */
 public class Bank extends MethodProvider {
-
-
 	public static int[] BANKERS;
 	public static int[] BANK_DEPOSIT_BOX;
 	public static int[] BANK_CHESTS;
 	public static int[] BANK_BOOTHS;
 
-
 	public static Point[] UNREACHABLE_BANKERS = {
 			new Point(3191, 3445), new Point(3180, 3433) // VARROCK EAST
 	};
-
-	//This seems to be universal in interfaces for the close component.
-	public static final int DYNAMIC_CLOSE_BUTTON = 11;
-
-	public static final int INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS = 1;
-	public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
-
-	public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();//.BANK_GROUP_ID;
-	public static final int INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS = WidgetInfo.BANK_DEPOSIT_INVENTORY.getChildId();
-	public static final int INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS = WidgetInfo.BANK_DEPOSIT_EQUIPMENT.getChildId();
-	public static final int INTERFACE_BANK_BUTTON_INSERT = 19;
-	public static final int INTERFACE_BANK_BUTTON_ITEM = 22;
-	public static final int INTERFACE_BANK_BUTTON_NOTE = 24;
-	public static final int INTERFACE_BANK_BUTTON_SEARCH = 39;
-	public static final int INTERFACE_BANK_BUTTON_SWAP = 17;
-
-
-	public static final int INTERFACE_BANK_INVENTORY = 12;
-	public static final int INTERFACE_BANK_ITEM_COUNT = 5;
-	public static final int INTERFACE_BANK_ITEM_MAX = 8;
-	public static final int INTERFACE_BANK_SCROLLBAR = 13;
-
-	//Chatbox Parent interface stuff
-	public static final int INTERFACE_BANK_SEARCH = WidgetInfo.CHATBOX.getGroupId();
-	public static final int INTERFACE_BANK_SEARCH_INPUT = WidgetInfo.CHATBOX_FULL_INPUT.getChildId();
-
-	public static final int INTERFACE_EQUIPMENT = WidgetInfo.EQUIPMENT.getGroupId();
-	public static final int INTERFACE_EQUIPMENT_COMPONENT = WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER.getChildId();
-
-	public static final int INTERFACE_COLLECTION_BOX = 402;
-
-	public static final int INTERFACE_BANK_TAB = 10;
-
-	public static final int INTERFACE_DEPOSIT_BOX = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId();
-
-	public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_LOOT = 8;
-	public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS = 4;
-	public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS = 6;
-
-
-
 
 	Bank(final MethodContext ctx) {
 		super(ctx);
@@ -728,7 +682,7 @@ public class Bank extends MethodProvider {
 				sleep(random(800, 1300));
 			}
 		}
-		if (!methods.interfaces.scrollTo(item, new RSWidget(methods, methods.client.getWidget(Bank.INTERFACE_BANK, Bank.INTERFACE_BANK_SCROLLBAR)))) {
+		if (!methods.interfaces.scrollTo(item, new RSWidget(methods, methods.client.getWidget(INTERFACE_BANK, INTERFACE_BANK_SCROLLBAR)))) {
 			return false;
 		}
 		int invCount = methods.inventory.getCount(true);

@@ -13,6 +13,9 @@ import java.util.function.Predicate;
  * Provides access to in-game physical objects.
  */
 public class Objects extends MethodProvider {
+    Objects(final MethodContext ctx) {
+        super(ctx);
+    }
 
     /**
      * A filter that accepts all matches.
@@ -22,10 +25,6 @@ public class Objects extends MethodProvider {
             return true;
         }
     };
-
-    Objects(final MethodContext ctx) {
-        super(ctx);
-    }
 
     /**
      * Returns all the <tt>RSObject</tt>s in the local region.

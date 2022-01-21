@@ -10,9 +10,6 @@ import java.lang.reflect.Field;
  * Walking related operations.
  */
 public class Walking extends MethodProvider {
-
-	public final int INTERFACE_RUN_ORB = 750;
-
 	Walking(final MethodContext ctx) {
 		super(ctx);
 	}

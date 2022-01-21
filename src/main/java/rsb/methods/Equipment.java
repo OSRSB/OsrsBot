@@ -11,21 +11,6 @@ import java.util.function.Predicate;
  * Equipment related operations.
  */
 public class Equipment extends MethodProvider {
-
-	public static final int ITEM_SLOTS = 11;
-	public static final int INTERFACE_EQUIPMENT = WidgetInfo.EQUIPMENT.getGroupId();
-	public static final int HELMET = 14;
-	public static final int CAPE = 15;
-	public static final int NECK = 16;
-	public static final int WEAPON = 17;
-	public static final int BODY = 18;
-	public static final int SHIELD = 19;
-	public static final int LEGS = 20;
-	public static final int HANDS = 21;
-	public static final int FEET = 22;
-	public static final int RING = 23;
-	public static final int AMMO = 24;
-
 	Equipment(final MethodContext ctx) {
 		super(ctx);
 	}

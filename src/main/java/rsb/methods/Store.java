@@ -9,14 +9,6 @@ import java.util.ArrayList;
  * Store related operations.
  */
 public class Store extends MethodProvider {
-
-	public static final int INTERFACE_STORE = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId();
-	public static final int INTERFACE_STORE_DYNAMIC_COMPONENTS = 1;
-	public static final int INTERFACE_STORE_ITEMS = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
-
-	//This seems to be universal in interfaces for the close component.
-	public static final int DYNAMIC_CLOSE_BUTTON = 11;
-
 	Store(final MethodContext ctx) {
 		super(ctx);
 	}

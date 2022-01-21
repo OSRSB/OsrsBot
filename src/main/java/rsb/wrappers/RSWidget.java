@@ -747,7 +747,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return false;
     }
 
-
     @Override
     public int hashCode() {
         return this.widget.hashCode();

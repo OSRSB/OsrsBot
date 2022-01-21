@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * Provides access to methods that can be used by RSBot scripts.
  */
 public class Methods {
+	
 	public MethodContext ctx;
 
 	/**

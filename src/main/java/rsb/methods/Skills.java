@@ -11,7 +11,6 @@ import java.lang.reflect.Field;
  * Example usage: skills.getRealLevel(Skills.ATTACK);
  */
 public class Skills extends MethodProvider {
-
 	/**
 	 * A table containing the experiences that begin each level.
 	 */
@@ -32,34 +31,8 @@ public class Skills extends MethodProvider {
 			47221641, 52136869, 57563718, 63555443, 70170840, 77474828,
 			85539082, 94442737, 104273167};
 
-	//Is in the ID but not Info as SKILLS_GROUP_ID
-	public static final int INTERFACE_TAB_STATS = 320;
-	 public class SkillInterfaces {
-		int INTERFACE_ATTACK = 1,
-		INTERFACE_STRENGTH = 2,
-		 INTERFACE_DEFENCE = 3,
-		INTERFACE_RANGED = 4,
-		INTERFACE_PRAYER = 5,
-		INTERFACE_MAGIC = 6,
-		INTERFACE_RUNECRAFT = 7,
-		INTERFACE_CONSTRUCTION = 8,
-		INTERFACE_HITPOINTS = 9,
-		INTERFACE_AGILITY = 10,
-		INTERFACE_HERBLORE = 11,
-		INTERFACE_THIEVING = 12,
-		INTERFACE_CRAFTING = 13,
-		INTERFACE_FLETCHING = 14,
-		INTERFACE_SLAYER = 15,
-		INTERFACE_HUNTER = 16,
-		INTERFACE_MINING = 17,
-		INTERFACE_SMITHING = 18,
-		INTERFACE_FISHING = 19,
-		INTERFACE_COOKING = 20,
-		INTERFACE_FIREMAKING = 21,
-		INTERFACE_WOODCUTTING = 22,
-		INTERFACE_FARMING = 23,
-		INTERFACE_TOTAL = 24;
-	}
+
+
 	
 	public static Skill getSkill(final int index) {
 		for (Field field : SkillInterfaces.class.getDeclaredFields()) {

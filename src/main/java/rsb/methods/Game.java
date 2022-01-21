@@ -19,22 +19,6 @@ import java.lang.reflect.Field;
 public class Game extends MethodProvider {
 
 	/**
-	 * The chat options
-	 *
-	 * @Author Gigia
-	 */
-
-	public class ChatOptions {
-		public static final int CHAT_OPTION_ALL = 4;
-		public static final int CHAT_OPTION_GAME = 8;
-		public static final int CHAT_OPTION_PUBLIC = 13;
-		public static final int CHAT_OPTION_PRIVATE = 18;
-		public static final int CHAT_OPTION_CLAN = 23;
-		public static final int CHAT_OPTION_TRADE = 28;
-		public static final int CHAT_OPTION_REPORT_ABUSE = 33;
-	}
-
-	/**
 	 * Different Types of Chat Modes
 	 *
 	 */
@@ -111,17 +95,9 @@ public class Game extends MethodProvider {
 	public static final int INTERFACE_WELCOME_SCREEN_CHILD = 150;
 	public static final int INTERFACE_WELCOME_SCREEN_PLAY = 18;
 
-	public static final int INTERFACE_HP_ORB_AMOUNT = 5;
-	public static final int INTERFACE_PRAYER_ORB_AMOUNT = 15;
-	public static final int INTERFACE_RUN_ORB_AMOUNT = 23;
-	public static final int INTERFACE_SPEC_ORB_AMOUNT = 31;
+
 
 	public static final int CHATBOX_TALK_INTERFACE = 561;
-
-	public static final int[] INTERFACE_TALKS = new int[]{211, 241, 251, 101,
-			242, 102, 161, 249, 243, 64, 65, 244, 255, 249, 230, 372,
-			421};
-	public static final int[] INTERFACE_OPTIONS = new int[]{230, 228};
 
 	Game(final MethodContext ctx) {
 		super(ctx);

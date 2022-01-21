@@ -15,28 +15,6 @@ import java.util.regex.Pattern;
  */
 @SuppressWarnings("unused")
 public class Trade extends MethodProvider {
-	private static final Logger log = Logger.getLogger(Trade.class.getName());
-
-	public static final int INTERFACE_TRADE_MAIN = 335;
-	public static final int INTERFACE_TRADE_SECOND = 334;
-
-	public static final int INTERFACE_TRADE_MAIN_NAME = 31;
-	public static final int INTERFACE_TRADE_SECOND_NAME = 30;
-
-	public static final int INTERFACE_TRADE_MAIN_OUR = 25;
-	public static final int INTERFACE_TRADE_MAIN_THEIR = 28;
-
-	public static final int INTERFACE_TRADE_SECOND_OUR = 28;
-	public static final int INTERFACE_TRADE_SECOND_THEIR = 29;
-
-	public static final int INTERFACE_TRADE_MAIN_ACCEPT = 10;
-	public static final int INTERFACE_TRADE_MAIN_DECLINE = 13;
-
-	public static final int INTERFACE_TRADE_SECOND_ACCEPT = 13;
-	public static final int INTERFACE_TRADE_SECOND_DECLINE = 14;
-
-	private final static int INTERFACE_TRADE_MAIN_INV_SLOTS = 9;
-
 	public static final int TRADE_TYPE_MAIN = 0;
 	public static final int TRADE_TYPE_SECONDARY = 1;
 	public static final int TRADE_TYPE_NONE = 2;
@@ -140,10 +118,10 @@ public class Trade extends MethodProvider {
 	 */
 	public boolean acceptTrade() {
 		if (inTradeMain()) {
-			return methods.interfaces.get(INTERFACE_TRADE_MAIN).getComponent(INTERFACE_TRADE_MAIN_ACCEPT).doAction(
+			return methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_ACCEPT).doAction(
 					"Accept");
 		} else {
-			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND).getComponent(INTERFACE_TRADE_SECOND_ACCEPT).doAction("Accept");
+			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_ACCEPT).doAction("Accept");
 		}
 	}
 
@@ -154,10 +132,10 @@ public class Trade extends MethodProvider {
 	 */
 	public boolean declineTrade() {
 		if (inTradeMain()) {
-			return methods.interfaces.get(INTERFACE_TRADE_MAIN).getComponent(INTERFACE_TRADE_MAIN_DECLINE).doAction(
+			return methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_DECLINE).doAction(
 					"Decline");
 		} else {
-			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND).getComponent(INTERFACE_TRADE_SECOND_DECLINE).doAction("Decline");
+			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_DECLINE).doAction("Decline");
 		}
 	}
 
@@ -226,7 +204,7 @@ public class Trade extends MethodProvider {
 	private int getNumberOfItemsOffered() {
 		int number = 0;
 		for (int i = 0; i < 28; i++) {
-			if (methods.interfaces.get(INTERFACE_TRADE_MAIN).getComponent(
+			if (methods.interfaces.get(INTERFACE_TRADE_MAIN,
 					INTERFACE_TRADE_MAIN_OUR).getComponent(i).getStackSize() != 0) {
 				++number;
 			}
@@ -241,8 +219,7 @@ public class Trade extends MethodProvider {
 	 */
 	private int getFreeSlots() {
 		if (inTradeMain()) {
-			String text = methods.interfaces.get(INTERFACE_TRADE_MAIN).getComponent(
-					INTERFACE_TRADE_MAIN_INV_SLOTS).getText();
+			String text = methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_INV_SLOTS).getText();
 			//
 			Matcher matcher = Pattern.compile("(has (.*\\d) free inventory slot)").matcher(text);
 			while (matcher.find())

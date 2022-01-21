@@ -12,16 +12,6 @@ import java.util.ArrayList;
  * Combat related operations.
  */
 public class Combat extends MethodProvider {
-
-	public static int INTERFACE_COMBAT = WidgetInfo.COMBAT_LEVEL.getGroupId();
-
-	public static int INTERFACE_COMBAT_DEFENSIVE_CAST_SPELL = 22;
-
-	public static int INTERFACE_COMBAT_AUTO_CAST_SPELL = 27;
-
-	public static int INTERFACE_COMBAT_AUTO_RETALIATE = 30;
-
-
 	public Combat(MethodContext ctx) {
 		super(ctx);
 	}

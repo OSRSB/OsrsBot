@@ -12,6 +12,13 @@ public class Application {
 
 	static RuneLite[] bots = new RuneLite[]{};
 
+	/**
+	 * Parses the command-line arguments and then passes the parsed arguments in the form of the parser, optionSpecs,
+	 * and options to a constructor to create an instance of the RuneLite(Bot) class
+	 * 
+	 * @param args			The command line arguments for the program
+	 * @throws Throwable	Any error that might be thrown
+	 */
 	public static void main(final String[] args) throws Throwable {
 		final OptionParser parser = new OptionParser();
 		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
