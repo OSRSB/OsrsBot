@@ -12,6 +12,11 @@ import java.lang.reflect.Field;
  * Example usage: skills.getRealLevel(Skills.ATTACK);
  */
 public class Skills extends MethodProvider {
+
+	Skills(final MethodContext ctx) {
+		super(ctx);
+	}
+
 	/**
 	 * A table containing the experiences that begin each level.
 	 */
@@ -32,15 +37,9 @@ public class Skills extends MethodProvider {
 			47221641, 52136869, 57563718, 63555443, 70170840, 77474828,
 			85539082, 94442737, 104273167};
 
-
-
-	
 	public static Skill getSkill(final int index) {
-		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().contains(Skill.values()[index].getName().toUpperCase())) {
-				return Skill.values()[index];
-			}
-		}
+		if (index > 0 && index < Skill.values().length)
+			return Skill.values()[index];
 		return null;
 	}
 
@@ -52,8 +51,8 @@ public class Skills extends MethodProvider {
 	 * @return The index of the specified skill; otherwise -1.
 	 */
 	public static int getIndex(final String statName) {
-		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().contains(statName.toUpperCase())) {
+		for (GlobalWidgetId.Skill skill : GlobalWidgetId.Skill.values()) {
+			if (skill.name().contains(statName.toUpperCase())) {
 				return Skill.valueOf(statName.toUpperCase()).ordinal();
 			}
 		}
@@ -75,9 +74,6 @@ public class Skills extends MethodProvider {
 		return 1;
 	}
 
-	Skills(final MethodContext ctx) {
-		super(ctx);
-	}
 
 	/**
 	 * Gets the current experience for the given skill.

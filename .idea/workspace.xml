@@ -9,66 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="In progress update to how widget info should be stored and called">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/RSBBB_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/events/MessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/events/MessageEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawInventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/TTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/TTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/listener/CharacterMovedListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/listener/CharacterMovedListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/AccountManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotMenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotToolBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotToolBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/LogTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/LogTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/MouseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/listener/ScriptListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/listener/ScriptListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/NPCs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/NPCs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/BasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/BasePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/FileScriptSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/FileScriptSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptClassLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ServiceException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/Extractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/Extractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalSettingValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalSettingValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/ScreenshotUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/ScreenshotUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/SkillTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/SkillTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSCharacterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSCharacterModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSLocalPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSLocalPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSTilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSTilePath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -384,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642809302751</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality">
+      <created>1642934734861</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642934734861</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,7 +359,8 @@
     <MESSAGE value="Prepped dependency changes and some misc things" />
     <MESSAGE value="gradle fix" />
     <MESSAGE value="In progress update to how widget info should be stored and called" />
-    <option name="LAST_COMMIT_MESSAGE" value="In progress update to how widget info should be stored and called" />
+    <MESSAGE value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

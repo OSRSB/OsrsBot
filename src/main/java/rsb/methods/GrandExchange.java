@@ -2,6 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.SpriteID;
 import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSItem;
 import rsb.wrappers.RSWidget;
 
@@ -13,6 +14,10 @@ import rsb.wrappers.RSWidget;
  */
 public class GrandExchange extends MethodProvider {
 
+	GrandExchange(MethodContext ctx) {
+		super(ctx);
+	}
+
 
 	//The number of grand exchange slots
 	public static final int NUMBER_OF_SLOTS = 8;
@@ -20,10 +25,6 @@ public class GrandExchange extends MethodProvider {
 
 
 	public static final int[] GRAND_EXCHANGE_CLERK = {6528, 6529};
-
-	GrandExchange(MethodContext ctx) {
-		super(ctx);
-	}
 
 	/**
 	 * Checks if Grand Exchange is open.
@@ -55,7 +56,7 @@ public class GrandExchange extends MethodProvider {
 
 	public boolean close() {
 		if (isOpen()) {
-			return methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, GRAND_EXCHANGE_INTERFACE_LAYOUT)
+			return methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INTERFACE_LAYOUT)
 					.getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
 		}
 		return false;
@@ -69,10 +70,10 @@ public class GrandExchange extends MethodProvider {
 	 */
 	public boolean checkSlotIsEmpty(int slot) {
 		try {
-			int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[slot];
+			int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
 			if (isOpen()) {
-				if (methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).getDynamicComponent(
-						GRAND_EXCHANGE_SLOT_TITLE).containsText("Empty")) {
+				if (methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).getDynamicComponent(
+						GlobalWidgetId.GRAND_EXCHANGE_SLOT_TITLE).containsText("Empty")) {
 					return true;
 				} else {
 					return false;
@@ -92,11 +93,11 @@ public class GrandExchange extends MethodProvider {
 	 * @return <tt>True<tt/> if the user is a member else false for slots 4-8
 	 */
 	public boolean checkSlotLocked(int slot) {
-			int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[slot];
+			int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
 			if (isOpen()) {
-				RSWidget geWidget = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent);
-				boolean isBuyHovered = geWidget.getDynamicComponent(GRAND_EXCHANGE_BUY_ICON).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
-				boolean isSellHovered = geWidget.getDynamicComponent(GRAND_EXCHANGE_SELL_ICON).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
+				RSWidget geWidget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent);
+				boolean isBuyHovered = geWidget.getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_BUY_ICON).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
+				boolean isSellHovered = geWidget.getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_SELL_ICON).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
 				//Obviously both can't be hovered at the same time so it must be locked
 				if (isBuyHovered && isSellHovered) {
 					return true;
@@ -113,10 +114,10 @@ public class GrandExchange extends MethodProvider {
 	 *         Will return null if no items are being sold.
 	 */
 	public String checkSlot(int slot) {
-		int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[slot];
+		int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
 		if (isOpen()) {
-			RSWidget nameWidget = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).getDynamicComponent(
-					GRAND_EXCHANGE_ITEM_NAME);
+			RSWidget nameWidget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).getDynamicComponent(
+					GlobalWidgetId.GRAND_EXCHANGE_ITEM_NAME);
 			if (nameWidget.isValid() && nameWidget.isVisible()) {
 				return nameWidget.getText();
 			}
@@ -135,9 +136,9 @@ public class GrandExchange extends MethodProvider {
 		for (int i = 1; i <= NUMBER_OF_SLOTS; i++) {
 			if (isOpen()) {
 				if (checkSlotIsEmpty(i) && !checkSlotLocked(i)) {
-					int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[i];
-					String s = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW,
-							slotComponent).getDynamicComponent(GRAND_EXCHANGE_ITEM_NAME).getText();
+					int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[i];
+					String s = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW,
+							slotComponent).getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_ITEM_NAME).getText();
 					if (s.equals(name)) {
 						return i;
 					}
@@ -171,8 +172,8 @@ public class GrandExchange extends MethodProvider {
 	public boolean checkCompleted(int slot) {
 		if (!checkSlotIsEmpty(slot) && !checkSlotLocked(slot)) {
 			if (slot != 0) {
-				int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[slot];
-				if (methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).containsAction(
+				int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
+				if (methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW, slotComponent).containsAction(
 						"Abort Offer")) {
 					return false;
 				} else {
@@ -190,12 +191,6 @@ public class GrandExchange extends MethodProvider {
 	 * @param asNote whether the item should be withdrawn as a note
 	 */
 	public void collect(boolean asNote) {
-		RSWidget geWidget = methods.interfaces.get(INTERFACE_GRAND_EXCHANGE_WINDOW).getComponent(GRAND_EXCHANGE_COLLECTION_AREA);
-		if (geWidget.getComponent(GRAND_EXCHANGE_COLLECT_BOX_TWO).containsAction("Collect")) {
-			methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW,
-					GRAND_EXCHANGE_COLLECT_BOX_TWO).doAction("Collect");
-			sleep(random(400, 900));
-		}
 		String collectAs = "Collect";
 		if (asNote) {
 			collectAs += "-note";
@@ -203,15 +198,25 @@ public class GrandExchange extends MethodProvider {
 		else {
 			collectAs += "-item";
 		}
-		if (geWidget.getComponent(GRAND_EXCHANGE_COLLECT_BOX_ONE).containsAction(collectAs)) {
-			methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW,
-					GRAND_EXCHANGE_COLLECT_BOX_ONE).doAction(collectAs);
+		RSWidget geWidget = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_COLLECTION_AREA);
+		collectFromSlot(geWidget, collectAs);
+		collectAs += "s";
+		collectFromSlot(geWidget, collectAs);
+	}
+
+	/**
+	 * Internal-use. Collects attempts to collect from both slots if the widgets contain the action passed
+	 *
+	 * @param widget		The widget to check to collect from
+	 * @param collectAs		The string to check for in the widget
+	 */
+	private void collectFromSlot(RSWidget widget, String collectAs) {
+		if (widget.getComponent(GlobalWidgetId.GRAND_EXCHANGE_COLLECT_BOX_ONE).containsAction(collectAs)) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_COLLECT_AREA_ONE).doAction(collectAs);
 			sleep(random(400, 900));
 		}
-		collectAs += "s";
-		if (geWidget.getComponent(GRAND_EXCHANGE_COLLECT_BOX_ONE).containsAction(collectAs)) {
-			methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW,
-					GRAND_EXCHANGE_COLLECT_BOX_ONE).doAction(collectAs);
+		if (widget.getComponent(GlobalWidgetId.GRAND_EXCHANGE_COLLECT_BOX_TWO).containsAction(collectAs)) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_COLLECT_AREA_TWO).doAction(collectAs);
 			sleep(random(400, 900));
 		}
 	}
@@ -248,19 +253,19 @@ public class GrandExchange extends MethodProvider {
 		}
 		if (isOpen()) {
 			if (toBank) {
-				methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW,
-						GRAND_EXCHANGE_DESCRIPTION).getDynamicComponent(GRAND_EXCHANGE_DESCRIPTION_COLLECT).doAction("Collect");
+				methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_DESCRIPTION)
+						.getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_DESCRIPTION_COLLECT).doAction("Collect");
 				return;
 			}
-			int slotComponent = GRAND_EXCHANGE_OFFER_BOXES[slot];
+			int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
 			if (!checkSlotIsEmpty(slot) && !checkSlotLocked(slot)) {
-				RSWidget geWidget = methods.interfaces.get(INTERFACE_GRAND_EXCHANGE_WINDOW);
+				RSWidget geWidget = methods.interfaces.get(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW);
 				if (geWidget.getComponent(slotComponent).isValid() && !geWidget.getComponent(slotComponent).isVisible()) {
 					geWidget.getComponent(slotComponent).doAction("Veiw Offer");
 					sleep(random(700, 1200));
 				}
-				if (geWidget.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW).isValid() &&
-						geWidget.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW).isVisible()) {
+				if (geWidget.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW).isValid() &&
+						geWidget.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW).isVisible()) {
 					collect(asNote);
 				}
 				else {
@@ -278,9 +283,9 @@ public class GrandExchange extends MethodProvider {
 	private int getCurrentOfferQuantity() {
 		//Dynamic child in offer container
 		final int OFFER_QUANTITY = 32;
-		RSWidget offerWindow = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW);
+		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 		if (offerWindow.isValid() && offerWindow.isVisible()) {
-			return Integer.valueOf(offerWindow.getDynamicComponent(OFFER_QUANTITY).getText());
+			return Integer.parseInt(offerWindow.getDynamicComponent(OFFER_QUANTITY).getText());
 		}
 		return -1;
 	}
@@ -293,9 +298,9 @@ public class GrandExchange extends MethodProvider {
 	private int getCurrentOfferPrice() {
 		//Dynamic child in offer container
 		final int OFFER_PRICE_PER_ITEM = 39;
-		RSWidget offerWindow = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW);
+		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 		if (offerWindow.isValid() && offerWindow.isVisible()) {
-			return Integer.valueOf(offerWindow.getDynamicComponent(OFFER_PRICE_PER_ITEM).getText().replaceAll("coin", "").replaceAll("s", "").trim());
+			return Integer.parseInt(offerWindow.getDynamicComponent(OFFER_PRICE_PER_ITEM).getText().replaceAll("coin", "").replaceAll("s", "").trim());
 		}
 		return -1;
 	}
@@ -310,7 +315,7 @@ public class GrandExchange extends MethodProvider {
 		//Dynamic child of offer window
 		final int OFFER_CONFIRM = 54;
 
-		RSWidget offerWindow = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW);
+		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 
 		//Decides what order to do these in and gives a off number so we are inconsistent in a weird manner
 		boolean randomlyInput = (random(0,10) < 4);
@@ -334,7 +339,7 @@ public class GrandExchange extends MethodProvider {
 		//Dynamic child of offer window
 		final int OFFER_DOWN = 10;
 		final int OFFER_UP = 13;
-		RSWidget offerWindow = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW);
+		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 		if (priceChange == 0) {
 			return;
 		}
@@ -359,7 +364,7 @@ public class GrandExchange extends MethodProvider {
 		final int OFFER_100 = 47;
 		final int OFFER_1000_OR_ALL_BUTTON = 48;
 		final int OFFER_ENTER_AMOUNT = 49;
-		RSWidget offerWindow = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW);
+		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 		if (quantity == 1) {
 			return;
 		}
@@ -421,7 +426,7 @@ public class GrandExchange extends MethodProvider {
 				default:
 					offerWindow.getDynamicComponent(OFFER_ENTER_AMOUNT).doClick();
 					sleep(random(20,100));
-					RSWidget chatbox = methods.interfaces.getComponent(CHATBOX_INTERFACE, CHATBOX_INPUT);
+					RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
 					if (chatbox.isValid() && chatbox.isVisible()) {
 						methods.keyboard.sendText(String.valueOf(quantity), true);
 					}
@@ -471,14 +476,15 @@ public class GrandExchange extends MethodProvider {
 			sleep(random(50, 250));
 		}
 		if (isOpen()) {
-			RSWidget buyButton = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, GRAND_EXCHANGE_OFFER_BOXES[freeSlot()]).getDynamicComponent(GRAND_EXCHANGE_BUY_BUTTON);
+			RSWidget buyButton = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW,
+					GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[freeSlot()]).getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_BUY_BUTTON);
 			if (buyButton.isValid() && buyButton.isVisible()) {
 				buyButton.doAction("Create");
 				if (roundQuantity) {
 					quantity = (quantity * random(85, 120)) / 100;
 				}
 				sleep(random(200,400));
-				RSWidget chatbox = methods.interfaces.getComponent(CHATBOX_INTERFACE, CHATBOX_INPUT);
+				RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
 				if (chatbox.isValid() && chatbox.isVisible()) {
 					methods.keyboard.sendText(name, true);
 				}
@@ -591,7 +597,8 @@ public class GrandExchange extends MethodProvider {
 		}
 		boolean sellFromInventory = (random(0,10) > 4);
 		if (isOpen()) {
-			RSWidget sellButton = methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, GRAND_EXCHANGE_OFFER_BOXES[freeSlot()]).getDynamicComponent(GRAND_EXCHANGE_SELL_BUTTON);
+			RSWidget sellButton = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_GRAND_EXCHANGE_WINDOW, GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[freeSlot()])
+					.getDynamicComponent(GlobalWidgetId.GRAND_EXCHANGE_SELL_BUTTON);
 			if (sellButton.isValid() && sellButton.isVisible() && (items.getComponent() != null && items.getComponent().isVisible())) {
 				if (sellFromInventory) {
 					items.doAction("Offer");

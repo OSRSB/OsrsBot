@@ -126,33 +126,35 @@ public class GlobalWidgetId {
      */
     //Parent id
     public static final int INTERFACE_STATS = 320;
+
+
+
     //Child id
-    public static class SkillId {
-        public static final int 
-            INTERFACE_SKILL_ATTACK = 1,
-            INTERFACE_SKILL_STRENGTH = 2,
-            INTERFACE_SKILL_DEFENCE = 3,
-            INTERFACE_SKILL_RANGED = 4,
-            INTERFACE_SKILL_PRAYER = 5,
-            INTERFACE_SKILL_MAGIC = 6,
-            INTERFACE_SKILL_RUNECRAFT = 7,
-            INTERFACE_SKILL_CONSTRUCTION = 8,
-            INTERFACE_SKILL_HITPOINTS = 9,
-            INTERFACE_SKILL_AGILITY = 10,
-            INTERFACE_SKILL_HERBLORE = 11,
-            INTERFACE_SKILL_THIEVING = 12,
-            INTERFACE_SKILL_CRAFTING = 13,
-            INTERFACE_SKILL_FLETCHING = 14,
-            INTERFACE_SKILL_SLAYER = 15,
-            INTERFACE_SKILL_HUNTER = 16,
-            INTERFACE_SKILL_MINING = 17,
-            INTERFACE_SKILL_SMITHING = 18,
-            INTERFACE_SKILL_FISHING = 19,
-            INTERFACE_SKILL_COOKING = 20,
-            INTERFACE_SKILL_FIREMAKING = 21,
-            INTERFACE_SKILL_WOODCUTTING = 22,
-            INTERFACE_SKILL_FARMING = 23,
-            INTERFACE_SKILL_TOTAL = 24;
+    public enum Skill {
+        INTERFACE_SKILL_ATTACK,
+        INTERFACE_SKILL_STRENGTH,
+        INTERFACE_SKILL_DEFENCE,
+        INTERFACE_SKILL_RANGED,
+        INTERFACE_SKILL_PRAYER,
+        INTERFACE_SKILL_MAGIC,
+        INTERFACE_SKILL_RUNECRAFT,
+        INTERFACE_SKILL_CONSTRUCTION,
+        INTERFACE_SKILL_HITPOINTS,
+        INTERFACE_SKILL_AGILITY,
+        INTERFACE_SKILL_HERBLORE,
+        INTERFACE_SKILL_THIEVING,
+        INTERFACE_SKILL_CRAFTING,
+        INTERFACE_SKILL_FLETCHING,
+        INTERFACE_SKILL_SLAYER,
+        INTERFACE_SKILL_HUNTER,
+        INTERFACE_SKILL_MINING,
+        INTERFACE_SKILL_SMITHING,
+        INTERFACE_SKILL_FISHING,
+        INTERFACE_SKILL_COOKING,
+        INTERFACE_SKILL_FIREMAKING,
+        INTERFACE_SKILL_WOODCUTTING,
+        INTERFACE_SKILL_FARMING,
+        INTERFACE_SKILL_TOTAL;
     }
 
     /**
@@ -382,12 +384,12 @@ public class GlobalWidgetId {
     public static final int INTERFACE_GRAND_EXCHANGE_WINDOW = WidgetInfo.GRAND_EXCHANGE_WINDOW_CONTAINER.getGroupId();
     public static final int INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW = WidgetInfo.GRAND_EXCHANGE_OFFER_CONTAINER.getChildId();
 
-    public static final int GRAND_EXCHANGE_INTERFACE_LAYOUT = 2;
+    public static final int INTERFACE_GRAND_EXCHANGE_INTERFACE_LAYOUT = 2;
 
     public static final int INTERFACE_GRAND_EXCHANGE_SELL_INVENTORY = 0;
     public static final int INTERFACE_BUY_SEARCH_BOX = 389;
 
-    public static final int GRAND_EXCHANGE_DESCRIPTION = 6;
+    public static final int INTERFACE_GRAND_EXCHANGE_DESCRIPTION = 6;
 
     //This is a dynamic child of the description widget
     public static final int GRAND_EXCHANGE_DESCRIPTION_COLLECT = 1;
@@ -405,7 +407,7 @@ public class GlobalWidgetId {
 
     public static final int[] GRAND_EXCHANGE_OFFER_BOXES = {7, 8, 9, 10, 11, 12, 13, 14};
 
-    public static final int GRAND_EXCHANGE_COLLECTION_AREA = 23;
+    public static final int INTERFACE_GRAND_EXCHANGE_COLLECTION_AREA = 23;
     //These are dynamic children of the collection area
     public static final int GRAND_EXCHANGE_COLLECT_BOX_ONE = 2;
     public static final int GRAND_EXCHANGE_COLLECT_BOX_TWO = 3;
