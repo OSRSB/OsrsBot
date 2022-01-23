@@ -2,8 +2,8 @@ package rsb.methods;
 
 import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.WidgetInfo;
-import rsb.util.GlobalWidgetId;
-import rsb.util.GlobalWidgetInfo;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
@@ -43,14 +43,13 @@ public class Inventory extends MethodProvider {
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (isOpen(entry.getValue())) {
-				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-					methods.game.openTab(Game.TAB_INVENTORY);
+				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+					methods.game.openTab(GameGUI.Tab.INVENTORY);
 					sleep(random(50, 100));
 				}
 				return entry;
 			}
 		}
-		log.error("Widget ID likely not found. Validate the values in Inventory.java");
 		return null;
 	}
 
@@ -73,7 +72,7 @@ public class Inventory extends MethodProvider {
 		}
 		while (item != null) {
 			if (methods.interfaces.get(WidgetInfo.DESTROY_ITEM.getGroupId()).isValid()) {
-				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM.getGroupId(), WidgetInfo.DESTROY_ITEM_YES.getChildId()).doClick();
+				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM_YES).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
@@ -125,7 +124,6 @@ public class Inventory extends MethodProvider {
 	 * @param action The item menu action to check.
 	 * @return <tt>true</tt> if the item has the action; otherwise
 	 *         <tt>false</tt>.
-	 * @author Aut0r
 	 */
 	public boolean itemHasAction(final RSItem item, final String action) {
 		// Used to determine if an item is droppable/destroyable
@@ -169,10 +167,10 @@ public class Inventory extends MethodProvider {
 			methods.interfaces.clickContinue();
 			sleep(random(800, 1300));
 		}
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
 				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK).isValid()
 				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE).isValid()) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {
 			return false;
@@ -301,8 +299,8 @@ public class Inventory extends MethodProvider {
 	 *         otherwise <tt>false</tt>.
 	 */
 	public boolean useItem(final RSItem item, final RSItem targetItem) {
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		return selectItem(item) && targetItem.doAction("Use");
 	}
@@ -330,8 +328,8 @@ public class Inventory extends MethodProvider {
 	 *         RSItem and RSObject; otherwise <tt>false</tt>.
 	 */
 	public boolean useItem(RSItem item, RSObject targetObject) {
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		return selectItem(item) && targetObject.doAction("Use", targetObject.getName());
 	}

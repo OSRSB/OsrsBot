@@ -1,4 +1,4 @@
-package rsb.util;
+package rsb.internal.globval;
 
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;

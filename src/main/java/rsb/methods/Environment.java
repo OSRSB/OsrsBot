@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 /**
  * Bot environment related operations.
  *
- * @author Jacmob
+ * @author GigiaJ
  */
 public class Environment extends MethodProvider {
 

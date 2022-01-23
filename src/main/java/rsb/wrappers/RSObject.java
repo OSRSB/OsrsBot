@@ -374,7 +374,6 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	
 	/**
 	 * Turns the camera towards the RSObject.
-	 * @author LastCoder
 	 * @return <tt>true</tt> If RSObject is on screen after attempted to move camera angle.
 	 */
 	public boolean turnTo() {

@@ -1,23 +1,15 @@
 package rsb.methods;
 
 import net.runelite.api.SpriteID;
-import net.runelite.api.widgets.WidgetInfo;
-import rsb.util.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetId;
 import rsb.wrappers.RSItem;
 import rsb.wrappers.RSWidget;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Obtains information on tradeable items from the Grand Exchange website and
  * Grand Exchange ingame interaction.
  *
- * @author Aion, Boolean, Debauchery
+ * @author GigiaJ
  */
 public class GrandExchange extends MethodProvider {
 
@@ -64,7 +56,7 @@ public class GrandExchange extends MethodProvider {
 	public boolean close() {
 		if (isOpen()) {
 			return methods.interfaces.getComponent(INTERFACE_GRAND_EXCHANGE_WINDOW, GRAND_EXCHANGE_INTERFACE_LAYOUT)
-					.getDynamicComponent(DYNAMIC_CLOSE_BUTTON).doClick();
+					.getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
 		}
 		return false;
 	}

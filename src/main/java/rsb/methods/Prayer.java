@@ -2,6 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.Skill;
 import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSWidget;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Prayer related operations.
  *
- * @author Aut0r, kiko
+ * @author GigiaJ
  */
 public class Prayer extends MethodProvider {
 
@@ -20,7 +21,6 @@ public class Prayer extends MethodProvider {
 	/**
 	 * Provides Prayer Book(s) Information.
 	 *
-	 * @author Aut0r
 	 */
 
 	private static final int PRAYER_BOOK_OFFSET = 5;
@@ -111,7 +111,7 @@ public class Prayer extends MethodProvider {
 		if ((pray.getBackgroundColor() != -1) == activate) {
 			return false;
 		}
-		if (methods.game.getCurrentTab() != Game.TAB_PRAYER && methods.game.openTab(Game.TAB_PRAYER)) {
+		if (methods.game.getCurrentTab() != GameGUI.Tab.PRAYER && methods.game.openTab(GameGUI.Tab.PRAYER)) {
 			sleep(random(100, 200));
 		}
 		return pray.doAction(activate ? "Activate" : "Deactivate");
@@ -188,8 +188,7 @@ public class Prayer extends MethodProvider {
 	 * @return The number of prayer points left.
 	 */
 	public int getPrayerLeft() {
-		return Integer.parseInt(methods.interfaces.getComponent(
-				WidgetInfo.MINIMAP_PRAYER_ORB.getGroupId(), Game.INTERFACE_PRAYER_ORB_AMOUNT).getText());
+		return Integer.parseInt(methods.interfaces.getComponent(WidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText());
 	}
 
 	/**

@@ -1,6 +1,5 @@
-package rsb.util;
+package rsb.internal.globval;
 
-import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 
 public class GlobalWidgetId {
@@ -13,11 +12,16 @@ public class GlobalWidgetId {
     //This seems to be universal in interfaces for the close component.
     public static final int DYNAMIC_CLOSE_BUTTON = 11;
 
+    //NON GLOBAL
+    public static final int DYNAMIC_CHAT_BOX_FIRST_MESSAGE = 0; //TODO: Check these. Not sure what they do.
+    public static final int DYNAMIC_CHAT_BOX_LATEST_MESSAGE = 1; //TODO: Check these. Not sure what they do.
+
+
     /**
      * Bank Widget IDs
      */
     //Parent ID
-    public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();//.BANK_GROUP_ID;
+    public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();
     //Child ID
     public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
     public static final int INTERFACE_BANK_ITEM_COUNT = 5;
@@ -121,7 +125,7 @@ public class GlobalWidgetId {
      * Skill ids
      */
     //Parent id
-    public static final int INTERFACE_TAB_STATS = 320;
+    public static final int INTERFACE_STATS = 320;
     //Child id
     public static class SkillId {
         public static final int 
@@ -159,10 +163,18 @@ public class GlobalWidgetId {
      */
 
     //Parent id
-    final int FIXED_VIEWPORT_SPELL_BOOK_CONTAINER_ID = 72;
-    final int SPELL_LIST = 3;
-    final int AUTOCAST_SPELL_BOOK = 201;
-    final int SPELL_BOOK = 218;
+    public static final int FIXED_VIEWPORT_SPELL_BOOK_CONTAINER_ID = 72;
+
+
+    //Parent id
+    public static final int INTERFACE_MAGIC_AUTOCAST_SPELL_BOOK = 201;
+    //Child id
+    public static final int INTERFACE_MAGIC_AUTOCAST_SPELL_LIST = 1;
+
+    //Parent id
+    public static final int INTERFACE_MAGIC_SPELL_BOOK = 218;
+    //Child id
+    public static final int INTERFACE_MAGIC_SPELL_LIST = 3;
 
     //Child id
     public static final int INTERFACE_SHOW_COMBAT_SPELLS = 5;
@@ -398,5 +410,13 @@ public class GlobalWidgetId {
     public static final int GRAND_EXCHANGE_COLLECT_BOX_ONE = 2;
     public static final int GRAND_EXCHANGE_COLLECT_BOX_TWO = 3;
 
+
+    /**
+     *  Minimap ids
+     */
+    public static final int INTERFACE_MINIMAP_HEALTH_ORB_TEXT = 5;
+    public static final int INTERFACE_MINIMAP_PRAYER_ORB_TEXT = 15;
+    public static final int INTERFACE_MINIMAP_RUN_ORB_TEXT = 23;
+    public static final int INTERFACE_MINIMAP_SPEC_ORB_TEXT = 31;
 
 }

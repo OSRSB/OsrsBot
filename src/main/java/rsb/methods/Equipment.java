@@ -1,7 +1,6 @@
 package rsb.methods;
 
-import net.runelite.api.widgets.WidgetInfo;
-import rsb.internal.wrappers.Filter;
+import rsb.internal.globval.GlobalWidgetId;
 import rsb.wrappers.RSItem;
 import rsb.wrappers.RSWidget;
 
@@ -22,14 +21,14 @@ public class Equipment extends MethodProvider {
 	 */
 	public RSWidget getInterface() {
 		// Tab needs to be open for it to update its content -.-
-		if (methods.game.getCurrentTab() != Game.TAB_EQUIPMENT) {
+		if (methods.game.getCurrentTab() != GameGUI.Tab.EQUIPMENT) {
 			if (methods.bank.isOpen()) {
 				methods.bank.close();
 			}
-			methods.game.openTab(Game.TAB_EQUIPMENT);
+			methods.game.openTab(GameGUI.Tab.EQUIPMENT);
 			sleep(random(900, 1500));
 		}
-		return methods.interfaces.get(INTERFACE_EQUIPMENT);
+		return methods.interfaces.get(GlobalWidgetId.INTERFACE_EQUIPMENT);
 	}
 
 	/**
@@ -39,9 +38,9 @@ public class Equipment extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget[] equip = getInterface().getComponents();
-		RSItem[] items = new RSItem[ITEM_SLOTS];
+		RSItem[] items = new RSItem[GlobalWidgetId.INTERFACE_EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			items[i] = new RSItem(methods, equip[i + HELMET].getDynamicComponent(1));
+			items[i] = new RSItem(methods, equip[i + GlobalWidgetId.EquipmentSlotId.INTERFACE_EQUIPMENT_HELMET].getDynamicComponent(1));
 		}
 		return items;
 	}
@@ -53,11 +52,11 @@ public class Equipment extends MethodProvider {
 	 *         opened.
 	 */
 	public RSItem[] getCachedItems() {
-		RSWidget equipment = methods.interfaces.get(INTERFACE_EQUIPMENT);
+		RSWidget equipment = getInterface();
 		RSWidget[] components = equipment.getComponents();
-		RSItem[] items = new RSItem[ITEM_SLOTS];
-		for (int i = HELMET; i < items.length + HELMET; i++) {
-			items[i] = new RSItem(methods, components[i].getDynamicComponent(1));
+		RSItem[] items = new RSItem[GlobalWidgetId.INTERFACE_EQUIPMENT_ITEM_SLOTS];
+		for (int i = 0; i < items.length; i++) {
+			items[i] = new RSItem(methods, components[i + GlobalWidgetId.EquipmentSlotId.INTERFACE_EQUIPMENT_HELMET].getDynamicComponent(1));
 		}
 		return items;
 	}
@@ -96,7 +95,7 @@ public class Equipment extends MethodProvider {
 	 * @return Amount of items currently equipped.
 	 */
 	public int getCount() {
-		return ITEM_SLOTS - getCount(-1);
+		return GlobalWidgetId.INTERFACE_EQUIPMENT_ITEM_SLOTS - getCount(-1);
 	}
 
 	/**

@@ -13,7 +13,7 @@ import java.util.Arrays;
  * The three arrays (skills, startExp, currentExp) are constantly congruent, and
  * updated as such.
  *
- * @author LastCoder
+ * @author GigiaJ
  * @version 1.0
  */
 @Deprecated

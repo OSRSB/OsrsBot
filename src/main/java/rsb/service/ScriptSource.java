@@ -5,7 +5,7 @@ import rsb.script.Script;
 import java.util.List;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public interface ScriptSource {
 

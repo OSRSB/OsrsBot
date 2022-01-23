@@ -2,9 +2,11 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
-import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.wrappers.Filter;
+import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
 import java.lang.Integer;
@@ -79,12 +81,12 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean close() {
 		if (isOpen()) {
-			methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_DYNAMIC_COMPONENTS).getDynamicComponent(DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isOpen();
 		}
 		if (isDepositOpen()) {
-			methods.interfaces.getComponent(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS).getDynamicComponent(DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isDepositOpen();
 		}
@@ -94,8 +96,8 @@ public class Bank extends MethodProvider {
 
 	public int getAvailableBankSpace (){
 		if (isOpen()) {
-			return Integer.valueOf(methods.interfaces.getComponent(INTERFACE_DEPOSIT_BOX, INTERFACE_BANK_ITEM_MAX).getText()) -
-					Integer.valueOf(methods.interfaces.getComponent(INTERFACE_DEPOSIT_BOX, INTERFACE_BANK_ITEM_COUNT).getText());
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_MAX).getText()) -
+					Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_COUNT).getText());
 		}
 		return -1;
 	}
@@ -120,8 +122,7 @@ public class Bank extends MethodProvider {
 			if (!isOpen()) {
 				boolean match = false;
 				for (int i = 0; i < 28; i++) {
-					RSWidget comp = methods.interfaces.get(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId(),
-							WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId()).getDynamicComponent(i);
+					RSWidget comp = methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getDynamicComponent(i);
 					if (comp.getId() == itemID) {
 						itemCount += comp.getStackSize();
 						if (!match) {
@@ -173,11 +174,9 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean depositAll() {
 		if (isOpen()) {
-			return methods.interfaces.getComponent(INTERFACE_BANK,
-					INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
+			return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
 		}
-		return isDepositOpen() && methods.interfaces.getComponent(INTERFACE_DEPOSIT_BOX,
-				INTERFACE_DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
+		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
 	}
 
 	/**
@@ -194,8 +193,7 @@ public class Bank extends MethodProvider {
 			outer:
 			for (int i = 0; i < 28; i++) {
 				RSWidget item = isOpen() ? methods.inventory.getItemAt(i).getComponent() :
-						methods.interfaces.get(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId(),
-								WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId()).getDynamicComponent(i);
+						methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getDynamicComponent(i);
 				if (item != null && item.getId() != -1) {
 					for (int id : items) {
 						if (item.getId() == id) {
@@ -227,10 +225,9 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean depositAllEquipped() {
 		if (isOpen()) {
-			return methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS).doClick();
+			return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_DEPOSIT_WORN_ITEMS).doClick();
 		}
-		return isDepositOpen() && methods.interfaces.getComponent(INTERFACE_DEPOSIT_BOX,
-				INTERFACE_DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS).doClick();
+		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS).doClick();
 	}
 
 	/**
@@ -258,10 +255,8 @@ public class Bank extends MethodProvider {
 	 * @return int of tab (0-8), or -1 if none are selected (bank is not open).
 	 */
 	public int getCurrentTab() {
-		int SELECTED = 1079;
-		int UNSELECTED = 1077;
-		for (Widget widget : methods.client.getWidget(INTERFACE_BANK, INTERFACE_BANK_TAB).getChildren()) {
-			if (widget.getSpriteId() == SELECTED) {
+		for (RSWidget widget : methods.interfaces.getComponent(GlobalWidgetInfo.BANK_TAB).getComponents()) {
+			if (widget.getSpriteId() == GlobalSettingValues.SPRITE_SELECTED_VALUE) {
 				return widget.getIndex();
 			}
 		}
@@ -272,16 +267,7 @@ public class Bank extends MethodProvider {
 	 * Gets a tab
 	 */
 	public RSWidget getTab(int index) {
-		return  new RSWidget(methods, methods.client.getWidget(INTERFACE_BANK, INTERFACE_BANK_TAB).getChild(index));
-	}
-
-	/**
-	 * Gets the bank interface.
-	 *
-	 * @return The bank <code>RSWidget</code>.
-	 */
-	public RSWidget getInterface() {
-		return methods.interfaces.get(INTERFACE_BANK);
+		return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_TAB).getComponent(index);
 	}
 
 	/**
@@ -290,7 +276,7 @@ public class Bank extends MethodProvider {
 	 * @return The deposit box <code>RSWidget</code>.
 	 */
 	public RSWidget getBoxInterface() {
-		return methods.interfaces.get(INTERFACE_DEPOSIT_BOX);
+		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX);
 	}
 
 	/**
@@ -310,6 +296,15 @@ public class Bank extends MethodProvider {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Gets the bank interface.
+	 *
+	 * @return The bank <code>RSWidget</code>.
+	 */
+	public RSWidget getInterface() {
+		return methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK);
 	}
 
 	/**
@@ -353,10 +348,11 @@ public class Bank extends MethodProvider {
 	 * @return an <code>RSItem</code> array of the bank's inventory interface.
 	 */
 	public RSItem[] getItems() {
-		if ((getInterface() == null) || (getInterface().getComponent(INTERFACE_BANK_INVENTORY) == null)) {
+		RSWidget bankInterface = getInterface();
+		if ((bankInterface == null) || (bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY) == null)) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = getInterface().getComponent(INTERFACE_BANK_INVENTORY).getComponents();
+		RSWidget[] components = bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; ++i) {
 			items[i] = new RSItem(methods, components[i]);
@@ -370,7 +366,8 @@ public class Bank extends MethodProvider {
 	 * @return <tt>true</tt> if the bank interface is open; otherwise <tt>false</tt>.
 	 */
 	public boolean isOpen() {
-		return getInterface().isValid() && getInterface().isVisible();
+		RSWidget bankInterface = getInterface();
+		return bankInterface.isValid() && bankInterface.isVisible();
 	}
 
 	/**
@@ -379,7 +376,7 @@ public class Bank extends MethodProvider {
 	 * @return <tt>true</tt> if the deposit box interface is open; otherwise <tt>false</tt>.
 	 */
 	public boolean isDepositOpen() {
-		return methods.interfaces.get(INTERFACE_DEPOSIT_BOX).isValid();
+		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX).isValid();
 	}
 
 	private static class ReachableBankerFilter implements Filter<RSNPC> {
@@ -571,7 +568,7 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_SEARCH).doAction("Search");
+		methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SEARCH).doAction("Search");
 		sleep(random(1000, 1500));
 		if (!isSearchOpen()) {
 			sleep(500);
@@ -593,11 +590,11 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(Settings.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 1) {
-			methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_INSERT).doClick();
+		if (methods.settings.getSetting(GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 1) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_INSERT).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(Settings.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 1;
+		return methods.settings.getSetting(GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 1;
 	}
 
 	/**
@@ -610,12 +607,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 0) {
-			methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_SWAP).doClick();
+				GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 0) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SWAP).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 0;
+				GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 0;
 	}
 
 	/**
@@ -628,12 +625,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 0) {
-			methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_ITEM).doClick();
+				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 0) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_ITEM).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 0;
+				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 0;
 	}
 
 	/**
@@ -646,12 +643,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 1) {
-			methods.interfaces.getComponent(INTERFACE_BANK, INTERFACE_BANK_BUTTON_NOTE).doClick();
+				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 1) {
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_NOTE).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				Settings.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 1;
+				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 1;
 	}
 
 	/**
@@ -682,7 +679,7 @@ public class Bank extends MethodProvider {
 				sleep(random(800, 1300));
 			}
 		}
-		if (!methods.interfaces.scrollTo(item, new RSWidget(methods, methods.client.getWidget(INTERFACE_BANK, INTERFACE_BANK_SCROLLBAR)))) {
+		if (!methods.interfaces.scrollTo(item, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_SCROLLBAR))) {
 			return false;
 		}
 		int invCount = methods.inventory.getCount(true);
@@ -737,8 +734,8 @@ public class Bank extends MethodProvider {
 		int count = 0;
 		for (int i = 0; i < 28; ++i) {
 			for (int id : ids) {
-				if (methods.interfaces.get(11).getComponent(17).isValid() && methods.interfaces.get(11).getComponent(
-						17).getComponent(i).getId() == id) {
+				if (methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).isValid()
+						&& methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getComponent(i).getId() == id) {
 					count++;
 				}
 			}
@@ -770,15 +767,12 @@ public class Bank extends MethodProvider {
 	 * Gets the equipment items from the bank interface.
 	 *
 	 * @return All equipment items that are being worn.
-	 * @author LastCoder
 	 */
 	public RSItem[] getEquipmentItems() {
-		if (methods.interfaces.get(INTERFACE_EQUIPMENT).getComponent(
-				INTERFACE_EQUIPMENT_COMPONENT).isValid()) {
+		if (methods.interfaces.getComponent(WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).isValid()) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = methods.interfaces.get(INTERFACE_EQUIPMENT).getComponent(
-				INTERFACE_EQUIPMENT_COMPONENT).getComponents();
+		RSWidget[] components = methods.interfaces.getComponent(WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = new RSItem(methods, components[i]);

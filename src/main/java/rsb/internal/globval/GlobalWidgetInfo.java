@@ -1,10 +1,10 @@
-package rsb.util;
+package rsb.internal.globval;
 
 import net.runelite.api.widgets.WidgetInfo;
 
 import static net.runelite.api.widgets.WidgetInfo.*;
-import static rsb.util.GlobalWidgetId.*;
-import static rsb.util.GlobalWidgetId.EquipmentSlotId.*;
+import static rsb.internal.globval.GlobalWidgetId.*;
+import static rsb.internal.globval.GlobalWidgetId.EquipmentSlotId.*;
 
 /**
  * The list of widget info in the form of (parent, child)
@@ -96,6 +96,9 @@ public enum GlobalWidgetInfo {
     //30
     //31
     TRADE_MAIN_SCREEN_MAIN_NAME(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_NAME),
+    TRADE_MAIN_SCREEN_PARTNER_FREE_SLOTS(0, 0), //TODO: Fix this
+
+
 
     TRADE_SECOND_SCREEN_ACCEPT(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_ACCEPT),
     TRADE_SECOND_SCREEN_DECLINE(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_DECLINE),
@@ -113,12 +116,28 @@ public enum GlobalWidgetInfo {
      * [STORE] Widget Info
      */
     STORE_DYNAMIC_COMPONENTS(INTERFACE_STORE, INTERFACE_STORE_DYNAMIC_COMPONENTS),
-    STORE_INVENTORY(INTERFACE_STORE, INTERFACE_STORE_ITEMS)
+    STORE_INVENTORY(INTERFACE_STORE, INTERFACE_STORE_ITEMS),
     //[STORE]
 
     /**
      * [SKILL] Widget Info
      */
+    SKILL(0,0),
+    //[SKILL]
+
+    /**
+     * [MAGIC] Widget Info
+     */
+    MAGIC_SPELL_LIST(INTERFACE_MAGIC_SPELL_BOOK, INTERFACE_MAGIC_SPELL_LIST),
+    MAGIC_AUTOCAST_SPELL_LIST(INTERFACE_MAGIC_AUTOCAST_SPELL_BOOK, INTERFACE_MAGIC_AUTOCAST_SPELL_LIST),
+    //[MAGIC]
+
+    /**
+     * [MINIMAP] Widget Info
+     */
+    MINIMAP_HEALTH_ORB_TEXT(WidgetInfo.MINIMAP_HEALTH_ORB.getGroupId(), INTERFACE_MINIMAP_HEALTH_ORB_TEXT),
+    MINIMAP_SPEC_ORB_TEXT(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), INTERFACE_MINIMAP_SPEC_ORB_TEXT),
+
 
     ;
 

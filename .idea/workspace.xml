@@ -10,542 +10,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="In progress update to how widget info should be stored and called">
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalSettingValues.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/RSBBB_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/Application$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLiteTestFeatures.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLiteTestFeatures.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/EventManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/EventManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/EventMulticaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/EventMulticaster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawBoundaries.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawBoundaries.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawGround.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawGround.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawInventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawItems.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawItems.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawMouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawMouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawNPCs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawNPCs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawObjects.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawObjects.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawPlayers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawPlayers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawWeb.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawWeb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenuActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMenuActions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMousePosition.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TMousePosition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TTab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TUserInputAllowed.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TUserInputAllowed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$AccountTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$AccountTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$TableSelectionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$TableSelectionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotHome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotMenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotMenuBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$HomeUpdater.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$HomeUpdater.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ClientPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ClientPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$LogQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$LogQueue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$Renderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$Renderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$ScriptTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$ScriptTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$TableSelectionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$TableSelectionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BotModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BotModule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BreakHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/BreakHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/InputManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/LogFormatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/LogFormatter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/LogOutputStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/LogOutputStream.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/PassiveScriptHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/PassiveScriptHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/ScriptHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/ScriptHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/input/Mouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/input/Mouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/input/VirtualMouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/input/VirtualMouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/instrumentate/ComponentMousePositionTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/instrumentate/ComponentMousePositionTransformer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/instrumentate/ContainerMousePositionTransformer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/instrumentate/ContainerMousePositionTransformer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Deque.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Deque.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Filter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Filter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Queue.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/Queue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/TileFlags.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/wrappers/TileFlags.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank$ReachableBankerFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank$ReachableBankerFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Calculations.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Calculations.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Camera.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Camera.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Combat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Combat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Environment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Equipment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Equipment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GameGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GrandExchange.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GrandExchange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GroundItems.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Magic.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Magic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/MethodProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/MethodProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Methods.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Methods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Mouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Mouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Prayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Prayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Tiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Tiles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Trade.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Trade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Walking.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Walking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BasePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BasePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/PassiveScript.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/PassiveScript.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Random.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Random.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Script.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Script.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/service/FileScriptSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/service/FileScriptSource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/service/ScriptClassLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/service/ScriptClassLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/testsScript/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/testsScript/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Base64.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Base64.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Extractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Extractor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths$URLs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths$URLs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/ScreenshotUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/ScreenshotUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SetForegroundWindowUtil$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SetForegroundWindowUtil$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SetForegroundWindowUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SetForegroundWindowUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SkillTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SkillTracker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/StringUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/StringUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Timer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Timer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$Comparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$GroundItems.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$Items.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$NPCs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$Objects.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters$Players.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/Filters.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/DaxConfigs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/DaxTracker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/DaxTrackerServerApi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/DaxWalker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/WebWalkerServerApi$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/WebWalkerServerApi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/Json$DefaultHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/Json.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonArray$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonArray.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonLiteral.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonNumber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonObject$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonObject$HashIndexTable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonObject$Member.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonString.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonValue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/JsonWriter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/Location.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/ParseException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/PrettyPrint$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/PrettyPrint$PrettyPrintWriter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/PrettyPrint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/WriterConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/WriterConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/json/WritingBuffer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/BankPathRequestPair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/BulkBankPathRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/BulkPathRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/DataLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/DataLogRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/DataSnapshot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/DaxCredentials.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/DaxCredentialsProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/IntPair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/ListSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/PathRequestPair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/PathResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/PathStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/Period.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/PlayerDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/Point3D$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/Point3D.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/PropertyStats.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/Requirement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/RunescapeBank.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/ServerResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/SourceHighScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/UserHighScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/exceptions/AuthorizationException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/exceptions/RateLimitException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/models/exceptions/UnknownException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/utils/DaxTrackerProperty.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/api_lib/utils/IOHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/GetPathResponseContainer$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/GetPathResponseContainer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/NodeInfo$Details.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/NodeInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/Pair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/PathFindingNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/PlayerInformation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/RSRegion$Rectangle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/RSRegion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/BankHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/InterfaceHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/RSItemHelper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/RSItemHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/RSNPCHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/RSObjectHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/WorldHelper$World.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/WorldHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/RuneElement$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/RuneElement$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/RuneElement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/RunePouch$RuneSlot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/RunePouch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/Spell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/SpellBook$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/SpellBook.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/magic/Validatable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/questing/Quest$State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/questing/Quest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/helpers/questing/QuestHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/ItemList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/JSONArray.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/JSONAware.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/JSONObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/JSONStreamAware.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/JSONValue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/ContainerFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/ContentHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/JSONParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/ParseException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/Yylex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/shared/jsonSimple/parser/Yytoken.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/Teleport$Action.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/Teleport.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/WearableItemTeleport.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook$Teleports.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/TeleportConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/TeleportLimit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/TeleportScrolls$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/teleports/teleport_utils/TeleportScrolls.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/DaxWalkerEngine$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/DaxWalkerEngine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/move_task/MoveTaskHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/move_task/MoveTaskHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/move_task/impl/DefaultObjectHandler$Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/move_task/impl/DefaultObjectHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/move_task/impl/DefaultWalkHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/passive_action/PassiveAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/passive_action/impl/RunEnergyPassiveAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/special_cases/SpecialCaseHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/special_cases/SpecialCaseHandlers.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/special_cases/impl/SecurityStrongholdHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/handlers/special_cases/impl/ShantyPassHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/DaxLogger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/MoveTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/WaitCondition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/enums/ActionResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/enums/MoveActionResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/models/enums/Situation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/AccurateMouse$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/AccurateMouse$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/AccurateMouse$State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/AccurateMouse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/TribotUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/AsynchronousCamera.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/Calculations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/CameraAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/CameraCalculations$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/CameraCalculations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/camera/DaxCamera.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/generator/CollisionFileMaker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/generator/CollisionTile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/movement/WalkingQueue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/path/DaxPathFinder$Destination.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/path/DaxPathFinder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/path/PathUtils$NotInPathException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker/utils/path/PathUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/Loggable$Level.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/Loggable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor$Condition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor$Return.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor$ReturnCondition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WaitFor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WalkerEngine$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WalkerEngine$CustomConditionContainer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WalkerEngine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WalkingCondition$State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WalkingCondition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/WebWalkerPaint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/bfs/BFS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/DoomsToggle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/InteractionHelper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/InteractionHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/NPCInteraction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialCondition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$14.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler$SpecialObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/AStarNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/CollisionFlags.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer$DestinationDetails.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer$Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer$PathState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/Reachable$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/Reachable$Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/local_pathfinding/Reachable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/Charter$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/Charter$Location.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/Charter$LocationProperty.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/Charter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/GnomeGlider$Location.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/GnomeGlider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/NavigationSpecialCase$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/NavigationSpecialCase$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/NavigationSpecialCase$SpecialLocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/NavigationSpecialCase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/ShipUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/SpiritTree$Location.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/SpiritTree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/FairyRing$Locations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/FairyRing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/FirstLetter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/SecondLetter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/ThirdLetter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/real_time_collision/CollisionDataCollector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/real_time_collision/CollisionFlags.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/walker/dax_api/walker_engine/real_time_collision/RealTimeCollisionTile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSArea$TileArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSArea$TileArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSCharacter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSCharacterModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSCharacterModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSGroundItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSGroundItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSLocalPath$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSLocalPath$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSLocalPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSLocalPath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSNPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSNPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSTile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSTilePath.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSTilePath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidget.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidgetItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidgetItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/ChooseOption.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/ChooseOption.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/WalkerTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/subwrap/WalkerTile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/events/MessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/events/MessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/DrawModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/impl/TTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/impl/TTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/event/listener/CharacterMovedListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/event/listener/CharacterMovedListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotMenuBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotToolBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/BotToolBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/LogTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/LogTextArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/MouseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/listener/ScriptListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/listener/ScriptListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Equipment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Methods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Objects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Players.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Players.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/MethodProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/NPCs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/NPCs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Trade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/Filters.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/DaxConfigs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/DaxTracker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/DaxTrackerServerApi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/DaxWalker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/WebWalkerServerApi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/Json.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonArray.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonLiteral.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonNumber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonString.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/JsonWriter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/ParseException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/PrettyPrint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/WriterConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/json/WritingBuffer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/BankPathRequestPair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/BulkBankPathRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/BulkPathRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/DataLog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/DataLogRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/DataSnapshot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/DaxCredentials.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/DaxCredentialsProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/IntPair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/ListSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/PathRequestPair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/PathResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/PathStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/Period.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/PlayerDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/Point3D.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/PropertyStats.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/Requirement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/RunescapeBank.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/ServerResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/SourceHighScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/UserHighScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/exceptions/AuthorizationException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/exceptions/RateLimitException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/models/exceptions/UnknownException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/utils/DaxTrackerProperty.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/api_lib/utils/IOHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/GetPathResponseContainer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/NodeInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/Pair.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/PathFindingNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/PlayerInformation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/RSRegion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/BankHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/InterfaceHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/RSItemHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/RSNPCHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/RSObjectHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/WorldHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/magic/RuneElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/magic/RunePouch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/magic/Spell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/magic/SpellBook.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/magic/Validatable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/questing/Quest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/helpers/questing/QuestHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/ItemList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/JSONArray.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/JSONAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/JSONObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/JSONStreamAware.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/JSONValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/ContainerFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/ContentHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/JSONParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/ParseException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/Yylex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/shared/jsonSimple/parser/Yytoken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/Teleport.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/WearableItemTeleport.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/teleport_utils/MasterScrollBook.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/teleport_utils/TeleportConstants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/teleport_utils/TeleportLimit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/teleports/teleport_utils/TeleportScrolls.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/DaxWalkerEngine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/move_task/MoveTaskHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/move_task/impl/DefaultObjectHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/move_task/impl/DefaultWalkHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/passive_action/PassiveAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/passive_action/impl/RunEnergyPassiveAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/special_cases/SpecialCaseHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/special_cases/SpecialCaseHandlers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/special_cases/impl/SecurityStrongholdHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/handlers/special_cases/impl/ShantyPassHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/DaxLogger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/MoveTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/WaitCondition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/enums/ActionResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/enums/MoveActionResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/models/enums/Situation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/AccurateMouse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/TribotUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/camera/AsynchronousCamera.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/camera/Calculations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/camera/CameraAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/camera/CameraCalculations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/camera/DaxCamera.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/generator/CollisionFileMaker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/generator/CollisionTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/movement/WalkingQueue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/path/DaxPathFinder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker/utils/path/PathUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/Loggable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/WaitFor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/WalkerEngine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/WalkingCondition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/WebWalkerPaint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/bfs/BFS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/interaction_handling/DoomsToggle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/interaction_handling/InteractionHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/interaction_handling/NPCInteraction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/interaction_handling/PathObjectHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/local_pathfinding/AStarNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/local_pathfinding/CollisionFlags.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/local_pathfinding/PathAnalyzer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/local_pathfinding/Reachable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/Charter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/GnomeGlider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/NavigationSpecialCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/ShipUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/SpiritTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/FairyRing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/FirstLetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/SecondLetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/navigation_utils/fairyring/letters/ThirdLetter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/real_time_collision/CollisionDataCollector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/real_time_collision/CollisionFlags.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/walker/dax_api/walker_engine/real_time_collision/RealTimeCollisionTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/BasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/BasePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/FileScriptSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/FileScriptSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptClassLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ScriptSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/service/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/service/ServiceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/Extractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/Extractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalSettingValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalSettingValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/ScreenshotUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/ScreenshotUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/SkillTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/SkillTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSCharacterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSCharacterModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSLocalPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSLocalPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSTilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSTilePath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -639,9 +161,9 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/GlobalWidgetId.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" root0="FORCE_HIGHLIGHTING" />
@@ -855,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642728483128</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="In progress update to how widget info should be stored and called">
+      <created>1642809302751</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1642809302751</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

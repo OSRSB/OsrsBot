@@ -1,7 +1,7 @@
 package rsb.gui;
 
 import rsb.methods.Environment;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -171,7 +171,7 @@ public class BotToolBar extends JToolBar {
 	}
 
 	/**
-	 * @author Jacmob
+	 * @author GigiaJ
 	 */
 	private class HomeButton extends JPanel {
 

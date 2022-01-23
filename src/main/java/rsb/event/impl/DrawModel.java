@@ -15,8 +15,8 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 
 /**
- * @author Jacmob
- * @author Kosaki
+ * @author GigiaJ
+ * 
  */
 public class DrawModel implements PaintListener, MouseListener {
 

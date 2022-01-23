@@ -2,6 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSWidget;
 
 import java.awt.*;
@@ -27,16 +28,8 @@ public class Interfaces extends MethodProvider {
 	 * @param index The index of the interface.
 	 * @return The <tt>RSWidget</tt> for the given index.
 	 */
-	public synchronized RSWidget get(final int index) {
+	public RSWidget get(final int index) {
 		return new RSWidget(methods, methods.client.getWidget(index, 0));
-	}
-
-	/**
-	 * @param index The index of the interface.
-	 * @return The <tt>RSWidget</tt> for the given index.
-	 */
-	public synchronized RSWidget get(final int parentIndex, final int index) {
-		return new RSWidget(methods, methods.client.getWidget(parentIndex, index));
 	}
 
 	/**
@@ -46,6 +39,22 @@ public class Interfaces extends MethodProvider {
 	 */
 	public RSWidget getComponent(final int index, final int childIndex) {
 		return new RSWidget(methods, methods.client.getWidget(index, childIndex));
+	}
+
+	/**
+	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
+	 * @return			The RSWidget for the WidgetInfo
+	 */
+	public RSWidget getComponent(WidgetInfo info) {
+		return new RSWidget(methods, methods.client.getWidget(info.getGroupId(), info.getChildId()));
+	}
+
+	/**
+	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
+	 * @return			The RSWidget for the WidgetInfo
+	 */
+	public RSWidget getComponent(GlobalWidgetInfo info) {
+		return new RSWidget(methods, methods.client.getWidget(info.getGroupId(), info.getChildId()));
 	}
 
 	/**

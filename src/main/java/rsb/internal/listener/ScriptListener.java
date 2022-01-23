@@ -5,7 +5,7 @@ import rsb.script.Script;
 import rsb.internal.ScriptHandler;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public interface ScriptListener {
 

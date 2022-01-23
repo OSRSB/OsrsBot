@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
  * A class that provides methods that use data from the game client. For
  * internal use.
  *
- * @author Jacmob
+ * @author GigiaJ
  */
 @Slf4j
 public abstract class MethodProvider {

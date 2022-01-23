@@ -1,7 +1,7 @@
 package rsb.service;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class ScriptDefinition {
 

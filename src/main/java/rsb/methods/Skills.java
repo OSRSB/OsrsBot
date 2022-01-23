@@ -1,6 +1,7 @@
 package rsb.methods;
 
 import net.runelite.api.Skill;
+import rsb.internal.globval.GlobalWidgetId;
 import rsb.util.SkillTracker;
 
 import java.lang.reflect.Field;
@@ -182,9 +183,9 @@ public class Skills extends MethodProvider {
 	 *         index.
 	 */
 	public boolean doHover(int component) {
-		methods.game.openTab(Game.TAB_STATS);
+		methods.game.openTab(GameGUI.Tab.STATS);
 		sleep(random(10, 100));
-		return methods.interfaces.getComponent(INTERFACE_TAB_STATS, component)
+		return methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_STATS, component)
 				.doHover();
 	}
 

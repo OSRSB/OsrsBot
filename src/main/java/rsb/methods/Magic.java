@@ -1,5 +1,8 @@
 package rsb.methods;
 
+import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSCharacter;
 import rsb.wrappers.RSGroundItem;
 import rsb.wrappers.RSObject;
@@ -12,7 +15,8 @@ import java.util.regex.Pattern;
 /**
  * Magic tab and spell related operations.
  *
- * @author Jacmob, Aut0r, Timer
+ * @author Gigiaj
+ *
  */
 public class Magic extends MethodProvider {
 
@@ -26,7 +30,7 @@ public class Magic extends MethodProvider {
      * @return <tt>true</tt> if a spell is selected; otherwise <tt>false</tt>.
      */
     public boolean isSpellSelected() {
-        RSWidget widget = methods.interfaces.get(SPELL_BOOK, SPELL_LIST);
+        RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
         for (RSWidget child : widget.getComponents()) {
                 if (child.isVisible() || child.isSelfVisible()) {
                     //Check api.widget to see what border is what or just validate that when one is selected
@@ -73,17 +77,17 @@ public class Magic extends MethodProvider {
      * @return <tt>true</tt> if the spell was clicked; otherwise <tt>false</tt>.
      */
     public boolean castSpell(final int spell) {
-        if (methods.game.getCurrentTab() != Game.TAB_MAGIC) {
-            methods.game.openTab(Game.TAB_MAGIC);
+        if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
+            methods.game.openTab(GameGUI.Tab.MAGIC);
             for (int i = 0; i < 100; i++) {
                 sleep(20);
-                if (methods.game.getCurrentTab() == Game.TAB_MAGIC) {
+                if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
                     break;
                 }
             }
             sleep(random(150, 250));
         }
-        if (methods.game.getCurrentTab() == Game.TAB_MAGIC) {
+        if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
             RSWidget inter = getInterface();
             if (inter != null) {
                 RSWidget comp = inter.getComponent(spell);
@@ -102,17 +106,17 @@ public class Magic extends MethodProvider {
      * @return <tt>true</tt> if the spell was clicked; otherwise <tt>false</tt>.
      */
     public boolean hoverSpell(final int spell) {
-        if (methods.game.getCurrentTab() != Game.TAB_MAGIC) {
-            methods.game.openTab(Game.TAB_MAGIC);
+        if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
+            methods.game.openTab(GameGUI.Tab.MAGIC);
             for (int i = 0; i < 100; i++) {
                 sleep(20);
-                if (methods.game.getCurrentTab() == Game.TAB_MAGIC) {
+                if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
                     break;
                 }
             }
             sleep(random(150, 250));
         }
-        if (methods.game.getCurrentTab() == Game.TAB_MAGIC) {
+        if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
             RSWidget inter = getInterface();
             if (inter != null) {
                 RSWidget comp = inter.getComponent(spell);
@@ -130,21 +134,21 @@ public class Magic extends MethodProvider {
      * otherwise <tt>false</tt>.
      */
     public boolean autoCastSpell(final int spell) {
-        if (methods.settings.getSetting(Settings.SETTING_COMBAT_STYLE) != 4) {
-            if (methods.game.getCurrentTab() != Game.TAB_ATTACK) {
-                methods.game.openTab(Game.TAB_ATTACK);
+        if (methods.settings.getSetting(GlobalSettingValues.SETTING_COMBAT_STYLE) != 4) {
+            if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
+                methods.game.openTab(GameGUI.Tab.COMBAT);
                 sleep(random(150, 250));
             }
-            if (methods.interfaces.get(Combat.INTERFACE_COMBAT, Combat.INTERFACE_COMBAT_AUTO_CAST_SPELL).doClick()) {
+            if (methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_CAST_SPELL).doClick()) {
                 {
                     sleep(random(500, 700));
-                    RSWidget widget = methods.interfaces.get(SPELL_BOOK, SPELL_LIST);
+                    RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
                     //The children are the spells
                     for (RSWidget child : widget.getComponents()) {
                         //To speed up the search we'll filter the undesirables
                         if (child.isVisible() || child.isSelfVisible()) {
                             //This is the autocast book spell list
-                            for (RSWidget autoCastSpell : methods.interfaces.get(AUTOCAST_SPELL_BOOK, 1).getComponents()) {
+                            for (RSWidget autoCastSpell : methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_AUTOCAST_SPELL_LIST).getComponents()) {
                                 //We need to compare sprites to determine if we've found the right value
                                 //This alleviates the need to devise a convoluted method to find spells in this book
                                 //All the spells start from at 4 so the index needs to be adjusted for that
@@ -168,7 +172,7 @@ public class Magic extends MethodProvider {
      * @return The current magic RSWidget.
      */
     public RSWidget getInterface() {
-        RSWidget widget = methods.interfaces.get(SPELL_BOOK, SPELL_LIST);
+        RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
         if (widget.isVisible()) {
             return widget;
         }
@@ -184,7 +188,7 @@ public class Magic extends MethodProvider {
         RSWidget widget;
         for (int x = 0; x < Book.values().length; x++) {
             if (Book.values()[x] != Book.NULL) {
-                widget = methods.interfaces.get(SPELL_BOOK, Book.values()[x].getIndex());
+                widget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_MAGIC_SPELL_BOOK, Book.values()[x].getIndex());
                 if (widget.isValid() && widget.isSelfVisible()) {
                     return Book.values()[x];
                 }
@@ -223,7 +227,7 @@ public class Magic extends MethodProvider {
      * @return string containing the spells in variable form
      */
     public String convertSpellBookToVariables() {
-        RSWidget widget = methods.interfaces.get(SPELL_BOOK, SPELL_LIST);
+        RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
         String spells = "";
         for (RSWidget child : widget.getComponents()) {
             Pattern pattern = Pattern.compile(">(.*)<");
@@ -263,7 +267,8 @@ public class Magic extends MethodProvider {
      */
     public enum Book {
 
-        MODERN(SPELL_WIND_STRIKE), ANCIENT(SPELL_ICE_RUSH), LUNAR(SPELL_BAKE_PIE), ARCEUUS(SPELL_REANIMATE_GOBLIN), NULL(-1);
+        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_ICE_RUSH),
+        LUNAR(GlobalWidgetId.SpellId.SPELL_BAKE_PIE), ARCEUUS(GlobalWidgetId.SpellId.SPELL_REANIMATE_GOBLIN), NULL(-1);
 
         private final int index;
 

@@ -1,17 +1,17 @@
 package rsb.methods;
 
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSPlayer;
 import rsb.wrappers.RSWidget;
 
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Trade handling.
  *
- * @author Timer
- * @author kyleshay
+ * @author GigiaJ
  */
 @SuppressWarnings("unused")
 public class Trade extends MethodProvider {
@@ -29,7 +29,7 @@ public class Trade extends MethodProvider {
 	 * @return <tt>true</tt> if in first stage.
 	 */
 	public boolean inTradeMain() {
-		RSWidget tradeInterface = methods.interfaces.get(INTERFACE_TRADE_MAIN);
+		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_MAIN);
 		return tradeInterface != null && tradeInterface.isValid();
 	}
 
@@ -39,7 +39,7 @@ public class Trade extends MethodProvider {
 	 * @return <tt>true</tt> if in second stage.
 	 */
 	public boolean inTradeSecond() {
-		RSWidget tradeInterface = methods.interfaces.get(INTERFACE_TRADE_SECOND);
+		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_SECOND);
 		return tradeInterface != null && tradeInterface.isValid();
 	}
 
@@ -118,10 +118,10 @@ public class Trade extends MethodProvider {
 	 */
 	public boolean acceptTrade() {
 		if (inTradeMain()) {
-			return methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_ACCEPT).doAction(
+			return methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_ACCEPT).doAction(
 					"Accept");
 		} else {
-			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_ACCEPT).doAction("Accept");
+			return inTradeSecond() && methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_SECOND_SCREEN_ACCEPT).doAction("Accept");
 		}
 	}
 
@@ -132,10 +132,10 @@ public class Trade extends MethodProvider {
 	 */
 	public boolean declineTrade() {
 		if (inTradeMain()) {
-			return methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_DECLINE).doAction(
+			return methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_DECLINE).doAction(
 					"Decline");
 		} else {
-			return inTradeSecond() && methods.interfaces.get(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_DECLINE).doAction("Decline");
+			return inTradeSecond() && methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_SECOND_SCREEN_DECLINE).doAction("Decline");
 		}
 	}
 
@@ -178,10 +178,10 @@ public class Trade extends MethodProvider {
 	 */
 	private String getTradingWith() {
 		if (inTradeMain()) {
-			String name = methods.interfaces.getComponent(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_NAME).getText();
+			String name = methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_MAIN_NAME).getText();
 			return name.substring(name.indexOf(": ") + 2);
 		} else if (inTradeSecond()) {
-			return methods.interfaces.getComponent(INTERFACE_TRADE_SECOND, INTERFACE_TRADE_SECOND_NAME).getText();
+			return methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_SECOND_SCREEN_SECOND_NAME).getText();
 		}
 		return null;
 	}
@@ -204,8 +204,7 @@ public class Trade extends MethodProvider {
 	private int getNumberOfItemsOffered() {
 		int number = 0;
 		for (int i = 0; i < 28; i++) {
-			if (methods.interfaces.get(INTERFACE_TRADE_MAIN,
-					INTERFACE_TRADE_MAIN_OUR).getComponent(i).getStackSize() != 0) {
+			if (methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER).getComponent(i).getStackSize() != 0) {
 				++number;
 			}
 		}
@@ -219,7 +218,7 @@ public class Trade extends MethodProvider {
 	 */
 	private int getFreeSlots() {
 		if (inTradeMain()) {
-			String text = methods.interfaces.get(INTERFACE_TRADE_MAIN, INTERFACE_TRADE_MAIN_INV_SLOTS).getText();
+			String text = methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER_FREE_SLOTS).getText();
 			//
 			Matcher matcher = Pattern.compile("(has (.*\\d) free inventory slot)").matcher(text);
 			while (matcher.find())

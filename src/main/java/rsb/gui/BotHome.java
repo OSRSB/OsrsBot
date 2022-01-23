@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.Collection;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class BotHome {
 

@@ -8,7 +8,7 @@ import rsb.service.FileScriptSource;
 import rsb.service.ScriptDefinition;
 import rsb.service.ScriptSource;
 import rsb.service.ServiceException;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

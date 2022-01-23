@@ -1,4 +1,4 @@
-package rsb.util;
+package rsb.internal.globval;
 
 public class GlobalSettingValues {
     public static final int SETTING_COMBAT_STYLE = 43;
@@ -24,4 +24,11 @@ public class GlobalSettingValues {
     public static final int SETTING_BANK_TOGGLE_WITHDRAW_MODE = 115;
     public static final int SETTING_TYPE_SHOP = 118;
     public static final int SETTING_SPECIAL_ATTACK_ENABLED = 301;
+
+
+
+    //Non-account settings (widget related ones)
+    public static final int SPRITE_SELECTED_VALUE = 1079;
+    public static final int SPRITE_UNSELECTED_VALUE = 1077;
+
 }

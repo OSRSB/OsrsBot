@@ -18,7 +18,7 @@ import javax.swing.*;
 
 
 /**
- * @author jasper ebidor
+ * @author GigiaJ
  */
 public class BasePanel extends PluginPanel implements ScriptListener {
 

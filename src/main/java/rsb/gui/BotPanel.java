@@ -13,7 +13,7 @@ import static rsb.methods.Environment.INPUT_MOUSE;
 
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class BotPanel extends JPanel {
 	private static final long serialVersionUID = 2269767882075468055L;
