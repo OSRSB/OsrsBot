@@ -9,11 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality">
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Skills and GrandExchange revised">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GrandExchange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Magic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Skills.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642934734861</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Skills and GrandExchange revised">
+      <created>1642938457804</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1642938457804</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,7 +371,8 @@
     <MESSAGE value="gradle fix" />
     <MESSAGE value="In progress update to how widget info should be stored and called" />
     <MESSAGE value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
+    <MESSAGE value="Skills and GrandExchange revised" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skills and GrandExchange revised" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

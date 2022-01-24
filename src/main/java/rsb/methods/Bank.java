@@ -32,6 +32,9 @@ public class Bank extends MethodProvider {
 		super(ctx);
 	}
 
+	/**
+	 * Assigns the ID constants for all the banking objects in RuneScape
+	 */
 	public void assignConstants() {
 		ArrayList<Integer> bankers = new ArrayList<Integer>();
 		ArrayList<Integer> bankBooths = new ArrayList<Integer>();

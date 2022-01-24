@@ -149,6 +149,11 @@ public enum GlobalWidgetInfo {
     MINIMAP_SPEC_ORB_TEXT(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), INTERFACE_MINIMAP_SPEC_ORB_TEXT),
     //[MINIMAP]
 
+    /**
+     * [PRAYER] Widget Info
+     */
+    PRAYER_NORMAL_BOOK(INTERFACE_PRAYER_BOOK, INTERFACE_NORMAL_PRAYERS)
+
 
 
     ;

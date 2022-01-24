@@ -18,14 +18,6 @@ public class GrandExchange extends MethodProvider {
 		super(ctx);
 	}
 
-
-	//The number of grand exchange slots
-	public static final int NUMBER_OF_SLOTS = 8;
-
-
-
-	public static final int[] GRAND_EXCHANGE_CLERK = {6528, 6529};
-
 	/**
 	 * Checks if Grand Exchange is open.
 	 *
@@ -133,6 +125,7 @@ public class GrandExchange extends MethodProvider {
 	 *         0 = Not found.
 	 */
 	public int findItem(String name) {
+		final int NUMBER_OF_SLOTS = 8;
 		for (int i = 1; i <= NUMBER_OF_SLOTS; i++) {
 			if (isOpen()) {
 				if (checkSlotIsEmpty(i) && !checkSlotLocked(i)) {
@@ -155,6 +148,7 @@ public class GrandExchange extends MethodProvider {
 	 *         0 = No empty slots.
 	 */
 	public int freeSlot() {
+		final int NUMBER_OF_SLOTS = 8;
 		for (int i = 1; i <= NUMBER_OF_SLOTS; i++) {
 			if (checkSlotIsEmpty(i) && !checkSlotLocked(i)) {
 				return i;

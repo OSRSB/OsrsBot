@@ -184,17 +184,17 @@ public class Magic extends MethodProvider {
      *
      * @return The Book enum of your current spell book.
      */
-    public Book getCurrentSpellBook() {
+    public MagicBook getCurrentSpellBook() {
         RSWidget widget;
-        for (int x = 0; x < Book.values().length; x++) {
-            if (Book.values()[x] != Book.NULL) {
-                widget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_MAGIC_SPELL_BOOK, Book.values()[x].getIndex());
+        for (int x = 0; x < MagicBook.values().length; x++) {
+            if (MagicBook.values()[x] != MagicBook.NULL) {
+                widget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_MAGIC_SPELL_BOOK, MagicBook.values()[x].getIndex());
                 if (widget.isValid() && widget.isSelfVisible()) {
-                    return Book.values()[x];
+                    return MagicBook.values()[x];
                 }
             }
         }
-        return Book.NULL;
+        return MagicBook.NULL;
     }
 
     /**
@@ -236,18 +236,18 @@ public class Magic extends MethodProvider {
                 String spellToAdd = "public static final int SPELL_" + matcher.group(1).replaceAll(" ", "_")
                         .replaceAll("-", "_").replaceAll("\'", "").toUpperCase() + " = ";
 
-                    for (int i = 0; i < Book.values().length; i++) {
-                        int reverseI = Book.values().length - i - 2;
+                    for (int i = 0; i < MagicBook.values().length; i++) {
+                        int reverseI = MagicBook.values().length - i - 2;
                         if (reverseI > 0) {
-                            if (child.getIndex() + 3 == Book.values()[reverseI].getIndex() - 1) {
-                                spells += "// " + Book.values()[reverseI].name() + "\n";
+                            if (child.getIndex() + 3 == MagicBook.values()[reverseI].getIndex() - 1) {
+                                spells += "// " + MagicBook.values()[reverseI].name() + "\n";
                             }
 
-                            if (child.getIndex() + 3 >= Book.values()[reverseI].getIndex() - 1) {
+                            if (child.getIndex() + 3 >= MagicBook.values()[reverseI].getIndex() - 1) {
                                 if (spells.contains(spellToAdd)) {
                                     spellToAdd = "public static final int SPELL_" + matcher.group(1).replaceAll(" ", "_")
                                             .replaceAll("-", "_").replaceAll("\'", "").toUpperCase()
-                                            + "_" + Book.values()[reverseI].name().charAt(0) + " = ";
+                                            + "_" + MagicBook.values()[reverseI].name().charAt(0) + " = ";
                                     break;
                                 }
                             }
@@ -265,14 +265,14 @@ public class Magic extends MethodProvider {
      *
      * @author GigiaJ
      */
-    public enum Book {
+    public enum MagicBook {
 
         MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_ICE_RUSH),
         LUNAR(GlobalWidgetId.SpellId.SPELL_BAKE_PIE), ARCEUUS(GlobalWidgetId.SpellId.SPELL_REANIMATE_GOBLIN), NULL(-1);
 
         private final int index;
 
-        Book(int index) {
+        MagicBook(int index) {
             this.index = index;
         }
 

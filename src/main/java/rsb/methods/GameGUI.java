@@ -12,14 +12,6 @@ import java.awt.event.KeyEvent;
  */
 public class GameGUI extends MethodProvider {
 
-	private int guiIndexes;
-	private int minimapIndexes;
-	private int compassIndexes;
-	private int[] tabIndexes;
-
-	private Tab tab;
-
-
 	public GameGUI(MethodContext ctx) {
 		super(ctx);
 		setGUI();
