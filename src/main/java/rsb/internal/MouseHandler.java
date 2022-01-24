@@ -13,7 +13,7 @@ import rsb.methods.Mouse;
 import java.awt.*;
 import java.util.Random;
 
-/*
+/**
  * @author BenLand100
  */
 @Slf4j

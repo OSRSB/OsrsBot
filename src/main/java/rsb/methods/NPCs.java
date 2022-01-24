@@ -14,6 +14,10 @@ import java.util.function.Predicate;
  */
 public class NPCs extends MethodProvider {
 
+    NPCs(final MethodContext ctx) {
+        super(ctx);
+    }
+
     /**
      * A filter that accepts all matches.
      */
@@ -23,10 +27,6 @@ public class NPCs extends MethodProvider {
             return true;
         }
     };
-
-    NPCs(final MethodContext ctx) {
-        super(ctx);
-    }
 
     /**
      * Returns an array of all loaded RSNPCs.

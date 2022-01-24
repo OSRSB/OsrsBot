@@ -1,11 +1,7 @@
 package rsb.gui;
 
 import net.runelite.api.Client;
-import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.botLauncher.RuneLite;
-import rsb.event.impl.TFPS;
-import rsb.event.impl.TMousePosition;
 import rsb.internal.PassiveScriptHandler;
 import rsb.internal.ScriptHandler;
 import rsb.internal.TextAreaLogHandler;
@@ -15,7 +11,7 @@ import rsb.methods.Environment;
 import rsb.script.PassiveScript;
 import rsb.script.Script;
 import rsb.script.ScriptManifest;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 import rsb.util.ScreenshotUtil;
 import rsb.util.WindowUtil;
 
@@ -23,14 +19,13 @@ import rsb.util.WindowUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class BotGUI extends JFrame implements ActionListener, ScriptListener, PassiveScriptListener {
     public static String[] args;

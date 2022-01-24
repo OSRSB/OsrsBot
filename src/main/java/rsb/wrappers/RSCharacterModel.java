@@ -6,7 +6,7 @@ import rsb.methods.Calculations;
 import rsb.methods.MethodContext;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class RSCharacterModel extends RSModel {
 

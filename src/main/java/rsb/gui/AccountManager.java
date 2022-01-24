@@ -2,7 +2,7 @@ package rsb.gui;
 
 import lombok.extern.slf4j.Slf4j;
 import rsb.util.AccountStore;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -19,13 +19,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
- * @author Tekk
- * @author Jacmob
- * @author Aion
- * @author Timer
+ * @author GigiaJ
  */
 @SuppressWarnings("serial")
 @Slf4j

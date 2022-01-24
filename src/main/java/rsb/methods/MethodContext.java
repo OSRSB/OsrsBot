@@ -22,7 +22,7 @@ import static java.lang.Thread.sleep;
 /**
  * For internal use to link MethodProviders.
  *
- * @author Jacmob
+ * @author GigiaJ
  */
 @Slf4j
 public class MethodContext {

@@ -9,7 +9,7 @@ import rsb.methods.MethodContext;
 import java.util.*;
 
 /**
- * @author Jacmob
+ * @author GigiaJ
  */
 public class RSLocalPath extends RSPath {
 

@@ -4,7 +4,7 @@ import rsb.botLauncher.RuneLite;
 import rsb.event.impl.*;
 import rsb.event.listener.PaintListener;
 import rsb.event.listener.TextPaintListener;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

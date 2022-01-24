@@ -21,8 +21,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @author Jacmob
- * @author Timer
+ * @author GigiaJ
  */
 public class AccountStore {
 

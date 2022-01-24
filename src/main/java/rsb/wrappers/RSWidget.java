@@ -190,7 +190,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     /**
      * The child components (bank items etc) of this component.
      *
-     * @return The components or RSInterfaceComponent[0] if null
+     * @return The components or RSWidget[0] if null
      */
     public RSWidget[] getComponents() {
         if (widget == null)
@@ -746,7 +746,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         }
         return false;
     }
-
 
     @Override
     public int hashCode() {

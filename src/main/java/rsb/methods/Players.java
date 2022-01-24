@@ -12,6 +12,10 @@ import java.util.Set;
  */
 public class Players extends MethodProvider {
 
+	Players(final MethodContext ctx) {
+		super(ctx);
+	}
+
 	/**
 	 * A filter that accepts all matches.
 	 */
@@ -20,10 +24,6 @@ public class Players extends MethodProvider {
 			return true;
 		}
 	};
-
-	Players(final MethodContext ctx) {
-		super(ctx);
-	}
 
 	/**
 	 * Returns an <tt>RSPlayer</tt> object representing the current player.

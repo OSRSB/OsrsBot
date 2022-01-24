@@ -1,7 +1,7 @@
 package rsb.gui;
 
 import rsb.internal.LogFormatter;
-import rsb.util.GlobalConfiguration;
+import rsb.internal.globval.GlobalConfiguration;
 import rsb.util.StringUtil;
 
 import javax.swing.*;

@@ -1,6 +1,7 @@
 package rsb.methods;
 
-import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
 import java.util.ArrayList;
@@ -9,13 +10,6 @@ import java.util.ArrayList;
  * Store related operations.
  */
 public class Store extends MethodProvider {
-
-	public static final int INTERFACE_STORE = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId();
-	public static final int INTERFACE_STORE_DYNAMIC_COMPONENTS = 1;
-	public static final int INTERFACE_STORE_ITEMS = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
-
-	//This seems to be universal in interfaces for the close component.
-	public static final int DYNAMIC_CLOSE_BUTTON = 11;
 
 	Store(final MethodContext ctx) {
 		super(ctx);
@@ -46,28 +40,28 @@ public class Store extends MethodProvider {
 				} else {
 					return false;
 				}
-			} else if (count >= 50 && count < 500) {
+			} else if (count >= 50) {
 				if (item.doAction("Buy 50")) {
 					sleep(random(500, 700));
 					return buy(itemID, (count - 50));
 				} else {
 					return false;
 				}
-			} else if (count >= 10 && count < 50) {
+			} else if (count >= 10) {
 				if (item.doAction("Buy 10")) {
 					sleep(random(500, 700));
 					return buy(itemID, (count - 10));
 				} else {
 					return false;
 				}
-			} else if (count >= 5 && count < 10) {
+			} else if (count >= 5) {
 				if (item.doAction("Buy 5")) {
 					sleep(random(500, 700));
 					return buy(itemID, (count - 5));
 				} else {
 					return false;
 				}
-			} else if (count >= 1 && count < 5) {
+			} else if (count >= 1) {
 				if (item.doAction("Buy 1")) {
 					sleep(random(500, 700));
 					return buy(itemID, (count - 1));
@@ -91,8 +85,7 @@ public class Store extends MethodProvider {
 			return true;
 		}
 
-		if (methods.interfaces.getComponent(INTERFACE_STORE,
-				INTERFACE_STORE_DYNAMIC_COMPONENTS).getDynamicComponent(DYNAMIC_CLOSE_BUTTON).doClick()) {
+		if (methods.interfaces.getComponent(GlobalWidgetInfo.STORE_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick()) {
 			sleep(random(500, 600));
 			return !isOpen();
 		} else {
@@ -106,7 +99,7 @@ public class Store extends MethodProvider {
 	 * @return the store <tt>RSWidget</tt>
 	 */
 	public RSWidget getInterface() {
-		return methods.interfaces.get(INTERFACE_STORE);
+		return methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE);
 	}
 
 	/**
@@ -156,14 +149,15 @@ public class Store extends MethodProvider {
 	 *         in the stores <tt>RSWidget</tt>.
 	 */
 	public RSItem[] getItems() {
-		if ((getInterface() == null)
-				|| (getInterface().getComponent(INTERFACE_STORE_ITEMS) == null)) {
+		RSWidget storeInterface = getInterface();
+		if ((storeInterface == null)
+				|| (storeInterface.getComponent(GlobalWidgetId.INTERFACE_STORE_ITEMS) == null)) {
 			return null;
 		}
 
-		ArrayList<RSItem> items = new ArrayList<RSItem>();
-		RSWidget[] components = getInterface().getComponent(
-				INTERFACE_STORE_ITEMS).getComponents();
+		ArrayList<RSItem> items = new ArrayList<>();
+		RSWidget[] components = storeInterface.getComponent(
+				GlobalWidgetId.INTERFACE_STORE_ITEMS).getComponents();
 
 		for (RSWidget component : components) {
 
@@ -172,7 +166,7 @@ public class Store extends MethodProvider {
 			}
 		}
 
-		return items.toArray(new RSItem[items.size()]);
+		return items.toArray(new RSItem[0]);
 	}
 
 	/**

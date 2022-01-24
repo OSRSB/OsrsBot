@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Represents a shape made of RSTiles.
  *
- * @author SpeedWing
+ * @author GigiaJ
  */
 public class RSArea {
 

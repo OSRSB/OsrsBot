@@ -2,14 +2,16 @@ package rsb.methods;
 
 import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.WidgetInfo;
-import rsb.internal.wrappers.Filter;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -17,106 +19,9 @@ import java.util.function.Predicate;
 /**
  * Inventory related operations.
  *
- * @author Jacmob, Aut0r, kiko
+ * @author GigiaJ
  */
 public class Inventory extends MethodProvider {
-	/**
-	 * Enumerations of the group IDs for item containers
-	 * Used in class to identify the different interfaces for inventory
-	 */
-	private enum InventoryInterfaceId {
-		//INVENTORY_CONTAINER_GROUP_ID
-		INVENTORY(149),
-		//BANK_INVENTORY_ITEMS_CONTAINER_GROUP_ID
-		BANK(15),
-		//STORE_INVENTORY_CONTAINER_GROUP_ID
-		STORE(301),
-		//GRAND_EXCHANGE_INVENTORY_GROUP_ID
-		GRAND_EXCHANGE(467),
-		//TRADE_INVENTORY_GROUP_ID
-		TRADE(336);
-		private int index;
-
-		InventoryInterfaceId(int index) {
-			this.index = index;
-		}
-
-		int getIndex() {
-			return index;
-		}
-
-	}
-
-	/**
-	 * Holds the widget and name of the widget for in file use
-	 */
-	private class InventoryInterface {
-		private String name;
-		private RSWidget widget;
-		InventoryInterface(RSWidget widget, String name) {
-			this.widget = widget;
-			this.name = name;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public RSWidget getWidget() {
-			return widget;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public void setWidget(RSWidget widget) {
-			this.widget = widget;
-		}
-	}
-
-	/**
-	 * Possibly unnecessary, but used in the selection methods
-	 * Holds values for the return of the <type>BufferedImage</type>
-	 * method getRGB
-	 */
-	private class Color {
-		// Components will be in the range of 0..255:
-		int blue;
-		int green;
-		int red;
-		int alpha;
-
-		Color(int color) {
-			blue = color & 0xff;
-			green = (color & 0xff00) >> 8;
-			red = (color & 0xff0000) >> 16;
-			alpha = (color & 0xff000000) >>> 24;
-		}
-
-		Color(int red, int green, int blue, int alpha) {
-			this.blue = blue;
-			this.green = green;
-			this.red = red;
-			this.alpha = alpha;
-		}
-
-		private boolean equals(Color color) {
-			if (this.red != color.red) {
-				return false;
-			}
-			if (this.blue != color.blue) {
-				return false;
-			}
-			if (this.green != color.green) {
-				return false;
-			}
-			if (this.alpha != color.alpha) {
-				return false;
-			}
-			return true;
-		}
-	}
 
 	Inventory(MethodContext ctx) {
 		super(ctx);
@@ -127,33 +32,29 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @return the inventory interface
 	 */
-	public InventoryInterface getInterface() {
+	public Map.Entry<String, RSWidget> getInterface() {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
-		RSWidget inventoryWidget = methods.interfaces.getComponent(InventoryInterfaceId.INVENTORY.getIndex(), 0),
-				bankWidget = methods.interfaces.getComponent(InventoryInterfaceId.BANK.getIndex(), 3),
-				storeWidget = methods.interfaces.getComponent(InventoryInterfaceId.STORE.getIndex(), 0),
-				grandExchangeWidget = methods.interfaces.getComponent(InventoryInterfaceId.GRAND_EXCHANGE.getIndex(), 0),
-				tradeWidget = methods.interfaces.getComponent(InventoryInterfaceId.TRADE.getIndex(), 0);
-		if (bankWidget.isValid() && bankWidget.isVisible()) {
-				return new InventoryInterface(bankWidget, BANK);
-		}
-		if (storeWidget.isValid() && storeWidget.isVisible()) {
-				return new InventoryInterface(storeWidget, STORE);
-		}
-		if (grandExchangeWidget.isValid() && grandExchangeWidget.isVisible()) {
-			return new InventoryInterface(grandExchangeWidget, GRAND_EXCHANGE);
-		}
-		if (tradeWidget.isValid() && tradeWidget.isVisible()) {
-			return new InventoryInterface(tradeWidget, TRADE);
-		}
+		HashMap<String, RSWidget> widgets = new HashMap<>();
+		widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.INVENTORY));
+		widgets.put(BANK, methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY));
+		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
 
-		// Tab has to be open for us to get content
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-			methods.game.openTab(Game.TAB_INVENTORY);
-			sleep(random(50, 100));
+		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
+			if (isOpen(entry.getValue())) {
+				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+					methods.game.openTab(GameGUI.Tab.INVENTORY);
+					sleep(random(50, 100));
+				}
+				return entry;
+			}
 		}
+		return null;
+	}
 
-		return new InventoryInterface(inventoryWidget, INVENTORY);
+	private static boolean isOpen(RSWidget widget) {
+		return (widget.isValid() && widget.isVisible());
 	}
 
 
@@ -171,7 +72,7 @@ public class Inventory extends MethodProvider {
 		}
 		while (item != null) {
 			if (methods.interfaces.get(WidgetInfo.DESTROY_ITEM.getGroupId()).isValid()) {
-				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM.getGroupId(), WidgetInfo.DESTROY_ITEM_YES.getChildId()).doClick();
+				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM_YES).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
@@ -223,7 +124,6 @@ public class Inventory extends MethodProvider {
 	 * @param action The item menu action to check.
 	 * @return <tt>true</tt> if the item has the action; otherwise
 	 *         <tt>false</tt>.
-	 * @author Aut0r
 	 */
 	public boolean itemHasAction(final RSItem item, final String action) {
 		// Used to determine if an item is droppable/destroyable
@@ -267,10 +167,10 @@ public class Inventory extends MethodProvider {
 			methods.interfaces.clickContinue();
 			sleep(random(800, 1300));
 		}
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY
-				&& !methods.interfaces.get(Bank.INTERFACE_BANK).isValid()
-				&& !methods.interfaces.get(Store.INTERFACE_STORE).isValid()) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
+				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK).isValid()
+				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE).isValid()) {
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {
 			return false;
@@ -399,8 +299,8 @@ public class Inventory extends MethodProvider {
 	 *         otherwise <tt>false</tt>.
 	 */
 	public boolean useItem(final RSItem item, final RSItem targetItem) {
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		return selectItem(item) && targetItem.doAction("Use");
 	}
@@ -428,8 +328,8 @@ public class Inventory extends MethodProvider {
 	 *         RSItem and RSObject; otherwise <tt>false</tt>.
 	 */
 	public boolean useItem(RSItem item, RSObject targetObject) {
-		if (methods.game.getCurrentTab() != Game.TAB_INVENTORY) {
-			methods.game.openTab(Game.TAB_INVENTORY);
+		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		return selectItem(item) && targetObject.doAction("Use", targetObject.getName());
 	}
@@ -466,11 +366,12 @@ public class Inventory extends MethodProvider {
 	 *         selected.
 	 */
 	public String getSelectedItemName() {
-		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+		RSWidget invIface = getInterface().getValue();
+		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
 			int index = getSelectedItemIndex();
 			if (index == -1)
 				return null;
-			String name = new RSItem(methods, getInterface().getWidget().getWidgetItems()[index]).getName();
+			String name = new RSItem(methods, invIface.getWidgetItems()[index]).getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
 		}
@@ -478,7 +379,7 @@ public class Inventory extends MethodProvider {
 			int index = getSelectedItemIndex();
 			if (index == -1)
 				return null;
-			String name = getInterface().getWidget().getComponents()[index].getName();
+			String name = invIface.getComponents()[index].getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
 		}
@@ -490,14 +391,13 @@ public class Inventory extends MethodProvider {
 	 * @return The index of current selected item, or -1 if none is selected.
 	 */
 	public int getSelectedItemIndex() {
-		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
-			RSWidgetItem[] comps = getInterface().getWidget().getWidgetItems();
+		RSWidget invIface = getInterface().getValue();
+		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+			RSWidgetItem[] comps = invIface.getWidgetItems();
 			return checkIsSelected(comps);
-
-
 		}
 		else {
-			RSWidget[] comps = getInterface().getWidget().getComponents();
+			RSWidget[] comps = invIface.getComponents();
 			for (int i = 0; i < Math.min(28, comps.length); ++i) {
 				if (comps[i].getBorderThickness() == 2) {
 					return i;
@@ -626,12 +526,13 @@ public class Inventory extends MethodProvider {
 	 * @return The item, or <tt>null</tt> if not found.
 	 */
 	public RSItem getItemAt(final int index) {
-		if (getInterface().getWidget().getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
-			RSWidgetItem comp = getInterface().getWidget().getWidgetItems()[index];
-			return 0 <= index && index < 28 && comp != null ? new RSItem(methods,
+		RSWidget invIface = getInterface().getValue();
+		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+			RSWidgetItem comp = invIface.getWidgetItems()[index];
+			return index < 28 && comp != null ? new RSItem(methods,
 					comp) : null;
 		}
-		RSWidget comp = getInterface().getWidget().getComponent(index);
+		RSWidget comp = invIface.getComponent(index);
 		return 0 <= index && index < 28 && comp != null ? new RSItem(methods,
 				comp) : null;
 	}
@@ -643,27 +544,22 @@ public class Inventory extends MethodProvider {
 	 *         <tt>RSItem[0]</tt>.
 	 */
 	public RSItem[] getItems() {
-		RSWidget invIface = getInterface().getWidget();
-		if (invIface.getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
-			if (invIface != null) {
-				RSWidgetItem[] invItems = invIface.getWidgetItems();
-				RSItem[] items = new RSItem[invItems.length];
-				for (int i = 0; i < invItems.length; i++) {
-					items[i] = new RSItem(methods, invItems[i]);
-				}
-				return items;
-			}
-		}
-		if (invIface != null) {
-			RSWidget[] invItems = invIface.getComponents();
+		RSWidget invIface = getInterface().getValue();
+		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+			RSWidgetItem[] invItems = invIface.getWidgetItems();
 			RSItem[] items = new RSItem[invItems.length];
 			for (int i = 0; i < invItems.length; i++) {
 				items[i] = new RSItem(methods, invItems[i]);
 			}
 			return items;
 		}
+		RSWidget[] invItems = invIface.getComponents();
+		RSItem[] items = new RSItem[invItems.length];
+		for (int i = 0; i < invItems.length; i++) {
+			items[i] = new RSItem(methods, invItems[i]);
+		}
+		return items;
 
-		return new RSItem[0];
 	}
 
 	/**
@@ -693,8 +589,8 @@ public class Inventory extends MethodProvider {
 	 *         <tt>RSItem[0]</tt>.
 	 */
 	public RSItem[] getCachedItems() {
-		RSWidget invIface = getInterface().getWidget();
-		if (invIface.getGroupIndex() == InventoryInterfaceId.INVENTORY.getIndex()) {
+		RSWidget invIface = getInterface().getValue();
+		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
 			if (invIface != null) {
 				RSWidgetItem[] invItems = invIface.getWidgetItems();
 				RSItem[] items = new RSItem[invItems.length];
@@ -881,5 +777,7 @@ public class Inventory extends MethodProvider {
 
 		return count;
 	}
+
+
 
 }

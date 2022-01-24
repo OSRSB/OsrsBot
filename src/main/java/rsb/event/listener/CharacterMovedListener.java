@@ -8,7 +8,7 @@ import rsb.event.events.CharacterMovedEvent;
 import java.util.EventListener;
 
 /**
- * @author Qauters
+ * @author GigiaJ
  */
 public interface CharacterMovedListener extends EventListener {
 	public void characterMoved(CharacterMovedEvent e);

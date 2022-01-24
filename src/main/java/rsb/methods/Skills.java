@@ -1,6 +1,7 @@
 package rsb.methods;
 
 import net.runelite.api.Skill;
+import rsb.internal.globval.GlobalWidgetId;
 import rsb.util.SkillTracker;
 
 import java.lang.reflect.Field;
@@ -12,61 +13,14 @@ import java.lang.reflect.Field;
  */
 public class Skills extends MethodProvider {
 
-	/**
-	 * A table containing the experiences that begin each level.
-	 */
-	public static final int[] XP_TABLE = {0, 0, 83, 174, 276, 388, 512, 650,
-			801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523,
-			3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031,
-			13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473, 30408,
-			33648, 37224, 41171, 45529, 50339, 55649, 61512, 67983, 75127,
-			83014, 91721, 101333, 111945, 123660, 136594, 150872, 166636,
-			184040, 203254, 224466, 247886, 273742, 302288, 333804, 368599,
-			407015, 449428, 496254, 547953, 605032, 668051, 737627, 814445,
-			899257, 992895, 1096278, 1210421, 1336443, 1475581, 1629200,
-			1798808, 1986068, 2192818, 2421087, 2673114, 2951373, 3258594,
-			3597792, 3972294, 4385776, 4842295, 5346332, 5902831, 6517253,
-			7195629, 7944614, 8771558, 9684577, 10692629, 11805606, 13034431,
-			14391160, 15889109, 17542976, 19368992, 21385073, 23611006,
-			26068632, 28782069, 31777943, 35085654, 38737661, 42769801,
-			47221641, 52136869, 57563718, 63555443, 70170840, 77474828,
-			85539082, 94442737, 104273167};
-
-	//Is in the ID but not Info as SKILLS_GROUP_ID
-	public static final int INTERFACE_TAB_STATS = 320;
-	 public class SkillInterfaces {
-		int INTERFACE_ATTACK = 1,
-		INTERFACE_STRENGTH = 2,
-		 INTERFACE_DEFENCE = 3,
-		INTERFACE_RANGED = 4,
-		INTERFACE_PRAYER = 5,
-		INTERFACE_MAGIC = 6,
-		INTERFACE_RUNECRAFT = 7,
-		INTERFACE_CONSTRUCTION = 8,
-		INTERFACE_HITPOINTS = 9,
-		INTERFACE_AGILITY = 10,
-		INTERFACE_HERBLORE = 11,
-		INTERFACE_THIEVING = 12,
-		INTERFACE_CRAFTING = 13,
-		INTERFACE_FLETCHING = 14,
-		INTERFACE_SLAYER = 15,
-		INTERFACE_HUNTER = 16,
-		INTERFACE_MINING = 17,
-		INTERFACE_SMITHING = 18,
-		INTERFACE_FISHING = 19,
-		INTERFACE_COOKING = 20,
-		INTERFACE_FIREMAKING = 21,
-		INTERFACE_WOODCUTTING = 22,
-		INTERFACE_FARMING = 23,
-		INTERFACE_TOTAL = 24;
+	Skills(final MethodContext ctx) {
+		super(ctx);
 	}
-	
+
+
 	public static Skill getSkill(final int index) {
-		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().contains(Skill.values()[index].getName().toUpperCase())) {
-				return Skill.values()[index];
-			}
-		}
+		if (index > 0 && index < Skill.values().length)
+			return Skill.values()[index];
 		return null;
 	}
 
@@ -78,8 +32,8 @@ public class Skills extends MethodProvider {
 	 * @return The index of the specified skill; otherwise -1.
 	 */
 	public static int getIndex(final String statName) {
-		for (Field field : SkillInterfaces.class.getDeclaredFields()) {
-			if (field.getName().contains(statName.toUpperCase())) {
+		for (GlobalWidgetId.Skill skill : GlobalWidgetId.Skill.values()) {
+			if (skill.name().contains(statName.toUpperCase())) {
 				return Skill.valueOf(statName.toUpperCase()).ordinal();
 			}
 		}
@@ -101,9 +55,6 @@ public class Skills extends MethodProvider {
 		return 1;
 	}
 
-	Skills(final MethodContext ctx) {
-		super(ctx);
-	}
 
 	/**
 	 * Gets the current experience for the given skill.
@@ -209,9 +160,9 @@ public class Skills extends MethodProvider {
 	 *         index.
 	 */
 	public boolean doHover(int component) {
-		methods.game.openTab(Game.TAB_STATS);
+		methods.game.openTab(GameGUI.Tab.STATS);
 		sleep(random(10, 100));
-		return methods.interfaces.getComponent(INTERFACE_TAB_STATS, component)
+		return methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_STATS, component)
 				.doHover();
 	}
 
@@ -226,4 +177,25 @@ public class Skills extends MethodProvider {
 	public SkillTracker createTracker(final int... skills) {
 		return new SkillTracker(methods.runeLite, skills);
 	}
+
+
+	/**
+	 * A table containing the experiences that begin each level.
+	 */
+	public static final int[] XP_TABLE = {0, 0, 83, 174, 276, 388, 512, 650,
+			801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523,
+			3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031,
+			13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473, 30408,
+			33648, 37224, 41171, 45529, 50339, 55649, 61512, 67983, 75127,
+			83014, 91721, 101333, 111945, 123660, 136594, 150872, 166636,
+			184040, 203254, 224466, 247886, 273742, 302288, 333804, 368599,
+			407015, 449428, 496254, 547953, 605032, 668051, 737627, 814445,
+			899257, 992895, 1096278, 1210421, 1336443, 1475581, 1629200,
+			1798808, 1986068, 2192818, 2421087, 2673114, 2951373, 3258594,
+			3597792, 3972294, 4385776, 4842295, 5346332, 5902831, 6517253,
+			7195629, 7944614, 8771558, 9684577, 10692629, 11805606, 13034431,
+			14391160, 15889109, 17542976, 19368992, 21385073, 23611006,
+			26068632, 28782069, 31777943, 35085654, 38737661, 42769801,
+			47221641, 52136869, 57563718, 63555443, 70170840, 77474828,
+			85539082, 94442737, 104273167};
 }

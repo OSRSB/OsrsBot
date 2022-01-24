@@ -8,7 +8,7 @@ import java.util.EnumSet;
 /**
  * Represents a path to walk along in game.
  *
- * @author Jacmob
+ * @author GigiaJ
  */
 public abstract class RSPath extends MethodProvider {
 

@@ -2,25 +2,15 @@ package rsb.methods;
 
 import net.runelite.api.Actor;
 import net.runelite.api.Skill;
-import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
-
-import java.util.ArrayList;
 
 /**
  * Combat related operations.
  */
 public class Combat extends MethodProvider {
-
-	public static int INTERFACE_COMBAT = WidgetInfo.COMBAT_LEVEL.getGroupId();
-
-	public static int INTERFACE_COMBAT_DEFENSIVE_CAST_SPELL = 22;
-
-	public static int INTERFACE_COMBAT_AUTO_CAST_SPELL = 27;
-
-	public static int INTERFACE_COMBAT_AUTO_RETALIATE = 30;
-
 
 	public Combat(MethodContext ctx) {
 		super(ctx);
@@ -74,12 +64,12 @@ public class Combat extends MethodProvider {
 	 * @param enable <tt>true</tt> to enable; <tt>false</tt> to disable.
 	 */
 	public void setAutoRetaliate(final boolean enable) {
-		final RSWidget autoRetal = methods.interfaces.getComponent(INTERFACE_COMBAT, INTERFACE_COMBAT_AUTO_RETALIATE);
+		final RSWidget autoRetal = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
 		if (isAutoRetaliateEnabled() != enable) {
-			if (methods.game.getCurrentTab() != Game.TAB_ATTACK) {
-				methods.game.openTab(Game.TAB_ATTACK);
+			if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
+				methods.game.openTab(GameGUI.Tab.COMBAT);
 			}
-			if (methods.game.getCurrentTab() == Game.TAB_ATTACK
+			if (methods.game.getCurrentTab() == GameGUI.Tab.COMBAT
 					&& autoRetal != null) {
 				autoRetal.doClick();
 			}
@@ -92,7 +82,7 @@ public class Combat extends MethodProvider {
 	 * @return <tt>true</tt> if retaliate is enabled; otherwise <tt>false</tt>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.settings.getSetting(Settings.SETTING_AUTO_RETALIATE) == 0;
+		return methods.settings.getSetting(GlobalSettingValues.SETTING_AUTO_RETALIATE) == 0;
 	}
 
 	/**
@@ -101,7 +91,7 @@ public class Combat extends MethodProvider {
 	 * @return The current fight mode setting.
 	 */
 	public int getFightMode() {
-		return methods.settings.getSetting(Settings.SETTING_COMBAT_STYLE);
+		return methods.settings.getSetting(GlobalSettingValues.SETTING_COMBAT_STYLE);
 	}
 
 	/**
@@ -116,15 +106,15 @@ public class Combat extends MethodProvider {
 	 */
 	public boolean setFightMode(int fightMode) {
 		if (fightMode != getFightMode()) {
-			methods.game.openTab(Game.TAB_ATTACK);
+			methods.game.openTab(GameGUI.Tab.COMBAT);
 			if (fightMode == 0) {
-				return methods.interfaces.getComponent(INTERFACE_COMBAT, WidgetInfo.COMBAT_STYLE_ONE.getChildId()).doClick();
+				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_ONE).doClick();
 			} else if (fightMode == 1) {
-				return methods.interfaces.getComponent(INTERFACE_COMBAT,  WidgetInfo.COMBAT_STYLE_TWO.getChildId()).doClick();
+				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_TWO).doClick();
 			} else if (fightMode == 2) {
-				return methods.interfaces.getComponent(INTERFACE_COMBAT, WidgetInfo.COMBAT_STYLE_THREE.getChildId()).doClick();
+				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_THREE).doClick();
 			} else if (fightMode == 3) {
-				return methods.interfaces.getComponent(INTERFACE_COMBAT, WidgetInfo.COMBAT_STYLE_FOUR.getChildId()).doClick();
+				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_FOUR).doClick();
 			}
 		}
 		return false;
@@ -136,8 +126,8 @@ public class Combat extends MethodProvider {
 	 * @return The current wilderness level otherwise, 0.
 	 */
 	public int getWildernessLevel() {
-		RSWidget widget = methods.interfaces.get(WidgetInfo.PVP_WILDERNESS_LEVEL.getGroupId(), WidgetInfo.PVP_WILDERNESS_LEVEL.getChildId());
-		return (widget.isValid() && widget.isVisible()) ? Integer.valueOf(widget.getText().replace("Level: ", "").trim()) : 0;
+		RSWidget widget = methods.interfaces.getComponent(WidgetInfo.PVP_WILDERNESS_LEVEL);
+		return (widget.isValid() && widget.isVisible()) ? Integer.parseInt(widget.getText().replace("Level: ", "").trim()) : 0;
 
 	}
 
@@ -148,7 +138,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getLifePoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_HEALTH_ORB.getGroupId(), Game.INTERFACE_HP_ORB_AMOUNT).getText());
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_HEALTH_ORB_TEXT).getText());
 		} catch (NumberFormatException ex) {
 			return 0;
 		}
@@ -169,7 +159,7 @@ public class Combat extends MethodProvider {
 	 */
 
 	public boolean isPoisoned() {
-		return 0 < methods.settings.getSetting(Settings.SETTING_POISON) && methods.settings.getSetting(Settings.SETTING_POISON) < 1000000;
+		return 0 < methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) && methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) < 1000000;
 	}
 
 	/**
@@ -178,7 +168,7 @@ public class Combat extends MethodProvider {
 	 * @return
 	 */
 	public boolean isEnvenomed() {
-		return methods.settings.getSetting(Settings.SETTING_POISON) > 1000000;
+		return methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) > 1000000;
 	}
 
 	/**
@@ -189,7 +179,7 @@ public class Combat extends MethodProvider {
 
 	public int getVenomDamage() {
 		if (isEnvenomed())
-			return (methods.settings.getSetting(Settings.SETTING_POISON) - 999997) * 2;
+			return (methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) - 999997) * 2;
 		return 0;
 	}
 
@@ -199,7 +189,7 @@ public class Combat extends MethodProvider {
 	 * @return <tt>true</tt> if special is enabled; otherwise <tt>false</tt>.
 	 */
 	public boolean isSpecialEnabled() {
-		return methods.settings.getSetting(Settings.SETTING_SPECIAL_ATTACK_ENABLED) == 1;
+		return methods.settings.getSetting(GlobalSettingValues.SETTING_SPECIAL_ATTACK_ENABLED) == 1;
 	}
 
 	/**
@@ -209,7 +199,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getSpecialBarEnergy() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), Game.INTERFACE_SPEC_ORB_AMOUNT).getText()
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_SPEC_ORB_TEXT).getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;
@@ -223,7 +213,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.get(WidgetInfo.MINIMAP_PRAYER_ORB.getGroupId(), Game.INTERFACE_PRAYER_ORB_AMOUNT).getText()
+			return Integer.parseInt(methods.interfaces.getComponent(WidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;

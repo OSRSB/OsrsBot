@@ -19,7 +19,7 @@ import java.util.LinkedList;
 /**
  * A screen space model.
  *
- * @author Jacmob, SpeedWing
+ * @author GigiaJ
  */
 @Slf4j
 public class RSModel extends MethodProvider {
