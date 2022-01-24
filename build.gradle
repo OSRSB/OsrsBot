@@ -12,7 +12,6 @@ repositories {
 }
 
 def runeLiteVersion = '1.8.9'
-def Tag = '0.0.2'
 
 dependencies {
     compile group: 'net.runelite', name: 'client', version: runeLiteVersion
@@ -29,7 +28,6 @@ dependencies {
     compile group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.2'
     compile group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     compile group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
-
 }
 
 group = 'rsb'

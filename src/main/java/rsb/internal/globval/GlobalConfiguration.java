@@ -80,9 +80,10 @@ public class GlobalConfiguration {
 		public static String getHomeDirectory() {
 			final String env = System.getenv(GlobalConfiguration.NAME.toUpperCase() + "_HOME");
 			if ((env == null) || env.isEmpty()) {
-				return (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS ?
-						FileSystemView.getFileSystemView().getDefaultDirectory().getAbsolutePath() :
-						Paths.getUnixHome()) + File.separator + GlobalConfiguration.NAME;
+				String test = GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS ?
+						System.getProperty("user.home") :
+						Paths.getUnixHome();
+				return (test + File.separator + GlobalConfiguration.NAME);
 			} else {
 				return env;
 			}

@@ -374,10 +374,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * @return          The ArgumentAcceptingOptionSpec array (the fields for our options)
      */
     public static ArgumentAcceptingOptionSpec<?>[] handleParsing(OptionParser parser) {
-        parser.accepts("developer-mode", "Enable developer tools");
-        parser.accepts("debug", "Show extra debugging output");
+
         parser.accepts("bot", "Starts the client in bot mode");
         parser.accepts("bot-runelite", "Starts the client in Bot RuneLite mode");
+        parser.accepts("developer-mode", "Enable developer tools");
+        parser.accepts("debug", "Show extra debugging output");
         parser.accepts("insecure-skip-tls-verification", "Disables TLS verification");
         parser.accepts("jav_config", "jav_config url")
                 .withRequiredArg()
@@ -409,7 +410,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 });
 
         final ArgumentAcceptingOptionSpec<String> proxyInfo = parser
-                .accepts("proxy")
+                .accepts("proxy", "Designates a proxy ip address to be used to make the bot server connections")
                 .withRequiredArg().ofType(String.class);
 
         return (ArgumentAcceptingOptionSpec<?>[]) new ArgumentAcceptingOptionSpec[]{sessionfile, configfile, updateMode, proxyInfo};
@@ -428,30 +429,25 @@ public class RuneLite extends net.runelite.client.RuneLite {
             System.exit(0);
         }
 
-        if (options.has("proxy"))
-        {
-            String[] proxy = options.valueOf(optionSpecs[Options.sessionfile.getIndex()].ofType(String.class)).split(":");
+        if (options.has("proxy")) {
+            String[] proxy = options.valueOf(optionSpecs[Options.proxyinfo.getIndex()].ofType(String.class)).split(":");
 
-            if (proxy.length >= 2)
-            {
+            if (proxy.length >= 2) {
                 System.setProperty("socksProxyHost", proxy[0]);
                 System.setProperty("socksProxyPort", proxy[1]);
             }
 
-            if (proxy.length >= 4)
-            {
+            if (proxy.length >= 4) {
                 System.setProperty("java.net.socks.username", proxy[2]);
                 System.setProperty("java.net.socks.password", proxy[3]);
 
                 final String user = proxy[2];
                 final char[] pass = proxy[3].toCharArray();
 
-                Authenticator.setDefault(new Authenticator()
-                {
+                Authenticator.setDefault(new Authenticator() {
                     private PasswordAuthentication auth = new PasswordAuthentication(user, pass);
 
-                    protected PasswordAuthentication getPasswordAuthentication()
-                    {
+                    protected PasswordAuthentication getPasswordAuthentication() {
                         return auth;
                     }
                 });

@@ -185,8 +185,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		scripts.addAll(SRC_BUNDLED.list());
 		scripts.addAll(SRC_PRECOMPILED.list());
 		scripts.addAll(SRC_SOURCES.list());
-		generateTestScripts();
-		scripts.addAll(SRC_TEST.list());
+		//generateTestScripts();
+		//scripts.addAll(SRC_TEST.list());
 		model.search(search.getText());
 		deleteTemporaryFiles();
 	}
