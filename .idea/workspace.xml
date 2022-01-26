@@ -9,16 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Revised the input location for scripts">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix README.md" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -361,7 +352,21 @@
       <option name="project" value="LOCAL" />
       <updated>1643013215040</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="README.md update">
+      <created>1643157820111</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1643157820111</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fix README.md">
+      <created>1643158023003</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1643158023003</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -387,7 +392,9 @@
     <MESSAGE value="Skills and GrandExchange revised" />
     <MESSAGE value="Finished revising Prayer for widget id centralization" />
     <MESSAGE value="Revised the input location for scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revised the input location for scripts" />
+    <MESSAGE value="README.md update" />
+    <MESSAGE value="Fix README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix README.md" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
