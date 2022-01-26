@@ -65,11 +65,11 @@ public class ScriptPanel extends JPanel {
 		Map<Integer, Script> running = sh.getRunningScripts();
 		if (running.size() > 0) {
 			int id = running.keySet().iterator().next();
-			Script s = running.get(id);
+			//Script s = running.get(id);
 			//ScriptManifest prop = s.getClass().getAnnotation(ScriptManifest.class);
 			//int result = JOptionPane.showConfirmDialog(this, "Would you like to stop the script " + prop.name() + "?", "Script", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 			//if (result == JOptionPane.OK_OPTION) {
-				sh.stopScript(id);
+			sh.stopScript(id);
 			//}
 		}
 	}

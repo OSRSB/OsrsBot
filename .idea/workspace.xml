@@ -9,96 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Finished revising Prayer for widget id centralization">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite$ConfigFileConverter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/DrawInventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/event/impl/TTab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$AccountTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$AccountTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$RandomRewardEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$RandomRewardEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$TableSelectionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$TableSelectionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotMenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotMenuBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$AddButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$AddButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$ScriptTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$ScriptTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank$ReachableBankerFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank$ReachableBankerFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Bank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Combat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Combat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Equipment.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Equipment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game$ChatMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game$ChatMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game$ChatOptions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GameGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GrandExchange.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/GrandExchange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Interfaces.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory$1Selector.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory$1Selector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory$Color.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory$InventoryInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory$InventoryInterfaceId.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Magic$Book.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Magic.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Magic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Methods.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Methods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/NPCs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Objects.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Players.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Prayer$Book.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Prayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Prayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Skills$SkillInterfaces.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Skills.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Store.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Trade.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Trade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Walking.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Walking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Extractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Extractor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$OperatingSystem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths$Resources.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths$URLs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Paths.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration$Twitter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/GlobalConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/ScreenshotUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/ScreenshotUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidget.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSWidget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" afterDir="false" />
-    </list>
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix README.md" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,10 +126,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24651568" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -434,7 +345,28 @@
       <option name="project" value="LOCAL" />
       <updated>1642988306959</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Revised the input location for scripts">
+      <created>1643013215040</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1643013215040</updated>
+    </task>
+    <task id="LOCAL-00011" summary="README.md update">
+      <created>1643157820111</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1643157820111</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fix README.md">
+      <created>1643158023003</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1643158023003</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -459,6 +391,13 @@
     <MESSAGE value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
     <MESSAGE value="Skills and GrandExchange revised" />
     <MESSAGE value="Finished revising Prayer for widget id centralization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished revising Prayer for widget id centralization" />
+    <MESSAGE value="Revised the input location for scripts" />
+    <MESSAGE value="README.md update" />
+    <MESSAGE value="Fix README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix README.md" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
