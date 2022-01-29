@@ -72,17 +72,17 @@ to look over are:
 To run you'll need to modify your program arguments to the following depending on how you wish it to run:
 
 --bot-runelite
-This runs the bot, it uses the RuneLite interface
+This runs the API, it uses the RuneLite interface
 
 --runelite
-This runs the bot in RuneLite stock form. It has no additions from RSB and behaves normally.
+This runs the API in RuneLite stock form. It has no additions from RSB and behaves normally.
 
 --ea
 This enables assertions, it should never be used with bot mode.
 It does need to be enabled for base RuneLite to use --developer-mode
 
 --developer-mode
-Enables the developer features in RuneLite stock and RuneLite bot modes. 
+Enables the developer features in RuneLite stock and RuneLite API modes. 
 
 VM args:
 -debug
@@ -117,7 +117,7 @@ testing your script then you might want to look into that.
 #### Dependencies
 So as any Java project might this one utilizes a few dependencies and as listed they are:
 1. [RuneLite](https://github.com/runelite/runelite)
-   - Bot is built to operate on top of RuneLite
+   - API is built to operate on top of RuneLite
 2. [javassist](https://github.com/jboss-javassist/javassist)
    - Used loosely in anti-cheat precautions involving the use of
    instrumentation
@@ -126,7 +126,7 @@ So as any Java project might this one utilizes a few dependencies and as listed 
 4. [junit](https://github.com/junit-team/junit4)
    - Used for making unit tests
 5. [slf4j](https://github.com/qos-ch/slf4j)
-   - Used for handling logging within the bot
+   - Used for handling logging within the API
 6. [jOpt Simple](https://github.com/jopt-simple/jopt-simple)
    - Used for easing the parsing of command-line arguments
 
