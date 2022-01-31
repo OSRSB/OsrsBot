@@ -26,11 +26,9 @@
 
 package rsb.plugin;
 
-import lombok.Getter;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.game.ItemManager;
 
-import rsb.botLauncher.Application;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.PluginPanel;
 import net.runelite.client.ui.components.materialtabs.MaterialTab;
@@ -67,7 +65,7 @@ class BotPanel extends PluginPanel
 	 * @param basePanel
 	 * @param scriptPanel
 	 */
-	protected void associateBot(BasePanel basePanel, ScriptPanel scriptPanel) {
+	protected void associateBot(AccountPanel basePanel, ScriptPanel scriptPanel) {
 		MaterialTab  baseTab = new MaterialTab("Bot", tabGroup, basePanel);
 		MaterialTab scriptTab = new MaterialTab("Scripts", tabGroup, scriptPanel);
 

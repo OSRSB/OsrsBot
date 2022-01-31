@@ -1,6 +1,5 @@
 package rsb.internal.globval;
 
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -18,31 +17,9 @@ public class GlobalConfiguration {
 	public static class Paths {
 
 		public static class Resources {
-			public static final String ROOT = "../../../rsb";//"runelite-client/src/main/java/net/runelite/client/rsb";
-			public static final String ROOT_IMG = ROOT + "/images";
-			public static final String ICON = ROOT_IMG + "/icon.png";
-			public static final String ICON_DELETE = ROOT_IMG + "/delete.png";
-			public static final String ICON_PLAY = ROOT_IMG + "/control_play_blue.png";
-			public static final String ICON_PAUSE = ROOT_IMG + "/control_pause.png";
-			public static final String ICON_ADD = ROOT_IMG + "/add.png";
-			public static final String ICON_ADD_OVER = ROOT_IMG + "/add_over.png";
-			public static final String ICON_ADD_DOWN = ROOT_IMG + "/add_down.png";
-			public static final String ICON_HOME = ROOT_IMG + "/home.png";
-			public static final String ICON_BOT = ROOT_IMG + "/bot.png";
-			public static final String ICON_CLOSE = ROOT_IMG + "/close.png";
-			public static final String ICON_CLOSE_OVER = ROOT_IMG + "/close_over.png";
-			public static final String ICON_TICK = ROOT_IMG + "/tick.png";
-			public static final String ICON_MOUSE = ROOT_IMG + "/mouse.png";
-			public static final String ICON_KEYBOARD = ROOT_IMG + "/keyboard.png";
-			public static final String ICON_CONNECT = ROOT_IMG + "/connect.png";
-			public static final String ICON_DISCONNECT = ROOT_IMG + "/disconnect.png";
-			public static final String ICON_START = ROOT_IMG + "/control_play.png";
-			public static final String ICON_SCRIPT_BDL = ROOT_IMG + "/script_bdl.png";
-			public static final String ICON_SCRIPT_DRM = ROOT_IMG + "/script_drm.png";
-			public static final String ICON_SCRIPT_PRE = ROOT_IMG + "/script_pre.png";
-			public static final String ICON_SCRIPT_SRC = ROOT_IMG + "/script_src.png";
-			public static final String ICON_WEBLINK = ROOT_IMG + "/world_link.png";
-
+			public static final String ROOT = "../../../rsb";
+			public static final String ROOT_IMG = ROOT ;//+ "/images";
+			public static final String ICON = GlobalConfiguration.class.getResource("rsb/plugin/rsb.png").getPath();
 			public static final String VERSION = ROOT + "/version.txt";
 		}
 

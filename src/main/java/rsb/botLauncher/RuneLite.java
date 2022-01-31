@@ -57,7 +57,7 @@ import okhttp3.Response;
 import rsb.event.EventManager;
 import rsb.event.events.PaintEvent;
 import rsb.event.events.TextPaintEvent;
-import rsb.gui.AccountManager;
+import rsb.plugin.AccountManager;
 import rsb.internal.BreakHandler;
 import rsb.internal.PassiveScriptHandler;
 import rsb.internal.ScriptHandler;

@@ -43,12 +43,13 @@ public class AccountStore {
 			boolean safe = true;
 			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 			for (StackTraceElement stackTraceElement : stackTraceElements) {
-				safe = safe && (stackTraceElement.getClassName().contains("net.runelite") || stackTraceElement
+				safe = safe && (stackTraceElement.getClassName().contains("rsb") || stackTraceElement
 						.getClassName().contains("java.lang.T") || stackTraceElement
 						.getClassName().contains("java.awt.") || stackTraceElement
 						.getClassName().contains("javax.swing.") || stackTraceElement
 						.getClassName().contains("java.security.") || stackTraceElement
-						.getClassName().contains("sun.awt."));
+						.getClassName().contains("sun.awt.") || stackTraceElement.getClassName().contains("org.pushingpixels")
+				);
 			}
 			return safe ? password : null;
 		}
@@ -58,12 +59,12 @@ public class AccountStore {
 			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 			if (key.equalsIgnoreCase("pin")) {
 				for (StackTraceElement stackTraceElement : stackTraceElements) {
-					safe = safe && (stackTraceElement.getClassName().contains("org.rsbot.") || stackTraceElement
+					safe = safe && (stackTraceElement.getClassName().contains("rsb") || stackTraceElement
 							.getClassName().contains("java.lang.T") || stackTraceElement
 							.getClassName().contains("java.awt.") || stackTraceElement
 							.getClassName().contains("javax.swing.") || stackTraceElement
 							.getClassName().contains("java.security.") || stackTraceElement
-							.getClassName().contains("sun.awt."));
+							.getClassName().contains("sun.awt.") || stackTraceElement.getClassName().contains("org.pushingpixels"));
 				}
 			}
 			return safe ? attributes.get(key) : null;

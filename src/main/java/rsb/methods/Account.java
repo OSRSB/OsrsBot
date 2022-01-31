@@ -1,6 +1,6 @@
 package rsb.methods;
 
-import rsb.gui.AccountManager;
+import rsb.plugin.AccountManager;
 
 import java.util.logging.Logger;
 

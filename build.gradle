@@ -16,7 +16,7 @@ def runeLiteVersion = '1.8.9'
 dependencies {
     compile group: 'net.runelite', name: 'client', version: runeLiteVersion
 
-    compileOnly 'org.projectlombok:lombok:1.18.22'
+    compile 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     testImplementation 'junit:junit:4.13.2'
@@ -28,6 +28,36 @@ dependencies {
     compile group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.2'
     compile group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     compile group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources"]
+        }
+    }
+}
+
+project.configurations.implementation.setCanBeResolved(true)
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'rsb.botLauncher.Application'
+        )
+
+    }
+    from{
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it: zipTree(it)}
+    }
+
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
 }
 
 group = 'rsb'

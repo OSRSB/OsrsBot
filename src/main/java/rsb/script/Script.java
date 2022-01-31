@@ -7,7 +7,7 @@ import rsb.util.Timer;
 import rsb.botLauncher.RuneLite;
 
 
-import rsb.gui.AccountManager;
+import rsb.plugin.AccountManager;
 import rsb.internal.BreakHandler;
 import rsb.event.EventMulticaster;
 import rsb.event.listener.PaintListener;

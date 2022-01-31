@@ -9,7 +9,427 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix README.md" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Added generated API reference">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/rsb/plugin/rsb.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/RSBBB_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/RSBBB_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/botLauncher/RuneLite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$AccountTableModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellEditor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$PasswordCellRenderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$RandomRewardEditor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager$TableSelectionListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/AccountManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotGUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotHome$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotHome.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotMenuBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel$HomeUpdater.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$AddButton$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$AddButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$BotButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$HomeButton$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar$HomeButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/BotToolBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ClientPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$LogAreaListModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$LogQueue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$Renderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea$WrappedLogRecord.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/LogTextArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$ScriptTableModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector$TableSelectionListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/gui/ScriptSelector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/TextAreaLogHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/internal/TextAreaLogHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BasePanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BasePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BotPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/BotPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/Botplugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/Botplugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Script.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/Script.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/script/randoms/LoginBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore$Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/AccountStore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/StringUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/StringUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-17.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-18.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-19.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-20.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-20.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-21.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-21.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-22.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-22.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-23.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-23.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-24.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-24.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-25.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-25.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-26.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-26.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/Application.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/Application.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/RuneLite.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/RuneLite.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/RuneLiteTestFeatures.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/RuneLiteTestFeatures.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/botLauncher/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/botLauncher/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/EventManager.KillEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/EventManager.KillEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/EventManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/EventManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/EventMulticaster.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/EventMulticaster.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/CharacterMovedEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/CharacterMovedEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/MessageEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/MessageEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/PaintEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/PaintEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/RSEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/RSEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/TextPaintEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/TextPaintEvent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/events/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/events/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/CharacterMovedLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/CharacterMovedLogger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawBoundaries.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawBoundaries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawGround.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawGround.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawInventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawInventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawItems.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawItems.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawMouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawMouse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawNPCs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawNPCs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawObjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawObjects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawPlayers.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawPlayers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawSettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawSettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/DrawWeb.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/DrawWeb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/MessageLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/MessageLogger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TAnimation.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TAnimation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TCamera.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TCamera.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TFPS.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TFPS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TFloorHeight.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TFloorHeight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TLoginIndex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TLoginIndex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TMenuActions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TMenuActions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TMousePosition.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TMousePosition.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TPlayerPosition.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TPlayerPosition.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TTab.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TTab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/TUserInputAllowed.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/TUserInputAllowed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/impl/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/impl/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/CharacterMovedListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/CharacterMovedListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/MessageListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/MessageListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/PaintListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/PaintListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/TextPaintListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/TextPaintListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/listener/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/listener/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/event/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/event/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/AccountManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/AccountManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/BotGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/BotGUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/BotHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/BotHome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/BotMenuBar.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/BotMenuBar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/BotPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/BotPanel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/BotToolBar.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/BotToolBar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/LogTextArea.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/LogTextArea.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/ScriptSelector.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/ScriptSelector.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/gui/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/gui/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/BotModule.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/BotModule.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/BotProperties.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/BotProperties.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/BreakHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/BreakHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/ClientThread.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/ClientThread.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/InputManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/InputManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/LogFormatter.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/LogFormatter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/LogOutputStream.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/LogOutputStream.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/MouseHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/MouseHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/NewHooks.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/NewHooks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/PassiveScriptHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/PassiveScriptHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/ScriptHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/ScriptHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/SystemConsoleHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/SystemConsoleHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/TextAreaLogHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/TextAreaLogHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.OperatingSystem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.OperatingSystem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.Resources.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.Resources.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.URLs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.URLs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Paths.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Twitter.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.Twitter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalConfiguration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalSettingValues.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalSettingValues.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.EquipmentSlotId.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.EquipmentSlotId.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.PrayerBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.PrayerBook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.Prayers.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.Prayers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.Skill.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.Skill.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.SpellId.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.SpellId.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetInfo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/globval/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/Canvas.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/Canvas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/Focus.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/Focus.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/Keyboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/Keyboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/Mouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/Mouse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/VirtualKeyboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/VirtualKeyboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/VirtualMouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/VirtualMouse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/input/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/input/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/CanvasMousePositionAgent.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/CanvasMousePositionAgent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/ComponentMousePositionTransformer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/ComponentMousePositionTransformer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/ContainerMousePositionTransformer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/ContainerMousePositionTransformer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/instrumentate/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/listener/PassiveScriptListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/listener/PassiveScriptListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/listener/ScriptListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/listener/ScriptListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/listener/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/listener/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/listener/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/listener/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/listener/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/listener/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/RSBSystemCalls.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/RSBSystemCalls.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/naturalmouse/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Deque.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Deque.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Filter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeDeque.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeDeque.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeSub.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeSub.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeSubQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/NodeSubQueue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Queue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/Queue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.Flags.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.Flags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.Keys.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.Keys.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/TileFlags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/internal/wrappers/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Account.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Bank.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Bank.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Calculations.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Calculations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Camera.ROTATION_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Camera.ROTATION_METHOD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Camera.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Camera.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Combat.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Combat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Environment.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Environment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Equipment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Game.ChatMode.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Game.ChatMode.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Game.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/GameGUI.Tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/GameGUI.Tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/GameGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/GameGUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/GrandExchange.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/GrandExchange.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/GroundItems.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/GroundItems.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Interfaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Interfaces.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Keyboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Keyboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Magic.MagicBook.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Magic.MagicBook.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Magic.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Magic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/MethodContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/MethodContext.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/MethodProvider.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/MethodProvider.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Methods.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Methods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Mouse.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Mouse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/NPCs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/NPCs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Objects.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Objects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Players.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Players.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Prayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Prayer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Skills.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Skills.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Store.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Store.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Tiles.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Tiles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Trade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Walking.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Walking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/Web.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/Web.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/WorldHopper.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/WorldHopper.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/methods/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/methods/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/BasePanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/BasePanel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/Botplugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/Botplugin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/ScriptPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/ScriptPanel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/plugin/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/plugin/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/PassiveScript.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/PassiveScript.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/PassiveScriptManifest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/PassiveScriptManifest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/Random.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/Random.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/Script.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/Script.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/ScriptManifest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/ScriptManifest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/randoms/LoginBot.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/randoms/LoginBot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/randoms/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/randoms/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/randoms/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/randoms/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/script/randoms/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/script/randoms/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/FileScriptSource.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/FileScriptSource.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/Monitoring.Event.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/Monitoring.Event.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/Monitoring.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/Monitoring.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/ScriptDefinition.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/ScriptDefinition.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/ScriptSource.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/ScriptSource.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/ServiceException.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/ServiceException.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/service/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/service/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/testsScript/Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/testsScript/Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/testsScript/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/testsScript/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/testsScript/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/testsScript/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/testsScript/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/testsScript/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/AccountStore.Account.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/AccountStore.Account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/AccountStore.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/AccountStore.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/Base64.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/Base64.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/Extractor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/Extractor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/OutputObjectComparer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/OutputObjectComparer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/Pair.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/Pair.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/Parameters.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/Parameters.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/ScreenshotUtil.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/ScreenshotUtil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.User32.WNDENUMPROC.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.User32.WNDENUMPROC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.User32.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.User32.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/SetForegroundWindowUtil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/SkillTracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/SkillTracker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/StdRandom.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/StdRandom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/StringUtil.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/StringUtil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/Timer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/Timer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/WindowUtil.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/WindowUtil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/util/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/util/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSArea.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSArea.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacter.DIRECTION.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacter.DIRECTION.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacter.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacterModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSCharacterModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundItemModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundItemModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundObjectModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSGroundObjectModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSLocalPath.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSLocalPath.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSNPC.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSNPC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSObject.Type.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSObject.Type.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSPath.TraversalOption.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSPath.TraversalOption.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSPath.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSPath.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSPlayer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSTile.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSTile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSTilePath.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSTilePath.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSWallObjectModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSWallObjectModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSWidget.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSWidget.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/RSWidgetItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/RSWidgetItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/Clickable.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/Clickable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/Clickable07.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/Clickable07.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/Positionable.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/Positionable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/common/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/ChooseOption.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/ChooseOption.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/NPCChat.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/NPCChat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/RSMenuNode.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/RSMenuNode.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/WalkerTile.TYPES.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/WalkerTile.TYPES.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/WalkerTile.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/WalkerTile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/rsb/wrappers/subwrap/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/serialized-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotHome.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotMenuBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/BotToolBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ClientPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/LogTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/LogTextArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/gui/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/add.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/add_down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/add_over.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/bot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/close_over.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/connect.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/control_pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/control_play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/control_play_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/delete.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/disconnect.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/keyboard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/mouse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/script_bdl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/script_drm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/script_pre.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/script_src.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/tick.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/images/world_link.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/TextAreaLogHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/TextAreaLogHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/BasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/AccountPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/BotPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/BotPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/Botplugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/Botplugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/login_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/script/Script.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/script/Script.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/script/randoms/LoginBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/script/randoms/LoginBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/util/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/util/StringUtil.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +522,6 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/gui/BotGUI.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
@@ -112,12 +531,15 @@
     <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1lnUdVLSWmkt81J803IojbTxJKT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -126,9 +548,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.24651568" />
+    <property name="project.structure.side.proportion" value="0.0963939" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
   </component>
   <component name="RecentsManager">
@@ -136,7 +558,11 @@
       <recent name="C:\Users\Jaggar\IdeaProjects\RSBBB\src\main\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jaggar\IdeaProjects\RSBBB\src\main\java" />
+      <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\resources\rsb\plugins" />
+      <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\resources\rsb" />
+      <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\resources" />
+      <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\plugin" />
+      <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -239,7 +665,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RSB [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="RSB [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -250,7 +676,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="compileJava" />
+            <option value="jar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -262,11 +688,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.RSB [build]" />
+        <item itemvalue="Gradle.RSB [jar]" />
         <item itemvalue="Gradle.RSB [clean]" />
+        <item itemvalue="Gradle.RSB [build]" />
         <item itemvalue="Gradle.RSB [buildNeeded]" />
         <item itemvalue="Gradle.RSB [buildDependents]" />
-        <item itemvalue="Gradle.RSB [compileJava]" />
       </list>
     </recent_temporary>
   </component>
@@ -366,7 +792,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643158023003</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added generated API reference">
+      <created>1643158453885</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1643158453885</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -382,6 +815,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="API is now functional. Updated a plethora of methods and revised the hook class. Some widget ids are likely broken and will need revisiting. I should really check on the shoddy built-in compilation sometime." />
     <MESSAGE value="Forgot a fairly important class" />
     <MESSAGE value="Modulated and revised Application.java and RuneLite.java" />
@@ -394,7 +828,28 @@
     <MESSAGE value="Revised the input location for scripts" />
     <MESSAGE value="README.md update" />
     <MESSAGE value="Fix README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix README.md" />
+    <MESSAGE value="Added generated API reference" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added generated API reference" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="net.runelite.client.plugins.PluginInstantiationException" package="net.runelite.client.plugins" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/rsb/plugin/AccountManager.java</url>
+          <line>315</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/rsb/plugin/AccountManager.java</url>
+          <line>311</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

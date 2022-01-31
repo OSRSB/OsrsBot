@@ -5,22 +5,12 @@ import net.runelite.api.GameState;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
-import rsb.internal.input.Mouse;
-import rsb.methods.Magic;
 import rsb.script.Random;
-import rsb.gui.AccountManager;
-import rsb.wrappers.RSNPC;
-import rsb.wrappers.RSPlayer;
-import rsb.wrappers.RSWidget;
+import rsb.plugin.AccountManager;
 import rsb.wrappers.RSWidget;
 import rsb.script.ScriptManifest;
 
-import java.applet.Applet;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import static java.lang.Thread.sleep;
 
