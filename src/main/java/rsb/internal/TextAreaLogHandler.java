@@ -1,6 +1,6 @@
 package rsb.internal;
 
-import rsb.gui.LogTextArea;
+import rsb.plugin.LogTextArea;
 
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;

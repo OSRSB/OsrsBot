@@ -1,6 +1,7 @@
 package rsb.util;
 
 import lombok.extern.slf4j.Slf4j;
+import rsb.internal.globval.GlobalConfiguration;
 
 import java.awt.*;
 import java.io.PrintWriter;
@@ -124,5 +125,23 @@ public class StringUtil {
 		}
 	}
 
-
+	/**
+	 * Gets the compiled path of the class containing the object
+	 * and replaces the path with the values needed to direct it to the
+	 * non-compiled path with the .java file to access
+	 * Used only in IntelliJ due to the weird behavior when building w/ the run-time compiler for test scripts
+	 * TODO: Remove this via Gradle behavior such as a resources folder
+	 *
+	 * @param clazz 	The class of the object in the same directory as the one we wish to find
+	 * @param file		The file we wish to locate within the above directory
+	 *
+	 * @return 			The path of the item in IntelliJ's non-build path
+	 */
+	public static String convertIntelliJPath(Class<?> clazz, String file) {
+		String path = clazz.getResource(file).getPath().replace(file, "");
+		if (!GlobalConfiguration.RUNNING_FROM_JAR) {
+			path = path.replace("build/classes/java/main", "src/main/java");
+		}
+		return path;
+	}
 }

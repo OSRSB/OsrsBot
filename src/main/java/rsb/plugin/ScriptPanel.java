@@ -1,12 +1,8 @@
 package rsb.plugin;
 
 import rsb.botLauncher.RuneLite;
-import rsb.gui.AccountManager;
-import rsb.gui.BotToolBar;
-import rsb.gui.ScriptSelector;
 import rsb.internal.ScriptHandler;
 import rsb.script.Script;
-import rsb.script.ScriptManifest;
 
 import java.awt.event.*;
 import java.util.Map;
@@ -22,9 +18,11 @@ public class ScriptPanel extends JPanel {
 	private JButton buttonStart;
 	private JButton buttonPause;
 	private JButton buttonStop;
+	private ScriptSelector scriptSelector;
 
 	public ScriptPanel(RuneLite bot) {
 		this.bot = bot;
+		scriptSelector = new ScriptSelector(bot);
 		initComponents();
 	}
 
@@ -75,9 +73,8 @@ public class ScriptPanel extends JPanel {
 	}
 
 	private void initComponents() {
-		ScriptSelector scriptSelector = new ScriptSelector(bot);
 		scrollPane1 = new JScrollPane();
-		table1 = scriptSelector.getTable(0, 70, 30, 70);
+		table1 = scriptSelector.getTable(0, 70, 45, 30);
 		comboBoxAccounts = scriptSelector.getAccounts();
 		buttonStart = scriptSelector.getSubmit();
 		//Make a search area
@@ -106,39 +103,55 @@ public class ScriptPanel extends JPanel {
 		buttonStop.setText("Stop");
 		buttonStop.addActionListener(e -> buttonStopActionPerformed(e));
 
+		assignLayouts();
+
+	}
+
+	/**
+	 * Assigns the layouts for the script panel
+	 */
+	private void assignLayouts() {
 		GroupLayout layout = new GroupLayout(this);
 		setLayout(layout);
 		layout.setHorizontalGroup(
-			layout.createParallelGroup()
-				.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-				.addGroup(layout.createSequentialGroup()
-					.addGroup(layout.createParallelGroup()
+				layout.createParallelGroup()
+						.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
-							.addGap(47, 47, 47)
-							.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
-						.addGroup(layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-							.addGap(18, 18, 18)
-							.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-						.addGroup(layout.createSequentialGroup()
-							.addGap(73, 73, 73)
-							.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(30, Short.MAX_VALUE))
+								.addGroup(layout.createParallelGroup()
+										.addGroup(layout.createSequentialGroup()
+												.addGap(47, 47, 47)
+												.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+										.addGroup(layout.createSequentialGroup()
+												.addContainerGap()
+												.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+												.addGap(18, 18, 18)
+												.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+										.addGroup(layout.createSequentialGroup()
+												.addGap(73, 73, 73)
+												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+								.addContainerGap(30, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
-			layout.createParallelGroup()
-				.addGroup(layout.createSequentialGroup()
-					.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
-					.addGap(28, 28, 28)
-					.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(57, 57, 57)
-					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(28, 28, 28)
-					.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(0, 60, Short.MAX_VALUE))
+				layout.createParallelGroup()
+						.addGroup(layout.createSequentialGroup()
+								.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
+								.addGap(28, 28, 28)
+								.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(57, 57, 57)
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+										.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+										.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+								.addGap(28, 28, 28)
+								.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+								.addGap(0, 60, Short.MAX_VALUE))
 		);
+	}
+
+	/**
+	 * Redefines the list of accounts in the dropdown list with an updated set of values
+	 * by reassigning the model
+	 */
+	public void updateAccountList() {
+		comboBoxAccounts.setModel(scriptSelector.getAccounts().getModel());
 	}
 }

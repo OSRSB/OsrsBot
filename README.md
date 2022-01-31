@@ -92,8 +92,8 @@ After entering the program arguments you wish to enable (one mode only --runelit
 it is ready to run.
 
 #### Building
-If you're actively working on the API you should generally know how to create artifacts in IntelliJ and use them
-to build jar files. If not check out the First Script Set Up link for details.
+The project uses Gradle so to build a jar just click on the Gradle task in the Gradle menu.
+
 ##### Changing the API used in your script environment
 If you're developing in your script environment, and you decide you wish to make changes to the API it is fairly 
 manageable.
