@@ -268,6 +268,8 @@ public class Bank extends MethodProvider {
 
 	/**
 	 * Gets a tab
+	 * @param index		Gets the bank tab at the specified index
+	 * @return 			The bank tab
 	 */
 	public RSWidget getTab(int index) {
 		return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_TAB).getComponent(index);

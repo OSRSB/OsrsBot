@@ -110,9 +110,9 @@ public class Timer {
 	/**
 	 * Allows a condition to be passed to check and a timeout for the condition to pass
 	 * Continuously checks the condition in a while loop on an executor thread
-	 * @param condition
-	 * @param timeout
-	 * @return
+	 * @param condition			the boolean conditional to check for
+	 * @param timeout			the time limit for waiting for the condition check to return true
+	 * @return					<tt>true</tt> if the task was executed; otherwise <tt>false</tt>
 	 */
 	public static boolean waitCondition(BooleanSupplier condition, long timeout) {
 		long start = System.currentTimeMillis();

@@ -29,6 +29,7 @@ public interface Filter<T> extends Predicate<T> {
 	 *
 	 * @param other a predicate that will be logically-ANDed with this
 	 *              predicate
+	 * @param check_before a non-used parameter
 	 * @return a composed predicate that represents the short-circuiting logical
 	 * AND of this predicate and the {@code other} predicate
 	 * @throws NullPointerException if other is null

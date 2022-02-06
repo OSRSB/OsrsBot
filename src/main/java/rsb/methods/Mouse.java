@@ -277,6 +277,12 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
+	 * Moves the mouse to the specified point and then by a randomized offset at default speed.
+	 *
+	 * @param x     The x destination.
+	 * @param y     The y destination.
+	 * @param afterOffset The maximum distance in pixels to move on both axes shortly
+	 *                    after moving to the destination.
 	 * @see #move(int, int, int, int, int, int)
 	 */
 	public void move(final int x, final int y, final int afterOffset) {
@@ -284,7 +290,7 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
-	 * Moves the mouse to the specified point at default speed.
+	 * Moves the mouse to the specified point with a randomized variation at default speed.
 	 *
 	 * @param x     The x destination.
 	 * @param y     The y destination.
@@ -313,8 +319,8 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
-	 * Moves the mouse to the specified point at a certain speed, then moves a
-	 * random distance up to <code>afterOffset</code>.
+	 * Moves the mouse to the specified point at a certain speed with variance in the x and y, then moves a
+	 * random distance up to <tt>afterOffset</tt>.
 	 *
 	 * @param speed       The lower, the faster.
 	 * @param x           The x destination.
@@ -338,35 +344,54 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
-	 * @see #move(int, int, int, int, int, int)
+	 * Moves the mouse to the specified point at a certain speed
+	 *
+	 * @param speed       The lower, the faster.
+	 * @param p           The x and y destination.
 	 */
 	public void move(final int speed, final Point p) {
 		move(speed, p.getX(), p.getY(), 0, 0, 0);
 	}
 
 	/**
-	 * @see #move(int, int, int, int)
+	 * Moves the mouse to the specified point
+	 *
+	 * @param p           The x and y destination.
 	 */
 	public void move(final Point p) {
 		move(p.getX(), p.getY(), 0, 0);
 	}
 
 	/**
-	 * @see #move(int, int, int, int, int, int)
+	 * Moves the mouse to the specified point then adds random distance up to <tt>afterOffset</tt>.
+	 * @param p           The x and y destination.
+	 * @param afterOffset The maximum distance in pixels to move on both axes shortly
+	 *                    after moving to the destination.
+	 *
 	 */
 	public void move(final Point p, final int afterOffset) {
 		move(getSpeed(), p.getX(), p.getY(), 0, 0, afterOffset);
 	}
 
 	/**
-	 * @see #move(int, int, int, int)
+	 * Moves the mouse to the specified point then adds random distance within to randX and randY
+	 * @param p           The x and y destination.
+	 * @param randX       X-axis randomness (added to x).
+	 * @param randY       X-axis randomness (added to y).
 	 */
 	public void move(final Point p, final int randX, final int randY) {
 		move(p.getX(), p.getY(), randX, randY);
 	}
 
 	/**
-	 * @see #move(int, int, int, int, int, int)
+	 * Moves the mouse to the specified point at a certain speed with variance in the x and y, then moves a
+	 * random distance up to <tt>afterOffset</tt>.
+	 *
+	 * @param p           The x and y destination.
+	 * @param randX       X-axis randomness (added to x).
+	 * @param randY       X-axis randomness (added to y).
+	 * @param afterOffset The maximum distance in pixels to move on both axes shortly
+	 *                    after moving to the destination.
 	 */
 	public void move(final Point p, final int randX, final int randY,
 	                 final int afterOffset) {
@@ -477,12 +502,10 @@ public class Mouse extends MethodProvider {
 	/**
 	 * The location of the bot's mouse; or Point(-1, -1) if off screen.
 	 *
-	 * @return A <tt>Point</tt> containing the bot's mouse's x & y coordinates.
+	 * @return A <tt>Point</tt> containing the bot's mouse's x and y coordinates.
 	 */
 	public Point getLocation() {
 		return new Point(methods.virtualMouse.getClientX(), methods.virtualMouse.getClientY());
-				//((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).getX(),
-				//((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).getY());
 	}
 
 	/**
@@ -490,8 +513,6 @@ public class Mouse extends MethodProvider {
 	 */
 	public Point getPressLocation() {
 		return new Point(methods.virtualMouse.getClientPressX(), methods.virtualMouse.getClientPressY());
-			//	((((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).getPressX())),
-			//	((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).getPressY());
 	}
 
 	/**
@@ -499,7 +520,6 @@ public class Mouse extends MethodProvider {
 	 */
 	public long getPressTime() {
 		return methods.virtualMouse.getClientPressTime();
-				//((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).getPressTime();
 	}
 
 	/**
@@ -507,8 +527,6 @@ public class Mouse extends MethodProvider {
 	 */
 	public boolean isPresent() {
 		return methods.virtualMouse.isClientPresent();
-
-				//((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).isPresent();
 	}
 
 	/**
@@ -516,8 +534,6 @@ public class Mouse extends MethodProvider {
 	 */
 	public boolean isPressed() {
 		return methods.virtualMouse.isClientPressed();
-
-				//((rsb.internal.input.Mouse) methods.clientUI.getMouseManager().getMouseListeners().get(3)).isPressed();
 	}
 
 }

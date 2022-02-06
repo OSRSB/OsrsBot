@@ -412,6 +412,7 @@ public class Inventory extends MethodProvider {
 	 * isSelectedValue
 	 *
 	 * @param comps the item to check if is selected
+	 * @return the index of the item selected; otherwise -1
 	 */
 	public int checkIsSelected(RSWidgetItem[] comps) {
 		class Selector {
@@ -457,6 +458,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param img the client image
 	 * @param comps the item to check for if it is selected
+	 * @return the index of the item selected; otherwise -1
 	 */
 	public int getSelected(Image img, RSWidgetItem[] comps) {
 		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -512,7 +514,7 @@ public class Inventory extends MethodProvider {
 	/**
 	 * Left-clicks on the selected item.
 	 *
-	 * @return <tt>true</tt> if item was selected, </tt>false</tt> if not.
+	 * @return <tt>true</tt> if item was selected, <tt>false</tt> if not.
 	 * @see #clickSelectedItem(boolean)
 	 */
 	public boolean clickSelectedItem() {

@@ -74,8 +74,8 @@ public class Game extends MethodProvider {
 	/**
 	 * Opens the specified tab at the specified index.
 	 *
-	 * @param tab The tab to open, functionKey if wanting to use function keys
-	 *            to switch.
+	 * @param tab 				The tab to open
+	 * @param functionKey       If wanting to use function keys to switch.
 	 * @return <tt>true</tt> if tab successfully selected; otherwise
 	 *         <tt>false</tt>.
 	 */
@@ -125,7 +125,6 @@ public class Game extends MethodProvider {
 	 * @param button Which button? One of CHAT_OPTION
 	 * @param left   Left or right button? Left = true. Right = false.
 	 * @return <tt>true</tt> if it was clicked.
-	 * @see WidgetID.Chatbox inside RuneLite for more
 	 */
 	@SuppressWarnings("JavadocReference")
 	public boolean mouseChatButton(int button, boolean left) {
@@ -154,7 +153,7 @@ public class Game extends MethodProvider {
 
 	/**
 	 * Gets the current run energy.
-	 * <p/>
+	 *
 	 * Deprecated : use walking.getEnergy()
 	 *
 	 * @return An <tt>int</tt> representation of the players current energy.
@@ -350,6 +349,8 @@ public class Game extends MethodProvider {
 
 	/**
 	 * Gets the flags relating to the tiles in the scene
+	 *
+	 * @return the flags for all the tiles in the current scene
 	 */
 	public byte[][][] getSceneFlags() {
 		return methods.client.getTileSettings();

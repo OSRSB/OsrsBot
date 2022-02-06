@@ -24,19 +24,26 @@ import java.util.concurrent.*;
 
 import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
+/**
+ * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
+ * acts as a factory for the RSModel of the RSObject (refer to getModel for better explanation)
+ *
+ * RSObject can represent any {@link Type types} game object
+ */
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable {
-
-	public enum Type {
-		GAME, DECORATIVE, GROUND, WALL
-	}
-
 	private final TileObject obj;
 	private final Type type;
 	private final int plane;
+	private final ObjectComposition def = null;
 
-	private ObjectComposition def = null;
-
+	/**
+	 * Creates a new RSObject with the following parameters:
+	 * @param ctx	The context in which the object exists (the singleton RuneLite)
+	 * @param obj	The TileObject which this RSObject is associated with
+	 * @param type	The type of game object corresponding to the enumerated {@link Type types}
+	 * @param plane	The plane that this object exists on
+	 */
 	public RSObject(final MethodContext ctx,
 					final TileObject obj, final Type type,
 					final int plane) {
@@ -55,8 +62,6 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 */
 	public WalkerTile getLocation() {
 		return new WalkerTile(obj.getWorldLocation().getX(), obj.getWorldLocation().getY(), obj.getWorldLocation().getPlane());
-		//return new RSTile(methods.client.getBaseX() + obj.getLocation().getX() / 512,
-		//		methods.client.getBaseY() + obj.getLocation().getY() / 512, plane);
 	}
 
 	/**
@@ -84,82 +89,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return The RSObjectDef if available, otherwise <code>null</code>.
 	 */
 	public ObjectComposition getDef() {
-		int id = getID();
-		if (id != -1) {
-			try {
-
-				def = methods.executorService.submit(() -> methods.client.getObjectDefinition(id)).get(50, TimeUnit.MILLISECONDS);
-			} catch (Exception e) {
-				String errorMsg = "Object with ID " + id + " has thrown an error while attempting to get the object definition." +
-						"\n Object type is " + type + "\n Please restart the client.";
-				log.debug(errorMsg, e);
-				/**
-				 * A restart is needed, will be fixed at a later time.
-				 */
-			}
-		}
-		return def;
-		/*
-		class Composition {
-			ObjectComposition def;
-			boolean isSet;
-
-			Composition() {
-				def = null;
-				isSet = false;
-			}
-
-			public void setDef(ObjectComposition def) {
-				this.def = def;
-			}
-
-			public ObjectComposition getDef() {
-				return def;
-			}
-
-			public boolean isSet() {
-				return isSet;
-			}
-
-			public void setSet(boolean set) {
-				isSet = set;
-			}
-		}
-		Composition composition = new Composition();
-		if (def == null) {
-			try {
-				if (methods.clientThreadProvider == null) {
-					setClientThreadProvider();
-				}
-
-				methods.clientThreadProvider.get().invoke(()-> {
-					composition.setSet(true);
-					composition.setDef(methods.client.getObjectDefinition(getID()));
-				});
-			} catch (Exception e) {
-				//methods.clientThreadProvider.get().
-				e.printStackTrace();
-				return null;
-			}
-		}
-		return def;
-
-
-		if (methods.clientThreadProvider == null) {
-			setClientThreadProvider();
-		}
-
-		methods.clientThreadProvider.get().invokeLater(()-> {
-				composition.setSet(true);
-				composition.setDef(methods.client.getObjectDefinition(id));
-		});
-
-		long start = System.currentTimeMillis();
-
-		while (!composition.isSet() || (start + 200 > System.currentTimeMillis()) );
-
-		return composition.getDef() != null ? composition.getDef() : null;
-		*/
+		int id;
+		return ((id = getID()) != -1) ? methods.client.getObjectDefinition(id) : def;
 	}
 
 	/**
@@ -214,7 +145,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Gets the Model of this object.
 	 * Checks what kind of object it is and returns the model of the object based on that
 	 *
-	 * @return The RSModel, or null if unavailable.
+	 * @return The RSModel, or <tt>null</tt> if unavailable.
 	 */
 	public RSModel getModel() {
 		try {
@@ -253,9 +184,9 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 
 
 	/**
-	 * Determines whether or not this object is on the game screen.
+	 * Determines whether this object is on the game screen.
 	 *
-	 * @return <tt>true</tt> if the object is on screen.
+	 * @return <tt>true</tt> if the object is on screen else <tt>false</tt>
 	 */
 	public boolean isOnScreen() {
 		RSModel model = getModel();
@@ -279,8 +210,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Performs the specified action on this object.
 	 *
 	 * @param action the menu item to search and click
-	 * @return returns true if clicked, false if object does not contain the
-	 *         desired action
+	 * @return 		 <tt>true</tt> if clicked, <tt>false</tt> if object does not contain the
+	 *         		 desired action
 	 */
 	public boolean doAction(final String action) {
 		return doAction(action, null);
@@ -291,8 +222,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 *
 	 * @param action the action of the menu item to search and click
 	 * @param option the option of the menu item to search and click
-	 * @return returns true if clicked, false if object does not contain the
-	 *         desired action
+	 * @return 		 <tt>true</tt> if clicked, <tt>false</tt> if object does not contain the
+	 *         		 desired action
 	 */
 	public boolean doAction(final String action, final String option) {
 		RSModel model = this.getModel();
@@ -305,7 +236,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	/**
 	 * Left-clicks this object.
 	 *
-	 * @return <tt>true</tt> if clicked.
+	 * @return <tt>true</tt> if clicked otherwise <tt>false</tt>
 	 */
 	public boolean doClick() {
 		return doClick(true);
@@ -315,7 +246,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Clicks this object.
 	 *
 	 * @param leftClick <tt>true</tt> to left-click; <tt>false</tt> to right-click.
-	 * @return <tt>true</tt> if clicked.
+	 * @return <tt>true</tt> if clicked otherwise <tt>false</tt>
 	 */
 	public boolean doClick(boolean leftClick) {
 		RSModel model = this.getModel();
@@ -343,6 +274,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 
 	/**
 	 * Moves the mouse over this object.
+	 * @return true if the object was hovered over (or attempted to) otherwise false
 	 */
 	public boolean doHover() {
 		RSModel model = getModel();
@@ -387,6 +319,10 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		return false;
 	}
 
+	/**
+	 * Checks if the RSObject is clickable (interactive)
+	 * @return	<tt>true</tt> if the object is capable of being interacted with otherwise <tt>false</tt>
+	 */
 	public boolean isClickable() {
 		if (obj == null) {
 			return false;
@@ -405,5 +341,14 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 */
 	public TileObject getObj() {
 		return obj;
+	}
+
+
+	/**
+	 * The type of game object
+	 * Game, Decorative, Ground, or Wall
+	 */
+	public enum Type {
+		GAME, DECORATIVE, GROUND, WALL
 	}
 }

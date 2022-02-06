@@ -161,7 +161,7 @@ public class GlobalWidgetId {
      * Magic ids
      * Interfaces used
      *  FIXED_VIEWPORT 548 (can be gotten from WidgetInfo
-     *  548->72-> (218(N)->3) N=Nested
+     *  548 into 72 into (218(N) into 3) N=Nested
      */
 
     //Parent id

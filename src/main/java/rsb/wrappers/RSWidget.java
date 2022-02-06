@@ -435,7 +435,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
 
     /**
      * Gets the parent widget
-     * @return
+     * @return  the parent widget for this RSWidget object
      */
     public RSWidget getParent() {
         return new RSWidget(methods, parentWidget.getParentId(), parentId);

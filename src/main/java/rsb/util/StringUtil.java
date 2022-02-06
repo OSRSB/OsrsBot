@@ -49,7 +49,7 @@ public class StringUtil {
 
 	/**
 	 * Draws a line on the screen at the specified index. Default is green.
-	 * <p/>
+	 *
 	 * Available colours: red, green, cyan, purple, white.
 	 *
 	 * @param render The Graphics object to be used.

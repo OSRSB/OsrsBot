@@ -437,9 +437,10 @@ public class Calculations extends MethodProvider {
 	/**
 	 * Returns the screen location of a given 3D point in the game world.
 	 *
-	 * @param x x value on the game plane.
-	 * @param y y value on the game plane.
-	 * @param z z value on the game plane.
+	 * @param x 		x value on the game plane.
+	 * @param y 		y value on the game plane.
+	 * @param plane     the game level (plane) value.
+	 * @param z 		z value on the game plane.
 	 * @return <code>Point</code> based on screen; otherwise
 	 *         <code>new Point(-1, -1)</code>.
 	 */

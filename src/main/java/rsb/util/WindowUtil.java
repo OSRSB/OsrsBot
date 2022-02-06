@@ -67,7 +67,7 @@ public class WindowUtil {
 	/**
 	 * Shows a dialog window that appears centered in front of the Bot window
 	 * that can be used to alert the user.
-	 * <p/>
+	 *
 	 * This dialog will keep focus until the user closes it.
 	 *
 	 * @param message The message to be shown within the dialog.
@@ -79,7 +79,7 @@ public class WindowUtil {
 	/**
 	 * Shows an input dialog with the given message. Text entered into the
 	 * dialog box will be returned.
-	 * <p/>
+	 *
 	 * This dialog will keep focus until the user hits OK or the user
 	 * closes it.
 	 *
@@ -108,7 +108,7 @@ public class WindowUtil {
 
 	/**
 	 * Shows a confirm dialog with the specified buttons.
-	 * <p/>
+	 *
 	 * This dialog will keep focus until the user closes it.
 	 *
 	 * @param message The message to be displayed in the dialog.

@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 
 /**
  * This class is for all the skill calculations.
- * <p/>
+ *
  * Example usage: skills.getRealLevel(Skills.ATTACK);
  */
 public class Skills extends MethodProvider {

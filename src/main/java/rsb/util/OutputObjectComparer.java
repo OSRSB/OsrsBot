@@ -75,6 +75,7 @@ public class OutputObjectComparer {
      * and get the method from that class like so: exampleClass.class.getMethod("conditional1", int.class)
      *
      * @param param parameter array to decide what to values to return in the key
+     * @param conditionals the conditional values to use to impact the output
      * @return the list of keys and outputs of the object's methods respective to the parameters
      */
     public HashMap<String, Object> getListOfMethodOutputsEx(Parameters[] param, Method... conditionals) {
@@ -173,6 +174,7 @@ public class OutputObjectComparer {
      * and get the method from that class like so: exampleClass.class.getMethod("conditional1", int.class)
      *
      * @param param parameter array to decide what to values to return in the key
+     * @param conditionals the conditional values to use to impact the output
      * @return the list of keys and outputs of the object's methods respective to the parameters
      */
     public HashMap<String, Object> getListOfFieldOutputsEx(Parameters[] param, Method... conditionals) {
@@ -434,6 +436,8 @@ public class OutputObjectComparer {
      * Creates a hashmap of strings and object outputs to then compares to another hashmap of strings and object outputs
      * to determine the differences and returns a list of the strings and objects that differ between the two
      *
+     * @param compareTo The second hashmap to compare against for collisions
+     *
      * @return the names of the outputs that did not match
      */
     public ArrayList<String> checkForMatching(HashMap<String, Object> compareTo) {
@@ -489,8 +493,8 @@ public class OutputObjectComparer {
             }
         }
         if (firstObject.getClass().isArray()) {
-            Object[] firstArray = null;
-            Object[] secondArray = null;
+            Object[] firstArray;
+            Object[] secondArray;
             try {
                 firstArray = unpack(firstObject);
                 secondArray = unpack(secondObject);
@@ -514,6 +518,8 @@ public class OutputObjectComparer {
      * Creates a hashmap of strings and object outputs to then compares to another hashmap of strings and object outputs
      * to determine the differences and returns a hashmap of the strings and objects that differ between the two
      *
+     * @param compareTo The second hashmap to compare against for collisions
+     * @param param     The parameters to use as a filter on the second hashmap
      * @return the names of the outputs that did not match
      */
     public HashMap<String, Object> checkForMatchingMethodOutputsEx(HashMap<String, Object> compareTo, Parameters... param) {
@@ -533,7 +539,7 @@ public class OutputObjectComparer {
 
                     } catch
                     (NullPointerException e) {
-                        //ignore
+                        System.err.println(e);
                     }
                 }
                 return notMatching;
@@ -543,11 +549,11 @@ public class OutputObjectComparer {
     }
 
     /**
-     * Converts the given ArrayList<String> to a string with the style of a String[]
+     * Converts the given ArrayList containing strings to a string with the style of a String[]
      * eg String output = "{"item1", "item2", "item3", "item4"}"
      *
-     * @param stringToConvert
-     * @return
+     * @param stringToConvert       ArrayList to convert to a string
+     * @return                      A string comprised of the contents of the ArrayList
      */
     public static String convertToStringArrayStyle(ArrayList<?> stringToConvert) {
         String string = "Empty";
@@ -565,11 +571,11 @@ public class OutputObjectComparer {
     }
 
     /**
-     * Converts the given ArrayList<String> to a string with the style of a String[]
+     * Converts the given ArrayList containing strings to a string with the style of a String[]
      * eg String output = "{"item1", "item2", "item3", "item4"}"
      *
-     * @param stringToConvert
-     * @return
+     * @param stringToConvert       List to convert to a string
+     * @return                      A string comprised of the contents of the List
      */
     public static String convertToStringArrayStyle(List<?> stringToConvert) {
         String string = "Empty";
@@ -591,6 +597,7 @@ public class OutputObjectComparer {
      * Returns everything in the hashmap as a String[] styled string
      *
      * @param stringObjectHashMap the hashmap to convert
+     * @param param     The parameters to use as a filter on the second hashmap
      * @return the string containing all the data in the hashmap as a string
      */
     public static String convertToStringArrayStyleEx(HashMap<String, Object> stringObjectHashMap, Parameters... param) {
@@ -624,7 +631,8 @@ public class OutputObjectComparer {
     /**
      * Returns a string of as much method outputs as the parameters passed for each object
      * as well as allowing the passing of conditional methods to further sort the results
-     *
+     * @param param     the parameter array to decide what to values to return in the key
+     * @param methods   the methods to allow further filtering of the method outputs
      * @return all the designated output based on the passed parameters for all objects
      */
     public String getMethodOuputsEx(Parameters[] param, Method... methods) {
@@ -634,7 +642,7 @@ public class OutputObjectComparer {
 
     /**
      * Returns a string of as much method outputs as the parameters passed for each object
-     *
+     * @param param     the parameter array to decide what to values to return in the key
      * @return all the designated output based on the passed parameters for all objects
      */
     public String getMethodOuputsEx(Parameters... param) {
@@ -644,7 +652,7 @@ public class OutputObjectComparer {
 
     /**
      * Returns a string of as much field values as the parameters passed for each object
-     *
+     * @param param     the parameter array to decide what to values to return in the key
      * @return all the designated output based on the passed parameters for all objects
      */
     public String getFieldOutputEx(Parameters... param) {
@@ -655,7 +663,8 @@ public class OutputObjectComparer {
     /**
      * Returns a string of as much field values as the parameters passed for each object
      * as well as allowing the passing of conditional methods to further sort the results
-     *
+     * @param param     the parameter array to decide what to values to return in the key
+     * @param method    the methods to allow further filtering of the method outputs
      * @return all the designated output based on the passed parameters for all objects
      */
     public String getFieldOutputEx(Parameters[] param, Method... method) {
@@ -688,7 +697,7 @@ public class OutputObjectComparer {
 
     /**
      * Returns the object as an array
-     * <p>
+     * <tt>
      * example usage:
      * String[] names = new String[]{"rb", "xz", "ux", "pt", "ye"};
      * for (String name : names) {
@@ -696,15 +705,14 @@ public class OutputObjectComparer {
      * Method method = player.getClass().getMethod(name);
      * Object[] output = OutputObjectComparer.unpack(method.invoke(player));
      * log.debug("Name: " + name);
-     * for (int i = 0; i < output.length; i++) {
+     * for (int i = 0; i (less than) output.length; i++) {
      * log.debug("Output:" + (int) output[i]);
      * }
      * log.debug("\n\n");
      * } catch (Exception e) {
-     * <p>
      * }
      * }
-     *
+     * </tt>
      * @param object the object to convert
      * @return the object as an array
      */

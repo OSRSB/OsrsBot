@@ -163,9 +163,9 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether or not we're envenomed
+	 * Returns whether we're envenomed
 	 *
-	 * @return
+	 * @return	<tt>true</tt> if the local player is envenomed; otherwise <tt>false</tt>
 	 */
 	public boolean isEnvenomed() {
 		return methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) > 1000000;
@@ -174,7 +174,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns the damage we're taking from venom
 	 *
-	 * @return the envenom damage if envenomed; otherwise 0;
+	 * @return the venom damage if envenomed; otherwise 0;
 	 */
 
 	public int getVenomDamage() {

@@ -118,9 +118,9 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	}
 
 	/**
-	 * Checks whether or not a valid item is being wrapped.
+	 * Checks whether a valid item is being wrapped.
 	 *
-	 * @Return <tt>true</tt> if there is a visible wrapped item
+	 * @return <tt>true</tt> if there is a visible wrapped item
 	 */
 	public boolean isItemValid() {
 		return item.isValid();

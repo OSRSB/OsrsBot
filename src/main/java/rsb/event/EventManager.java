@@ -34,7 +34,7 @@ public class EventManager implements Runnable {
 
 	/**
 	 * Adds the event to the queue for the EventManager to process.
-	 * <p/>
+	 *
 	 * Events are processed with the default mask.
 	 *
 	 * @param e The event object to dispatch.
