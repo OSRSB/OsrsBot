@@ -22,7 +22,7 @@ public abstract class MethodProvider {
 	 *
 	 * @param min The inclusive lower bound.
 	 * @param max The exclusive upper bound.
-	 * @return Random integer min <= n < max.
+	 * @return Random integer min (less than or equal) to n (less than) max.
 	 */
 	public int random(int min, int max) {
 		return min + (max == min ? 0 : methods.random.nextInt(max - min));
@@ -36,7 +36,7 @@ public abstract class MethodProvider {
 	 * @param max The exclusive upper bound.
 	 * @param sd  The standard deviation. A higher value will increase the
 	 *            probability of numbers further from the mean being returned.
-	 * @return Random integer min <= n < max from the normal distribution
+	 * @return Random integer min (less than or equal to) n (less than) max from the normal distribution
 	 *         described by the parameters.
 	 */
 	public int random(int min, int max, int sd) {
@@ -54,10 +54,10 @@ public abstract class MethodProvider {
 	 *
 	 * @param min  The inclusive lower bound.
 	 * @param max  The exclusive upper bound.
-	 * @param mean The mean (>= min and < max).
+	 * @param mean The mean (greater than or equal to min and less than max).
 	 * @param sd   The standard deviation. A higher value will increase the
 	 *             probability of numbers further from the mean being returned.
-	 * @return Random integer min <= n < max from the normal distribution
+	 * @return Random integer min (less than or equal) to n (less than) max from the normal distribution
 	 *         described by the parameters.
 	 */
 	public int random(int min, int max, int mean, int sd) {
@@ -73,7 +73,7 @@ public abstract class MethodProvider {
 	 *
 	 * @param min The inclusive lower bound.
 	 * @param max The exclusive upper bound.
-	 * @return Random min <= n < max.
+	 * @return Random min (less than or equal) to n (less than) max.
 	 */
 	public double random(double min, double max) {
 		return min + methods.random.nextDouble() * (max - min);

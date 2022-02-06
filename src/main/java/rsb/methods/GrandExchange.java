@@ -82,7 +82,7 @@ public class GrandExchange extends MethodProvider {
 	 * Checks if the Grand Exchange slot is locked or not
 	 *
 	 * @param slot An int for the corresponding slot.
-	 * @return <tt>True<tt/> if the user is a member else false for slots 4-8
+	 * @return <tt>True</tt> if the user is a member else <tt>false</tt> for slots 4-8
 	 */
 	public boolean checkSlotLocked(int slot) {
 			int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
@@ -304,6 +304,7 @@ public class GrandExchange extends MethodProvider {
 	 *
 	 * @param quantity the number of items to list for
 	 * @param priceChange the number of times to press the price per item +5% or -5% buttons
+	 * @return <tt>true</tt> if the offer was attempted to be made; otherwise <tt>false</tt>
 	 */
 	public boolean createOffer(int quantity, int priceChange) {
 		//Dynamic child of offer window
@@ -311,7 +312,7 @@ public class GrandExchange extends MethodProvider {
 
 		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 
-		//Decides what order to do these in and gives a off number so we are inconsistent in a weird manner
+		//Decides what order to do these in and gives an off number, so we are inconsistent in a weird manner
 		boolean randomlyInput = (random(0,10) < 4);
 		if (randomlyInput) {
 			setPrice(priceChange);

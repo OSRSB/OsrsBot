@@ -22,13 +22,12 @@ public class Environment extends MethodProvider {
 
 	/**
 	 * Controls the available means of user input when user input is disabled.
-	 * <p/>
-	 * <br />
-	 * Disable all: <code>setUserInput(0);</code> <br />
+	 *
+	 * Disable all: <tt>setUserInput(0);</tt>
 	 * Enable keyboard only:
-	 * <code>setUserInput(Environment.INPUT_KEYBOARD);</code> <br />
-	 * Enable mouse & keyboard:
-	 * <code>setUserInput(Environment.INPUT_MOUSE | Environment.INPUT_KEYBOARD);</code>
+	 * <tt>setUserInput(Environment.INPUT_KEYBOARD);</tt>
+	 * Enable mouse and keyboard:
+	 * <tt>setUserInput(Environment.INPUT_MOUSE | Environment.INPUT_KEYBOARD);</tt>
 	 *
 	 * @param mask flags indicating which types of input to allow
 	 */

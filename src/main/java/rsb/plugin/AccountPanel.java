@@ -9,14 +9,9 @@ import net.runelite.client.ui.PluginPanel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-/*
- * Created by JFormDesigner on Mon Apr 06 21:41:40 CEST 2020
- */
-
-
 
 /**
- * @author GigiaJ
+ * A class that acts as effectively a single button to launch the account manager interface
  */
 public class AccountPanel extends PluginPanel implements ScriptListener {
 
@@ -26,22 +21,27 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 	private JButton buttonScripts;
 	private RuneLite bot;
 
+	/**
+	 * Creates an account panel bound to a singleton of a bot
+	 * TODO: Change this to not be hard bound, but rather iterable through a list of active clients
+	 * @param bot	the bot singleton to associate with this panel
+	 */
 	public AccountPanel(RuneLite bot) {
 		initComponents();
 		this.bot = bot;
 		bot.getScriptHandler().init();
 	}
 
+	/**
+	 * Assigns the action for the accounts button action
+	 * @param e	the action event to assign
+	 */
 	private void buttonAccountActionPerformed(ActionEvent e) {
 		AccountManager.getInstance().showGUI();
 	}
 
-	private void buttonScriptsActionPerformed(ActionEvent e) {
-		ScriptSelector.getInstance(bot).showGUI();
-	}
-
-	/*
-	This will likely be modified and added later, feel free to edit it to make it look better
+	/**
+	 * Initializes the components for the panel
 	 */
 	private void initComponents() {
 		scrollPane1 = new JScrollPane();
@@ -55,13 +55,6 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 		add(buttonAccounts);
 		buttonAccounts.setBounds(new Rectangle(new Point(15, 375), buttonAccounts.getPreferredSize()));
 
-
-		/*
-		buttonScripts.setText("View Scripts");
-		buttonScripts.addActionListener(e -> buttonScriptsActionPerformed(e));
-		add(buttonScripts);
-		buttonScripts.setBounds(new Rectangle(new Point(120, 375), buttonScripts.getPreferredSize()));
-		 */
 
 		{
 			// compute preferred size
@@ -82,12 +75,10 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 
 
 	/**
-	 * @author GigiaJ
+	 * Handles any task necessary if a script has been started
 	 *
-	 * @description Handles any task necessary if a script has been started
-	 *
-	 * @param handler
-	 * @param script
+	 * @param handler	the script handler
+	 * @param script	the script to start
 	 */
 	public void scriptStarted(final ScriptHandler handler, Script script) {
 		EventQueue.invokeLater(new Runnable() {
@@ -99,36 +90,30 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 
 
 	/**
-	 * @author GigiaJ
+	 * Handles any task necessary if a script has been stopped
 	 *
-	 * @description Handles any task necessary if a script has been stopped
-	 *
-	 * @param handler
-	 * @param script
+	 * @param handler	the script handler
+	 * @param script	the script to stop
 	 */
 	public void scriptStopped(ScriptHandler handler, Script script) {
 
 	}
 
 	/**
-	 * @author GigiaJ
+	 * Handles any task necessary on a script being resumed
 	 *
-	 * @description Handles any task necessary on a script being resumed
-	 *
-	 * @param handler
-	 * @param script
+	 * @param handler	the script handler
+	 * @param script	the script to resume
 	 */
 	public void scriptResumed(ScriptHandler handler, Script script) {
 
 	}
 
 	/**
-	 * @author GigiaJ
+	 * Handles any task necessary on a script being paused
 	 *
-	 * @description Handles any task necessary on a script being paused
-	 *
-	 * @param handler
-	 * @param script
+	 * @param handler	the script handler
+	 * @param script	the script to pause
 	 */
 	public void scriptPaused(ScriptHandler handler, Script script) {
 
@@ -136,12 +121,10 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 
 
 	/**
-	 * @author GigiaJ
+	 * Handles any task necessary if the input has changed
 	 *
-	 * @description Handles any task necessary if the input has changed
-	 *
-	 * @param bot
-	 * @param mask
+	 * @param bot		the bot instance to check
+	 * @param mask		the mask to check for
 	 */
 	public void inputChanged(RuneLite bot, int mask) {
 

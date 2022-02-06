@@ -25,6 +25,8 @@ public class Interfaces extends MethodProvider {
 
 
 	/**
+	 * Gets a widget corresponding to the index
+	 *
 	 * @param index The index of the interface.
 	 * @return The <tt>RSWidget</tt> for the given index.
 	 */
@@ -33,6 +35,8 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Gets a widget corresponding to the indexes
+	 *
 	 * @param index      The parent interface index
 	 * @param childIndex The component index
 	 * @return <tt>RSWidget</tt> for the given index and child index.
@@ -42,6 +46,7 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Gets a widget corresponding to the widget info
 	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
 	 * @return			The RSWidget for the WidgetInfo
 	 */
@@ -50,6 +55,7 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Gets a widget corresponding to the widget info
 	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
 	 * @return			The RSWidget for the WidgetInfo
 	 */
@@ -58,6 +64,7 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Checks for the click here to continue widget
 	 * @return <tt>true</tt> if continue component is valid; otherwise
 	 *         <tt>false</tt>.
 	 */
@@ -66,6 +73,7 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Clicks the click here to continue widget
 	 * @return <tt>true</tt> if continue component was clicked; otherwise
 	 *         <tt>false</tt>.
 	 */
@@ -75,6 +83,7 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Gets the click here to continue widget
 	 * @return <tt>RSWidget</tt> containing "Click here to continue";
 	 *         otherwise null.
 	 */
@@ -91,9 +100,10 @@ public class Interfaces extends MethodProvider {
 	 * Performs the given action on this RSWidgetChild if it is showing
 	 * (valid).
 	 *
-	 * @param action The menu action to click.
+	 * @param c			The component widget to click
+	 * @param action 	The menu action to click.
+	 *
 	 * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>
-	 *         .
 	 */
 	public boolean clickComponent(final RSWidget c, final String action) {
 		if (!c.isValid()) {

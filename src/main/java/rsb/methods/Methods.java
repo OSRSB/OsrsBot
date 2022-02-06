@@ -212,7 +212,7 @@ public class Methods {
 	 *
 	 * @param min The inclusive lower bound.
 	 * @param max The exclusive upper bound.
-	 * @return Random integer min <= n < max.
+	 * @return Random integer min (less than or equal) to n (less than) max.
 	 */
 	public static int random(int min, int max) {
 		int n = Math.abs(max - min);
@@ -265,7 +265,7 @@ public class Methods {
 	 *
 	 * @param min The inclusive lower bound.
 	 * @param max The exclusive upper bound.
-	 * @return Random double min <= n < max.
+	 * @return Random double min (less than or equal) to n (less than) max.
 	 */
 	public static double random(double min, double max) {
 		return Math.min(min, max) + random.nextDouble() * Math.abs(max - min);

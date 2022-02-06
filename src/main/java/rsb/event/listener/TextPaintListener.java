@@ -5,9 +5,10 @@ import java.util.EventListener;
 
 public interface TextPaintListener extends EventListener {
 	/**
-	 * Argument is the line number to start drawing from.
-	 * <p/>
-	 * Returns the line number + number of lines actually drawn.
+	 *	Draws at the line at the index
+	 * @param render	the graphic renderer for the bot singleton
+	 * @param i			the index for the line to draw from
+	 * @return  the line number + number of lines actually drawn.
 	 */
-	public int drawLine(Graphics render, int idx);
+	public int drawLine(Graphics render, int i);
 }

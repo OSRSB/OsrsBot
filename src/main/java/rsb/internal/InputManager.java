@@ -167,7 +167,10 @@ public class InputManager {
 	}
 
 	/**
-	 * @see #moveMouse(int, int, int, int, int)
+	 * @param x       the x value
+	 * @param y       the y value
+	 * @param randomX x-axis randomness (added to x)
+	 * @param randomY y-axis randomness (added to y)
 	 */
 	public void moveMouse(final int x, final int y, final int randomX, final int randomY) {
 		moveMouse(MouseHandler.DEFAULT_MOUSE_SPEED, x, y, randomX, randomY);
@@ -356,6 +359,12 @@ public class InputManager {
 	}
 
 	/**
+	 * Moves the mouse from a certain point to another at the default speed.
+	 *
+	 * @param curX    the x value to move from
+	 * @param curY    the y value to move from
+	 * @param targetX the x value to move to
+	 * @param targetY the y value to move to
 	 * @see #windMouse(int, int, int, int, int)
 	 */
 	public void windMouse(final int curX, final int curY, final int targetX, final int targetY) {

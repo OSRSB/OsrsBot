@@ -3,7 +3,6 @@ rsb.event
 rsb.event.events
 rsb.event.impl
 rsb.event.listener
-rsb.gui
 rsb.internal
 rsb.internal.globval
 rsb.internal.input

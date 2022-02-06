@@ -181,16 +181,13 @@ public class Camera extends MethodProvider {
 	 * on the return value too much - it should return whether the camera was
 	 * successfully set, but it isn't very accurate near the very extremes of
 	 * the height.
-	 * <p/>
-	 * <p/>
+	 *
 	 * This also depends on the maximum camera angle in a region, as it changes
 	 * depending on situation and surroundings. So in some areas, 68% might be
 	 * the maximum altitude. This method will do the best it can to switch the
 	 * camera altitude to what you want, but if it hits the maximum or stops
 	 * moving for any reason, it will return.
-	 * <p/>
-	 * <p/>
-	 * <p/>
+	 *
 	 * Mess around a little to find the altitude percentage you like. In later
 	 * versions, there will be easier-to-work-with methods regarding altitude.
 	 *

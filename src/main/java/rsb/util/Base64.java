@@ -20,12 +20,10 @@ import java.math.BigInteger;
 
 /**
  * Provides Base64 encoding and decoding as defined by <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>.
- * <p/>
- * <p>
+ *
  * This class implements section <cite>6.8. Base64 Content-Transfer-Encoding</cite> from RFC 2045 <cite>Multipurpose
  * Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</cite> by Freed and Borenstein.
- * </p>
- * <p>
+ *
  * The class can be parameterized in the following manner with various constructors:
  * <ul>
  * <li>URL-safe mode: Default off.</li>
@@ -33,7 +31,6 @@ import java.math.BigInteger;
  * 4 in the encoded data.
  * <li>Line separator: Default is CRLF ("\r\n")</li>
  * </ul>
- * </p>
  * <p>
  * Since this class operates directly on byte streams, and not character streams, it is hard-coded to only encode/decode
  * character encodings which are compatible with the lower 127 ASCII chart (ISO-8859-1, Windows-1252, UTF-8, etc).
@@ -51,7 +48,7 @@ public class Base64 {
 
 	/**
 	 * MIME chunk size per RFC 2045 section 6.8.
-	 * <p/>
+	 *
 	 * <p>
 	 * The {@value} character limit does not count the trailing CRLF, but counts all other characters, including any
 	 * equal signs.
@@ -63,7 +60,7 @@ public class Base64 {
 
 	/**
 	 * PEM chunk size per RFC 1421 section 4.3.2.4.
-	 * <p/>
+	 *
 	 * <p>
 	 * The {@value} character limit does not count the trailing CRLF, but counts all other characters, including any
 	 * equal signs.
@@ -267,7 +264,7 @@ public class Base64 {
 	 * <p>
 	 * When encoding the line length is 0 (no chunking), and the encoding table is STANDARD_ENCODE_TABLE.
 	 * </p>
-	 * <p/>
+	 *
 	 * <p>
 	 * When decoding all variants are supported.
 	 * </p>
@@ -281,7 +278,6 @@ public class Base64 {
 	 * <p>
 	 * When encoding the line length is 76, the line separator is CRLF, and the encoding table is STANDARD_ENCODE_TABLE.
 	 * </p>
-	 * <p/>
 	 * <p>
 	 * When decoding all variants are supported.
 	 * </p>
@@ -307,8 +303,9 @@ public class Base64 {
 	 * When decoding all variants are supported.
 	 * </p>
 	 *
-	 * @param lineLength Each line of encoded data will be at most of the given length (rounded down to nearest multiple of 4).
-	 *                   If lineLength <= 0, then the output will not be divided into lines (chunks). Ignored when decoding.
+	 * @param lineLength Each line of encoded data will be at most of the given length
+	 *                   (rounded down to nearest multiple of 4). If lineLength less than or equal to 0,
+	 *                   then the output will not be divided into lines (chunks). Ignored when decoding.
 	 * @since 1.4
 	 */
 	public Base64(int lineLength) {
@@ -329,7 +326,8 @@ public class Base64 {
 	 * </p>
 	 *
 	 * @param lineLength    Each line of encoded data will be at most of the given length (rounded down to nearest multiple of 4).
-	 *                      If lineLength <= 0, then the output will not be divided into lines (chunks). Ignored when decoding.
+	 *                      If lineLength is less than or equal to 0, then the output will not be divided into lines (chunks).
+	 *                      Ignored when decoding.
 	 * @param lineSeparator Each line of encoded data will end with this sequence of bytes.
 	 * @throws IllegalArgumentException Thrown when the provided lineSeparator included some base64 characters.
 	 * @since 1.4
@@ -352,7 +350,7 @@ public class Base64 {
 	 * </p>
 	 *
 	 * @param lineLength    Each line of encoded data will be at most of the given length (rounded down to nearest multiple of 4).
-	 *                      If lineLength <= 0, then the output will not be divided into lines (chunks). Ignored when decoding.
+	 *                      If lineLength less than or equal to 0, then the output will not be divided into lines (chunks). Ignored when decoding.
 	 * @param lineSeparator Each line of encoded data will end with this sequence of bytes.
 	 * @param urlSafe       Instead of emitting '+' and '/' we emit '-' and '_' respectively. urlSafe is only applied to encode
 	 *                      operations. Decoding seamlessly handles both modes.
@@ -661,7 +659,7 @@ public class Base64 {
 	 *
 	 * @param pArray byte[] array which will later be encoded
 	 * @return amount of space needed to encoded the supplied array.
-	 *         Returns a long since a max-len array will require > Integer.MAX_VALUE
+	 *         Returns a long since a max-len array will require greater than Integer.MAX_VALUE
 	 */
 	public long getEncodedLength(byte[] pArray) {
 		// Calculate non-chunked size - rounded up to allow for padding
@@ -892,7 +890,7 @@ public class Base64 {
 
 	/**
 	 * Encodes binary data using the base64 algorithm but does not chunk the output.
-	 * <p/>
+	 *
 	 * NOTE:  We changed the behaviour of this method from multi-line chunking (commons-codec-1.4) to
 	 * single-line non-chunking (commons-codec-1.5).
 	 *

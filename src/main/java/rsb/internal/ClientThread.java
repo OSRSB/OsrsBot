@@ -17,6 +17,10 @@ public class ClientThread
     @Inject
     private Client client;
 
+    /**
+     * Immediately invokes a runnable onto the client thread
+     * @param r a runnable
+     */
     public void invoke(Runnable r)
     {
         invoke(() ->
@@ -29,6 +33,8 @@ public class ClientThread
     /**
      * Will run r on the game thread, at a unspecified point in the future.
      * If r returns false, r will be ran again, at a later point
+     * @param r the conditional to validate
+     *
      */
     public void invoke(BooleanSupplier r)
     {
@@ -47,6 +53,7 @@ public class ClientThread
     /**
      * Will run r on the game thread after this method returns
      * If r returns false, r will be ran again, at a later point
+     * @param r the runnable to invoke on the client thread
      */
     public void invokeLater(Runnable r)
     {
@@ -57,11 +64,18 @@ public class ClientThread
         });
     }
 
+    /**
+     * Adds a conditional to validate onto the client thread queue
+     * @param r the conditional to add to the client thread queue
+     */
     public void invokeLater(BooleanSupplier r)
     {
         invokes.add(r);
     }
 
+    /**
+     * Invokes queued actions on the client thread
+     */
     void invoke()
     {
         assert client.isClientThread();

@@ -176,7 +176,7 @@ public class Walking extends MethodProvider {
 	 * Turns run on or off using the game GUI controls.
 	 *
      * @param enable <tt>true</tt> to enable run, <tt>false</tt> to disable it.
-     * @return
+     * @return	if run was attempted to be enabled <tt>true</tt>; otherwise <tt>false</tt>
      */
 	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {

@@ -120,7 +120,7 @@ public class Tiles extends MethodProvider {
 	/**
 	 * Gets the tile under a point.
 	 *
-	 * @param p
+	 * @param p	a point (X, Y)
 	 * @return RSTile at the point's location
 	 */
 	public RSTile getTileUnderPoint(final Point p) {

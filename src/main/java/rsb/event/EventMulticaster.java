@@ -28,6 +28,8 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Gets the default mask for an event listener.
+	 * @param el an EventListener
+	 * @return the integer value representing the mask for this object
 	 */
 	@SuppressWarnings("deprecation")
 	public static long getDefaultMask(EventListener el) {
@@ -70,6 +72,8 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Gets the default mask for an event.
+	 * @param e an EventObject
+	 * @return the integer value representing the mask for this object
 	 */
 	public static long getDefaultMask(EventObject e) {
 		long mask = 0;
@@ -126,6 +130,7 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Adds the listener to the tree with a default mask.
+	 * @param el an EventListener to add
 	 */
 	public void addListener(EventListener el) {
 		long mask;
@@ -139,8 +144,10 @@ public class EventMulticaster implements EventListener {
 	}
 
 	/**
-	 * Adds the listener with the specified mask. If its an EventMulticaster the
+	 * Adds the listener with the specified mask. If it is an EventMulticaster the
 	 * specified mask will be ignored.
+	 * @param el 	an EventListener to add
+	 * @param mask	a mask to assign to the EventListener
 	 */
 	public void addListener(EventListener el, long mask) {
 		synchronized (EventMulticaster.treeLock) {
@@ -210,6 +217,7 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Fires an event to all applicable listeners.
+	 * @param e an EventObject to trigger
 	 */
 	public void fireEvent(EventObject e) {
 		fireEvent(e, EventMulticaster.getDefaultMask(e));
@@ -217,6 +225,8 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Fires an event to all listeners, restricted by the mask.
+	 * @param e 	an EventObject to trigger
+	 * @param mask	a mask to act as a filter to prevent unwanted firing
 	 */
 	public void fireEvent(EventObject e, long mask) {
 		synchronized (EventMulticaster.treeLock) {
@@ -288,6 +298,7 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Gets the masks enabled for this multicaster.
+	 * @return the mask for the multicaster
 	 */
 	public long getEnabledMask() {
 		return enabledMask;
@@ -295,6 +306,7 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Returns an unmodifiable list of the backing list of listeners.
+	 * @return the listeners on this multicaster
 	 */
 	public List<EventListener> getListeners() {
 		return Collections.unmodifiableList(listeners);
@@ -302,6 +314,8 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Returns whether the mask is enabled on this multicaster.
+	 * @param mask	the mask to check for on the multicaster
+	 * @return 	<tt>true</tt> if the mask is found; otherwise <tt>false</tt>
 	 */
 	public final boolean isEnabled(long mask) {
 		return (enabledMask & mask) != 0;
@@ -309,6 +323,7 @@ public class EventMulticaster implements EventListener {
 
 	/**
 	 * Removes a listener. Cleans up the masks.
+	 * @param el an EventListener to remove
 	 */
 	public void removeListener(EventListener el) {
 		synchronized (EventMulticaster.treeLock) {

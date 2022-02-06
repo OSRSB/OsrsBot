@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * A class for tracking experience gains in specified skills.
- * <p/>
+ *
  * The three arrays (skills, startExp, currentExp) are constantly congruent, and
  * updated as such.
  *
@@ -60,6 +60,8 @@ public class SkillTracker {
 
 	/**
 	 * Determines if the current SkillTracker is started.
+	 *
+	 * @return <tt>true</tt> if the tracker is started; otherwise <tt>false</tt>
 	 */
 	public boolean isStarted() {
 		return started;
@@ -67,6 +69,7 @@ public class SkillTracker {
 
 	/**
 	 * Calculates the current runtime.
+	 * @return the runtime of the tracker
 	 */
 	public long getRuntime() {
 		return (long) (System.currentTimeMillis() - start);
@@ -84,6 +87,7 @@ public class SkillTracker {
 
 	/**
 	 * Updates a single skill dependent on the index of the skill.
+	 * @param index	the index of the skill to update
 	 */
 	public void update(final int index) {
 		int size = skills.length;
@@ -99,7 +103,7 @@ public class SkillTracker {
 	 * Removes an item using index (of item in array). Recommended to use
 	 * removeItem to remove via skill index.
 	 *
-	 * @param index
+	 * @param index	the skill to remove from the array
 	 */
 	public void remove(final int index) {
 		int size = lastIndex - firstIndex;
@@ -160,9 +164,9 @@ public class SkillTracker {
 	 * Adds a skill into the skills array and updates it. Start experience will
 	 * be calculated during the the exact time the item is added into the array.
 	 *
-	 * @param skill To add.
+	 * @param skill The skill to add.
 	 */
-	public boolean add(final int skill) {
+	public void add(final int skill) {
 		if (lastIndex == skills.length) {
 			growAtEnd(1);
 		}
@@ -171,11 +175,13 @@ public class SkillTracker {
 		currentExp[l] = 0;
 		startExp[l] = context.skills.getCurrentExp(skill);
 		update(skill);
-		return true;
 	}
 
 	/**
 	 * Determines if an array contains the specified index.
+	 * @param index the index to check
+	 * @param array	the array to check
+	 * @return <tt>true</tt> if the array contains the index; otherwise <tt>false</tt>
 	 */
 	public boolean arrayContains(final int index, final int[] array) {
 		for (final int i : array) {
@@ -187,7 +193,10 @@ public class SkillTracker {
 	}
 
 	/**
-	 * Determines the true index for an item within the specificed array.
+	 * Determines the true index for an item within the specified array.
+	 * @param secondaryIndex 	the inner index in the array to check
+	 * @param array				the array to check
+	 * @return the true index
 	 */
 	public int getArrayIndex(final int secondaryIndex, final int[] array) {
 		for (int i = 0; i < array.length; i++) {
@@ -200,6 +209,7 @@ public class SkillTracker {
 
 	/**
 	 * Expands the current array (skillsList) by the specified growth.
+	 * @param growth	the integer amount to increase the array size by
 	 */
 	public void growAtEnd(final int growth) {
 		int size = lastIndex - firstIndex;
@@ -232,6 +242,7 @@ public class SkillTracker {
 
 	/**
 	 * Returns the main value of the skills array.
+	 * @return the skills array
 	 */
 	public int[] toArray() {
 		return skills;
@@ -240,6 +251,7 @@ public class SkillTracker {
 	/**
 	 * Calculates the true gains of the skills being tracked. (Updates current
 	 * experience)
+	 * @return an array containing the calculated gains of the skills tracked
 	 */
 	public int[] getGains() {
 		int size = skills.length;
@@ -253,6 +265,7 @@ public class SkillTracker {
 
 	/**
 	 * Calculates the experience gained per hour. (Updates current experience)
+	 * @return the calculated hourly gains
 	 */
 	public int[] getHourlyGains() {
 		int size = skills.length;
@@ -267,6 +280,8 @@ public class SkillTracker {
 
 	/**
 	 * Retrieves the name of the indicated skill.
+	 * @param skill the index to check for
+	 * @return the name of the skill at a specified index
 	 */
 	public String getName(final int skill) {
 		final int index = getArrayIndex(skill, skills);
@@ -275,6 +290,7 @@ public class SkillTracker {
 
 	/**
 	 * Calculates number of seconds until level gain
+	 * @return the calculated value estimate for gaining a level
 	 */
 	public int[] getSecTNL() {
 		final int[] gains = getHourlyGains();
@@ -289,6 +305,8 @@ public class SkillTracker {
 
 	/**
 	 * Converts a number of seconds into a string of form hh:mm:ss
+	 * @param sec the seconds to convert into the HMS format
+	 * @return the hour minutes and seconds representation of the parameter
 	 */
 	public static String SecToHMS(int sec) {
 		int min = sec / 60;

@@ -56,6 +56,9 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private JButton submit;
 	private boolean connected = true;
 
+	/**
+	 * Assigns the constant values
+	 */
 	static {
 		TEST_PATH = convertIntelliJPath(rsb.testsScript.Test.class, "Test.class");
 		SRC_TEST = new FileScriptSource(new File(TEST_PATH));
@@ -68,6 +71,10 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
+	/**
+	 * Creates a script selector for the given bot instance
+	 * @param bot	the bot instance
+	 */
 	public ScriptSelector(RuneLite bot) {
 		super(Frame.getFrames()[0], "Script Selector", false);
 		this.bot = bot;
@@ -76,6 +83,11 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
+	/**
+	 * Creates a script selector for the given bot instance
+	 * @param frame the frame to bind this to
+	 * @param bot	the bot instance
+	 */
 	public ScriptSelector(Frame frame, RuneLite bot) {
 		super(frame, "Script Selector", true);
 		this.bot = bot;
@@ -84,6 +96,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
+	/**
+	 * Gets the singleton for the script selector
+	 * TODO: remove the bot instance being required
+	 * @param bot 	the bot instance
+	 * @return 		the singleton for script selector
+	 */
 	public static ScriptSelector getInstance(RuneLite bot) {
 		return new ScriptSelector(Frame.getFrames()[0], bot);
 	}
@@ -150,14 +168,9 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		}
 	}
 
-
-	public void showGUI() {
-		init();
-		update();
-		load();
-		setVisible(true);
-	}
-
+	/**
+	 * Updates the script panel
+	 */
 	public void update() {
 		boolean available = bot.getScriptHandler().getRunningScripts().size() == 0;
 		submit.setEnabled(available && table.getSelectedRow() != -1);
@@ -167,6 +180,9 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		table.clearSelection();
 	}
 
+	/**
+	 * Loads the scripts from the script directories
+	 */
 	public void load() {
 		scripts.clear();
 		deleteTemporaryFiles();
@@ -179,48 +195,14 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		deleteTemporaryFiles();
 	}
 
-	private void init() {
-		setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		bot.getScriptHandler().addScriptListener(ScriptSelector.this);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(final WindowEvent e) {
-				bot.getScriptHandler().removeScriptListener(ScriptSelector.this);
-				dispose();
-			}
-		});
-		getTable(30, 175, 50, 100);
-		getSearch();
-		JToolBar toolBar = new JToolBar();
-		toolBar.setMargin(new Insets(1, 1, 1, 1));
-		toolBar.setFloatable(false);
-
-		getSubmit();
-		getAccounts();
-
-		toolBar.add(search);
-		toolBar.add(Box.createHorizontalStrut(5));
-		toolBar.add(accounts);
-		toolBar.add(Box.createHorizontalStrut(5));
-		toolBar.add(submit);
-		JPanel center = new JPanel();
-		center.setLayout(new BorderLayout());
-		JScrollPane pane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		center.add(pane, BorderLayout.CENTER);
-		add(center, BorderLayout.CENTER);
-		add(toolBar, BorderLayout.SOUTH);
-		setSize(750, 400);
-		setMinimumSize(getSize());
-		setLocationRelativeTo(getParent());
-		search.requestFocus();
-	}
 
 	/**
-	 * @author GigiaJ
-	 * @description Generates and returns the script table
+	 * Generates and returns the script table
 	 *
+	 * @param icon 		The icon for the script
+	 * @param name 		The name of the script
+	 * @param version   The version of the script
+	 * @param desc		The description of the script
 	 * @return script table
 	 */
 	public JTable getTable(int icon, int name, int version, int desc) {
@@ -281,8 +263,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	}
 
 	/**
-	 * @author GigiaJ
-	 * @description Generates and returns the start button
+	 * Generates and returns the start button
 	 *
 	 * @return start button
 	 */
@@ -306,8 +287,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	}
 
 	/**
-	 * @author GigiaJ
-	 * @description Generates and returns the search button
+	 * Generates and returns the search button
 	 *
 	 * @return search button
 	 */
@@ -330,8 +310,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	}
 
 	/**
-	 * @author GigiaJ
-	 * @description Generates and returns the accounts from the AccountManager
+	 * Generates and returns the accounts from the AccountManager
 	 *
 	 * @return account combo box
 	 */
