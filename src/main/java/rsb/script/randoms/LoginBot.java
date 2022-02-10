@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.GameState;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.script.Random;
 import rsb.plugin.AccountManager;
 import rsb.wrappers.RSWidget;
@@ -86,9 +86,9 @@ public class LoginBot extends Random {
             }
         }
         if (game.getClientState() == GameState.LOGGED_IN) {
-            Widget welcomeScreenMotW = ctx.client.getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
-            if (welcomeScreenMotW != null) {
-                if (welcomeScreenMotW.getTextColor() != -1) {
+            Widget welcomeScreenMOTD = ctx.client.getWidget(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY.getPackedId());
+            if (welcomeScreenMOTD != null) {
+                if (welcomeScreenMOTD.getTextColor() != -1) {
                     ctx.mouse.click(true);
                 }
             }

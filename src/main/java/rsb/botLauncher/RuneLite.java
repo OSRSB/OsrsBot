@@ -42,7 +42,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.client.ClientSessionManager;
-import net.runelite.client.RuneLiteProperties;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.discord.DiscordService;
@@ -57,13 +56,9 @@ import okhttp3.Response;
 import rsb.event.EventManager;
 import rsb.event.events.PaintEvent;
 import rsb.event.events.TextPaintEvent;
+import rsb.internal.*;
 import rsb.plugin.AccountManager;
-import rsb.internal.BreakHandler;
-import rsb.internal.PassiveScriptHandler;
-import rsb.internal.ScriptHandler;
 import rsb.methods.*;
-import rsb.internal.InputManager;
-import rsb.internal.BotModule;
 import rsb.internal.input.Canvas;
 import rsb.plugin.Botplugin;
 import net.runelite.client.ui.ClientUI;
@@ -90,7 +85,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     public static final File DEFAULT_CONFIG_FILE = new File(RUNELITE_DIR, "settings.properties");
 
     private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
-    public static String USER_AGENT = "RuneLite/" + RuneLiteProperties.getVersion() + "-" + RuneLiteProperties.getCommit() + (RuneLiteProperties.isDirty() ? "+" : "");
+    public static String USER_AGENT = "RuneLite/" + BotProperties.getVersion() + "-" + BotProperties.getCommit() + (BotProperties.isDirty() ? "+" : "");
 
 
     @Getter
@@ -382,7 +377,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
         parser.accepts("insecure-skip-tls-verification", "Disables TLS verification");
         parser.accepts("jav_config", "jav_config url")
                 .withRequiredArg()
-                .defaultsTo(RuneLiteProperties.getJavConfig());
+                .defaultsTo(BotProperties.getJavConfig());
         parser.accepts("help", "Show this text").forHelp();
 
         final ArgumentAcceptingOptionSpec<File> sessionfile = parser.accepts("sessionfile", "Use a specified session file")
@@ -487,6 +482,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     options.valueOf(
                             optionSpecs[Options.updatemode.getIndex()].ofType(ClientUpdateCheckMode.class)),
                     (String) options.valueOf("jav_config"));
+            final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
 
             new Thread(() ->
             {
@@ -502,6 +498,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
             injector = Guice.createInjector(new BotModule(
                     okHttpClient,
                     clientLoader,
+                    runtimeConfigLoader,
                     options.has("developer-mode"),
                     false,
                     options.valueOf(optionSpecs[Options.sessionfile.getIndex()].ofType(File.class)),
@@ -683,7 +680,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     return res;
                 });
 
-        if (insecureSkipTlsVerification || RuneLiteProperties.isInsecureSkipTlsVerification())
+        if (insecureSkipTlsVerification || BotProperties.isInsecureSkipTlsVerification())
         {
             setupInsecureTrustManager(builder);
         }

@@ -60,6 +60,9 @@ public class GameGUI extends MethodProvider {
 		return true;//!methods.client.isResized();
 	}
 
+	/**
+	 * An enumerated type representing the tabs interfaces and their WidgetInfo.
+	 */
 	public enum Tab {
 		COMBAT("Combat Styles", KeyEvent.VK_F5, WidgetInfo.FIXED_VIEWPORT_COMBAT_TAB, WidgetInfo.RESIZABLE_VIEWPORT_COMBAT_TAB),
 		STATS("Stats", 0, WidgetInfo.FIXED_VIEWPORT_STATS_TAB, WidgetInfo.RESIZABLE_VIEWPORT_STATS_TAB),
@@ -74,12 +77,14 @@ public class GameGUI extends MethodProvider {
 		LOGOUT("Exit", 0, WidgetInfo.FIXED_VIEWPORT_LOGOUT_TAB, WidgetInfo.RESIZABLE_VIEWPORT_LOGOUT_TAB);
 
 
-		private String name;
-		private int functionKey;
-		private WidgetInfo fixedInfo;
-		private WidgetInfo resizeInfo;
+		private final String name;
+		private final int functionKey;
+		private final WidgetInfo fixedInfo;
+		private final WidgetInfo resizeInfo;
 
 		Tab(String name, int functionKey, WidgetInfo fixedInfo, WidgetInfo resizeInfo) {
+			this.name = name;
+			this.functionKey = functionKey;
 			this.fixedInfo = fixedInfo;
 			this.resizeInfo = resizeInfo;
 		}
@@ -99,11 +104,9 @@ public class GameGUI extends MethodProvider {
 		public WidgetInfo getResizeInfo() {
 			return resizeInfo;
 		}
-
-
-
-
 	}
+
+
 
 }
 

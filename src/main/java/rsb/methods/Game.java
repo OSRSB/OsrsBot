@@ -2,14 +2,13 @@ package rsb.methods;
 
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
-import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.script.Random;
 import rsb.script.randoms.*;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.wrappers.*;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 
@@ -49,7 +48,7 @@ public class Game extends MethodProvider {
 	 * @return The last message spoken by a player or "" if none
 	 */
 	public String getLastMessage() {
-		RSWidget messages = methods.interfaces.getComponent(WidgetInfo.CHATBOX_MESSAGES);
+		RSWidget messages = methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_MESSAGES);
 			if (!messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_FIRST_MESSAGE).getText().isEmpty()) {
 				if (messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).isVisible()
 						&& !messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).getText().isEmpty())
@@ -98,7 +97,7 @@ public class Game extends MethodProvider {
 			if (iTab == null) {
 				return false;
 			}
-			methods.interfaces.getComponent(WidgetInfo.TO_GROUP(iTab.getParent().getId()), WidgetInfo.TO_CHILD(iTab.getId())).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.TO_GROUP(iTab.getParent().getId()), GlobalWidgetInfo.TO_CHILD(iTab.getId())).doClick();
 		}
 
 		sleep(random(400, 600));
@@ -115,7 +114,7 @@ public class Game extends MethodProvider {
 		}
 		net.runelite.api.widgets.Widget iTab = methods.gui.getTab(tab);
 		if (iTab != null) {
-			methods.interfaces.getComponent(WidgetInfo.TO_GROUP(iTab.getParent().getId()), WidgetInfo.TO_CHILD(iTab.getId())).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.TO_GROUP(iTab.getParent().getId()), GlobalWidgetInfo.TO_CHILD(iTab.getId())).doClick();
 		}
 	}
 
@@ -126,7 +125,6 @@ public class Game extends MethodProvider {
 	 * @param left   Left or right button? Left = true. Right = false.
 	 * @return <tt>true</tt> if it was clicked.
 	 */
-	@SuppressWarnings("JavadocReference")
 	public boolean mouseChatButton(int button, boolean left) {
 		RSWidget chatButton = methods.interfaces.get(WidgetID.CHATBOX_GROUP_ID).getComponent(button);
 		return chatButton.isValid() && chatButton.doClick(left);
@@ -197,7 +195,7 @@ public class Game extends MethodProvider {
 	 *         otherwise null.
 	 */
 	public RSWidget getTalkInterface() {
-		for (RSWidget component : methods.interfaces.getComponent(WidgetInfo.CHATBOX_FULL_INPUT).getComponents()) {
+		for (RSWidget component : methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_FULL_INPUT).getComponents()) {
 			if (component.isValid() && component.isVisible())
 				return component;
 		}
@@ -252,7 +250,7 @@ public class Game extends MethodProvider {
 			sleep(random(300, 600));
 		}
 
-		methods.interfaces.getComponent(WidgetInfo.LOGOUT_BUTTON).doClick();
+		methods.interfaces.getComponent(GlobalWidgetInfo.LOGOUT_BUTTON).doClick();
 		// Final logout button in the logout tab
 		sleep(random(1500, 2000));
 		return !isLoggedIn();
@@ -295,8 +293,8 @@ public class Game extends MethodProvider {
 	 *         otherwise <tt>false</tt>.
 	 */
 	public boolean isWelcomeScreen() {
-		return methods.interfaces.get(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId())
-				.getComponent(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY.getChildId()).getAbsoluteY() > 2;
+		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY)
+				.getAbsoluteY() > 2;
 	}
 
 	/**

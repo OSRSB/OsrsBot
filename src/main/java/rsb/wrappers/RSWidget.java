@@ -2,8 +2,8 @@ package rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.methods.MethodContext;
 import rsb.methods.MethodProvider;
 import rsb.wrappers.common.Clickable07;
@@ -25,7 +25,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     public RSWidget(final MethodContext ctx, final int parentId, final int id) {
         super(ctx);
         this.id = id;
-        this.widget = ctx.client.getWidget(WidgetInfo.TO_GROUP(parentId), WidgetInfo.TO_CHILD(id));
+        this.widget = ctx.client.getWidget(GlobalWidgetInfo.TO_GROUP(parentId), GlobalWidgetInfo.TO_CHILD(id));
         this.parentId = parentId;
         this.parentWidget = widget.getParent();
     }
@@ -280,17 +280,8 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @param idx The child index
      * @return The child component, or null
      */
-    /*
     public RSWidget getComponent(int idx) {
-        RSWidget[] components = getComponents();
-        if (idx >= 0 && idx < components.length) {
-            return components[idx];
-        }
-        return null;
-    }
-    */
-    public RSWidget getComponent(int idx) {
-        return new RSWidget(methods, methods.client.getWidget(WidgetInfo.TO_GROUP(this.getId()), idx));
+        return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.TO_GROUP(this.getId()), idx));
     }
 
     /**
@@ -446,7 +437,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return the group index
      */
     public int getGroupIndex() {
-        return WidgetInfo.TO_GROUP(widget.getId());
+        return GlobalWidgetInfo.TO_GROUP(widget.getId());
     }
 
     /**
@@ -454,7 +445,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return the child index
      */
     public int getChildIndex() {
-        return WidgetInfo.TO_CHILD(widget.getId());
+        return GlobalWidgetInfo.TO_CHILD(widget.getId());
     }
 
 

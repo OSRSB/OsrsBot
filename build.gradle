@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
 }
 
-def runeLiteVersion = '1.8.9'
+def runeLiteVersion = '1.8.11'
 
 dependencies {
     compile group: 'net.runelite', name: 'client', version: runeLiteVersion
@@ -20,7 +20,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.32'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.35'
     testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion, {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }

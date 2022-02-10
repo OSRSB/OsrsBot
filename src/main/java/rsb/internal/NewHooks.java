@@ -30,7 +30,6 @@ import net.runelite.api.events.GameTick;
 import net.runelite.api.events.ScriptCallbackEvent;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.widgets.Widget;
-import static net.runelite.api.widgets.WidgetInfo.WORLD_MAP_VIEW;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.Notifier;
 import net.runelite.client.chat.ChatMessageManager;
@@ -47,6 +46,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import rsb.botLauncher.RuneLite;
+import rsb.internal.globval.GlobalWidgetInfo;
 
 /**
  * This class contains field required for mixins and runelite hooks to work.
@@ -92,9 +92,9 @@ public class NewHooks implements Callbacks
 
     /**
      * Get the Graphics2D for the MainBufferProvider image
-     * This caches the Graphics2D instance so it can be reused
-     * @param mainBufferProvider
-     * @return
+     * This caches the Graphics2D instance, so it can be reused
+     * @param mainBufferProvider   The MainBufferProvider instance
+     * @return                     The Graphics2D instance
      */
     private static Graphics2D getGraphics(MainBufferProvider mainBufferProvider)
     {
@@ -217,7 +217,7 @@ public class NewHooks implements Callbacks
      */
     private void checkWorldMap()
     {
-        Widget widget = client.getWidget(WORLD_MAP_VIEW);
+        Widget widget = client.getWidget(GlobalWidgetInfo.WORLD_MAP_VIEW.getPackedId());
 
         if (widget != null)
         {

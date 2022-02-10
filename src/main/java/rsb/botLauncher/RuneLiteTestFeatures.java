@@ -4,8 +4,9 @@ import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.callback.ClientThread;
+import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.methods.Game;
 import rsb.methods.GroundItems;
 import rsb.methods.MethodContext;
@@ -48,7 +49,7 @@ public class RuneLiteTestFeatures {
                 }
             }
         }
-        Widget welcomeScreenMotW = bot.getClient().getWidget(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId(), 6);
+        Widget welcomeScreenMotW = bot.getClient().getWidget(GlobalWidgetInfo.LOGIN_MOTW.getPackedId());
         if (welcomeScreenMotW != null) {
             if (welcomeScreenMotW.getTextColor() != -1) {
                 Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);

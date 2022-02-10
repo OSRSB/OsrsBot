@@ -2,7 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.widgets.WidgetInfo;
+import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
 import java.lang.reflect.Field;
@@ -180,7 +180,7 @@ public class Walking extends MethodProvider {
      */
 	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {
-			return methods.interfaces.getComponent(WidgetInfo.MINIMAP_RUN_ORB).doClick();
+			return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_RUN_ORB).doClick();
 		}
         return false;
     }

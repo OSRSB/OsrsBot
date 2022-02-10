@@ -2,7 +2,6 @@ package rsb.methods;
 
 import net.runelite.api.Actor;
 import net.runelite.api.Skill;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.globval.GlobalSettingValues;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
@@ -108,27 +107,26 @@ public class Combat extends MethodProvider {
 		if (fightMode != getFightMode()) {
 			methods.game.openTab(GameGUI.Tab.COMBAT);
 			if (fightMode == 0) {
-				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_ONE).doClick();
+				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_ONE).doClick();
 			} else if (fightMode == 1) {
-				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_TWO).doClick();
+				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_TWO).doClick();
 			} else if (fightMode == 2) {
-				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_THREE).doClick();
+				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_THREE).doClick();
 			} else if (fightMode == 3) {
-				return methods.interfaces.getComponent(WidgetInfo.COMBAT_STYLE_FOUR).doClick();
+				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_FOUR).doClick();
 			}
 		}
 		return false;
 	}
 
 	/**
-	 * Gets the current Wilderness Level. Written by Speed.
+	 * Gets the current Wilderness Level.
 	 *
 	 * @return The current wilderness level otherwise, 0.
 	 */
 	public int getWildernessLevel() {
-		RSWidget widget = methods.interfaces.getComponent(WidgetInfo.PVP_WILDERNESS_LEVEL);
+		RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.PVP_WILDERNESS_LEVEL);
 		return (widget.isValid() && widget.isVisible()) ? Integer.parseInt(widget.getText().replace("Level: ", "").trim()) : 0;
-
 	}
 
 	/**
@@ -153,7 +151,7 @@ public class Combat extends MethodProvider {
 	 */
 
 	/**
-	 * Returns whether or not we're poisoned.
+	 * Returns whether we're poisoned.
 	 *
 	 * @return <tt>true</tt> if poisoned; otherwise <tt>false</tt>.
 	 */
@@ -184,7 +182,7 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether or not the special-attack option is enabled.
+	 * Returns whether the special-attack option is enabled.
 	 *
 	 * @return <tt>true</tt> if special is enabled; otherwise <tt>false</tt>.
 	 */
@@ -213,7 +211,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(WidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText()
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;
@@ -254,6 +252,7 @@ public class Combat extends MethodProvider {
 		// false positives)
 		// getInteracting() confirms because it will no longer interact if
 		// dead/dying
+		//TODO: Fix this
 		return npc == null || !npc.isValid() || (npc.getHPPercent() == 0 && npc.getAnimation() != -1 && npc
 				.getInteracting() == null);
 	}
