@@ -17,6 +17,10 @@ public class GlobalWidgetId {
     public static final int DYNAMIC_CHAT_BOX_LATEST_MESSAGE = 1; //TODO: Check these. Not sure what they do.
 
 
+    /**Login Screen Widget IDs*/
+    public static final int INTERFACE_LOGIN_SCREEN = WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId();
+    public static final int INTERFACE_LOGIN_SCREEN_MOTW = 6;
+
     /**
      * Bank Widget IDs
      */
@@ -24,6 +28,7 @@ public class GlobalWidgetId {
     public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();
     //Child ID
     public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
+    public static final int INTERFACE_BANK_INVENTORY_ITEMS_CONTAINER = 3;
     public static final int INTERFACE_BANK_ITEM_COUNT = 5;
     public static final int INTERFACE_BANK_ITEM_MAX = 8;
     public static final int INTERFACE_BANK_TAB = 10;
@@ -54,6 +59,7 @@ public class GlobalWidgetId {
     public static final int INTERFACE_DEPOSIT_BOX = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId();
     //Child ID
     public static final int INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS = 1;
+    public static final int INTERFACE_DEPOSIT_INVENTORY_ITEMS_CONTAINER = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId();
     public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS = 4;
     public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS = 6;
     public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_LOOT = 8;
@@ -74,7 +80,7 @@ public class GlobalWidgetId {
     //Parent ID
     public static final int INTERFACE_EQUIPMENT = WidgetInfo.EQUIPMENT.getGroupId();
     //Child ID
-    public static final int INTERFACE_EQUIPMENT_COMPONENT = WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER.getChildId();
+    public static final int INTERFACE_EQUIPMENT_INVENTORY_ITEMS_CONTAINER = WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER.getChildId();
     public static final int INTERFACE_EQUIPMENT_ITEM_SLOTS = 11;
     public static class EquipmentSlotId {
         public static final int INTERFACE_EQUIPMENT_HELMET = 14;
@@ -119,7 +125,7 @@ public class GlobalWidgetId {
     public static final int INTERFACE_STORE = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId();
     //Child id
     public static final int INTERFACE_STORE_DYNAMIC_COMPONENTS = 1;
-    public static final int INTERFACE_STORE_ITEMS = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
+    public static final int INTERFACE_STORE_ITEMS_CONTAINER = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
 
     /**
      * Skill ids
@@ -416,10 +422,17 @@ public class GlobalWidgetId {
     /**
      *  Minimap ids
      */
+    public static final int INTERFACE_MINIMAP_ORBS = WidgetInfo.MINIMAP_ORBS.getGroupId();
+    public static final int INTERFACE_MINIMAP_HEALTH_ORB = WidgetInfo.MINIMAP_HEALTH_ORB.getChildId();
+    public static final int INTERFACE_MINIMAP_PRAYER_ORB = WidgetInfo.MINIMAP_PRAYER_ORB.getChildId();
+    public static final int INTERFACE_MINIMAP_QUICK_PRAYER_ORB = WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId();
+    public static final int INTERFACE_MINIMAP_RUN_ORB = WidgetInfo.MINIMAP_RUN_ORB.getChildId();
+    public static final int INTERFACE_MINIMAP_SPEC_ORB = WidgetInfo.MINIMAP_SPEC_ORB.getChildId();
     public static final int INTERFACE_MINIMAP_HEALTH_ORB_TEXT = 5;
     public static final int INTERFACE_MINIMAP_PRAYER_ORB_TEXT = 15;
     public static final int INTERFACE_MINIMAP_RUN_ORB_TEXT = 23;
     public static final int INTERFACE_MINIMAP_SPEC_ORB_TEXT = 31;
+    public static final int INTERFACE_MINIMAP_QUICK_PRAYER_ORB_SPRITE = 2;
 
 
     /**
@@ -454,34 +467,56 @@ public class GlobalWidgetId {
         }
     }
 
-    public enum Prayers {
+    public enum Prayer {
 
-        THICK_SKIN(0, 1), BURST_OF_STRENGTH(1, 4), CLARITY_OF_THOUGHT(2, 7), SHARP_EYE(
-                3, 8), MYSTIC_WILL(4, 9), ROCK_SKIN(5, 10), SUPERHUMAN_STRENGTH(
-                6, 13), IMPROVED_REFLEXES(7, 16), RAPID_RESTORE(8, 19), RAPID_HEAL(
-                9, 22), PROTECT_ITEM(10, 25), HAWK_EYE(11, 26), MYSTIC_LORE(12,
-                27), STEEL_SKIN(13, 28), ULTIMATE_STRENGTH(
-                14, 31), INCREDIBLE_REFLEXES(
-                15, 34), PROTECT_FROM_SUMMONING(16, 35), PROTECT_FROM_MAGIC(17,
-                37), PROTECT_FROM_MISSILES(18,
-                40), PROTECT_FROM_MELEE(
-                19, 43), EAGLE_EYE(
-                20, 44), MYSTIC_MIGHT(21, 45), RETRIBUTION(22, 46), REDEMPTION(
-                23, 49), SMITE(24, 52), CHIVALRY(25, 60), RAPID_RENEWAL(26, 65), PIETY(
-                27, 70), RIGOUR(28, 74), AUGURY(29, 77);
-
-        private static final int PRAYER_BOOK_OFFSET = INTERFACE_NORMAL_PRAYERS + 1;
+        THICK_SKIN(0, 1, 5, 0),
+        BURST_OF_STRENGTH(1, 4, 6, 1),
+        CLARITY_OF_THOUGHT(2, 7, 7, 2),
+        SHARP_EYE(3, 8, 23, 18),
+        MYSTIC_WILL(4, 9, 24, 19),
+        ROCK_SKIN(5, 10, 8, 3),
+        SUPERHUMAN_STRENGTH(6, 13, 9, 4),
+        IMPROVED_REFLEXES(7, 16, 10, 5),
+        RAPID_RESTORE(8, 19, 11, 6),
+        RAPID_HEAL(9, 22, 12, 7),
+        PROTECT_ITEM(10, 25, 13, 8),
+        HAWK_EYE(11, 26, 25, 20),
+        MYSTIC_LORE(12, 27, 26, 21),
+        STEEL_SKIN(13, 28, 14, 9),
+        ULTIMATE_STRENGTH(14, 31, 15, 10),
+        INCREDIBLE_REFLEXES(15, 34, 16, 11),
+        PROTECT_FROM_MAGIC(17, 37, 17, 12),
+        PROTECT_FROM_MISSILES(18, 40, 18, 13),
+        PROTECT_FROM_MELEE(19, 43, 19, 14),
+        EAGLE_EYE(20, 44, 27, 22),
+        MYSTIC_MIGHT(21, 45, 28, 23),
+        RETRIBUTION(22, 46, 20, 15),
+        REDEMPTION(23, 49, 21, 16),
+        SMITE(24, 52, 22, 17),
+        PRESERVE(25, 55, 33, 28),
+        CHIVALRY(26, 60, 29, 25),
+        PIETY(27, 70, 30, 26),
+        RIGOUR(28, 74, 31, 24),
+        AUGURY(29, 77, 32, 27);
 
         private final int index;
         private final int level;
+        private final int prayerId;
+        private final int quickPrayerId;
 
-        Prayers(int index, int level) {
+        Prayer(int index, int level, int prayerId, int quickPrayerId) {
             this.index = index;
             this.level = level;
+            this.prayerId = prayerId;
+            this.quickPrayerId = quickPrayerId;
         }
 
-        public int getIndex() {
-            return PRAYER_BOOK_OFFSET + index;
+        public int getPrayerId() {
+            return prayerId;
+        }
+
+        public int getQuickPrayerId() {
+            return quickPrayerId;
         }
 
         public int getRequiredLevel() {
@@ -489,5 +524,7 @@ public class GlobalWidgetId {
         }
 
     }
+
+
 
 }

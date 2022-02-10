@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.Point;
 import rsb.wrappers.*;
 import rsb.wrappers.common.Positionable;
@@ -17,39 +16,20 @@ import java.awt.*;
  */
 @Slf4j
 public class Calculations extends MethodProvider {
-	static class Render {
-		float absoluteX1 = 0, absoluteX2 = 0;
-		float absoluteY1 = 0, absoluteY2 = 0;
-		int xMultiplier = 512, yMultiplier = 512;
-		int zNear = 50, zFar = 3500;
-	}
-
-	static class RenderData {
-		float xOff = 0, xX = 32768, xY = 0, xZ = 0;
-		float yOff = 0, yX = 0, yY = 32768, yZ = 0;
-		float zOff = 0, zX = 0, zY = 0, zZ = 32768;
-	}
-
-	public static final int[] SIN_TABLE = new int[16384];
-	public static final int[] COS_TABLE = new int[16384];
-
-	static {
-		final double d = 0.00038349519697141029D;
-		for (int i = 0; i < 16384; i++) {
-			Calculations.SIN_TABLE[i] = (int) (32768D * Math.sin(i * d));
-			Calculations.COS_TABLE[i] = (int) (32768D * Math.cos(i * d));
-		}
-	}
 
 	private final Render render = new Render();
 	private final RenderData renderData = new RenderData();
 
+	/**
+	 * Creates the singleton for calculations
+	 * @param ctx	The bot context to associate this calculations object with
+	 */
 	Calculations(final MethodContext ctx) {
 		super(ctx);
 	}
 
 	/**
-	 * Checks whether or not a given tile is on the minimap.
+	 * Checks whether a given tile is on the minimap.
 	 *
 	 * @param t The Tile to check.
 	 * @return <tt>true</tt> if the RSTile is on the minimap; otherwise
@@ -63,7 +43,7 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not the centroid of a given tile is on the screen.
+	 * Checks whether the centroid of a given tile is on the screen.
 	 *
 	 * @param t The RSTile to check.
 	 * @return <tt>true</tt> if the RSTile is on the screen; otherwise
@@ -617,5 +597,29 @@ public class Calculations extends MethodProvider {
 
 	public static java.awt.Point convertRLPointToAWTPoint(Point point) {
 		return new java.awt.Point(point.getX(), point.getY());
+	}
+
+	static class Render {
+		float absoluteX1 = 0, absoluteX2 = 0;
+		float absoluteY1 = 0, absoluteY2 = 0;
+		int xMultiplier = 512, yMultiplier = 512;
+		int zNear = 50, zFar = 3500;
+	}
+
+	static class RenderData {
+		float xOff = 0, xX = 32768, xY = 0, xZ = 0;
+		float yOff = 0, yX = 0, yY = 32768, yZ = 0;
+		float zOff = 0, zX = 0, zY = 0, zZ = 32768;
+	}
+
+	public static final int[] SIN_TABLE = new int[16384];
+	public static final int[] COS_TABLE = new int[16384];
+
+	static {
+		final double d = 0.00038349519697141029D;
+		for (int i = 0; i < 16384; i++) {
+			Calculations.SIN_TABLE[i] = (int) (32768D * Math.sin(i * d));
+			Calculations.COS_TABLE[i] = (int) (32768D * Math.cos(i * d));
+		}
 	}
 }

@@ -2,7 +2,6 @@ package rsb.internal.globval;
 
 import net.runelite.api.widgets.WidgetInfo;
 
-import static net.runelite.api.widgets.WidgetInfo.*;
 import static rsb.internal.globval.GlobalWidgetId.*;
 import static rsb.internal.globval.GlobalWidgetId.EquipmentSlotId.*;
 
@@ -13,10 +12,44 @@ import static rsb.internal.globval.GlobalWidgetId.EquipmentSlotId.*;
  * Rather just for grouping and potentially future updating purposes
  */
 public enum GlobalWidgetInfo {
+    /** [LOGIN] Widget Info */
+    LOGIN_MOTW(INTERFACE_LOGIN_SCREEN, INTERFACE_LOGIN_SCREEN_MOTW),
+    //[LOGIN]
+
+    /** [MISC] Widget Info */
+    WORLD_MAP_VIEW(WidgetInfo.WORLD_MAP_VIEW),
+    LOGOUT_BUTTON(WidgetInfo.LOGOUT_BUTTON),
+    LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY),
+
+    //[MISC]
+
+    /**
+     * [CHAT] Widget Info
+     */
+    CHATBOX_MESSAGES(WidgetInfo.CHATBOX_MESSAGES),
+    CHATBOX_FULL_INPUT(WidgetInfo.CHATBOX_FULL_INPUT),
+    DIALOG_NPC_TEXT(WidgetInfo.DIALOG_NPC_TEXT),
+    //[CHAT
+
+    /**
+     * [WILDERNESS] Widget Info
+     */
+    PVP_WILDERNESS_LEVEL(WidgetInfo.PVP_WILDERNESS_LEVEL),
+    //[WILDERNESS]
+
+    /**
+     * [INVENTORY] Widget Info
+     */
+    INVENTORY_ITEMS_CONTAINER(WidgetInfo.INVENTORY),
+    INVENTORY_DESTROY_ITEM(WidgetInfo.DESTROY_ITEM),
+    INVENTORY_DESTROY_ITEM_YES(WidgetInfo.DESTROY_ITEM_YES),
+    //[INVENTORY]
+
     /**
      * [BANK] Widget Info
      */
     BANK_DYNAMIC_COMPONENTS(INTERFACE_BANK, INTERFACE_BANK_DYNAMIC_COMPONENTS),
+    BANK_INVENTORY_ITEMS_CONTAINER(INTERFACE_BANK, INTERFACE_BANK_INVENTORY_ITEMS_CONTAINER),
     BANK_ITEM_COUNT(INTERFACE_BANK, INTERFACE_BANK_ITEM_COUNT),
     //6
     //7
@@ -43,6 +76,7 @@ public enum GlobalWidgetInfo {
      * [DEPOSIT BOX] Widget Info
      */
     DEPOSIT_DYNAMIC_COMPONENTS(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS),
+    DEPOSIT_ITEMS_CONTAINER(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_INVENTORY_ITEMS_CONTAINER),
     DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS),
     DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS),
     DEPOSIT_BUTTON_DEPOSIT_LOOT(INTERFACE_DEPOSIT_BOX, INTERFACE_DEPOSIT_BUTTON_DEPOSIT_LOOT),
@@ -51,6 +85,10 @@ public enum GlobalWidgetInfo {
     /**
      * [COMBAT] Widget Info
      */
+    COMBAT_STYLE_ONE(WidgetInfo.COMBAT_STYLE_ONE),
+    COMBAT_STYLE_TWO(WidgetInfo.COMBAT_STYLE_TWO),
+    COMBAT_STYLE_THREE(WidgetInfo.COMBAT_STYLE_THREE),
+    COMBAT_STYLE_FOUR(WidgetInfo.COMBAT_STYLE_FOUR),
     COMBAT_DEFENSIVE_CAST_SPELL(INTERFACE_COMBAT, INTERFACE_COMBAT_DEFENSIVE_CAST_SPELL),
     //23
     //24
@@ -65,6 +103,7 @@ public enum GlobalWidgetInfo {
     /**
      * [EQUIPMENT] Widget Info
      */
+    EQUIPMENT_INVENTORY_ITEMS_CONTAINER(INTERFACE_EQUIPMENT, INTERFACE_EQUIPMENT_INVENTORY_ITEMS_CONTAINER),
     EQUIPMENT_ITEM_SLOTS(INTERFACE_EQUIPMENT, INTERFACE_EQUIPMENT_ITEM_SLOTS),
     //12
     //13
@@ -116,7 +155,7 @@ public enum GlobalWidgetInfo {
      * [STORE] Widget Info
      */
     STORE_DYNAMIC_COMPONENTS(INTERFACE_STORE, INTERFACE_STORE_DYNAMIC_COMPONENTS),
-    STORE_INVENTORY(INTERFACE_STORE, INTERFACE_STORE_ITEMS),
+    STORE_INVENTORY_ITEMS_CONTAINER(INTERFACE_STORE, INTERFACE_STORE_ITEMS_CONTAINER),
     //[STORE]
 
     /**
@@ -129,6 +168,8 @@ public enum GlobalWidgetInfo {
     GRAND_EXCHANGE_COLLECT_AREA_ONE(INTERFACE_GRAND_EXCHANGE_COLLECTION_AREA, GRAND_EXCHANGE_COLLECT_BOX_ONE),
     GRAND_EXCHANGE_COLLECT_AREA_TWO(INTERFACE_GRAND_EXCHANGE_COLLECTION_AREA, GRAND_EXCHANGE_COLLECT_BOX_TWO),
     GRAND_EXCHANGE_INTERFACE_LAYOUT(INTERFACE_GRAND_EXCHANGE_WINDOW, INTERFACE_GRAND_EXCHANGE_INTERFACE_LAYOUT),
+
+    GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER),
     /**
      * [SKILL] Widget Info
      */
@@ -145,29 +186,75 @@ public enum GlobalWidgetInfo {
     /**
      * [MINIMAP] Widget Info
      */
-    MINIMAP_HEALTH_ORB_TEXT(WidgetInfo.MINIMAP_HEALTH_ORB.getGroupId(), INTERFACE_MINIMAP_HEALTH_ORB_TEXT),
-    MINIMAP_SPEC_ORB_TEXT(WidgetInfo.MINIMAP_SPEC_ORB.getGroupId(), INTERFACE_MINIMAP_SPEC_ORB_TEXT),
+
+
+    MINIMAP_HEALTH_ORB(INTERFACE_MINIMAP_ORBS, INTERFACE_MINIMAP_HEALTH_ORB),
+    MINIMAP_PRAYER_ORB(INTERFACE_MINIMAP_ORBS, INTERFACE_MINIMAP_PRAYER_ORB),
+    MINIMAP_RUN_ORB(INTERFACE_MINIMAP_ORBS, INTERFACE_MINIMAP_RUN_ORB),
+    MINIMAP_SPEC_ORB(INTERFACE_MINIMAP_ORBS, INTERFACE_MINIMAP_SPEC_ORB),
+    MINIMAP_QUICK_PRAYER_ORB(INTERFACE_MINIMAP_ORBS, INTERFACE_MINIMAP_QUICK_PRAYER_ORB),
+    MINIMAP_HEALTH_ORB_TEXT(INTERFACE_MINIMAP_HEALTH_ORB, INTERFACE_MINIMAP_HEALTH_ORB_TEXT),
+    MINIMAP_PRAYER_ORB_TEXT(INTERFACE_MINIMAP_PRAYER_ORB, INTERFACE_MINIMAP_PRAYER_ORB_TEXT),
+    MINIMAP_RUN_ORB_TEXT(INTERFACE_MINIMAP_RUN_ORB, INTERFACE_MINIMAP_RUN_ORB_TEXT),
+    MINIMAP_SPEC_ORB_TEXT(INTERFACE_MINIMAP_SPEC_ORB, INTERFACE_MINIMAP_SPEC_ORB_TEXT),
+    MINIMAP_QUICK_PRAYER_ORB_SPRITE(INTERFACE_MINIMAP_PRAYER_ORB, INTERFACE_MINIMAP_QUICK_PRAYER_ORB_SPRITE),
     //[MINIMAP]
 
     /**
      * [PRAYER] Widget Info
      */
-    PRAYER_NORMAL_BOOK(INTERFACE_PRAYER_BOOK, INTERFACE_NORMAL_PRAYERS)
+    PRAYER_NORMAL_BOOK(INTERFACE_PRAYER_BOOK, INTERFACE_NORMAL_PRAYERS),
+    //[PRAYER]
 
-
+    /**
+     * [QUICKPRAYER]
+     */
+    QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS),
+    //[QUICKPRAYER]
 
     ;
 
     private final int groupId;
     private final int childId;
 
+    /**
+     * Creates a new {@link GlobalWidgetInfo} enum value based on the passed child and group ids.
+     * NOTE: Enumerated values can not be constructed. They must be added here or extended
+     * via the extends keyword for your enumerated widget id class.
+     *
+     * @param groupId    the group id of the widget
+     * @param childId    the child id of the widget
+     */
     GlobalWidgetInfo(int groupId, int childId)
     {
         this.groupId = groupId;
         this.childId = childId;
     }
 
+    /**
+     * Creates a new {@link GlobalWidgetInfo} enum value based on the passed {@link WidgetInfo} enum value.
+     * Basically used to re-skin an existing one to assist in contextually calling.
+     * Or in simpler terms, an alias for an existing enum value.
+     * NOTE: Enumerated values can not be constructed. They must be added here or extended
+     * via the extends keyword for your enumerated widget id class.
+     *
+     * @param widgetInfo    the widget value to base the new enum value off of.
+     */
     GlobalWidgetInfo(WidgetInfo widgetInfo) {
+        this.groupId = widgetInfo.getGroupId();
+        this.childId = widgetInfo.getChildId();
+    }
+
+    /**
+     * Creates a new {@link GlobalWidgetInfo} enum value based on the passed {@link GlobalWidgetInfo} enum value.
+     * Basically used to re-skin an existing one to assist in contextually calling.
+     * Or in simpler terms, an alias for an existing enum value.
+     * NOTE: Enumerated values can not be constructed. They must be added here or extended
+     * via the extends keyword for your enumerated widget id class.
+     *
+     * @param widgetInfo    the widget value to base the new enum value off of.
+     */
+    GlobalWidgetInfo(GlobalWidgetInfo widgetInfo) {
         this.groupId = widgetInfo.getGroupId();
         this.childId = widgetInfo.getChildId();
     }
@@ -204,6 +291,10 @@ public enum GlobalWidgetInfo {
 
     /**
      * Gets the packed widget ID.
+     * Any usage where regular WidgetInfo is required and an easy conversion is required.
+     * This will enable use of the RuneLite WidgetInfo class somewhat indirectly.
+     * Method calls using this are for example:
+     * client.getWidget()
      *
      * @return the packed ID
      */

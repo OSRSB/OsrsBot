@@ -1,7 +1,6 @@
 package rsb.methods;
 
 import net.runelite.api.ItemComposition;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
@@ -35,10 +34,10 @@ public class Inventory extends MethodProvider {
 	public Map.Entry<String, RSWidget> getInterface() {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		HashMap<String, RSWidget> widgets = new HashMap<>();
-		widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.INVENTORY));
-		widgets.put(BANK, methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY));
-		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(INVENTORY, methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER));
+		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
@@ -71,8 +70,8 @@ public class Inventory extends MethodProvider {
 			return false;
 		}
 		while (item != null) {
-			if (methods.interfaces.get(WidgetInfo.DESTROY_ITEM.getGroupId()).isValid()) {
-				methods.interfaces.getComponent(WidgetInfo.DESTROY_ITEM_YES).doClick();
+			if (methods.interfaces.get(GlobalWidgetInfo.INVENTORY_DESTROY_ITEM.getGroupId()).isValid()) {
+				methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_DESTROY_ITEM).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
@@ -367,7 +366,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public String getSelectedItemName() {
 		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			int index = getSelectedItemIndex();
 			if (index == -1)
 				return null;
@@ -392,7 +391,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public int getSelectedItemIndex() {
 		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			RSWidgetItem[] comps = invIface.getWidgetItems();
 			return checkIsSelected(comps);
 		}
@@ -529,7 +528,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getItemAt(final int index) {
 		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			RSWidgetItem comp = invIface.getWidgetItems()[index];
 			return index < 28 && comp != null ? new RSItem(methods,
 					comp) : null;
@@ -547,7 +546,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			RSWidgetItem[] invItems = invIface.getWidgetItems();
 			RSItem[] items = new RSItem[invItems.length];
 			for (int i = 0; i < invItems.length; i++) {
@@ -592,7 +591,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem[] getCachedItems() {
 		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == WidgetInfo.INVENTORY.getGroupId()) {
+		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			if (invIface != null) {
 				RSWidgetItem[] invItems = invIface.getWidgetItems();
 				RSItem[] items = new RSItem[invItems.length];

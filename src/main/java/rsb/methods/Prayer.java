@@ -1,14 +1,12 @@
 package rsb.methods;
 
 import net.runelite.api.Skill;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSWidget;
 
 import java.util.ArrayList;
 
-import static rsb.internal.globval.GlobalWidgetId.Prayers;
 
 /**
  * Prayer related operations.
@@ -32,11 +30,11 @@ public class Prayer extends MethodProvider {
 	 * @param prayer The prayer to check.
 	 * @return <tt>true</tt> if enabled; otherwise <tt>false</tt>.
 	 */
-	public boolean isPrayerOn(Prayers prayer) {
+	public boolean isPrayerOn(GlobalWidgetId.Prayer prayer) {
 		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_NORMAL_BOOK)
 				.getComponents();
 		for (RSWidget c : prayers) {
-			if (WidgetInfo.TO_CHILD(c.getId()) == prayer.getIndex()) {
+			if (GlobalWidgetInfo.TO_CHILD(c.getId()) == prayer.getPrayerId()) {
 				return c.getDynamicComponent(GlobalWidgetId.ACTIVE_PRAYER_BORDER).isSelfVisible();
 			}
 		}
@@ -53,8 +51,7 @@ public class Prayer extends MethodProvider {
 		final int QUICK_PRAYER_SPRITE = 1066;
 		//Located two items below the one that contains the name "Quick prayer"
 		//Is likely the active sprite for prayer
-		int prayerSprite = WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId() + 2;
-		return methods.interfaces.getComponent(WidgetInfo.MINIMAP_PRAYER_ORB.getGroupId(), prayerSprite)
+		return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB_SPRITE)
 				.getSpriteId() == QUICK_PRAYER_SPRITE;
 	}
 
@@ -66,11 +63,11 @@ public class Prayer extends MethodProvider {
 	 * @return <tt>true</tt> if the interface was clicked; otherwise
 	 *         <tt>false</tt>.
 	 */
-	public boolean activatePrayer(final Prayers prayer, final boolean activate) {
+	public boolean activatePrayer(final GlobalWidgetId.Prayer prayer, final boolean activate) {
 		if (isPrayerOn(prayer) == activate) {
 			return false;
 		}
-		RSWidget pray = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_PRAYER_BOOK, prayer.getIndex());
+		RSWidget pray = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_PRAYER_BOOK, prayer.getPrayerId());
 		if ((pray.getBackgroundColor() != -1) == activate) {
 			return false;
 		}
@@ -88,7 +85,7 @@ public class Prayer extends MethodProvider {
 	 *         <tt>false</tt>.
 	 */
 	public boolean activateQuickPrayer(final boolean activate) {
-		return methods.interfaces.getComponent(WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getGroupId(), WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId()).doAction(
+		return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB).doAction(
 				activate ? "Activate" : "Deactivate");
 	}
 
@@ -100,21 +97,22 @@ public class Prayer extends MethodProvider {
 	 *
 	 * @return <tt>True</tt> unless unable to access the interface
 	 */
-	public boolean setQuickPrayers(boolean unsetPrevious, Prayers... prayers) {
-		RSWidget quickPrayers = methods.interfaces.getComponent(WidgetInfo.QUICK_PRAYER_PRAYERS.getGroupId(), WidgetInfo.QUICK_PRAYER_PRAYERS.getChildId());
-		methods.interfaces.getComponent(WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getGroupId(), WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId()).doAction("Setup");
+	public boolean setQuickPrayers(boolean unsetPrevious, GlobalWidgetId.Prayer... prayers) {
+		final int SET_PRAYER_SPRITE = 181;
+		RSWidget quickPrayers = methods.interfaces.getComponent(GlobalWidgetInfo.QUICK_PRAYER_PRAYERS);
+		methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB).doAction("Setup");
 		sleep(random(400,700));
 		if (quickPrayers.isValid() && quickPrayers.isVisible()) {
 			if (unsetPrevious) {
 				for (RSWidget quickPrayer : quickPrayers.getComponents()) {
-					if (quickPrayer.getSpriteId() == 181) {
+					if (quickPrayer.getSpriteId() == SET_PRAYER_SPRITE) {
 						quickPrayer.doAction("Toggle");
 						sleep(random(600, 800));
 					}
 				}
 			}
 			RSWidget[] quickPrayersInterface = quickPrayers.getComponents();
-			for (Prayers prayer : prayers) {
+			for (GlobalWidgetId.Prayer prayer : prayers) {
 				for (RSWidget quickPrayer : quickPrayersInterface) {
 					if (quickPrayer.getName().contains(prayer.name())) {
 						quickPrayer.doAction("Toggle");
@@ -136,7 +134,7 @@ public class Prayer extends MethodProvider {
 	 */
 	public RSWidget[] getSelectedPrayers() {
 		ArrayList<RSWidget> selected = new ArrayList<RSWidget>();
-		RSWidget[] prayers = methods.interfaces.getComponent(WidgetInfo.PRAYER_THICK_SKIN.getGroupId(), 0).getComponents();
+		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_NORMAL_BOOK).getComponents();
 		for (RSWidget prayer : prayers) {
 			if (prayer.getDynamicComponent(GlobalWidgetId.ACTIVE_PRAYER_BORDER).isSelfVisible()) {
 				selected.add(prayer);
@@ -151,7 +149,7 @@ public class Prayer extends MethodProvider {
 	 * @return The number of prayer points left.
 	 */
 	public int getPrayerLeft() {
-		return Integer.parseInt(methods.interfaces.getComponent(WidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText());
+		return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText());
 	}
 
 	/**

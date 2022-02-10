@@ -151,13 +151,13 @@ public class Store extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget storeInterface = getInterface();
 		if ((storeInterface == null)
-				|| (storeInterface.getComponent(GlobalWidgetId.INTERFACE_STORE_ITEMS) == null)) {
+				|| (storeInterface.getComponent(GlobalWidgetId.INTERFACE_STORE_ITEMS_CONTAINER) == null)) {
 			return null;
 		}
 
 		ArrayList<RSItem> items = new ArrayList<>();
 		RSWidget[] components = storeInterface.getComponent(
-				GlobalWidgetId.INTERFACE_STORE_ITEMS).getComponents();
+				GlobalWidgetId.INTERFACE_STORE_ITEMS_CONTAINER).getComponents();
 
 		for (RSWidget component : components) {
 

@@ -1,10 +1,17 @@
 package rsb.internal;
 
+import com.google.common.math.DoubleMath;
+import com.google.gson.Gson;
+import com.google.inject.binder.ConstantBindingBuilder;
 import com.google.inject.name.Names;
+import java.applet.Applet;
+import java.io.File;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Supplier;
 import net.runelite.api.hooks.Callbacks;
-import net.runelite.client.RuneLite;
-import net.runelite.client.RuneLiteModule;
-import net.runelite.client.RuneLiteProperties;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
@@ -15,32 +22,26 @@ import net.runelite.client.task.Scheduler;
 import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.ExecutorServiceExceptionLogger;
 import net.runelite.http.api.RuneLiteAPI;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.applet.Applet;
-import java.io.File;
-import java.util.Properties;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.function.Supplier;
+import net.runelite.client.RuneLiteModule;
+import net.runelite.client.RuntimeConfig;
 
 public class BotModule extends RuneLiteModule {
 
     private final OkHttpClient okHttpClient;
     private final Supplier<Applet> clientLoader;
+    private final Supplier<RuntimeConfig> configSupplier;
     private final boolean developerMode;
     private final boolean safeMode;
     private final File sessionfile;
     private final File config;
 
 
-    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, boolean developerMode, boolean safeMode, File sessionfile, File config) {
-        super(okHttpClient, clientLoader, developerMode, safeMode, sessionfile, config);
+    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, Supplier<RuntimeConfig> configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
+        super(okHttpClient, clientLoader, configSupplier, developerMode, safeMode, sessionfile, config);
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
+        this.configSupplier = configSupplier;
         this.developerMode = developerMode;
         this.safeMode = safeMode;
         this.sessionfile = sessionfile;
@@ -48,6 +49,7 @@ public class BotModule extends RuneLiteModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void configure()
     {
         Properties properties = BotProperties.getProperties();
@@ -56,6 +58,31 @@ public class BotModule extends RuneLiteModule {
             String value = properties.getProperty(key);
             bindConstant().annotatedWith(Names.named(key)).to(value);
         }
+        RuntimeConfig runtimeConfig = configSupplier.get();
+        if (runtimeConfig != null && runtimeConfig.getProps() != null)
+        {
+            for (Map.Entry<String, ?> entry : runtimeConfig.getProps().entrySet())
+            {
+                if (entry.getValue() instanceof String)
+                {
+                    ConstantBindingBuilder binder = bindConstant().annotatedWith(Names.named(entry.getKey()));
+                    binder.to((String) entry.getValue());
+                }
+                else if (entry.getValue() instanceof Double)
+                {
+                    ConstantBindingBuilder binder = bindConstant().annotatedWith(Names.named(entry.getKey()));
+                    if (DoubleMath.isMathematicalInteger((Double) entry.getValue()))
+                    {
+                        binder.to(((Double) entry.getValue()).intValue());
+                    }
+                    else
+                    {
+                        binder.to((Double) entry.getValue());
+                    }
+                }
+            }
+        }
+
         bindConstant().annotatedWith(Names.named("developerMode")).to(developerMode);
         bindConstant().annotatedWith(Names.named("safeMode")).to(safeMode);
         bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
@@ -69,6 +96,8 @@ public class BotModule extends RuneLiteModule {
         bind(PluginManager.class);
         bind(SessionManager.class);
 
+        bind(Gson.class).toInstance(RuneLiteAPI.GSON);
+
         bind(Callbacks.class).to(NewHooks.class);
 
         bind(EventBus.class)
@@ -77,9 +106,5 @@ public class BotModule extends RuneLiteModule {
         bind(EventBus.class)
                 .annotatedWith(Names.named("Deferred EventBus"))
                 .to(DeferredEventBus.class);
-
-        bind(Logger.class)
-                .annotatedWith(Names.named("Core Logger"))
-                .toInstance(LoggerFactory.getLogger(RuneLite.class));
     }
 }

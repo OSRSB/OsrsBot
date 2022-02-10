@@ -2,7 +2,6 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.wrappers.Filter;
 import rsb.internal.globval.GlobalSettingValues;
 import rsb.internal.globval.GlobalWidgetId;
@@ -125,7 +124,7 @@ public class Bank extends MethodProvider {
 			if (!isOpen()) {
 				boolean match = false;
 				for (int i = 0; i < 28; i++) {
-					RSWidget comp = methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getDynamicComponent(i);
+					RSWidget comp = methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).getDynamicComponent(i);
 					if (comp.getId() == itemID) {
 						itemCount += comp.getStackSize();
 						if (!match) {
@@ -196,7 +195,7 @@ public class Bank extends MethodProvider {
 			outer:
 			for (int i = 0; i < 28; i++) {
 				RSWidget item = isOpen() ? methods.inventory.getItemAt(i).getComponent() :
-						methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getDynamicComponent(i);
+						methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).getDynamicComponent(i);
 				if (item != null && item.getId() != -1) {
 					for (int id : items) {
 						if (item.getId() == id) {
@@ -294,7 +293,7 @@ public class Bank extends MethodProvider {
 		final RSItem[] items = getItems();
 		if (items != null) {
 			for (final RSItem item : items) {
-				if (WidgetInfo.TO_CHILD(item.getComponent().getId()) == index) {
+				if (GlobalWidgetInfo.TO_CHILD(item.getComponent().getId()) == index) {
 					return item;
 				}
 			}
@@ -739,8 +738,8 @@ public class Bank extends MethodProvider {
 		int count = 0;
 		for (int i = 0; i < 28; ++i) {
 			for (int id : ids) {
-				if (methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).isValid()
-						&& methods.interfaces.getComponent(WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER).getComponent(i).getId() == id) {
+				if (methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).isValid()
+						&& methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).getComponent(i).getId() == id) {
 					count++;
 				}
 			}
@@ -774,10 +773,10 @@ public class Bank extends MethodProvider {
 	 * @return All equipment items that are being worn.
 	 */
 	public RSItem[] getEquipmentItems() {
-		if (methods.interfaces.getComponent(WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).isValid()) {
+		if (methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).isValid()) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = methods.interfaces.getComponent(WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).getComponents();
+		RSWidget[] components = methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = new RSItem(methods, components[i]);
