@@ -58,7 +58,7 @@ public class GlobalConfiguration {
 			return path;
 		}
 
-		public static String GetOsrsBotDirectory() {
+		public static String getOsrsBotDirectory() {
 			final String env = System.getenv(GlobalConfiguration.NAME.toUpperCase() + "_HOME");
 			if ((env != null) && !env.isEmpty()) {
 				return env;
@@ -78,7 +78,7 @@ public class GlobalConfiguration {
 		}
 
 		public static String getLogsDirectory() {
-			return Paths.GetOsrsBotDirectory() + File.separator + "Logs";
+			return Paths.getOsrsBotDirectory() + File.separator + "Logs";
 		}
 
 		public static String getMenuCache() {
@@ -98,11 +98,11 @@ public class GlobalConfiguration {
 		}
 
 		public static String getScreenshotsDirectory() {
-			return Paths.GetOsrsBotDirectory() + File.separator + "Screenshots";
+			return Paths.getOsrsBotDirectory() + File.separator + "Screenshots";
 		}
 
 		public static String getScriptsDirectory() {
-			return Paths.GetOsrsBotDirectory() + File.separator + Paths.SCRIPTS_NAME_OUT;
+			return Paths.getOsrsBotDirectory() + File.separator + Paths.SCRIPTS_NAME_OUT;
 		}
 		
 
@@ -119,7 +119,7 @@ public class GlobalConfiguration {
 		}
 
 		public static String getCacheDirectory() {
-			return Paths.GetOsrsBotDirectory() + File.separator + "Cache";
+			return Paths.getOsrsBotDirectory() + File.separator + "Cache";
 		}
 
 		public static String getScriptsExtractedCache() {
@@ -147,7 +147,7 @@ public class GlobalConfiguration {
 		}
 
 		public static String getSettingsDirectory() {
-			return Paths.GetOsrsBotDirectory() + File.separator + "Settings";
+			return Paths.getOsrsBotDirectory() + File.separator + "Settings";
 		}
 
 		public static String getMenuBarPrefs() {
@@ -194,7 +194,7 @@ public class GlobalConfiguration {
 		}
 		final ArrayList<String> dirs = new ArrayList<String>();
 		//This is where folders and files are generated on start-up
-		dirs.add(Paths.GetOsrsBotDirectory());
+		dirs.add(Paths.getOsrsBotDirectory());
 		dirs.add(Paths.getLogsDirectory());
 		dirs.add(Paths.getCacheDirectory());
 		dirs.add(Paths.getSettingsDirectory());
