@@ -1,12 +1,12 @@
-# RSB
+# OSRSBot
 An automation API for Old School RuneScape
 ___
 
 ## Community Discord
 [Click here](https://discord.gg/CGBXNrHREP) to join our community Discord for more support and help
 
-### What is RSB?
-RSB is an API designed to aid in automating the gameplay of Old School RuneScape using RuneLite's 
+### What is OSRSBot?
+OSRSBot is an API designed to aid in automating the gameplay of Old School RuneScape using RuneLite's 
 third party client. 
 
 ###### RuneLite?
@@ -28,7 +28,7 @@ of ensuring unrelated systems remain relevant.
 ### Using the Client
 
 ###### Set up
-So, if you're a script user reading this then you can [click here](https://github.com/OSRSB/RSB/releases/latest) 
+So, if you're a script user reading this then you can [click here](https://github.com/OSRSB/OSRSBot/releases/latest) 
 to download the latest jar file. To run this file you'll need an installation of 
 [JDK 8](https://www.oracle.com/java/technologies/downloads/#java8) which can be obtained by clicking that link and 
 downloading the version that matches your operating system. If you need help just jump into the community server and
@@ -100,7 +100,7 @@ manageable.
 Script jars are not intended to be runnable (even if they're able to be). They're really just a zip file for the API
 to load.
 If the script is compiled without dependencies and only using the module compiled (script classes only) then 
-you really only need to worry about directing the gradle.build to your local file system directory containing RSB.
+you really only need to worry about directing the gradle.build to your local file system directory containing OSRSBot.
 
 ###### Simple
 Adjusting a built output (class files not a jar) where they are in the Source folder in GService means that updates 
@@ -109,9 +109,9 @@ I'd recommend using this option and have configured it to default to this behavi
 (Personally I just keep multiple windows of IntelliJ. One for each project. You could likely set 
 up the script environment to be a module within the opened project). 
 ###### Advanced
-Additionally, RSB does enable a hacky in-environment test script folder that will compile on runtime of the 
+Additionally, OSRSBot does enable a hacky in-environment test script folder that will compile on runtime of the 
 API without any extra effort from you. Refer to the Wiki Links second bulletin.
-If you find yourself constantly changing the RSB API and 
+If you find yourself constantly changing the OSRSBot API and 
 testing your script then you might want to look into that.
 
 #### Dependencies
