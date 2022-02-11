@@ -47,6 +47,10 @@ public class GlobalConfiguration {
 			if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS) {
 				path = System.getenv("APPDATA") + File.separator
 						+ GlobalConfiguration.NAME + "_Accounts.ini";
+			} else if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.LINUX) {
+				path = Paths.getUnixHome() + File.separator
+						+ ".config" + File.separator
+						+ GlobalConfiguration.NAME_LOWERCASE + "_acct.ini";
 			} else {
 				path = Paths.getUnixHome() + File.separator + "."
 						+ GlobalConfiguration.NAME_LOWERCASE + "acct";
@@ -54,20 +58,27 @@ public class GlobalConfiguration {
 			return path;
 		}
 
-		public static String getHomeDirectory() {
+		public static String GetOsrsBotDirectory() {
 			final String env = System.getenv(GlobalConfiguration.NAME.toUpperCase() + "_HOME");
-			if ((env == null) || env.isEmpty()) {
-				String test = GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS ?
-						System.getProperty("user.home") :
-						Paths.getUnixHome();
-				return (test + File.separator + GlobalConfiguration.NAME);
-			} else {
+			if ((env != null) && !env.isEmpty()) {
 				return env;
+			} else {
+				String homeDirBuilder;
+				if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS)
+					homeDirBuilder = System.getProperty("user.home");
+				else if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.LINUX) {
+					homeDirBuilder = System.getProperty("user.home")
+						+ File.separator + ".config";
+				}
+				else {
+					homeDirBuilder = Paths.getUnixHome();
+				}
+				return (homeDirBuilder + File.separator + GlobalConfiguration.NAME);
 			}
 		}
 
 		public static String getLogsDirectory() {
-			return Paths.getHomeDirectory() + File.separator + "Logs";
+			return Paths.GetOsrsBotDirectory() + File.separator + "Logs";
 		}
 
 		public static String getMenuCache() {
@@ -87,11 +98,11 @@ public class GlobalConfiguration {
 		}
 
 		public static String getScreenshotsDirectory() {
-			return Paths.getHomeDirectory() + File.separator + "Screenshots";
+			return Paths.GetOsrsBotDirectory() + File.separator + "Screenshots";
 		}
 
 		public static String getScriptsDirectory() {
-			return Paths.getHomeDirectory() + File.separator + Paths.SCRIPTS_NAME_OUT;
+			return Paths.GetOsrsBotDirectory() + File.separator + Paths.SCRIPTS_NAME_OUT;
 		}
 		
 
@@ -108,7 +119,7 @@ public class GlobalConfiguration {
 		}
 
 		public static String getCacheDirectory() {
-			return Paths.getHomeDirectory() + File.separator + "Cache";
+			return Paths.GetOsrsBotDirectory() + File.separator + "Cache";
 		}
 
 		public static String getScriptsExtractedCache() {
@@ -136,7 +147,7 @@ public class GlobalConfiguration {
 		}
 
 		public static String getSettingsDirectory() {
-			return Paths.getHomeDirectory() + File.separator + "Settings";
+			return Paths.GetOsrsBotDirectory() + File.separator + "Settings";
 		}
 
 		public static String getMenuBarPrefs() {
@@ -149,7 +160,7 @@ public class GlobalConfiguration {
 		}
 	}
 
-	public static final String NAME = "GService";
+	public static final String NAME = "OsrsBot";
 	public static final String NAME_LOWERCASE = NAME.toLowerCase();
 	private static final OperatingSystem CURRENT_OS;
 	public static boolean RUNNING_FROM_JAR = false;
@@ -183,7 +194,7 @@ public class GlobalConfiguration {
 		}
 		final ArrayList<String> dirs = new ArrayList<String>();
 		//This is where folders and files are generated on start-up
-		dirs.add(Paths.getHomeDirectory());
+		dirs.add(Paths.GetOsrsBotDirectory());
 		dirs.add(Paths.getLogsDirectory());
 		dirs.add(Paths.getCacheDirectory());
 		dirs.add(Paths.getSettingsDirectory());

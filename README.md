@@ -35,9 +35,11 @@ downloading the version that matches your operating system. If you need help jus
 ask.
 
 ###### Installing a script
-As for running a script you've downloaded (which will be in the form of a jar file). You can go to your home directory
-(if you don't know what this is just search the words home directory and your operating system in the Google) and from 
-there the GService folder, then the Scripts folder, then the Precompiled folder. Place your scripts here.
+To install a .jar script, put it in the following folder:
+
+Windows: C:\Users\[username]\AppData\Roaming\OsrsBot\Scripts\Precompiled
+Linux: /home/[username]/.config/OsrsBot/Scripts/Precompiled
+MacOS: /Users/[username]/Library/Application Support/OsrsBot/Scripts/Precompiled
 
 
 ###### Running a script
