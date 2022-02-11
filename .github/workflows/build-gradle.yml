@@ -1,0 +1,36 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Build with Gradle
+      run: |
+        ./gradlew build
+    - name: Rename bot jar
+      run: |
+        mv ./build/libs/RSBBB-1.0.jar ./OsrsBot.jar
+    - uses: actions/upload-artifact@v2
+      with:
+        name: OsrsBot.jar
+        path: ./OsrsBot.jar
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: ./OsrsBot.jar
+
