@@ -210,6 +210,14 @@ public class RSArea {
 	}
 
 	/**
+	 * @return a random <b>RSTile</b> in the <b>RSArea</b>
+	 */
+	public RSTile getRandomTile() {
+		RSTile[] tiles = this.getTileArray();
+		return tiles[(int) (Math.random() * tiles.length)];
+	}
+
+	/**
 	 * @return The distance between the the <b>RSTile</b> that's most
 	 *         <i>East</i> and the <b>RSTile</b> that's most <i>West</i>.
 	 */
