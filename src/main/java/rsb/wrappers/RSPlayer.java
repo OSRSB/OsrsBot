@@ -68,7 +68,7 @@ public class RSPlayer extends RSCharacter {
 */
 	public boolean isIdle() {
 
-		return getAnimation() == -1 && isInCombat();
+		return getAnimation() == -1 && !isInCombat();
 		//return !isMoving() && (getAnimation() == -1) && !isInCombat();
 	}
 
