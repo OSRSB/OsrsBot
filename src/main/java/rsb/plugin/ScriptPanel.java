@@ -14,8 +14,8 @@ import javax.swing.GroupLayout;
 
 public class ScriptPanel extends JPanel {
 	private RuneLite bot;
-	private JScrollPane scrollPane1;
-	private JTable table1;
+	private JScrollPane scriptsSelectionScrollPane;
+	private JTable scriptsTable;
 	private JComboBox comboBoxAccounts;
 	private JButton buttonStart;
 	private JButton buttonPause;
@@ -127,8 +127,8 @@ public class ScriptPanel extends JPanel {
 	}
 
 	private void initComponents() {
-		scrollPane1 = new JScrollPane();
-		table1 = scriptSelector.getTable(0, 70, 45, 30);
+		scriptsSelectionScrollPane = new JScrollPane();
+		scriptsTable = scriptSelector.getTable(0, 70, 45, 30);
 		comboBoxAccounts = scriptSelector.getAccounts();
 		buttonStart = scriptSelector.getSubmit();
 		//Make a search area
@@ -146,10 +146,8 @@ public class ScriptPanel extends JPanel {
 		 getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
 		) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
-		//======== scrollPane1 ========
-		{
-			scrollPane1.setViewportView(table1);
-		}
+		//======== scripts scroll pane ========
+		scriptsSelectionScrollPane.setViewportView(scriptsTable);
 
 		//---- buttonPause ----
 		buttonPause.setText("Pause");
@@ -179,7 +177,7 @@ public class ScriptPanel extends JPanel {
 		setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup()
-						.addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+						.addComponent(scriptsSelectionScrollPane, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
 								.addGroup(layout.createParallelGroup()
 										.addGroup(layout.createSequentialGroup()
@@ -203,7 +201,7 @@ public class ScriptPanel extends JPanel {
 		layout.setVerticalGroup(
 				layout.createParallelGroup()
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scriptsSelectionScrollPane, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
 								.addGap(28, 28, 28)
 								.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGap(57, 57, 57)
