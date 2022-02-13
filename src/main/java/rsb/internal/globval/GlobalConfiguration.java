@@ -25,6 +25,7 @@ public class GlobalConfiguration {
 
 		public static class URLs {
 			private static final String BASE = "https://github.com/OSRSB/";
+			public static final String FORUMS = "https://osrsbot.org/";
 			public static final String DOWNLOAD = BASE + "releases";
 			public static final String UPDATE = BASE + "modscript";
 			public static final String WEB = BASE + "webwalker.gz";

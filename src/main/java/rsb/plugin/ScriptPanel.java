@@ -6,6 +6,7 @@ import rsb.internal.globval.GlobalConfiguration;
 import rsb.script.Script;
 
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -19,7 +20,8 @@ public class ScriptPanel extends JPanel {
 	private JButton buttonStart;
 	private JButton buttonPause;
 	private JButton buttonStop;
-	private JButton openScriptsFolder;
+	private JButton buttonScriptsFolder;
+	private JButton buttonForums;
 	private ScriptSelector scriptSelector;
 
 	public ScriptPanel(RuneLite bot) {
@@ -80,6 +82,31 @@ public class ScriptPanel extends JPanel {
 	 *
 	 * @param e ActionEvent
 	 */
+	private void openForumsPerformed(ActionEvent e) {
+		String forumsURL = GlobalConfiguration.Paths.URLs.FORUMS;
+		try {
+			switch (GlobalConfiguration.getCurrentOperatingSystem()) {
+				case WINDOWS:
+					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + forumsURL);
+					break;
+				case LINUX:
+					Runtime.getRuntime().exec("xdg-open " + forumsURL);
+					break;
+				case MAC:
+					Runtime.getRuntime().exec("open " + forumsURL);
+					break;
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * @author dginovker
+	 * @description Opens the scripts folder in the default file explorer
+	 *
+	 * @param e ActionEvent
+	 */
 	private void openScriptsFolderPerformed(ActionEvent e) {
 		String folderPath = GlobalConfiguration.Paths.getScriptsPrecompiledDirectory();
 		try {
@@ -109,7 +136,8 @@ public class ScriptPanel extends JPanel {
 		scriptSelector.load();
 		buttonPause = new JButton();
 		buttonStop = new JButton();
-		openScriptsFolder = new JButton();
+		buttonScriptsFolder = new JButton();
+		buttonForums = new JButton();
 
 		//======== this ========
 		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
@@ -132,8 +160,12 @@ public class ScriptPanel extends JPanel {
 		buttonStop.addActionListener(e -> buttonStopActionPerformed(e));
 
 		//---- openScriptsFolder ----
-		openScriptsFolder.setText("Open Scripts Folder");
-		openScriptsFolder.addActionListener(e -> openScriptsFolderPerformed(e));
+		buttonScriptsFolder.setText("Scripts Folder");
+		buttonScriptsFolder.addActionListener(e -> openScriptsFolderPerformed(e));
+
+		//---- openForums ----
+		buttonForums.setText("Forums");
+		buttonForums.addActionListener(e -> openForumsPerformed(e));
 
 		assignLayouts();
 
@@ -162,8 +194,10 @@ public class ScriptPanel extends JPanel {
 												.addGap(73, 73, 73)
 												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
-												.addGap(21, 21, 21)
-												.addComponent(openScriptsFolder, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)))
+												.addContainerGap()
+												.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+												.addGap(18, 18, 18)
+												.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
 								.addContainerGap(30, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
@@ -179,8 +213,9 @@ public class ScriptPanel extends JPanel {
 								.addGap(28, 28, 28)
 								.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
 								.addGap(28, 28, 28)
-								.addComponent(openScriptsFolder, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addGap(0, 60, Short.MAX_VALUE))
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+										.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+										.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
 		);
 	}
 
