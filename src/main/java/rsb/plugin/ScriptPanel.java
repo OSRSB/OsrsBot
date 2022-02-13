@@ -5,6 +5,7 @@ import rsb.internal.ScriptHandler;
 import rsb.internal.globval.GlobalConfiguration;
 import rsb.script.Script;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.Map;
@@ -157,11 +158,11 @@ public class ScriptPanel extends JPanel {
 		buttonStop.setText("Stop");
 		buttonStop.addActionListener(e -> buttonStopActionPerformed(e));
 
-		//---- openScriptsFolder ----
+		//---- buttonScriptsFolder ----
 		buttonScriptsFolder.setText("Scripts Folder");
 		buttonScriptsFolder.addActionListener(e -> openScriptsFolderPerformed(e));
 
-		//---- openForums ----
+		//---- buttonForums ----
 		buttonForums.setText("Forums");
 		buttonForums.addActionListener(e -> openForumsPerformed(e));
 
@@ -193,9 +194,11 @@ public class ScriptPanel extends JPanel {
 												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addContainerGap()
-												.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+												.addGap(10, 10, 10)
+												.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
 												.addGap(18, 18, 18)
-												.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
+												.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
+												.addGap(10, 10, 10))
 								.addContainerGap(30, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
