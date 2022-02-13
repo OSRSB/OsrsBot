@@ -213,7 +213,8 @@ public class ScriptPanel extends JPanel {
 								.addGap(28, 28, 28)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-										.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(30, Short.MAX_VALUE))
 		);
 	}
 
