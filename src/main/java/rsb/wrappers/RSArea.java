@@ -1,7 +1,8 @@
 package rsb.wrappers;
 
-import net.runelite.api.Tile;
+import net.runelite.api.Player;
 import net.runelite.api.coords.WorldPoint;
+import rsb.botLauncher.RuneLite;
 import rsb.wrappers.common.Positionable;
 
 import java.awt.*;
@@ -173,6 +174,15 @@ public class RSArea {
 			}
 		}
 		return cur;
+	}
+
+	/**
+	 * @return The nearest <b>RSTile</b> in the <b>RSArea</b>
+	 *         to the <b>Player</b>.
+	 */
+	public RSTile getNearestTile() {
+		RSTile playerLocation = new RSTile(RuneLite.getInjector().getInstance(Player.class).getWorldLocation());
+		return this.getNearestTile(playerLocation);
 	}
 
 	/**
