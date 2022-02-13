@@ -2,6 +2,7 @@ package rsb.plugin;
 
 import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
+import rsb.internal.globval.GlobalConfiguration;
 import rsb.script.Script;
 
 import java.awt.event.*;
@@ -18,6 +19,7 @@ public class ScriptPanel extends JPanel {
 	private JButton buttonStart;
 	private JButton buttonPause;
 	private JButton buttonStop;
+	private JButton openScriptsFolder;
 	private ScriptSelector scriptSelector;
 
 	public ScriptPanel(RuneLite bot) {
@@ -72,6 +74,31 @@ public class ScriptPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * @author dginovker
+	 * @description Opens the scripts folder in the default file explorer
+	 *
+	 * @param e ActionEvent
+	 */
+	private void openScriptsFolderPerformed(ActionEvent e) {
+		String folderPath = GlobalConfiguration.Paths.getScriptsPrecompiledDirectory();
+		try {
+			switch (GlobalConfiguration.getCurrentOperatingSystem()) {
+				case WINDOWS:
+					Runtime.getRuntime().exec("explorer.exe " + folderPath);
+					break;
+				case LINUX:
+					Runtime.getRuntime().exec("xdg-open " + folderPath);
+					break;
+				case MAC:
+					Runtime.getRuntime().exec("open " + folderPath);
+					break;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	private void initComponents() {
 		scrollPane1 = new JScrollPane();
 		table1 = scriptSelector.getTable(0, 70, 45, 30);
@@ -82,6 +109,7 @@ public class ScriptPanel extends JPanel {
 		scriptSelector.load();
 		buttonPause = new JButton();
 		buttonStop = new JButton();
+		openScriptsFolder = new JButton();
 
 		//======== this ========
 		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
@@ -102,6 +130,10 @@ public class ScriptPanel extends JPanel {
 		//---- buttonStop ----
 		buttonStop.setText("Stop");
 		buttonStop.addActionListener(e -> buttonStopActionPerformed(e));
+
+		//---- openScriptsFolder ----
+		openScriptsFolder.setText("Open Scripts Folder");
+		openScriptsFolder.addActionListener(e -> openScriptsFolderPerformed(e));
 
 		assignLayouts();
 
@@ -128,7 +160,10 @@ public class ScriptPanel extends JPanel {
 												.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addGap(73, 73, 73)
-												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+										.addGroup(layout.createSequentialGroup()
+												.addGap(21, 21, 21)
+												.addComponent(openScriptsFolder, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)))
 								.addContainerGap(30, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
@@ -143,6 +178,8 @@ public class ScriptPanel extends JPanel {
 										.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 								.addGap(28, 28, 28)
 								.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+								.addGap(28, 28, 28)
+								.addComponent(openScriptsFolder, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 60, Short.MAX_VALUE))
 		);
 	}
