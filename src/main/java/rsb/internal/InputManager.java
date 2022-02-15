@@ -1,8 +1,6 @@
 package rsb.internal;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Point;
 import rsb.botLauncher.RuneLite;
 import net.runelite.api.Client;
 import rsb.internal.input.Canvas;
@@ -125,9 +123,7 @@ public class InputManager {
 		}
 	}
 
-	@SneakyThrows
 	private void moveMouse(final int x, final int y) {
-		Point startLocation = bot.getMethodContext().mouse.getLocation();
 		// Firstly invoke drag events
 		if (bot.getMethodContext().mouse.isPressed()) {
 			final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_DRAGGED, System.currentTimeMillis(), 0,
@@ -140,9 +136,11 @@ public class InputManager {
 		}
 
 		if (!bot.getMethodContext().mouse.isPresent()) {
-			final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_ENTERED, System.currentTimeMillis(),
-					0, x, y, 0, false);
-			bot.getMethodContext().virtualMouse.sendEvent(me);
+			if (isOnCanvas(x, y)) { // Entered
+				final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_ENTERED, System.currentTimeMillis(),
+						0, x, y, 0, false);
+				bot.getMethodContext().virtualMouse.sendEvent(me);
+			}
 		} else if (!isOnCanvas(x, y)) {
 			final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_EXITED, System.currentTimeMillis(), 0, x,
 					y, 0, false);
@@ -165,9 +163,6 @@ public class InputManager {
 			final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_MOVED, System.currentTimeMillis(), 0, x,
 					y, 0, false);
 			bot.getMethodContext().virtualMouse.sendEvent(me);
-		}
-		if (bot.getMethodContext().mouse.getLocation() == startLocation) {
-			throw new Exception("Mouse failed to move");
 		}
 	}
 
