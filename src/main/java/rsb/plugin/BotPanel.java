@@ -44,6 +44,7 @@ class BotPanel extends PluginPanel
 {
 	private final JPanel display = new JPanel();
 	private final MaterialTabGroup tabGroup = new MaterialTabGroup(display);
+	private JScrollPane botPanelScrollPane;
 
 
 	@Inject
@@ -67,7 +68,9 @@ class BotPanel extends PluginPanel
 	 */
 	protected void associateBot(AccountPanel basePanel, ScriptPanel scriptPanel) {
 		MaterialTab  baseTab = new MaterialTab("Bot", tabGroup, basePanel);
-		MaterialTab scriptTab = new MaterialTab("Scripts", tabGroup, scriptPanel);
+		botPanelScrollPane = new JScrollPane(scriptPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		MaterialTab scriptTab = new MaterialTab("Scripts", tabGroup, botPanelScrollPane);
+
 
 		tabGroup.setBorder(new EmptyBorder(5, 0, 0, 0));
 		tabGroup.addTab(baseTab);
