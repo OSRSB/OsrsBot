@@ -38,7 +38,7 @@ public class Menu extends MethodProvider {
      * <tt>false</tt>.
      */
     public boolean doAction(String action) {
-        return doAction(action, null);
+        return doAction(action, (String) null);
     }
 
     /**

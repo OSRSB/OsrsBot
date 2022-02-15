@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
@@ -46,15 +47,19 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private static final String CLASS_EXT = ".class";
 	private static final String NO_EXT = "";
 	private static final String TMP_REGEX = "^tmp[0-9]+";
-	private RuneLite bot;
-	private JTable table;
-	private JTextField search;
-	private JComboBox accounts;
+
 	private ScriptTableModel model;
 	private List<ScriptDefinition> scripts;
 	private List<String> tmpFileNames;
-	private JButton submit;
 	private boolean connected = true;
+	private RuneLite bot;
+	protected JTable table;
+	protected JTextField search;
+	protected JComboBox accounts;
+	protected JButton buttonStart;
+	protected JButton buttonPause;
+	protected JButton buttonStop;
+	protected JButton buttonReload;
 
 	/**
 	 * Assigns the constant values
@@ -173,11 +178,15 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 */
 	public void update() {
 		boolean available = bot.getScriptHandler().getRunningScripts().size() == 0;
-		submit.setEnabled(available && table.getSelectedRow() != -1);
+		buttonStart.setEnabled(available && table.getSelectedRow() != -1);
 		table.setEnabled(available);
 		search.setEnabled(available);
 		accounts.setEnabled(available);
 		table.clearSelection();
+		/**
+		 * ADD A LOAD HERE
+		 * load();
+		 */
 	}
 
 	/**
@@ -193,8 +202,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		//scripts.addAll(SRC_TEST.list());
 		model.search(search.getText());
 		deleteTemporaryFiles();
+		table = (table == null) ? getTable(0, 70, 45, 30) : table;
 	}
-
 
 	/**
 	 * Generates and returns the script table
@@ -263,27 +272,95 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	}
 
 	/**
-	 * Generates and returns the start button
-	 *
-	 * @return start button
+	 * Sets the action to occur when the reload button is pressed.
+	 * @param e		the action event
 	 */
-	public JButton getSubmit() {
-		submit = new JButton("Start");
-		submit.setEnabled(false);
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				ScriptDefinition def = model.getDefinition(table.getSelectedRow());
-				try {
-					bot.setAccount((String) accounts.getSelectedItem());
-					bot.getScriptHandler().runScript(def.source.load(def));
-					bot.getScriptHandler().removeScriptListener(ScriptSelector.this);
-					dispose();
-				} catch (ServiceException e) {
-					e.printStackTrace();
-				}
+	void buttonReloadActionPerformed(ActionEvent e) {
+		stopAction();
+		accounts = getAccounts();
+		//
+		//Make a search area
+		getSearch();
+		//Reload the scripts
+		load();
+		//buttonStart = scriptSelector.getSubmit();
+
+	}
+
+	/**
+	 * Sets the action to occur when the start button is pressed.
+	 *
+	 * @param e		the action event
+	 */
+	void buttonStartActionPerformed(ActionEvent e) {
+		startAction();
+		buttonStart.setEnabled(false);
+	}
+
+	/**
+	 * The actions to perform to start a script
+	 */
+	private void startAction() {
+		ScriptDefinition def = model.getDefinition(table.getSelectedRow());
+		try {
+			bot.setAccount((String) accounts.getSelectedItem());
+			bot.getScriptHandler().runScript(def.source.load(def));
+			bot.getScriptHandler().removeScriptListener(this);
+		} catch (ServiceException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	/**
+	 * Sets the action to occur when the pause button is pressed.
+	 *
+	 * @param e		the action event
+	 */
+	void buttonPauseActionPerformed(ActionEvent e) {
+		ScriptHandler sh = bot.getScriptHandler();
+		Map<Integer, Script> running = sh.getRunningScripts();
+		if (running.size() > 0) {
+			int id = running.keySet().iterator().next();
+			sh.pauseScript(id);
+			//Swaps the displayed text
+			if (buttonPause.getText().equals("Pause")) {
+				buttonPause.setText("Play");
 			}
-		});
-		return submit;
+			else {
+				buttonPause.setText("Pause");
+			}
+		}
+	}
+
+	/**
+	 * Sets the action to occur when the stop button is pressed.
+	 *
+	 * @param e		the action event
+	 */
+	void buttonStopActionPerformed(ActionEvent e) {
+		//Sets the value back to Pause
+		if (buttonPause.getText().equals("Play")) {
+			buttonPause.setText("Pause");
+		}
+		stopAction();
+
+	}
+
+	/**
+	 * The actions to perform to stop a script
+	 */
+	private void stopAction() {
+		ScriptHandler sh = bot.getScriptHandler();
+		Map<Integer, Script> running = sh.getRunningScripts();
+		if (running.size() > 0) {
+			int id = running.keySet().iterator().next();
+			//Script s = running.get(id);
+			//ScriptManifest prop = s.getClass().getAnnotation(ScriptManifest.class);
+			//int result = JOptionPane.showConfirmDialog(this, "Would you like to stop the script " + prop.name() + "?", "Script", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			//if (result == JOptionPane.OK_OPTION) {
+			sh.stopScript(id);
+			//}
+		}
 	}
 
 	/**
@@ -353,12 +430,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private class TableSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent evt) {
 			if (!evt.getValueIsAdjusting()) {
-				submit.setEnabled(table.getSelectedRow() != -1);
+				buttonStart.setEnabled(table.getSelectedRow() != -1);
 			}
 		}
 	}
 
-	private static class ScriptTableModel extends AbstractTableModel {
+	public static class ScriptTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = 1L;
 		private final List<ScriptDefinition> scripts;
 		private final List<ScriptDefinition> matches;

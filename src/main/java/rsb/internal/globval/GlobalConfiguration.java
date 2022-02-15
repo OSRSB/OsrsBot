@@ -54,16 +54,30 @@ public class GlobalConfiguration {
 			return path;
 		}
 
+		/**
+		 * Retrieves the home directory using the operating system specific
+		 * method and concatenates it with our API specific path.
+		 * @return	the home directory of our API
+		 */
 		public static String getHomeDirectory() {
 			final String env = System.getenv(GlobalConfiguration.NAME.toUpperCase() + "_HOME");
-			if ((env == null) || env.isEmpty()) {
-				String test = GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS ?
-						System.getProperty("user.home") :
-						Paths.getUnixHome();
-				return (test + File.separator + GlobalConfiguration.NAME);
-			} else {
-				return env;
+			if (env == null || env.isEmpty()) {
+				String homeDirBuilder;
+				switch(GlobalConfiguration.getCurrentOperatingSystem()) {
+					case LINUX:
+						homeDirBuilder = System.getProperty("user.home")
+								+ File.separator + ".config";
+						break;
+					case WINDOWS:
+						homeDirBuilder = System.getProperty("user.home");
+						break;
+					default: //MAC etc
+						homeDirBuilder = Paths.getUnixHome();
+						break;
+				}
+				return (homeDirBuilder + File.separator + GlobalConfiguration.NAME);
 			}
+			return env;
 		}
 
 		public static String getLogsDirectory() {

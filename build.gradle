@@ -60,7 +60,7 @@ jar {
     exclude 'META-INF/*.DSA'
 }
 
-group = 'rsb'
+group = 'osrsb'
 version = '1.0'
 sourceCompatibility = '1.8'
 

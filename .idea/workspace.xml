@@ -9,10 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Clean-up, error fixing, and update for release&#10;Removed WidgetInfo method calls from inner method contexts&#10;Adjusted Prayer enumerated type to support both Quick Prayer Ids and normal Prayer Ids&#10;Repaired issues that a RuneLite update created involving RuneTimeConfigs and a JVM compilation error involving improper type-casting performed by Adam. (Probably worked fine in Eclipse, but it shouldn't).">
-      <change afterPath="$PROJECT_DIR$/docs/rsb/internal/RuntimeConfig.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/rsb/internal/RuntimeConfigLoader.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/rsb/internal/globval/GlobalWidgetId.Prayer.html" afterDir="false" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Update the javadocs for three files">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/methods/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/plugin/ScriptPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/wrappers/RSModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +117,14 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="wip" />
+        <option value="master" />
+      </list>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
@@ -149,7 +173,7 @@
       <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="Gradle.RSB [build]">
     <configuration name="Application" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="rsb.botLauncher.Application" />
       <module name="RSBBB.main" />
@@ -272,9 +296,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RSB [build]" />
         <item itemvalue="Gradle.RSB [jar]" />
         <item itemvalue="Gradle.RSB [clean]" />
-        <item itemvalue="Gradle.RSB [build]" />
         <item itemvalue="Gradle.RSB [buildNeeded]" />
         <item itemvalue="Gradle.RSB [buildDependents]" />
       </list>
@@ -404,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644453873859</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Update the javadocs for three files">
+      <created>1644454250794</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1644454250794</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,7 +469,8 @@
     <MESSAGE value="Revised RSObject to better document and fix getDef (this is totally not the first time I've written those words)&#10;&#10;The general use case by most plugins appears to be similar, so we're going to revert to that use case. If issues appear we'll need to see what thread exactly is making that call I suppose." />
     <MESSAGE value="Revised RSObject to better document and fix getDef (this is totally not the first time I've written those words)&#10;Revised a number of classes to remove Javadoc errors and improved commenting on classes such as RSTile &#10;The general use case by most plugins appears to be similar, so we're going to revert to that use case. If issues appear we'll need to see what thread exactly is making that call I suppose." />
     <MESSAGE value="Clean-up, error fixing, and update for release&#10;Removed WidgetInfo method calls from inner method contexts&#10;Adjusted Prayer enumerated type to support both Quick Prayer Ids and normal Prayer Ids&#10;Repaired issues that a RuneLite update created involving RuneTimeConfigs and a JVM compilation error involving improper type-casting performed by Adam. (Probably worked fine in Eclipse, but it shouldn't)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean-up, error fixing, and update for release&#10;Removed WidgetInfo method calls from inner method contexts&#10;Adjusted Prayer enumerated type to support both Quick Prayer Ids and normal Prayer Ids&#10;Repaired issues that a RuneLite update created involving RuneTimeConfigs and a JVM compilation error involving improper type-casting performed by Adam. (Probably worked fine in Eclipse, but it shouldn't)." />
+    <MESSAGE value="Update the javadocs for three files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update the javadocs for three files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
