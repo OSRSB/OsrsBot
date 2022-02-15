@@ -8,6 +8,7 @@ import net.runelite.client.ui.DrawManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -82,6 +83,17 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Destroys any inventory items with the given name.
+	 *
+	 * @param name The name of items to destroy.
+	 * @return <tt>true</tt> if the items were destroyed; otherwise
+	 *         <tt>false</tt>.
+	 */
+	public boolean destroyItem(final String name) {
+		return destroyItem(getItemID(name));
+	}
+
+	/**
 	 * Drops all items with the same specified id.
 	 *
 	 * @param leftToRight <tt>true</tt> to drop items from left to right.
@@ -114,6 +126,16 @@ public class Inventory extends MethodProvider {
 			}
 			sleep(random(500, 800));
 		}
+	}
+
+	/**
+	 * Drops all items with the specified names.
+	 *
+	 * @param leftToRight <tt>true</tt> to drop items from left to right.
+	 * @param names       The item names to drop
+	 */
+	public void dropAllExcept(final boolean leftToRight, final String... names) {
+		dropAllExcept(leftToRight, getItemIDs(names));
 	}
 
 	/**
@@ -151,6 +173,18 @@ public class Inventory extends MethodProvider {
 	public boolean dropAllExcept(final int... items) {
 		dropAllExcept(false, items);
 		return true;
+	}
+
+	/**
+	 * Drops all items with the specified names. This method drops items
+	 * vertically going down the inventory.
+	 *
+	 * @param names The item names to drop.
+	 * @return <tt>true</tt> at all times.
+	 * @see #dropAllExcept(boolean, int...)
+	 */
+	public boolean dropAllExcept(final String... names) {
+		return dropAllExcept(getItemIDs(names));
 	}
 
 	/**
@@ -192,6 +226,19 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Checks whether or not your inventory contains the provided item name.
+	 *
+	 * @param name The name you wish to evaluate.
+	 * @return <tt>true</tt> if your inventory contains an item with the name
+	 *         provided; otherwise <tt>false</tt>.
+	 * @see #containsOneOf(int...)
+	 * @see #containsAll(int...)
+	 */
+	public boolean contains(final String name) {
+		return contains(getItemID(name));
+	}
+
+	/**
 	 * Checks whether or not your inventory contains all of the provided item
 	 * IDs.
 	 *
@@ -207,6 +254,20 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Checks whether or not your inventory contains all of the provided item
+	 * IDs.
+	 *
+	 * @param names The item(s) you wish to evaluate.
+	 * @return <tt>true</tt> if your inventory contains at least one of all of
+	 *         the item IDs provided; otherwise <tt>false</tt>.
+	 * @see #containsOneOf(int...)
+	 */
+	public boolean containsAll(final String... names) {
+		if (!(getItemIDs(names).length == names.length)) return false;
+		return containsAll(getItemIDs(names));
 	}
 
 	/**
@@ -228,6 +289,19 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Checks whether or not your inventory contains at least one of the
+	 * provided item names.
+	 *
+	 * @param names The item names to check for.
+	 * @return <tt>true</tt> if inventory contains one of the specified items;
+	 *         otherwise <tt>false</tt>.
+	 * @see #containsAll(int...)
+	 */
+	public boolean containsOneOf(final String... names) {
+		return containsOneOf(getItemIDs(names));
 	}
 
 	/**
@@ -259,6 +333,16 @@ public class Inventory extends MethodProvider {
 	public boolean selectItem(final int itemID) {
 		final RSItem item = getItem(itemID);
 		return item != null && selectItem(item);
+	}
+
+	/**
+	 * Selects the first item in the inventory with the provided name.
+	 *
+	 * @param name The name of the item to select.
+	 * @return <tt>true</tt> if the item was selected; otherwise <tt>false</tt>.
+	 */
+	public boolean selectItem(final String name) {
+		return selectItem(getItemID(name));
 	}
 
 	/**
@@ -319,6 +403,18 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Uses two items together.
+	 *
+	 * @param name   The first item to use.
+	 * @param targetName The item name you want the first parameter to be used on.
+	 * @return <tt>true</tt> if the first item has been "used" on the other;
+	 *         otherwise <tt>false</tt>.
+	 */
+	public boolean useItem(final String name, final String targetName) {
+		return useItem(getItemID(name), getItemID(targetName));
+	}
+
+	/**
 	 * Uses an item on an object.
 	 *
 	 * @param item         The item to use on another item.
@@ -344,6 +440,18 @@ public class Inventory extends MethodProvider {
 	public boolean useItem(final int itemID, final RSObject object) {
 		RSItem item = getItem(itemID);
 		return item != null && useItem(item, object);
+	}
+
+	/**
+	 * Uses an item on an object.
+	 *
+	 * @param name The item name to use on the object.
+	 * @param object The RSObject you want the item to be used on.
+	 * @return <tt>true</tt> if the "use" action had been used on both the
+	 *         RSItem and RSObject; otherwise <tt>false</tt>.
+	 */
+	public boolean useItem(final String name, final RSObject object) {
+		return useItem(getItemID(name), object);
 	}
 
 	/**
@@ -583,6 +691,16 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Gets all the items in the inventory matching any of the provided names.
+	 *
+	 * @param names Valid IDs.
+	 * @return <tt>RSItem</tt> array of the matching inventory items.
+	 */
+	public RSItem[] getItems(final String... names) {
+		return getItems(getItemIDs(names));
+	}
+
+	/**
 	 * Gets all the items in the inventory. If the tab is not currently open, it
 	 * does not open it and returns the last known array of items in the tab.
 	 *
@@ -634,6 +752,28 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Gets the IDs of items in the inventory with given names.
+	 *
+	 * @param names The names of the item IDs you wish to find.
+	 * @return The IDs of the items or null if not in inventory.
+	 */
+	public int[] getItemIDs(final String[] names) {
+		ArrayList<Integer> itemIDs = new ArrayList<>();
+		for (String name : names) {
+			int itemID = getItemID(name);
+			if (itemID != -1) {
+				itemIDs.add(itemID);
+			}
+		}
+
+		int[] arr = new int[itemIDs.size()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = itemIDs.get(i);
+		}
+		return arr;
+	}
+
+	/**
 	 * Gets the first item in the inventory with any of the provided IDs.
 	 *
 	 * @param ids The IDs of the item to find.
@@ -649,6 +789,16 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Gets the first item in the inventory with any of the provided names.
+	 *
+	 * @param names The names of the item to find.
+	 * @return The first <tt>RSItem</tt> for the given names; otherwise null.
+	 */
+	public RSItem getItem(final String... names) {
+		return getItem(getItemIDs(names));
 	}
 
 	public RSItem[] find(final Predicate<RSItem> filter) {
@@ -676,6 +826,17 @@ public class Inventory extends MethodProvider {
 	 */
 	public int getCountExcept(final int... ids) {
 		return getCountExcept(false, ids);
+	}
+
+	/**
+	 * Gets the count of all the items in the inventory without any of the
+	 * provided names. This ignores stack sizes.
+	 *
+	 * @param names The item names to exclude.
+	 * @return The count.
+	 */
+	public int getCountExcept(final String... names) {
+		return getCountExcept(false, names);
 	}
 
 	/**
@@ -709,6 +870,19 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Gets the count of all the items in the inventory without any of the
+	 * provided names.
+	 *
+	 * @param includeStacks <tt>true</tt> to count the stack sizes of each item;
+	 *                      <tt>false</tt> to count a stack as a single item.
+	 * @param names           The item names to exclude.
+	 * @return The count.
+	 */
+	public int getCountExcept(final boolean includeStacks, final String... names) {
+		return getCountExcept(includeStacks, getItemIDs(names));
+	}
+
+	/**
 	 * Gets the count of all the items in the inventory with the any of the
 	 * specified IDs. This ignores stack sizes.
 	 *
@@ -717,6 +891,17 @@ public class Inventory extends MethodProvider {
 	 */
 	public int getCount(final int... itemIDs) {
 		return getCount(false, itemIDs);
+	}
+
+	/**
+	 * Gets the count of all the items in the inventory with the any of the
+	 * specified names. This ignores stack sizes.
+	 *
+	 * @param names the item names to include
+	 * @return The count.
+	 */
+	public int getCount(final String... names) {
+		return getCount(false, names);
 	}
 
 	/**
@@ -744,6 +929,19 @@ public class Inventory extends MethodProvider {
 		}
 
 		return total;
+	}
+
+	/**
+	 * Gets the count of all the items in the inventory with the any of the
+	 * specified names.
+	 *
+	 * @param includeStacks <tt>true</tt> to count the stack sizes of each item;
+	 *                      <tt>false</tt> to count a stack as a single item.
+	 * @param names       the item names to include
+	 * @return The count.
+	 */
+	public int getCount(final boolean includeStacks, final String... names) {
+		return getCount(includeStacks, getItemIDs(names));
 	}
 
 	/**
