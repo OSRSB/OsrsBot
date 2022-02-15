@@ -10,34 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Revised RSObject to better document and fix getDef (this is totally not the first time I've written those words)&#10;Revised a number of classes to remove Javadoc errors and improved commenting on classes such as RSTile &#10;The general use case by most plugins appears to be similar, so we're going to revert to that use case. If issues appear we'll need to see what thread exactly is making that call I suppose.">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/RuntimeConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/RuntimeConfigLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Base64.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/Base64.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/OutputObjectComparer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SkillTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/rsb/util/SkillTracker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLiteTestFeatures.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLiteTestFeatures.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/BotModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/BotModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/BotProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/BotProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/NewHooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/NewHooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Combat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/GameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Interfaces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Prayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Walking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/script/randoms/LoginBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/script/randoms/LoginBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/wrappers/RSWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/ScriptSelector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,9 +105,9 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalWidgetId.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/build.gradle" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" root0="FORCE_HIGHLIGHTING" />
   </component>

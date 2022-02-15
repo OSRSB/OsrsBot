@@ -4,6 +4,8 @@ import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
 import rsb.internal.globval.GlobalConfiguration;
 import rsb.script.Script;
+import rsb.service.ScriptDefinition;
+import rsb.service.ServiceException;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +17,7 @@ import javax.swing.GroupLayout;
 
 public class ScriptPanel extends JPanel {
 	private RuneLite bot;
+	private JScrollPane scrollPane1;
 	private JScrollPane scriptsSelectionScrollPane;
 	private JTable scriptsTable;
 	private JComboBox comboBoxAccounts;
@@ -30,56 +33,8 @@ public class ScriptPanel extends JPanel {
 		scriptSelector = new ScriptSelector(bot);
 		initComponents();
 	}
-
 	/**
-	 * @author GigiaJ
-	 * @description Sets the action to occur when the pause button is pressed.
-	 *
-	 * @param e
-	 */
-	private void buttonPauseActionPerformed(ActionEvent e) {
-		ScriptHandler sh = bot.getScriptHandler();
-		Map<Integer, Script> running = sh.getRunningScripts();
-		if (running.size() > 0) {
-			int id = running.keySet().iterator().next();
-			sh.pauseScript(id);
-			//Swaps the displayed text
-			if (buttonPause.getText().equals("Pause")) {
-				buttonPause.setText("Play");
-			}
-			else {
-				buttonPause.setText("Pause");
-			}
-		}
-	}
-
-	/**
-	 * @author GigiaJ
-	 * @description Sets the action to occur when the stop button is pressed.
-	 *
-	 * @param e
-	 */
-	private void buttonStopActionPerformed(ActionEvent e) {
-		//Sets the value back to Pause
-		if (buttonPause.getText().equals("Play")) {
-			buttonPause.setText("Pause");
-		}
-		ScriptHandler sh = bot.getScriptHandler();
-		Map<Integer, Script> running = sh.getRunningScripts();
-		if (running.size() > 0) {
-			int id = running.keySet().iterator().next();
-			//Script s = running.get(id);
-			//ScriptManifest prop = s.getClass().getAnnotation(ScriptManifest.class);
-			//int result = JOptionPane.showConfirmDialog(this, "Would you like to stop the script " + prop.name() + "?", "Script", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-			//if (result == JOptionPane.OK_OPTION) {
-			sh.stopScript(id);
-			//}
-		}
-	}
-
-	/**
-	 * @author dginovker
-	 * @description Opens the scripts folder in the default file explorer
+	 * Opens the scripts folder in the default file explorer
 	 *
 	 * @param e ActionEvent
 	 */
@@ -103,8 +58,7 @@ public class ScriptPanel extends JPanel {
 	}
 
 	/**
-	 * @author dginovker
-	 * @description Opens the scripts folder in the default file explorer
+	 * Opens the scripts folder in the default file explorer
 	 *
 	 * @param e ActionEvent
 	 */
@@ -129,34 +83,42 @@ public class ScriptPanel extends JPanel {
 
 	private void initComponents() {
 		scriptsSelectionScrollPane = new JScrollPane();
-		scriptsTable = scriptSelector.getTable(0, 70, 45, 30);
-		comboBoxAccounts = scriptSelector.getAccounts();
-		buttonStart = scriptSelector.getSubmit();
+		scriptSelector.accounts = scriptSelector.getAccounts();
 		//Make a search area
 		scriptSelector.getSearch();
 		scriptSelector.load();
-		buttonPause = new JButton();
-		buttonStop = new JButton();
+		scriptSelector.buttonStart = new JButton();
+		scriptSelector.buttonPause = new JButton();
+		scriptSelector.buttonStop = new JButton();
+		scriptSelector.buttonReload = new JButton();
 		buttonScriptsFolder = new JButton();
 		buttonForums = new JButton();
 
 		//======== this ========
 		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
-		, 0, 0, 0) , "", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-		, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
-		 getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+				, 0, 0, 0) , "", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+				, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+				getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
 		) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
 		//======== scripts scroll pane ========
-		scriptsSelectionScrollPane.setViewportView(scriptsTable);
+		scriptsSelectionScrollPane.setViewportView(scriptSelector.table);
+
+		//---- buttonStart ----
+		scriptSelector.buttonStart.setText("Start");
+		scriptSelector.buttonStart.addActionListener(scriptSelector::buttonStartActionPerformed);
 
 		//---- buttonPause ----
-		buttonPause.setText("Pause");
-		buttonPause.addActionListener(e -> buttonPauseActionPerformed(e));
+		scriptSelector.buttonPause.setText("Pause");
+		scriptSelector.buttonPause.addActionListener(scriptSelector::buttonPauseActionPerformed);
 
 		//---- buttonStop ----
-		buttonStop.setText("Stop");
-		buttonStop.addActionListener(e -> buttonStopActionPerformed(e));
+		scriptSelector.buttonStop.setText("Stop");
+		scriptSelector.buttonStop.addActionListener(scriptSelector::buttonStopActionPerformed);
+
+		//---- buttonReload ----
+		scriptSelector.buttonReload.setText("Reload");
+		scriptSelector.buttonReload.addActionListener(scriptSelector::buttonReloadActionPerformed);
 
 		//---- buttonScriptsFolder ----
 		buttonScriptsFolder.setText("Scripts Folder");
@@ -183,22 +145,25 @@ public class ScriptPanel extends JPanel {
 								.addGroup(layout.createParallelGroup()
 										.addGroup(layout.createSequentialGroup()
 												.addGap(47, 47, 47)
-												.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+												.addComponent(scriptSelector.accounts, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addContainerGap()
-												.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+												.addComponent(scriptSelector.buttonStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
 												.addGap(18, 18, 18)
-												.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+												.addComponent(scriptSelector.buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addGap(73, 73, 73)
-												.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+												.addComponent(scriptSelector.buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+										.addGroup(layout.createSequentialGroup()
+												.addGap(73, 73, 73)
+												.addComponent(scriptSelector.buttonReload, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addContainerGap()
 												.addGap(10, 10, 10)
 												.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
 												.addGap(18, 18, 18)
 												.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
-												.addGap(10, 10, 10))
+										.addGap(10, 10, 10))
 								.addContainerGap(30, Short.MAX_VALUE))
 		);
 		layout.setVerticalGroup(
@@ -206,18 +171,22 @@ public class ScriptPanel extends JPanel {
 						.addGroup(layout.createSequentialGroup()
 								.addComponent(scriptsSelectionScrollPane, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
 								.addGap(28, 28, 28)
-								.addComponent(comboBoxAccounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scriptSelector.accounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGap(57, 57, 57)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(buttonStart, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-										.addComponent(buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+										.addComponent(scriptSelector.buttonStart, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+										.addComponent(scriptSelector.buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 								.addGap(28, 28, 28)
-								.addComponent(buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addGap(28, 28, 28)
+								.addComponent(scriptSelector.buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+								.addGap(0, 60, Short.MAX_VALUE)
+								.addComponent(scriptSelector.buttonReload, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+								.addGap(0, 60, Short.MAX_VALUE)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 										.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(30, Short.MAX_VALUE))
+								.addContainerGap(30, Short.MAX_VALUE))
+
+
 		);
 	}
 
@@ -226,6 +195,6 @@ public class ScriptPanel extends JPanel {
 	 * by reassigning the model
 	 */
 	public void updateAccountList() {
-		comboBoxAccounts.setModel(scriptSelector.getAccounts().getModel());
+		scriptSelector.accounts.setModel(scriptSelector.getAccounts().getModel());
 	}
 }

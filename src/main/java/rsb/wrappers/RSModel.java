@@ -168,7 +168,7 @@ public class RSModel extends MethodProvider {
 	 * @return true if clicked, false if failed.
 	 */
 	public boolean doAction(String action) {
-		return doAction(action, null);
+		return doAction(action, (String[]) null);
 	}
 
 	/**
