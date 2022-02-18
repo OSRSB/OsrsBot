@@ -9,6 +9,7 @@ import java.applet.Applet;
 import java.awt.event.*;
 
 @Slf4j
+@SuppressWarnings("removal")
 public class InputManager {
 
 	private final java.util.Random random = new java.util.Random();

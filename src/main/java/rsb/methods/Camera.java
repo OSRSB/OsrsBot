@@ -26,6 +26,7 @@ public class Camera extends MethodProvider {
 	 * @param c The RSCharacter to turn to.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToCharacter(RSCharacter c) {
 		int angle = getCharacterAngle(c);
 		setAngle(angle);
@@ -48,6 +49,7 @@ public class Camera extends MethodProvider {
 	 * @param dev The maximum difference in the angle.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToCharacter(RSCharacter c, int dev) {
 		int angle = getCharacterAngle(c);
 		angle = random(angle - dev, angle + dev + 1);
@@ -72,6 +74,7 @@ public class Camera extends MethodProvider {
 	 * @param o The RSObject to turn to.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToObject(RSObject o) {
 		int angle = getObjectAngle(o);
 		setAngle(angle);
@@ -94,6 +97,7 @@ public class Camera extends MethodProvider {
 	 * @param dev The maximum difference in the turn angle.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToObject(RSObject o, int dev) {
 		int angle = getObjectAngle(o);
 		angle = random(angle - dev, angle + dev + 1);
@@ -118,6 +122,7 @@ public class Camera extends MethodProvider {
 	 * @param tile Tile to turn to.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToTile(RSTile tile) {
 		int angle = getTileAngle(tile);
 		setAngle(angle);
@@ -140,6 +145,7 @@ public class Camera extends MethodProvider {
 	 * @param dev  Maximum deviation from the angle to the tile.
 	 * @deprecated
 	 */
+	@Deprecated
 	public void turnToTile(RSTile tile, int dev) {
 		int angle = getTileAngle(tile);
 		angle = random(angle - dev, angle + dev + 1);

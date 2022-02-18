@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 
 
 @Slf4j
+@SuppressWarnings("removal")
 public class VirtualKeyboard implements KeyListener {
 
     private MethodContext methods;
