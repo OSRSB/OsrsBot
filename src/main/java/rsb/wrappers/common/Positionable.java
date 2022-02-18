@@ -22,7 +22,7 @@ public interface Positionable {
 
     /**
      * Turns the camera to face the entity
-     * @return <tt>True</tt> if the camera has been turned to face the entity
+     * @return <code>True</code> if the camera has been turned to face the entity
      */
     boolean turnTo();
 

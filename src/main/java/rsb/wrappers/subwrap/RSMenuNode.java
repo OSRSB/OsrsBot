@@ -60,7 +60,7 @@ public class RSMenuNode {
      * TODO: Properly implement feature
      * Checks if the RSMenuNode is associated with an option of a clickable entity
      * @param clickable The clickable object to check
-     * @return <tt>True</tt> if the RSMenuNode is associated with the clickable
+     * @return <code>True</code> if the RSMenuNode is associated with the clickable
      */
     public boolean correlatesTo(Clickable clickable) {
         return false;

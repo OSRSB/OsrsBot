@@ -132,7 +132,7 @@ public class Mouse extends MethodProvider {
 	/**
 	 * Clicks the mouse at its current location.
 	 *
-	 * @param leftClick <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick <code>true</code> to left-click, <code>false</code>to right-click.
 	 */
 	public void click(final boolean leftClick) {
 		click(leftClick, MouseHandler.DEFAULT_MAX_MOVE_AFTER);
@@ -154,7 +154,7 @@ public class Mouse extends MethodProvider {
 	 *
 	 * @param x         x coordinate
 	 * @param y         y coordinate
-	 * @param leftClick <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick <code>true</code> to left-click, <code>false</code>to right-click.
 	 */
 	public void click(final int x, final int y, final boolean leftClick) {
 		click(x, y, 0, 0, leftClick);
@@ -167,7 +167,7 @@ public class Mouse extends MethodProvider {
 	 * @param y         y coordinate
 	 * @param randX     x randomness (added to x)
 	 * @param randY     y randomness (added to y)
-	 * @param leftClick <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick <code>true</code> to left-click, <code>false</code>to right-click.
 	 * @see #move(int, int, int, int)
 	 */
 	public synchronized void click(final int x, final int y, final int randX,
@@ -185,7 +185,7 @@ public class Mouse extends MethodProvider {
 	 * @param y             y coordinate
 	 * @param randX         x randomness (added to x)
 	 * @param randY         y randomness (added to y)
-	 * @param leftClick     <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick     <code>true</code> to left-click, <code>false</code>to right-click.
 	 * @param moveAfterDist The maximum distance in pixels to move on both axes shortly
 	 *                      after moving to the destination.
 	 */
@@ -200,7 +200,7 @@ public class Mouse extends MethodProvider {
 	 * Moves the mouse to a given location then clicks.
 	 *
 	 * @param p         The point to click.
-	 * @param leftClick <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick <code>true</code> to left-click, <code>false</code>to right-click.
 	 */
 	public void click(final Point p, final boolean leftClick) {
 		click(p.getX(), p.getY(), leftClick);
@@ -218,7 +218,7 @@ public class Mouse extends MethodProvider {
 	 * @param p             The destination Point.
 	 * @param x             x coordinate
 	 * @param y             y coordinate
-	 * @param leftClick     <tt>true</tt> to left-click, <tt>false</tt>to right-click.
+	 * @param leftClick     <code>true</code> to left-click, <code>false</code>to right-click.
 	 * @param moveAfterDist The maximum distance in pixels to move on both axes shortly
 	 *                      after moving to the destination.
 	 */
@@ -320,7 +320,7 @@ public class Mouse extends MethodProvider {
 
 	/**
 	 * Moves the mouse to the specified point at a certain speed with variance in the x and y, then moves a
-	 * random distance up to <tt>afterOffset</tt>.
+	 * random distance up to <code>afterOffset</code>.
 	 *
 	 * @param speed       The lower, the faster.
 	 * @param x           The x destination.
@@ -363,7 +363,7 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
-	 * Moves the mouse to the specified point then adds random distance up to <tt>afterOffset</tt>.
+	 * Moves the mouse to the specified point then adds random distance up to <code>afterOffset</code>.
 	 * @param p           The x and y destination.
 	 * @param afterOffset The maximum distance in pixels to move on both axes shortly
 	 *                    after moving to the destination.
@@ -385,7 +385,7 @@ public class Mouse extends MethodProvider {
 
 	/**
 	 * Moves the mouse to the specified point at a certain speed with variance in the x and y, then moves a
-	 * random distance up to <tt>afterOffset</tt>.
+	 * random distance up to <code>afterOffset</code>.
 	 *
 	 * @param p           The x and y destination.
 	 * @param randX       X-axis randomness (added to x).
@@ -502,14 +502,14 @@ public class Mouse extends MethodProvider {
 	/**
 	 * The location of the bot's mouse; or Point(-1, -1) if off screen.
 	 *
-	 * @return A <tt>Point</tt> containing the bot's mouse's x and y coordinates.
+	 * @return A <code>Point</code> containing the bot's mouse's x and y coordinates.
 	 */
 	public Point getLocation() {
 		return new Point(methods.virtualMouse.getClientX(), methods.virtualMouse.getClientY());
 	}
 
 	/**
-	 * @return The <tt>Point</tt> at which the bot's mouse was last clicked.
+	 * @return The <code>Point</code> at which the bot's mouse was last clicked.
 	 */
 	public Point getPressLocation() {
 		return new Point(methods.virtualMouse.getClientPressX(), methods.virtualMouse.getClientPressY());
@@ -523,14 +523,14 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
-	 * @return <tt>true</tt> if the bot's mouse is present.
+	 * @return <code>true</code> if the bot's mouse is present.
 	 */
 	public boolean isPresent() {
 		return methods.virtualMouse.isClientPresent();
 	}
 
 	/**
-	 * @return <tt>true</tt> if the bot's mouse is pressed.
+	 * @return <code>true</code> if the bot's mouse is pressed.
 	 */
 	public boolean isPressed() {
 		return methods.virtualMouse.isClientPressed();

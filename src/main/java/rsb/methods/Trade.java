@@ -26,7 +26,7 @@ public class Trade extends MethodProvider {
 	/**
 	 * Are we in the first stage of a trade?
 	 *
-	 * @return <tt>true</tt> if in first stage.
+	 * @return <code>true</code> if in first stage.
 	 */
 	public boolean inTradeMain() {
 		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_MAIN);
@@ -36,7 +36,7 @@ public class Trade extends MethodProvider {
 	/**
 	 * Are we in the second stage of a trade?
 	 *
-	 * @return <tt>true</tt> if in second stage.
+	 * @return <code>true</code> if in second stage.
 	 */
 	public boolean inTradeSecond() {
 		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_SECOND);
@@ -46,7 +46,7 @@ public class Trade extends MethodProvider {
 	/**
 	 * Checks if you're in a trade.
 	 *
-	 * @return <tt>true</tt> if you're trading; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if you're trading; otherwise <code>false</code>.
 	 */
 	public boolean inTrade() {
 		return inTradeMain() || inTradeSecond();
@@ -57,7 +57,7 @@ public class Trade extends MethodProvider {
 	 *
 	 * @param playerName The player's name.
 	 * @param tradeWait  Timeout to wait for the trade.
-	 * @return <tt>true</tt> if traded.
+	 * @return <code>true</code> if traded.
 	 */
 	public boolean tradePlayer(final String playerName, final int tradeWait) {
 		if (!inTrade()) {
@@ -76,7 +76,7 @@ public class Trade extends MethodProvider {
 	 * Trades a player.
 	 *
 	 * @param playerName The player's name.
-	 * @return <tt>true</tt> if traded.
+	 * @return <code>true</code> if traded.
 	 */
 	public boolean tradePlayer(final String playerName) {
 		return tradePlayer(playerName, 15000);
@@ -87,7 +87,7 @@ public class Trade extends MethodProvider {
 	 *
 	 * @param targetPlayer The player you wish to trade.
 	 * @param tradeWait    The time out for the trade.
-	 * @return <tt>true</tt> if traded.
+	 * @return <code>true</code> if traded.
 	 */
 	public boolean tradePlayer(final RSPlayer targetPlayer, final int tradeWait) {
 		if (!inTrade()) {
@@ -105,7 +105,7 @@ public class Trade extends MethodProvider {
 	 * Trades a player.
 	 *
 	 * @param targetPlayer The desired player.
-	 * @return <tt>true</tt> if traded.
+	 * @return <code>true</code> if traded.
 	 */
 	public boolean tradePlayer(final RSPlayer targetPlayer) {
 		return tradePlayer(targetPlayer, 15000);
@@ -114,7 +114,7 @@ public class Trade extends MethodProvider {
 	/**
 	 * Accepts a trade
 	 *
-	 * @return <tt>true</tt> on accept.
+	 * @return <code>true</code> on accept.
 	 */
 	public boolean acceptTrade() {
 		if (inTradeMain()) {
@@ -128,7 +128,7 @@ public class Trade extends MethodProvider {
 	/**
 	 * Declines a trade
 	 *
-	 * @return <tt>true</tt> on decline
+	 * @return <code>true</code> on decline
 	 */
 	public boolean declineTrade() {
 		if (inTradeMain()) {
@@ -144,7 +144,7 @@ public class Trade extends MethodProvider {
 	 *
 	 * @param tradeType The trade type.
 	 * @param timeOut   Time out of waiting.
-	 * @return <tt>true</tt> if true, otherwise false.
+	 * @return <code>true</code> if true, otherwise false.
 	 */
 	public boolean waitForTrade(final int tradeType, final long timeOut) {
 		long timeCounter = System.currentTimeMillis() + timeOut;
@@ -190,7 +190,7 @@ public class Trade extends MethodProvider {
 	 * Checks if you're trading with someone.
 	 *
 	 * @param name The person's name.
-	 * @return <tt>true</tt> if true; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if true; otherwise <code>false</code>.
 	 */
 	private boolean isTradingWith(String name) {
 		return getTradingWith().equals(name);

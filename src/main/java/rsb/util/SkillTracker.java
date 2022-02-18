@@ -61,7 +61,7 @@ public class SkillTracker {
 	/**
 	 * Determines if the current SkillTracker is started.
 	 *
-	 * @return <tt>true</tt> if the tracker is started; otherwise <tt>false</tt>
+	 * @return <code>true</code> if the tracker is started; otherwise <code>false</code>
 	 */
 	public boolean isStarted() {
 		return started;
@@ -149,7 +149,7 @@ public class SkillTracker {
 	 * Removes an item from the current array.
 	 *
 	 * @param index Of the skill to remove.
-	 * @return <tt>true</tt> If removed.
+	 * @return <code>true</code> If removed.
 	 */
 	public boolean removeSkill(final int index) {
 		int realIndex = getArrayIndex(index, skills);
@@ -181,7 +181,7 @@ public class SkillTracker {
 	 * Determines if an array contains the specified index.
 	 * @param index the index to check
 	 * @param array	the array to check
-	 * @return <tt>true</tt> if the array contains the index; otherwise <tt>false</tt>
+	 * @return <code>true</code> if the array contains the index; otherwise <code>false</code>
 	 */
 	public boolean arrayContains(final int index, final int[] array) {
 		for (final int i : array) {

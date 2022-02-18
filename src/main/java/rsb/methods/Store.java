@@ -21,7 +21,7 @@ public class Store extends MethodProvider {
 	 *
 	 * @param itemID The id of the item.
 	 * @param count  The number to buy.
-	 * @return <tt>true</tt> on success
+	 * @return <code>true</code> on success
 	 */
 	public boolean buy(final int itemID, final int count) {
 		if (count < 0) {
@@ -78,7 +78,7 @@ public class Store extends MethodProvider {
 	/**
 	 * Closes the store interface.
 	 *
-	 * @return <tt>true</tt> if the interface is no longer open
+	 * @return <code>true</code> if the interface is no longer open
 	 */
 	public boolean close() {
 		if (!isOpen()) {
@@ -96,7 +96,7 @@ public class Store extends MethodProvider {
 	/**
 	 * Gets the store interface.
 	 *
-	 * @return the store <tt>RSWidget</tt>
+	 * @return the store <code>RSWidget</code>
 	 */
 	public RSWidget getInterface() {
 		return methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE);
@@ -107,7 +107,7 @@ public class Store extends MethodProvider {
 	 *
 	 * @param index The index of the component based off of the components in the
 	 *              Store interface.
-	 * @return <tt>RSWidget</tt> for the item at the given index; otherwise
+	 * @return <code>RSWidget</code> for the item at the given index; otherwise
 	 *         null.
 	 */
 	public RSItem getItemAt(final int index) {
@@ -127,7 +127,7 @@ public class Store extends MethodProvider {
 	 * Gets the first item found with the given id.
 	 *
 	 * @param id ID of the item to get
-	 * @return The <tt>RSWidget</tt> of the item; otherwise null.
+	 * @return The <code>RSWidget</code> of the item; otherwise null.
 	 */
 	public RSItem getItem(final int id) {
 		final RSItem[] items = getItems();
@@ -145,8 +145,8 @@ public class Store extends MethodProvider {
 	/**
 	 * Gets all the items in the store inventory.
 	 *
-	 * @return An <tt>RSWidget</tt> array representing all of the components
-	 *         in the stores <tt>RSWidget</tt>.
+	 * @return An <code>RSWidget</code> array representing all of the components
+	 *         in the stores <code>RSWidget</code>.
 	 */
 	public RSItem[] getItems() {
 		RSWidget storeInterface = getInterface();
@@ -172,8 +172,8 @@ public class Store extends MethodProvider {
 	/**
 	 * Returns whether or not the store interface is open.
 	 *
-	 * @return <tt>true</tt> if the store interface is open, otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the store interface is open, otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean isOpen() {
 		return getInterface().isValid();

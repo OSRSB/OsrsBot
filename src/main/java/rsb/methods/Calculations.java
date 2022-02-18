@@ -32,8 +32,8 @@ public class Calculations extends MethodProvider {
 	 * Checks whether a given tile is on the minimap.
 	 *
 	 * @param t The Tile to check.
-	 * @return <tt>true</tt> if the RSTile is on the minimap; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the RSTile is on the minimap; otherwise
+	 *         <code>false</code>.
 	 * @see #tileToMinimap(RSTile)
 	 */
 	public boolean tileOnMap(RSTile t) {
@@ -46,8 +46,8 @@ public class Calculations extends MethodProvider {
 	 * Checks whether the centroid of a given tile is on the screen.
 	 *
 	 * @param t The RSTile to check.
-	 * @return <tt>true</tt> if the RSTile is on the screen; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the RSTile is on the screen; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean tileOnScreen(RSTile t) {
 		Point point = tileToScreen(t, 0.5, 0.5, 0);
@@ -58,8 +58,8 @@ public class Calculations extends MethodProvider {
 	 * Returns the Point on screen where a given tile is shown on the minimap.
 	 *
 	 * @param t The RSTile to check.
-	 * @return <tt>Point</tt> within minimap; otherwise
-	 *         <tt>new Point(-1, -1)</tt>.
+	 * @return <code>Point</code> within minimap; otherwise
+	 *         <code>new Point(-1, -1)</code>.
 	 */
 
 	@SuppressWarnings("unused")
@@ -75,8 +75,8 @@ public class Calculations extends MethodProvider {
 	 * giving a rough area.
 	 *
 	 * @param check The point to check.
-	 * @return <tt>true</tt> if the point is within the rectangle; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the point is within the rectangle; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean pointOnScreen(Point check) {
 		int x = check.getX(), y = check.getY();
@@ -253,9 +253,9 @@ public class Calculations extends MethodProvider {
 	 * Returns the length of the path generated to a given RSTile.
 	 *
 	 * @param dest     The destination tile.
-	 * @param isObject <tt>true</tt> if reaching any tile adjacent to the destination
+	 * @param isObject <code>true</code> if reaching any tile adjacent to the destination
 	 *                 should be accepted.
-	 * @return <tt>true</tt> if reaching any tile adjacent to the destination
+	 * @return <code>true</code> if reaching any tile adjacent to the destination
 	 *         should be accepted.
 	 */
 	public int pathLengthTo(RSTile dest, boolean isObject) {
@@ -268,9 +268,9 @@ public class Calculations extends MethodProvider {
 	 *
 	 * @param start    The starting tile.
 	 * @param dest     The destination tile.
-	 * @param isObject <tt>true</tt> if reaching any tile adjacent to the destination
+	 * @param isObject <code>true</code> if reaching any tile adjacent to the destination
 	 *                 should be accepted.
-	 * @return <tt>true</tt> if reaching any tile adjacent to the destination
+	 * @return <code>true</code> if reaching any tile adjacent to the destination
 	 *         should be accepted.
 	 */
 	public int pathLengthBetween(RSTile start, RSTile dest, boolean isObject) {
@@ -286,8 +286,8 @@ public class Calculations extends MethodProvider {
 	 *
 	 * @param dest     The <code>RSTile</code> to check.
 	 * @param isObject True if an instance of <code>RSObject</code>.
-	 * @return <tt>true</tt> if player can reach specified Object; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if player can reach specified Object; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean canReach(RSTile dest, boolean isObject) {
 		return pathLengthTo(dest, isObject) != -1;
@@ -300,7 +300,7 @@ public class Calculations extends MethodProvider {
 	 * @param x x value based on the game plane.
 	 * @param y y value based on the game plane.
 	 * @return <code>Point</code> within minimap; otherwise
-	 *         <tt>new Point(-1, -1)</tt>.
+	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point worldToMinimap(double x, double y) {
 		LocalPoint test = LocalPoint.fromWorld(methods.client, (int) x, (int) y);

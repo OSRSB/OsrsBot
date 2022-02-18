@@ -23,11 +23,11 @@ public class Environment extends MethodProvider {
 	/**
 	 * Controls the available means of user input when user input is disabled.
 	 *
-	 * Disable all: <tt>setUserInput(0);</tt>
+	 * Disable all: <code>setUserInput(0);</code>
 	 * Enable keyboard only:
-	 * <tt>setUserInput(Environment.INPUT_KEYBOARD);</tt>
+	 * <code>setUserInput(Environment.INPUT_KEYBOARD);</code>
 	 * Enable mouse and keyboard:
-	 * <tt>setUserInput(Environment.INPUT_MOUSE | Environment.INPUT_KEYBOARD);</tt>
+	 * <code>setUserInput(Environment.INPUT_MOUSE | Environment.INPUT_KEYBOARD);</code>
 	 *
 	 * @param mask flags indicating which types of input to allow
 	 */
@@ -38,8 +38,8 @@ public class Environment extends MethodProvider {
 	/**
 	 * Takes and saves a screenshot.
 	 *
-	 * @param hideUsername <tt>true</tt> to cover the player's username; otherwise
-	 *                     <tt>false</tt>
+	 * @param hideUsername <code>true</code> to cover the player's username; otherwise
+	 *                     <code>false</code>
 	 */
 	public void saveScreenshot(boolean hideUsername) {
 		ScreenshotUtil.saveScreenshot(methods.runeLite, hideUsername);
@@ -48,8 +48,8 @@ public class Environment extends MethodProvider {
 	/**
 	 * Takes a screenshot.
 	 *
-	 * @param hideUsername <tt>true</tt> to cover the player's username; otherwise
-	 *                     <tt>false</tt>
+	 * @param hideUsername <code>true</code> to cover the player's username; otherwise
+	 *                     <code>false</code>
 	 * @return The screen capture image.
 	 */
 	public BufferedImage takeScreenshot(boolean hideUsername) {
@@ -60,8 +60,8 @@ public class Environment extends MethodProvider {
 	 * Enables a random event solver.
 	 *
 	 * @param name the anti-random's (manifest) name (case insensitive)
-	 * @return <tt>true</tt> if random was found and set to enabled; otherwise
-	 *         <tt>false</tt>
+	 * @return <code>true</code> if random was found and set to enabled; otherwise
+	 *         <code>false</code>
 	 */
 	public boolean enableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
@@ -81,8 +81,8 @@ public class Environment extends MethodProvider {
 	 * Disables a random event solver.
 	 *
 	 * @param name the anti-random's (manifest) name (case insensitive)
-	 * @return <tt>true</tt> if random was found and set to disabled; otherwise
-	 *         <tt>false</tt>
+	 * @return <code>true</code> if random was found and set to disabled; otherwise
+	 *         <code>false</code>
 	 */
 	public boolean disableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {

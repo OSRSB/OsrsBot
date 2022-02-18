@@ -27,7 +27,7 @@ public class RSWidgetItem extends MethodProvider {
      * showing (valid).
      *
      * @param action The menu action to click.
-     * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action) {
         return doAction(action, null);
@@ -39,7 +39,7 @@ public class RSWidgetItem extends MethodProvider {
      *
      * @param action The menu action to click.
      * @param option The option of the menu action to click.
-     * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
         if (!isValid()) {
@@ -63,7 +63,7 @@ public class RSWidgetItem extends MethodProvider {
     /**
      * Left-clicks this component.
      *
-     * @return <tt>true</tt> if the component was clicked.
+     * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick() {
         return doClick(true);
@@ -72,9 +72,9 @@ public class RSWidgetItem extends MethodProvider {
     /**
      * Clicks this component.
      *
-     * @param leftClick <tt>true</tt> to left-click; <tt>false</tt>
+     * @param leftClick <code>true</code> to left-click; <code>false</code>
      *                  to right-click.
-     * @return <tt>true</tt> if the component was clicked.
+     * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick(boolean leftClick) {
         if (!isValid()) {
@@ -102,7 +102,7 @@ public class RSWidgetItem extends MethodProvider {
      * Moves the mouse over this component (with normally distributed randomness)
      * if it is not already.
      *
-     * @return <tt>true</tt> if the mouse was moved; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the mouse was moved; otherwise <code>false</code>.
      */
     public boolean doHover() {
         if (!isValid()) {

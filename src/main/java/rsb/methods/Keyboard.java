@@ -22,7 +22,7 @@ public class Keyboard extends MethodProvider {
 	 * Types a given string.
 	 *
 	 * @param text       The text to press/send.
-	 * @param pressEnter <tt>true</tt> to press enter after pressing the text.
+	 * @param pressEnter <code>true</code> to press enter after pressing the text.
 	 */
 	public void sendText(final String text, final boolean pressEnter) {
 		methods.inputManager.sendKeys(text, pressEnter);
@@ -32,7 +32,7 @@ public class Keyboard extends MethodProvider {
 	 * Types a given string instantly.
 	 *
 	 * @param text       The text to press/send.
-	 * @param pressEnter <tt>true</tt> to press enter after pressing the text.
+	 * @param pressEnter <code>true</code> to press enter after pressing the text.
 	 */
 	public void sendTextInstant(final String text, final boolean pressEnter) {
 		methods.inputManager.sendKeysInstant(text, pressEnter);

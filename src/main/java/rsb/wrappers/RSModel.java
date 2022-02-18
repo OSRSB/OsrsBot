@@ -355,7 +355,7 @@ public class RSModel extends MethodProvider {
 	 * z points as this model. This method compares all of the values in the
 	 * three vertex arrays.
 	 *
-	 * @return <tt>true</tt> if the provided object is a model with the same
+	 * @return <code>true</code> if the provided object is a model with the same
 	 *         points as this.
 	 */
 	@Override

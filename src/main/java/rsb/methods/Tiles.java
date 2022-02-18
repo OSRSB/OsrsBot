@@ -24,8 +24,8 @@ public class Tiles extends MethodProvider {
 	 * @param h      Height to click the <code>RSTile</code> at. Use 1 for tables,
 	 *               0 by default.
 	 * @param action The action to perform at the given <code>RSTile</code>.
-	 * @return <tt>true</tt> if no exceptions were thrown; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if no exceptions were thrown; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean doAction(final RSTile tile, final double xd,
 	                        final double yd, final int h, final String action) {
@@ -50,8 +50,8 @@ public class Tiles extends MethodProvider {
 	 *
 	 * @param tile   The RSTile that you want to click.
 	 * @param action Action command to use click
-	 * @return <tt>true</tt> if the tile was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the tile was clicked; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean doAction(final RSTile tile, final String action) {
 		return methods.tiles.doAction(tile, action, null);
@@ -65,8 +65,8 @@ public class Tiles extends MethodProvider {
 	 * @param tile   The RSTile that you want to click.
 	 * @param action Action of the menu entry to click
 	 * @param option Option of the menu entry to click
-	 * @return <tt>true</tt> if the tile was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the tile was clicked; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean doAction(final RSTile tile, final String action, final String option) {
 		try {
