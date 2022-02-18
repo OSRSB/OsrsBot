@@ -24,7 +24,8 @@ public class VarpIndices {
     public static final int CHAT_EFFECTS = 171;
     /**
      * Permitted values: 0 - 1
-     * Note: 0 = disabled, 1 = enabled
+     * Note: 0 = enabled, 1 = disabled
+     * Note: Its always by default enabled.
      */
     public static final int AUTO_RETALIATE_ENABLED = 172;
     /**

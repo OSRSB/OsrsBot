@@ -31,7 +31,7 @@ public class Methods {
 	 */
 	protected Skills skills;
 	/**
-	 * The singleton of Settings
+	 * The singleton of ClientLocalStorage
 	 */
 	protected ClientLocalStorage clientLocalStorage;
 	/**
