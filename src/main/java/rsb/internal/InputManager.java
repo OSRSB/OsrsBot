@@ -26,10 +26,20 @@ public class InputManager {
 		this.bot = bot;
 	}
 
+	/**
+	 * Determines if a coordinate is valid on the game canvas.
+	 * @param x		the x coordinate
+	 * @param y		the y coordinate
+	 * @return		<tt>true</tt> if the coordinate is valid on the game canvas otherwise <tt>false</tt>
+	 */
 	private boolean isOnCanvas(final int x, final int y) {
-		return x > 0 && x < bot.getCanvas().getWidth() && y > 0 && y < bot.getCanvas().getHeight();
+		return x >= 0 && x < bot.getCanvas().getWidth() && y >= 0 && y < bot.getCanvas().getHeight();
 	}
 
+	/**
+	 * Click the mouse at the current position.
+	 * @param left	whether to click the left mouse button or not
+	 */
 	public void clickMouse(final boolean left) {
 		if (!bot.getMethodContext().mouse.isPresent()) {
 			return; // Can't click off the canvas
