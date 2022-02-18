@@ -34,8 +34,8 @@ public class Menu extends MethodProvider {
      * otherwise open menu and click the target.
      *
      * @param action The action (or action substring) to click.
-     * @return <tt>true</tt> if the menu item was clicked; otherwise
-     * <tt>false</tt>.
+     * @return <code>true</code> if the menu item was clicked; otherwise
+     * <code>false</code>.
      */
     public boolean doAction(String action) {
         return doAction(action, (String[]) null);
@@ -47,8 +47,8 @@ public class Menu extends MethodProvider {
      *
      * @param action The action (or action substring) to click.
      * @param target The target (or target substring) of the action to click.
-     * @return <tt>true</tt> if the menu item was clicked; otherwise
-     * <tt>false</tt>.
+     * @return <code>true</code> if the menu item was clicked; otherwise
+     * <code>false</code>.
      */
     public boolean doAction(final String action, final String... target) {
         int idx = getIndex(action, target);
@@ -84,8 +84,8 @@ public class Menu extends MethodProvider {
      *
      * @param item   The item to check.
      * @param action The item menu action to check.
-     * @return <tt>true</tt> if the item has the action; otherwise
-     * <tt>false</tt>.
+     * @return <code>true</code> if the item has the action; otherwise
+     * <code>false</code>.
      */
     public boolean itemHasAction(final RSItem item, final String action) {
         // Used to determine if an item is droppable/destroyable
@@ -107,7 +107,7 @@ public class Menu extends MethodProvider {
      * Left clicks at the given index.
      *
      * @param i The index of the item.
-     * @return <tt>true</tt> if the mouse was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the mouse was clicked; otherwise <code>false</code>.
      */
     public boolean clickIndex(final int i) {
         if (!isOpen()) {
@@ -146,7 +146,7 @@ public class Menu extends MethodProvider {
     /**
      * Checks whether or not the menu is collapsed.
      *
-     * @return <tt>true</tt> if the menu is collapsed; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the menu is collapsed; otherwise <code>false</code>.
      */
     public boolean isCollapsed() {
         return !methods.client.isMenuOpen();
@@ -155,7 +155,7 @@ public class Menu extends MethodProvider {
     /**
      * Checks whether or not the menu is open.
      *
-     * @return <tt>true</tt> if the menu is open; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the menu is open; otherwise <code>false</code>.
      */
     public boolean isOpen() {
         return methods.client.isMenuOpen();
@@ -364,7 +364,7 @@ public class Menu extends MethodProvider {
          * the menu.
          *
          * @param action The action or action substring.
-         * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
+         * @return <code>true</code> if present, otherwise <code>false</code>.
          */
         public boolean contains(final String action) {
             return getIndex(action) != -1;
@@ -376,7 +376,7 @@ public class Menu extends MethodProvider {
          *
          * @param action The action or action substring.
          * @param target The target or target substring.
-         * @return <tt>true</tt> if present, otherwise <tt>false</tt>.
+         * @return <code>true</code> if present, otherwise <code>false</code>.
          */
         public boolean contains(final String action, final String target) {
             return getIndex(action, target) != -1;

@@ -33,7 +33,7 @@ public abstract class Random extends Methods implements PaintListener {
 	 * Detects whether or not this anti-random should
 	 * activate.
 	 *
-	 * @return <tt>true</tt> if the current script
+	 * @return <code>true</code> if the current script
 	 *         should be paused and control passed to this
 	 *         anti-random's loop.
 	 */
@@ -59,7 +59,7 @@ public abstract class Random extends Methods implements PaintListener {
 	 * this anti-random to complete.
 	 *
 	 * @return The number of seconds after activateCondition
-	 *         returns <tt>true</tt> before the anti-random should be
+	 *         returns <code>true</code> before the anti-random should be
 	 *         detected as having failed. If this time is reached
 	 *         the random and running script will be stopped.
 	 */
@@ -89,7 +89,7 @@ public abstract class Random extends Methods implements PaintListener {
 	 * Stops the current script; player can be logged out before
 	 * the script is stopped.
 	 *
-	 * @param logout <tt>true</tt> if the player should be logged
+	 * @param logout <code>true</code> if the player should be logged
 	 *               out before the script is stopped.
 	 */
 	protected void stopScript(boolean logout) {

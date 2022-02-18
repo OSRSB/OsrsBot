@@ -27,7 +27,7 @@ public class Magic extends MethodProvider {
     /**
      * Checks whether or not a spell is selected.
      *
-     * @return <tt>true</tt> if a spell is selected; otherwise <tt>false</tt>.
+     * @return <code>true</code> if a spell is selected; otherwise <code>false</code>.
      */
     public boolean isSpellSelected() {
         RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
@@ -47,7 +47,7 @@ public class Magic extends MethodProvider {
     /**
      * Determines whether a spell is currently set to autocast.
      *
-     * @return <tt>true</tt> if autocasting; otherwise <tt>false</tt>.
+     * @return <code>true</code> if autocasting; otherwise <code>false</code>.
      */
     public boolean isAutoCasting() {
         return methods.combat.getFightMode() == 4;
@@ -74,7 +74,7 @@ public class Magic extends MethodProvider {
      * sway.
      *
      * @param spell The spell to cast.
-     * @return <tt>true</tt> if the spell was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the spell was clicked; otherwise <code>false</code>.
      */
     public boolean castSpell(final int spell) {
         if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
@@ -103,7 +103,7 @@ public class Magic extends MethodProvider {
      * sway.
      *
      * @param spell The spell to hover.
-     * @return <tt>true</tt> if the spell was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the spell was clicked; otherwise <code>false</code>.
      */
     public boolean hoverSpell(final int spell) {
         if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
@@ -130,8 +130,8 @@ public class Magic extends MethodProvider {
      * Auto-casts a spell via the magic tab.
      *
      * @param spell The spell to auto-cast.
-     * @return <tt>true</tt> if the "Auto-cast" interface option was clicked;
-     * otherwise <tt>false</tt>.
+     * @return <code>true</code> if the "Auto-cast" interface option was clicked;
+     * otherwise <code>false</code>.
      */
     public boolean autoCastSpell(final int spell) {
         if (methods.settings.getSetting(VarpIndices.COMBAT_STYLE) != 4) {
@@ -202,7 +202,7 @@ public class Magic extends MethodProvider {
      *
      * @param entity A Character or Animable.
      * @param spell  The spell to cast.
-     * @return <tt>true</tt> if casted; otherwise <tt>false</tt>.
+     * @return <code>true</code> if casted; otherwise <code>false</code>.
      */
     public boolean castSpellOn(final Object entity, final int spell) {
         if (isSpellSelected() || entity == null) {

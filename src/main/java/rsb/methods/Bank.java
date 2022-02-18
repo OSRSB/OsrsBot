@@ -79,7 +79,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Closes the bank interface. Supports deposit boxes.
 	 *
-	 * @return <tt>true</tt> if the bank interface is no longer open.
+	 * @return <code>true</code> if the bank interface is no longer open.
 	 */
 	public boolean close() {
 		if (isOpen()) {
@@ -111,7 +111,7 @@ public class Bank extends MethodProvider {
 	 * @param itemID The ID of the item.
 	 * @param number The amount to deposit. 0 deposits All. 1,5,10 deposit
 	 *               corresponding amount while other numbers deposit X.
-	 * @return <tt>true</tt> if successful; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if successful; otherwise <code>false</code>.
 	 */
 	public boolean deposit(int itemID, int number) {
 		if (isOpen() || isDepositOpen()) {
@@ -172,7 +172,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Deposits all items in methods.inventory. Supports deposit boxes.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean depositAll() {
 		if (isOpen()) {
@@ -222,7 +222,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Deposit everything your player has equipped. Supports deposit boxes.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 * @since 6 March 2009.
 	 */
 	public boolean depositAllEquipped() {
@@ -367,7 +367,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Checks whether or not the bank is open.
 	 *
-	 * @return <tt>true</tt> if the bank interface is open; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the bank interface is open; otherwise <code>false</code>.
 	 */
 	public boolean isOpen() {
 		RSWidget bankInterface = getInterface();
@@ -377,7 +377,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Checks whether or not the deposit box is open.
 	 *
-	 * @return <tt>true</tt> if the deposit box interface is open; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the deposit box interface is open; otherwise <code>false</code>.
 	 */
 	public boolean isDepositOpen() {
 		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX).isValid();
@@ -431,7 +431,7 @@ public class Bank extends MethodProvider {
 	 * are not nearby, and they are not null, it will automatically walk to the
 	 * closest one.
 	 *
-	 * @return <tt>true</tt> if the bank was opened; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the bank was opened; otherwise <code>false</code>.
 	 */
 	public boolean open() {
 		if (isOpen()) {
@@ -500,8 +500,8 @@ public class Bank extends MethodProvider {
 	 * Opens one of the supported deposit boxes nearby. If they are not nearby, and they are not null,
 	 * it will automatically walk to the closest one.
 	 *
-	 * @return <tt>true</tt> if the deposit box was opened; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the deposit box was opened; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean openDepositBox() {
 		try {
@@ -546,7 +546,7 @@ public class Bank extends MethodProvider {
 	 * Opens the bank tab.
 	 *
 	 * @param tabNumber The tab number - e.g. view all is 1.
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean openTab(final int tabNumber) {
 
@@ -554,7 +554,7 @@ public class Bank extends MethodProvider {
 	}
 
 	/**
-	 * @return <tt>true</tt> if currently searching the bank.
+	 * @return <code>true</code> if currently searching the bank.
 	 */
 	public boolean isSearchOpen() {
 		// Setting 1248 is -2147483648 when search is enabled and -2013265920
@@ -566,7 +566,7 @@ public class Bank extends MethodProvider {
 	 * necessarily mean it was found).
 	 *
 	 * @param itemName The item name to find.
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean searchItem(final String itemName) {
 		if (!isOpen()) {
@@ -588,7 +588,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Sets the bank rearrange mode to insert.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean setRearrangeModeToInsert() {
 		if (!isOpen()) {
@@ -604,7 +604,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Sets the bank rearrange mode to swap.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean setRearrangeModeToSwap() {
 		if (!isOpen()) {
@@ -622,7 +622,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Sets the bank withdraw mode to item.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToItem() {
 		if (!isOpen()) {
@@ -640,7 +640,7 @@ public class Bank extends MethodProvider {
 	/**
 	 * Sets the bank withdraw mode to note.
 	 *
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToNote() {
 		if (!isOpen()) {
@@ -661,7 +661,7 @@ public class Bank extends MethodProvider {
 	 *
 	 * @param itemID The ID of the item.
 	 * @param count  The number to withdraw.
-	 * @return <tt>true</tt> on success.
+	 * @return <code>true</code> on success.
 	 */
 	public boolean withdraw(final int itemID, final int count) {
 		if (!isOpen()) {

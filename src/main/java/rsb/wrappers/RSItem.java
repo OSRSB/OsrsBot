@@ -84,8 +84,8 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	/**
 	 * Returns whether or not this item has an available definition.
 	 *
-	 * @return <tt>true</tt> if an item definition is available;
-	 *         otherwise <tt>false</tt>.
+	 * @return <code>true</code> if an item definition is available;
+	 *         otherwise <code>false</code>.
 	 */
 	public boolean hasDefinition() {
 		return getDefinition() != null;
@@ -111,7 +111,7 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	/**
 	 * Checks whether or not a valid component is being wrapped.
 	 *
-	 * @return <tt>true</tt> if there is a visible wrapped component.
+	 * @return <code>true</code> if there is a visible wrapped component.
 	 */
 	public boolean isComponentValid() {
 		return component != null && component.isVisible();
@@ -120,7 +120,7 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	/**
 	 * Checks whether a valid item is being wrapped.
 	 *
-	 * @return <tt>true</tt> if there is a visible wrapped item
+	 * @return <code>true</code> if there is a visible wrapped item
 	 */
 	public boolean isItemValid() {
 		return item.isValid();
@@ -203,8 +203,8 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	 * this RSItem if possible.
 	 *
 	 * @param action The action to perform.
-	 * @return <tt>true</tt> if the component was clicked
-	 *         successfully; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the component was clicked
+	 *         successfully; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action) {
 		return doAction(action, null);
@@ -216,8 +216,8 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	 *
 	 * @param action The action to perform.
 	 * @param option The option of the action to perform.
-	 * @return <tt>true</tt> if the component was clicked
-	 *         successfully; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the component was clicked
+	 *         successfully; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action, final String option) {
 		return (component != null) ?  component.doAction(action, option) : item.doAction(action, option);
@@ -236,10 +236,10 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	/**
 	 * Clicks the component wrapped by this RSItem if possible.
 	 *
-	 * @param left <tt>true</tt> if the component should be
-	 *             left-click; <tt>false</tt> if it should be right-clicked.
-	 * @return <tt>true</tt> if the component was clicked
-	 *         successfully; otherwise <tt>false</tt>.
+	 * @param left <code>true</code> if the component should be
+	 *             left-click; <code>false</code> if it should be right-clicked.
+	 * @return <code>true</code> if the component was clicked
+	 *         successfully; otherwise <code>false</code>.
 	 */
 	public boolean doClick(boolean left) {
 		return (component != null) ? component.doClick(left) : item.doClick(left);

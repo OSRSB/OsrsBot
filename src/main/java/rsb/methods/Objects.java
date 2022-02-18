@@ -27,20 +27,20 @@ public class Objects extends MethodProvider {
     };
 
     /**
-     * Returns all the <tt>RSObject</tt>s in the local region.
+     * Returns all the <code>RSObject</code>s in the local region.
      *
-     * @return An <tt>RSObject[]</tt> of all objects in the loaded region.
+     * @return An <code>RSObject[]</code> of all objects in the loaded region.
      */
     public RSObject[] getAll() {
         return getAll(Objects.ALL_FILTER);
     }
 
     /**
-     * Returns all the <tt>RSObject</tt>s in the local region accepted by the
+     * Returns all the <code>RSObject</code>s in the local region accepted by the
      * provided Filter.
      *
      * @param filter Filters out unwanted objects.
-     * @return An <tt>RSObject[]</tt> of all the accepted objects in the loaded
+     * @return An <code>RSObject[]</code> of all the accepted objects in the loaded
      * region.
      */
     public RSObject[] getAll(final Predicate<RSObject> filter) {
@@ -61,11 +61,11 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt> that is nearest out of all objects that are
+     * Returns the <code>RSObject</code> that is nearest out of all objects that are
      * accepted by the provided Filter.
      *
      * @param filter Filters out unwanted objects.
-     * @return An <tt>RSObject</tt> representing the nearest object that was
+     * @return An <code>RSObject</code> representing the nearest object that was
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
@@ -99,12 +99,12 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt> that is nearest out of all objects that are
+     * Returns the <code>RSObject</code> that is nearest out of all objects that are
      * accepted by the provided Filter.
      *
      * @param distance The distance away from the player to check
      * @param filter Filters out unwanted objects.
-     * @return An <tt>RSObject</tt> representing the nearest object that was
+     * @return An <code>RSObject</code> representing the nearest object that was
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
@@ -141,11 +141,11 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt> that is nearest, out of all of the
+     * Returns the <code>RSObject</code> that is nearest, out of all of the
      * RSObjects with the provided ID(s).
      *
      * @param ids The ID(s) of the RSObject that you are searching.
-     * @return An <tt>RSObject</tt> representing the nearest object with one of
+     * @return An <code>RSObject</code> representing the nearest object with one of
      * the provided IDs; or null if there are no matching objects in the
      * current region.
      */
@@ -163,11 +163,11 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt> that is nearest, out of all of the
+     * Returns the <code>RSObject</code> that is nearest, out of all of the
      * RSObjects with the provided name(s).
      *
      * @param names The name(s) of the RSObject that you are searching.
-     * @return An <tt>RSObject</tt> representing the nearest object with one of
+     * @return An <code>RSObject</code> representing the nearest object with one of
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
@@ -188,12 +188,12 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt> that is nearest, out of all of the
+     * Returns the <code>RSObject</code> that is nearest, out of all of the
      * RSObjects with the provided name(s).
      *
      * @param distance The distance from the player to search within
      * @param names The name(s) of the RSObject that you are searching.
-     * @return An <tt>RSObject</tt> representing the nearest object with one of
+     * @return An <code>RSObject</code> representing the nearest object with one of
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
@@ -214,7 +214,7 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the top <tt>RSObject</tt> on the specified tile.
+     * Returns the top <code>RSObject</code> on the specified tile.
      *
      * @param t The tile on which to search.
      * @return The top RSObject on the provided tile; or null if none found.
@@ -224,7 +224,7 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the top <tt>RSObject</tt> on the specified tile matching types
+     * Returns the top <code>RSObject</code> on the specified tile matching types
      * specified by the flags in the provided mask.
      *
      * @param t    The tile on which to search.
@@ -238,7 +238,7 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt>s which are on the specified <tt>RSTile</tt>
+     * Returns the <code>RSObject</code>s which are on the specified <code>RSTile</code>
      * matching types specified by the flags in the provided mask.
      *
      * @param t    The tile on which to search.
@@ -253,7 +253,7 @@ public class Objects extends MethodProvider {
     }
 
     /**
-     * Returns the <tt>RSObject</tt>s which are on the specified <tt>RSTile</tt>
+     * Returns the <code>RSObject</code>s which are on the specified <code>RSTile</code>
      * .
      *
      * @param t The tile on which to search.

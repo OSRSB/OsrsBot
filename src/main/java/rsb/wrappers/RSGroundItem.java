@@ -61,7 +61,7 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	 * Performs the given action on this RSGroundItem.
 	 *
 	 * @param action The menu action to click.
-	 * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action) {
 		return doAction(action, null);
@@ -72,7 +72,7 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	 *
 	 * @param action The menu action to click.
 	 * @param option The option of the menu action to click.
-	 * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action, final String option) {
 		RSModel model = getModel();

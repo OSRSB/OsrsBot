@@ -315,7 +315,7 @@ public class EventMulticaster implements EventListener {
 	/**
 	 * Returns whether the mask is enabled on this multicaster.
 	 * @param mask	the mask to check for on the multicaster
-	 * @return 	<tt>true</tt> if the mask is found; otherwise <tt>false</tt>
+	 * @return 	<code>true</code> if the mask is found; otherwise <code>false</code>
 	 */
 	public final boolean isEnabled(long mask) {
 		return (enabledMask & mask) != 0;

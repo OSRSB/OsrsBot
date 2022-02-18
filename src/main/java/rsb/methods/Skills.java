@@ -156,7 +156,7 @@ public class Skills extends MethodProvider {
 	 * Moves the mouse over a given component in the stats tab.
 	 *
 	 * @param component The component index.
-	 * @return <tt>true</tt> if the mouse was moved over the given component
+	 * @return <code>true</code> if the mouse was moved over the given component
 	 *         index.
 	 */
 	public boolean doHover(int component) {

@@ -11,7 +11,7 @@
         <module name="RSBBB.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="17">
       <module name="runelite-parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>

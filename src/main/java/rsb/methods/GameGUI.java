@@ -25,7 +25,7 @@ public class GameGUI extends MethodProvider {
 	}
 
 	/**
-	 * @return The compasses <tt>RSInterface</tt>;otherwise null.
+	 * @return The compasses <code>RSInterface</code>;otherwise null.
 	 */
 	public synchronized Widget getCompass() {
 		//TODO Add resizable support for compass
@@ -33,7 +33,7 @@ public class GameGUI extends MethodProvider {
 	}
 
 	/**
-	 * @return The minimaps <tt>RSInterface</tt>; otherwise null.
+	 * @return The minimaps <code>RSInterface</code>; otherwise null.
 	 */
 	public synchronized Widget getMinimapInterface() {
 		return (isFixed()) ? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP) :
@@ -42,7 +42,7 @@ public class GameGUI extends MethodProvider {
 
 	/**
 	 * @param tab The enumerated tab containing WidgetInfo of the tab.
-	 * @return The specified tab <tt>RSInterface</tt>; otherwise null.
+	 * @return The specified tab <code>RSInterface</code>; otherwise null.
 	 */
 	public synchronized Widget getTab(final Tab tab) {
 		return (isFixed() ? methods.client.getWidget(tab.getFixedInfo()) :
@@ -53,7 +53,7 @@ public class GameGUI extends MethodProvider {
 	 * Determines whether or no the client is currently in the fixed display
 	 * mode.
 	 *
-	 * @return <tt>true</tt> if in fixed mode; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if in fixed mode; otherwise <code>false</code>.
 	 */
 	public boolean isFixed() {
 		//TODO: Add resizable check and changes

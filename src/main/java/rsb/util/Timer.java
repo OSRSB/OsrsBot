@@ -54,10 +54,10 @@ public class Timer {
 	}
 
 	/**
-	 * Returns <tt>true</tt> if this timer's time period
+	 * Returns <code>true</code> if this timer's time period
 	 * has not yet elapsed.
 	 *
-	 * @return <tt>true</tt> if the time period has not yet passed.
+	 * @return <code>true</code> if the time period has not yet passed.
 	 */
 	public boolean isRunning() {
 		return (System.currentTimeMillis() < end);
@@ -112,7 +112,7 @@ public class Timer {
 	 * Continuously checks the condition in a while loop on an executor thread
 	 * @param condition			the boolean conditional to check for
 	 * @param timeout			the time limit for waiting for the condition check to return true
-	 * @return					<tt>true</tt> if the task was executed; otherwise <tt>false</tt>
+	 * @return					<code>true</code> if the task was executed; otherwise <code>false</code>
 	 */
 	public static boolean waitCondition(BooleanSupplier condition, long timeout) {
 		long start = System.currentTimeMillis();

@@ -37,7 +37,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * (yea I know how to deal with these script writers ;)).
 	 *
 	 * @param map The arguments passed in from the description.
-	 * @return <tt>true</tt> if the script can start.
+	 * @return <code>true</code> if the script can start.
 	 * @deprecated Use {@link #onStart()} instead.
 	 */
 	@Deprecated
@@ -50,7 +50,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * been initialized with all method providers. Override to
 	 * perform any initialization or prevent script start.
 	 *
-	 * @return <tt>true</tt> if the script can start.
+	 * @return <code>true</code> if the script can start.
 	 */
 	public boolean onStart() {
 		return true;
@@ -60,7 +60,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * Called when a break is initiated, before the logout.
 	 * Override it to implement in your script.
 	 *
-	 * @return <tt>true</tt> if a break can be initiated.
+	 * @return <code>true</code> if a break can be initiated.
 	 */
 	public boolean onBreakStart() {
 		return true;
@@ -160,7 +160,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	/**
 	 * Pauses/resumes this script.
 	 *
-	 * @param paused <tt>true</tt> to pause; <tt>false</tt> to resume.
+	 * @param paused <code>true</code> to pause; <code>false</code> to resume.
 	 */
 	public final void setPaused(boolean paused) {
 		if (running && !random) {
@@ -176,7 +176,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	/**
 	 * Returns whether or not this script is paused.
 	 *
-	 * @return <tt>true</tt> if paused; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if paused; otherwise <code>false</code>.
 	 */
 	public final boolean isPaused() {
 		return paused;
@@ -185,7 +185,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	/**
 	 * Returns whether or not this script has started and not stopped.
 	 *
-	 * @return <tt>true</tt> if running; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if running; otherwise <code>false</code>.
 	 */
 	public final boolean isRunning() {
 		return running;
@@ -195,7 +195,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * Returns whether or not the loop of this script is able to
 	 * receive control (i.e. not paused, stopped or in random).
 	 *
-	 * @return <tt>true</tt> if active; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if active; otherwise <code>false</code>.
 	 */
 	public final boolean isActive() {
 		return running && !paused && !random;
@@ -212,7 +212,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * Stops the current script; player can be logged out before
 	 * the script is stopped.
 	 *
-	 * @param logout <tt>true</tt> if the player should be logged
+	 * @param logout <code>true</code> if the player should be logged
 	 *               out before the script is stopped.
 	 */
 	public void stopScript(boolean logout) {

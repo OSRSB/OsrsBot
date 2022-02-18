@@ -122,8 +122,8 @@ public class Equipment extends MethodProvider {
 	 *
 	 * @param items The item ID to check for. Same as the equipment/item id in the
 	 *              inventory.
-	 * @return <tt>true</tt> if specified item is currently equipped; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if specified item is currently equipped; otherwise
+	 *         <code>false</code>.
 	 * @see #getItems()
 	 */
 	public boolean containsAll(int... items) {
@@ -144,8 +144,8 @@ public class Equipment extends MethodProvider {
 	 * Checks if the player has one (or more) of the given items equipped.
 	 *
 	 * @param items The IDs of items to check for.
-	 * @return <tt>true</tt> if the player has one (or more) of the given items
-	 *         equipped; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the player has one (or more) of the given items
+	 *         equipped; otherwise <code>false</code>.
 	 */
 	public boolean containsOneOf(int... items) {
 		for (RSItem item : getItems()) {

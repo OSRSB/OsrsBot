@@ -68,8 +68,8 @@ public class RSNPC extends RSCharacter {
     }
 
     /**
-     * @return <tt>true</tt> if RSNPC is interacting with RSPlayer; otherwise
-     *         <tt>false</tt>.
+     * @return <code>true</code> if RSNPC is interacting with RSPlayer; otherwise
+     *         <code>false</code>.
      */
     @Override
     public boolean isInteractingWithLocalPlayer() {

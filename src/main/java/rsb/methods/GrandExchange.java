@@ -58,7 +58,7 @@ public class GrandExchange extends MethodProvider {
 	 * Checks Grand Exchange slots for an any activity (1-8)
 	 *
 	 * @param slot An int for the corresponding slot.
-	 * @return <tt>True</tt> if the slot is free from activity.
+	 * @return <code>True</code> if the slot is free from activity.
 	 */
 	public boolean checkSlotIsEmpty(int slot) {
 		try {
@@ -82,7 +82,7 @@ public class GrandExchange extends MethodProvider {
 	 * Checks if the Grand Exchange slot is locked or not
 	 *
 	 * @param slot An int for the corresponding slot.
-	 * @return <tt>True</tt> if the user is a member else <tt>false</tt> for slots 4-8
+	 * @return <code>True</code> if the user is a member else <code>false</code> for slots 4-8
 	 */
 	public boolean checkSlotLocked(int slot) {
 			int slotComponent = GlobalWidgetId.GRAND_EXCHANGE_OFFER_BOXES[slot];
@@ -161,7 +161,7 @@ public class GrandExchange extends MethodProvider {
 	 * Will check a slot for to see if an item has completed.
 	 *
 	 * @param slot The slot to check.
-	 * @return <tt>true</tt> if Complete, otherwise <tt>false</tt>
+	 * @return <code>true</code> if Complete, otherwise <code>false</code>
 	 */
 	public boolean checkCompleted(int slot) {
 		if (!checkSlotIsEmpty(slot) && !checkSlotLocked(slot)) {
@@ -304,7 +304,7 @@ public class GrandExchange extends MethodProvider {
 	 *
 	 * @param quantity the number of items to list for
 	 * @param priceChange the number of times to press the price per item +5% or -5% buttons
-	 * @return <tt>true</tt> if the offer was attempted to be made; otherwise <tt>false</tt>
+	 * @return <code>true</code> if the offer was attempted to be made; otherwise <code>false</code>
 	 */
 	public boolean createOffer(int quantity, int priceChange) {
 		//Dynamic child of offer window
@@ -433,7 +433,7 @@ public class GrandExchange extends MethodProvider {
 	/**
 	 * Checks if the user has coins in their inventory
 	 *
-	 * @return <tt>True</tt> unless the user does not have coins
+	 * @return <code>True</code> unless the user does not have coins
 	 */
 	private boolean hasCoins() {
 		return methods.inventory.getItemID("Coins") != -1;
@@ -445,7 +445,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buy(int id, int quantity, int priceChange, boolean roundQuantity) {
 		return buy(methods.client.getItemDefinition(id).getName(), quantity, priceChange, roundQuantity);
@@ -457,7 +457,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buy(String name, int quantity, int priceChange, boolean roundQuantity) {
 		if (name == null || quantity <= 0) {
@@ -495,7 +495,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param name the name of the item
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(String name, int quantity, int priceChange) {
 		return buy(name, quantity, priceChange, false);
@@ -506,7 +506,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param name the name of the item
 	 * @param quantity the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(String name, int quantity, boolean roundQuantity) {
 		return buy(name, quantity, 0, roundQuantity);
@@ -518,7 +518,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(String name, int quantity, int priceChange, boolean roundQuantity) {
 		return buy(name, quantity, priceChange, roundQuantity);
@@ -529,7 +529,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param id the id of the item
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(int id, int quantity, int priceChange) {
 		return buy(id, quantity, priceChange, false);
@@ -540,7 +540,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param id the id of the item
 	 * @param quantity the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(int id, int quantity, boolean roundQuantity) {
 		return buy(id, quantity, 0, roundQuantity);
@@ -552,7 +552,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean buyItem(int id, int quantity, int priceChange, boolean roundQuantity) {
 		return buy(id, quantity, priceChange, roundQuantity);
@@ -564,7 +564,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sell(int id, int quantity, int priceChange, boolean roundQuantity) {
 		return sell(methods.client.getItemDefinition(id).getName(), quantity, priceChange, roundQuantity);
@@ -576,7 +576,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sell(String name, int quantity, int priceChange, boolean roundQuantity) {
 		if (name == null || quantity <= 0) {
@@ -619,7 +619,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(String name, int quantity, int priceChange, boolean roundQuantity) {
 		return sell(name, quantity, priceChange, roundQuantity);
@@ -630,7 +630,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param name the name of the item
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(String name, int quantity, int priceChange) {
 		return sell(name, quantity, priceChange, false);
@@ -641,7 +641,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param name the name of the item
 	 * @param quantity the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(String name, int quantity, boolean roundQuantity) {
 		return sell(name, quantity, 0, roundQuantity);
@@ -651,7 +651,7 @@ public class GrandExchange extends MethodProvider {
 	 * Sells an item in the grand exchange
 	 * @param name the name of the item
 	 * @param quantity the number of items to buy
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(String name, int quantity) {
 		return sell(name, quantity, 0, false);
@@ -663,7 +663,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(int id, int quantity, int priceChange, boolean roundQuantity) {
 		return sell(id, quantity, priceChange, roundQuantity);
@@ -674,7 +674,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param id the id of the item
 	 * @param quantity the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(int id, int quantity, int priceChange) {
 		return sell(id, quantity, priceChange, false);
@@ -685,7 +685,7 @@ public class GrandExchange extends MethodProvider {
 	 * @param id the id of the item
 	 * @param quantity the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(int id, int quantity, boolean roundQuantity) {
 		return sell(id, quantity, 0, roundQuantity);
@@ -695,7 +695,7 @@ public class GrandExchange extends MethodProvider {
 	 * Sells an item in the grand exchange
 	 * @param id the id of the item
 	 * @param quantity the number of items to buy
-	 * @return <tt>True</tt> unless we can't buy
+	 * @return <code>True</code> unless we can't buy
 	 */
 	public boolean sellItem(int id, int quantity) {
 		return sell(id, quantity, 0, false);

@@ -51,7 +51,7 @@ public class GroundItems extends MethodProvider {
 	 *
 	 * @param range The range (max distance in all directions) in which to check
 	 *              items for.
-	 * @return <tt>RSGroundItem</tt> array containing all of the items in range.
+	 * @return <code>RSGroundItem</code> array containing all of the items in range.
 	 */
 	public RSGroundItem[] getAll(int range) {
 		return getAll(range, ALL_FILTER);
@@ -63,7 +63,7 @@ public class GroundItems extends MethodProvider {
 	 * @param range  The range (max distance in all directions) in which to check
 	 *               items for.
 	 * @param filter Filters out unwanted matches.
-	 * @return <tt>RSGroundItem</tt> array containing all of the items in range.
+	 * @return <code>RSGroundItem</code> array containing all of the items in range.
 	 */
 	public RSGroundItem[] getAll(int range, Filter<RSGroundItem> filter) {
 		ArrayList<RSGroundItem> temp = new ArrayList<RSGroundItem>();

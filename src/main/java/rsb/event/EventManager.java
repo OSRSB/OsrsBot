@@ -69,7 +69,7 @@ public class EventManager implements Runnable {
 	/**
 	 * Is this thread the event thread?
 	 *
-	 * @return <tt>true</tt> if the thread is an event thread; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the thread is an event thread; otherwise <code>false</code>.
 	 */
 	public boolean isEventThread() {
 		synchronized (threadLock) {
@@ -80,7 +80,7 @@ public class EventManager implements Runnable {
 	/**
 	 * Is the event thread alive?
 	 *
-	 * @return <tt>true</tt> if the thread is alive; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the thread is alive; otherwise <code>false</code>.
 	 */
 	public boolean isEventThreadAlive() {
 		synchronized (threadLock) {
@@ -91,9 +91,9 @@ public class EventManager implements Runnable {
 	/**
 	 * Kills the event manager thread.
 	 *
-	 * @param wait <tt>true</tt> to wait for the kill
+	 * @param wait <code>true</code> to wait for the kill
 	 *             event to be processed before returning; otherwise
-	 *             <tt>false</tt> to submit the kill event and return
+	 *             <code>false</code> to submit the kill event and return
 	 *             immediately.
 	 */
 	public void killThread(boolean wait) {

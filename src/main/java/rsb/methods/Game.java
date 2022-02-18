@@ -34,8 +34,8 @@ public class Game extends MethodProvider {
 	 *
 	 * @param chatOption one of CHAT_OPTION_
 	 * @param mode       one of ChatMode
-	 * @return <tt>true</tt> if item was clicked correctly; otherwise
-	 *         <tt>false</tt>
+	 * @return <code>true</code> if item was clicked correctly; otherwise
+	 *         <code>false</code>
 	 */
 	public boolean setChatOption(int chatOption, ChatMode mode) {
 		mouseChatButton(chatOption, false);
@@ -62,8 +62,8 @@ public class Game extends MethodProvider {
 	 * Opens the specified tab at the specified index.
 	 *
 	 * @param tab The tab to open.
-	 * @return <tt>true</tt> if tab successfully selected; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if tab successfully selected; otherwise
+	 *         <code>false</code>.
 	 * @see #openTab(GameGUI.Tab tab, boolean functionKey)
 	 */
 	public boolean openTab(GameGUI.Tab tab) {
@@ -75,8 +75,8 @@ public class Game extends MethodProvider {
 	 *
 	 * @param tab 				The tab to open
 	 * @param functionKey       If wanting to use function keys to switch.
-	 * @return <tt>true</tt> if tab successfully selected; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if tab successfully selected; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean openTab(GameGUI.Tab tab, boolean functionKey) {
 		// Check current tab
@@ -123,7 +123,7 @@ public class Game extends MethodProvider {
 	 *
 	 * @param button Which button? One of CHAT_OPTION
 	 * @param left   Left or right button? Left = true. Right = false.
-	 * @return <tt>true</tt> if it was clicked.
+	 * @return <code>true</code> if it was clicked.
 	 */
 	public boolean mouseChatButton(int button, boolean left) {
 		RSWidget chatButton = methods.interfaces.get(WidgetID.CHATBOX_GROUP_ID).getComponent(button);
@@ -154,7 +154,7 @@ public class Game extends MethodProvider {
 	 *
 	 * Deprecated : use walking.getEnergy()
 	 *
-	 * @return An <tt>int</tt> representation of the players current energy.
+	 * @return An <code>int</code> representation of the players current energy.
 	 */
 	@Deprecated
 	public int getEnergy() {
@@ -191,7 +191,7 @@ public class Game extends MethodProvider {
 	/**
 	 * Returns the valid chat component.
 	 *
-	 * @return <tt>RSWidgetChild</tt> of the current valid talk interface;
+	 * @return <code>RSWidgetChild</code> of the current valid talk interface;
 	 *         otherwise null.
 	 */
 	public RSWidget getTalkInterface() {
@@ -213,7 +213,7 @@ public class Game extends MethodProvider {
 	/**
 	 * Checks whether or not the logout tab is selected.
 	 *
-	 * @return <tt>true</tt> if on the logout tab.
+	 * @return <code>true</code> if on the logout tab.
 	 */
 	public boolean isOnLogoutTab() {
 		return getCurrentTab() == GameGUI.Tab.LOGOUT;
@@ -222,7 +222,7 @@ public class Game extends MethodProvider {
 	/**
 	 * Closes the bank if it is open and logs out.
 	 *
-	 * @return <tt>true</tt> if the player was logged out.
+	 * @return <code>true</code> if the player was logged out.
 	 */
 	public boolean logout() {
 		if (methods.bank.isOpen()) {
@@ -259,7 +259,7 @@ public class Game extends MethodProvider {
 	/**
 	 * Runs the LoginBot random.
 	 *
-	 * @return <tt>true</tt> if random was run; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if random was run; otherwise <code>false</code>.
 	 */
 	public boolean login() {
 		return new LoginBot().activateCondition();
@@ -270,7 +270,7 @@ public class Game extends MethodProvider {
 	 * Determines whether or not the client is currently logged in to an
 	 * account.
 	 *
-	 * @return <tt>true</tt> if logged in; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if logged in; otherwise <code>false</code>.
 	 */
 	public boolean isLoggedIn() {
 		return methods.client.getLocalPlayer() != null;
@@ -279,8 +279,8 @@ public class Game extends MethodProvider {
 	/**
 	 * Determines whether or not the client is showing the login screen.
 	 *
-	 * @return <tt>true</tt> if the client is showing the login screen;
-	 *         otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the client is showing the login screen;
+	 *         otherwise <code>false</code>.
 	 */
 	public boolean isLoginScreen() {
 		return methods.client.getLocalPlayer() == null;
@@ -289,8 +289,8 @@ public class Game extends MethodProvider {
 	/**
 	 * Determines whether or not the welcome screen is open.
 	 *
-	 * @return <tt>true</tt> if the client is showing the welcome screen;
-	 *         otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the client is showing the welcome screen;
+	 *         otherwise <code>false</code>.
 	 */
 	public boolean isWelcomeScreen() {
 		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY)

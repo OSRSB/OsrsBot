@@ -199,7 +199,7 @@ public class Methods {
 	/**
 	 * Returns the current client's local player.
 	 *
-	 * @return The current client's <tt>RSPlayer</tt>.
+	 * @return The current client's <code>RSPlayer</code>.
 	 * @see Players#getMyPlayer()
 	 */
 	public RSPlayer getMyPlayer() {
@@ -223,7 +223,7 @@ public class Methods {
 	 * Checks for the existence of a NPC.
 	 *
 	 * @param npc The NPC to check for.
-	 * @return <tt>true</tt> if found.
+	 * @return <code>true</code> if found.
 	 */
 	public boolean verify(RSNPC npc) {
 		return npc != null;
@@ -233,7 +233,7 @@ public class Methods {
 	 * Checks for the existence of a RSObject.
 	 *
 	 * @param o The RSObject to check for.
-	 * @return <tt>true</tt> if found.
+	 * @return <code>true</code> if found.
 	 */
 	public boolean verify(RSObject o) {
 		return o != null;
@@ -243,7 +243,7 @@ public class Methods {
 	 * Checks for the existence of a RSTile.
 	 *
 	 * @param t The RSTile to check for.
-	 * @return <tt>true</tt> if found.
+	 * @return <code>true</code> if found.
 	 */
 	public boolean verify(RSTile t) {
 		return t != null;
@@ -253,7 +253,7 @@ public class Methods {
 	 * Checks for the existence of a RSGroundItem.
 	 *
 	 * @param i The RSGroundItem to check for.
-	 * @return <tt>true</tt> if found.
+	 * @return <code>true</code> if found.
 	 */
 	public boolean verify(RSGroundItem i) {
 		return i != null;

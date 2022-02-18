@@ -20,8 +20,8 @@ public class Combat extends MethodProvider {
 	 *
 	 * @param percent The health percentage to eat at; 10%-90%
 	 * @param foods   Array of Foods we can eat.
-	 * @return <tt>true</tt> once we eaten to the health % (percent); otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 *         <code>false</code>.
 	 */
 	@Deprecated
 	public boolean Eat(final int percent, final int... foods) {
@@ -33,8 +33,8 @@ public class Combat extends MethodProvider {
 	 *
 	 * @param percent The health percentage to eat at; 10%-90%
 	 * @param foods   Array of Foods we can eat.
-	 * @return <tt>true</tt> once we eaten to the health % (percent); otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean eat(final int percent, final int... foods) {
 		int firstPercent = getHealth();
@@ -60,7 +60,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Turns auto-retaliate on or off in the combat tab.
 	 *
-	 * @param enable <tt>true</tt> to enable; <tt>false</tt> to disable.
+	 * @param enable <code>true</code> to enable; <code>false</code> to disable.
 	 */
 	public void setAutoRetaliate(final boolean enable) {
 		final RSWidget autoRetal = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
@@ -78,7 +78,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether or not the auto-retaliate option is enabled.
 	 *
-	 * @return <tt>true</tt> if retaliate is enabled; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
 		return methods.settings.getSetting(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
@@ -99,8 +99,8 @@ public class Combat extends MethodProvider {
 	 * @param fightMode The fight mode to set it to. From 0-3 corresponding to the 4
 	 *                  attacking modes; Else if there is only 3 attacking modes then,
 	 *                  from 0-2 corresponding to the 3 attacking modes
-	 * @return <tt>true</tt> if the interface was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the interface was clicked; otherwise
+	 *         <code>false</code>.
 	 * @see #getFightMode()
 	 */
 	public boolean setFightMode(int fightMode) {
@@ -145,7 +145,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether we're poisoned.
 	 *
-	 * @return <tt>true</tt> if poisoned; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if poisoned; otherwise <code>false</code>.
 	 */
 	public boolean isPoisoned() {
 		return 0 < methods.settings.getSetting(VarpIndices.POISON) && methods.settings.getSetting(VarpIndices.POISON) < 1000000;
@@ -165,7 +165,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether we're immune to poison.
 	 *
-	 * @return <tt>true</tt> if immune; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if immune; otherwise <code>false</code>.
 	 */
 	public boolean isPoisonImmune() {
 		return methods.settings.getSetting(VarpIndices.POISON) == -1;
@@ -174,7 +174,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether we're envenomed
 	 *
-	 * @return	<tt>true</tt> if the local player is envenomed; otherwise <tt>false</tt>
+	 * @return	<code>true</code> if the local player is envenomed; otherwise <code>false</code>
 	 */
 	public boolean isEnvenomed() {
 		return methods.settings.getSetting(VarpIndices.POISON) >= 1000000;
@@ -194,7 +194,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether the special-attack option is enabled.
 	 *
-	 * @return <tt>true</tt> if special is enabled; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isSpecialEnabled() {
 		return methods.settings.getSetting(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
@@ -250,7 +250,7 @@ public class Combat extends MethodProvider {
 	 * Checks if your character is interacting with an Npc.
 	 *
 	 * @param npc The Npc we want to fight.
-	 * @return <tt>true</tt> if interacting; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if interacting; otherwise <code>false</code>.
 	 */
 	public boolean isAttacking(final RSNPC npc) {
 		// Helpful for new scripters confused by the function of isInCombat()
@@ -262,8 +262,8 @@ public class Combat extends MethodProvider {
 	 * Checks whether the desired Npc is dead.
 	 *
 	 * @param npc The RSNPC to check.
-	 * @return <tt>true</tt> if the Npc is dead or dying; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the Npc is dead or dying; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean isDead(final RSNPC npc) {
 		// getHPPercent() can return 0 when the Npc has a sliver of health left

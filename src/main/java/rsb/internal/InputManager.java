@@ -31,7 +31,7 @@ public class InputManager {
 	 * Determines if a coordinate is valid on the game canvas.
 	 * @param x		the x coordinate
 	 * @param y		the y coordinate
-	 * @return		<tt>true</tt> if the coordinate is valid on the game canvas otherwise <tt>false</tt>
+	 * @return		<code>true</code> if the coordinate is valid on the game canvas otherwise <code>false</code>
 	 */
 	private boolean isOnCanvas(final int x, final int y) {
 		return x >= 0 && x < bot.getCanvas().getWidth() && y >= 0 && y < bot.getCanvas().getHeight();

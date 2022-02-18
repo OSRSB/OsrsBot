@@ -697,7 +697,7 @@ public class OutputObjectComparer {
 
     /**
      * Returns the object as an array
-     * <tt>
+     * <code>
      * example usage:
      * String[] names = new String[]{"rb", "xz", "ux", "pt", "ye"};
      * for (String name : names) {
@@ -712,7 +712,7 @@ public class OutputObjectComparer {
      * } catch (Exception e) {
      * }
      * }
-     * </tt>
+     * </code>
      * @param object the object to convert
      * @return the object as an array
      */

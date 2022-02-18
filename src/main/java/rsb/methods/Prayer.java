@@ -28,7 +28,7 @@ public class Prayer extends MethodProvider {
 	 * Returns true if designated prayer is turned on.
 	 *
 	 * @param prayer The prayer to check.
-	 * @return <tt>true</tt> if enabled; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if enabled; otherwise <code>false</code>.
 	 */
 	public boolean isPrayerOn(GlobalWidgetId.Prayer prayer) {
 		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_NORMAL_BOOK)
@@ -45,7 +45,7 @@ public class Prayer extends MethodProvider {
 	 * Returns true if the quick prayer interface has been used to activate
 	 * prayers.
 	 *
-	 * @return <tt>true</tt> if quick prayer is on; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if quick prayer is on; otherwise <code>false</code>.
 	 */
 	public boolean isQuickPrayerOn() {
 		final int QUICK_PRAYER_SPRITE = 1066;
@@ -59,9 +59,9 @@ public class Prayer extends MethodProvider {
 	 * Activates/deactivates a prayer via interfaces.
 	 *
 	 * @param prayer   The prayer to activate.
-	 * @param activate <tt>true</tt> to activate; <tt>false</tt> to deactivate.
-	 * @return <tt>true</tt> if the interface was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @param activate <code>true</code> to activate; <code>false</code> to deactivate.
+	 * @return <code>true</code> if the interface was clicked; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean activatePrayer(final GlobalWidgetId.Prayer prayer, final boolean activate) {
 		if (isPrayerOn(prayer) == activate) {
@@ -80,9 +80,9 @@ public class Prayer extends MethodProvider {
 	/**
 	 * Activates/deactivates quick prayers via interfaces.
 	 *
-	 * @param activate <tt>true</tt> to activate; <tt>false</tt> to deactivate.
-	 * @return <tt>true</tt> if the interface was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @param activate <code>true</code> to activate; <code>false</code> to deactivate.
+	 * @return <code>true</code> if the interface was clicked; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean activateQuickPrayer(final boolean activate) {
 		return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB).doAction(
@@ -95,7 +95,7 @@ public class Prayer extends MethodProvider {
 	 * @param unsetPrevious whether or not the previous quick prayers should be unset
 	 * @param prayers the prayers to activate with quick prayers
 	 *
-	 * @return <tt>True</tt> unless unable to access the interface
+	 * @return <code>True</code> unless unable to access the interface
 	 */
 	public boolean setQuickPrayers(boolean unsetPrevious, GlobalWidgetId.Prayer... prayers) {
 		final int SET_PRAYER_SPRITE = 181;

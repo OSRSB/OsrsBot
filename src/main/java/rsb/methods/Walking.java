@@ -48,7 +48,7 @@ public class Walking extends MethodProvider {
 	 * Determines whether or not a given tile is in the loaded map area.
 	 *
 	 * @param tile The tile to check.
-	 * @return <tt>true</tt> if local; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if local; otherwise <code>false</code>.
 	 */
 	public boolean isLocal(final RSTile tile) {
 		int[][] flags = getCollisionFlags(methods.game.getPlane());
@@ -61,8 +61,8 @@ public class Walking extends MethodProvider {
 	 * Walks one tile towards the given destination using a generated path.
 	 *
 	 * @param destination The destination tile.
-	 * @return <tt>true</tt> if the next tile was walked to; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was walked to; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean walkTo(final RSTile destination) {
 		if (destination.equals(lastDestination)
@@ -82,7 +82,7 @@ public class Walking extends MethodProvider {
 	 * Walks to the given tile using the minimap with 1 tile randomness.
 	 *
 	 * @param t The tile to walk to.
-	 * @return <tt>true</tt> if the tile was clicked; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the tile was clicked; otherwise <code>false</code>.
 	 * @see #walkTileMM(RSTile, int, int)
 	 */
 	public boolean walkTileMM(final RSTile t) {
@@ -95,7 +95,7 @@ public class Walking extends MethodProvider {
 	 * @param t The tile to walk to.
 	 * @param x The x randomness (between 0 and x-1).
 	 * @param y The y randomness (between 0 and y-1).
-	 * @return <tt>true</tt> if the tile was clicked; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the tile was clicked; otherwise <code>false</code>.
 	 */
 	public boolean walkTileMM(final RSTile t, final int x, final int y) {
 		int xx = t.getWorldLocation().getX(), yy = t.getWorldLocation().getY();
@@ -143,7 +143,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param t The tile to walk to.
 	 * @param r The maximum deviation from the tile to allow.
-	 * @return <tt>true</tt> if the tile was clicked; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if the tile was clicked; otherwise <code>false</code>.
 	 */
 	public boolean walkTileMM(final RSTile t, final int r) {
 		int x = t.getWorldLocation().getX();
@@ -178,8 +178,8 @@ public class Walking extends MethodProvider {
 	/**
 	 * Turns run on or off using the game GUI controls.
 	 *
-     * @param enable <tt>true</tt> to enable run, <tt>false</tt> to disable it.
-     * @return	if run was attempted to be enabled <tt>true</tt>; otherwise <tt>false</tt>
+     * @param enable <code>true</code> to enable run, <code>false</code> to disable it.
+     * @return	if run was attempted to be enabled <code>true</code>; otherwise <code>false</code>
      */
 	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {
@@ -240,7 +240,7 @@ public class Walking extends MethodProvider {
 	/**
 	 * Returns whether or not run is enabled.
 	 *
-	 * @return <tt>true</tt> if run mode is enabled; otherwise <tt>false</tt>.
+	 * @return <code>true</code> if run mode is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isRunEnabled() {
 		return methods.settings.getSetting(173) == 1;
@@ -353,8 +353,8 @@ public class Walking extends MethodProvider {
 	 * Walks towards the end of a path. This method should be looped.
 	 *
 	 * @param path The path to walk along.
-	 * @return <tt>true</tt> if the next tile was reached; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was reached; otherwise
+	 *         <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int)
 	 */
 	@Deprecated
@@ -367,8 +367,8 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param path    The path to walk along.
 	 * @param maxDist See {@link #nextTile(RSTile[], int)}.
-	 * @return <tt>true</tt> if the next tile was reached; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was reached; otherwise
+	 *         <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int, int)
 	 */
 	@Deprecated
@@ -382,8 +382,8 @@ public class Walking extends MethodProvider {
 	 * @param path  The path to walk along.
 	 * @param randX The X value to randomize each tile in the path by.
 	 * @param randY The Y value to randomize each tile in the path by.
-	 * @return <tt>true</tt> if the next tile was reached; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was reached; otherwise
+	 *         <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int, int, int)
 	 */
 	@Deprecated
@@ -398,8 +398,8 @@ public class Walking extends MethodProvider {
 	 * @param maxDist See {@link #nextTile(RSTile[], int)}.
 	 * @param randX   The X value to randomize each tile in the path by.
 	 * @param randY   The Y value to randomize each tile in the path by.
-	 * @return <tt>true</tt> if the next tile was reached; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was reached; otherwise
+	 *         <code>false</code>.
 	 */
 	@Deprecated
 	public boolean walkPathMM(RSTile[] path, int maxDist, int randX, int randY) {
@@ -415,8 +415,8 @@ public class Walking extends MethodProvider {
 	 * Walks to the end of a path via the screen. This method should be looped.
 	 *
 	 * @param path The path to walk along.
-	 * @return <tt>true</tt> if the next tile was reached; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if the next tile was reached; otherwise
+	 *         <code>false</code>.
 	 * @see #walkPathOnScreen(RSTile[], int)
 	 */
 	@Deprecated
@@ -446,8 +446,8 @@ public class Walking extends MethodProvider {
 	/**
 	 * Reverses an array of tiles.
 	 *
-	 * @param other The <tt>RSTile</tt> path array to reverse.
-	 * @return The reverse <tt>RSTile</tt> path for the given <tt>RSTile</tt>
+	 * @param other The <code>RSTile</code> path array to reverse.
+	 * @return The reverse <code>RSTile</code> path for the given <code>RSTile</code>
 	 *         path.
 	 */
 	@Deprecated
@@ -463,7 +463,7 @@ public class Walking extends MethodProvider {
 	 * Returns the next tile to walk to on a path.
 	 *
 	 * @param path The path.
-	 * @return The next <tt>RSTile</tt> to walk to on the provided path; or
+	 * @return The next <code>RSTile</code> to walk to on the provided path; or
 	 *         <code>null</code> if far from path or at destination.
 	 * @see #nextTile(RSTile[], int)
 	 */
@@ -480,7 +480,7 @@ public class Walking extends MethodProvider {
 	 *                 than or equal to this distance, the tile after next will be
 	 *                 returned rather than the next tile, skipping one. This
 	 *                 interlacing aids continuous walking.
-	 * @return The next <tt>RSTile</tt> to walk to on the provided path; or
+	 * @return The next <code>RSTile</code> to walk to on the provided path; or
 	 *         <code>null</code> if far from path or at destination.
 	 */
 	@Deprecated

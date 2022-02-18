@@ -28,7 +28,7 @@ public class Interfaces extends MethodProvider {
 	 * Gets a widget corresponding to the index
 	 *
 	 * @param index The index of the interface.
-	 * @return The <tt>RSWidget</tt> for the given index.
+	 * @return The <code>RSWidget</code> for the given index.
 	 */
 	public RSWidget get(final int index) {
 		return new RSWidget(methods, methods.client.getWidget(index, 0));
@@ -39,7 +39,7 @@ public class Interfaces extends MethodProvider {
 	 *
 	 * @param index      The parent interface index
 	 * @param childIndex The component index
-	 * @return <tt>RSWidget</tt> for the given index and child index.
+	 * @return <code>RSWidget</code> for the given index and child index.
 	 */
 	public RSWidget getComponent(final int index, final int childIndex) {
 		return new RSWidget(methods, methods.client.getWidget(index, childIndex));
@@ -65,8 +65,8 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Checks for the click here to continue widget
-	 * @return <tt>true</tt> if continue component is valid; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if continue component is valid; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean canContinue() {
 		return getContinueComponent() != null;
@@ -74,8 +74,8 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Clicks the click here to continue widget
-	 * @return <tt>true</tt> if continue component was clicked; otherwise
-	 *         <tt>false</tt>.
+	 * @return <code>true</code> if continue component was clicked; otherwise
+	 *         <code>false</code>.
 	 */
 	public boolean clickContinue() {
 		RSWidget cont = getContinueComponent();
@@ -84,7 +84,7 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Gets the click here to continue widget
-	 * @return <tt>RSWidget</tt> containing "Click here to continue";
+	 * @return <code>RSWidget</code> containing "Click here to continue";
 	 *         otherwise null.
 	 */
 	public RSWidget getContinueComponent() {
@@ -103,7 +103,7 @@ public class Interfaces extends MethodProvider {
 	 * @param c			The component widget to click
 	 * @param action 	The menu action to click.
 	 *
-	 * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>
+	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>
 	 */
 	public boolean clickComponent(final RSWidget c, final String action) {
 		if (!c.isValid()) {
@@ -133,7 +133,7 @@ public class Interfaces extends MethodProvider {
 	 *
 	 * @param inter  The interface of the dialogue menu.
 	 * @param option The text we want to click.
-	 * @return <tt>true</tt> if the option was clicked; otherwise <tt>false</tt>
+	 * @return <code>true</code> if the option was clicked; otherwise <code>false</code>
 	 *         .
 	 */
 	public boolean clickDialogueOption(final RSWidget inter, String option) {
@@ -251,7 +251,7 @@ public class Interfaces extends MethodProvider {
 	 * @param iface The interface to wait for.
 	 * @param valid True if open, false if close.
 	 * @param timer Milliseconds to wait for the interface to open/close.
-	 * @return <tt>true</tt> if the interface was successfully closed/opened.
+	 * @return <code>true</code> if the interface was successfully closed/opened.
 	 */
 	public boolean waitFor(RSWidget iface, boolean valid, int timer) {
 		for (int w = 0; w < timer && iface.isValid() == valid ? true : false; w++) {
@@ -273,7 +273,7 @@ public class Interfaces extends MethodProvider {
 	 * Use -1 to make all
 	 *
 	 * @param amount The number of items to make
-	 * @return <tt>true</tt> f the interface was interacted with; else <tt>false</tt>
+	 * @return <code>true</code> f the interface was interacted with; else <code>false</code>
 	 */
 	public boolean makeX(int amount) {
 		RSWidget widget = null;

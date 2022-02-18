@@ -14,8 +14,8 @@ public class Settings extends MethodProvider {
 	/**
 	 * Gets the settings array.
 	 *
-	 * @return An <tt>int</tt> array representing all of the settings values;
-	 *         otherwise <tt>new int[0]</tt>.
+	 * @return An <code>int</code> array representing all of the settings values;
+	 *         otherwise <code>new int[0]</code>.
 	 */
 	public int[] getSettingArray() {
 		int[] settingArray = methods.client.getVarps();
@@ -29,8 +29,8 @@ public class Settings extends MethodProvider {
 	 * Gets the setting at a given index.
 	 *
 	 * @param setting The setting index to return the value of.
-	 * @return <tt>int</tt> representing the setting of the given setting id;
-	 *         otherwise <tt>-1</tt>.
+	 * @return <code>int</code> representing the setting of the given setting id;
+	 *         otherwise <code>-1</code>.
 	 */
 	public int getSetting(final int setting) {
 		int[] settings = getSettingArray();

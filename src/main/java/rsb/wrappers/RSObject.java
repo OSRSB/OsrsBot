@@ -145,7 +145,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Gets the Model of this object.
 	 * Checks what kind of object it is and returns the model of the object based on that
 	 *
-	 * @return The RSModel, or <tt>null</tt> if unavailable.
+	 * @return The RSModel, or <code>null</code> if unavailable.
 	 */
 	public RSModel getModel() {
 		try {
@@ -186,7 +186,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	/**
 	 * Determines whether this object is on the game screen.
 	 *
-	 * @return <tt>true</tt> if the object is on screen else <tt>false</tt>
+	 * @return <code>true</code> if the object is on screen else <code>false</code>
 	 */
 	public boolean isOnScreen() {
 		RSModel model = getModel();
@@ -210,7 +210,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Performs the specified action on this object.
 	 *
 	 * @param action the menu item to search and click
-	 * @return 		 <tt>true</tt> if clicked, <tt>false</tt> if object does not contain the
+	 * @return 		 <code>true</code> if clicked, <code>false</code> if object does not contain the
 	 *         		 desired action
 	 */
 	public boolean doAction(final String action) {
@@ -222,7 +222,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 *
 	 * @param action the action of the menu item to search and click
 	 * @param option the option of the menu item to search and click
-	 * @return 		 <tt>true</tt> if clicked, <tt>false</tt> if object does not contain the
+	 * @return 		 <code>true</code> if clicked, <code>false</code> if object does not contain the
 	 *         		 desired action
 	 */
 	public boolean doAction(final String action, final String option) {
@@ -236,7 +236,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	/**
 	 * Left-clicks this object.
 	 *
-	 * @return <tt>true</tt> if clicked otherwise <tt>false</tt>
+	 * @return <code>true</code> if clicked otherwise <code>false</code>
 	 */
 	public boolean doClick() {
 		return doClick(true);
@@ -245,8 +245,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	/**
 	 * Clicks this object.
 	 *
-	 * @param leftClick <tt>true</tt> to left-click; <tt>false</tt> to right-click.
-	 * @return <tt>true</tt> if clicked otherwise <tt>false</tt>
+	 * @param leftClick <code>true</code> to left-click; <code>false</code> to right-click.
+	 * @return <code>true</code> if clicked otherwise <code>false</code>
 	 */
 	public boolean doClick(boolean leftClick) {
 		RSModel model = this.getModel();
@@ -306,7 +306,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	
 	/**
 	 * Turns the camera towards the RSObject.
-	 * @return <tt>true</tt> If RSObject is on screen after attempted to move camera angle.
+	 * @return <code>true</code> If RSObject is on screen after attempted to move camera angle.
 	 */
 	public boolean turnTo() {
 		final RSObject o = methods.objects.getNearest(getID());
@@ -321,7 +321,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 
 	/**
 	 * Checks if the RSObject is clickable (interactive)
-	 * @return	<tt>true</tt> if the object is capable of being interacted with otherwise <tt>false</tt>
+	 * @return	<code>true</code> if the object is capable of being interacted with otherwise <code>false</code>
 	 */
 	public boolean isClickable() {
 		if (obj == null) {

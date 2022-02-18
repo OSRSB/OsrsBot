@@ -168,7 +168,7 @@ public class Camera extends MethodProvider {
 	 * Sets the altitude to max or minimum.
 	 *
 	 * @param up True to go up. False to go down.
-	 * @return <tt>true</tt> if the altitude was changed.
+	 * @return <code>true</code> if the altitude was changed.
 	 */
 	public boolean setPitch(boolean up) {
 		if (up) {

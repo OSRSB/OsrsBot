@@ -99,7 +99,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * Performs an action on a humanoid character (tall and skinny).
      *
      * @param action The action of the menu entry to be clicked (if available).
-     * @return <tt>true</tt> if the option was found; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the option was found; otherwise <code>false</code>.
      */
     public boolean doAction(final String action) {
         return doAction(action, null);
@@ -110,7 +110,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      *
      * @param action The action of the menu entry to be clicked (if available).
      * @param option The option of the menu entry to be clicked (if available).
-     * @return <tt>true</tt> if the option was found; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the option was found; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
         RSModel model = this.getModel();
@@ -284,7 +284,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
 
     /**
      * Turns towards the RSCharacter.
-     * @return <tt>true</tt> - If RSCharacter is on screen after attempting to move camera angle.
+     * @return <code>true</code> - If RSCharacter is on screen after attempting to move camera angle.
      */
     public boolean turnTo() {
         RSCharacter character = this;

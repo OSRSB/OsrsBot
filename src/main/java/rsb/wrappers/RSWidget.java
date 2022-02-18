@@ -61,7 +61,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * showing (valid).
      *
      * @param action The menu action to click.
-     * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action) {
         return doAction(action, null);
@@ -73,7 +73,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      *
      * @param action The menu action to click.
      * @param option The option of the menu action to click.
-     * @return <tt>true</tt> if the action was clicked; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
         if (!isValid()) {
@@ -97,7 +97,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     /**
      * Left-clicks this component.
      *
-     * @return <tt>true</tt> if the component was clicked.
+     * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick() {
         return doClick(true);
@@ -106,9 +106,9 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     /**
      * Clicks this component.
      *
-     * @param leftClick <tt>true</tt> to left-click; <tt>false</tt>
+     * @param leftClick <code>true</code> to left-click; <code>false</code>
      *                  to right-click.
-     * @return <tt>true</tt> if the component was clicked.
+     * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick(boolean leftClick) {
         if (!isValid()) {
@@ -135,7 +135,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * Moves the mouse over this component (with normally distributed randomness)
      * if it is not already.
      *
-     * @return <tt>true</tt> if the mouse was moved; otherwise <tt>false</tt>.
+     * @return <code>true</code> if the mouse was moved; otherwise <code>false</code>.
      */
     public boolean doHover() {
         if (!isValid()) {
@@ -641,7 +641,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * Checks the actions of the child for a given substring
      *
      * @param phrase The phrase to check for
-     * @return <tt>true</tt> if found
+     * @return <code>true</code> if found
      */
     public boolean containsAction(final String phrase) {
         for (final String action : getActions()) {
@@ -669,7 +669,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * Checks the text of this component for a given substring
      *
      * @param phrase The phrase to check for
-     * @return <tt>true</tt> if the text contained the phrase
+     * @return <code>true</code> if the text contained the phrase
      * @see #getText()
      */
     public boolean containsText(final String phrase) {
