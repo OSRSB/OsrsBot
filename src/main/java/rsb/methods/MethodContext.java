@@ -124,9 +124,9 @@ public class MethodContext {
 	public final Walking walking = new Walking(this);
 
 	/**
-	 * The singleton of Settings
+	 * The singleton of ClientLocalStorage
 	 */
-	public final Settings settings = new Settings(this);
+	public final ClientLocalStorage clientLocalStorage = new ClientLocalStorage(this);
 
 	/**
 	 * the singleton of Account
