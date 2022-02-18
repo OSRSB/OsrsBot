@@ -43,6 +43,13 @@ public class GlobalConfiguration {
 		public static final String SCRIPTS_NAME_SRC = "scripts";
 		public static final String SCRIPTS_NAME_OUT = "Scripts";
 
+
+		/**
+		 * Retrieves the file containing account information by checking the OS to determine
+		 * the path and file name to use
+		 *
+		 * @return	the accounts file
+		 */
 		public static String getAccountsFile() {
 			final String path;
 			if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS) {
@@ -59,23 +66,30 @@ public class GlobalConfiguration {
 			return path;
 		}
 
+		/**
+		 * Retrieves the home directory using the operating system specific
+		 * method and concatenates it with our API specific path.
+		 * @return	the home directory of our API
+		 */
 		public static String getOsrsBotDirectory() {
 			final String env = System.getenv(GlobalConfiguration.NAME.toUpperCase() + "_HOME");
-			if ((env != null) && !env.isEmpty()) {
-				return env;
-			} else {
+			if (env == null || env.isEmpty()) {
 				String homeDirBuilder;
-				if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.WINDOWS)
-					homeDirBuilder = System.getProperty("user.home");
-				else if (GlobalConfiguration.getCurrentOperatingSystem() == OperatingSystem.LINUX) {
-					homeDirBuilder = System.getProperty("user.home")
-						+ File.separator + ".config";
-				}
-				else {
-					homeDirBuilder = Paths.getUnixHome();
+				switch(GlobalConfiguration.getCurrentOperatingSystem()) {
+					case LINUX:
+						homeDirBuilder = System.getProperty("user.home")
+								+ File.separator + ".config";
+						break;
+					case WINDOWS:
+						homeDirBuilder = System.getProperty("user.home");
+						break;
+					default: //MAC etc
+						homeDirBuilder = Paths.getUnixHome();
+						break;
 				}
 				return (homeDirBuilder + File.separator + GlobalConfiguration.NAME);
 			}
+			return env;
 		}
 
 		public static String getLogsDirectory() {
@@ -166,14 +180,6 @@ public class GlobalConfiguration {
 	private static final OperatingSystem CURRENT_OS;
 	public static boolean RUNNING_FROM_JAR = false;
 	public static final boolean SCRIPT_DRM = true;
-	
-	
-	public static class Twitter {
-		public static final boolean ENABLED = true;
-		public static final String NAME = "rsbotorg";
-		public static final String HASHTAG = "#" + NAME_LOWERCASE;
-		public static final int MESSAGES = 3;
-	}
 
 	/**
 	 * When executed it starts up the general configurations and paths as well as determines what files will be auto-generated
