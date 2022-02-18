@@ -1,6 +1,6 @@
 package rsb.methods;
 
-import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.RSCharacter;
@@ -134,7 +134,7 @@ public class Magic extends MethodProvider {
      * otherwise <code>false</code>.
      */
     public boolean autoCastSpell(final int spell) {
-        if (methods.settings.getSetting(GlobalSettingValues.SETTING_COMBAT_STYLE) != 4) {
+        if (methods.settings.getSetting(VarpIndices.COMBAT_STYLE) != 4) {
             if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
                 methods.game.openTab(GameGUI.Tab.COMBAT);
                 sleep(random(150, 250));

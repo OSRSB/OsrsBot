@@ -2,7 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.Actor;
 import net.runelite.api.Skill;
-import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
@@ -20,8 +20,8 @@ public class Combat extends MethodProvider {
 	 *
 	 * @param percent The health percentage to eat at; 10%-90%
 	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
-	 *         <code>false</code>.
+	 * @return <tt>true</tt> once we eaten to the health % (percent); otherwise
+	 *         <tt>false</tt>.
 	 */
 	@Deprecated
 	public boolean Eat(final int percent, final int... foods) {
@@ -33,8 +33,8 @@ public class Combat extends MethodProvider {
 	 *
 	 * @param percent The health percentage to eat at; 10%-90%
 	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
-	 *         <code>false</code>.
+	 * @return <tt>true</tt> once we eaten to the health % (percent); otherwise
+	 *         <tt>false</tt>.
 	 */
 	public boolean eat(final int percent, final int... foods) {
 		int firstPercent = getHealth();
@@ -60,7 +60,7 @@ public class Combat extends MethodProvider {
 	/**
 	 * Turns auto-retaliate on or off in the combat tab.
 	 *
-	 * @param enable <code>true</code> to enable; <code>false</code> to disable.
+	 * @param enable <tt>true</tt> to enable; <tt>false</tt> to disable.
 	 */
 	public void setAutoRetaliate(final boolean enable) {
 		final RSWidget autoRetal = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
@@ -78,10 +78,10 @@ public class Combat extends MethodProvider {
 	/**
 	 * Returns whether or not the auto-retaliate option is enabled.
 	 *
-	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
+	 * @return <tt>true</tt> if retaliate is enabled; otherwise <tt>false</tt>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.settings.getSetting(GlobalSettingValues.SETTING_AUTO_RETALIATE) == 0;
+		return methods.settings.getSetting(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Combat extends MethodProvider {
 	 * @return The current fight mode setting.
 	 */
 	public int getFightMode() {
-		return methods.settings.getSetting(GlobalSettingValues.SETTING_COMBAT_STYLE);
+		return methods.settings.getSetting(VarpIndices.COMBAT_STYLE);
 	}
 
 	/**
@@ -99,8 +99,8 @@ public class Combat extends MethodProvider {
 	 * @param fightMode The fight mode to set it to. From 0-3 corresponding to the 4
 	 *                  attacking modes; Else if there is only 3 attacking modes then,
 	 *                  from 0-2 corresponding to the 3 attacking modes
-	 * @return <code>true</code> if the interface was clicked; otherwise
-	 *         <code>false</code>.
+	 * @return <tt>true</tt> if the interface was clicked; otherwise
+	 *         <tt>false</tt>.
 	 * @see #getFightMode()
 	 */
 	public boolean setFightMode(int fightMode) {
@@ -142,31 +142,42 @@ public class Combat extends MethodProvider {
 		}
 	}
 
-
-	/**
-	 * 	-1 : Poison immune
-	 * 	  Normal poison damage is ceil( this / 5.0f )
-	 * 	  If this is greater than or equal to 1000000, the player is envenomed.
-	 * 	   Venom damage is (this - 999997) * 2
-	 */
-
 	/**
 	 * Returns whether we're poisoned.
 	 *
-	 * @return <code>true</code> if poisoned; otherwise <code>false</code>.
+	 * @return <tt>true</tt> if poisoned; otherwise <tt>false</tt>.
 	 */
-
 	public boolean isPoisoned() {
-		return 0 < methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) && methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) < 1000000;
+		return 0 < methods.settings.getSetting(VarpIndices.POISON) && methods.settings.getSetting(VarpIndices.POISON) < 1000000;
+	}
+
+	/**
+	 * Returns the damage we're taking from poison
+	 *
+	 * @return the poison damage if poisoned; otherwise 0;
+	 */
+	public double getPoisonDamage() {
+		if (isPoisoned())
+			return Math.ceil(methods.settings.getSetting(VarpIndices.POISON) / 5.0f);
+		return 0;
+	}
+
+	/**
+	 * Returns whether we're immune to poison.
+	 *
+	 * @return <tt>true</tt> if immune; otherwise <tt>false</tt>.
+	 */
+	public boolean isPoisonImmune() {
+		return methods.settings.getSetting(VarpIndices.POISON) == -1;
 	}
 
 	/**
 	 * Returns whether we're envenomed
 	 *
-	 * @return	<code>true</code> if the local player is envenomed; otherwise <code>false</code>
+	 * @return	<tt>true</tt> if the local player is envenomed; otherwise <tt>false</tt>
 	 */
 	public boolean isEnvenomed() {
-		return methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) > 1000000;
+		return methods.settings.getSetting(VarpIndices.POISON) >= 1000000;
 	}
 
 	/**
@@ -174,20 +185,28 @@ public class Combat extends MethodProvider {
 	 *
 	 * @return the venom damage if envenomed; otherwise 0;
 	 */
-
 	public int getVenomDamage() {
 		if (isEnvenomed())
-			return (methods.settings.getSetting(GlobalSettingValues.SETTING_POISON) - 999997) * 2;
+			return (methods.settings.getSetting(VarpIndices.POISON) - 999997) * 2;
 		return 0;
 	}
 
 	/**
 	 * Returns whether the special-attack option is enabled.
 	 *
-	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
+	 * @return <tt>true</tt> if special is enabled; otherwise <tt>false</tt>.
 	 */
 	public boolean isSpecialEnabled() {
-		return methods.settings.getSetting(GlobalSettingValues.SETTING_SPECIAL_ATTACK_ENABLED) == 1;
+		return methods.settings.getSetting(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
+	}
+
+	/**
+	 * Returns current special attack energy in percent.
+	 *
+	 * @return 0 - 100
+	 */
+	public int getSpecialAttackEnergy() {
+		return methods.settings.getSetting(VarpIndices.SPECIAL_ATTACK_ENERGY);
 	}
 
 	/**
@@ -231,7 +250,7 @@ public class Combat extends MethodProvider {
 	 * Checks if your character is interacting with an Npc.
 	 *
 	 * @param npc The Npc we want to fight.
-	 * @return <code>true</code> if interacting; otherwise <code>false</code>.
+	 * @return <tt>true</tt> if interacting; otherwise <tt>false</tt>.
 	 */
 	public boolean isAttacking(final RSNPC npc) {
 		// Helpful for new scripters confused by the function of isInCombat()
@@ -243,8 +262,8 @@ public class Combat extends MethodProvider {
 	 * Checks whether the desired Npc is dead.
 	 *
 	 * @param npc The RSNPC to check.
-	 * @return <code>true</code> if the Npc is dead or dying; otherwise
-	 *         <code>false</code>.
+	 * @return <tt>true</tt> if the Npc is dead or dying; otherwise
+	 *         <tt>false</tt>.
 	 */
 	public boolean isDead(final RSNPC npc) {
 		// getHPPercent() can return 0 when the Npc has a sliver of health left
