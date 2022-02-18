@@ -30,9 +30,14 @@ of ensuring unrelated systems remain relevant.
 ###### Set up
 So, if you're a script user reading this then you can [click here](https://github.com/OSRSB/OSRSBot/releases/latest) 
 to download the latest jar file. To run this file you'll need an installation of 
-[JDK 8](https://www.oracle.com/java/technologies/downloads/#java8) which can be obtained by clicking that link and 
+[JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) which can be obtained by clicking that link and 
 downloading the version that matches your operating system. If you need help just jump into the community server and
-ask.
+ask. Alternatively, you can install it through IntelliJ IDEA by hitting File -> Project Structure -> Project -> Project SDK
+and selecting the JDK version you want to use (or adding it).
+
+###### Building
+
+To build make sure to use the Gradle build tasks to build the classes or the jar task to build the jar.
 
 ###### Installing a script
 To install a .jar script, put it in the following folder:
