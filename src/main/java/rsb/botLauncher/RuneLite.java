@@ -74,6 +74,7 @@ import okhttp3.OkHttpClient;
 
 @Singleton
 @Slf4j
+@SuppressWarnings("removal")
 public class RuneLite extends net.runelite.client.RuneLite {
     public static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".runelite");
     public static final File CACHE_DIR = new File(RUNELITE_DIR, "cache");

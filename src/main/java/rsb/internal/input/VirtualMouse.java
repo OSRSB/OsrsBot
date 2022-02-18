@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 @Slf4j
+@SuppressWarnings("removal")
 public class VirtualMouse {
 
     private MethodContext methods;
