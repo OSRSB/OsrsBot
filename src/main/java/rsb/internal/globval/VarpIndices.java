@@ -1,12 +1,19 @@
 package rsb.internal.globval;
 
-public class GlobalSettingValues {
+public class VarpIndices {
     // Player/account
     public static final int PLAYER_VENOM_STATE = 12;
     public static final int TOGGLE_LOOP_MUSIC = 19;
     public static final int COMBAT_STYLE = 43;
     public static final int PLAYER_POISONED_STATE = 83;
     public static final int QUEST_POINTS = 101;
+    /**
+     * 	Poison immune = -1
+     * 	Poisoned = 0 - 1000000
+     * 	Envenomed = this >= 1000000
+     * 	Poison damage = ceil(this / 5.0f)
+     * 	Venom damage = (this - 999997) * 2
+     */
     public static final int POISON = 102;
     public static final int BANK_TOGGLE_WITHDRAW_MODE = 115;
     public static final int TYPE_SHOP = 118;

@@ -3,7 +3,7 @@ package rsb.methods;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
 import rsb.internal.wrappers.Filter;
-import rsb.internal.globval.GlobalSettingValues;
+import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
@@ -258,7 +258,7 @@ public class Bank extends MethodProvider {
 	 */
 	public int getCurrentTab() {
 		for (RSWidget widget : methods.interfaces.getComponent(GlobalWidgetInfo.BANK_TAB).getComponents()) {
-			if (widget.getSpriteId() == GlobalSettingValues.SPRITE_SELECTED_VALUE) {
+			if (widget.getSpriteId() == VarpIndices.SPRITE_SELECTED_VALUE) {
 				return widget.getIndex();
 			}
 		}
@@ -594,11 +594,11 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 1) {
+		if (methods.settings.getSetting(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 1) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_INSERT).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 1;
+		return methods.settings.getSetting(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 1;
 	}
 
 	/**
@@ -611,12 +611,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) != 0) {
+				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 0) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SWAP).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_REARRANGE_MODE) == 0;
+				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 0;
 	}
 
 	/**
@@ -629,12 +629,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 0) {
+				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 0) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_ITEM).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 0;
+				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 0;
 	}
 
 	/**
@@ -647,12 +647,12 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		if (methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) != 1) {
+				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 1) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_NOTE).doClick();
 			sleep(random(500, 700));
 		}
 		return methods.settings.getSetting(
-				GlobalSettingValues.SETTING_BANK_TOGGLE_WITHDRAW_MODE) == 1;
+				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 1;
 	}
 
 	/**
