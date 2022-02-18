@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
 import net.runelite.client.RuneLiteModule;
 import net.runelite.client.RuntimeConfig;
 
+@SuppressWarnings("removal")
 public class BotModule extends RuneLiteModule {
 
     private final OkHttpClient okHttpClient;
@@ -49,7 +50,6 @@ public class BotModule extends RuneLiteModule {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     protected void configure()
     {
         Properties properties = BotProperties.getProperties();
