@@ -3,6 +3,7 @@ package rsb.methods;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarpIndices;
 import rsb.wrappers.*;
 
 import java.lang.reflect.Field;
@@ -243,7 +244,7 @@ public class Walking extends MethodProvider {
 	 * @return <code>true</code> if run mode is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isRunEnabled() {
-		return methods.settings.getSetting(173) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_RUN_ENABLED) == 1;
 	}
 
 	/**

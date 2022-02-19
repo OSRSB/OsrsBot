@@ -2,7 +2,7 @@ package rsb.event.impl;
 
 import rsb.botLauncher.RuneLite;
 import rsb.event.listener.PaintListener;
-import rsb.methods.Settings;
+import rsb.methods.ClientLocalStorage;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -15,14 +15,14 @@ public class DrawSettings implements PaintListener {
 	private int[] lastSettings = new int[0];
 	private long[] settingsAge = new long[0];
 
-	private final Settings settings;
+	private final ClientLocalStorage clientLocalStorage;
 
 	public DrawSettings(RuneLite bot) {
-		settings = bot.getMethodContext().settings;
+		clientLocalStorage = bot.getMethodContext().clientLocalStorage;
 	}
 
 	public void onRepaint(final Graphics render) {
-		final int[] settings = this.settings.getSettingArray();
+		final int[] settings = this.clientLocalStorage.getLoadedVarpValues();
 		if (settings != null) {
 			final Font prev = render.getFont();
 			render.setFont(DrawSettings.monoFont);
