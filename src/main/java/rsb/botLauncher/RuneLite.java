@@ -373,7 +373,9 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         parser.accepts("bot", "Starts the client in bot mode");
         parser.accepts("bot-runelite", "Starts the client in Bot RuneLite mode");
+        parser.accepts("runelite", "Starts the client in RuneLite mode");
         parser.accepts("developer-mode", "Enable developer tools");
+        parser.accepts("ea", "Enable assertions");
         parser.accepts("debug", "Show extra debugging output");
         parser.accepts("insecure-skip-tls-verification", "Disables TLS verification");
         parser.accepts("jav_config", "jav_config url")
