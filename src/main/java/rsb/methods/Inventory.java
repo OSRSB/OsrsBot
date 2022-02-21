@@ -739,11 +739,14 @@ public class Inventory extends MethodProvider {
 	 * @return The ID of the item or -1 if not in inventory.
 	 */
 	public int getItemID(final String name) {
+		if (name == null) {
+			return -1;
+		}
 		RSItem[] items = getItems();
 		int slot = -1;
 		for (RSItem item : items) {
 			ItemComposition def = item.getDefinition();
-			if (def != null && def.getName().toLowerCase().contains(name.toLowerCase())) {
+			if (def != null && def.getName() != null && def.getName().toLowerCase().contains(name.toLowerCase())) {
 				slot = item.getID();
 				break;
 			}
