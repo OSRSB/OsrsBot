@@ -743,7 +743,7 @@ public class Inventory extends MethodProvider {
 		int slot = -1;
 		for (RSItem item : items) {
 			ItemComposition def = item.getDefinition();
-			if (def != null && def.getName().contains(name)) {
+			if (def != null && def.getName().toLowerCase().contains(name.toLowerCase())) {
 				slot = item.getID();
 				break;
 			}
