@@ -1,7 +1,9 @@
 package rsb.event.events;
 
+import lombok.extern.java.Log;
 import rsb.event.EventMulticaster;
 import rsb.event.listener.PaintListener;
+import rsb.methods.Players;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -33,6 +35,20 @@ public class PaintEvent extends RSEvent {
 
 		// Dispatch the event
 		((PaintListener) el).onRepaint(graphics);
+
+		// Draw bot's mouse
+		if (Players.methods.mouse.isPressed()) {
+			graphics.setColor(new Color(255, 255, 0, 175));
+			graphics.fillOval(Players.methods.mouse.getLocation().getX(), Players.methods.mouse.getLocation().getY(), 7, 7);
+			graphics.setColor(new Color(0, 255, 255, 175));
+			graphics.drawOval(Players.methods.mouse.getLocation().getX(), Players.methods.mouse.getLocation().getY(), 7, 7);
+		} else {
+			graphics.setColor(new Color(0, 255, 255, 175));
+			graphics.fillOval(Players.methods.mouse.getLocation().getX(), Players.methods.mouse.getLocation().getY(), 7, 7);
+			graphics.setColor(new Color(255, 255, 0, 175));
+			graphics.drawOval(Players.methods.mouse.getLocation().getX(), Players.methods.mouse.getLocation().getY(), 7, 7);
+		}
+
 
 		// Restore settings
 		g2d.setBackground(s_background);
