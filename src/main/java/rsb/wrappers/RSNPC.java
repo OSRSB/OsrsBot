@@ -1,25 +1,94 @@
 package rsb.wrappers;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import net.runelite.api.*;
+import net.runelite.cache.definitions.NpcDefinition;
+import net.runelite.cache.definitions.ObjectDefinition;
+import rsb.internal.globval.GlobalConfiguration;
 import rsb.methods.MethodContext;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.ref.SoftReference;
+import java.util.HashMap;
 
 public class RSNPC extends RSCharacter {
+    private static HashMap<Integer, NpcDefinition> npcDefinitonCache;
+    private static HashMap<Integer, File> npcFileCache;
     private final SoftReference<NPC> npc;
+    private NpcDefinition def;
     //private final NPC npc;
 
 
     public RSNPC(final MethodContext ctx, final NPC npc) {
         super(ctx);
         this.npc =  new SoftReference<>(npc);
+        this.def = (npc.getId() != -1) ? createObjectDefinition(npc.getId()) : null;
     }
-/*
-    public RSNPC(final MethodContext ctx, final RSCharacter npc) {
-        super(ctx);
-        this.npc =
+
+    /**
+     * Fills the runtime file cache with all the files in the cache directory.
+     */
+    private void fillFileCache() {
+        File dir = new File(GlobalConfiguration.Paths.getNPCsCacheDirectory());
+        File[] directoryListing = dir.listFiles();
+        npcFileCache = new HashMap<>();
+        npcDefinitonCache = new HashMap<>();
+        for (File file : directoryListing) {
+            if (file.getName().contains(".json")) {
+                npcFileCache.put(Integer.parseInt(file.getName().replace(".json", "")), file);
+            }
+        }
     }
-*/
+
+    /**
+     * Adds the object definition to the runtime cache.
+     * @param id	The id of the object definition to add
+     */
+    private void addDefinitionToLoadedCache(int id) {
+        try {
+            NpcDefinition def = readFileAndGenerateDefinition(npcFileCache.get(id));
+            if (def != null && def.getId() != -1) {
+                npcDefinitonCache.put(def.getId(), def);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reads the passed file and generates an object definition from it.
+     * @param file	The file to read
+     * @return	The object definition generated from the file
+     * @throws FileNotFoundException    If the file is not found
+     */
+    public static NpcDefinition readFileAndGenerateDefinition(File file) throws FileNotFoundException {
+        if (file != null) {
+            Gson gson = new Gson();
+            JsonReader reader = new JsonReader(new FileReader(file));
+            return gson.fromJson(reader, NpcDefinition.class);
+        }
+        return null;
+    }
+
+    /**
+     * Creates a new ObjectDefinition from the passed id.
+     * @param id	The id of the object definition to create
+     * @return	The object definition generated from the id
+     */
+    private NpcDefinition createObjectDefinition(int id) {
+        if (npcFileCache == null || npcFileCache.isEmpty()) {
+            fillFileCache();
+        }
+        if (!npcDefinitonCache.containsKey(id)) {
+            addDefinitionToLoadedCache(id);
+        }
+        return (npcDefinitonCache != null) ? npcDefinitonCache.get(id) : null;
+    }
+
     @Override
     public Actor getAccessor() {
         return npc.get();
@@ -32,7 +101,7 @@ public class RSNPC extends RSCharacter {
 
 
     public String[] getActions() {
-        NPCComposition def = getDefInternal();
+        NpcDefinition def = getDef();
 
         if (def != null) {
             return def.getActions();
@@ -41,7 +110,7 @@ public class RSNPC extends RSCharacter {
     }
 
     public int getID() {
-        NPCComposition def = getDefInternal();
+        NpcDefinition def = getDef();
         if (def != null) {
             return def.getId();
         }
@@ -50,7 +119,7 @@ public class RSNPC extends RSCharacter {
 
     @Override
     public String getName() {
-        NPCComposition def = getDefInternal();
+        NpcDefinition def = getDef();
         if (def != null) {
             return def.getName();
         }
@@ -97,13 +166,8 @@ public class RSNPC extends RSCharacter {
 */
 
 
-    NPCComposition getDefInternal() {
-        NPC c = npc.get();
-        if (c == null) {
-            return null;
-        } else {
-            return c.getComposition();
-        }
+    NpcDefinition getDef() {
+        return this.def;
     }
 
     public RSTile getPosition() {

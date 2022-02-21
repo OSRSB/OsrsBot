@@ -7,6 +7,10 @@ package rsb.botLauncher;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
+import rsb.internal.globval.GlobalConfiguration;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Application {
 
@@ -23,6 +27,8 @@ public class Application {
 		final OptionParser parser = new OptionParser();
 		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
 		OptionSet options = parser.parse(args);
+
+		checkForCacheAndLoad();
 
 		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
 			if (options.has("bot-runelite") && !options.has("runelite")) {
@@ -47,6 +53,43 @@ public class Application {
 
 	}
 
+
+	/**
+	 * Checks if the cache exists and if it does, loads it
+	 * if not it creates a new cache and saves it
+	 *
+	 * @throws IOException
+	 */
+	private static void checkForCacheAndLoad() throws IOException {
+		String gameCacheLocation = GlobalConfiguration.Paths.getRuneLiteGameCacheDirectory();
+		String objectCacheLocation = GlobalConfiguration.Paths.getObjectsCacheDirectory();
+		String itemCacheLocation = GlobalConfiguration.Paths.getItemsCacheDirectory();
+		String npcCacheLocation = GlobalConfiguration.Paths.getNPCsCacheDirectory();
+		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
+
+
+		String[] itemArgs = {"--cache", gameCacheLocation,
+				"--items", itemCacheLocation};
+		String[] objectArgs = {"--cache", gameCacheLocation,
+				"--objects", objectCacheLocation};
+		String[] npcArgs = {"--cache", gameCacheLocation,
+				"--npcs", npcCacheLocation};
+		String[] spriteArgs = {"--cache", gameCacheLocation,
+				"--sprites", spriteCacheLocation};
+
+		//TODO Some sort of better validation here
+		if (!new File(itemCacheLocation).exists() && new File(itemCacheLocation).getTotalSpace() < 100) {
+			net.runelite.cache.Cache.main(itemArgs);
+			net.runelite.cache.Cache.main(objectArgs);
+			net.runelite.cache.Cache.main(npcArgs);
+			if (!new File(spriteCacheLocation).exists()) {
+				new File(spriteCacheLocation).mkdir();
+				net.runelite.cache.Cache.main(spriteArgs);
+			}
+		}
+
+
+	}
 
 	/**
 	 * Returns the Bot for any object loaded in its client. For internal use
