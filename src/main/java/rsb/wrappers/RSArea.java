@@ -2,6 +2,7 @@ package rsb.wrappers;
 
 import net.runelite.api.Tile;
 import net.runelite.api.coords.WorldPoint;
+import rsb.methods.Players;
 import rsb.wrappers.common.Positionable;
 
 import java.awt.*;
@@ -151,6 +152,14 @@ public class RSArea {
 		}
 		return new RSTile(Math.round(totalX / area.npoints),
 				Math.round(totalY / area.npoints));
+	}
+
+	/**
+	 * @return The nearest <b>RSTile</b> in the <b>RSArea</b>
+	 *         to the local player
+	 */
+	public RSTile getNearestTile() {
+		return getNearestTile(Players.methods.players.getMyPlayer().getPosition());
 	}
 
 	/**
