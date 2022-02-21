@@ -558,7 +558,7 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean isSearchOpen() {
 		// Setting 1248 is -2147483648 when search is enabled and -2013265920
-		return (methods.settings.getSetting(1248) == -2147483648);
+		return (methods.clientLocalStorage.getVarpValueAt(1248) == -2147483648);
 	}
 
 	/**
@@ -594,11 +594,11 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 1) {
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 1) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_INSERT).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 1;
 	}
 
 	/**
@@ -610,12 +610,12 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(
+		if (methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 0) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SWAP).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(
+		return methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 0;
 	}
 
@@ -628,12 +628,12 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(
+		if (methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 0) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_ITEM).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(
+		return methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 0;
 	}
 
@@ -646,12 +646,12 @@ public class Bank extends MethodProvider {
 		if (!isOpen()) {
 			return false;
 		}
-		if (methods.settings.getSetting(
+		if (methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 1) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_NOTE).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.settings.getSetting(
+		return methods.clientLocalStorage.getVarpValueAt(
 				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 1;
 	}
 

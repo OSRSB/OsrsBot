@@ -134,7 +134,7 @@ public class Magic extends MethodProvider {
      * otherwise <code>false</code>.
      */
     public boolean autoCastSpell(final int spell) {
-        if (methods.settings.getSetting(VarpIndices.COMBAT_STYLE) != 4) {
+        if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE) != 4) {
             if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
                 methods.game.openTab(GameGUI.Tab.COMBAT);
                 sleep(random(150, 250));
