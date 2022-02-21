@@ -267,8 +267,8 @@ public class Magic extends MethodProvider {
      */
     public enum MagicBook {
 
-        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_ICE_RUSH),
-        LUNAR(GlobalWidgetId.SpellId.SPELL_BAKE_PIE), ARCEUUS(GlobalWidgetId.SpellId.SPELL_REANIMATE_GOBLIN), NULL(-1);
+        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_EARTH_SURGE),
+        LUNAR(GlobalWidgetId.SpellId.SPELL_GHORROCK_TELEPORT), ARCEUUS(GlobalWidgetId.SpellId.SPELL_SPIN_FLAX), NULL(-1);
 
         private final int index;
 
