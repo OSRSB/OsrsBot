@@ -137,6 +137,7 @@ public class GlobalConfiguration {
 			return Paths.getOsrsBotDirectory() + File.separator + "Cache";
 		}
 
+
 		public static String getScriptsExtractedCache() {
 			return	Paths.getCacheDirectory() + File.separator + "script.dat";
 		}
@@ -173,6 +174,40 @@ public class GlobalConfiguration {
 			final String home = System.getProperty("user.home");
 			return home == null ? "~" : home;
 		}
+
+
+		/**
+		 * Gets the directory where RuneLite installs the jagex cache.
+		 * @return	the jagex cache directory
+		 */
+		public static String getRuneLiteGameCacheDirectory() {
+			return System.getProperty("user.home") + File.separator + ".runelite" +
+					File.separator + "jagexcache" + File.separator + "oldschool" + File.separator + "LIVE" + File.separator;
+		}
+
+		/**
+		 * Gets the bot directory where the object cache is stored.
+		 * @return	the object cache directory
+		 */
+		public static String getObjectsCacheDirectory() {return Paths.getCacheDirectory() + File.separator + "Objects" + File.separator;}
+
+		/**
+		 * Gets the bot directory where the sprites cache is stored.
+		 * @return	the sprites cache directory
+		 */
+		public static String getSpritesCacheDirectory() {return Paths.getCacheDirectory() + File.separator + "Sprites" + File.separator;}
+
+		/**
+		 * Gets the bot directory where the npcs cache is stored.
+		 * @return	the npcs cache directory
+		 */
+		public static String getNPCsCacheDirectory() {return Paths.getCacheDirectory() + File.separator + "NPCs" + File.separator;}
+
+		/**
+		 * Gets the bot directory where the items cache is stored.
+		 * @return	the items cache directory
+		 */
+		public static String getItemsCacheDirectory() {return Paths.getCacheDirectory() + File.separator + "Items" + File.separator;}
 	}
 
 	public static final String NAME = "OsrsBot";

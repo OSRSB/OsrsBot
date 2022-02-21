@@ -1,7 +1,6 @@
 package rsb.methods;
 
 import net.runelite.api.NPC;
-import rsb.internal.wrappers.Filter;
 import rsb.wrappers.RSNPC;
 
 import java.util.HashSet;
@@ -98,16 +97,13 @@ public class NPCs extends MethodProvider {
      * current region.
      */
     public RSNPC getNearest(final int... ids) {
-        return getNearest(new Predicate<RSNPC>() {
-            @Override
-            public boolean test(RSNPC npc) {
-                for (int id : ids) {
-                    if (npc.getID() == id) {
-                        return true;
-                    }
+        return getNearest(npc -> {
+            for (int id : ids) {
+                if (npc.getID() == id) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -121,16 +117,13 @@ public class NPCs extends MethodProvider {
      * current region.
      */
     public RSNPC getNearest(final String... names) {
-        return getNearest(new Predicate<RSNPC>() {
-            @Override
-            public boolean test(RSNPC npc) {
-                for (String name : names) {
-                    if (npc.getName().equals(name)) {
-                        return true;
-                    }
+        return getNearest(npc -> {
+            for (String name : names) {
+                if (npc.getName().equals(name)) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 }

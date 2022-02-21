@@ -1,6 +1,7 @@
 package rsb.methods;
 
 import net.runelite.api.*;
+import net.runelite.cache.definitions.ObjectDefinition;
 import rsb.wrappers.RSObject;
 import rsb.wrappers.RSTile;
 import rsb.wrappers.subwrap.WalkerTile;
@@ -44,7 +45,7 @@ public class Objects extends MethodProvider {
      * region.
      */
     public RSObject[] getAll(final Predicate<RSObject> filter) {
-        Set<RSObject> objects = new LinkedHashSet<RSObject>();
+        Set<RSObject> objects = new LinkedHashSet<>();
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 for (RSObject o : getAtLocal(x, y, -1)) {
@@ -74,8 +75,8 @@ public class Objects extends MethodProvider {
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
-                Set<RSObject> objs = getAtLocal(x, y, -1);
-                for (RSObject o : objs) {
+                Set<RSObject> objects = getAtLocal(x, y, -1);
+                for (RSObject o : objects) {
                     if (o == null) {
                         continue;
                     }
@@ -115,8 +116,8 @@ public class Objects extends MethodProvider {
             for (int y = 0; y < 104; y++) {
                 int distanceToCheck = methods.calc.distanceTo(new WalkerTile(x, y, methods.client.getPlane(), WalkerTile.TYPES.SCENE).toWorldTile());
                 if (distanceToCheck < distance) {
-                    Set<RSObject> objs = getAtLocal(x, y, -1);
-                    for (RSObject o : objs) {
+                    Set<RSObject> objects = getAtLocal(x, y, -1);
+                    for (RSObject o : objects) {
                         if (o == null) {
                             continue;
                         }
@@ -150,15 +151,13 @@ public class Objects extends MethodProvider {
      * current region.
      */
     public RSObject getNearest(final int... ids) {
-        return getNearest(new Predicate<RSObject>() {
-            public boolean test(RSObject o) {
-                for (int id : ids) {
-                    if (o.getID() == id) {
-                        return true;
-                    }
+        return getNearest(o -> {
+            for (int id : ids) {
+                if (o.getID() == id) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -172,18 +171,16 @@ public class Objects extends MethodProvider {
      * the current region.
      */
     public RSObject getNearest(final String... names) {
-        return getNearest(new Predicate<RSObject>() {
-            public boolean test(RSObject o) {
-                ObjectComposition def = o.getDef();
-                if (def != null) {
-                    for (String name : names) {
-                        if (name.equals(def.getName())) {
-                            return true;
-                        }
+        return getNearest(o -> {
+            ObjectDefinition def = o.getDef();
+            if (def != null) {
+                for (String name : names) {
+                    if (name.equals(def.getName())) {
+                        return true;
                     }
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -198,18 +195,16 @@ public class Objects extends MethodProvider {
      * the current region.
      */
     public RSObject findNearest(final int distance, final String... names) {
-        return getNearest(distance, new Predicate<RSObject>() {
-            public boolean test(RSObject o) {
-                ObjectComposition def = o.getDef();
-                if (def != null) {
-                    for (String name : names) {
-                        if (name.equals(def.getName())) {
-                            return true;
-                        }
+        return getNearest(distance, o -> {
+            ObjectDefinition def = o.getDef();
+            if (def != null) {
+                for (String name : names) {
+                    if (name.equals(def.getName())) {
+                        return true;
                     }
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -232,7 +227,7 @@ public class Objects extends MethodProvider {
      * @return The top RSObject on the provided tile matching the specified
      * flags; or null if none found.
      */
-    public RSObject getTopAt(final RSTile t, final int mask) {
+    public RSObject getTopAt(final RSTile t, int mask) {
         RSObject[] objects = getAt(t, mask);
         return objects.length > 0 ? objects[0] : null;
     }
@@ -242,14 +237,14 @@ public class Objects extends MethodProvider {
      * matching types specified by the flags in the provided mask.
      *
      * @param t    The tile on which to search.
-     * @param mask The type flags.
+     * @param mask  The type flags.
      * @return An RSObject[] of the objects on the specified tile.
      */
-    public RSObject[] getAt(final RSTile t, final int mask) {
+    public RSObject[] getAt(final RSTile t, int mask) {
         Set<RSObject> objects = getAtLocal(
                 t.getWorldLocation().getX() - methods.client.getBaseX(),
                 t.getWorldLocation().getY() - methods.client.getBaseY(), mask);
-        return objects.toArray(new RSObject[objects.size()]);
+        return objects.toArray(new RSObject[0]);
     }
 
     /**
@@ -266,32 +261,59 @@ public class Objects extends MethodProvider {
         return objects.toArray(new RSObject[objects.size()]);
     }
 
-    private Set<RSObject> getAtLocal(int x, int y, final int mask) {
-        Client client = methods.client;
-        Set<RSObject> objects = new LinkedHashSet<RSObject>();
-        if (client.getTileSettings() == null) {
+    /**
+     * Returns the <code>RSObject</code> that is located at the tile specified by the coordinates x and y in the
+     * current plane (0 = ground, 1 = level 1, 2 = level 2, etc.). By using a mask you can then filter the type of
+     * objects you wish to get from this location.
+     *
+     * @param x The x coordinate of the tile.
+     * @param y The y coordinate of the tile.
+     * @param mask  The type enumeration.
+     * @return  An RSObject[] of the objects on the specified tile.
+     */
+    private Set<RSObject> getAtLocal(int x, int y, int mask) {
+        Set<RSObject> objects = new LinkedHashSet<>();
+        if (methods.client.getTileSettings() == null) {
             return objects;
         }
 
-        try {
-            int plane = client.getPlane();
-            Tile tile = client.getScene().getTiles()[plane][x][y];
+        int plane = methods.client.getPlane();
+        Tile tile = methods.client.getScene().getTiles()[plane][x][y];
 
-            if (tile != null) {
-                x += methods.client.getBaseX();
-                y += methods.client.getBaseY();
-
+        if (tile != null) {
+            if (mask == -1 || (mask & 1) == 1) {
                 for (GameObject gameObject : tile.getGameObjects()) {
-                    objects.add(new RSObject(methods, gameObject, RSObject.Type.GAME, plane));
+                    if (gameObject != null) {
+                        addObject(objects,  new RSObject(methods, gameObject, RSObject.Type.GAME, plane));
+                    }
                 }
-                objects.add(new RSObject(methods, tile.getDecorativeObject(), RSObject.Type.DECORATIVE, plane));
-                objects.add(new RSObject(methods, tile.getGroundObject(), RSObject.Type.GROUND, plane));
-                objects.add(new RSObject(methods, tile.getWallObject(), RSObject.Type.WALL, plane));
             }
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+            if (mask == -1 || (mask >> 1 & 1) == 1) {
+                TileObject tileObject =  tile.getDecorativeObject();
+                if (tileObject != null) {
+                    addObject(objects, new RSObject(methods, tile.getDecorativeObject(), RSObject.Type.DECORATIVE, plane));
+                }
+            }
+            if (mask == -1 || (mask >> 2 & 1) == 1) {
+                GroundObject groundObject = tile.getGroundObject();
+                if (groundObject != null) {
+                    addObject(objects, new RSObject(methods, groundObject, RSObject.Type.GROUND, plane));
+                }
+            }
+            if (mask == -1 || (mask >> 3 & 1) == 1) {
+                WallObject wallObject = tile.getWallObject();
+                if (wallObject != null) {
+                    addObject(objects, new RSObject(methods, wallObject, RSObject.Type.WALL, plane));
+                }
+            }
         }
+
         return objects;
     }
 
+    private void addObject(Set<RSObject> objects, RSObject object) {
+        if (object.getDef() != null) {
+            objects.add(object);
+        }
+    }
 }

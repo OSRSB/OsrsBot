@@ -15,7 +15,7 @@ def runeLiteVersion = '1.8.11'
 
 dependencies {
     implementation group: 'net.runelite', name: 'client', version: runeLiteVersion
-
+    implementation group: 'net.runelite', name: 'cache', version: runeLiteVersion
     implementation 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
@@ -64,7 +64,6 @@ jar {
 }
 
 group = 'rsb'
-version = '1.0'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
