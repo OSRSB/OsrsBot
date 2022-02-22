@@ -30,17 +30,17 @@ public class GlobalWidgetId {
     public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
     public static final int INTERFACE_BANK_INVENTORY_ITEMS_CONTAINER = 3;
     public static final int INTERFACE_BANK_ITEM_COUNT = 5;
-    public static final int INTERFACE_BANK_ITEM_MAX = 8;
-    public static final int INTERFACE_BANK_TAB = 10;
+    public static final int INTERFACE_BANK_ITEM_MAX = 9;
+    public static final int INTERFACE_BANK_TAB = 11;
     //Dynamic close button = 11
-    public static final int INTERFACE_BANK_INVENTORY = 12;
-    public static final int INTERFACE_BANK_SCROLLBAR = 13;
-    public static final int INTERFACE_BANK_BUTTON_SWAP = 17;
+    public static final int INTERFACE_BANK_INVENTORY = 13;
+    public static final int INTERFACE_BANK_SCROLLBAR = 14;
+    public static final int INTERFACE_BANK_BUTTON_SWAP = 18;
     //Fill
     public static final int INTERFACE_BANK_BUTTON_INSERT = 19;
-    public static final int INTERFACE_BANK_BUTTON_ITEM = 22;
-    public static final int INTERFACE_BANK_BUTTON_NOTE = 24;
-    public static final int INTERFACE_BANK_BUTTON_SEARCH = 39;
+    public static final int INTERFACE_BANK_BUTTON_ITEM = 23;
+    public static final int INTERFACE_BANK_BUTTON_NOTE = 25;
+    public static final int INTERFACE_BANK_BUTTON_SEARCH = 40;
     public static final int INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS = WidgetInfo.BANK_DEPOSIT_INVENTORY.getChildId();
     public static final int INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS = WidgetInfo.BANK_DEPOSIT_EQUIPMENT.getChildId();
 
