@@ -1,28 +1,25 @@
 package rsb.wrappers;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.cache.definitions.ObjectDefinition;
 import net.runelite.client.callback.ClientThread;
+import rsb.internal.globval.GlobalConfiguration;
 import rsb.methods.MethodContext;
 import rsb.methods.MethodProvider;
-import rsb.util.OutputObjectComparer;
-import rsb.util.Parameters;
 import rsb.wrappers.common.Clickable07;
 import rsb.wrappers.common.Positionable;
 import rsb.wrappers.subwrap.WalkerTile;
-import org.apache.commons.lang3.ObjectUtils;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Area;
+import java.io.*;
 import java.lang.reflect.Field;
-import java.util.concurrent.*;
+import java.util.HashMap;
 
-import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
@@ -32,10 +29,13 @@ import static java.util.concurrent.Executors.newSingleThreadExecutor;
  */
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable {
+	private static HashMap<Integer, ObjectDefinition> objectDefinitionCache;
+	private static HashMap<Integer, File> objectFileCache;
 	private final TileObject obj;
 	private final Type type;
 	private final int plane;
-	private final ObjectComposition def = null;
+	private final int id;
+	private final ObjectDefinition def;
 
 	/**
 	 * Creates a new RSObject with the following parameters:
@@ -51,6 +51,68 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		this.obj = obj;
 		this.type = type;
 		this.plane = plane;
+		this.id = (obj != null) ? obj.getId() : -1;
+		this.def = (id != -1) ? createObjectDefinition(id) : null;
+	}
+
+	/**
+	 * Fills the runtime file cache with all the files in the cache directory.
+	 */
+	private void fillFileCache() {
+		File dir = new File(GlobalConfiguration.Paths.getObjectsCacheDirectory());
+		File[] directoryListing = dir.listFiles();
+		objectFileCache = new HashMap<>();
+		objectDefinitionCache = new HashMap<>();
+		for (File file : directoryListing) {
+			if (file.getName().contains(".json")) {
+				objectFileCache.put(Integer.parseInt(file.getName().replace(".json", "")), file);
+			}
+		}
+	}
+
+	/**
+	 * Adds the object definition to the runtime cache.
+	 * @param id	The id of the object definition to add
+	 */
+	private void addDefinitionToLoadedCache(int id) {
+		try {
+			ObjectDefinition def = readFileAndGenerateDefinition(objectFileCache.get(id));
+			if (def != null && def.getId() != -1) {
+				objectDefinitionCache.put(def.getId(), def);
+			}
+		} catch (IOException e) {
+			log.debug("Failed to load object definition", e);
+		}
+	}
+
+	/**
+	 * Reads the passed file and generates an object definition from it.
+	 * @param file	The file to read
+	 * @return	The object definition generated from the file
+	 * @throws FileNotFoundException	If the file is not found
+	 */
+	public static ObjectDefinition readFileAndGenerateDefinition(File file) throws FileNotFoundException {
+		if (file != null) {
+			Gson gson = new Gson();
+			JsonReader reader = new JsonReader(new FileReader(file));
+			return gson.fromJson(reader, ObjectDefinition.class);
+		}
+		return null;
+	}
+
+	/**
+	 * Creates a new ObjectDefinition from the passed id.
+	 * @param id	The id of the object definition to create
+	 * @return	The object definition generated from the id
+	 */
+	private ObjectDefinition createObjectDefinition(int id) {
+		if (objectFileCache == null || objectFileCache.isEmpty()) {
+			fillFileCache();
+		}
+		if (!objectDefinitionCache.containsKey(id)) {
+			addDefinitionToLoadedCache(id);
+		}
+		return (objectDefinitionCache != null) ? objectDefinitionCache.get(id) : null;
 	}
 
 	/**
@@ -88,9 +150,11 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 *
 	 * @return The RSObjectDef if available, otherwise <code>null</code>.
 	 */
-	public ObjectComposition getDef() {
-		int id;
-		return ((id = getID()) != -1) ? methods.client.getObjectDefinition(id) : def;
+	public ObjectDefinition getDef() {
+		if (obj != null) {
+			return def;
+		}
+		return null;
 	}
 
 	/**
@@ -137,7 +201,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return The object name if the definition is available; otherwise "".
 	 */
 	public String getName() {
-		ObjectComposition objectDef = getDef();
+		ObjectDefinition objectDef = getDef();
 		return objectDef != null ? objectDef.getName() : "";
 	}
 
@@ -349,6 +413,41 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * Game, Decorative, Ground, or Wall
 	 */
 	public enum Type {
-		GAME, DECORATIVE, GROUND, WALL
+		GAME(1), DECORATIVE(2), GROUND(4), WALL(8);
+
+		private final int value;
+
+		Type(int value) {
+			this.value = value;
+		}
+
+		public int getBitValue() {
+			return value;
+		}
+
+		public static Type getType(int value) {
+			for (Type type : values()) {
+				if (type.getBitValue() == value) {
+					return type;
+				}
+			}
+			return null;
+		}
+
+		/**
+		 * Allows you to pass an array of enumerated types and retrieve the combined mask value
+		 * @param types		the type(s) to combine
+		 * @return			the mask value of the combined types
+		 */
+		public static int getMask(Type... types) {
+			int sum = 0;
+			for (Type type : types) {
+				if (type != null) {
+					sum+= type.getBitValue();
+				}
+			}
+			return sum;
+		}
+
 	}
 }

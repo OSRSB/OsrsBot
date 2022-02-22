@@ -31,9 +31,9 @@ public class Methods {
 	 */
 	protected Skills skills;
 	/**
-	 * The singleton of Settings
+	 * The singleton of ClientLocalStorage
 	 */
-	protected Settings settings;
+	protected ClientLocalStorage clientLocalStorage;
 	/**
 	 * The singleton of Magic
 	 */
@@ -162,7 +162,7 @@ public class Methods {
 	public void init(MethodContext ctx) {
 		this.ctx = ctx;
 		this.skills = ctx.skills;
-		this.settings = ctx.settings;
+		this.clientLocalStorage = ctx.clientLocalStorage;
 		this.magic = ctx.magic;
 		this.bank = ctx.bank;
 		this.players = ctx.players;

@@ -2,8 +2,9 @@
 An automation API for Old School RuneScape
 ___
 
-## Community Discord
-[Click here](https://discord.gg/CGBXNrHREP) to join our community Discord for more support and help
+## Community
+* [Forums](https://osrsbot.org/) - Ask questions, find guides, make requests
+* [Discord](https://discord.gg/CGBXNrHREP)
 
 ### What is OSRSBot?
 OSRSBot is an API designed to aid in automating the gameplay of Old School RuneScape using RuneLite's 
