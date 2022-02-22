@@ -3,7 +3,6 @@ package rsb.internal.globval;
 import net.runelite.api.widgets.WidgetInfo;
 
 public class GlobalWidgetId {
-
     /**
      * Global Dynamic Components
      * Used in almost every interface for the respective function
@@ -16,7 +15,6 @@ public class GlobalWidgetId {
     public static final int DYNAMIC_CHAT_BOX_FIRST_MESSAGE = 0; //TODO: Check these. Not sure what they do.
     public static final int DYNAMIC_CHAT_BOX_LATEST_MESSAGE = 1; //TODO: Check these. Not sure what they do.
 
-
     /**Login Screen Widget IDs*/
     public static final int INTERFACE_LOGIN_SCREEN = WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId();
     public static final int INTERFACE_LOGIN_SCREEN_MOTW = 6;
@@ -24,33 +22,42 @@ public class GlobalWidgetId {
     /**
      * Bank Widget IDs
      */
-    //Parent ID
+    // Parent ID
     public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();
-    //Child ID
+    // Child ID
     public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
-    public static final int INTERFACE_BANK_INVENTORY_ITEMS_CONTAINER = 3;
-    public static final int INTERFACE_BANK_ITEM_COUNT = 5;
-    public static final int INTERFACE_BANK_ITEM_MAX = 8;
-    public static final int INTERFACE_BANK_TAB = 10;
-    //Dynamic close button = 11
-    public static final int INTERFACE_BANK_INVENTORY = 12;
-    public static final int INTERFACE_BANK_SCROLLBAR = 13;
+    // Sub-child ID
+    public static final int INTERFACE_BANK_CLOSE_BUTTON = 1;
+    // Child ID - till end
+    public static final int INTERFACE_BANK_TITLE = 3;
+    public static final int INTERFACE_BANK_BUTTON_SHOW_TUTORIAL = 4;
+    public static final int INTERFACE_BANK_ITEM_SLOTS_USED = 5;
+    public static final int INTERFACE_BANK_SEPARATOR_LINE = 6;
+    public static final int INTERFACE_BANK_ITEM_SLOTS_MAX = 8;
+    public static final int INTERFACE_BANK_TABS = 11;
+    public static final int INTERFACE_BANK_INVENTORY = 13;
+    public static final int INTERFACE_BANK_SCROLLBAR = 14;
+    public static final int INTERFACE_BANK_FOOTER = 15;
     public static final int INTERFACE_BANK_BUTTON_SWAP = 17;
-    //Fill
     public static final int INTERFACE_BANK_BUTTON_INSERT = 19;
     public static final int INTERFACE_BANK_BUTTON_ITEM = 22;
     public static final int INTERFACE_BANK_BUTTON_NOTE = 24;
-    public static final int INTERFACE_BANK_BUTTON_SEARCH = 39;
+    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_1 = 28;
+    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_5 = 30;
+    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_10 = 32;
+    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_X = 34;
+    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_ALL = 36;
+    public static final int INTERFACE_BANK_BUTTON_PLACEHOLDERS = 38;
+    public static final int INTERFACE_BANK_BUTTON_SEARCH = 40;
+    // 42
     public static final int INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS = WidgetInfo.BANK_DEPOSIT_INVENTORY.getChildId();
+    // 44
     public static final int INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS = WidgetInfo.BANK_DEPOSIT_EQUIPMENT.getChildId();
-
-
 
     /**
      * Collection box
      */
     public static final int INTERFACE_COLLECTION_BOX = 402;
-
 
     /**
      * Deposit box ids
@@ -83,17 +90,17 @@ public class GlobalWidgetId {
     public static final int INTERFACE_EQUIPMENT_INVENTORY_ITEMS_CONTAINER = WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER.getChildId();
     public static final int INTERFACE_EQUIPMENT_ITEM_SLOTS = 11;
     public static class EquipmentSlotId {
-        public static final int INTERFACE_EQUIPMENT_HELMET = 14;
-        public static final int INTERFACE_EQUIPMENT_CAPE = 15;
-        public static final int INTERFACE_EQUIPMENT_NECK = 16;
-        public static final int INTERFACE_EQUIPMENT_WEAPON = 17;
-        public static final int INTERFACE_EQUIPMENT_BODY = 18;
-        public static final int INTERFACE_EQUIPMENT_SHIELD = 19;
-        public static final int INTERFACE_EQUIPMENT_LEGS = 20;
-        public static final int INTERFACE_EQUIPMENT_HANDS = 21;
-        public static final int INTERFACE_EQUIPMENT_FEET = 22;
-        public static final int INTERFACE_EQUIPMENT_RING = 23;
-        public static final int INTERFACE_EQUIPMENT_AMMO = 24;
+        public static final int INTERFACE_EQUIPMENT_HELMET = 15;
+        public static final int INTERFACE_EQUIPMENT_CAPE = 16;
+        public static final int INTERFACE_EQUIPMENT_NECK = 17;
+        public static final int INTERFACE_EQUIPMENT_WEAPON = 18;
+        public static final int INTERFACE_EQUIPMENT_BODY = 19;
+        public static final int INTERFACE_EQUIPMENT_SHIELD = 20;
+        public static final int INTERFACE_EQUIPMENT_LEGS = 21;
+        public static final int INTERFACE_EQUIPMENT_HANDS = 22;
+        public static final int INTERFACE_EQUIPMENT_FEET = 23;
+        public static final int INTERFACE_EQUIPMENT_RING = 24;
+        public static final int INTERFACE_EQUIPMENT_AMMO = 25;
     }
 
     /**
@@ -133,8 +140,6 @@ public class GlobalWidgetId {
     //Parent id
     public static final int INTERFACE_STATS = 320;
 
-
-
     //Child id
     public enum Skill {
         INTERFACE_SKILL_ATTACK,
@@ -172,7 +177,6 @@ public class GlobalWidgetId {
 
     //Parent id
     public static final int FIXED_VIEWPORT_SPELL_BOOK_CONTAINER_ID = 72;
-
 
     //Parent id
     public static final int INTERFACE_MAGIC_AUTOCAST_SPELL_BOOK = 201;
@@ -272,8 +276,8 @@ public class GlobalWidgetId {
         public static final int SPELL_TELEOTHER_CAMELOT = 70;
         public static final int SPELL_EARTH_SURGE = 71;
         public static final int SPELL_LVL_7_ENCHANT = 72;
-        // ANCIENT
         public static final int SPELL_FIRE_SURGE = 73;
+        // ANCIENT
         public static final int SPELL_ICE_RUSH = 74;
         public static final int SPELL_ICE_BLITZ = 75;
         public static final int SPELL_ICE_BURST = 76;
@@ -383,7 +387,6 @@ public class GlobalWidgetId {
         public static final int SPELL_BATTLEFRONT_TELEPORT = 178;
     }
 
-
     /**
      * GrandExchange ids
      */
@@ -410,14 +413,12 @@ public class GlobalWidgetId {
     public static final int GRAND_EXCHANGE_BUY_ICON = 26;
     public static final int GRAND_EXCHANGE_SELL_ICON = 27;
 
-
     public static final int[] GRAND_EXCHANGE_OFFER_BOXES = {7, 8, 9, 10, 11, 12, 13, 14};
 
     public static final int INTERFACE_GRAND_EXCHANGE_COLLECTION_AREA = 23;
     //These are dynamic children of the collection area
     public static final int GRAND_EXCHANGE_COLLECT_BOX_ONE = 2;
     public static final int GRAND_EXCHANGE_COLLECT_BOX_TWO = 3;
-
 
     /**
      *  Minimap ids
@@ -428,17 +429,23 @@ public class GlobalWidgetId {
     public static final int INTERFACE_MINIMAP_QUICK_PRAYER_ORB = WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId();
     public static final int INTERFACE_MINIMAP_RUN_ORB = WidgetInfo.MINIMAP_RUN_ORB.getChildId();
     public static final int INTERFACE_MINIMAP_SPEC_ORB = WidgetInfo.MINIMAP_SPEC_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_HEALTH_ORB_TEXT = 5;
-    public static final int INTERFACE_MINIMAP_PRAYER_ORB_TEXT = 15;
-    public static final int INTERFACE_MINIMAP_RUN_ORB_TEXT = 23;
-    public static final int INTERFACE_MINIMAP_SPEC_ORB_TEXT = 31;
-    public static final int INTERFACE_MINIMAP_QUICK_PRAYER_ORB_SPRITE = 2;
-
+    public static final int INTERFACE_MINIMAP_HEALTH_ORB_CONTAINER = 4;
+    public static final int INTERFACE_MINIMAP_HEALTH_ORB_LABEL = 5;
+    public static final int INTERFACE_MINIMAP_HEALTH_ORB_SPRITE = 6;
+    public static final int INTERFACE_MINIMAP_PRAYER_ORB_CONTAINER = 15;
+    public static final int INTERFACE_MINIMAP_PRAYER_ORB_LABEL = 16;
+    public static final int INTERFACE_MINIMAP_PRAYER_ORB_SPRITE = 17;
+    public static final int INTERFACE_MINIMAP_RUN_ORB_CONTAINER = 23;
+    public static final int INTERFACE_MINIMAP_RUN_ORB_LABEL = 24;
+    public static final int INTERFACE_MINIMAP_RUN_ORB_SPRITE = 25;
+    public static final int INTERFACE_MINIMAP_SPEC_ORB_CONTAINER = 31;
+    public static final int INTERFACE_MINIMAP_SPEC_ORB_LABEL = 32;
+    public static final int INTERFACE_MINIMAP_SPEC_ORB_SPRITE = 37;
+    public static final int INTERFACE_MINIMAP_BOND_POUCH = 41;
 
     /**
      * Prayer ids
      */
-
     public static final int INTERFACE_PRAYER_BOOK = WidgetInfo.PRAYER_THICK_SKIN.getGroupId();
     public static final int INTERFACE_NORMAL_PRAYERS = 4;
     //The dynamic component in each prayer widget that is visible when prayers are active (the white border)
@@ -453,7 +460,6 @@ public class GlobalWidgetId {
      * @author GigiaJ
      */
     public enum PrayerBook {
-
         NORMAL(INTERFACE_NORMAL_PRAYERS), NULL(-1);
 
         private final int index;
@@ -468,7 +474,6 @@ public class GlobalWidgetId {
     }
 
     public enum Prayer {
-
         THICK_SKIN(0, 1, 5, 0),
         BURST_OF_STRENGTH(1, 4, 6, 1),
         CLARITY_OF_THOUGHT(2, 7, 7, 2),
@@ -514,17 +519,11 @@ public class GlobalWidgetId {
         public int getPrayerId() {
             return prayerId;
         }
-
         public int getQuickPrayerId() {
             return quickPrayerId;
         }
-
         public int getRequiredLevel() {
             return level;
         }
-
     }
-
-
-
 }
