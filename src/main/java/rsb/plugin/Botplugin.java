@@ -93,4 +93,9 @@ public class Botplugin extends Plugin
     public void setAccountPanel(AccountPanel accountPanel) {
         Botplugin.accountPanel = accountPanel;
     }
+
+    public void setInjector(Injector injector) {
+        super.injector = injector;
+    }
+
 }

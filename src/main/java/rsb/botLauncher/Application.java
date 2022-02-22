@@ -7,11 +7,14 @@ package rsb.botLauncher;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
+import lombok.extern.slf4j.Slf4j;
 import rsb.internal.globval.GlobalConfiguration;
+import rsb.plugin.Botplugin;
 
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public class Application {
 
 	static RuneLite[] bots = new RuneLite[]{};
@@ -87,7 +90,16 @@ public class Application {
 				net.runelite.cache.Cache.main(spriteArgs);
 			}
 		}
+	}
 
+	public static void setBot(int index) {
+		RuneLite bot = getBots()[index];
+		try {
+			bot.init();
+			bot.bareStart();
+		} catch (Throwable e) {
+			log.error("Error while starting bot", e);
+		}
 
 	}
 
