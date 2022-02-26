@@ -1,5 +1,16 @@
-# OSRSBot
-An automation API for Old School RuneScape
+
+<h1 align="center">OSRSBot</h1>
+
+<p align="center">An automation API for Old School RuneScape</p>
+
+<p align="center">
+  <img src="./assets/osrs-bot-demo.png"
+    alt="OSRSBot automating the RuneLite client"
+    width="400"/>
+</p>
+
+<p align="center"><em style="font-size: 11px">OSRSBot automating the RuneLite client</em></p>
+
 ___
 
 ## Community
