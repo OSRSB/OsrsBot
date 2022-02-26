@@ -1,4 +1,3 @@
-
 <h1 align="center">OSRSBot</h1>
 
 <p align="center">An automation API for Old School RuneScape</p>
@@ -19,7 +18,7 @@ ___
 
 ### What is OSRSBot?
 OSRSBot is an API designed to aid in automating the gameplay of Old School RuneScape using RuneLite's 
-third party client. 
+third party client.
 
 ###### RuneLite?
 RuneLite is an open-source API that seeks to enable a player to make 
