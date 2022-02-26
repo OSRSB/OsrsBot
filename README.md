@@ -1,11 +1,14 @@
-<div style="text-align: center;">
-  <h1>OSRSBot</h1>
-  <p>An automation API for Old School RuneScape</p>
-  <img style="display: block; margin: 0 auto; width: 400px;"
-    src="./assets/osrs-bot-demo.png"
-    alt="OSRSBot automating the RuneLite client"/>
-  <em style="font-size: 11px">OSRSBot automating the RuneLite client</em>
-</div>
+<h1 align="center">OSRSBot</h1>
+
+<p align="center">An automation API for Old School RuneScape</p>
+
+<p align="center">
+  <img src="./assets/osrs-bot-demo.png"
+    alt="OSRSBot automating the RuneLite client"
+    width="400"/>
+</p>
+
+<p align="center"><em style="font-size: 11px">OSRSBot automating the RuneLite client</em></p>
 
 ___
 
