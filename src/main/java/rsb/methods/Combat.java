@@ -81,7 +81,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.settings.getSetting(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Combat extends MethodProvider {
 	 * @return The current fight mode setting.
 	 */
 	public int getFightMode() {
-		return methods.settings.getSetting(VarpIndices.COMBAT_STYLE);
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE);
 	}
 
 	/**
@@ -126,7 +126,9 @@ public class Combat extends MethodProvider {
 	 */
 	public int getWildernessLevel() {
 		RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.PVP_WILDERNESS_LEVEL);
-		return (widget.isValid() && widget.isVisible()) ? Integer.parseInt(widget.getText().replace("Level: ", "").trim()) : 0;
+		return (widget.isValid() && widget.isVisible())
+				? Integer.parseInt(widget.getText().replace("Level: ", "").trim())
+				: 0;
 	}
 
 	/**
@@ -136,7 +138,8 @@ public class Combat extends MethodProvider {
 	 */
 	public int getLifePoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_HEALTH_ORB_TEXT).getText());
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_HEALTH_ORB_TEXT)
+					.getText());
 		} catch (NumberFormatException ex) {
 			return 0;
 		}
@@ -148,7 +151,8 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if poisoned; otherwise <code>false</code>.
 	 */
 	public boolean isPoisoned() {
-		return 0 < methods.settings.getSetting(VarpIndices.POISON) && methods.settings.getSetting(VarpIndices.POISON) < 1000000;
+		return 0 < methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON)
+				&& methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON) < 1000000;
 	}
 
 	/**
@@ -158,7 +162,7 @@ public class Combat extends MethodProvider {
 	 */
 	public double getPoisonDamage() {
 		if (isPoisoned())
-			return Math.ceil(methods.settings.getSetting(VarpIndices.POISON) / 5.0f);
+			return Math.ceil(methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON) / 5.0f);
 		return 0;
 	}
 
@@ -168,7 +172,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if immune; otherwise <code>false</code>.
 	 */
 	public boolean isPoisonImmune() {
-		return methods.settings.getSetting(VarpIndices.POISON) == -1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON) == -1;
 	}
 
 	/**
@@ -177,7 +181,7 @@ public class Combat extends MethodProvider {
 	 * @return	<code>true</code> if the local player is envenomed; otherwise <code>false</code>
 	 */
 	public boolean isEnvenomed() {
-		return methods.settings.getSetting(VarpIndices.POISON) >= 1000000;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON) >= 1000000;
 	}
 
 	/**
@@ -187,7 +191,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getVenomDamage() {
 		if (isEnvenomed())
-			return (methods.settings.getSetting(VarpIndices.POISON) - 999997) * 2;
+			return (methods.clientLocalStorage.getVarpValueAt(VarpIndices.POISON) - 999997) * 2;
 		return 0;
 	}
 
@@ -197,7 +201,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isSpecialEnabled() {
-		return methods.settings.getSetting(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
 	}
 
 	/**
@@ -206,7 +210,7 @@ public class Combat extends MethodProvider {
 	 * @return 0 - 100
 	 */
 	public int getSpecialAttackEnergy() {
-		return methods.settings.getSetting(VarpIndices.SPECIAL_ATTACK_ENERGY);
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK_ENERGY);
 	}
 
 	/**
@@ -216,7 +220,8 @@ public class Combat extends MethodProvider {
 	 */
 	public int getSpecialBarEnergy() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_SPEC_ORB_TEXT).getText()
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_SPEC_ORB_TEXT)
+					.getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;
@@ -230,7 +235,8 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText()
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT)
+					.getText()
 					.trim());
 		} catch (NumberFormatException ex) {
 			return 0;

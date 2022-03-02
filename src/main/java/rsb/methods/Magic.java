@@ -134,7 +134,7 @@ public class Magic extends MethodProvider {
      * otherwise <code>false</code>.
      */
     public boolean autoCastSpell(final int spell) {
-        if (methods.settings.getSetting(VarpIndices.COMBAT_STYLE) != 4) {
+        if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE) != 4) {
             if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
                 methods.game.openTab(GameGUI.Tab.COMBAT);
                 sleep(random(150, 250));
@@ -267,8 +267,8 @@ public class Magic extends MethodProvider {
      */
     public enum MagicBook {
 
-        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_ICE_RUSH),
-        LUNAR(GlobalWidgetId.SpellId.SPELL_BAKE_PIE), ARCEUUS(GlobalWidgetId.SpellId.SPELL_REANIMATE_GOBLIN), NULL(-1);
+        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_EARTH_SURGE),
+        LUNAR(GlobalWidgetId.SpellId.SPELL_GHORROCK_TELEPORT), ARCEUUS(GlobalWidgetId.SpellId.SPELL_SPIN_FLAX), NULL(-1);
 
         private final int index;
 
