@@ -135,40 +135,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_STORE_ITEMS_CONTAINER = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
 
     /**
-     * Skill ids
-     */
-    //Parent id
-    public static final int INTERFACE_STATS = 320;
-
-    //Child id
-    public enum Skill {
-        INTERFACE_SKILL_ATTACK,
-        INTERFACE_SKILL_STRENGTH,
-        INTERFACE_SKILL_DEFENCE,
-        INTERFACE_SKILL_RANGED,
-        INTERFACE_SKILL_PRAYER,
-        INTERFACE_SKILL_MAGIC,
-        INTERFACE_SKILL_RUNECRAFT,
-        INTERFACE_SKILL_CONSTRUCTION,
-        INTERFACE_SKILL_HITPOINTS,
-        INTERFACE_SKILL_AGILITY,
-        INTERFACE_SKILL_HERBLORE,
-        INTERFACE_SKILL_THIEVING,
-        INTERFACE_SKILL_CRAFTING,
-        INTERFACE_SKILL_FLETCHING,
-        INTERFACE_SKILL_SLAYER,
-        INTERFACE_SKILL_HUNTER,
-        INTERFACE_SKILL_MINING,
-        INTERFACE_SKILL_SMITHING,
-        INTERFACE_SKILL_FISHING,
-        INTERFACE_SKILL_COOKING,
-        INTERFACE_SKILL_FIREMAKING,
-        INTERFACE_SKILL_WOODCUTTING,
-        INTERFACE_SKILL_FARMING,
-        INTERFACE_SKILL_TOTAL;
-    }
-
-    /**
      * Magic ids
      * Interfaces used
      *  FIXED_VIEWPORT 548 (can be gotten from WidgetInfo
