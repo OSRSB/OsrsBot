@@ -149,7 +149,8 @@ public class Prayer extends MethodProvider {
 	 * @return The number of prayer points left.
 	 */
 	public int getPrayerLeft() {
-		return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT).getText());
+		return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB_TEXT)
+				.getText());
 	}
 
 	/**

@@ -1,12 +1,12 @@
 package rsb.internal.globval;
 
-public class WidgetIDs {
+public class WidgetIndices {
     /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
     public static class Minimap {
-        public static final int GROUP_ID = 160;
+        public static final int GROUP_INDEX = 160;
         public static final int XP_ORB_SPRITE = 1; // Interactions: "Hide", "Setup"
         public static final int HEALTH_ORB_PARENT_CONTAINER = 2;
         public static final int HEALTH_ORB_PARENT_SPRITE = 3;

@@ -421,29 +421,6 @@ public class GlobalWidgetId {
     public static final int GRAND_EXCHANGE_COLLECT_BOX_TWO = 3;
 
     /**
-     *  Minimap ids
-     */
-    public static final int INTERFACE_MINIMAP_ORBS = WidgetInfo.MINIMAP_ORBS.getGroupId();
-    public static final int INTERFACE_MINIMAP_HEALTH_ORB = WidgetInfo.MINIMAP_HEALTH_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_PRAYER_ORB = WidgetInfo.MINIMAP_PRAYER_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_QUICK_PRAYER_ORB = WidgetInfo.MINIMAP_QUICK_PRAYER_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_RUN_ORB = WidgetInfo.MINIMAP_RUN_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_SPEC_ORB = WidgetInfo.MINIMAP_SPEC_ORB.getChildId();
-    public static final int INTERFACE_MINIMAP_HEALTH_ORB_CONTAINER = 4;
-    public static final int INTERFACE_MINIMAP_HEALTH_ORB_LABEL = 5;
-    public static final int INTERFACE_MINIMAP_HEALTH_ORB_SPRITE = 6;
-    public static final int INTERFACE_MINIMAP_PRAYER_ORB_CONTAINER = 15;
-    public static final int INTERFACE_MINIMAP_PRAYER_ORB_LABEL = 16;
-    public static final int INTERFACE_MINIMAP_PRAYER_ORB_SPRITE = 17;
-    public static final int INTERFACE_MINIMAP_RUN_ORB_CONTAINER = 23;
-    public static final int INTERFACE_MINIMAP_RUN_ORB_LABEL = 24;
-    public static final int INTERFACE_MINIMAP_RUN_ORB_SPRITE = 25;
-    public static final int INTERFACE_MINIMAP_SPEC_ORB_CONTAINER = 31;
-    public static final int INTERFACE_MINIMAP_SPEC_ORB_LABEL = 32;
-    public static final int INTERFACE_MINIMAP_SPEC_ORB_SPRITE = 37;
-    public static final int INTERFACE_MINIMAP_BOND_POUCH = 41;
-
-    /**
      * Prayer ids
      */
     public static final int INTERFACE_PRAYER_BOOK = WidgetInfo.PRAYER_THICK_SKIN.getGroupId();
