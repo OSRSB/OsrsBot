@@ -57,6 +57,35 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes deposit box widgets
+     * Last reviewed: 28/2/2022 2:51 am UTC+1
+     */
+    public static class DepositBox {
+        public static final int GROUP_INDEX = 192;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // Contains thick border sprites 0-11
+        public static final int ITEMS_DYNAMIC_CONTAINER = 2; // Contains sprites of items inside deposit box 0-27
+        public static final int BOTTOM_BAR_RIGHT_SIDE_CONTAINER = 3;
+        public static final int BUTTON_DEPOSIT_INVENTORY_SPRITE = 4;
+        public static final int BUTTON_DEPOSIT_INVENTORY_ICON_SPRITE = 5;
+        public static final int BUTTON_DEPOSIT_WORN_ITEMS_SPRITE = 6;
+        public static final int BUTTON_DEPOSIT_WORN_ITEMS_ICON_SPRITE = 7;
+        public static final int BUTTON_DEPOSIT_LOOT_SPRITE = 8;
+        public static final int BUTTON_DEPOSIT_LOOT_ICON_SPRITE = 9;
+        public static final int BOTTOM_BAR_LEFT_SIDE_CONTAINER = 10;
+        public static final int BUTTON_DEFAULT_QUANTITY_1_DYNAMIC_CONTAINER = 11; // Contains button sprites 0-8
+        public static final int BUTTON_DEFAULT_QUANTITY_1_LABEL = 12;
+        public static final int BUTTON_DEFAULT_QUANTITY_5_DYNAMIC_CONTAINER = 13; // Contains button sprites 0-8
+        public static final int BUTTON_DEFAULT_QUANTITY_5_LABEL = 14;
+        public static final int BUTTON_DEFAULT_QUANTITY_10_DYNAMIC_CONTAINER = 15; // Contains button sprites 0-8
+        public static final int BUTTON_DEFAULT_QUANTITY_10_LABEL = 16;
+        public static final int BUTTON_DEFAULT_QUANTITY_X_DYNAMIC_CONTAINER = 17; // Contains button sprites 0-8
+        public static final int BUTTON_DEFAULT_QUANTITY_X_LABEL = 18;
+        public static final int BUTTON_DEFAULT_QUANTITY_ALL_DYNAMIC_CONTAINER = 19; // Contains button sprites 0-8
+        public static final int BUTTON_DEFAULT_QUANTITY_ALL_LABEL = 20;
+    }
+
+    /**
      * Describes skill tab widgets
      * Last reviewed: 28/2/2022 2:18 am UTC+1
      */

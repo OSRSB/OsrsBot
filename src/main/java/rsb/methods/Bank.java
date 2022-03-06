@@ -2,6 +2,7 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
+import rsb.internal.globval.WidgetIndices;
 import rsb.internal.wrappers.Filter;
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetId;
@@ -178,7 +179,7 @@ public class Bank extends MethodProvider {
 		if (isOpen()) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
 		}
-		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
+		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_INVENTORY_ITEMS).doClick();
 	}
 
 	/**
@@ -280,7 +281,7 @@ public class Bank extends MethodProvider {
 	 * @return The deposit box <code>RSWidget</code>.
 	 */
 	public RSWidget getBoxInterface() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX);
+		return methods.interfaces.get(WidgetIndices.DepositBox.GROUP_INDEX);
 	}
 
 	/**
@@ -380,7 +381,7 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> if the deposit box interface is open; otherwise <code>false</code>.
 	 */
 	public boolean isDepositOpen() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX).isValid();
+		return methods.interfaces.get(WidgetIndices.DepositBox.GROUP_INDEX).isValid();
 	}
 
 	private static class ReachableBankerFilter implements Filter<RSNPC> {

@@ -60,18 +60,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_COLLECTION_BOX = 402;
 
     /**
-     * Deposit box ids
-     */
-    //Parent ID
-    public static final int INTERFACE_DEPOSIT_BOX = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getGroupId();
-    //Child ID
-    public static final int INTERFACE_DEPOSIT_DYNAMIC_COMPONENTS = 1;
-    public static final int INTERFACE_DEPOSIT_INVENTORY_ITEMS_CONTAINER = WidgetInfo.DEPOSIT_BOX_INVENTORY_ITEMS_CONTAINER.getChildId();
-    public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS = 4;
-    public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS = 6;
-    public static final int INTERFACE_DEPOSIT_BUTTON_DEPOSIT_LOOT = 8;
-
-    /**
      * Combat ids
      */
     //Parent ID
