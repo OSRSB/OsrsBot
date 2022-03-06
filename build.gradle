@@ -61,6 +61,8 @@ jar {
     exclude 'META-INF/*.DSA'
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    destinationDirectory.set(file("$rootDir"))
 }
 
 group = 'rsb'

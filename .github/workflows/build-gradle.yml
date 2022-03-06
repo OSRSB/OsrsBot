@@ -24,7 +24,7 @@ jobs:
         ./gradlew build
     - name: Rename bot jar
       run: |
-        mv ./build/libs/RSBBB-1.0.jar ./OsrsBot.jar
+        mv OSRSBot-*.jar ./OsrsBot.jar
     - uses: actions/upload-artifact@v2
       with:
         name: OsrsBot.jar
