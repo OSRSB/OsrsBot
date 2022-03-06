@@ -60,16 +60,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_COLLECTION_BOX = 402;
 
     /**
-     * Combat ids
-     */
-    //Parent ID
-    public static int INTERFACE_COMBAT = WidgetInfo.COMBAT_LEVEL.getGroupId();
-    //Child ID
-    public static int INTERFACE_COMBAT_DEFENSIVE_CAST_SPELL = 22;
-    public static int INTERFACE_COMBAT_AUTO_CAST_SPELL = 27;
-    public static int INTERFACE_COMBAT_AUTO_RETALIATE = 30;
-
-    /**
      * Equipment ids
      */
     //Parent ID

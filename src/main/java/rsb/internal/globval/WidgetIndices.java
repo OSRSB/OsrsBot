@@ -121,4 +121,55 @@ public class WidgetIndices {
         public static final int TOTAL_LEVEL_LABEL = 27;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 28;
     }
+
+    /**
+     * Describes combat options tab widgets
+     * Last reviewed: 1/3/2022 0:31 am UTC+1
+     */
+    public static class CombatOptionsTab {
+        public static final int GROUP_INDEX = 593;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int WEAPON_NAME_LABEL = 1;
+        public static final int WEAPON_CATEGORY_LABEL = 2;
+        public static final int COMBAT_LEVEL_LABEL = 3;
+        public static final int WEAPON_STYLE_ONE_CONTAINER = 4;
+        public static final int WEAPON_STYLE_ONE_DYNAMIC_CONTAINER = 5; // Contains button sprites 0-8
+        public static final int WEAPON_STYLE_ONE_SPRITE = 6;
+        public static final int WEAPON_STYLE_ONE_LABEL = 7;
+        public static final int WEAPON_STYLE_TWO_CONTAINER = 8;
+        public static final int WEAPON_STYLE_TWO_DYNAMIC_CONTAINER = 9;
+        public static final int WEAPON_STYLE_TWO_SPRITE = 10;
+        public static final int WEAPON_STYLE_TWO_LABEL = 11;
+        public static final int WEAPON_STYLE_THREE_CONTAINER = 12;
+        public static final int WEAPON_STYLE_THREE_DYNAMIC_CONTAINER = 13;
+        public static final int WEAPON_STYLE_THREE_SPRITE = 14;
+        public static final int WEAPON_STYLE_THREE_LABEL = 15;
+        public static final int WEAPON_STYLE_FOUR_CONTAINER = 16;
+        public static final int WEAPON_STYLE_FOUR_DYNAMIC_CONTAINER = 17;
+        public static final int WEAPON_STYLE_FOUR_SPRITE = 18;
+        public static final int WEAPON_STYLE_FOUR_LABEL = 19;
+        public static final int AUTO_CAST_SPELL_PARENT_CONTAINER = 20;
+        public static final int AUTO_CAST_DEFENSIVE_SPELL_DYNAMIC_CONTAINER = 21; // Contains button sprites 0-8
+        public static final int AUTO_CAST_DEFENSIVE_SPELL_CONTAINER = 22;
+        public static final int AUTO_CAST_DEFENSIVE_SPELL_ICON_SPRITE = 23;
+        public static final int AUTO_CAST_DEFENSIVE_SPELL_SHIELD_SPRITE = 24;
+        public static final int AUTO_CAST_DEFENSIVE_SPELL_LABEL = 25;
+        public static final int AUTO_CAST_SPELL_DYNAMIC_CONTAINER = 26;  // Contains button sprites 0-8
+        public static final int AUTO_CAST_SPELL_CONTAINER = 27;
+        public static final int AUTO_CAST_SPELL_ICON_SPRITE = 28;
+        public static final int AUTO_CAST_SPELL_LABEL = 29;
+        public static final int AUTO_RETALIATE_CONTAINER = 30;
+        public static final int AUTO_RETALIATE_ICON_LABEL = 31;
+        public static final int AUTO_RETALIATE_DYNAMIC_CONTAINER = 32;  // Contains button sprites 0-8
+        public static final int AUTO_RETALIATE_SPRITE = 33;
+        public static final int AUTO_RETALIATE_LABEL = 34;
+        public static final int SPECIAL_ATTACK_CONTAINER = 35;
+        public static final int SPECIAL_ATTACK_DYNAMIC_CONTAINER = 36;  // Contains button sprites 0-8
+        public static final int SPECIAL_ATTACK_BAR = 37;
+        public static final int SPECIAL_ATTACK_GREEN_BAR_CONTAINER = 38;
+        public static final int SPECIAL_ATTACK_GREEN_BAR_GREEN_BOX = 39;
+        public static final int SPECIAL_ATTACK_LABEL = 40;
+        public static final int SPECIAL_ATTACK_BROWN_GREEN_BOX = 41;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 42;
+    }
 }
