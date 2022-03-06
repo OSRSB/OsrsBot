@@ -60,28 +60,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_COLLECTION_BOX = 402;
 
     /**
-     * Equipment ids
-     */
-    //Parent ID
-    public static final int INTERFACE_EQUIPMENT = WidgetInfo.EQUIPMENT.getGroupId();
-    //Child ID
-    public static final int INTERFACE_EQUIPMENT_INVENTORY_ITEMS_CONTAINER = WidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER.getChildId();
-    public static final int INTERFACE_EQUIPMENT_ITEM_SLOTS = 11;
-    public static class EquipmentSlotId {
-        public static final int INTERFACE_EQUIPMENT_HELMET = 15;
-        public static final int INTERFACE_EQUIPMENT_CAPE = 16;
-        public static final int INTERFACE_EQUIPMENT_NECK = 17;
-        public static final int INTERFACE_EQUIPMENT_WEAPON = 18;
-        public static final int INTERFACE_EQUIPMENT_BODY = 19;
-        public static final int INTERFACE_EQUIPMENT_SHIELD = 20;
-        public static final int INTERFACE_EQUIPMENT_LEGS = 21;
-        public static final int INTERFACE_EQUIPMENT_HANDS = 22;
-        public static final int INTERFACE_EQUIPMENT_FEET = 23;
-        public static final int INTERFACE_EQUIPMENT_RING = 24;
-        public static final int INTERFACE_EQUIPMENT_AMMO = 25;
-    }
-
-    /**
      * Trade ids
      */
     //Parent id

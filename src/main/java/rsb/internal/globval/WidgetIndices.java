@@ -124,6 +124,42 @@ public class WidgetIndices {
 
     /**
      * Describes combat options tab widgets
+     * Last reviewed: 1/3/2022 1:21 am UTC+1
+     */
+    public static class WornEquipmentTab {
+        public static final int GROUP_INDEX = 387;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int EQUIPMENT_STATS_DYNAMIC_CONTAINER = 1;     // Contains button sprites 0-8 Interactions: View equipment stats
+        public static final int EQUIPMENT_STATS_ICON_SPRITE = 2;
+        public static final int GUIDE_PRICES_DYNAMIC_CONTAINER = 3;        // Contains button sprites 0-8 Interactions: View guide prices
+        public static final int GUIDE_PRICES_ICON_SPRITE = 4;
+        public static final int ITEMS_KEPT_ON_DEATH_DYNAMIC_CONTAINER = 5; // Contains button sprites 0-8 Interactions  View items kept on death
+        public static final int ITEMS_KEPT_ON_DEATH_SPRITE = 6;
+        public static final int CALL_FOLLOWER_DYNAMIC_CONTAINER = 7;       // Contains button sprites 0-8 Interactions  Call follower
+        public static final int CALL_FOLLOWER_SPRITE = 8;
+        public static final int MIDDLE_STRAIGHT_LINE_SPRITE = 9;
+        public static final int LEFT_STRAIGHT_LINE_SPRITE = 10;
+        public static final int RIGHT_STRAIGHT_LINE_SPRITE = 11;
+        public static final int MIDDLE_HORIZONTAL_STRAIGHT_LINE_SPRITE = 12;
+        public static final int TOP_HORIZONTAL_STRAIGHT_LINE_SPRITE = 13;
+        // 14
+        public static final int HEAD_DYNAMIC_CONTAINER = 15;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int BACK_DYNAMIC_CONTAINER = 16;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int NECK_DYNAMIC_CONTAINER = 17; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int WEAPON_DYNAMIC_CONTAINER = 18; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int CHEST_DYNAMIC_CONTAINER = 19; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int SHIELD_DYNAMIC_CONTAINER = 20; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int LEGS_DYNAMIC_CONTAINER = 21; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int HANDS_DYNAMIC_CONTAINER = 22; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int FEET_DYNAMIC_CONTAINER = 23; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int RING_DYNAMIC_CONTAINER = 24; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int AMMUNITION_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int UNKNOWN1_CONTAINER = 26;
+        public static final int UNKNOWN2_CONTAINER = 27;
+    }
+
+    /**
+     * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
     public static class CombatOptionsTab {
