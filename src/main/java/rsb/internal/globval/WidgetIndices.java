@@ -123,7 +123,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes combat options tab widgets
+     * Describes worn equipment tab widgets
      * Last reviewed: 1/3/2022 1:21 am UTC+1
      */
     public static class WornEquipmentTab {

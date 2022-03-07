@@ -774,10 +774,10 @@ public class Bank extends MethodProvider {
 	 * @return All equipment items that are being worn.
 	 */
 	public RSItem[] getEquipmentItems() {
-		if (methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).isValid()) {
+		if (methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_ITEMS_CONTAINER).isValid()) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).getComponents();
+		RSWidget[] components = methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_ITEMS_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = new RSItem(methods, components[i]);
