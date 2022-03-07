@@ -272,6 +272,39 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes grand exchange widgets
+     * Last reviewed: 3/3/2022 0:14 am UTC+1
+     */
+    public static class GrandExchange {
+        public static final int GROUP_INDEX = 465;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int DYNAMIC_CONTAINER = 2; // Contains stone borders close button 0-11
+        public static final int BUTTON_HISTORY_DYNAMIC_CONTAINER = 3; // Contains sprites, label 0-9
+        public static final int OFFER_STATUS_BUTTON_BACK_SPRITE = 4;
+        public static final int INNER_FRAME_CONTAINER = 5;
+        public static final int TITLE_DYNAMIC_CONTAINER = 6; // Contains label[0]
+        public static final int FIRST_SLOT_DYNAMIC_CONTAINER = 7; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int SECOND_SLOT_DYNAMIC_CONTAINER = 8; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int THIRD_SLOT_DYNAMIC_CONTAINER = 9; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int FOURTH_SLOT_DYNAMIC_CONTAINER = 10; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int FIFTH_SLOT_DYNAMIC_CONTAINER = 11; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int SIXTH_SLOT_DYNAMIC_CONTAINER = 12; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int SEVENTH_SLOT_DYNAMIC_CONTAINER = 13; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int EIGHT_SLOT_DYNAMIC_CONTAINER = 14; // Contains 0-4 icon layers, 5-15 steel borders, 16 title label, 26 left icon sprite, 27 right icon sprite
+        public static final int OFFER_STATUS_DYNAMIC_CONTAINER = 15;
+        public static final int OFFER_STATUS_ITEM_DESCRIPTION_LABEL = 16;
+        public static final int OFFER_STATUS_ABOVE_PRICE_TEXT_LABEL = 17;
+        public static final int OFFER_STATUS_INFO_ICON_DYNAMIC_CONTAINER = 18; // 0 icon sprite
+        public static final int OFFER_STATUS_COLLECTION_AREA_SPRITE = 19;
+        public static final int OFFER_STATUS_STEEL_BORDER_SEPARATOR_LINE = 20;
+        public static final int OFFER_STATUS_STEEL_BORDER_VERTICAL_SEPARATOR_LINE = 21;
+        public static final int UNKNOWN_SPRITE = 22;
+        public static final int OFFER_STATUS_BOTTOM_BAR_DYNAMIC_CONTAINER = 23; // 0 cancel button sprite, 1 sold text
+        public static final int OFFER_STATUS_COLLECTION_AREA_DYNAMIC_CONTAINER = 24; // 0 bg sprite left item, 1 bg sprite right item, 2 item sprite, 3 item sprite
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
@@ -320,5 +353,43 @@ public class WidgetIndices {
         public static final int SPECIAL_ATTACK_LABEL = 40;
         public static final int SPECIAL_ATTACK_BROWN_GREEN_BOX = 41;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 42;
+    }
+
+    /**
+     * Describes dynamic widgets
+     * Last reviewed: 3/3/2022 0:37 am UTC+1
+     */
+    public static class DynamicComponents {
+        public static class GrandExchangeOfferTittle {
+            public static final int BUTTON_COLLECT_SPRITE = 0;
+            public static final int BUTTON_COLLECT_LABEL = 1;
+            public static final int TITLE_LABEL = 2;
+        }
+        public static class GrandExchangeSlot {
+            public static final int BUTTON_BUY_BG_BOX = 1;
+            public static final int BUTTON_SELL_BG_BOX = 2;
+            public static final int BUTTON_BUY_ICON_BOX = 3;
+            public static final int BUTTON_SELL_ICON_BOX = 4;
+            // 5-15 steel border sprites
+            public static final int TITLE_LABEL = 16;
+            public static final int ITEM_SPRITE = 17;
+            public static final int ITEM_ID_SPRITE = 18; // id, quantity, quantity mode
+            public static final int ITEM_NAME_LABEL = 19;
+            public static final int PROGRESS_BAR_BOX = 20;
+            public static final int ITEM_EACH_PRICE_LABEL = 25;
+            public static final int BUY_ICON_SPRITE = 26;
+            public static final int SELL_ICON_SPRITE = 27;
+        }
+        public static class GrandExchangeOfferDetails {
+            public static final int ITEM_QUANTITY_LABEL = 18;
+            public static final int ITEM_EACH_PRICE_LABEL = 25;
+            public static final int ITEM_TOTAL_PRICE_LABEL = 29;
+        }
+        public static class GrandExchangeCollectionArea {
+            public static final int LEFT_ITEM_BG_SPRITE = 0;
+            public static final int RIGHT_ITEM_BG_SPRITE = 1;
+            public static final int LEFT_ITEM_SPRITE = 2;
+            public static final int RIGHT_ITEM_SPRITE = 3;
+        }
     }
 }

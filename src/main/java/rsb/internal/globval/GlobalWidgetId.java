@@ -256,39 +256,6 @@ public class GlobalWidgetId {
     }
 
     /**
-     * GrandExchange ids
-     */
-    public static final int INTERFACE_GRAND_EXCHANGE_WINDOW = WidgetInfo.GRAND_EXCHANGE_WINDOW_CONTAINER.getGroupId();
-    public static final int INTERFACE_GRAND_EXCHANGE_OFFER_WINDOW = WidgetInfo.GRAND_EXCHANGE_OFFER_CONTAINER.getChildId();
-
-    public static final int INTERFACE_GRAND_EXCHANGE_INTERFACE_LAYOUT = 2;
-
-    public static final int INTERFACE_GRAND_EXCHANGE_SELL_INVENTORY = 0;
-    public static final int INTERFACE_BUY_SEARCH_BOX = 389;
-
-    public static final int INTERFACE_GRAND_EXCHANGE_DESCRIPTION = 6;
-
-    //This is a dynamic child of the description widget
-    public static final int GRAND_EXCHANGE_DESCRIPTION_COLLECT = 1;
-
-    //These are dynamic children in the offer box
-    public static final int GRAND_EXCHANGE_BUY_BUTTON = 3;
-    public static final int GRAND_EXCHANGE_SELL_BUTTON = 4;
-    public static final int GRAND_EXCHANGE_SLOT_TITLE = 16;
-    public static final int GRAND_EXCHANGE_ITEM_SPRITE = 17;
-    public static final int GRAND_EXCHANGE_ITEM_ID = 18;
-    public static final int GRAND_EXCHANGE_ITEM_NAME = 19;
-    public static final int GRAND_EXCHANGE_BUY_ICON = 26;
-    public static final int GRAND_EXCHANGE_SELL_ICON = 27;
-
-    public static final int[] GRAND_EXCHANGE_OFFER_BOXES = {7, 8, 9, 10, 11, 12, 13, 14};
-
-    public static final int INTERFACE_GRAND_EXCHANGE_COLLECTION_AREA = 23;
-    //These are dynamic children of the collection area
-    public static final int GRAND_EXCHANGE_COLLECT_BOX_ONE = 2;
-    public static final int GRAND_EXCHANGE_COLLECT_BOX_TWO = 3;
-
-    /**
      * Prayer ids
      */
     public static final int INTERFACE_PRAYER_BOOK = WidgetInfo.PRAYER_THICK_SKIN.getGroupId();
