@@ -196,6 +196,46 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes click to play screen widgets
+     * Last reviewed: 2/3/2022 2:28 am UTC+1
+     */
+    static class ClickToPlayScreen {
+        public static final int GROUP_INDEX = 378;
+        public static final int PARENT_FIRST_CONTAINER = 0;
+        public static final int PARENT_SECOND_CONTAINER = 1;
+        public static final int INNER_FRAME_CONTAINER = 2;
+        public static final int UNKNOWN_CONTAINER = 3;
+        public static final int MOTW_CONTAINER = 4;
+        public static final int UNKNOWN_MODEL = 5;
+        public static final int MOTW_TITLE_LABEL = 6;
+        public static final int MOTW_TEXT_LABEL = 7;
+        // 8 - 55 gap
+        public static final int MOTW_LEFT_SIDE_MODEL = 56;
+        public static final int MOTW_RIGHT_SIDE_MODEL = 57;
+        public static final int ABOVE_MOTW_CONTAINER = 58;
+        public static final int SWITCH_STYLE_DYNAMIC_CONTAINER = 59; // Contains label[0]
+        public static final int WELCOME_MSG_CONTAINER = 60;
+        public static final int WELCOME_MSG_SPRITE = 61;
+        public static final int WELCOME_MSG_TITLE_LABEL = 62;
+        public static final int WELCOME_MSG_TEXT_LABEL = 63;
+        // 64 - 73 gap
+        public static final int BUTTON_MEMBERSHIP_SPRITE = 74;
+        // 75
+        public static final int BUTTON_MEMBERSHIP_ICON_SPRITE = 76;
+        public static final int BUTTON_MEMBERSHIP_TEXT_LABEL = 77;
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_CONTAINER = 78;
+        public static final int BUTTON_MEMBERSHIP_CONTAINER = 79;
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_SPRITE = 80;
+        public static final int BUTTON_BANK_PIN_CONTAINER = 81;
+        // 82
+        public static final int BUTTON_UNREAD_MSG_CONTAINER = 83;
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_ICON_SPRITE = 84;
+        public static final int BUTTON_PASSWORD_CONTAINER = 85;
+        public static final int BANNER_CONTAINER = 86;
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_LABEL = 87;
+    }
+
+    /**
      * Describes worn equipment tab widgets
      * Last reviewed: 1/3/2022 1:21 am UTC+1
      */

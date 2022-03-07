@@ -12,14 +12,16 @@ import static rsb.internal.globval.GlobalWidgetId.*;
  */
 public enum GlobalWidgetInfo {
     /** [LOGIN] Widget Info */
-    LOGIN_MOTW(INTERFACE_LOGIN_SCREEN, INTERFACE_LOGIN_SCREEN_MOTW),
+    LOGIN_MOTW(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_CONTAINER),
+    LOGIN_MOTW_TITLE(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TITLE_LABEL),
+    LOGIN_MOTW_TEXT(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TEXT_LABEL),
+    LOGIN_CLICK_TO_PLAY(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.BUTTON_CLICK_HERE_TO_PLAY_CONTAINER),
     //[LOGIN]
 
     /** [MISC] Widget Info */
     WORLD_MAP_VIEW(WidgetInfo.WORLD_MAP_VIEW),
     LOGOUT_BUTTON(WidgetInfo.LOGOUT_BUTTON),
     LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY),
-
     //[MISC]
 
     /**

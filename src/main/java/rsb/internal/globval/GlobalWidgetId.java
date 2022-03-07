@@ -15,15 +15,6 @@ public class GlobalWidgetId {
     public static final int DYNAMIC_CHAT_BOX_FIRST_MESSAGE = 0; //TODO: Check these. Not sure what they do.
     public static final int DYNAMIC_CHAT_BOX_LATEST_MESSAGE = 1; //TODO: Check these. Not sure what they do.
 
-    /**Login Screen Widget IDs*/
-    public static final int INTERFACE_LOGIN_SCREEN = WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN.getGroupId();
-    public static final int INTERFACE_LOGIN_SCREEN_MOTW = 6;
-
-    /**
-     * Collection box
-     */
-    public static final int INTERFACE_COLLECTION_BOX = 402;
-
     /**
      * Trade ids
      */
