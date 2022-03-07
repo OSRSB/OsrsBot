@@ -38,7 +38,7 @@ public class Inventory extends MethodProvider {
 		HashMap<String, RSWidget> widgets = new HashMap<>();
 		widgets.put(INVENTORY, methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER));
 		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEMS_CONTAINER));
-		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
 
@@ -203,7 +203,7 @@ public class Inventory extends MethodProvider {
 		}
 		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
 				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
-				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE).isValid()) {
+				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
 			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {

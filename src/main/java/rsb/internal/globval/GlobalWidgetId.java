@@ -47,21 +47,11 @@ public class GlobalWidgetId {
     public static final int INTERFACE_TRADE_SECOND_NAME = 30;
 
     /**
-     * Store ids
-     */
-    //Parent id
-    public static final int INTERFACE_STORE = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getGroupId();
-    //Child id
-    public static final int INTERFACE_STORE_DYNAMIC_COMPONENTS = 1;
-    public static final int INTERFACE_STORE_ITEMS_CONTAINER = WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER.getChildId();
-
-    /**
      * Magic ids
      * Interfaces used
      *  FIXED_VIEWPORT 548 (can be gotten from WidgetInfo
      *  548 into 72 into (218(N) into 3) N=Nested
      */
-
     //Parent id
     public static final int FIXED_VIEWPORT_SPELL_BOOK_CONTAINER_ID = 72;
 

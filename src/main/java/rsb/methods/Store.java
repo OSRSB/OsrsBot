@@ -2,6 +2,7 @@ package rsb.methods;
 
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.*;
 
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class Store extends MethodProvider {
 	 * @return the store <code>RSWidget</code>
 	 */
 	public RSWidget getInterface() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE);
+		return methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX);
 	}
 
 	/**
@@ -151,13 +152,13 @@ public class Store extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget storeInterface = getInterface();
 		if ((storeInterface == null)
-				|| (storeInterface.getComponent(GlobalWidgetId.INTERFACE_STORE_ITEMS_CONTAINER) == null)) {
+				|| (storeInterface.getComponent(WidgetIndices.Store.ITEMS_DYNAMIC_CONTAINER) == null)) {
 			return null;
 		}
 
 		ArrayList<RSItem> items = new ArrayList<>();
 		RSWidget[] components = storeInterface.getComponent(
-				GlobalWidgetId.INTERFACE_STORE_ITEMS_CONTAINER).getComponents();
+				WidgetIndices.Store.ITEMS_DYNAMIC_CONTAINER).getComponents();
 
 		for (RSWidget component : components) {
 

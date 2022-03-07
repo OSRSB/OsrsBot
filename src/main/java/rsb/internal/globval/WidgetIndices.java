@@ -147,6 +147,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes store widgets
+     * Last reviewed: 2/3/2022 1:47 am UTC+1
+     */
+    public static class Store {
+        public static final int GROUP_INDEX = 300;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // Contains stone border sprites 0-11
+        public static final int ITEMS_DYNAMIC_CONTAINER = 16; // Contains items sold sprites 0-16
+        public static final int BOTTOM_TEXT_LABEL = 18;
+    }
+
+    /**
      * Describes skill tab widgets
      * Last reviewed: 28/2/2022 2:18 am UTC+1
      */
