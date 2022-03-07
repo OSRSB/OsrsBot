@@ -38,20 +38,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_TRADE_SECOND_NAME = 30;
 
     /**
-     * Magic ids
-     * Interfaces used
-     *  FIXED_VIEWPORT 548 (can be gotten from WidgetInfo
-     *  548 into 72 into (218(N) into 3) N=Nested
-     */
-    //Parent id
-    public static final int FIXED_VIEWPORT_SPELL_BOOK_CONTAINER_ID = 72;
-
-    //Parent id
-    public static final int INTERFACE_MAGIC_AUTOCAST_SPELL_BOOK = 201;
-    //Child id
-    public static final int INTERFACE_MAGIC_AUTOCAST_SPELL_LIST = 1;
-
-    /**
      * Prayer ids
      */
     public static final int INTERFACE_PRAYER_BOOK = WidgetInfo.PRAYER_THICK_SKIN.getGroupId();

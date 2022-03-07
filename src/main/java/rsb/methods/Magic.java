@@ -188,7 +188,7 @@ public class Magic extends MethodProvider {
         RSWidget widget;
         for (int x = 0; x < MagicBook.values().length; x++) {
             if (MagicBook.values()[x] != MagicBook.NULL) {
-                widget = methods.interfaces.getComponent(WidgetIndices.SpellbookTab.GROUP_ID, MagicBook.values()[x].getIndex());
+                widget = methods.interfaces.getComponent(WidgetIndices.SpellbookTab.GROUP_INDEX, MagicBook.values()[x].getIndex());
                 if (widget.isValid() && widget.isSelfVisible()) {
                     return MagicBook.values()[x];
                 }

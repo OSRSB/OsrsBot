@@ -147,11 +147,22 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes spell autocast widgets
+     * Last reviewed: 3/3/2022 4:46 am UTC+1
+     */
+    static class SpellAutocast {
+        public static final int GROUP_INDEX = 201;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int SPELLS_DYNAMIC_CONTAINER = 1;
+        public static final int SPELL_INFO_BOX_DYNAMIC_CONTAINER = 2;
+    }
+
+    /**
      * Describes spellbook tab widgets
      * Last reviewed: 3/3/2022 4:21 am UTC+1
      */
     public static class SpellbookTab {
-        public static final int GROUP_ID = 218;
+        public static final int GROUP_INDEX = 218;
         public static final int PARENT_CONTAINER = 0;
         public static final int INNER_FRAME_CONTAINER = 1;
         // 2

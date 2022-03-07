@@ -161,8 +161,8 @@ public enum GlobalWidgetInfo {
     /**
      * [MAGIC] Widget Info
      */
-    MAGIC_SPELL_LIST(WidgetIndices.SpellbookTab.GROUP_ID, WidgetIndices.SpellbookTab.SPELLS_CONTAINER),
-    MAGIC_AUTOCAST_SPELL_LIST(INTERFACE_MAGIC_AUTOCAST_SPELL_BOOK, INTERFACE_MAGIC_AUTOCAST_SPELL_LIST),
+    MAGIC_SPELL_LIST(WidgetIndices.SpellbookTab.GROUP_INDEX, WidgetIndices.SpellbookTab.SPELLS_CONTAINER),
+    MAGIC_AUTOCAST_SPELL_LIST(WidgetIndices.SpellAutocast.GROUP_INDEX, WidgetIndices.SpellAutocast.SPELLS_DYNAMIC_CONTAINER),
     //[MAGIC]
 
     /**
