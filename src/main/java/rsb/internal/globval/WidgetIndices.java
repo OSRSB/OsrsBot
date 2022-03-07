@@ -484,6 +484,49 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes prayers tab widgets
+     * Last reviewed: 4/3/2022 0:34 am UTC+1
+     */
+    public static class PrayersTab {
+        public static final int GROUP_ID = 541;
+        public static final int PARENT_CONTAINER = 0;
+        // 1
+        public static final int BOTTOM_BAR_DYNAMIC_CONTAINER = 2;
+        // 3
+        public static final int PRAYERS_CONTAINER = 4;
+        public static final int THICK_SKIN = 5;
+        public static final int BURST_OF_STRENGTH = 6;
+        public static final int CLARITY_OF_THOUGHT = 7;
+        public static final int ROCK_SKIN = 8;
+        public static final int SUPERHUMAN_STRENGTH = 9;
+        public static final int IMPROVED_REFLEXES = 10;
+        public static final int RAPID_RESTORE = 11;
+        public static final int RAPID_HEAL = 12;
+        public static final int PROTECT_ITEM = 13;
+        public static final int STEEL_SKIN = 14;
+        public static final int ULTIMATE_STRENGTH = 15;
+        public static final int INCREDIBLE_REFLEXES = 16;
+        public static final int PROTECT_FROM_MAGIC = 17;
+        public static final int PROTECT_FROM_MISSILES = 18;
+        public static final int PROTECT_FROM_MELEE = 19;
+        public static final int RETRIBUTION = 20;
+        public static final int REDEMPTION = 21;
+        public static final int SMITE = 22;
+        public static final int SHARP_EYE = 23;
+        public static final int MYSTIC_WILL = 24;
+        public static final int HAWK_EYE = 25;
+        public static final int MYSTIC_LORE = 26;
+        public static final int EAGLE_EYE = 27;
+        public static final int MYSTIC_MIGHT = 28;
+        public static final int CHIVALRY = 29;
+        public static final int PIETY = 30;
+        public static final int RIGOUR = 31;
+        public static final int AUGURY = 32;
+        public static final int PRESERVE = 33;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 34;
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
@@ -539,6 +582,10 @@ public class WidgetIndices {
      * Last reviewed: 3/3/2022 0:37 am UTC+1
      */
     public static class DynamicComponents {
+        public static class PrayerWidget {
+            public static final int BG_LIGHT_SPRITE = 0;
+            public static final int ICON_SPRITE = 1;
+        }
         public static class GrandExchangeOfferTittle {
             public static final int BUTTON_COLLECT_SPRITE = 0;
             public static final int BUTTON_COLLECT_LABEL = 1;

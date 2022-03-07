@@ -3,10 +3,11 @@ package rsb.methods;
 import net.runelite.api.Skill;
 import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.Prayers;
 import rsb.wrappers.RSWidget;
 
 import java.util.ArrayList;
-
 
 /**
  * Prayer related operations.
@@ -20,22 +21,17 @@ public class Prayer extends MethodProvider {
 	}
 
 	/**
-	 * Provides Prayer Book(s) Information.
-	 *
-	 */
-
-	/**
 	 * Returns true if designated prayer is turned on.
 	 *
 	 * @param prayer The prayer to check.
 	 * @return <code>true</code> if enabled; otherwise <code>false</code>.
 	 */
-	public boolean isPrayerOn(GlobalWidgetId.Prayer prayer) {
-		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_NORMAL_BOOK)
+	public boolean isPrayerOn(Prayers prayer) {
+		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_STANDARD_BOOK)
 				.getComponents();
 		for (RSWidget c : prayers) {
 			if (GlobalWidgetInfo.TO_CHILD(c.getId()) == prayer.getPrayerId()) {
-				return c.getDynamicComponent(GlobalWidgetId.ACTIVE_PRAYER_BORDER).isSelfVisible();
+				return c.getDynamicComponent(WidgetIndices.DynamicComponents.PrayerWidget.ICON_SPRITE).isSelfVisible();
 			}
 		}
 		return false;
@@ -63,11 +59,11 @@ public class Prayer extends MethodProvider {
 	 * @return <code>true</code> if the interface was clicked; otherwise
 	 *         <code>false</code>.
 	 */
-	public boolean activatePrayer(final GlobalWidgetId.Prayer prayer, final boolean activate) {
+	public boolean activatePrayer(final Prayers prayer, final boolean activate) {
 		if (isPrayerOn(prayer) == activate) {
 			return false;
 		}
-		RSWidget pray = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_PRAYER_BOOK, prayer.getPrayerId());
+		RSWidget pray = methods.interfaces.getComponent(WidgetIndices.PrayersTab.PRAYERS_CONTAINER, prayer.getPrayerId());
 		if ((pray.getBackgroundColor() != -1) == activate) {
 			return false;
 		}
@@ -97,7 +93,7 @@ public class Prayer extends MethodProvider {
 	 *
 	 * @return <code>True</code> unless unable to access the interface
 	 */
-	public boolean setQuickPrayers(boolean unsetPrevious, GlobalWidgetId.Prayer... prayers) {
+	public boolean setQuickPrayers(boolean unsetPrevious, Prayers... prayers) {
 		final int SET_PRAYER_SPRITE = 181;
 		RSWidget quickPrayers = methods.interfaces.getComponent(GlobalWidgetInfo.QUICK_PRAYER_PRAYERS);
 		methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB).doAction("Setup");
@@ -112,7 +108,7 @@ public class Prayer extends MethodProvider {
 				}
 			}
 			RSWidget[] quickPrayersInterface = quickPrayers.getComponents();
-			for (GlobalWidgetId.Prayer prayer : prayers) {
+			for (Prayers prayer : prayers) {
 				for (RSWidget quickPrayer : quickPrayersInterface) {
 					if (quickPrayer.getName().contains(prayer.name())) {
 						quickPrayer.doAction("Toggle");
@@ -134,9 +130,9 @@ public class Prayer extends MethodProvider {
 	 */
 	public RSWidget[] getSelectedPrayers() {
 		ArrayList<RSWidget> selected = new ArrayList<RSWidget>();
-		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_NORMAL_BOOK).getComponents();
+		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_STANDARD_BOOK).getComponents();
 		for (RSWidget prayer : prayers) {
-			if (prayer.getDynamicComponent(GlobalWidgetId.ACTIVE_PRAYER_BORDER).isSelfVisible()) {
+			if (prayer.getDynamicComponent(WidgetIndices.DynamicComponents.PrayerWidget.ICON_SPRITE).isSelfVisible()) {
 				selected.add(prayer);
 			}
 		}
@@ -164,4 +160,26 @@ public class Prayer extends MethodProvider {
 				/ methods.skills.getCurrentLevel(Skill.PRAYER.ordinal());
 	}
 
+	/**
+	 * Provides Prayer Book(s) Information.
+	 * This is written in preparation for future prayer books
+	 * Likely they'll be similar to MagicBook and simply be one set of child components
+	 * of the one we list here
+	 *
+	 * @author GigiaJ
+	 */
+	public enum PrayerBook {
+		NORMAL(WidgetIndices.PrayersTab.PRAYERS_CONTAINER),
+		NULL(-1);
+
+		private final int index;
+
+		PrayerBook(int index) {
+			this.index = index;
+		}
+
+		int getIndex() {
+			return this.index;
+		}
+	}
 }

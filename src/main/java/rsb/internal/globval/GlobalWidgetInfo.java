@@ -186,7 +186,7 @@ public enum GlobalWidgetInfo {
     /**
      * [PRAYER] Widget Info
      */
-    PRAYER_NORMAL_BOOK(INTERFACE_PRAYER_BOOK, INTERFACE_NORMAL_PRAYERS),
+    PRAYER_STANDARD_BOOK(WidgetIndices.PrayersTab.GROUP_ID, WidgetIndices.PrayersTab.PRAYERS_CONTAINER),
     //[PRAYER]
 
     /**
