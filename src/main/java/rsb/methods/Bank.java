@@ -84,7 +84,7 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean close() {
 		if (isOpen()) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_CONTAINER).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isOpen();
 		}
@@ -309,7 +309,7 @@ public class Bank extends MethodProvider {
 	 * @return The bank <code>RSWidget</code>.
 	 */
 	public RSWidget getInterface() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK);
+		return methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX);
 	}
 
 	/**
@@ -354,10 +354,10 @@ public class Bank extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget bankInterface = getInterface();
-		if ((bankInterface == null) || (bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY) == null)) {
+		if ((bankInterface == null) || (bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER) == null)) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY).getComponents();
+		RSWidget[] components = bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; ++i) {
 			items[i] = new RSItem(methods, components[i]);

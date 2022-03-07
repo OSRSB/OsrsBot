@@ -20,41 +20,6 @@ public class GlobalWidgetId {
     public static final int INTERFACE_LOGIN_SCREEN_MOTW = 6;
 
     /**
-     * Bank Widget IDs
-     */
-    // Parent ID
-    public static final int INTERFACE_BANK = WidgetInfo.BANK_CONTAINER.getGroupId();
-    // Child ID
-    public static final int INTERFACE_BANK_DYNAMIC_COMPONENTS = 2;
-    // Sub-child ID
-    public static final int INTERFACE_BANK_CLOSE_BUTTON = 1;
-    // Child ID - till end
-    public static final int INTERFACE_BANK_TITLE = 3;
-    public static final int INTERFACE_BANK_BUTTON_SHOW_TUTORIAL = 4;
-    public static final int INTERFACE_BANK_ITEM_SLOTS_USED = 5;
-    public static final int INTERFACE_BANK_SEPARATOR_LINE = 6;
-    public static final int INTERFACE_BANK_ITEM_SLOTS_MAX = 8;
-    public static final int INTERFACE_BANK_TABS = 11;
-    public static final int INTERFACE_BANK_INVENTORY = 13;
-    public static final int INTERFACE_BANK_SCROLLBAR = 14;
-    public static final int INTERFACE_BANK_FOOTER = 15;
-    public static final int INTERFACE_BANK_BUTTON_SWAP = 17;
-    public static final int INTERFACE_BANK_BUTTON_INSERT = 19;
-    public static final int INTERFACE_BANK_BUTTON_ITEM = 22;
-    public static final int INTERFACE_BANK_BUTTON_NOTE = 24;
-    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_1 = 28;
-    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_5 = 30;
-    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_10 = 32;
-    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_X = 34;
-    public static final int INTERFACE_BANK_BUTTON_WITHDRAWAL_QUANTITY_ALL = 36;
-    public static final int INTERFACE_BANK_BUTTON_PLACEHOLDERS = 38;
-    public static final int INTERFACE_BANK_BUTTON_SEARCH = 40;
-    // 42
-    public static final int INTERFACE_BANK_BUTTON_DEPOSIT_CARRIED_ITEMS = WidgetInfo.BANK_DEPOSIT_INVENTORY.getChildId();
-    // 44
-    public static final int INTERFACE_BANK_BUTTON_DEPOSIT_WORN_ITEMS = WidgetInfo.BANK_DEPOSIT_EQUIPMENT.getChildId();
-
-    /**
      * Collection box
      */
     public static final int INTERFACE_COLLECTION_BOX = 402;

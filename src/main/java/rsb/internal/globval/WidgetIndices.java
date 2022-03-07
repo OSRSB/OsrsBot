@@ -2,6 +2,67 @@ package rsb.internal.globval;
 
 public class WidgetIndices {
     /**
+     * Describes bank widgets
+     * Last reviewed: 2/3/2022 1:57 am UTC+1
+     */
+    public static class Bank {
+        public static final int GROUP_INDEX = 12;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int FRAME_DYNAMIC_CONTAINER = 2; // Contains stone border sprites 0-11, 11 is close button
+        public static final int TITLE_LABEL = 3;
+        public static final int BUTTON_SHOW_TUTORIAL_CONTAINER = 4;
+        public static final int ITEM_SLOTS_USED_LABEL = 5;
+        public static final int ITEM_SLOTS_SEPARATOR_LINE = 6;
+        public static final int ITEM_SLOTS_CONTAINER= 7;
+        public static final int BUTTON_GROUP_STORAGE_CONTAINER = 8;
+        public static final int ITEM_SLOTS_MAX_LABEL = 9;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 10; // Contains 0 sprite tab add
+        public static final int TABS_DYNAMIC_CONTAINER = 11; // Contains TAB sprites 0-19
+        public static final int TABS_SEPARATOR_LINE = 12;
+        public static final int ITEMS_DYNAMIC_CONTAINER = 13; // Contains 0-x bank items
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 14; // Contains 0-5 sprites
+        public static final int FOOTER_CONTAINER = 15;
+        public static final int REARRANGE_MODE_LABEL = 16;
+        public static final int BUTTON_SWAP_CONTAINER = 17;
+        public static final int BUTTON_SWAP_LABEL = 18;
+        public static final int BUTTON_INSERT_CONTAINER = 19;
+        public static final int BUTTON_INSERT_LABEL = 20;
+        public static final int WITHDRAW_AS_LABEL = 21;
+        public static final int BUTTON_ITEM_CONTAINER = 22;
+        public static final int BUTTON_ITEM_LABEL = 23;
+        public static final int BUTTON_NOTE_CONTAINER = 24;
+        public static final int BUTTON_NOTE_LABEL = 25;
+        public static final int BOTTOM_BAR_CONTAINER = 26;
+        public static final int QUANTITY_LABEL = 27;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_1_CONTAINER = 28;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_1_LABEL = 29;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_5_CONTAINER = 30;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_5_LABEL = 31;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_10_CONTAINER = 32;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_10_LABEL = 33;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_X_CONTAINER = 34;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_X_LABEL = 35;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_ALL_CONTAINER = 36;
+        public static final int BUTTON_WITHDRAWAL_QUANTITY_ALL_LABEL = 37;
+        public static final int BUTTON_PLACEHOLDERS_SPRITE = 38;
+        public static final int BUTTON_PLACEHOLDERS_ICON_SPRITE = 39;
+        public static final int BUTTON_SEARCH_SPRITE = 40;
+        public static final int BUTTON_SEARCH_ICON_SPRITE = 41;
+        public static final int BUTTON_DEPOSIT_CARRIED_ITEMS_SPRITE = 42;
+        public static final int BUTTON_DEPOSIT_CARRIED_ITEMS_ICON_SPRITE = 43;
+        public static final int BUTTON_DEPOSIT_WORN_ITEMS_SPRITE = 44;
+        public static final int BUTTON_DEPOSIT_WORN_ITEMS_ICON_SPRITE = 45;
+        public static final int INCINERATOR_DYNAMIC_CONTAINER = 46;
+        // 47-48
+        public static final int SETTINGS_CONTAINER = 49;
+        // 50 - 111
+        public static final int BUTTON_SETTINGS_DYNAMIC_CONTAINER = 112; // Contains 0-1 sprites
+        public static final int BUTTON_EQUIPMENT_DYNAMIC_CONTAINER = 113; // Contains 0-1 sprites
+        // 114 - 115
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
@@ -63,7 +124,7 @@ public class WidgetIndices {
     public static class DepositBox {
         public static final int GROUP_INDEX = 192;
         public static final int PARENT_CONTAINER = 0;
-        public static final int DYNAMIC_CONTAINER = 1; // Contains thick border sprites 0-11
+        public static final int DYNAMIC_CONTAINER = 1; // Contains stone border sprites 0-11
         public static final int ITEMS_DYNAMIC_CONTAINER = 2; // Contains sprites of items inside deposit box 0-27
         public static final int BOTTOM_BAR_RIGHT_SIDE_CONTAINER = 3;
         public static final int BUTTON_DEPOSIT_INVENTORY_SPRITE = 4;
