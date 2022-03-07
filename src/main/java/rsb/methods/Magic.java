@@ -1,8 +1,8 @@
 package rsb.methods;
 
 import rsb.internal.globval.VarpIndices;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.RSCharacter;
 import rsb.wrappers.RSGroundItem;
 import rsb.wrappers.RSObject;
@@ -188,7 +188,7 @@ public class Magic extends MethodProvider {
         RSWidget widget;
         for (int x = 0; x < MagicBook.values().length; x++) {
             if (MagicBook.values()[x] != MagicBook.NULL) {
-                widget = methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_MAGIC_SPELL_BOOK, MagicBook.values()[x].getIndex());
+                widget = methods.interfaces.getComponent(WidgetIndices.SpellbookTab.GROUP_ID, MagicBook.values()[x].getIndex());
                 if (widget.isValid() && widget.isSelfVisible()) {
                     return MagicBook.values()[x];
                 }
@@ -266,9 +266,11 @@ public class Magic extends MethodProvider {
      * @author GigiaJ
      */
     public enum MagicBook {
-
-        MODERN(GlobalWidgetId.SpellId.SPELL_WIND_STRIKE), ANCIENT(GlobalWidgetId.SpellId.SPELL_EARTH_SURGE),
-        LUNAR(GlobalWidgetId.SpellId.SPELL_GHORROCK_TELEPORT), ARCEUUS(GlobalWidgetId.SpellId.SPELL_SPIN_FLAX), NULL(-1);
+        STANDARD(WidgetIndices.SpellbookTab.LUMBRIDGE_HOME_TELEPORT_SPRITE),
+        ANCIENT(WidgetIndices.SpellbookTab.ICE_RUSH_SPRITE),
+        LUNAR(WidgetIndices.SpellbookTab.LUNAR_HOME_TELEPORT_SPRITE),
+        ARCEUUS(WidgetIndices.SpellbookTab.ARCEEUS_HOME_TELEPORT_SPRITE),
+        NULL(-1);
 
         private final int index;
 
@@ -279,7 +281,5 @@ public class Magic extends MethodProvider {
         int getIndex() {
             return this.index;
         }
-
     }
-
 }

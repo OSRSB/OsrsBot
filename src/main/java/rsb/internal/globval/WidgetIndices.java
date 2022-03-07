@@ -147,6 +147,174 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes spellbook tab widgets
+     * Last reviewed: 3/3/2022 4:21 am UTC+1
+     */
+    public static class SpellbookTab {
+        public static final int GROUP_ID = 218;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int INNER_FRAME_CONTAINER = 1;
+        // 2
+        public static final int SPELLS_CONTAINER = 3;
+        // 4
+        public static final int CATHERBY_HOME_TELEPORT_SPRITE = 5; // on Leagues
+        public static final int LUMBRIDGE_HOME_TELEPORT_SPRITE = 6;
+        public static final int WIND_STRIKE_SPRITE = 7;
+        public static final int CONFUSE_SPRITE = 8;
+        public static final int ENCHANT_CROSSBOW_BOLT_SPRITE = 9;
+        public static final int WATER_STRIKE_SPRITE = 10;
+        public static final int LVL_1_ENCHANT_SPRITE = 11;
+        public static final int EARTH_STRIKE_SPRITE = 12;
+        public static final int WEAKEN_SPRITE = 13;
+        public static final int FIRE_STRIKE_SPRITE = 14;
+        public static final int BONES_TO_BANANAS_SPRITE = 15;
+        public static final int WIND_BOLT_SPRITE = 16;
+        public static final int CURSE_SPRITE = 17;
+        public static final int BIND_SPRITE = 18;
+        public static final int LOW_LEVEL_ALCHEMY_SPRITE = 19;
+        public static final int WATER_BOLT_SPRITE = 20;
+        public static final int VARROCK_TELEPORT_SPRITE = 21;
+        public static final int LVL_2_ENCHANT_SPRITE = 22;
+        public static final int EARTH_BOLT_SPRITE = 23;
+        public static final int LUMBRIDGE_TELEPORT_SPRITE = 24;
+        public static final int TELEKINETIC_GRAB_SPRITE = 25;
+        public static final int FIRE_BOLT_SPRITE = 26;
+        public static final int FALADOR_TELEPORT_SPRITE = 27;
+        public static final int CRUMBLE_UNDEAD_SPRITE = 28;
+        public static final int TELEPORT_TO_HOUSE_SPRITE = 29;
+        public static final int WIND_BLAST_SPRITE = 30;
+        public static final int SUPERHEAT_ITEM_SPRITE = 31;
+        public static final int CAMELOT_TELEPORT_SPRITE = 32;
+        public static final int WATER_BLAST_SPRITE = 33;
+        public static final int LVL_3_ENCHANT_SPRITE = 34;
+        public static final int IBAN_BLAST_SPRITE = 35;
+        public static final int SNARE_SPRITE = 36;
+        public static final int MAGIC_DART_SPRITE = 37;
+        public static final int ARDOUGNE_TELEPORT_SPRITE = 38;
+        public static final int EARTH_BLAST_SPRITE = 39;
+        public static final int HIGH_LEVEL_ALCHEMY_SPRITE = 40;
+        public static final int CHARGE_WATER_ORB_SPRITE = 41;
+        public static final int LVL_4_ENCHANT_SPRITE = 42;
+        public static final int WATCHTOWER_TELEPORT_SPRITE = 43;
+        public static final int FIRE_BLAST_SPRITE = 44;
+        public static final int CHARGE_EARTH_ORB_SPRITE = 45;
+        public static final int BONES_TO_PEACHES_SPRITE = 46;
+        public static final int SARADOMIN_STRIKE_SPRITE = 47;
+        public static final int CLAWS_OF_GUTHIX_SPRITE = 48;
+        public static final int FLAMES_OF_ZAMORAK_SPRITE = 49;
+        public static final int TROLLHEIM_TELEPORT_SPRITE = 50;
+        public static final int WIND_WAVE_SPRITE = 51;
+        public static final int CHARGE_FIRE_ORB_SPRITE = 52;
+        public static final int APE_ATOLL_TELEPORT_SPRITE = 53;
+        public static final int WATER_WAVE_SPRITE = 54;
+        public static final int CHARGE_AIR_ORB_SPRITE = 55;
+        public static final int VULNERABILITY_SPRITE = 56;
+        public static final int LVL_5_ENCHANT_SPRITE = 57;
+        public static final int KOUREND_CASTLE_TELEPORT_SPRITE = 58;
+        public static final int EARTH_WAVE_SPRITE = 59;
+        public static final int ENFEEBLE_SPRITE = 60;
+        public static final int TELEOTHER_LUMBRIDGE_SPRITE = 61;
+        public static final int FIRE_WAVE_SPRITE = 62;
+        public static final int ENTANGLE_SPRITE = 63;
+        public static final int STUN_SPRITE = 64;
+        public static final int CHARGE_SPRITE = 65;
+        public static final int WIND_SURGE_SPRITE = 66;
+        public static final int TELEOTHER_FALADOR_SPRITE = 67;
+        public static final int WATER_SURGE_SPRITE = 68;
+        public static final int TELE_BLOCK_SPRITE = 69;
+        public static final int TELEPORT_TO_TARGET_SPRITE = 70;
+        public static final int LVL_6_ENCHANT_SPRITE = 71;
+        public static final int TELEOTHER_CAMELOT_SPRITE = 72;
+        public static final int EARTH_SURGE_SPRITE = 73;
+        public static final int LVL_7_ENCHANT_SPRITE = 74;
+        public static final int FIRE_SURGE_SPRITE = 75;
+        // Ancient
+        public static final int ICE_RUSH_SPRITE = 76;
+        public static final int ICE_BLITZ_SPRITE = 77;
+        public static final int ICE_BURST_SPRITE = 78;
+        public static final int ICE_BARRAGE_SPRITE = 79;
+        public static final int BLOOD_RUSH_SPRITE = 80;
+        public static final int BLOOD_BLITZ_SPRITE = 81;
+        public static final int BLOOD_BURST_SPRITE = 82;
+        public static final int BLOOD_BARRAGE_SPRITE = 83;
+        public static final int SMOKE_RUSH_SPRITE = 84;
+        public static final int SMOKE_BLITZ_SPRITE = 85;
+        public static final int SMOKE_BURST_SPRITE = 86;
+        public static final int SMOKE_BARRAGE_SPRITE = 87;
+        public static final int SHADOW_RUSH_SPRITE = 88;
+        public static final int SHADOW_BLITZ_SPRITE = 89;
+        public static final int SHADOW_BURST_SPRITE = 90;
+        public static final int SHADOW_BARRAGE_SPRITE = 91;
+        public static final int PADDEWWA_TELEPORT_SPRITE = 92;
+        public static final int SENNTISTEN_TELEPORT_SPRITE = 93;
+        public static final int KHARYRLL_TELEPORT_SPRITE = 94;
+        public static final int LASSAR_TELEPORT_SPRITE = 95;
+        public static final int DAREEYAK_TELEPORT_SPRITE = 96;
+        public static final int CARRALLANGAR_TELEPORT_SPRITE = 97;
+        public static final int ANNAKARL_TELEPORT_SPRITE = 98;
+        public static final int GHORROCK_TELEPORT_SPRITE = 99;
+        public static final int EDGEVILLE_HOME_TELEPORT_SPRITE = 100;
+        // Lunar
+        public static final int LUNAR_HOME_TELEPORT_SPRITE = 101;
+        public static final int BAKE_PIE_SPRITE = 102;
+        public static final int CURE_PLANT_SPRITE = 103;
+        public static final int MONSTER_EXAMINE_SPRITE = 104;
+        public static final int NPC_CONTACT_SPRITE = 105;
+        public static final int CURE_OTHER_SPRITE = 106;
+        public static final int HUMIDIFY_SPRITE = 107;
+        public static final int MOONCLAN_TELEPORT_SPRITE = 108;
+        public static final int TELE_GROUP_MOONCLAN_SPRITE = 109;
+        public static final int CURE_ME_SPRITE = 110;
+        public static final int HUNTER_KIT_SPRITE = 111;
+        public static final int WATERBIRTH_TELEPORT_SPRITE = 112;
+        public static final int TELE_GROUP_WATERBIRTH_SPRITE = 113;
+        public static final int CURE_GROUP_SPRITE = 114;
+        public static final int STAT_SPY_SPRITE = 115;
+        public static final int BARBARIAN_TELEPORT_SPRITE = 116;
+        public static final int TELE_GROUP_BARBARIAN_SPRITE = 117;
+        public static final int SUPERGLASS_MAKE_SPRITE = 118;
+        public static final int TAN_LEATHER_SPRITE = 119;
+        public static final int KHAZARD_TELEPORT_SPRITE = 120;
+        public static final int TELE_GROUP_KHAZARD_SPRITE = 121;
+        public static final int DREAM_SPRITE = 122;
+        public static final int STRING_JEWELLERY_SPRITE = 123;
+        public static final int STAT_RESTORE_POT_SHARE_SPRITE = 124;
+        public static final int MAGIC_IMBUE_SPRITE = 125;
+        public static final int FERTILE_SOIL_SPRITE = 126;
+        public static final int BOOST_POTION_SHARE_SPRITE = 127;
+        public static final int FISHING_GUILD_TELEPORT_SPRITE = 128;
+        public static final int TELE_GROUP_FISHING_GUILD_SPRITE = 129;
+        public static final int PLANK_MAKE_SPRITE = 130;
+        public static final int CATHERBY_TELEPORT_SPRITE = 131;
+        public static final int TELE_GROUP_CATHERBY_SPRITE = 132;
+        public static final int RECHARGE_DRAGONSTONE_SPRITE = 133;
+        public static final int ICE_PLATEAU_TELEPORT_SPRITE = 134;
+        public static final int TELE_GROUP_ICE_PLATEAU_SPRITE = 135;
+        public static final int ENERGY_TRANSFER_SPRITE = 136;
+        public static final int HEAL_OTHER_SPRITE = 137;
+        public static final int VENGEANCE_OTHER_SPRITE = 138;
+        public static final int VENGEANCE_SPRITE = 139;
+        public static final int HEAL_GROUP_SPRITE = 140;
+        public static final int SPELLBOOK_SWAP_SPRITE = 141;
+        public static final int GEOMANCY_SPRITE = 142;
+        public static final int SPIN_FLAX_SPRITE = 143;
+        public static final int OURANIA_TELEPORT_SPRITE = 144;
+        //  Arceeus book
+        public static final int ARCEEUS_HOME_TELEPORT_SPRITE = 145;
+        public static final int BASIC_REANIMATION = 146;
+        // TODO: arceeus spells 147 - 188
+        public static final int RESSURECT_GREATER_ZOMBIE = 189;
+        // 190 - 191
+        public static final int SPELL_FILTERS_DYNAMIC_CONTAINER = 192;
+        public static final int SPELL_FILTERS_FRAME_SPRITE = 193;
+        public static final int SPELL_FILTERS_TITLE_LABEL = 194;
+        public static final int SPELL_FILTERS_INNER_MSG_DYNAMIC_CONTAINER = 195;
+        public static final int BOTTOM_BAR_CONTAINER = 196;
+        // 197
+        public static final int FILTERS_DYNAMIC_CONTAINER = 198; // Contains 0-8 button sprites 9 button label
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
