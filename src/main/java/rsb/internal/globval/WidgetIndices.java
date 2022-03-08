@@ -762,6 +762,71 @@ public class WidgetIndices {
             // TODO: ancient autocast
             // TODO: arceeus autocast
         }
+        public static class TradeWindowDynamicContainer {
+            public static final int TRADE_WINDOW_SPRITE = 0;
+            public static final int TRADE_WINDOW_TITLE_LABEL = 1;
+            // 2-12 steel border sprites
+            public static final int TRADE_WINDOW_CLOSE_BUTTON = 13;
+        }
+        public static class TradeOfferDynamicContainer {
+            public static final int USED_ITEM_SLOT_ONE = 0;
+            public static final int USED_ITEM_SLOT_TWO = 1;
+            public static final int USED_ITEM_SLOT_THREE = 2;
+            public static final int USED_ITEM_SLOT_FOUR = 3;
+            public static final int USED_ITEM_SLOT_FIVE = 4;
+            public static final int USED_ITEM_SLOT_SIX = 5;
+            public static final int USED_ITEM_SLOT_SEVEN = 6;
+            public static final int USED_ITEM_SLOT_EIGHT = 7;
+            public static final int USED_ITEM_SLOT_NINE = 8;
+            public static final int USED_ITEM_SLOT_TEN = 9;
+            public static final int USED_ITEM_SLOT_ELEVEN = 10;
+            public static final int USED_ITEM_SLOT_TWELVE = 11;
+            public static final int USED_ITEM_SLOT_THIRTEEN = 12;
+            public static final int USED_ITEM_SLOT_FOURTEEN = 13;
+            public static final int USED_ITEM_SLOT_FIFTEEN = 14;
+            public static final int USED_ITEM_SLOT_SIXTEEN = 15;
+            public static final int USED_ITEM_SLOT_SEVENTEEN = 16;
+            public static final int USED_ITEM_SLOT_EIGHTEEN = 17;
+            public static final int USED_ITEM_SLOT_NINETEEN = 18;
+            public static final int USED_ITEM_SLOT_TWENTY = 19;
+            public static final int USED_ITEM_SLOT_TWENTYONE = 20;
+            public static final int USED_ITEM_SLOT_TWENTYTWO = 21;
+            public static final int USED_ITEM_SLOT_TWENTYTHREE = 22;
+            public static final int USED_ITEM_SLOT_TWENTYFOUR = 23;
+            public static final int USED_ITEM_SLOT_TWENTYFIVE = 24;
+            public static final int USED_ITEM_SLOT_TWENTYSIX = 25;
+            public static final int USED_ITEM_SLOT_TWENTYSEVEN = 26;
+            public static final int USED_ITEM_SLOT_TWENTYEIGHT = 27;
+            public static final int UNUSED_ITEM_SLOT_ONE = 28;
+            public static final int UNUSED_ITEM_SLOT_TWO = 29;
+            public static final int UNUSED_ITEM_SLOT_THREE = 30;
+            public static final int UNUSED_ITEM_SLOT_FOUR = 31;
+            public static final int UNUSED_ITEM_SLOT_FIVE = 32;
+            public static final int UNUSED_ITEM_SLOT_SIX = 33;
+            public static final int UNUSED_ITEM_SLOT_SEVEN = 34;
+            public static final int UNUSED_ITEM_SLOT_EIGHT = 35;
+            public static final int UNUSED_ITEM_SLOT_NINE = 36;
+            public static final int UNUSED_ITEM_SLOT_TEN = 37;
+            public static final int UNUSED_ITEM_SLOT_ELEVEN = 38;
+            public static final int UNUSED_ITEM_SLOT_TWELVE = 39;
+            public static final int UNUSED_ITEM_SLOT_THIRTEEN = 40;
+            public static final int UNUSED_ITEM_SLOT_FOURTEEN = 41;
+            public static final int UNUSED_ITEM_SLOT_FIFTEEN = 42;
+            public static final int UNUSED_ITEM_SLOT_SIXTEEN = 43;
+            public static final int UNUSED_ITEM_SLOT_SEVENTEEN = 44;
+            public static final int UNUSED_ITEM_SLOT_EIGHTEEN = 45;
+            public static final int UNUSED_ITEM_SLOT_NINETEEN = 46;
+            public static final int UNUSED_ITEM_SLOT_TWENTY = 47;
+            public static final int UNUSED_ITEM_SLOT_TWENTYONE = 48;
+            public static final int UNUSED_ITEM_SLOT_TWENTYTWO = 49;
+            public static final int UNUSED_ITEM_SLOT_TWENTYTHREE = 50;
+            public static final int UNUSED_ITEM_SLOT_TWENTYFOUR = 51;
+            public static final int UNUSED_ITEM_SLOT_TWENTYFIVE = 52;
+            public static final int UNUSED_ITEM_SLOT_TWENTYSIX = 53;
+            public static final int UNUSED_ITEM_SLOT_TWENTYSEVEN = 54;
+            public static final int UNUSED_ITEM_SLOT_TWENTYEIGHT = 55;
+        }
+        // NOTE: this is rubbish not every interface will implement close sprite under 11
         public static class Global {
             public static final int DYNAMIC_CLOSE_BUTTON = 11;
         }
