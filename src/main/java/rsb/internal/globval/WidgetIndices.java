@@ -375,6 +375,65 @@ public class WidgetIndices {
     }
 
     /**
+     * Describe second trade screen widgets
+     * Last reviewed: 5/3/2022 1:29 am UTC+1
+     */
+    public static class TradeSecondScreen {
+        public static final int GROUP_INDEX = 334;
+        public static final int TRADE_WINDOW_SHADOW_BOX = 0;
+        public static final int PARENT_CONTAINER = 1;
+        public static final int TRADE_WINDOW_DYNAMIC_CONTAINER = 2; //0-7 steel border sprites
+        public static final int TRADE_WINDOW_SPRITE = 3;
+        public static final int TRADE_WINDOW_TITLE_FIRST_ROW = 4;
+        public static final int TRADE_WINDOW_TITLE_SECOND_ROW = 5;
+        // 6-12 steel border sprites
+        public static final int BUTTON_ACCEPT_SHADOW_BOX = 13;
+        public static final int BUTTON_DECLINE_SHADOW_BOX = 14;
+        // 15-22 steel border sprites
+        public static final int MY_OFFER_VALUE_LABEL = 23;
+        public static final int PARTNER_OFFER_VALUE_LABEL = 24;
+        public static final int BUTTON_ACCEPT_LABEL = 25;
+        public static final int BUTTON_DECLINE_LABEL = 26;
+        public static final int PARTNER_UNKNOWN_CONTAINER = 27;
+        public static final int MY_OFFER_ITEM_LIST_DYNAMIC_CONTAINER = 28;
+        public static final int MY_PARTNER_OFFER_ITEM_LIST_DYNAMIC_CONTAINER = 29;
+        public static final int NAME_OF_TRADE_PARTNER_LABEL = 30;
+        // 31
+        public static final int CLOSE_BUTTON_SPRITE = 32;
+    }
+
+    /**
+     * Describes first trade screen widgets
+     * Last reviewed: 5/3/2022 1:07 am UTC+1
+     */
+    public static class TradeFirstScreen {
+        public static final int GROUP_INDEX = 335;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TRADE_WINDOW_SHADOW_BOX = 1;
+        public static final int TRADE_WINDOW_CONTAINER = 2;
+        public static final int TRADE_WINDOW_DYNAMIC_CONTAINER = 3;
+        // 4-6 gap
+        public final static int BUTTON_FREE_INV_SLOTS_DYNAMIC_CONTAINER = 7; // Contains 0-7 steel border sprites
+        public final static int BUTTON_FREE_INV_SLOTS_BOX = 8;
+        public final static int BUTTON_FREE_INV_SLOTS_LABEL = 9;
+        public static final int BUTTON_ACCEPT_DYNAMIC_CONTAINER = 10; // Contains 0-7 steel border sprites
+        public static final int BUTTON_ACCEPT_SHADOW_BOX = 11;
+        public static final int BUTTON_ACCEPT_LABEL = 12;
+        public static final int BUTTON_DECLINE_DYNAMIC_CONTAINER = 13; // Contains 0-7 steel border sprites
+        public static final int BUTTON_DECLINE_SHADOW_BOX = 14;
+        public static final int BUTTON_DECLINE_LABEL = 15;
+        // 16-23 trade window steel border sprites
+        public static final int MY_OFFER_VALUE_LABEL = 24;
+        public static final int MY_OFFER_DYNAMIC_CONTAINER = 25;
+        public static final int MY_OFFER_TRADE_STATUS_LABEL = 26;
+        public static final int PARTNER_OFFER_VALUE_LABEL = 27;
+        public static final int PARTNER_OFFER_DYNAMIC_CONTAINER = 28;
+        public static final int PARTNER_OFFER_TRADE_STATUS_LABEL = 29;
+        public static final int TRADE_STATUS_LABEL = 30;
+        public static final int NAME_OF_TRADE_PARTNER_LABEL = 31;
+    }
+
+    /**
      * Describes click to play screen widgets
      * Last reviewed: 2/3/2022 2:28 am UTC+1
      */

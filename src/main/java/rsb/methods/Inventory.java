@@ -40,7 +40,7 @@ public class Inventory extends MethodProvider {
 		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEMS_CONTAINER));
 		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
+		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (isOpen(entry.getValue())) {
