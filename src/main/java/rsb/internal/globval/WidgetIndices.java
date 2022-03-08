@@ -617,5 +617,32 @@ public class WidgetIndices {
             public static final int LEFT_ITEM_SPRITE = 2;
             public static final int RIGHT_ITEM_SPRITE = 3;
         }
+        public static class AutocastSpells {
+            public static final int CANCEL_LABEL = 0;
+            public static final int WIND_STRIKE_SPRITE = 1;
+            public static final int WATER_STRIKE_SPRITE = 2;
+            public static final int EARTH_STRIKE_SPRITE = 3;
+            public static final int FIRE_STRIKE_SPRITE = 4;
+            public static final int WIND_BOLT_SPRITE = 5;
+            public static final int WATER_BOLT_SPRITE = 6;
+            public static final int EARTH_BOLT_SPRITE = 7;
+            public static final int FIRE_BOLT_SPRITE = 8;
+            public static final int WIND_BLAST_SPRITE = 9;
+            public static final int WATER_BLAST_SPRITE = 10;
+            public static final int EARTH_BLAST_SPRITE = 11;
+            public static final int FIRE_BLAST_SPRITE = 12;
+            public static final int WIND_WAVE_SPRITE = 13;
+            public static final int WATER_WAVE_SPRITE = 14;
+            public static final int EARTH_WAVE_SPRITE = 15;
+            public static final int FIRE_WAVE_SPRITE = 16;
+            // 17 - 47
+            // TODO: crumble undead, magic dart, iban blast, flames of zamorak, saradomin strike, claws of guthix
+            public static final int WIND_SURGE_SPRITE = 48;
+            public static final int WATER_SURGE_SPRITE = 49;
+            public static final int EARTH_SURGE_SPRITE = 50;
+            public static final int FIRE_SURGE_SPRITE = 51;
+            // TODO: ancient autocast
+            // TODO: arceeus autocast
+        }
     }
 }
