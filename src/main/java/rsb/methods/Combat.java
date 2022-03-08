@@ -235,7 +235,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT)
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB_TEXT)
 					.getText()
 					.trim());
 		} catch (NumberFormatException ex) {

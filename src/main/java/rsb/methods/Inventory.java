@@ -1,8 +1,8 @@
 package rsb.methods;
 
 import net.runelite.api.ItemComposition;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
@@ -36,10 +36,10 @@ public class Inventory extends MethodProvider {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		HashMap<String, RSWidget> widgets = new HashMap<>();
 		widgets.put(INVENTORY, methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER));
-		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEMS_CONTAINER));
+		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
+		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (isOpen(entry.getValue())) {
@@ -201,8 +201,8 @@ public class Inventory extends MethodProvider {
 			sleep(random(800, 1300));
 		}
 		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
-				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK).isValid()
-				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE).isValid()) {
+				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
+				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
 			methods.game.openTab(GameGUI.Tab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {

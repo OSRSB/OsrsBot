@@ -2,9 +2,9 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
+import rsb.internal.globval.WidgetIndices;
 import rsb.internal.wrappers.Filter;
 import rsb.internal.globval.VarpIndices;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
@@ -83,12 +83,14 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean close() {
 		if (isOpen()) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_CONTAINER)
+					.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isOpen();
 		}
 		if (isDepositOpen()) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_DYNAMIC_COMPONENTS)
+					.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isDepositOpen();
 		}
@@ -178,7 +180,7 @@ public class Bank extends MethodProvider {
 		if (isOpen()) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
 		}
-		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
+		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_INVENTORY_ITEMS).doClick();
 	}
 
 	/**
@@ -280,7 +282,7 @@ public class Bank extends MethodProvider {
 	 * @return The deposit box <code>RSWidget</code>.
 	 */
 	public RSWidget getBoxInterface() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX);
+		return methods.interfaces.get(WidgetIndices.DepositBox.GROUP_INDEX);
 	}
 
 	/**
@@ -308,7 +310,7 @@ public class Bank extends MethodProvider {
 	 * @return The bank <code>RSWidget</code>.
 	 */
 	public RSWidget getInterface() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK);
+		return methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX);
 	}
 
 	/**
@@ -353,10 +355,10 @@ public class Bank extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget bankInterface = getInterface();
-		if ((bankInterface == null) || (bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY) == null)) {
+		if ((bankInterface == null) || (bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER) == null)) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = bankInterface.getComponent(GlobalWidgetId.INTERFACE_BANK_INVENTORY).getComponents();
+		RSWidget[] components = bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; ++i) {
 			items[i] = new RSItem(methods, components[i]);
@@ -380,7 +382,7 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> if the deposit box interface is open; otherwise <code>false</code>.
 	 */
 	public boolean isDepositOpen() {
-		return methods.interfaces.get(GlobalWidgetId.INTERFACE_DEPOSIT_BOX).isValid();
+		return methods.interfaces.get(WidgetIndices.DepositBox.GROUP_INDEX).isValid();
 	}
 
 	private static class ReachableBankerFilter implements Filter<RSNPC> {
@@ -773,10 +775,10 @@ public class Bank extends MethodProvider {
 	 * @return All equipment items that are being worn.
 	 */
 	public RSItem[] getEquipmentItems() {
-		if (methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).isValid()) {
+		if (methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_ITEMS_CONTAINER).isValid()) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_INVENTORY_ITEMS_CONTAINER).getComponents();
+		RSWidget[] components = methods.interfaces.getComponent(GlobalWidgetInfo.EQUIPMENT_ITEMS_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = new RSItem(methods, components[i]);

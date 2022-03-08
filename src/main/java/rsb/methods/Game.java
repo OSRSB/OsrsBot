@@ -3,9 +3,9 @@ package rsb.methods;
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.script.Random;
 import rsb.script.randoms.*;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.wrappers.*;
 
 import java.awt.*;
@@ -49,11 +49,11 @@ public class Game extends MethodProvider {
 	 */
 	public String getLastMessage() {
 		RSWidget messages = methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_MESSAGES);
-			if (!messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_FIRST_MESSAGE).getText().isEmpty()) {
-				if (messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).isVisible()
-						&& !messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).getText().isEmpty())
-					return messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).getText();
-				return messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_FIRST_MESSAGE).getText();
+			if (!messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText().isEmpty()) {
+				if (messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).isVisible()
+						&& !messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText().isEmpty())
+					return messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText();
+				return messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText();
 			}
 		return "";
 	}
