@@ -1,25 +1,14 @@
 package rsb.botLauncher;
 
-import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.callback.ClientThread;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
-import rsb.methods.Game;
-import rsb.methods.GroundItems;
 import rsb.methods.MethodContext;
-import rsb.testsScript.Test;
 import rsb.util.OutputObjectComparer;
-import rsb.util.Parameters;
-import rsb.util.StdRandom;
 import rsb.wrappers.*;
-import rsb.wrappers.subwrap.WalkerTile;
 
-import java.applet.Applet;
 import java.awt.*;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import static java.lang.Thread.sleep;

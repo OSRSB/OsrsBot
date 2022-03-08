@@ -2,8 +2,6 @@ package rsb.internal.globval;
 
 import net.runelite.api.widgets.WidgetInfo;
 
-import static rsb.internal.globval.GlobalWidgetId.*;
-
 /**
  * The list of widget info in the form of (parent, child)
  * The [Group] at the start and end denotes a segment

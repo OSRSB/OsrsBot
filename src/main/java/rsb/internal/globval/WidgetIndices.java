@@ -118,6 +118,65 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes chatbox widgets
+     * TODO: review
+     */
+    public static class ChatBox {
+        public static final int GROUP_INDEX = 162;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BOTTOM_BAR_PARENT_CONTAINER = 1;
+        public static final int BOTTOM_BAR_CONTAINER = 2;
+        public static final int BOTTOM_BAR_SPRITE = 3;
+        public static final int TAB_ALL_CONTAINER = 4;
+        public static final int TAB_ALL_SPRITE = 5;
+        public static final int TAB_ALL_LABEL = 6;
+        public static final int TAB_GAME_CONTAINER = 7;
+        public static final int TAB_GAME_SPRITE = 8;
+        public static final int TAB_GAME_LABEL = 9;
+        public static final int TAB_GAME_STATE_LABEL = 10;
+        public static final int TAB_PUBLIC_CONTAINER = 11;
+        public static final int TAB_PUBLIC_SPRITE = 12;
+        public static final int TAB_PUBLIC_LABEL = 13;
+        public static final int TAB_PUBLIC_STATE_LABEL = 14;
+        public static final int TAB_PRIVATE_CONTAINER = 15;
+        public static final int TAB_PRIVATE_SPRITE= 16;
+        public static final int TAB_PRIVATE_LABEL = 17;
+        public static final int TAB_PRIVATE_STATE_LABEL = 18;
+        public static final int TAB_CHANNEL_CONTAINER = 19;
+        public static final int TAB_CHANNEL_SPRITE = 20;
+        public static final int TAB_CHANNEL_LABEL = 21;
+        public static final int TAB_CHANNEL_STATE_LABEL = 22;
+        public static final int TAB_CLAN_CONTAINER = 23;
+        public static final int TAB_CLAN_SPRITE = 24;
+        public static final int TAB_CLAN_LABEL = 25;
+        public static final int TAB_CLAN_STATE_LABEL = 26;
+        public static final int TAB_TRADE_CONTAINER = 27;
+        public static final int TAB_TRADE_SPRITE = 28;
+        public static final int TAB_TRADE_LABEL = 29;
+        public static final int TAB_TRADE_STATE_LABEL = 30;
+        public static final int REPORT_TAB_CONTAINER = 31;
+        public static final int REPORT_TAB_LABEL = 32;
+        public static final int REPORT_TAB_TEXT = 33;
+        public static final int FRAME_CONTAINER = 34;
+        public static final int TRANSPARENT_BACKGROUND_CONTAINER = 35;
+        // 36
+        public static final int CONTAINER = 37;
+        // 38 - 40 gap
+        public static final int TITLE = 41;
+        public static final int FULL_INPUT = 42;
+        // 43 - 49 gap
+        public static final int GE_SEARCH_RESULTS = 50;
+        // 51 - 52 gap
+        public static final int MESSAGES_CONTAINER = 53;
+        public static final int TRANSPARENT_BACKGROUND_LINES_CONTAINER = 54;
+        public static final int INPUT_LABEL = 55;
+        public static final int MESSAGE_LINES_CONTAINER = 56;
+        public static final int FIRST_MESSAGE_LABEL = 57;
+        public static final int LAST_MESSAGE_LABEL = 556;
+        public static final int SCROLLBAR_CONTAINER = 557;
+    }
+
+    /**
      * Describes deposit box widgets
      * Last reviewed: 28/2/2022 2:51 am UTC+1
      */
@@ -702,6 +761,9 @@ public class WidgetIndices {
             public static final int FIRE_SURGE_SPRITE = 51;
             // TODO: ancient autocast
             // TODO: arceeus autocast
+        }
+        public static class Global {
+            public static final int DYNAMIC_CLOSE_BUTTON = 11;
         }
     }
 }

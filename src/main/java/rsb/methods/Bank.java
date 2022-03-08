@@ -5,7 +5,6 @@ import net.runelite.api.ObjectID;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.wrappers.Filter;
 import rsb.internal.globval.VarpIndices;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
@@ -84,12 +83,14 @@ public class Bank extends MethodProvider {
 	 */
 	public boolean close() {
 		if (isOpen()) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_CONTAINER).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_DYNAMIC_CONTAINER)
+					.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isOpen();
 		}
 		if (isDepositOpen()) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+			methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_DYNAMIC_COMPONENTS)
+					.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick();
 			sleep(random(500, 600));
 			return !isDepositOpen();
 		}

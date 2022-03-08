@@ -1,7 +1,6 @@
 package rsb.methods;
 
 import net.runelite.api.Skill;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.Prayers;

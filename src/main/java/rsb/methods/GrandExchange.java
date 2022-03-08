@@ -1,7 +1,6 @@
 package rsb.methods;
 
 import net.runelite.api.SpriteID;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.RSItem;
@@ -49,7 +48,7 @@ public class GrandExchange extends MethodProvider {
 	public boolean close() {
 		if (isOpen()) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INTERFACE_LAYOUT)
-					.getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick();
+					.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick();
 		}
 		return false;
 	}
@@ -64,8 +63,8 @@ public class GrandExchange extends MethodProvider {
 		try {
 			int slotComponent = mapSlotToSlotIndex(slot);
 			if (isOpen()) {
-				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent).getDynamicComponent(
-						WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty")) {
+				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
+						.getDynamicComponent(WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty")) {
 					return true;
 				} else {
 					return false;

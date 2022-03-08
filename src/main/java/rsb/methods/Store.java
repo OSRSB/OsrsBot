@@ -1,6 +1,5 @@
 package rsb.methods;
 
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.*;
@@ -86,7 +85,8 @@ public class Store extends MethodProvider {
 			return true;
 		}
 
-		if (methods.interfaces.getComponent(GlobalWidgetInfo.STORE_DYNAMIC_COMPONENTS).getDynamicComponent(GlobalWidgetId.DYNAMIC_CLOSE_BUTTON).doClick()) {
+		if (methods.interfaces.getComponent(GlobalWidgetInfo.STORE_DYNAMIC_COMPONENTS)
+				.getDynamicComponent(WidgetIndices.DynamicComponents.Global.DYNAMIC_CLOSE_BUTTON).doClick()) {
 			sleep(random(500, 600));
 			return !isOpen();
 		} else {
