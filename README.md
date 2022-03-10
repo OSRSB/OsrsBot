@@ -53,9 +53,9 @@ To build make sure to use the Gradle build tasks to build the classes or the jar
 ###### Installing a script
 To install a .jar script, put it in the following folder:
 
-Windows: C:\Users\[username]\AppData\Roaming\OsrsBot\Scripts\Precompiled
-Linux: /home/[username]/.config/OsrsBot/Scripts/Precompiled
-MacOS: /Users/[username]/Library/Application Support/OsrsBot/Scripts/Precompiled
+**Windows:** C:\\Users\\[username]\\OsrsBot\\Scripts\\Precompiled \
+**Linux:** /home/[username]/.config/OsrsBot/Scripts/Precompiled \
+**MacOS:** /Users/[username]/Library/Application Support/OsrsBot/Scripts/Precompiled
 
 
 ###### Running a script
