@@ -469,7 +469,7 @@ public class Bank extends MethodProvider {
 			if (lowestDist < 5 && methods.calc.tileOnMap(tile) && methods.calc.canReach(tile, true)) {
 				boolean didAction = false;
 				if (bankBooth != null) {
-					didAction = bankBooth.doAction("Use-Quickly");
+					didAction = bankBooth.doAction("Bank") || bankBooth.doAction("Use-Quickly");
 				} else if (banker != null) {
 					didAction = banker.doAction("Bank", "Banker");
 				} else if (bankChest != null) {
