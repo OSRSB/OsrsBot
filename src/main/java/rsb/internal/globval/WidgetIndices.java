@@ -11,6 +11,7 @@ public class WidgetIndices {
         public static final int CONTAINER = 1;
         public static final int FRAME_DYNAMIC_CONTAINER = 2; // Contains stone border sprites 0-11, 11 is close button
         public static final int TITLE_LABEL = 3;
+        public static final int INVENTORY_ITEM_CONTAINER = 3; // In bank_inventory group 15, spot #3
         public static final int BUTTON_SHOW_TUTORIAL_CONTAINER = 4;
         public static final int ITEM_SLOTS_USED_LABEL = 5;
         public static final int ITEM_SLOTS_SEPARATOR_LINE = 6;

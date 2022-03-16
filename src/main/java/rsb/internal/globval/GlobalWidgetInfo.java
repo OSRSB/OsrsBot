@@ -1,5 +1,6 @@
 package rsb.internal.globval;
 
+import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 
 /**
@@ -53,6 +54,8 @@ public enum GlobalWidgetInfo {
     BANK_ITEM_MAX(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.ITEM_SLOTS_MAX_LABEL),
     BANK_TAB(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.TABS_DYNAMIC_CONTAINER),
     BANK_ITEMS_CONTAINER(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER),
+    //Bug #137 - Bank has its own inventory container
+    BANK_INVENTORY_ITEMS_CONTAINER(WidgetID.BANK_INVENTORY_GROUP_ID, WidgetIndices.Bank.INVENTORY_ITEM_CONTAINER),
     BANK_SCROLLBAR(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.SCROLLBAR_DYNAMIC_CONTAINER),
     BANK_BUTTON_SWAP(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_SWAP_CONTAINER),
     BANK_BUTTON_INSERT(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_INSERT_CONTAINER),
