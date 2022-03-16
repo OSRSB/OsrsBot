@@ -343,6 +343,7 @@ public class MouseHandler {
 	}
 
 	public void moveMouse(final int x, final int y) {
+		// Todo - don't use a thread with killing and actually fix https://osrsbot.org/t/mouse-did-not-end-up-on-target-pixel-compilation/35/3
 		Thread moveMouseThread = new Thread(() -> {
 			try {
 				motionFactory.move(x, y);
