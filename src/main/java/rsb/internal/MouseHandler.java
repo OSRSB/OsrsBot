@@ -343,10 +343,19 @@ public class MouseHandler {
 	}
 
 	public void moveMouse(final int x, final int y) {
+		Thread moveMouseThread = new Thread(() -> {
+			try {
+				motionFactory.move(x, y);
+			} catch (InterruptedException e) {
+				log.debug("Mouse move failed to execute properly.", e);
+			}
+		});
+		moveMouseThread.start();
+		// kill the thread after 5 seconds
 		try {
-			motionFactory.move(x, y);
+			moveMouseThread.join(5000);
 		} catch (InterruptedException e) {
-			log.debug("Mouse move failed to execute properly.", e);
+			log.debug("Mouse move thread failed to join properly.", e);
 		}
 	}
 
