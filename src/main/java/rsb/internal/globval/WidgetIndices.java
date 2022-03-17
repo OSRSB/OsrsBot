@@ -2,6 +2,33 @@ package rsb.internal.globval;
 
 public class WidgetIndices {
     /**
+     * Describes chat channel widgets
+     * Last reviewed: 10/3/2022 0:09 am UTC+1
+     */
+    public static class ChatChannel {
+        public static final int GROUP_INDEX = 7;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int OWNER_LABEL = 2;
+        public static final int FRAME_DYNAMIC_CONTAINER = 3; // 0 - 7, frame sprites
+        public static final int FRIENDS_LIST = 4;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 5; // 0 - 2, frame sprites
+        public static final int INNER_FRAME_TOP_BAR_DYNAMIC_CONTAINER = 6; // 0 - 1, bar sprites
+        public static final int INNER_FRAME_SORT_BY_RANK_DYNAMIC_CONTAINER = 7; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_NAME_DYNAMIC_CONTAINER = 8; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_LAST_WORLD_DYNAMIC_CONTAINER = 9; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_DYNAMIC_CONTAINER = 10; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_LEGACY_SORT_DYNAMIC_CONTAINER = 11; // 0, button sprite
+        public static final int INNER_FRAME_FRIENDS_LIST_CONTAINER = 12;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 13; // 0 - 5, sprites
+        public static final int JOIN_DYNAMIC_CONTAINER = 17; // 0 - 7, button sprites
+        public static final int JOIN_LABEL = 18;
+        public static final int SETUP_DYNAMIC_CONTAINER = 19; // 0 - 7, button sprites
+        public static final int SETUP_LABEL = 20;
+        // 21
+    }
+
+    /**
      * Describes bank widgets
      * Last reviewed: 2/3/2022 1:57 am UTC+1
      */
@@ -62,6 +89,10 @@ public class WidgetIndices {
         // 114 - 115
     }
 
+    /**
+     * Describes inventory widgets when bank is open
+     * Last reviewed: 10/3/2022 0:01 am UTC+1
+     */
     static class BankInventoryItems {
         public static final int GROUP_INDEX = 15;
         public static final int PARENT_CONTAINER = 0;
