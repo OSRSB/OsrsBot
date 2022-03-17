@@ -3,7 +3,6 @@ package rsb.plugin;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
@@ -16,7 +15,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import rsb.botLauncher.RuneLite;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.ClientToolbar;
-import rsb.internal.globval.GlobalConfiguration;
+import rsb.plugin.base.BotViewPanel;
 
 @PluginDescriptor(
         name = "Bot panel",
@@ -37,6 +36,7 @@ public class Botplugin extends Plugin
     private static ScriptPanel scriptPanel;
 
     private static AccountPanel accountPanel;
+
 
 
     @Override

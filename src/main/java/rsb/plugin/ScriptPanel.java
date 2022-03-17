@@ -1,5 +1,6 @@
 package rsb.plugin;
 
+import net.runelite.client.ui.PluginPanel;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
 import rsb.internal.globval.GlobalConfiguration;
@@ -15,7 +16,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 
-public class ScriptPanel extends JPanel {
+public class ScriptPanel extends PluginPanel {
 	private RuneLite bot;
 	private JScrollPane scrollPane1;
 	private JScrollPane scriptsSelectionScrollPane;

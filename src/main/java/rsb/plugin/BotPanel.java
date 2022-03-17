@@ -37,6 +37,7 @@ import rsb.internal.globval.GlobalConfiguration;
 import rsb.plugin.base.Accordion;
 import rsb.plugin.base.DebugPanel;
 import rsb.plugin.base.GeneralPanel;
+import rsb.plugin.base.BotViewPanel;
 
 import javax.inject.Inject;
 import javax.swing.*;
@@ -55,7 +56,6 @@ class BotPanel extends PluginPanel
 	private BotPanel(ClientThread clientThread, ItemManager itemManager, ScheduledExecutorService executor)
 	{
 		super(false);
-
 		setLayout(new BorderLayout());
 		setBackground(ColorScheme.DARK_GRAY_COLOR);
 	}
@@ -74,10 +74,11 @@ class BotPanel extends PluginPanel
 
 		JPanel generalPanel = GeneralPanel.getInstance();
 		JPanel debugPanel = new DebugPanel();
-
+		JPanel botViewPanel = new BotViewPanel();
 
 		accordion.addBar("General", generalPanel);
 		accordion.addBar("Debug", debugPanel);
+		accordion.addBar("Bot View", botViewPanel);
 
 		MaterialTab baseTab = new MaterialTab("Settings", tabGroup, accordion);
 		MaterialTab  accountTab = new MaterialTab("Accounts", tabGroup, accountPanel);
@@ -93,30 +94,6 @@ class BotPanel extends PluginPanel
 
 		add(tabGroup, BorderLayout.NORTH);
 		add(display, BorderLayout.CENTER);
-	}
-
-	/**
-	 * Opens the scripts folder in the default file explorer
-	 *
-	 * @param e ActionEvent
-	 */
-	private void openScriptsFolderPerformed(ActionEvent e) {
-		String folderPath = GlobalConfiguration.Paths.getScriptsPrecompiledDirectory();
-		try {
-			switch (GlobalConfiguration.getCurrentOperatingSystem()) {
-				case WINDOWS:
-					Runtime.getRuntime().exec("explorer.exe " + folderPath);
-					break;
-				case LINUX:
-					Runtime.getRuntime().exec("xdg-open " + folderPath);
-					break;
-				case MAC:
-					Runtime.getRuntime().exec("open " + folderPath);
-					break;
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 }

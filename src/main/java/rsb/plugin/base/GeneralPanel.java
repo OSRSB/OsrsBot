@@ -2,6 +2,7 @@ package rsb.plugin.base;
 
 import rsb.botLauncher.Application;
 import rsb.botLauncher.RuneLite;
+import rsb.internal.globval.GlobalConfiguration;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ public class GeneralPanel extends JPanel {
 
     private static GeneralPanel generalPanel;
     JButton addBotButton = new JButton("Add bot");
-    JButton scriptsFolderButton = new JButton("Scripts Folder");
+    JButton openScriptsFolderButton = new JButton("Scripts Folder");
 
     public static GeneralPanel getInstance() {
         if (generalPanel == null) {
@@ -36,6 +37,29 @@ public class GeneralPanel extends JPanel {
     private void init() {
         addBotButton.addActionListener(e -> addBotButtonAction());
         this.add(addBotButton);
-        generalPanel.add(scriptsFolderButton);
+        openScriptsFolderButton.addActionListener(e -> openScriptsFolderPerformed());
+        this.add(openScriptsFolderButton);
+    }
+
+    /**
+     * Opens the scripts folder in the default file explorer
+     */
+    private void openScriptsFolderPerformed() {
+        String folderPath = GlobalConfiguration.Paths.getScriptsPrecompiledDirectory();
+        try {
+            switch (GlobalConfiguration.getCurrentOperatingSystem()) {
+                case WINDOWS:
+                    Runtime.getRuntime().exec("explorer.exe " + folderPath);
+                    break;
+                case LINUX:
+                    Runtime.getRuntime().exec("xdg-open " + folderPath);
+                    break;
+                case MAC:
+                    Runtime.getRuntime().exec("open " + folderPath);
+                    break;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
