@@ -7,12 +7,10 @@ public class WidgetIndices {
      */
     public static class Bank {
         public static final int GROUP_INDEX = 12;
-        public static final int INVENTORY_GROUP_INDEX = 15;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
         public static final int FRAME_DYNAMIC_CONTAINER = 2; // Contains stone border sprites 0-11, 11 is close button
         public static final int TITLE_LABEL = 3;
-        public static final int INVENTORY_ITEM_CONTAINER = 3; // In INVENTORY_GROUP_INDEX, spot #3
         public static final int BUTTON_SHOW_TUTORIAL_CONTAINER = 4;
         public static final int ITEM_SLOTS_USED_LABEL = 5;
         public static final int ITEM_SLOTS_SEPARATOR_LINE = 6;
@@ -62,6 +60,14 @@ public class WidgetIndices {
         public static final int BUTTON_SETTINGS_DYNAMIC_CONTAINER = 112; // Contains 0-1 sprites
         public static final int BUTTON_EQUIPMENT_DYNAMIC_CONTAINER = 113; // Contains 0-1 sprites
         // 114 - 115
+    }
+
+    static class BankInventoryItems {
+        public static final int GROUP_INDEX = 15;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int UNKNOWN_CONTAINER = 2;
+        public static final int ITEMS_DYNAMIC_CONTAINER = 3; // 0-27 items sprites
     }
 
     /**

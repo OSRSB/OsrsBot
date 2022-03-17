@@ -53,7 +53,6 @@ public enum GlobalWidgetInfo {
     BANK_ITEM_MAX(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.ITEM_SLOTS_MAX_LABEL),
     BANK_TAB(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.TABS_DYNAMIC_CONTAINER),
     BANK_ITEMS_CONTAINER(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER),
-    BANK_INVENTORY_ITEMS_CONTAINER(WidgetIndices.Bank.INVENTORY_GROUP_INDEX, WidgetIndices.Bank.INVENTORY_ITEM_CONTAINER),
     BANK_SCROLLBAR(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.SCROLLBAR_DYNAMIC_CONTAINER),
     BANK_BUTTON_SWAP(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_SWAP_CONTAINER),
     BANK_BUTTON_INSERT(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_INSERT_CONTAINER),
@@ -64,6 +63,12 @@ public enum GlobalWidgetInfo {
     BANK_BUTTON_DEPOSIT_WORN_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_WORN_ITEMS_SPRITE),
     BANK_SEARCH_INPUT(CHATBOX_FULL_INPUT),
     //[BANK]
+
+    /**
+     * [BANK INVENTORY ITEMS] Widget Info
+     */
+    BANK_INVENTORY_ITEMS_CONTAINER(WidgetIndices.BankInventoryItems.GROUP_INDEX, WidgetIndices.BankInventoryItems.ITEMS_DYNAMIC_CONTAINER),
+    //[BANK INVENTORY ITEMS]
 
     /**
      * [DEPOSIT BOX] Widget Info
