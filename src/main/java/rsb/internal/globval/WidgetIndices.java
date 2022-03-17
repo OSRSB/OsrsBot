@@ -102,6 +102,84 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes contact npc widgets
+     * Last reviewed: 10/3/2022 1:17 am UTC+1
+     */
+    public static class ContactNpc {
+        public static final int GROUP_INDEX = 75;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // Contains thick border sprites [0-11]
+        public static final int CHARACTERS_CONTAINER = 2;
+        public static final int HONEST_JIMMY_CONTAINER = 3;
+        public static final int HONEST_JIMMY_MODEL = 4;
+        public static final int HONEST_JIMMY_LABEL = 5;
+        public static final int BERT_THE_SANDMAN_CONTAINER = 6;
+        public static final int BERT_THE_SANDMAN_MODEL = 7;
+        public static final int BERT_THE_SANDMAN_LABEL = 8;
+        public static final int ADVISOR_GHRIM_CONTAINER = 9;
+        public static final int ADVISOR_GHRIM_MODEL = 10;
+        public static final int ADVISOR_GHRIM_LABEL = 11;
+        public static final int DARK_MAGE_ABYSS_CONTAINER = 12;
+        public static final int DARK_MAGE_ABYSS_MODEL = 13;
+        public static final int DARK_MAGE_ABYSS_LABEL = 14;
+        public static final int LANTHUS_CONTAINER = 15;
+        public static final int LANTHUS_MODEL = 16;
+        public static final int LANTHUS_LABEL = 17;
+        public static final int SPRIA_CONTAINER = 18;
+        public static final int TURAEL_CONTAINER = 19;
+        public static final int TURAEL_MODEL = 20;
+        public static final int TURAEL_LABEL = 21;
+        public static final int MAZCHNA_CONTAINER = 22;
+        public static final int MAZCHNA_MODEL = 23;
+        public static final int MAZCHNA_LABEL = 24;
+        public static final int VANNAKA_CONTAINER = 25;
+        public static final int VANNAKA_MODEL = 26;
+        public static final int VANNAKA_LABEL = 27;
+        public static final int CHAELDAR_CONTAINER = 28;
+        public static final int CHAELDAR_MODEL = 29;
+        public static final int CHAELDAR_LABEL = 30;
+        public static final int NIEVE_CONTAINER = 31;
+        public static final int NIEVE_MODEL = 32;
+        public static final int NIEVE_LABEL = 33;
+        public static final int DURADEL_CONTAINER = 34;
+        public static final int DURADEL_MODEL = 35;
+        public static final int DURADEL_LABEL = 36;
+        public static final int KONAR_CONTAINER = 37;
+        public static final int KRYSTILIA_CONTAINER = 38;
+        public static final int KRYSTILIA_MODEL = 39;
+        public static final int KRYSTILIA_LABEL = 40;
+        public static final int MURPHY_CONTAINER = 41;
+        public static final int MURPHY_MODEL = 42;
+        public static final int MURPHY_LABEL = 43;
+        public static final int CYRISUS_CONTAINER = 44;
+        public static final int CYRISUS_MODEL = 45;
+        public static final int CYRISUS_LABEL = 46;
+        public static final int SMOGGY_CONTAINER = 47;
+        public static final int SMOGGY_MODEL = 48;
+        public static final int SMOGGY_LABEL = 49;
+        public static final int CAPTAIN_GINEA_CONTAINER = 50;
+        public static final int CAPTAIN_GINEA_MODEL = 51;
+        public static final int CAPTAIN_GINEA_LABEL = 52;
+        public static final int WATSON_CONTAINER = 53;
+        public static final int WATSON_MODEL = 54;
+        public static final int WATSON_LABEL = 55;
+        public static final int BARBARIAN_GUARD_CONTAINER = 56;
+        public static final int BARBARIAN_GUARD_MODEL = 57;
+        public static final int BARBARIAN_GUARD_LABEL = 58;
+        public static final int RANDOM_CONTAINER = 59;
+        public static final int RANDOM_MODEL = 60;
+        public static final int RANDOM_LABEL = 61;
+        public static final int AMY_CONTAINER = 62;
+        public static final int AMY_MODEL = 63;
+        public static final int AMY_LABEL = 64;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 65; // Contains scrollbar sprites [0-5]
+        public static final int KONAR_MODEL = 66;
+        public static final int KONAR_LABEL = 67;
+        public static final int SPRIA_MODEL = 68;
+        public static final int SPRIA_LABEL = 69;
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
