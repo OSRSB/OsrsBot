@@ -323,6 +323,51 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes settings tab
+     * Last reviewed: 10/3/2022 3:09 am UTC+1
+     */
+    public static class Settings {
+        public static final int GROUP_INDEX = 116;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TITLE_LABEL = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; //0-7 thick border sprites
+        public static final int INNER_FRAME_INNER_CONTAINER = 4;
+        public static final int PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
+        public static final int PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
+        public static final int NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
+        public static final int BOTTOM_BAR_CONTAINER = 8;
+        // gap 9 - 71
+        public static final int TAB_ACCEPT_AID_DYNAMIC_CONTAINER = 72; // 0-1 tab sprite, icon sprite
+        public static final int TAB_TOGGLE_RUN_DYNAMIC_CONTAINER = 73; // 0-2 tab sprite, icon sprite, label percentage
+        public static final int TAB_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 74; // 0-1 tab sprite, icon sprite
+        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 75; // 0-9 sprites of button
+        public static final int TAB_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 76; // 0-1 tab sprite, icon sprite
+        // gap 77 - 85
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 86;
+        // gap 87 - 101
+        public static final int TOP_BAR_FIRST_SEPARATOR_LINE = 102;
+        public static final int TOP_BAR_SECOND_SEPARATOR_LINE = 103;
+        public static final int TOP_BAR_THIRD_SEPARATOR_LINE = 104;
+        public static final int TOP_BAR_FOURTH_SEPARATOR_LINE = 105;
+        public static final int TAB_CONTROLS_SETTINGS_CONTAINER = 106;
+        public static final int TAB_CONTROLS_SETTINGS_LEFT_SIDE_SPRITE = 107;
+        public static final int TAB_CONTROLS_SETTINGS_MID_SIDE_SPRITE = 108;
+        public static final int TAB_CONTROLS_SETTINGS_RIGHT_SIDE_SPRITE = 109;
+        public static final int TAB_CONTROLS_SETTINGS_ICON_SPRITE = 110;
+        public static final int TAB_TAB_AUDIO_SETTINGS_CONTAINER = 111;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_CONTAINER = 112;
+        public static final int TAB_TAB_AUDIO_SETTINGS_LEFT_SIDE_SPRITE = 113;
+        public static final int TAB_TAB_AUDIO_SETTINGS_MID_SIDE_SPRITE = 114;
+        public static final int TAB_TAB_AUDIO_SETTINGS_RIGHT_SIDE_SPRITE = 115;
+        public static final int TAB_TAB_AUDIO_SETTINGS_ICON_SPRITE = 116;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_LEFT_SIDE_SPRITE = 117;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
