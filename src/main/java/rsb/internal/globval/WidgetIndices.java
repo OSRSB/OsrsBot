@@ -228,6 +228,101 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes account management tab
+     * Last reviewed: 10/3/2022 2:48 am UTC+1
+     */
+    public static class AccountManagementTab {
+        public static final int GROUP_INDEX = 109;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int SEPARATOR_FIRST_LINE = 2;
+        public static final int SEPARATOR_SECOND_LINE = 3;
+        public static final int SEPARATOR_THIRD_LINE = 4;
+        public static final int SEPARATOR_FOURTH_LINE = 5;
+        public static final int TAB_ACCOUNT_CONTAINER = 6;
+        public static final int TAB_ACCOUNT_LEFT_SIDE_SPRITE = 7;
+        public static final int TAB_ACCOUNT_MID_SIDE_SPRITE = 8;
+        public static final int TAB_ACCOUNT_RIGHT_SIDE_SPRITE = 9;
+        public static final int TAB_ACCOUNT_ICON_SPRITE = 10;
+        public static final int TAB_COMMUNITY_CONTAINER = 11;
+        public static final int TAB_COMMUNITY_LEFT_SIDE_SPRITE = 12;
+        public static final int TAB_COMMUNITY_MID_SIDE_SPRITE = 13;
+        public static final int TAB_COMMUNITY_RIGHT_SIDE_SPRITE = 14;
+        public static final int TAB_COMMUNITY_ICON_SPRITE = 15;
+        public static final int TAB_USEFUL_LINKS_CONTAINER = 16;
+        public static final int TAB_USEFUL_LINKS_LEFT_SIDE_SPRITE = 17;
+        public static final int TAB_USEFUL_LINKS_MID_SIDE_SPRITE = 18;
+        public static final int TAB_USEFUL_LINKS_RIGHT_SIDE_SPRITE = 19;
+        public static final int TAB_USEFUL_LINKS_ICON_SPRITE = 20;
+        public static final int FRAME_PARENT_CONTAINER = 21;
+        public static final int ACCOUNT_FRAME_CONTAINER = 22;
+        public static final int ACCOUNT_FRAME_TITLE_LABEL = 23;
+        public static final int ACCOUNT_SEGMENT_FIRST_CONTAINER = 24;
+        public static final int ACCOUNT_SEGMENT_FIRST_TITLE_LABEL = 25;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_CONTAINER = 26;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_SPRITE = 27;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_ICON_LEFT_SPRITE = 28;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_ICON_RIGHT_SPRITE = 29;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_LABEL = 30;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_CONTAINER = 31;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_SPRITE = 32;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_ICON_LEFT_SPRITE = 33;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_ICON_RIGHT_SPRITE = 34;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_LABEL = 35;
+        public static final int ACCOUNT_SEGMENT_SECOND_CONTAINER = 36;
+        public static final int ACCOUNT_SEGMENT_SECOND_TITLE_LABEL = 37;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_CONTAINER = 38;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_SPRITE = 39;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_ICON_LEFT_SPRITE = 40;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_ICON_RIGHT_SPRITE = 41;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_LABEL = 42;
+        public static final int ACCOUNT_SEGMENT_THIRD_CONTAINER = 43;
+        public static final int ACCOUNT_SEGMENT_THIRD_TITLE_LABEL = 44;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_CONTAINER = 45;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_SPRITE = 46;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_ICON_LEFT_SPRITE = 47;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_ICON_RIGHT_SPRITE = 48;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_LABEL = 49;
+        public static final int COMMUNITY_FRAME_CONTAINER = 50;
+        public static final int COMMUNITY_FRAME_TITLE_LABEL = 51;
+        public static final int COMMUNITY_SEGMENT_FIRST_CONTAINER = 52;
+        public static final int COMMUNITY_SEGMENT_FIRST_TITLE_LABEL = 53;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_CONTAINER = 54;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_SPRITE = 55;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_ICON_LEFT_SPRITE = 56;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_ICON_RIGHT_SPRITE = 57;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_LABEL = 58;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_OPACITY_SPRITE = 59;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_CONTAINER = 60;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_SPRITE = 61;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_ICON_LEFT_SPRITE = 62;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_ICON_RIGHT_SPRITE = 63;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_LABEL = 64;
+        public static final int COMMUNITY_SEGMENT_SECOND_CONTAINER = 65;
+        public static final int COMMUNITY_SEGMENT_SECOND_TITLE_LABEL = 66;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_CONTAINER = 67;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_SPRITE = 68;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_ICON_LEFT_SPRITE = 69;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_ICON_RIGHT_SPRITE = 70;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_LABEL = 71;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_CONTAINER = 72;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_SPRITE = 73;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_ICON_LEFT_SPRITE = 74;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_ICON_RIGHT_SPRITE = 75;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_LABEL = 76;
+        public static final int USEFUL_LINKS_FRAME_CONTAINER = 77;
+        public static final int USEFUL_LINKS_FRAME_TITLE_LABEL = 78;
+        public static final int USEFUL_LINKS_CONTAINER = 79;
+        public static final int USEFUL_LINKS_WEBSITE_DYNAMIC_CONTAINER = 80; // 0-9 , 8 button sprites, 1 button label
+        public static final int USEFUL_LINKS_SUPPORT_DYNAMIC_CONTAINER = 81; // 0-9
+        public static final int USEFUL_LINKS_EXCHANGE_DYNAMIC_CONTAINER = 82; // 0-9
+        public static final int USEFUL_LINKS_HISCORES_DYNAMIC_CONTAINER = 83; // 0-9
+        public static final int USEFUL_LINKS_WIKI_DYNAMIC_CONTAINER = 84; // 0-9
+        public static final int USEFUL_LINKS_MERCHANDISE_DYNAMIC_CONTAINER = 85; // 0-9
+        public static final int USEFUL_LINKS_EMPTY_LINK_DYNAMIC_CONTAINER = 86; // 0-9
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
