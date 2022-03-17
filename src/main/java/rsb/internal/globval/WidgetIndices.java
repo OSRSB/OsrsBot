@@ -180,6 +180,36 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes grouping tab widgets
+     * Last reviewed: 10/3/2022 2:06 am UTC+1
+     */
+    public static class Grouping {
+        public static final int GROUP_INDEX = 76;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int ENTIRE_FRAME_LABEL = 2;
+        public static final int ACTIVITY_DROPDOWN_CONTAINER = 3;
+        public static final int ACTIVITY_DROPDOWN_SPRITE = 4;
+        public static final int ACTIVITY_DROPDOWN_WHITE_BOX = 5;
+        public static final int ACTIVITY_DROPDOWN_YELLOW_BOX = 6;
+        public static final int ACTIVITY_DROPDOWN_ORANGE_BOX = 7;
+        public static final int ACTIVITY_DROPDOWN_LABEL = 8;
+        public static final int INNER_FRAME_CONTAINER = 9;
+        public static final int INNER_FRAME_YELLOW_BOX = 10;
+        public static final int INNER_FRAME_ORANGE_BOX = 11;
+        public static final int INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER = 13; // 0 - 5 scrollbar sprite
+        public static final int ACTIVITY_DROPDOWN_ICON_SPRITE = 20;
+        public static final int SUGGESTED_WORLD_TEXT_LABEL = 21;
+        public static final int SUGGESTED_WORLD_LABEL = 22;
+        public static final int JOIN_CONTAINER  = 23;
+        public static final int JOIN_SPRITE = 24;
+        public static final int JOIN_LABEL  = 25;
+        public static final int TELEPORT_BUTTON_DYNAMIC_CONTAINER = 26; // 0 teleport button box
+        public static final int TELEPORT_BUTTON_SPRITE = 27;
+        public static final int TELEPORT_BUTTON_LABEL = 28;
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
