@@ -210,6 +210,24 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes hairdresser widgets
+     * Last reviewed: 10/3/2022 2:18 am UTC+1
+     */
+    static class HairdresserSalon {
+        public static final int GROUP_INDEX = 82;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
+        public static final int HAIR_STYLES_DYNAMIC_CONTAINER = 2; //0-71 models/sprites
+        public static final int HAIR_STYLES_TITLE_LABEL = 3;
+        public static final int SELECT_COLOUR_CONTAINER = 4;
+        public static final int SELECT_COLOUR_TITLE_LABEL = 5;
+        public static final int SELECT_COLOUR_TOP_BOX = 6;
+        public static final int SELECT_COLOUR_BOTTOM_BOX = 7;
+        public static final int SELECT_COLOUR_DYNAMIC_CONTAINER = 8; //0-49 colors sprites
+        public static final int CONFIRM_TEXT_LABEL = 9;
+    }
+
+    /**
      * Describes minimap widgets
      * Last reviewed: 28/2/2022 1:57 am UTC+1
      */
