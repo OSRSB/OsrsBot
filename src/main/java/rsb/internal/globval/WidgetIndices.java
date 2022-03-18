@@ -499,6 +499,38 @@ public class WidgetIndices {
 
     /**
      * Describes deposit box widgets
+     * Last reviewed: 12/3/2022 1:26 am UTC+1
+     */
+    static class Logout {
+        public static final int GROUP_INDEX = 182;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BOTTOM_BAR_CONTAINER = 1;
+        public static final int BOTTOM_BAR_TITLE_LABEL = 2;
+        public static final int BUTTON_WORLD_SWITCHER_CONTAINER = 3;
+        public static final int BUTTON_WORLD_SWITCHER_MAIN_SPRITE= 4;
+        public static final int BUTTON_WORLD_SWITCHER_LEFT_SPRITE= 5;
+        public static final int BUTTON_WORLD_SWITCHER_RIGHT_SPRITE= 6;
+        public static final int BUTTON_WORLD_SWITCHER_LABEL = 7;
+        public static final int BUTTON_LOGOUT_CONTAINER = 8;
+        public static final int BUTTON_LOGOUT_MAIN_SPRITE= 9;
+        public static final int BUTTON_LOGOUT_LEFT_SPRITE= 10;
+        public static final int BUTTON_LOGOUT_RIGHT_SPRITE= 11;
+        public static final int BUTTON_LOGOUT_LABEL = 12;
+        public static final int TOP_BAR_CONTAINER = 13;
+        public static final int TOP_BAR_TITLE_LABEL = 14;
+        public static final int TOP_BAR_BUTTONS_CONTAINER = 15;
+        public static final int THUMB_UP_CONTAINER = 16;
+        public static final int THUMB_UP_LEFT_SPRITE = 17;
+        public static final int THUMB_UP_RIGHT_SPRITE = 18;
+        public static final int THUMB_UP_MAIN_SPRITE = 19;
+        public static final int THUMB_DOWN_CONTAINER = 20;
+        public static final int THUMB_DOWN_LEFT_SPRITE = 21;
+        public static final int THUMB_DOWN_RIGHT_SPRITE = 22;
+        public static final int THUMB_DOWN_MAIN_SPRITE = 23;
+    }
+
+    /**
+     * Describes deposit box widgets
      * Last reviewed: 28/2/2022 2:51 am UTC+1
      */
     public static class DepositBox {

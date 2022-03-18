@@ -10,12 +10,6 @@ import net.runelite.api.widgets.WidgetInfo;
  */
 public enum GlobalWidgetInfo {
     /**
-     * [MISC] Widget Info
-     */
-    LOGOUT_BUTTON(WidgetInfo.LOGOUT_BUTTON),
-    // [MISC]
-
-    /**
      * [CHAT] Widget Info
      */
     CHATBOX_MESSAGES(WidgetInfo.CHATBOX_MESSAGES),
@@ -36,6 +30,12 @@ public enum GlobalWidgetInfo {
      */
     QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS),
     // [QUICKPRAYER]
+
+    /**
+     * [LOGOUT] Widget Info
+     */
+    LOGOUT_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_LOGOUT_CONTAINER),
+    // [LOGOUT]
 
     /**
      * [WILDERNESS] Widget Info
@@ -75,14 +75,14 @@ public enum GlobalWidgetInfo {
     BANK_BUTTON_SEARCH(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_SEARCH_SPRITE),
     BANK_BUTTON_DEPOSIT_CARRIED_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_CARRIED_ITEMS_SPRITE),
     BANK_BUTTON_DEPOSIT_WORN_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_WORN_ITEMS_SPRITE),
-    BANK_SEARCH_INPUT(CHATBOX_FULL_INPUT),
+    BANK_SEARCH_INPUT(CHATBOX_FULL_INPUT), // dafuq is this?
     // [BANK]
 
     /**
      * [BANK INVENTORY ITEMS] Widget Info
      */
     BANK_INVENTORY_ITEMS_CONTAINER(WidgetIndices.BankInventoryItems.GROUP_INDEX, WidgetIndices.BankInventoryItems.ITEMS_DYNAMIC_CONTAINER),
-    //[BANK INVENTORY ITEMS]
+    // [BANK INVENTORY ITEMS]
 
     /**
      * [DEPOSIT BOX] Widget Info
