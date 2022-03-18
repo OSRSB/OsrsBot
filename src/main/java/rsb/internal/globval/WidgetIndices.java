@@ -210,6 +210,21 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes grouping tab widgets
+     * Last reviewed: 12/3/2022 1:51 am UTC+1
+     */
+    public static class QuickPrayers {
+        public static final int GROUP_INDEX = 77;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BG_FIRST_WHITE_BOX = 1; // 245 opacity layers in background
+        public static final int BG_SECOND_WHITE_BOX = 2; // 245 opacity layers in background
+        public static final int BG_THIRD_WHITE_BOX = 3; // 245 opacity layers in background
+        public static final int PRAYERS_DYNAMIC_CONTAINER = 4; // 0-28 prayer sprites, other sprites
+        public static final int BUTTON_DONE_SPRITE = 5;
+        public static final int BUTTON_DONE_LABEL = 6;
+    }
+
+    /**
      * Describes hairdresser widgets
      * Last reviewed: 10/3/2022 2:18 am UTC+1
      */
@@ -736,7 +751,6 @@ public class WidgetIndices {
         // 197
         public static final int FILTERS_DYNAMIC_CONTAINER = 198; // Contains 0-8 button sprites 9 button label
     }
-
 
     /**
      * Describes npc dialog widgets

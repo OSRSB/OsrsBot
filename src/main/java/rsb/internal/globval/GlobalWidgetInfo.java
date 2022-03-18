@@ -20,7 +20,7 @@ public enum GlobalWidgetInfo {
     /**
      * [QUICKPRAYER]
      */
-    QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS),
+    QUICK_PRAYER_PRAYERS(WidgetIndices.QuickPrayers.GROUP_INDEX, WidgetIndices.QuickPrayers.PRAYERS_DYNAMIC_CONTAINER),
     // [QUICKPRAYER]
 
     /**
