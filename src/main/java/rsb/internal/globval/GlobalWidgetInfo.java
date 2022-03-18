@@ -10,14 +10,6 @@ import net.runelite.api.widgets.WidgetInfo;
  */
 public enum GlobalWidgetInfo {
     /**
-     * [CHAT] Widget Info
-     */
-    CHATBOX_MESSAGES(WidgetInfo.CHATBOX_MESSAGES),
-    CHATBOX_FULL_INPUT(WidgetInfo.CHATBOX_FULL_INPUT),
-    DIALOG_NPC_TEXT(WidgetInfo.DIALOG_NPC_TEXT),
-    // [CHAT
-
-    /**
      * [INVENTORY] Widget Info
      */
     INVENTORY_ITEMS_CONTAINER(WidgetInfo.INVENTORY),
@@ -30,6 +22,19 @@ public enum GlobalWidgetInfo {
      */
     QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS),
     // [QUICKPRAYER]
+
+    /**
+     * [CHAT] Widget Info
+     */
+    CHATBOX_MESSAGES(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.MESSAGES_CONTAINER),
+    CHATBOX_FULL_INPUT(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.FULL_INPUT),
+    // [CHAT
+
+    /**
+     * [DIALOGNPC]
+     */
+    DIALOG_NPC_TEXT(WidgetIndices.DialogNPC.GROUP_INDEX, WidgetIndices.DialogNPC.DIALOG_TEXT_LABEL),
+    // [DIALOGNPC]
 
     /**
      * [LOGOUT] Widget Info

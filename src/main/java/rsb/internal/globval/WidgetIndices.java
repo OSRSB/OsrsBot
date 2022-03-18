@@ -737,6 +737,22 @@ public class WidgetIndices {
         public static final int FILTERS_DYNAMIC_CONTAINER = 198; // Contains 0-8 button sprites 9 button label
     }
 
+
+    /**
+     * Describes npc dialog widgets
+     * Last reviewed: 14/3/2022 1:56 am UTC+1
+     */
+    static class DialogNPC {
+        public static final int GROUP_INDEX = 232;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_CONTAINER = 1;
+        public static final int NPC_HEAD_MODEL = 2;
+        public static final int DIALOG_CONTAINER = 3;
+        public static final int DIALOG_TITLE_LABEL = 4;
+        public static final int DIALOG_CONTINUE_LABEL = 5;
+        public static final int DIALOG_TEXT_LABEL = 6;
+    }
+
     /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
