@@ -228,6 +228,22 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes hairdresser widgets
+     * Last reviewed: 12/3/2022 10:27 pm UTC+1
+     */
+    public static class PvPScreen {
+        public static final int GROUP_INDEX = 90;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
+        public static final int KD_COUNTER_DYNAMIC_CONTAINER = 26; //1 KD label
+        public static final int SKULL_GROUP_CONTAINER = 44;
+        public static final int SKULL_CONTAINER = 45;
+        public static final int SKULL_SPRITE = 46;
+        public static final int UNKNOWN_SPRITE = 48;
+        public static final int WILDNERESS_LEVEL_LABEL = 50;
+    }
+
+    /**
      * Describes account management tab
      * Last reviewed: 10/3/2022 2:48 am UTC+1
      */

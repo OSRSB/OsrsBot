@@ -86,7 +86,7 @@ public class LoginBot extends Random {
             }
         }
         if (game.getClientState() == GameState.LOGGED_IN) {
-            Widget welcomeScreenMOTD = ctx.client.getWidget(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY.getPackedId());
+            Widget welcomeScreenMOTD = ctx.client.getWidget(GlobalWidgetInfo.LOGIN_MOTW_TEXT.getPackedId());
             if (welcomeScreenMOTD != null) {
                 if (welcomeScreenMOTD.getTextColor() != -1) {
                     ctx.mouse.click(true);

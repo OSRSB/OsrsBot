@@ -19,7 +19,6 @@ public enum GlobalWidgetInfo {
     /** [MISC] Widget Info */
     WORLD_MAP_VIEW(WidgetInfo.WORLD_MAP_VIEW),
     LOGOUT_BUTTON(WidgetInfo.LOGOUT_BUTTON),
-    LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY(WidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY),
     //[MISC]
 
     /**
@@ -33,7 +32,7 @@ public enum GlobalWidgetInfo {
     /**
      * [WILDERNESS] Widget Info
      */
-    PVP_WILDERNESS_LEVEL(WidgetInfo.PVP_WILDERNESS_LEVEL),
+    PVP_WILDERNESS_LEVEL(WidgetIndices.PvPScreen.GROUP_INDEX, WidgetIndices.PvPScreen.WILDNERESS_LEVEL_LABEL),
     //[WILDERNESS]
 
     /**
