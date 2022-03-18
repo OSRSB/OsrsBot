@@ -80,7 +80,6 @@ public enum GlobalWidgetInfo {
     BANK_BUTTON_SEARCH(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_SEARCH_SPRITE),
     BANK_BUTTON_DEPOSIT_CARRIED_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_CARRIED_ITEMS_SPRITE),
     BANK_BUTTON_DEPOSIT_WORN_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_WORN_ITEMS_SPRITE),
-    BANK_SEARCH_INPUT(CHATBOX_FULL_INPUT), // dafuq is this?
     // [BANK]
 
     /**
@@ -164,12 +163,6 @@ public enum GlobalWidgetInfo {
     GRAND_EXCHANGE_COLLECT_AREA_TWO(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.LEFT_ITEM_SPRITE),
     GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER),
     // [GRANDEXCHANGE]
-
-    /**
-     * [SKILL] Widget Info
-     */
-    SKILL(0,0), // dafuq is this?
-    // [SKILL]
 
     /**
      * [MAGIC] Widget Info
