@@ -9,17 +9,11 @@ import net.runelite.api.widgets.WidgetInfo;
  * Rather just for grouping and potentially future updating purposes
  */
 public enum GlobalWidgetInfo {
-    /** [LOGIN] Widget Info */
-    LOGIN_MOTW(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_CONTAINER),
-    LOGIN_MOTW_TITLE(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TITLE_LABEL),
-    LOGIN_MOTW_TEXT(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TEXT_LABEL),
-    LOGIN_CLICK_TO_PLAY(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.BUTTON_CLICK_HERE_TO_PLAY_CONTAINER),
-    //[LOGIN]
-
-    /** [MISC] Widget Info */
-    WORLD_MAP_VIEW(WidgetInfo.WORLD_MAP_VIEW),
+    /**
+     * [MISC] Widget Info
+     */
     LOGOUT_BUTTON(WidgetInfo.LOGOUT_BUTTON),
-    //[MISC]
+    // [MISC]
 
     /**
      * [CHAT] Widget Info
@@ -27,13 +21,7 @@ public enum GlobalWidgetInfo {
     CHATBOX_MESSAGES(WidgetInfo.CHATBOX_MESSAGES),
     CHATBOX_FULL_INPUT(WidgetInfo.CHATBOX_FULL_INPUT),
     DIALOG_NPC_TEXT(WidgetInfo.DIALOG_NPC_TEXT),
-    //[CHAT
-
-    /**
-     * [WILDERNESS] Widget Info
-     */
-    PVP_WILDERNESS_LEVEL(WidgetIndices.PvPScreen.GROUP_INDEX, WidgetIndices.PvPScreen.WILDNERESS_LEVEL_LABEL),
-    //[WILDERNESS]
+    // [CHAT
 
     /**
      * [INVENTORY] Widget Info
@@ -41,7 +29,34 @@ public enum GlobalWidgetInfo {
     INVENTORY_ITEMS_CONTAINER(WidgetInfo.INVENTORY),
     INVENTORY_DESTROY_ITEM(WidgetInfo.DESTROY_ITEM),
     INVENTORY_DESTROY_ITEM_YES(WidgetInfo.DESTROY_ITEM_YES),
-    //[INVENTORY]
+    // [INVENTORY]
+
+    /**
+     * [QUICKPRAYER]
+     */
+    QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS),
+    // [QUICKPRAYER]
+
+    /**
+     * [WILDERNESS] Widget Info
+     */
+    PVP_WILDERNESS_LEVEL(WidgetIndices.PvPScreen.GROUP_INDEX, WidgetIndices.PvPScreen.WILDNERESS_LEVEL_LABEL),
+    // [WILDERNESS]
+
+    /**
+     * [WORLDMAP] Widget Info
+     */
+    WORLD_MAP_VIEW(WidgetIndices.WorldMap.GROUP_INDEX, WidgetIndices.WorldMap.MAPVIEW_CONTAINER),
+    // [WORLDMAP]
+
+    /**
+     * [LOGIN] Widget Info
+     */
+    LOGIN_MOTW(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_CONTAINER),
+    LOGIN_MOTW_TITLE(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TITLE_LABEL),
+    LOGIN_MOTW_TEXT(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.MOTW_TEXT_LABEL),
+    LOGIN_CLICK_TO_PLAY(WidgetIndices.ClickToPlayScreen.GROUP_INDEX, WidgetIndices.ClickToPlayScreen.BUTTON_CLICK_HERE_TO_PLAY_CONTAINER),
+    // [LOGIN]
 
     /**
      * [BANK] Widget Info
@@ -61,7 +76,7 @@ public enum GlobalWidgetInfo {
     BANK_BUTTON_DEPOSIT_CARRIED_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_CARRIED_ITEMS_SPRITE),
     BANK_BUTTON_DEPOSIT_WORN_ITEMS(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_DEPOSIT_WORN_ITEMS_SPRITE),
     BANK_SEARCH_INPUT(CHATBOX_FULL_INPUT),
-    //[BANK]
+    // [BANK]
 
     /**
      * [BANK INVENTORY ITEMS] Widget Info
@@ -77,7 +92,7 @@ public enum GlobalWidgetInfo {
     DEPOSIT_BUTTON_DEPOSIT_INVENTORY_ITEMS(WidgetIndices.DepositBox.GROUP_INDEX, WidgetIndices.DepositBox.BUTTON_DEPOSIT_INVENTORY_SPRITE),
     DEPOSIT_BUTTON_DEPOSIT_WORN_ITEMS(WidgetIndices.DepositBox.GROUP_INDEX, WidgetIndices.DepositBox.BUTTON_DEPOSIT_WORN_ITEMS_SPRITE),
     DEPOSIT_BUTTON_DEPOSIT_LOOT(WidgetIndices.DepositBox.GROUP_INDEX, WidgetIndices.DepositBox.BUTTON_DEPOSIT_LOOT_SPRITE),
-    //[DEPOSIT BOX]
+    // [DEPOSIT BOX]
 
     /**
      * [COMBAT] Widget Info
@@ -89,7 +104,7 @@ public enum GlobalWidgetInfo {
     COMBAT_AUTO_CAST_DEFENSIVE_SPELL(WidgetIndices.CombatOptionsTab.GROUP_INDEX, WidgetIndices.CombatOptionsTab.AUTO_CAST_DEFENSIVE_SPELL_CONTAINER),
     COMBAT_AUTO_CAST_SPELL(WidgetIndices.CombatOptionsTab.GROUP_INDEX, WidgetIndices.CombatOptionsTab.AUTO_CAST_SPELL_CONTAINER),
     COMBAT_AUTO_RETALIATE(WidgetIndices.CombatOptionsTab.GROUP_INDEX, WidgetIndices.CombatOptionsTab.AUTO_RETALIATE_CONTAINER),
-    //[COMBAT]
+    // [COMBAT]
 
     /**
      * [EQUIPMENT] Widget Info
@@ -106,7 +121,7 @@ public enum GlobalWidgetInfo {
     EQUIPMENT_FEET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.FEET_DYNAMIC_CONTAINER),
     EQUIPMENT_RING(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.RING_DYNAMIC_CONTAINER),
     EQUIPMENT_AMMO(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.AMMUNITION_DYNAMIC_CONTAINER),
-    //[EQUIPMENT]
+    // [EQUIPMENT]
 
     /**
      * [TRADE] Widget Info
@@ -123,14 +138,14 @@ public enum GlobalWidgetInfo {
     TRADE_SECOND_SCREEN_MY_OFFER_ITEM_LIST(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.MY_OFFER_ITEM_LIST_DYNAMIC_CONTAINER),
     TRADE_SECOND_SCREEN_PARTNER_OFFER_ITEM_LIST(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.MY_PARTNER_OFFER_ITEM_LIST_DYNAMIC_CONTAINER),
     TRADE_SECOND_SCREEN_PARTNER_NAME(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.NAME_OF_TRADE_PARTNER_LABEL),
-    //[TRADE]
+    // [TRADE]
 
     /**
      * [STORE] Widget Info
      */
     STORE_DYNAMIC_COMPONENTS(WidgetIndices.Store.GROUP_INDEX, WidgetIndices.Store.DYNAMIC_CONTAINER),
     STORE_ITEMS_CONTAINER(WidgetIndices.Store.GROUP_INDEX, WidgetIndices.Store.ITEMS_DYNAMIC_CONTAINER),
-    //[STORE]
+    // [STORE]
 
     /**
      * [GRANDEXCHANGE]
@@ -143,18 +158,20 @@ public enum GlobalWidgetInfo {
     GRAND_EXCHANGE_COLLECT_AREA_ONE(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.RIGHT_ITEM_SPRITE),
     GRAND_EXCHANGE_COLLECT_AREA_TWO(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.LEFT_ITEM_SPRITE),
     GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER),
+    // [GRANDEXCHANGE]
+
     /**
      * [SKILL] Widget Info
      */
-    SKILL(0,0),
-    //[SKILL]
+    SKILL(0,0), // dafuq is this?
+    // [SKILL]
 
     /**
      * [MAGIC] Widget Info
      */
     MAGIC_SPELL_LIST(WidgetIndices.SpellbookTab.GROUP_INDEX, WidgetIndices.SpellbookTab.SPELLS_CONTAINER),
     MAGIC_AUTOCAST_SPELL_LIST(WidgetIndices.SpellAutocast.GROUP_INDEX, WidgetIndices.SpellAutocast.SPELLS_DYNAMIC_CONTAINER),
-    //[MAGIC]
+    // [MAGIC]
 
     /**
      * [MINIMAP] Widget Info
@@ -172,19 +189,13 @@ public enum GlobalWidgetInfo {
     MINIMAP_BOND_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.BOND_ORB_CONTAINER),
     MINIMAP_WIKI_BANNER(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.WIKI_BANNER_CONTAINER),
     MINIMAP_WORLDMAP_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.WORLDMAP_ORB_SPRITE),
-    //[MINIMAP]
+    // [MINIMAP]
 
     /**
      * [PRAYER] Widget Info
      */
-    PRAYER_STANDARD_BOOK(WidgetIndices.PrayersTab.GROUP_ID, WidgetIndices.PrayersTab.PRAYERS_CONTAINER),
-    //[PRAYER]
-
-    /**
-     * [QUICKPRAYER]
-     */
-    QUICK_PRAYER_PRAYERS(WidgetInfo.QUICK_PRAYER_PRAYERS);
-    //[QUICKPRAYER]
+    PRAYER_STANDARD_BOOK(WidgetIndices.PrayersTab.GROUP_ID, WidgetIndices.PrayersTab.PRAYERS_CONTAINER);
+    // [PRAYER]
 
     private final int groupId;
     private final int childId;

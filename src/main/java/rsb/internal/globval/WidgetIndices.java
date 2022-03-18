@@ -1018,6 +1018,36 @@ public class WidgetIndices {
 
     /**
      * Describes dynamic widgets
+     * Last reviewed: 12/3/2022 0:11 am UTC+1
+     */
+    public static class WorldMap {
+        public static final int GROUP_INDEX = 595;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MAIN_CONTAINER = 1;
+        public static final int DYNAMIC_CONTAINER = 2; //0-7 borders,corners sprites
+        //3
+        public static final int UNKNOWN_CONTAINER = 4;
+        public static final int MAIN_FRAME_CONTAINER = 5;
+        public static final int MAPVIEW_BOX = 6;
+        public static final int MAPVIEW_CONTAINER = 7;
+        public static final int CONTAINER = 8; //Content Type 1400
+        public static final int MAPVIEW_DYNAMIC_CONTAINER = 9; //1 position icon
+        public static final int SIDEBAR_DYNAMIC_CONTAINER = 14;
+        public static final int KEY_DYNAMIC_CONTAINER = 16;
+        public static final int LEGENDS_DYNAMIC_CONTAINER = 21;
+        public static final int BOTTOM_BAR_CONTAINER = 22;
+        public static final int BOTTOM_BAR_SPRITE = 23;
+        public static final int HIDE_MENU_DYNAMIC_SPRITE = 24;
+        public static final int SEARCH_INPUT_BOX_DYNAMIC_SPRITE = 25;
+        public static final int SURFACE_DYNAMIC_CONTAINER = 26;
+        public static final int BUTTON_CLOSE_SPRITE = 38;
+        public static final int RESIZE_CORNER_CONTAINER = 39;
+        public static final int RESIZE_CORNER_SPRITE = 40;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 41;
+    }
+
+    /**
+     * Describes dynamic widgets
      * Last reviewed: 3/3/2022 0:37 am UTC+1
      */
     public static class DynamicComponents {
