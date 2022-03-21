@@ -728,7 +728,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes summary tab widget
+     * Describes character summary tab widget
      * Last reviewed: 18/3/2022 0:29 am UTC+1
      */
     static class CharacterSummaryTab {
@@ -763,6 +763,23 @@ public class WidgetIndices {
         public static final int TAB_LEAGUES_RIGHT_SIDE_SPRITE = 31;
         public static final int TAB_LEAGUES_ICON_SPRITE = 32;
         public static final int INNER_FRAME_CONTAINER = 33;
+    }
+
+    /**
+     * Describes social tab widget
+     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     */
+    public static class SocialTab {
+        public static final int GROUP_INDEX = 707;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TOP_BAR_SEPARATOR_LINE = 2;
+        public static final int TAB_CHAT_CHANNEL_CONTAINER = 3;
+        public static final int TAB_YOUR_CLAN_CONTAINER = 4;
+        public static final int TAB_VIEW_ANOTHER_CLAN_CONTAINER = 5;
+        public static final int TAB_CHAT_GROUPING_CONTAINER = 6;
+        public static final int FRAME_CONTAINER = 7;
+        public static final int FRAME_TIME_LABEL = 8;
     }
 
     /**
