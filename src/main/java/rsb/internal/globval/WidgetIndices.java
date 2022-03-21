@@ -812,6 +812,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes character summary sub-tab widget under character summary tab widget
+     * Last reviewed: 18/3/2022 2:34 am UTC+1
+     */
+    static class CharacterSummarySubTab {
+        public static final int GROUP_INDEX = 712;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CHARACTER_NAME_LABEL = 1;
+        public static final int SPRITES_LABELS_DYNAMIC_CONTAINER = 2;
+        public static final int BUTTONS_DYNAMIC_CONTAINER = 3;
+    }
+
+    /**
      * Describes dynamic widgets
      * Last reviewed: 3/3/2022 0:37 am UTC+1
      */
