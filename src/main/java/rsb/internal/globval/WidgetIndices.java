@@ -399,8 +399,23 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes quest list sub tab widgets
-     * Last reviewed: 18/3/2022 4:31 am UTC+1
+     * Describes npc dialog widgets
+     * Last reviewed: 19/3/2022 0:19 am UTC+1
+     */
+    static class DialogNPC {
+        public static final int GROUP_INDEX = 232;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_CONTAINER = 1;
+        public static final int NPC_HEAD_MODEL = 2;
+        public static final int DIALOG_CONTAINER = 3;
+        public static final int DIALOG_TITLE_LABEL = 4;
+        public static final int DIALOG_CONTINUE_LABEL = 5;
+        public static final int DIALOG_TEXT_LABEL = 6;
+    }
+
+    /**
+     * Describes music player tab widgets
+     * Last reviewed: 18/3/2022 4:49 am UTC+1
      */
     public static class MusicPlayerTab {
         public static final int GROUP_INDEX = 239;
@@ -433,7 +448,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes quest list sub tab widgets
+     * Describes smithing window widgets
      * Last reviewed: 18/3/2022 4:02 am UTC+1
      */
     public static class Smithing {
@@ -682,7 +697,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes grand exchange widgets
+     * Describes friend list tab widgets
      * Last reviewed: 18/3/2022 2:46 am UTC+1
      */
     public static class FriendlistTab {
