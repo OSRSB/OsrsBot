@@ -387,6 +387,28 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes quest list sub tab widgets
+     * Last reviewed: 18/3/2022 4:31 am UTC+1
+     */
+    static class MusicPlayerTab {
+        public static final int GROUP_INDEX = 239;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //0-1 toggle all sprite, search sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 1;
+        public static final int INNER_FRAME_BOX = 2;
+        public static final int MUSIC_TRACK_LIST_DYNAMIC_CONTAINER = 3; //0-679, music labels
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 4; //0-5, scrollbar sprites
+        public static final int PLAYING_TEXT_LABEL = 5;
+        public static final int CURRENT_TRACK_LABEL = 6;
+        public static final int AUTO_BUTTON_SPRITE = 7;
+        public static final int AUTO_BUTTON_LABEL = 8;
+        public static final int MANUAL_BUTTON_SPRITE = 9;
+        public static final int MANUAL_BUTTON_LABEL = 10;
+        public static final int LOOP_BUTTON_SPRITE = 11;
+        public static final int LOOP_BUTTON_LABEL = 12;
+        public static final int UNLOCKED_TRACKS_COUNT = 13;
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
