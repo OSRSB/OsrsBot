@@ -2,17 +2,42 @@ package rsb.internal.globval;
 
 public class WidgetIndices {
     /**
+     * Describes chat channel widgets
+     * Last reviewed: 10/3/2022 0:09 am UTC+1
+     */
+    public static class ChatChannel {
+        public static final int GROUP_INDEX = 7;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int OWNER_LABEL = 2;
+        public static final int FRAME_DYNAMIC_CONTAINER = 3; // 0 - 7, frame sprites
+        public static final int FRIENDS_LIST = 4;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 5; // 0 - 2, frame sprites
+        public static final int INNER_FRAME_TOP_BAR_DYNAMIC_CONTAINER = 6; // 0 - 1, bar sprites
+        public static final int INNER_FRAME_SORT_BY_RANK_DYNAMIC_CONTAINER = 7; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_NAME_DYNAMIC_CONTAINER = 8; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_LAST_WORLD_DYNAMIC_CONTAINER = 9; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_DYNAMIC_CONTAINER = 10; // 0, button sprite
+        public static final int INNER_FRAME_SORT_BY_LEGACY_SORT_DYNAMIC_CONTAINER = 11; // 0, button sprite
+        public static final int INNER_FRAME_FRIENDS_LIST_CONTAINER = 12;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 13; // 0 - 5, sprites
+        public static final int JOIN_DYNAMIC_CONTAINER = 17; // 0 - 7, button sprites
+        public static final int JOIN_LABEL = 18;
+        public static final int SETUP_DYNAMIC_CONTAINER = 19; // 0 - 7, button sprites
+        public static final int SETUP_LABEL = 20;
+        // 21
+    }
+
+    /**
      * Describes bank widgets
      * Last reviewed: 2/3/2022 1:57 am UTC+1
      */
     public static class Bank {
         public static final int GROUP_INDEX = 12;
-        public static final int INVENTORY_GROUP_INDEX = 15;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
         public static final int FRAME_DYNAMIC_CONTAINER = 2; // Contains stone border sprites 0-11, 11 is close button
         public static final int TITLE_LABEL = 3;
-        public static final int INVENTORY_ITEM_CONTAINER = 3; // In INVENTORY_GROUP_INDEX, spot #3
         public static final int BUTTON_SHOW_TUTORIAL_CONTAINER = 4;
         public static final int ITEM_SLOTS_USED_LABEL = 5;
         public static final int ITEM_SLOTS_SEPARATOR_LINE = 6;
@@ -62,6 +87,315 @@ public class WidgetIndices {
         public static final int BUTTON_SETTINGS_DYNAMIC_CONTAINER = 112; // Contains 0-1 sprites
         public static final int BUTTON_EQUIPMENT_DYNAMIC_CONTAINER = 113; // Contains 0-1 sprites
         // 114 - 115
+    }
+
+    /**
+     * Describes inventory widgets when bank is open
+     * Last reviewed: 10/3/2022 0:01 am UTC+1
+     */
+    static class BankInventoryItems {
+        public static final int GROUP_INDEX = 15;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int UNKNOWN_CONTAINER = 2;
+        public static final int ITEMS_DYNAMIC_CONTAINER = 3; // 0-27 items sprites
+    }
+
+    /**
+     * Describes contact npc widgets
+     * Last reviewed: 10/3/2022 1:17 am UTC+1
+     */
+    public static class ContactNpc {
+        public static final int GROUP_INDEX = 75;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // Contains thick border sprites [0-11]
+        public static final int CHARACTERS_CONTAINER = 2;
+        public static final int HONEST_JIMMY_CONTAINER = 3;
+        public static final int HONEST_JIMMY_MODEL = 4;
+        public static final int HONEST_JIMMY_LABEL = 5;
+        public static final int BERT_THE_SANDMAN_CONTAINER = 6;
+        public static final int BERT_THE_SANDMAN_MODEL = 7;
+        public static final int BERT_THE_SANDMAN_LABEL = 8;
+        public static final int ADVISOR_GHRIM_CONTAINER = 9;
+        public static final int ADVISOR_GHRIM_MODEL = 10;
+        public static final int ADVISOR_GHRIM_LABEL = 11;
+        public static final int DARK_MAGE_ABYSS_CONTAINER = 12;
+        public static final int DARK_MAGE_ABYSS_MODEL = 13;
+        public static final int DARK_MAGE_ABYSS_LABEL = 14;
+        public static final int LANTHUS_CONTAINER = 15;
+        public static final int LANTHUS_MODEL = 16;
+        public static final int LANTHUS_LABEL = 17;
+        public static final int SPRIA_CONTAINER = 18;
+        public static final int TURAEL_CONTAINER = 19;
+        public static final int TURAEL_MODEL = 20;
+        public static final int TURAEL_LABEL = 21;
+        public static final int MAZCHNA_CONTAINER = 22;
+        public static final int MAZCHNA_MODEL = 23;
+        public static final int MAZCHNA_LABEL = 24;
+        public static final int VANNAKA_CONTAINER = 25;
+        public static final int VANNAKA_MODEL = 26;
+        public static final int VANNAKA_LABEL = 27;
+        public static final int CHAELDAR_CONTAINER = 28;
+        public static final int CHAELDAR_MODEL = 29;
+        public static final int CHAELDAR_LABEL = 30;
+        public static final int NIEVE_CONTAINER = 31;
+        public static final int NIEVE_MODEL = 32;
+        public static final int NIEVE_LABEL = 33;
+        public static final int DURADEL_CONTAINER = 34;
+        public static final int DURADEL_MODEL = 35;
+        public static final int DURADEL_LABEL = 36;
+        public static final int KONAR_CONTAINER = 37;
+        public static final int KRYSTILIA_CONTAINER = 38;
+        public static final int KRYSTILIA_MODEL = 39;
+        public static final int KRYSTILIA_LABEL = 40;
+        public static final int MURPHY_CONTAINER = 41;
+        public static final int MURPHY_MODEL = 42;
+        public static final int MURPHY_LABEL = 43;
+        public static final int CYRISUS_CONTAINER = 44;
+        public static final int CYRISUS_MODEL = 45;
+        public static final int CYRISUS_LABEL = 46;
+        public static final int SMOGGY_CONTAINER = 47;
+        public static final int SMOGGY_MODEL = 48;
+        public static final int SMOGGY_LABEL = 49;
+        public static final int CAPTAIN_GINEA_CONTAINER = 50;
+        public static final int CAPTAIN_GINEA_MODEL = 51;
+        public static final int CAPTAIN_GINEA_LABEL = 52;
+        public static final int WATSON_CONTAINER = 53;
+        public static final int WATSON_MODEL = 54;
+        public static final int WATSON_LABEL = 55;
+        public static final int BARBARIAN_GUARD_CONTAINER = 56;
+        public static final int BARBARIAN_GUARD_MODEL = 57;
+        public static final int BARBARIAN_GUARD_LABEL = 58;
+        public static final int RANDOM_CONTAINER = 59;
+        public static final int RANDOM_MODEL = 60;
+        public static final int RANDOM_LABEL = 61;
+        public static final int AMY_CONTAINER = 62;
+        public static final int AMY_MODEL = 63;
+        public static final int AMY_LABEL = 64;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 65; // Contains scrollbar sprites [0-5]
+        public static final int KONAR_MODEL = 66;
+        public static final int KONAR_LABEL = 67;
+        public static final int SPRIA_MODEL = 68;
+        public static final int SPRIA_LABEL = 69;
+    }
+
+    /**
+     * Describes grouping tab widgets
+     * Last reviewed: 10/3/2022 2:06 am UTC+1
+     */
+    public static class Grouping {
+        public static final int GROUP_INDEX = 76;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int ENTIRE_FRAME_LABEL = 2;
+        public static final int ACTIVITY_DROPDOWN_CONTAINER = 3;
+        public static final int ACTIVITY_DROPDOWN_SPRITE = 4;
+        public static final int ACTIVITY_DROPDOWN_WHITE_BOX = 5;
+        public static final int ACTIVITY_DROPDOWN_YELLOW_BOX = 6;
+        public static final int ACTIVITY_DROPDOWN_ORANGE_BOX = 7;
+        public static final int ACTIVITY_DROPDOWN_LABEL = 8;
+        public static final int INNER_FRAME_CONTAINER = 9;
+        public static final int INNER_FRAME_YELLOW_BOX = 10;
+        public static final int INNER_FRAME_ORANGE_BOX = 11;
+        public static final int INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER = 13; // 0 - 5 scrollbar sprite
+        public static final int ACTIVITY_DROPDOWN_ICON_SPRITE = 20;
+        public static final int SUGGESTED_WORLD_TEXT_LABEL = 21;
+        public static final int SUGGESTED_WORLD_LABEL = 22;
+        public static final int JOIN_CONTAINER  = 23;
+        public static final int JOIN_SPRITE = 24;
+        public static final int JOIN_LABEL  = 25;
+        public static final int TELEPORT_BUTTON_DYNAMIC_CONTAINER = 26; // 0 teleport button box
+        public static final int TELEPORT_BUTTON_SPRITE = 27;
+        public static final int TELEPORT_BUTTON_LABEL = 28;
+    }
+
+    /**
+     * Describes grouping tab widgets
+     * Last reviewed: 12/3/2022 1:51 am UTC+1
+     */
+    public static class QuickPrayers {
+        public static final int GROUP_INDEX = 77;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BG_FIRST_WHITE_BOX = 1; // 245 opacity layers in background
+        public static final int BG_SECOND_WHITE_BOX = 2; // 245 opacity layers in background
+        public static final int BG_THIRD_WHITE_BOX = 3; // 245 opacity layers in background
+        public static final int PRAYERS_DYNAMIC_CONTAINER = 4; // 0-28 prayer sprites, other sprites
+        public static final int BUTTON_DONE_SPRITE = 5;
+        public static final int BUTTON_DONE_LABEL = 6;
+    }
+
+    /**
+     * Describes hairdresser widgets
+     * Last reviewed: 10/3/2022 2:18 am UTC+1
+     */
+    static class HairdresserSalon {
+        public static final int GROUP_INDEX = 82;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
+        public static final int HAIR_STYLES_DYNAMIC_CONTAINER = 2; //0-71 models/sprites
+        public static final int HAIR_STYLES_TITLE_LABEL = 3;
+        public static final int SELECT_COLOUR_CONTAINER = 4;
+        public static final int SELECT_COLOUR_TITLE_LABEL = 5;
+        public static final int SELECT_COLOUR_TOP_BOX = 6;
+        public static final int SELECT_COLOUR_BOTTOM_BOX = 7;
+        public static final int SELECT_COLOUR_DYNAMIC_CONTAINER = 8; //0-49 colors sprites
+        public static final int CONFIRM_TEXT_LABEL = 9;
+    }
+
+    /**
+     * Describes hairdresser widgets
+     * Last reviewed: 12/3/2022 10:27 pm UTC+1
+     */
+    public static class PvPScreen {
+        public static final int GROUP_INDEX = 90;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
+        public static final int KD_COUNTER_DYNAMIC_CONTAINER = 26; //1 KD label
+        public static final int SKULL_GROUP_CONTAINER = 44;
+        public static final int SKULL_CONTAINER = 45;
+        public static final int SKULL_SPRITE = 46;
+        public static final int UNKNOWN_SPRITE = 48;
+        public static final int WILDNERESS_LEVEL_LABEL = 50;
+    }
+
+    /**
+     * Describes account management tab
+     * Last reviewed: 10/3/2022 2:48 am UTC+1
+     */
+    public static class AccountManagementTab {
+        public static final int GROUP_INDEX = 109;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int SEPARATOR_FIRST_LINE = 2;
+        public static final int SEPARATOR_SECOND_LINE = 3;
+        public static final int SEPARATOR_THIRD_LINE = 4;
+        public static final int SEPARATOR_FOURTH_LINE = 5;
+        public static final int TAB_ACCOUNT_CONTAINER = 6;
+        public static final int TAB_ACCOUNT_LEFT_SIDE_SPRITE = 7;
+        public static final int TAB_ACCOUNT_MID_SIDE_SPRITE = 8;
+        public static final int TAB_ACCOUNT_RIGHT_SIDE_SPRITE = 9;
+        public static final int TAB_ACCOUNT_ICON_SPRITE = 10;
+        public static final int TAB_COMMUNITY_CONTAINER = 11;
+        public static final int TAB_COMMUNITY_LEFT_SIDE_SPRITE = 12;
+        public static final int TAB_COMMUNITY_MID_SIDE_SPRITE = 13;
+        public static final int TAB_COMMUNITY_RIGHT_SIDE_SPRITE = 14;
+        public static final int TAB_COMMUNITY_ICON_SPRITE = 15;
+        public static final int TAB_USEFUL_LINKS_CONTAINER = 16;
+        public static final int TAB_USEFUL_LINKS_LEFT_SIDE_SPRITE = 17;
+        public static final int TAB_USEFUL_LINKS_MID_SIDE_SPRITE = 18;
+        public static final int TAB_USEFUL_LINKS_RIGHT_SIDE_SPRITE = 19;
+        public static final int TAB_USEFUL_LINKS_ICON_SPRITE = 20;
+        public static final int FRAME_PARENT_CONTAINER = 21;
+        public static final int ACCOUNT_FRAME_CONTAINER = 22;
+        public static final int ACCOUNT_FRAME_TITLE_LABEL = 23;
+        public static final int ACCOUNT_SEGMENT_FIRST_CONTAINER = 24;
+        public static final int ACCOUNT_SEGMENT_FIRST_TITLE_LABEL = 25;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_CONTAINER = 26;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_SPRITE = 27;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_ICON_LEFT_SPRITE = 28;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_ICON_RIGHT_SPRITE = 29;
+        public static final int ACCOUNT_SEGMENT_FIRST_STORE_LABEL = 30;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_CONTAINER = 31;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_SPRITE = 32;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_ICON_LEFT_SPRITE = 33;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_ICON_RIGHT_SPRITE = 34;
+        public static final int ACCOUNT_SEGMENT_FIRST_BOND_LABEL = 35;
+        public static final int ACCOUNT_SEGMENT_SECOND_CONTAINER = 36;
+        public static final int ACCOUNT_SEGMENT_SECOND_TITLE_LABEL = 37;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_CONTAINER = 38;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_SPRITE = 39;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_ICON_LEFT_SPRITE = 40;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_ICON_RIGHT_SPRITE = 41;
+        public static final int ACCOUNT_SEGMENT_SECOND_INBOX_LABEL = 42;
+        public static final int ACCOUNT_SEGMENT_THIRD_CONTAINER = 43;
+        public static final int ACCOUNT_SEGMENT_THIRD_TITLE_LABEL = 44;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_CONTAINER = 45;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_SPRITE = 46;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_ICON_LEFT_SPRITE = 47;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_ICON_RIGHT_SPRITE = 48;
+        public static final int ACCOUNT_SEGMENT_THIRD_NAMECHANGER_LABEL = 49;
+        public static final int COMMUNITY_FRAME_CONTAINER = 50;
+        public static final int COMMUNITY_FRAME_TITLE_LABEL = 51;
+        public static final int COMMUNITY_SEGMENT_FIRST_CONTAINER = 52;
+        public static final int COMMUNITY_SEGMENT_FIRST_TITLE_LABEL = 53;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_CONTAINER = 54;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_SPRITE = 55;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_ICON_LEFT_SPRITE = 56;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_ICON_RIGHT_SPRITE = 57;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_LABEL = 58;
+        public static final int COMMUNITY_SEGMENT_FIRST_POLL_OPACITY_SPRITE = 59;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_CONTAINER = 60;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_SPRITE = 61;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_ICON_LEFT_SPRITE = 62;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_ICON_RIGHT_SPRITE = 63;
+        public static final int COMMUNITY_SEGMENT_FIRST_HISTORY_LABEL = 64;
+        public static final int COMMUNITY_SEGMENT_SECOND_CONTAINER = 65;
+        public static final int COMMUNITY_SEGMENT_SECOND_TITLE_LABEL = 66;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_CONTAINER = 67;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_SPRITE = 68;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_ICON_LEFT_SPRITE = 69;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_ICON_RIGHT_SPRITE = 70;
+        public static final int COMMUNITY_SEGMENT_SECOND_NEWSPOST_LABEL = 71;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_CONTAINER = 72;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_SPRITE = 73;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_ICON_LEFT_SPRITE = 74;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_ICON_RIGHT_SPRITE = 75;
+        public static final int COMMUNITY_SEGMENT_SECOND_ARCHIVE_LABEL = 76;
+        public static final int USEFUL_LINKS_FRAME_CONTAINER = 77;
+        public static final int USEFUL_LINKS_FRAME_TITLE_LABEL = 78;
+        public static final int USEFUL_LINKS_CONTAINER = 79;
+        public static final int USEFUL_LINKS_WEBSITE_DYNAMIC_CONTAINER = 80; // 0-9 , 8 button sprites, 1 button label
+        public static final int USEFUL_LINKS_SUPPORT_DYNAMIC_CONTAINER = 81; // 0-9
+        public static final int USEFUL_LINKS_EXCHANGE_DYNAMIC_CONTAINER = 82; // 0-9
+        public static final int USEFUL_LINKS_HISCORES_DYNAMIC_CONTAINER = 83; // 0-9
+        public static final int USEFUL_LINKS_WIKI_DYNAMIC_CONTAINER = 84; // 0-9
+        public static final int USEFUL_LINKS_MERCHANDISE_DYNAMIC_CONTAINER = 85; // 0-9
+        public static final int USEFUL_LINKS_EMPTY_LINK_DYNAMIC_CONTAINER = 86; // 0-9
+    }
+
+    /**
+     * Describes settings tab
+     * Last reviewed: 10/3/2022 3:09 am UTC+1
+     */
+    public static class Settings {
+        public static final int GROUP_INDEX = 116;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TITLE_LABEL = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; //0-7 thick border sprites
+        public static final int INNER_FRAME_INNER_CONTAINER = 4;
+        public static final int PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
+        public static final int PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
+        public static final int NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
+        public static final int BOTTOM_BAR_CONTAINER = 8;
+        // gap 9 - 71
+        public static final int TAB_ACCEPT_AID_DYNAMIC_CONTAINER = 72; // 0-1 tab sprite, icon sprite
+        public static final int TAB_TOGGLE_RUN_DYNAMIC_CONTAINER = 73; // 0-2 tab sprite, icon sprite, label percentage
+        public static final int TAB_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 74; // 0-1 tab sprite, icon sprite
+        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 75; // 0-9 sprites of button
+        public static final int TAB_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 76; // 0-1 tab sprite, icon sprite
+        // gap 77 - 85
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 86;
+        // gap 87 - 101
+        public static final int TOP_BAR_FIRST_SEPARATOR_LINE = 102;
+        public static final int TOP_BAR_SECOND_SEPARATOR_LINE = 103;
+        public static final int TOP_BAR_THIRD_SEPARATOR_LINE = 104;
+        public static final int TOP_BAR_FOURTH_SEPARATOR_LINE = 105;
+        public static final int TAB_CONTROLS_SETTINGS_CONTAINER = 106;
+        public static final int TAB_CONTROLS_SETTINGS_LEFT_SIDE_SPRITE = 107;
+        public static final int TAB_CONTROLS_SETTINGS_MID_SIDE_SPRITE = 108;
+        public static final int TAB_CONTROLS_SETTINGS_RIGHT_SIDE_SPRITE = 109;
+        public static final int TAB_CONTROLS_SETTINGS_ICON_SPRITE = 110;
+        public static final int TAB_TAB_AUDIO_SETTINGS_CONTAINER = 111;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_CONTAINER = 112;
+        public static final int TAB_TAB_AUDIO_SETTINGS_LEFT_SIDE_SPRITE = 113;
+        public static final int TAB_TAB_AUDIO_SETTINGS_MID_SIDE_SPRITE = 114;
+        public static final int TAB_TAB_AUDIO_SETTINGS_RIGHT_SIDE_SPRITE = 115;
+        public static final int TAB_TAB_AUDIO_SETTINGS_ICON_SPRITE = 116;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_LEFT_SIDE_SPRITE = 117;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
+        public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
     }
 
     /**
@@ -176,6 +510,38 @@ public class WidgetIndices {
         public static final int FIRST_MESSAGE_LABEL = 57;
         public static final int LAST_MESSAGE_LABEL = 556;
         public static final int SCROLLBAR_CONTAINER = 557;
+    }
+
+    /**
+     * Describes deposit box widgets
+     * Last reviewed: 12/3/2022 1:26 am UTC+1
+     */
+    static class Logout {
+        public static final int GROUP_INDEX = 182;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BOTTOM_BAR_CONTAINER = 1;
+        public static final int BOTTOM_BAR_TITLE_LABEL = 2;
+        public static final int BUTTON_WORLD_SWITCHER_CONTAINER = 3;
+        public static final int BUTTON_WORLD_SWITCHER_MAIN_SPRITE= 4;
+        public static final int BUTTON_WORLD_SWITCHER_LEFT_SPRITE= 5;
+        public static final int BUTTON_WORLD_SWITCHER_RIGHT_SPRITE= 6;
+        public static final int BUTTON_WORLD_SWITCHER_LABEL = 7;
+        public static final int BUTTON_LOGOUT_CONTAINER = 8;
+        public static final int BUTTON_LOGOUT_MAIN_SPRITE= 9;
+        public static final int BUTTON_LOGOUT_LEFT_SPRITE= 10;
+        public static final int BUTTON_LOGOUT_RIGHT_SPRITE= 11;
+        public static final int BUTTON_LOGOUT_LABEL = 12;
+        public static final int TOP_BAR_CONTAINER = 13;
+        public static final int TOP_BAR_TITLE_LABEL = 14;
+        public static final int TOP_BAR_BUTTONS_CONTAINER = 15;
+        public static final int THUMB_UP_CONTAINER = 16;
+        public static final int THUMB_UP_LEFT_SPRITE = 17;
+        public static final int THUMB_UP_RIGHT_SPRITE = 18;
+        public static final int THUMB_UP_MAIN_SPRITE = 19;
+        public static final int THUMB_DOWN_CONTAINER = 20;
+        public static final int THUMB_DOWN_LEFT_SPRITE = 21;
+        public static final int THUMB_DOWN_RIGHT_SPRITE = 22;
+        public static final int THUMB_DOWN_MAIN_SPRITE = 23;
     }
 
     /**
@@ -384,6 +750,21 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_CONTAINER = 196;
         // 197
         public static final int FILTERS_DYNAMIC_CONTAINER = 198; // Contains 0-8 button sprites 9 button label
+    }
+
+    /**
+     * Describes npc dialog widgets
+     * Last reviewed: 14/3/2022 1:56 am UTC+1
+     */
+    static class DialogNPC {
+        public static final int GROUP_INDEX = 232;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_CONTAINER = 1;
+        public static final int NPC_HEAD_MODEL = 2;
+        public static final int DIALOG_CONTAINER = 3;
+        public static final int DIALOG_TITLE_LABEL = 4;
+        public static final int DIALOG_CONTINUE_LABEL = 5;
+        public static final int DIALOG_TEXT_LABEL = 6;
     }
 
     /**
@@ -695,6 +1076,36 @@ public class WidgetIndices {
         public static final int SPECIAL_ATTACK_LABEL = 40;
         public static final int SPECIAL_ATTACK_BROWN_GREEN_BOX = 41;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 42;
+    }
+
+    /**
+     * Describes dynamic widgets
+     * Last reviewed: 12/3/2022 0:11 am UTC+1
+     */
+    public static class WorldMap {
+        public static final int GROUP_INDEX = 595;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MAIN_CONTAINER = 1;
+        public static final int DYNAMIC_CONTAINER = 2; //0-7 borders,corners sprites
+        //3
+        public static final int UNKNOWN_CONTAINER = 4;
+        public static final int MAIN_FRAME_CONTAINER = 5;
+        public static final int MAPVIEW_BOX = 6;
+        public static final int MAPVIEW_CONTAINER = 7;
+        public static final int CONTAINER = 8; //Content Type 1400
+        public static final int MAPVIEW_DYNAMIC_CONTAINER = 9; //1 position icon
+        public static final int SIDEBAR_DYNAMIC_CONTAINER = 14;
+        public static final int KEY_DYNAMIC_CONTAINER = 16;
+        public static final int LEGENDS_DYNAMIC_CONTAINER = 21;
+        public static final int BOTTOM_BAR_CONTAINER = 22;
+        public static final int BOTTOM_BAR_SPRITE = 23;
+        public static final int HIDE_MENU_DYNAMIC_SPRITE = 24;
+        public static final int SEARCH_INPUT_BOX_DYNAMIC_SPRITE = 25;
+        public static final int SURFACE_DYNAMIC_CONTAINER = 26;
+        public static final int BUTTON_CLOSE_SPRITE = 38;
+        public static final int RESIZE_CORNER_CONTAINER = 39;
+        public static final int RESIZE_CORNER_SPRITE = 40;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 41;
     }
 
     /**
