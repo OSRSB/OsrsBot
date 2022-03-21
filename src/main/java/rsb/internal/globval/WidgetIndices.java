@@ -813,6 +813,39 @@ public class WidgetIndices {
 
     /**
      * Describes store widgets
+     * Last reviewed: 20/3/2022 10:58 pm UTC+1
+     */
+    public static class MakeDialog {
+        public static final int GROUP_INDEX = 270;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int SPRITE = 1;
+        public static final int TOP_BAR_CONTAINER = 2;
+        public static final int TOP_BAR_TITLE_CONTAINER = 3;
+        public static final int TOP_BAR_FIRST_TITLE_LABEL = 4;
+        public static final int TOP_BAR_SECOND_TITLE_LABEL = 5;
+        public static final int TOP_BAR_BUTTON_ALL_CONTAINER = 6;
+        public static final int BUTTON_ONE_DYNAMIC_CONTAINER = 7; // contains sprites, label[9]
+        public static final int BUTTON_FIVE_DYNAMIC_CONTAINER = 8; // contains sprites, label[9]
+        // 9 container
+        // 10
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 11; // contains sprites, label[9]
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 12; // contains sprites, label[9]
+        public static final int BOTTOM_BAR_DYN_CONTAINER = 13; // 0-8 choices labels/keys
+        public static final int BOTTOM_BAR_FIRST_CHOICE_BAR_DYN_CONTAINER = 14; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_SECOND_CHOICE_BAR_DYN_CONTAINER = 15; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_THIRD_CHOICE_BAR_DYN_CONTAINER = 16; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_FOURTH_CHOICE_BAR_DYN_CONTAINER = 17; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_FIFTH_CHOICE_BAR_DYN_CONTAINER = 18; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_SIXTH_CHOICE_BAR_DYN_CONTAINER = 19; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_SEVENTH_CHOICE_BAR_DYN_CONTAINER = 20; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_EIGHT_CHOICE_BAR_DYN_CONTAINER = 21; // 29-37 sprites, 38 model
+        public static final int BOTTOM_BAR_NINTH_CHOICE_BAR_DYN_CONTAINER = 22; // 29-37 sprites, 38 model
+        public static final int UNKNOWN1_CONTAINER = 23;
+        public static final int UNKNOWN2_CONTAINER = 24;
+    }
+
+    /**
+     * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
     public static class Store {
