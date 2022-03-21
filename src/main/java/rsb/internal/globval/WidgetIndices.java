@@ -571,6 +571,23 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes quest list sub tab widgets
+     * Last reviewed: 18/3/2022 3:42 am UTC+1
+     */
+    static class QuestListSubTab {
+        public static final int GROUP_INDEX = 399;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int QUEST_LIST_TITLE_LABEL = 1;
+        public static final int DYNAMIC_CONTAINER = 2;
+        public static final int QUEST_LIST_LIST = 3;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 4;
+        public static final int QUEST_LIST_CONTAINER = 5;
+        public static final int FREE_QUESTS_DYNAMIC_CONTAINER = 6; // labels
+        public static final int MEMBER_QUESTS_DYNAMIC_CONTAINER = 7; // labels
+        public static final int MINIQUESTS_DYNAMIC_CONTAINER = 8; // labels
+    }
+
+    /**
      * Describes collection box widgets
      * Last reviewed: 18/3/2022 3:10 am UTC+1
      */
