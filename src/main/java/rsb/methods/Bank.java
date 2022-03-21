@@ -139,7 +139,10 @@ public class Bank extends MethodProvider {
 					}
 				}
 			} else {
-				item = methods.inventory.getItem(itemID).getComponent();
+				RSItem rsItem = methods.inventory.getItem(itemID);
+				if (rsItem != null) {
+					item = rsItem.getComponent();
+				}
 				itemCount = methods.inventory.getCount(true, itemID);
 			}
 			if (item == null) {
