@@ -211,11 +211,23 @@ public class WidgetIndices {
      * Describes spell autocast widgets
      * Last reviewed: 3/3/2022 4:46 am UTC+1
      */
-    static class SpellAutocast {
+    public static class SpellAutocast {
         public static final int GROUP_INDEX = 201;
         public static final int PARENT_CONTAINER = 0;
         public static final int SPELLS_DYNAMIC_CONTAINER = 1;
         public static final int SPELL_INFO_BOX_DYNAMIC_CONTAINER = 2;
+    }
+
+    /**
+     * Describes emotes tab
+     * Last reviewed: 18/3/2022 4:59 am UTC+1
+     */
+    public static class EmotesTab {
+        public static final int GROUP_INDEX = 216;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int EMOTES_DYNAMIC_CONTAINER = 1; // 0-50 emote sprites
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 2; // 0-5 scrollbar sprites
+        public static final int TOOLTIP_CONTAINER = 3;
     }
 
     /**
@@ -390,7 +402,7 @@ public class WidgetIndices {
      * Describes quest list sub tab widgets
      * Last reviewed: 18/3/2022 4:31 am UTC+1
      */
-    static class MusicPlayerTab {
+    public static class MusicPlayerTab {
         public static final int GROUP_INDEX = 239;
         public static final int PARENT_DYNAMIC_CONTAINER = 0; //0-1 toggle all sprite, search sprite
         public static final int INNER_FRAME_DYNAMIC_CONTAINER = 1;
@@ -558,7 +570,7 @@ public class WidgetIndices {
      * Describes click to play screen widgets
      * Last reviewed: 2/3/2022 2:28 am UTC+1
      */
-    static class ClickToPlayScreen {
+    public static class ClickToPlayScreen {
         public static final int GROUP_INDEX = 378;
         public static final int PARENT_FIRST_CONTAINER = 0;
         public static final int PARENT_SECOND_CONTAINER = 1;
@@ -634,7 +646,7 @@ public class WidgetIndices {
      * Describes quest list sub tab widgets
      * Last reviewed: 18/3/2022 3:42 am UTC+1
      */
-    static class QuestListSubTab {
+    public static class QuestListSubTab {
         public static final int GROUP_INDEX = 399;
         public static final int PARENT_CONTAINER = 0;
         public static final int QUEST_LIST_TITLE_LABEL = 1;
@@ -651,7 +663,7 @@ public class WidgetIndices {
      * Describes collection box widgets
      * Last reviewed: 18/3/2022 3:10 am UTC+1
      */
-    static class CollectionBox {
+    public static class CollectionBox {
         public static final int GROUP_INDEX = 402;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
@@ -673,7 +685,7 @@ public class WidgetIndices {
      * Describes grand exchange widgets
      * Last reviewed: 18/3/2022 2:46 am UTC+1
      */
-    static class FriendlistTab {
+    public static class FriendlistTab {
         public static final int GROUP_INDEX = 429;
         public static final int PARENT_CONTAINER = 0;
         public static final int VIEW_IGNORE_LIST_CONTAINER = 1;
@@ -850,7 +862,7 @@ public class WidgetIndices {
      * Describes character summary tab widget
      * Last reviewed: 18/3/2022 0:29 am UTC+1
      */
-    static class CharacterSummaryTab {
+    public static class CharacterSummaryTab {
         public static final int GROUP_INDEX = 629;
         public static final int PARENT_CONTAINER = 0;
         public static final int TOP_BAR_CONTAINER = 1;
@@ -934,7 +946,7 @@ public class WidgetIndices {
      * Describes character summary sub-tab widget under character summary tab widget
      * Last reviewed: 18/3/2022 2:34 am UTC+1
      */
-    static class CharacterSummarySubTab {
+    public static class CharacterSummarySubTab {
         public static final int GROUP_INDEX = 712;
         public static final int PARENT_CONTAINER = 0;
         public static final int CHARACTER_NAME_LABEL = 1;
