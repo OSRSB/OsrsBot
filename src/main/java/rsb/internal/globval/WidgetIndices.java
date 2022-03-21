@@ -572,6 +572,26 @@ public class WidgetIndices {
 
     /**
      * Describes grand exchange widgets
+     * Last reviewed: 18/3/2022 2:46 am UTC+1
+     */
+    static class FriendlistTab {
+        public static final int GROUP_INDEX = 429;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int VIEW_IGNORE_LIST_CONTAINER = 1;
+        public static final int VIEW_IGNORE_LIST_SPRITE = 2;
+        public static final int TITLE_LABEL = 3;
+        public static final int DYNAMIC_CONTAINER = 4; // Contains dynamic components [0-7]
+        // 5 - 12 gap
+        public static final int ADD_FRIEND_TEXT_LABEL = 13;
+        public static final int ADD_FRIEND_SPRITE = 14;
+        public static final int ADD_FRIEND_LABEL = 15;
+        public static final int DEL_FRIEND_SPRITE = 16;
+        public static final int DEL_FRIEND_LABEL = 17;
+        public static final int PREVIOUS_NAME_CONTAINER = 18;
+    }
+
+    /**
+     * Describes grand exchange widgets
      * Last reviewed: 3/3/2022 0:14 am UTC+1
      */
     public static class GrandExchange {
