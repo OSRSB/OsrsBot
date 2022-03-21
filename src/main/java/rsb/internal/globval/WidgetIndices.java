@@ -766,6 +766,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes your clan sub-tab widget under social tab widget
+     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     */
+    public static class YourClanSubTab {
+        public static final int GROUP_INDEX = 701;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int HEADER_DYNAMIC_CONTAINER = 1; // 0-1 header titles
+        public static final int REFRESH_DYNAMIC_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3;
+        public static final int JOIN_DYNAMIC_CONTAINER = 8;
+        public static final int SETUP_DYNAMIC_CONTAINER = 9;
+    }
+
+    /**
      * Describes social tab widget
      * Last reviewed: 18/3/2022 0:29 am UTC+1
      */
