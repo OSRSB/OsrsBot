@@ -399,6 +399,44 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes quest list sub tab widgets
+     * Last reviewed: 18/3/2022 4:02 am UTC+1
+     */
+    public static class Smithing {
+        public static final int GROUP_INDEX = 312;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // borders sprites, title 1, close button 11
+        public static final int BUTTONS_CONTAINER = 2;
+        public static final int BUTTON_ONE_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 6;
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 7;
+        public static final int ITEM_ONE_DYNAMIC_CONTAINER = 9;
+        public static final int ITEM_TWO_DYNAMIC_CONTAINER = 10;
+        public static final int ITEM_THREE_DYNAMIC_CONTAINER = 11;
+        public static final int ITEM_FOUR_DYNAMIC_CONTAINER = 12;
+        public static final int ITEM_FIFE_DYNAMIC_CONTAINER = 13;
+        public static final int ITEM_SIX_DYNAMIC_CONTAINER = 14;
+        public static final int ITEM_SEVEN_DYNAMIC_CONTAINER = 15;
+        public static final int ITEM_EIGHT_DYNAMIC_CONTAINER = 16;
+        public static final int ITEM_NINE_DYNAMIC_CONTAINER = 17;
+        public static final int ITEM_TEN_DYNAMIC_CONTAINER = 18;
+        public static final int ITEM_ELEVEN_DYNAMIC_CONTAINER = 19;
+        public static final int ITEM_TWELVE_DYNAMIC_CONTAINER = 20;
+        public static final int ITEM_THIRTEEN_DYNAMIC_CONTAINER = 21;
+        public static final int ITEM_FOURTEEN_DYNAMIC_CONTAINER = 22;
+        public static final int ITEM_FIFTEEN_DYNAMIC_CONTAINER = 23;
+        public static final int ITEM_SIXTEEN_DYNAMIC_CONTAINER = 24;
+        public static final int ITEM_SEVENTEEN_DYNAMIC_CONTAINER = 25;
+        public static final int ITEM_EIGHTEEN_DYNAMIC_CONTAINER = 26;
+        public static final int ITEM_NINETEEN_DYNAMIC_CONTAINER = 27;
+        public static final int ITEM_TWENTIETH_DYNAMIC_CONTAINER = 28;
+        public static final int ITEM_TWENTYFIRST_DYNAMIC_CONTAINER = 29;
+        public static final int ITEM_TWENTYSECOND_DYNAMIC_CONTAINER = 30;
+        public static final int ITEM_TWENTYTHIRD_DYNAMIC_CONTAINER = 31;
+        public static final int ITEM_TWENTYFOURTH_DYNAMIC_CONTAINER = 32;
+    }
+
+    /**
      * Describes skill tab widgets
      * Last reviewed: 28/2/2022 2:18 am UTC+1
      */
