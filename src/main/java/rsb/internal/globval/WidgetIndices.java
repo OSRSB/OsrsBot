@@ -755,13 +755,31 @@ public class WidgetIndices {
             public static final int WATER_WAVE_SPRITE = 14;
             public static final int EARTH_WAVE_SPRITE = 15;
             public static final int FIRE_WAVE_SPRITE = 16;
-            // 17 - 47
-            // TODO: crumble undead, magic dart, iban blast, flames of zamorak, saradomin strike, claws of guthix
+            public static final int CRUMBLE_UNDEAD_SPRITE = 17;
+            public static final int MAGIC_DART_SPRITE = 18;
+            // TODO: flames of zamorak, saradomin strike, claws of guthix
+            // 19 - 30
+            public static final int SMOKE_RUSH_SPRITE = 31;
+            public static final int SHADOW_RUSH_SPRITE = 32;
+            public static final int BLOOD_RUSH_SPRITE = 33;
+            public static final int ICE_RUSH_SPRITE = 34;
+            public static final int SMOKE_BURST_SPRITE = 35;
+            public static final int SHADOW_BURST_SPRITE = 36;
+            public static final int BLOOD_BURST_SPRITE = 37;
+            public static final int ICE_BURST_SPRITE = 38;
+            public static final int SMOKE_BLITZ_SPRITE = 39;
+            public static final int SHADOW_BLITZ_SPRITE = 40;
+            public static final int BLOOD_BLITZ_SPRITE = 41;
+            public static final int ICE_BLITZ_SPRITE = 42;
+            public static final int SMOKE_BARRAGE_SPRITE = 43;
+            public static final int SHADOW_BARRAGE_SPRITE = 44;
+            public static final int BLOOD_BARRAGE_SPRITE = 45;
+            public static final int ICE_BARRAGE_SPRITE = 46;
+            public static final int IBAN_BLAST_SPRITE = 47;
             public static final int WIND_SURGE_SPRITE = 48;
             public static final int WATER_SURGE_SPRITE = 49;
             public static final int EARTH_SURGE_SPRITE = 50;
             public static final int FIRE_SURGE_SPRITE = 51;
-            // TODO: ancient autocast
             // TODO: arceeus autocast
         }
         public static class TradeWindowDynamicContainer {
