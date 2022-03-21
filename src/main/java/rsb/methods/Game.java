@@ -293,7 +293,7 @@ public class Game extends MethodProvider {
 	 *         otherwise <code>false</code>.
 	 */
 	public boolean isWelcomeScreen() {
-		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY)
+		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_MOTW_TEXT)
 				.getAbsoluteY() > 2;
 	}
 
