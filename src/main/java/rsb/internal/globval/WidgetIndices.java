@@ -698,7 +698,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes dynamic widgets
+     * Describes world map widget
      * Last reviewed: 18/3/2022 0:04 am UTC+1
      */
     public static class WorldMap {
@@ -725,6 +725,44 @@ public class WidgetIndices {
         public static final int RESIZE_CORNER_CONTAINER = 39;
         public static final int RESIZE_CORNER_SPRITE = 40;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 41;
+    }
+
+    /**
+     * Describes summary tab widget
+     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     */
+    static class CharacterSummaryTab {
+        public static final int GROUP_INDEX = 629;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TOP_SEPARATOR_LINE = 2;
+        public static final int TAB_CHARACTER_SUMMARY_CONTAINER = 3;
+        public static final int TAB_CHARACTER_SUMMARY_LEFT_SIDE_SPRITE = 4;
+        public static final int TAB_CHARACTER_SUMMARY_MID_SIDE_SPRITE = 5;
+        public static final int TAB_CHARACTER_SUMMARY_RIGHT_SIDE_SPRITE = 6;
+        public static final int TAB_CHARACTER_SUMMARY_ICON_SPRITE = 7;
+        public static final int TAB_QUEST_LIST_CONTAINER = 8;
+        public static final int TAB_QUEST_LIST_LEFT_SIDE_SPRITE = 9;
+        public static final int TAB_QUEST_LIST_MID_SIDE_SPRITE = 10;
+        public static final int TAB_QUEST_LIST_RIGHT_SIDE_SPRITE = 11;
+        public static final int TAB_QUEST_LIST_ICON_SPRITE = 12;
+        public static final int TAB_ACHIEVEMENT_DIARIES_CONTAINER = 13;
+        public static final int TAB_ACHIEVEMENT_DIARIES_LEFT_SIDE_SPRITE = 14;
+        public static final int TAB_ACHIEVEMENT_DIARIES_MID_SIDE_SPRITE = 15;
+        public static final int TAB_ACHIEVEMENT_DIARIES_RIGHT_SIDE_SPRITE = 16;
+        public static final int TAB_ACHIEVEMENT_DIARIES_ICON_SPRITE = 17;
+        public static final int TAB_KOUREND_FAVOR_CONTAINER = 18;
+        public static final int TAB_KOUREND_FAVOR_LEFT_SIDE_SPRITE = 19;
+        public static final int TAB_KOUREND_FAVOR_MID_SIDE_SPRITE = 20;
+        public static final int TAB_KOUREND_FAVOR_RIGHT_SIDE_SPRITE = 21;
+        public static final int TAB_KOUREND_FAVOR_ICON_SPRITE = 22;
+        // 23 - 27 gap
+        public static final int TAB_LEAGUES_CONTAINER = 28;
+        public static final int TAB_LEAGUES_LEFT_SIDE_SPRITE = 29;
+        public static final int TAB_LEAGUES_MID_SIDE_SPRITE = 30;
+        public static final int TAB_LEAGUES_RIGHT_SIDE_SPRITE = 31;
+        public static final int TAB_LEAGUES_ICON_SPRITE = 32;
+        public static final int INNER_FRAME_CONTAINER = 33;
     }
 
     /**
