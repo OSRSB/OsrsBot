@@ -767,7 +767,7 @@ public class WidgetIndices {
 
     /**
      * Describes your clan sub-tab widget under social tab widget
-     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     * Last reviewed: 18/3/2022 1:19 am UTC+1
      */
     public static class YourClanSubTab {
         public static final int GROUP_INDEX = 701;
@@ -780,8 +780,23 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes another clan sub-tab widget under social tab widget
+     * Last reviewed: 18/3/2022 1:47 am UTC+1
+     */
+    public static class AnotherClanSubTab {
+        public static final int GROUP_INDEX = 702;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int HEADER_DYNAMIC_CONTAINER = 1; // 0-1 header titles
+        public static final int REFRESH_DYNAMIC_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON1_DYNAMIC_CONTAINER = 8;
+        public static final int BUTTON2_DYNAMIC_CONTAINER = 9;
+        public static final int FIND_DYNAMIC_CONTAINER = 10;
+    }
+
+    /**
      * Describes social tab widget
-     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     * Last reviewed: 18/3/2022 0:57 am UTC+1
      */
     public static class SocialTab {
         public static final int GROUP_INDEX = 707;
