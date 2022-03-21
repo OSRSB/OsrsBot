@@ -577,11 +577,23 @@ public class WidgetIndices {
      * Describes spell autocast widgets
      * Last reviewed: 3/3/2022 4:46 am UTC+1
      */
-    static class SpellAutocast {
+    public static class SpellAutocast {
         public static final int GROUP_INDEX = 201;
         public static final int PARENT_CONTAINER = 0;
         public static final int SPELLS_DYNAMIC_CONTAINER = 1;
         public static final int SPELL_INFO_BOX_DYNAMIC_CONTAINER = 2;
+    }
+
+    /**
+     * Describes emotes tab
+     * Last reviewed: 18/3/2022 4:59 am UTC+1
+     */
+    public static class EmotesTab {
+        public static final int GROUP_INDEX = 216;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int EMOTES_DYNAMIC_CONTAINER = 1; // 0-50 emote sprites
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 2; // 0-5 scrollbar sprites
+        public static final int TOOLTIP_CONTAINER = 3;
     }
 
     /**
@@ -753,8 +765,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes npc dialog options widgets
+     * Last reviewed: 19/3/2022 2:21 am UTC+1
+     */
+    static class DialogOptions {
+        public static final int GROUP_INDEX = 219;
+        public static final int CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; //0 select an option title, 1-x options
+    }
+
+    /**
      * Describes npc dialog widgets
-     * Last reviewed: 14/3/2022 1:56 am UTC+1
+     * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
     static class DialogNPC {
         public static final int GROUP_INDEX = 232;
@@ -768,6 +790,28 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes music player tab widgets
+     * Last reviewed: 18/3/2022 4:49 am UTC+1
+     */
+    public static class MusicPlayerTab {
+        public static final int GROUP_INDEX = 239;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //0-1 toggle all sprite, search sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 1;
+        public static final int INNER_FRAME_BOX = 2;
+        public static final int MUSIC_TRACK_LIST_DYNAMIC_CONTAINER = 3; //0-679, music labels
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 4; //0-5, scrollbar sprites
+        public static final int PLAYING_TEXT_LABEL = 5;
+        public static final int CURRENT_TRACK_LABEL = 6;
+        public static final int AUTO_BUTTON_SPRITE = 7;
+        public static final int AUTO_BUTTON_LABEL = 8;
+        public static final int MANUAL_BUTTON_SPRITE = 9;
+        public static final int MANUAL_BUTTON_LABEL = 10;
+        public static final int LOOP_BUTTON_SPRITE = 11;
+        public static final int LOOP_BUTTON_LABEL = 12;
+        public static final int UNLOCKED_TRACKS_COUNT = 13;
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
@@ -777,6 +821,44 @@ public class WidgetIndices {
         public static final int DYNAMIC_CONTAINER = 1; // Contains stone border sprites 0-11
         public static final int ITEMS_DYNAMIC_CONTAINER = 16; // Contains items sold sprites 0-16
         public static final int BOTTOM_TEXT_LABEL = 18;
+    }
+
+    /**
+     * Describes smithing window widgets
+     * Last reviewed: 18/3/2022 4:02 am UTC+1
+     */
+    public static class Smithing {
+        public static final int GROUP_INDEX = 312;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // borders sprites, title 1, close button 11
+        public static final int BUTTONS_CONTAINER = 2;
+        public static final int BUTTON_ONE_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 6;
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 7;
+        public static final int ITEM_ONE_DYNAMIC_CONTAINER = 9;
+        public static final int ITEM_TWO_DYNAMIC_CONTAINER = 10;
+        public static final int ITEM_THREE_DYNAMIC_CONTAINER = 11;
+        public static final int ITEM_FOUR_DYNAMIC_CONTAINER = 12;
+        public static final int ITEM_FIFE_DYNAMIC_CONTAINER = 13;
+        public static final int ITEM_SIX_DYNAMIC_CONTAINER = 14;
+        public static final int ITEM_SEVEN_DYNAMIC_CONTAINER = 15;
+        public static final int ITEM_EIGHT_DYNAMIC_CONTAINER = 16;
+        public static final int ITEM_NINE_DYNAMIC_CONTAINER = 17;
+        public static final int ITEM_TEN_DYNAMIC_CONTAINER = 18;
+        public static final int ITEM_ELEVEN_DYNAMIC_CONTAINER = 19;
+        public static final int ITEM_TWELVE_DYNAMIC_CONTAINER = 20;
+        public static final int ITEM_THIRTEEN_DYNAMIC_CONTAINER = 21;
+        public static final int ITEM_FOURTEEN_DYNAMIC_CONTAINER = 22;
+        public static final int ITEM_FIFTEEN_DYNAMIC_CONTAINER = 23;
+        public static final int ITEM_SIXTEEN_DYNAMIC_CONTAINER = 24;
+        public static final int ITEM_SEVENTEEN_DYNAMIC_CONTAINER = 25;
+        public static final int ITEM_EIGHTEEN_DYNAMIC_CONTAINER = 26;
+        public static final int ITEM_NINETEEN_DYNAMIC_CONTAINER = 27;
+        public static final int ITEM_TWENTIETH_DYNAMIC_CONTAINER = 28;
+        public static final int ITEM_TWENTYFIRST_DYNAMIC_CONTAINER = 29;
+        public static final int ITEM_TWENTYSECOND_DYNAMIC_CONTAINER = 30;
+        public static final int ITEM_TWENTYTHIRD_DYNAMIC_CONTAINER = 31;
+        public static final int ITEM_TWENTYFOURTH_DYNAMIC_CONTAINER = 32;
     }
 
     /**
@@ -879,7 +961,7 @@ public class WidgetIndices {
      * Describes click to play screen widgets
      * Last reviewed: 2/3/2022 2:28 am UTC+1
      */
-    static class ClickToPlayScreen {
+    public static class ClickToPlayScreen {
         public static final int GROUP_INDEX = 378;
         public static final int PARENT_FIRST_CONTAINER = 0;
         public static final int PARENT_SECOND_CONTAINER = 1;
@@ -949,6 +1031,65 @@ public class WidgetIndices {
         public static final int AMMUNITION_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int UNKNOWN1_CONTAINER = 26;
         public static final int UNKNOWN2_CONTAINER = 27;
+    }
+
+    /**
+     * Describes quest list sub tab widgets
+     * Last reviewed: 18/3/2022 3:42 am UTC+1
+     */
+    public static class QuestListSubTab {
+        public static final int GROUP_INDEX = 399;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int QUEST_LIST_TITLE_LABEL = 1;
+        public static final int DYNAMIC_CONTAINER = 2;
+        public static final int QUEST_LIST_LIST = 3;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 4;
+        public static final int QUEST_LIST_CONTAINER = 5;
+        public static final int FREE_QUESTS_DYNAMIC_CONTAINER = 6; // labels
+        public static final int MEMBER_QUESTS_DYNAMIC_CONTAINER = 7; // labels
+        public static final int MINIQUESTS_DYNAMIC_CONTAINER = 8; // labels
+    }
+
+    /**
+     * Describes collection box widgets
+     * Last reviewed: 18/3/2022 3:10 am UTC+1
+     */
+    public static class CollectionBox {
+        public static final int GROUP_INDEX = 402;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int DYNAMIC_CONTAINER = 2; // stone borders, title, close
+        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // sprite, text
+        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // sprite, text
+        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; // sprites, layers, steel border 0-20
+        public static final int SLOT_SECOND_DYNAMIC_CONTAINER = 6; // sprites, layers, steel border 0-20
+        public static final int SLOT_THIRD_DYNAMIC_CONTAINER = 7; // sprites, layers, steel border 0-20
+        public static final int SLOT_FOURTH_DYNAMIC_CONTAINER = 8; // sprites, layers, steel border 0-20
+        public static final int SLOT_FIFTH_DYNAMIC_CONTAINER = 9; // sprites, layers, steel border 0-20
+        public static final int SLOT_SIXTH_DYNAMIC_CONTAINER = 10; // sprites, layers, steel border 0-20
+        public static final int SLOT_SEVENTH_DYNAMIC_CONTAINER = 11; // sprites, layers, steel border 0-20
+        public static final int SLOT_EIGHT_DYNAMIC_CONTAINER = 12; // sprites, layers, steel border 0-20
+        public static final int UNKNOWN_CONTAINER = 13;
+    }
+
+    /**
+     * Describes friend list tab widgets
+     * Last reviewed: 18/3/2022 2:46 am UTC+1
+     */
+    public static class FriendlistTab {
+        public static final int GROUP_INDEX = 429;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int VIEW_IGNORE_LIST_CONTAINER = 1;
+        public static final int VIEW_IGNORE_LIST_SPRITE = 2;
+        public static final int TITLE_LABEL = 3;
+        public static final int DYNAMIC_CONTAINER = 4; // Contains dynamic components [0-7]
+        // 5 - 12 gap
+        public static final int ADD_FRIEND_TEXT_LABEL = 13;
+        public static final int ADD_FRIEND_SPRITE = 14;
+        public static final int ADD_FRIEND_LABEL = 15;
+        public static final int DEL_FRIEND_SPRITE = 16;
+        public static final int DEL_FRIEND_LABEL = 17;
+        public static final int PREVIOUS_NAME_CONTAINER = 18;
     }
 
     /**
@@ -1079,21 +1220,21 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes dynamic widgets
-     * Last reviewed: 12/3/2022 0:11 am UTC+1
+     * Describes world map widget
+     * Last reviewed: 18/3/2022 0:04 am UTC+1
      */
     public static class WorldMap {
         public static final int GROUP_INDEX = 595;
         public static final int PARENT_CONTAINER = 0;
         public static final int MAIN_CONTAINER = 1;
-        public static final int DYNAMIC_CONTAINER = 2; //0-7 borders,corners sprites
-        //3
+        public static final int DYNAMIC_CONTAINER = 2; // 0-7 borders,corners sprites
+        // 3
         public static final int UNKNOWN_CONTAINER = 4;
         public static final int MAIN_FRAME_CONTAINER = 5;
         public static final int MAPVIEW_BOX = 6;
         public static final int MAPVIEW_CONTAINER = 7;
-        public static final int CONTAINER = 8; //Content Type 1400
-        public static final int MAPVIEW_DYNAMIC_CONTAINER = 9; //1 position icon
+        public static final int CONTAINER = 8; // Content Type 1400
+        public static final int MAPVIEW_DYNAMIC_CONTAINER = 9; // 1 your position icon
         public static final int SIDEBAR_DYNAMIC_CONTAINER = 14;
         public static final int KEY_DYNAMIC_CONTAINER = 16;
         public static final int LEGENDS_DYNAMIC_CONTAINER = 21;
@@ -1106,6 +1247,102 @@ public class WidgetIndices {
         public static final int RESIZE_CORNER_CONTAINER = 39;
         public static final int RESIZE_CORNER_SPRITE = 40;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 41;
+    }
+
+    /**
+     * Describes character summary tab widget
+     * Last reviewed: 18/3/2022 0:29 am UTC+1
+     */
+    public static class CharacterSummaryTab {
+        public static final int GROUP_INDEX = 629;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TOP_SEPARATOR_LINE = 2;
+        public static final int TAB_CHARACTER_SUMMARY_CONTAINER = 3;
+        public static final int TAB_CHARACTER_SUMMARY_LEFT_SIDE_SPRITE = 4;
+        public static final int TAB_CHARACTER_SUMMARY_MID_SIDE_SPRITE = 5;
+        public static final int TAB_CHARACTER_SUMMARY_RIGHT_SIDE_SPRITE = 6;
+        public static final int TAB_CHARACTER_SUMMARY_ICON_SPRITE = 7;
+        public static final int TAB_QUEST_LIST_CONTAINER = 8;
+        public static final int TAB_QUEST_LIST_LEFT_SIDE_SPRITE = 9;
+        public static final int TAB_QUEST_LIST_MID_SIDE_SPRITE = 10;
+        public static final int TAB_QUEST_LIST_RIGHT_SIDE_SPRITE = 11;
+        public static final int TAB_QUEST_LIST_ICON_SPRITE = 12;
+        public static final int TAB_ACHIEVEMENT_DIARIES_CONTAINER = 13;
+        public static final int TAB_ACHIEVEMENT_DIARIES_LEFT_SIDE_SPRITE = 14;
+        public static final int TAB_ACHIEVEMENT_DIARIES_MID_SIDE_SPRITE = 15;
+        public static final int TAB_ACHIEVEMENT_DIARIES_RIGHT_SIDE_SPRITE = 16;
+        public static final int TAB_ACHIEVEMENT_DIARIES_ICON_SPRITE = 17;
+        public static final int TAB_KOUREND_FAVOR_CONTAINER = 18;
+        public static final int TAB_KOUREND_FAVOR_LEFT_SIDE_SPRITE = 19;
+        public static final int TAB_KOUREND_FAVOR_MID_SIDE_SPRITE = 20;
+        public static final int TAB_KOUREND_FAVOR_RIGHT_SIDE_SPRITE = 21;
+        public static final int TAB_KOUREND_FAVOR_ICON_SPRITE = 22;
+        // 23 - 27 gap
+        public static final int TAB_LEAGUES_CONTAINER = 28;
+        public static final int TAB_LEAGUES_LEFT_SIDE_SPRITE = 29;
+        public static final int TAB_LEAGUES_MID_SIDE_SPRITE = 30;
+        public static final int TAB_LEAGUES_RIGHT_SIDE_SPRITE = 31;
+        public static final int TAB_LEAGUES_ICON_SPRITE = 32;
+        public static final int INNER_FRAME_CONTAINER = 33;
+    }
+
+    /**
+     * Describes your clan sub-tab widget under social tab widget
+     * Last reviewed: 18/3/2022 1:19 am UTC+1
+     */
+    public static class YourClanSubTab {
+        public static final int GROUP_INDEX = 701;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int HEADER_DYNAMIC_CONTAINER = 1; // 0-1 header titles
+        public static final int REFRESH_DYNAMIC_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3;
+        public static final int JOIN_DYNAMIC_CONTAINER = 8;
+        public static final int SETUP_DYNAMIC_CONTAINER = 9;
+    }
+
+    /**
+     * Describes another clan sub-tab widget under social tab widget
+     * Last reviewed: 18/3/2022 1:47 am UTC+1
+     */
+    public static class AnotherClanSubTab {
+        public static final int GROUP_INDEX = 702;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int HEADER_DYNAMIC_CONTAINER = 1; // 0-1 header titles
+        public static final int REFRESH_DYNAMIC_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON1_DYNAMIC_CONTAINER = 8;
+        public static final int BUTTON2_DYNAMIC_CONTAINER = 9;
+        public static final int FIND_DYNAMIC_CONTAINER = 10;
+    }
+
+    /**
+     * Describes social tab widget
+     * Last reviewed: 18/3/2022 0:57 am UTC+1
+     */
+    public static class SocialTab {
+        public static final int GROUP_INDEX = 707;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int TOP_BAR_CONTAINER = 1;
+        public static final int TOP_BAR_SEPARATOR_LINE = 2;
+        public static final int TAB_CHAT_CHANNEL_CONTAINER = 3;
+        public static final int TAB_YOUR_CLAN_CONTAINER = 4;
+        public static final int TAB_VIEW_ANOTHER_CLAN_CONTAINER = 5;
+        public static final int TAB_CHAT_GROUPING_CONTAINER = 6;
+        public static final int FRAME_CONTAINER = 7;
+        public static final int FRAME_TIME_LABEL = 8;
+    }
+
+    /**
+     * Describes character summary sub-tab widget under character summary tab widget
+     * Last reviewed: 18/3/2022 2:34 am UTC+1
+     */
+    public static class CharacterSummarySubTab {
+        public static final int GROUP_INDEX = 712;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CHARACTER_NAME_LABEL = 1;
+        public static final int SPRITES_LABELS_DYNAMIC_CONTAINER = 2;
+        public static final int BUTTONS_DYNAMIC_CONTAINER = 3;
     }
 
     /**
@@ -1166,13 +1403,31 @@ public class WidgetIndices {
             public static final int WATER_WAVE_SPRITE = 14;
             public static final int EARTH_WAVE_SPRITE = 15;
             public static final int FIRE_WAVE_SPRITE = 16;
-            // 17 - 47
-            // TODO: crumble undead, magic dart, iban blast, flames of zamorak, saradomin strike, claws of guthix
+            public static final int CRUMBLE_UNDEAD_SPRITE = 17;
+            public static final int MAGIC_DART_SPRITE = 18;
+            // TODO: flames of zamorak, saradomin strike, claws of guthix
+            // 19 - 30
+            public static final int SMOKE_RUSH_SPRITE = 31;
+            public static final int SHADOW_RUSH_SPRITE = 32;
+            public static final int BLOOD_RUSH_SPRITE = 33;
+            public static final int ICE_RUSH_SPRITE = 34;
+            public static final int SMOKE_BURST_SPRITE = 35;
+            public static final int SHADOW_BURST_SPRITE = 36;
+            public static final int BLOOD_BURST_SPRITE = 37;
+            public static final int ICE_BURST_SPRITE = 38;
+            public static final int SMOKE_BLITZ_SPRITE = 39;
+            public static final int SHADOW_BLITZ_SPRITE = 40;
+            public static final int BLOOD_BLITZ_SPRITE = 41;
+            public static final int ICE_BLITZ_SPRITE = 42;
+            public static final int SMOKE_BARRAGE_SPRITE = 43;
+            public static final int SHADOW_BARRAGE_SPRITE = 44;
+            public static final int BLOOD_BARRAGE_SPRITE = 45;
+            public static final int ICE_BARRAGE_SPRITE = 46;
+            public static final int IBAN_BLAST_SPRITE = 47;
             public static final int WIND_SURGE_SPRITE = 48;
             public static final int WATER_SURGE_SPRITE = 49;
             public static final int EARTH_SURGE_SPRITE = 50;
             public static final int FIRE_SURGE_SPRITE = 51;
-            // TODO: ancient autocast
             // TODO: arceeus autocast
         }
         public static class TradeWindowDynamicContainer {
