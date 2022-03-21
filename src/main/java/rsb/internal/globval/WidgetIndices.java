@@ -571,6 +571,28 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes collection box widgets
+     * Last reviewed: 18/3/2022 3:10 am UTC+1
+     */
+    static class CollectionBox {
+        public static final int GROUP_INDEX = 402;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int DYNAMIC_CONTAINER = 2; // stone borders, title, close
+        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // sprite, text
+        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // sprite, text
+        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; // sprites, layers, steel border 0-20
+        public static final int SLOT_SECOND_DYNAMIC_CONTAINER = 6; // sprites, layers, steel border 0-20
+        public static final int SLOT_THIRD_DYNAMIC_CONTAINER = 7; // sprites, layers, steel border 0-20
+        public static final int SLOT_FOURTH_DYNAMIC_CONTAINER = 8; // sprites, layers, steel border 0-20
+        public static final int SLOT_FIFTH_DYNAMIC_CONTAINER = 9; // sprites, layers, steel border 0-20
+        public static final int SLOT_SIXTH_DYNAMIC_CONTAINER = 10; // sprites, layers, steel border 0-20
+        public static final int SLOT_SEVENTH_DYNAMIC_CONTAINER = 11; // sprites, layers, steel border 0-20
+        public static final int SLOT_EIGHT_DYNAMIC_CONTAINER = 12; // sprites, layers, steel border 0-20
+        public static final int UNKNOWN_CONTAINER = 13;
+    }
+
+    /**
      * Describes grand exchange widgets
      * Last reviewed: 18/3/2022 2:46 am UTC+1
      */
