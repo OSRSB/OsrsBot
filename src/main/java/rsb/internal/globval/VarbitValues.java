@@ -66,7 +66,15 @@ public enum VarbitValues {
     FAIRY_RING_DIAL_P(0),
     FAIRY_RING_DIAL_S(1),
     FAIRY_RING_DIAL_R(2),
-    FAIRY_RING_DIAL_Q(3);
+    FAIRY_RING_DIAL_Q(3),
+    // TODO: FAIR_RING_LAST_DESTINATION
+    // Quest Tab Index
+    QUEST_TAB_INDEX_CHARACTER_SUMMARY(0),
+    QUEST_TAB_INDEX_QUEST_LIST(1),
+    QUEST_TAB_INDEX_MINIGAME_GROUP_FINDER(2),
+    QUEST_TAB_INDEX_ACHIEVEMENT_DIARY(3),
+    QUEST_TAB_INDEX_KOUREND_FAVOR(4),
+    QUEST_TAB_INDEX_LEAGUES(5);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
