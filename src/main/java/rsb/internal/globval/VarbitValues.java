@@ -48,7 +48,25 @@ public enum VarbitValues {
     CURRENT_BANK_TAB_SIXTH(5),
     CURRENT_BANK_TAB_SEVENTH(6),
     CURRENT_BANK_TAB_EIGHT(7),
-    CURRENT_BANK_TAB_NINTH(8);
+    CURRENT_BANK_TAB_NINTH(8),
+    // XP Drops
+    XP_DROPS_HIDDEN(0),
+    XP_DROPS_SHOWN(1),
+    // Fairy Ring Dial ABCD
+    FAIRY_RING_DIAL_A(0),
+    FAIRY_RING_DIAL_B(1),
+    FAIRY_RING_DIAL_C(2),
+    FAIRY_RING_DIAL_D(3),
+    // Fairy Ring Dial ILJK
+    FAIRY_RING_DIAL_I(0),
+    FAIRY_RING_DIAL_J(1),
+    FAIRY_RING_DIAL_K(2),
+    FAIRY_RING_DIAL_L(3),
+    // Fairy Ring Dial PSRQ
+    FAIRY_RING_DIAL_P(0),
+    FAIRY_RING_DIAL_S(1),
+    FAIRY_RING_DIAL_R(2),
+    FAIRY_RING_DIAL_Q(3);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
