@@ -2,6 +2,7 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
+import rsb.internal.globval.VarpValues;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.wrappers.Filter;
 import rsb.internal.globval.VarpIndices;
@@ -596,14 +597,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setRearrangeModeToInsert() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 1) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_REARRANGE_MODE)
+				== VarpValues.BANK_REARRANGE_MODE_SWAP.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_INSERT).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_REARRANGE_MODE)
+				== VarpValues.BANK_REARRANGE_MODE_INSERT.getValue();
 	}
 
 	/**
@@ -612,16 +613,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setRearrangeModeToSwap() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) != 0) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_REARRANGE_MODE)
+				== VarpValues.BANK_REARRANGE_MODE_INSERT.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SWAP).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_REARRANGE_MODE) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_REARRANGE_MODE)
+				== VarpValues.BANK_REARRANGE_MODE_SWAP.getValue();
 	}
 
 	/**
@@ -630,16 +629,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToItem() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 0) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_NOTE.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_ITEM).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_ITEM.getValue();
 	}
 
 	/**
@@ -648,16 +645,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToNote() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 1) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_ITEM.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_NOTE).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_NOTE.getValue();
 	}
 
 	/**

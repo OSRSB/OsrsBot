@@ -6,7 +6,11 @@ public class VarpIndices {
     public static final int TOGGLE_LOOP_MUSIC = 19;
     public static final int COMBAT_STYLE = 43;
     public static final int PLAYER_POISONED_STATE = 83;
-    public static final int QUEST_POINTS = 101;
+    /**
+     * Permitted values: 0 - 279
+     * Note: total quest points count
+     */
+    public static final int QUEST_POINTS_COUNT = 101;
     /**
      * 	Poison immune = -1
      * 	Poisoned = 0 - 1000000
@@ -15,7 +19,11 @@ public class VarpIndices {
      * 	Venom damage = (this - 999997) * 2
      */
     public static final int POISON = 102;
-    public static final int BANK_TOGGLE_WITHDRAW_MODE = 115;
+    /**
+     * Permitted values: 0 - 1
+     * Note: 0 = item, 1 = note
+     */
+    public static final int TOGGLE_BANK_WITHDRAW_MODE = 115;
     public static final int TYPE_SHOP = 118;
     public static final int ADJUST_SCREEN_BRIGHTNESS = 166;
     public static final int ADJUST_MUSIC_VOLUME = 168;
@@ -27,12 +35,12 @@ public class VarpIndices {
      * Note: 0 = enabled, 1 = disabled
      * Note: Its always by default enabled.
      */
-    public static final int AUTO_RETALIATE_ENABLED = 172;
+    public static final int TOGGLE_AUTO_RETALIATE = 172;
     /**
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled
      */
-    public static final int TOGGLE_RUN_ENABLED = 173;
+    public static final int TOGGLE_RUN = 173;
     public static final int SPLIT_PRIVATE_CHAT = 287;
     /**
      * Permitted values: 0 - 100
@@ -43,16 +51,20 @@ public class VarpIndices {
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled
      */
-    public static final int SPECIAL_ATTACK_ENABLED = 301;
-    public static final int BANK_TOGGLE_REARRANGE_MODE = 304;
+    public static final int TOGGLE_SPECIAL_ATTACK = 301;
+    /**
+     * Permitted values: 0 - 1
+     * Note: 0 = swap, 1 = insert
+     */
+    public static final int TOGGLE_BANK_REARRANGE_MODE = 304;
     public static final int TOGGLE_ACCEPT_AID = 427;
     public static final int ACTIVE_MAGIC_BOOK = 439;
-    public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;
-    public static final int SWAP_QUEST_DIARY = 1002;
     // Blast furnace
     public static final int BLAST_FURNACE_COOLING_STATE = 543;
     public static final int BLAST_FURNACE_STORED_ORE = 547;
     public static final int BLAST_FURNACE_COFFER_COINS = 795;
+    public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;
+    public static final int SWAP_QUEST_DIARY = 1002;
     // Non-account settings (widget related ones)
     public static final int SPRITE_UNSELECTED_VALUE = 1077;
     public static final int SPRITE_SELECTED_VALUE = 1079;

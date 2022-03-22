@@ -4,6 +4,7 @@ import net.runelite.api.Actor;
 import net.runelite.api.Skill;
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarpValues;
 import rsb.wrappers.*;
 
 /**
@@ -81,7 +82,8 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_AUTO_RETALIATE)
+				== VarpValues.AUTO_RETALIATE_ENABLED.getValue();
 	}
 
 	/**
@@ -196,12 +198,13 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether the special-attack option is enabled.
+	 * Returns whether the special attack option is enabled.
 	 *
-	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
+	 * @return <code>true</code> if special attack is enabled; otherwise <code>false</code>.
 	 */
-	public boolean isSpecialEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
+	public boolean isSpecialAttackEnabled() {
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_SPECIAL_ATTACK)
+				== VarpValues.SPECIAL_ATTACK_ENABLED.getValue();
 	}
 
 	/**
