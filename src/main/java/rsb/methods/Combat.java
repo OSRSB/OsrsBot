@@ -198,11 +198,11 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether the special-attack option is enabled.
+	 * Returns whether the special attack option is enabled.
 	 *
-	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
+	 * @return <code>true</code> if special attack is enabled; otherwise <code>false</code>.
 	 */
-	public boolean isSpecialEnabled() {
+	public boolean isSpecialAttackEnabled() {
 		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK)
 				== VarpValues.SPECIAL_ATTACK_ENABLED.getValue();
 	}
