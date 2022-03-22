@@ -32,7 +32,23 @@ public enum VarbitValues {
     WEAPON_TYPE_BANNER(24),
     WEAPON_TYPE_UNKNOWN_25(25),
     WEAPON_TYPE_BLUDGEON(26),
-    WEAPON_TYPE_BULWARK(27);
+    WEAPON_TYPE_BULWARK(27),
+    // Defensive Autocast
+    DEFENSIVE_AUTOCAST_DISABLED(0),
+    DEFENSIVE_AUTOCAST_ENABLED(1),
+    // Quick Prayer
+    QUICK_PRAYER_DISABLED(0),
+    QUICK_PRAYER_ENABLED(1),
+    // Current Bank Tab
+    CURRENT_BANK_TAB_FIRST(0),
+    CURRENT_BANK_TAB_SECOND(1),
+    CURRENT_BANK_TAB_THIRD(2),
+    CURRENT_BANK_TAB_FOURTH(3),
+    CURRENT_BANK_TAB_FIFTH(4),
+    CURRENT_BANK_TAB_SIXTH(5),
+    CURRENT_BANK_TAB_SEVENTH(6),
+    CURRENT_BANK_TAB_EIGHT(7),
+    CURRENT_BANK_TAB_NINTH(8);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
