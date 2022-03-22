@@ -27,7 +27,7 @@ public class VarpIndices {
      * Note: 0 = enabled, 1 = disabled
      * Note: Its always by default enabled.
      */
-    public static final int AUTO_RETALIATE_ENABLED = 172;
+    public static final int AUTO_RETALIATE = 172;
     /**
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled

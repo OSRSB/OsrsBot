@@ -4,6 +4,7 @@ import net.runelite.api.Actor;
 import net.runelite.api.Skill;
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarpValues;
 import rsb.wrappers.*;
 
 /**
@@ -81,7 +82,8 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE)
+				== VarpValues.AUTO_RETALIATE_ENABLED.getValue();
 	}
 
 	/**
