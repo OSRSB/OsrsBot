@@ -82,7 +82,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE)
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_AUTO_RETALIATE)
 				== VarpValues.AUTO_RETALIATE_ENABLED.getValue();
 	}
 
@@ -203,7 +203,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if special attack is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isSpecialAttackEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK)
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_SPECIAL_ATTACK)
 				== VarpValues.SPECIAL_ATTACK_ENABLED.getValue();
 	}
 

@@ -27,7 +27,7 @@ public class VarpIndices {
      * Note: 0 = enabled, 1 = disabled
      * Note: Its always by default enabled.
      */
-    public static final int AUTO_RETALIATE = 172;
+    public static final int TOGGLE_AUTO_RETALIATE = 172;
     /**
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled
@@ -43,7 +43,7 @@ public class VarpIndices {
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled
      */
-    public static final int SPECIAL_ATTACK = 301;
+    public static final int TOGGLE_SPECIAL_ATTACK = 301;
     public static final int TOGGLE_BANK_REARRANGE_MODE = 304;
     public static final int TOGGLE_ACCEPT_AID = 427;
     public static final int ACTIVE_MAGIC_BOOK = 439;
