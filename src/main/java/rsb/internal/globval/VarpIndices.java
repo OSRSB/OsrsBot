@@ -44,7 +44,7 @@ public class VarpIndices {
      * Note: 0 = disabled, 1 = enabled
      */
     public static final int SPECIAL_ATTACK = 301;
-    public static final int BANK_TOGGLE_REARRANGE_MODE = 304;
+    public static final int TOGGLE_BANK_REARRANGE_MODE = 304;
     public static final int TOGGLE_ACCEPT_AID = 427;
     public static final int ACTIVE_MAGIC_BOOK = 439;
     public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;

@@ -12,7 +12,10 @@ public enum VarpValues {
     TOGGLE_RUN_ENABLED(1),
     // Special attack
     SPECIAL_ATTACK_DISABLED(0),
-    SPECIAL_ATTACK_ENABLED(1);
+    SPECIAL_ATTACK_ENABLED(1),
+    // Bank rearrange mode
+    BANK_REARRANGE_MODE_SWAP(0),
+    BANK_REARRANGE_MODE_INSERT(1);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
