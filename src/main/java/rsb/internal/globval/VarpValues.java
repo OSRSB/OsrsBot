@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum VarpValues {
+    // Auto retaliate
     AUTO_RETALIATE_ENABLED(0),
-    AUTO_RETALIATE_DISABLED(1);
+    AUTO_RETALIATE_DISABLED(1),
+    // Toggle run
+    TOGGLE_RUN_DISABLED(0),
+    TOGGLE_RUN_ENABLED(1);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();

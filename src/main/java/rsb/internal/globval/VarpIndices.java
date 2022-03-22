@@ -32,7 +32,7 @@ public class VarpIndices {
      * Permitted values: 0 - 1
      * Note: 0 = disabled, 1 = enabled
      */
-    public static final int TOGGLE_RUN_ENABLED = 173;
+    public static final int TOGGLE_RUN = 173;
     public static final int SPLIT_PRIVATE_CHAT = 287;
     /**
      * Permitted values: 0 - 100
