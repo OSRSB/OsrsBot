@@ -203,7 +203,8 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isSpecialEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK)
+				== VarpValues.SPECIAL_ATTACK_ENABLED.getValue();
 	}
 
 	/**

@@ -9,7 +9,10 @@ public enum VarpValues {
     AUTO_RETALIATE_DISABLED(1),
     // Toggle run
     TOGGLE_RUN_DISABLED(0),
-    TOGGLE_RUN_ENABLED(1);
+    TOGGLE_RUN_ENABLED(1),
+    // Special attack
+    SPECIAL_ATTACK_DISABLED(0),
+    SPECIAL_ATTACK_ENABLED(1);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
