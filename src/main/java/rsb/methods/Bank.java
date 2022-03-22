@@ -629,16 +629,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToItem() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 0) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_NOTE.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_ITEM).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_ITEM.getValue();
 	}
 
 	/**
@@ -647,16 +645,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean setWithdrawModeToNote() {
-		if (!isOpen()) {
-			return false;
-		}
-		if (methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) != 1) {
+		if (!isOpen()) { return false; }
+		if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_ITEM.getValue()) {
 			methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_NOTE).doClick();
 			sleep(random(500, 700));
 		}
-		return methods.clientLocalStorage.getVarpValueAt(
-				VarpIndices.BANK_TOGGLE_WITHDRAW_MODE) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_BANK_WITHDRAW_MODE)
+				== VarpValues.BANK_WITHDRAW_MODE_NOTE.getValue();
 	}
 
 	/**

@@ -246,7 +246,7 @@ public class Walking extends MethodProvider {
 	 */
 	public boolean isRunEnabled() {
 		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_RUN)
-				== VarpValues.TOGGLE_RUN_ENABLED.getValue();
+				== VarpValues.RUN_ENABLED.getValue();
 	}
 
 	/**

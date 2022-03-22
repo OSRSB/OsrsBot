@@ -8,14 +8,17 @@ public enum VarpValues {
     AUTO_RETALIATE_ENABLED(0),
     AUTO_RETALIATE_DISABLED(1),
     // Toggle run
-    TOGGLE_RUN_DISABLED(0),
-    TOGGLE_RUN_ENABLED(1),
+    RUN_DISABLED(0),
+    RUN_ENABLED(1),
     // Special attack
     SPECIAL_ATTACK_DISABLED(0),
     SPECIAL_ATTACK_ENABLED(1),
     // Bank rearrange mode
     BANK_REARRANGE_MODE_SWAP(0),
-    BANK_REARRANGE_MODE_INSERT(1);
+    BANK_REARRANGE_MODE_INSERT(1),
+    // Bank withdraw mode
+    BANK_WITHDRAW_MODE_ITEM(0),
+    BANK_WITHDRAW_MODE_NOTE(1);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();

@@ -15,7 +15,11 @@ public class VarpIndices {
      * 	Venom damage = (this - 999997) * 2
      */
     public static final int POISON = 102;
-    public static final int BANK_TOGGLE_WITHDRAW_MODE = 115;
+    /**
+     * Permitted values: 0 - 1
+     * Note: 0 = item, 1 = note
+     */
+    public static final int TOGGLE_BANK_WITHDRAW_MODE = 115;
     public static final int TYPE_SHOP = 118;
     public static final int ADJUST_SCREEN_BRIGHTNESS = 166;
     public static final int ADJUST_MUSIC_VOLUME = 168;
@@ -44,6 +48,10 @@ public class VarpIndices {
      * Note: 0 = disabled, 1 = enabled
      */
     public static final int TOGGLE_SPECIAL_ATTACK = 301;
+    /**
+     * Permitted values: 0 - 1
+     * Note: 0 = swap, 1 = insert
+     */
     public static final int TOGGLE_BANK_REARRANGE_MODE = 304;
     public static final int TOGGLE_ACCEPT_AID = 427;
     public static final int ACTIVE_MAGIC_BOOK = 439;
