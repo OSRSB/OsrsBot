@@ -6,7 +6,11 @@ public class VarpIndices {
     public static final int TOGGLE_LOOP_MUSIC = 19;
     public static final int COMBAT_STYLE = 43;
     public static final int PLAYER_POISONED_STATE = 83;
-    public static final int QUEST_POINTS = 101;
+    /**
+     * Permitted values: 0 - 279
+     * Note: total quest points count
+     */
+    public static final int QUEST_POINTS_COUNT = 101;
     /**
      * 	Poison immune = -1
      * 	Poisoned = 0 - 1000000
@@ -55,12 +59,12 @@ public class VarpIndices {
     public static final int TOGGLE_BANK_REARRANGE_MODE = 304;
     public static final int TOGGLE_ACCEPT_AID = 427;
     public static final int ACTIVE_MAGIC_BOOK = 439;
-    public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;
-    public static final int SWAP_QUEST_DIARY = 1002;
     // Blast furnace
     public static final int BLAST_FURNACE_COOLING_STATE = 543;
     public static final int BLAST_FURNACE_STORED_ORE = 547;
     public static final int BLAST_FURNACE_COFFER_COINS = 795;
+    public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;
+    public static final int SWAP_QUEST_DIARY = 1002;
     // Non-account settings (widget related ones)
     public static final int SPRITE_UNSELECTED_VALUE = 1077;
     public static final int SPRITE_SELECTED_VALUE = 1079;
