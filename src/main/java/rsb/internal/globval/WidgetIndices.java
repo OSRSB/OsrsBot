@@ -812,6 +812,19 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes music player tab widgets
+     * Last reviewed: 21/3/2022 11:06 pm UTC+1
+     */
+    static class AchievementDiaries {
+        public static final int GROUP_INDEX = 259;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int ACHIEVEMENT_DIARIES_TITLE_LABEL = 1;
+        public static final int ACHIEVEMENT_DIARIES_DYNAMIC_CONTAINER = 2;
+        public static final int SPRITES_DYNAMIC_CONTAINER = 3;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 4;
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 20/3/2022 10:58 pm UTC+1
      */
