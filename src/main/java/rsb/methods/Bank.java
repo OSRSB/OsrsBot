@@ -23,9 +23,9 @@ public class Bank extends MethodProvider {
 	public static int[] BANK_DEPOSIT_BOX;
 	public static int[] BANK_CHESTS;
 	public static int[] BANK_BOOTHS;
-
 	public static Point[] UNREACHABLE_BANKERS = {
-			new Point(3191, 3445), new Point(3180, 3433) // VARROCK EAST
+			new Point(3191, 3445),
+			new Point(3180, 3433) // VARROCK EAST
 	};
 
 	Bank(final MethodContext ctx) {
@@ -36,10 +36,10 @@ public class Bank extends MethodProvider {
 	 * Assigns the ID constants for all the banking objects in RuneScape
 	 */
 	public void assignConstants() {
-		ArrayList<Integer> bankers = new ArrayList<Integer>();
-		ArrayList<Integer> bankBooths = new ArrayList<Integer>();
-		ArrayList<Integer> bankChests = new ArrayList<Integer>();
-		ArrayList<Integer> bankDepositBox = new ArrayList<Integer>();
+		ArrayList<Integer> bankers = new ArrayList<>();
+		ArrayList<Integer> bankBooths = new ArrayList<>();
+		ArrayList<Integer> bankChests = new ArrayList<>();
+		ArrayList<Integer> bankDepositBox = new ArrayList<>();
 		ObjectID ObjectIDs = new ObjectID();
 		try {
 			for (Field i : ObjectIDs.getClass().getDeclaredFields()) {
@@ -53,7 +53,6 @@ public class Bank extends MethodProvider {
 					bankChests.add(Integer.valueOf(i.get(ObjectIDs).toString()));
 				}
 			}
-
 			for (Field i : net.runelite.api.NpcID.class.getDeclaredFields()) {
 				if (i.getName().contains("BANKER")) {
 					bankers.add(Integer.valueOf(i.get(ObjectIDs).toString()));
@@ -62,15 +61,13 @@ public class Bank extends MethodProvider {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-
 		BANKERS = toIntArray(bankers);
 		BANK_BOOTHS = toIntArray(bankBooths);
 		BANK_CHESTS = toIntArray(bankChests);
 		BANK_DEPOSIT_BOX = toIntArray(bankDepositBox);
-
 	}
 
-	private static int[] toIntArray(ArrayList<Integer> list){
+	private static int[] toIntArray(ArrayList<Integer> list) {
 		int[] ret = new int[list.size()];
 		for(int i = 0;i < ret.length;i++)
 			ret[i] = list.get(i);
@@ -98,11 +95,10 @@ public class Bank extends MethodProvider {
 		return false;
 	}
 
-
-	public int getAvailableBankSpace (){
+	public int getAvailableBankSpace() {
 		if (isOpen()) {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_MAX).getText()) -
-					Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_COUNT).getText());
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_MAX).getText())
+					- Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.BANK_ITEM_COUNT).getText());
 		}
 		return -1;
 	}
@@ -304,7 +300,6 @@ public class Bank extends MethodProvider {
 				}
 			}
 		}
-
 		return null;
 	}
 
@@ -431,7 +426,6 @@ public class Bank extends MethodProvider {
 		return (bankChest == null) ? (banker == null) ? bankBooth : banker : bankChest;
 	}
 
-
 	/**
 	 * Opens one of the supported banker NPCs, booths, or chests nearby. If they
 	 * are not nearby, and they are not null, it will automatically walk to the
@@ -440,9 +434,7 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> if the bank was opened; otherwise <code>false</code>.
 	 */
 	public boolean open() {
-		if (isOpen()) {
-			return true;
-		}
+		if (isOpen()) { return true; }
 		try {
 			if (methods.menu.isOpen()) {
 				methods.mouse.moveSlightly();
@@ -486,8 +478,6 @@ public class Bank extends MethodProvider {
 						if (methods.players.getMyPlayer().isLocalPlayerMoving()) {
 							count = 0;
 						}
-
-
 					}
 				} else {
 					methods.camera.turnTo(tile);
@@ -516,8 +506,7 @@ public class Bank extends MethodProvider {
 					methods.mouse.moveSlightly();
 					sleep(random(20, 30));
 				}
-				RSObject depositBox = methods.objects.getNearest(
-						 BANK_DEPOSIT_BOX);
+				RSObject depositBox = methods.objects.getNearest(BANK_DEPOSIT_BOX);
 				if (depositBox != null && methods.calc.distanceTo(depositBox) < 8 && methods.calc.tileOnMap(
 						depositBox.getLocation()) && methods.calc.canReach(
 						depositBox.getLocation(), true)) {
@@ -525,12 +514,9 @@ public class Bank extends MethodProvider {
 						int count = 0;
 						while (!isDepositOpen() && ++count < 10) {
 							sleep(random(200, 400));
-
 							if (methods.players.getMyPlayer().isLocalPlayerMoving()) {
 								count = 0;
 							}
-
-
 						}
 					} else {
 						methods.camera.turnTo(depositBox, 20);
@@ -555,7 +541,6 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean openTab(final int tabNumber) {
-
 		return isOpen() && getTab(tabNumber).doClick();
 	}
 
@@ -563,6 +548,7 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> if currently searching the bank.
 	 */
 	public boolean isSearchOpen() {
+		// TODO: fix this
 		// Setting 1248 is -2147483648 when search is enabled and -2013265920
 		return (methods.clientLocalStorage.getVarpValueAt(1248) == -2147483648);
 	}
@@ -575,9 +561,7 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean searchItem(final String itemName) {
-		if (!isOpen()) {
-			return false;
-		}
+		if (!isOpen()) { return false; }
 		methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_SEARCH).doAction("Search");
 		sleep(random(1000, 1500));
 		if (!isSearchOpen()) {
@@ -664,20 +648,14 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> on success.
 	 */
 	public boolean withdraw(final int itemID, final int count) {
-		if (!isOpen()) {
-			return false;
-		}
+		if (!isOpen()) { return false; }
 		if (count < 0) {
 			throw new IllegalArgumentException("count (" + count + ") < 0");
 		}
 		RSItem rsi = getItem(itemID);
-		if (rsi == null) {
-			return false;
-		}
+		if (rsi == null) { return false; }
 		RSWidget item = rsi.getComponent();
-		if (item == null) {
-			return false;
-		}
+		if (item == null) { return false; }
 		while (item.getRelativeX() == 0 && methods.bank.getCurrentTab() != 0) {
 			if (getTab(0).doClick()) {
 				sleep(random(800, 1300));
@@ -759,8 +737,8 @@ public class Bank extends MethodProvider {
 		}
 		int count = 0;
 		for (int i = 0; i < 28; i++) {
-			if (methods.interfaces.get(11).getComponent(17).isValid() && methods.interfaces.get(11).getComponent(
-					17).getComponent(i).getId() != -1) {
+			if (methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).isValid()
+					&& methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).getComponent(i).getId() != -1) {
 				count++;
 			}
 		}
@@ -820,7 +798,6 @@ public class Bank extends MethodProvider {
 		return -1;
 	}
 
-
 	/**
 	 * Gets the item ID of a item side the bank.
 	 *
@@ -843,5 +820,4 @@ public class Bank extends MethodProvider {
 		}
 		return -1;
 	}
-
 }
