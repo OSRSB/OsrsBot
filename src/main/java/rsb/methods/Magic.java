@@ -2,6 +2,7 @@ package rsb.methods;
 
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarpValues;
 import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.RSCharacter;
 import rsb.wrappers.RSGroundItem;
@@ -32,15 +33,14 @@ public class Magic extends MethodProvider {
     public boolean isSpellSelected() {
         RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
         for (RSWidget child : widget.getComponents()) {
-                if (child.isVisible() || child.isSelfVisible()) {
-                    //Check api.widget to see what border is what or just validate that when one is selected
-                    // what border type it has at the time
-                    if (child.getBorderThickness() == 2) {
-                        return true;
-                    }
+            if (child.isVisible() || child.isSelfVisible()) {
+                //Check api.widget to see what border is what or just validate that when one is selected
+                // what border type it has at the time
+                if (child.getBorderThickness() == 2) {
+                    return true;
                 }
+            }
         }
-
         return false;
     }
 
@@ -50,10 +50,8 @@ public class Magic extends MethodProvider {
      * @return <code>true</code> if autocasting; otherwise <code>false</code>.
      */
     public boolean isAutoCasting() {
-        return methods.combat.getFightMode() == 4;
+        return methods.combat.getFightMode() == VarpValues.COMBAT_STYLE_AUTOCAST.getValue();
     }
-
-
 
     public int getSpell(String name) {
         for (Field field : this.getClass().getDeclaredFields()) {
@@ -134,28 +132,27 @@ public class Magic extends MethodProvider {
      * otherwise <code>false</code>.
      */
     public boolean autoCastSpell(final int spell) {
-        if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE) != 4) {
+        if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE)
+                != VarpValues.COMBAT_STYLE_AUTOCAST.getValue()) {
             if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
                 methods.game.openTab(GameGUI.Tab.COMBAT);
                 sleep(random(150, 250));
             }
             if (methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_CAST_SPELL).doClick()) {
-                {
-                    sleep(random(500, 700));
-                    RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
-                    //The children are the spells
-                    for (RSWidget child : widget.getComponents()) {
-                        //To speed up the search we'll filter the undesirables
-                        if (child.isVisible() || child.isSelfVisible()) {
-                            //This is the autocast book spell list
-                            for (RSWidget autoCastSpell : methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_AUTOCAST_SPELL_LIST).getComponents()) {
-                                //We need to compare sprites to determine if we've found the right value
-                                //This alleviates the need to devise a convoluted method to find spells in this book
-                                //All the spells start from at 4 so the index needs to be adjusted for that
-                                if (child.getIndex() + 3 == spell) {
-                                    if (autoCastSpell.getSpriteId() == child.getSpriteId()) {
-                                        return autoCastSpell.doClick();
-                                    }
+                sleep(random(500, 700));
+                RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
+                //The children are the spells
+                for (RSWidget child : widget.getComponents()) {
+                    //To speed up the search we'll filter the undesirables
+                    if (child.isVisible() || child.isSelfVisible()) {
+                        //This is the autocast book spell list
+                        for (RSWidget autoCastSpell : methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_AUTOCAST_SPELL_LIST).getComponents()) {
+                            //We need to compare sprites to determine if we've found the right value
+                            //This alleviates the need to devise a convoluted method to find spells in this book
+                            //All the spells start from at 4 so the index needs to be adjusted for that
+                            if (child.getIndex() + 3 == spell) {
+                                if (autoCastSpell.getSpriteId() == child.getSpriteId()) {
+                                    return autoCastSpell.doClick();
                                 }
                             }
                         }
@@ -228,36 +225,33 @@ public class Magic extends MethodProvider {
      */
     public String convertSpellBookToVariables() {
         RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
-        String spells = "";
+        StringBuilder spells = new StringBuilder();
         for (RSWidget child : widget.getComponents()) {
             Pattern pattern = Pattern.compile(">(.*)<");
             Matcher matcher = pattern.matcher(child.getName());
             while (matcher.find()) {
                 String spellToAdd = "public static final int SPELL_" + matcher.group(1).replaceAll(" ", "_")
-                        .replaceAll("-", "_").replaceAll("\'", "").toUpperCase() + " = ";
-
-                    for (int i = 0; i < MagicBook.values().length; i++) {
-                        int reverseI = MagicBook.values().length - i - 2;
-                        if (reverseI > 0) {
-                            if (child.getIndex() + 3 == MagicBook.values()[reverseI].getIndex() - 1) {
-                                spells += "// " + MagicBook.values()[reverseI].name() + "\n";
-                            }
-
-                            if (child.getIndex() + 3 >= MagicBook.values()[reverseI].getIndex() - 1) {
-                                if (spells.contains(spellToAdd)) {
-                                    spellToAdd = "public static final int SPELL_" + matcher.group(1).replaceAll(" ", "_")
-                                            .replaceAll("-", "_").replaceAll("\'", "").toUpperCase()
-                                            + "_" + MagicBook.values()[reverseI].name().charAt(0) + " = ";
-                                    break;
-                                }
+                        .replaceAll("-", "_").replaceAll("'", "").toUpperCase() + " = ";
+                for (int i = 0; i < MagicBook.values().length; i++) {
+                    int reverseI = MagicBook.values().length - i - 2;
+                    if (reverseI > 0) {
+                        if (child.getIndex() + 3 == MagicBook.values()[reverseI].getIndex() - 1) {
+                            spells.append("// ").append(MagicBook.values()[reverseI].name()).append("\n");
+                        }
+                        if (child.getIndex() + 3 >= MagicBook.values()[reverseI].getIndex() - 1) {
+                            if (spells.toString().contains(spellToAdd)) {
+                                spellToAdd = "public static final int SPELL_" + matcher.group(1).replaceAll(" ", "_")
+                                        .replaceAll("-", "_").replaceAll("'", "").toUpperCase()
+                                        + "_" + MagicBook.values()[reverseI].name().charAt(0) + " = ";
+                                break;
                             }
                         }
+                    }
                 }
-                spells += spellToAdd + (child.getIndex() + 3) + ";\n";
-
+                spells.append(spellToAdd).append(child.getIndex() + 3).append(";\n");
             }
         }
-        return spells;
+        return spells.toString();
     }
 
     /**
