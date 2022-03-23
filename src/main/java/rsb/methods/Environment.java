@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
  * @author GigiaJ
  */
 public class Environment extends MethodProvider {
-
 	public static final int INPUT_MOUSE = 1;
 	public static final int INPUT_KEYBOARD = 2;
 
@@ -66,12 +65,10 @@ public class Environment extends MethodProvider {
 	public boolean enableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
 			if (random.getClass().getAnnotation(ScriptManifest.class).name().toLowerCase().equals(name.toLowerCase())) {
-				if (random.isEnabled()) {
-					return true;
-				} else {
+				if (!random.isEnabled()) {
 					random.setEnabled(true);
-					return true;
 				}
+				return true;
 			}
 		}
 		return false;
@@ -87,12 +84,10 @@ public class Environment extends MethodProvider {
 	public boolean disableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
 			if (random.getClass().getAnnotation(ScriptManifest.class).name().toLowerCase().equals(name.toLowerCase())) {
-				if (!random.isEnabled()) {
-					return true;
-				} else {
+				if (random.isEnabled()) {
 					random.setEnabled(false);
-					return true;
 				}
+				return true;
 			}
 		}
 		return false;
@@ -113,11 +108,6 @@ public class Environment extends MethodProvider {
 	 * Disables all randoms.
 	 *
 	 */
-	@Deprecated
-	public void disbleRandoms() {
-		disableRandoms();
-	}
-
 	public void disableRandoms() {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
 			if (random.isEnabled()) {
