@@ -214,14 +214,13 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         return getAccessor() == localPlayer.getInteracting();
     }
 
-
     /**
     * Checks to determine whether the character is in the idle animation or not
     *
     * @return true if the character is in the idle animation otherwise false
     */
     public boolean isIdle() {
-        return (getAnimation() != -1);
+        return (getAnimation() == -1);
     }
 
      // TODO: public boolean isMoving()
@@ -320,8 +319,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         {
             int round = angle >>> 9;
             int up = angle & 128;
-            if (up != 0)
-            {
+            if (up != 0) {
                 // round up
                 ++round;
             }

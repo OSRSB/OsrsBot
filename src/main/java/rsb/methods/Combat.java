@@ -276,6 +276,14 @@ public class Combat extends MethodProvider {
 		return npc.getHPPercent() > 0 || (isHPZero(npc) && isFinishable(npc));
 	}
 
+	/**
+	 * Checks whether the desired Npc is dead.
+	 *
+	 * @param npc The RSNPC to check.
+	 * @return <code>true</code> if the Npc is dead or dying; otherwise
+	 *         <code>false</code>.
+	 */
+	//TODO: this will need investigation as there will always be special cases
 	public boolean isDead(final RSNPC npc) {
 		return isHPZero(npc) && !isFinishable(npc);
 	}
@@ -301,10 +309,12 @@ public class Combat extends MethodProvider {
 	}
 
 	public boolean isFinishable(final RSNPC npc) {
+		String mobName = npc.getName();
+		if (mobName == null || mobName.equals("")) return false;
 		String[] finishableMobs = {
 				"Rockslug", "Desert Lizard", "Small Lizard", "Lizard", "Mutated Zygomite", "Ancient Zygomite", "Gargoyle"
 		};
-		return Arrays.asList(finishableMobs).contains(npc.getName());
+		return Arrays.asList(finishableMobs).contains(mobName);
 	}
 
 	public double getFinishableHP(double maxHP, double finishHP) {
@@ -313,7 +323,7 @@ public class Combat extends MethodProvider {
 
 	public boolean canBeFinished(final RSNPC npc) {
 		String mobName = npc.getName();
-		if (mobName == null) return false;
+		if (mobName == null || mobName.equals("")) return false;
 		switch (mobName) {
 			case "Ancient Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(150, 8));
 			case "Gargoyle" -> isBelowOrAtHP(npc, getFinishableHP(105, 8));
@@ -325,23 +335,5 @@ public class Combat extends MethodProvider {
 			default -> throw new IllegalStateException("Unexpected value: " + mobName);
 		}
 		return false;
-	}
-
-	/**
-	 * Checks whether the desired Npc is dead.
-	 *
-	 * @param npc The RSNPC to check.
-	 * @return <code>true</code> if the Npc is dead or dying; otherwise
-	 *         <code>false</code>.
-	 */
-	public boolean isDead2(final RSNPC npc) {
-		// getHPPercent() can return 0 when the Npc has a sliver of health left
-		// getAnimation() confirms a death animation is playing (to prevent
-		// false positives)
-		// getInteracting() confirms because it will no longer interact if
-		// dead/dying
-		//TODO: Fix this
-		return npc == null || !npc.isValid() || (npc.getHPPercent() == 0 && npc.getAnimation() != -1 && npc
-				.getInteracting() == null);
 	}
 }
