@@ -270,8 +270,8 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return <code>true</code> - If RSCharacter is on screen after attempting to move camera angle.
      */
     public boolean turnTo() {
-        if (!character.isOnScreen()) {
-            methods.camera.turnTo(character);
+        if (!this.isOnScreen()) {
+            methods.camera.turnTo(this);
             return character.isOnScreen();
         }
         return false;
