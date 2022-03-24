@@ -7,6 +7,8 @@ import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.VarpValues;
 import rsb.wrappers.*;
 
+import java.util.Arrays;
+
 /**
  * Combat related operations.
  */
@@ -64,14 +66,13 @@ public class Combat extends MethodProvider {
 	 * @param enable <code>true</code> to enable; <code>false</code> to disable.
 	 */
 	public void setAutoRetaliate(final boolean enable) {
-		final RSWidget autoRetal = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
+		final RSWidget autoRetaliate = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
 		if (isAutoRetaliateEnabled() != enable) {
 			if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
 				methods.game.openTab(GameGUI.Tab.COMBAT);
 			}
-			if (methods.game.getCurrentTab() == GameGUI.Tab.COMBAT
-					&& autoRetal != null) {
-				autoRetal.doClick();
+			if (methods.game.getCurrentTab() == GameGUI.Tab.COMBAT && autoRetaliate != null) {
+				autoRetaliate.doClick();
 			}
 		}
 	}
@@ -267,6 +268,65 @@ public class Combat extends MethodProvider {
 		return interact != null && interact.equals(npc.getAccessor());
 	}
 
+	public boolean isHPZero(final RSNPC npc) {
+		return npc.getHPPercent() == 0;
+	}
+
+	public boolean isAlive(final RSNPC npc) {
+		return npc.getHPPercent() > 0 || (isHPZero(npc) && isFinishable(npc));
+	}
+
+	public boolean isDead(final RSNPC npc) {
+		return isHPZero(npc) && !isFinishable(npc);
+	}
+
+	public boolean isBelowHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() < healthPercentage;
+	}
+
+	public boolean isBelowOrAtHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() <= healthPercentage;
+	}
+
+	public boolean isAboveHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() > healthPercentage;
+	}
+
+	public boolean isAboveOrAtHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() >= healthPercentage;
+	}
+
+	public boolean isLowHealth(final RSNPC npc) {
+		return isAboveHP(npc, 0) && isBelowHP(npc, 15);
+	}
+
+	public boolean isFinishable(final RSNPC npc) {
+		String[] finishableMobs = {
+				"Rockslug", "Desert Lizard", "Small Lizard", "Lizard", "Mutated Zygomite", "Ancient Zygomite", "Gargoyle"
+		};
+		return Arrays.asList(finishableMobs).contains(npc.getName());
+	}
+
+	public double getFinishableHP(double maxHP, double finishHP) {
+		return Math.floor(finishHP/(maxHP/100));
+	}
+
+	public boolean canBeFinished(final RSNPC npc) {
+		String mobName = npc.getName();
+		if (mobName == null) return false;
+		switch (mobName) {
+			case "Ancient Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(150, 8));
+			case "Gargoyle" -> isBelowOrAtHP(npc, getFinishableHP(105, 8));
+			case "Mutated Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(75, 8));
+			case "Lizard" -> isBelowOrAtHP(npc, getFinishableHP(40, 4));
+			case "Rockslug" -> isBelowOrAtHP(npc, getFinishableHP(27, 5));
+			case "Desert Lizard" -> isBelowOrAtHP(npc, getFinishableHP(25, 5));
+			case "Small Lizard" -> isBelowOrAtHP(npc, getFinishableHP(15, 4));
+			default -> throw new IllegalStateException("Unexpected value: " + mobName);
+		}
+		return false;
+	}
+
 	/**
 	 * Checks whether the desired Npc is dead.
 	 *
@@ -274,7 +334,7 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if the Npc is dead or dying; otherwise
 	 *         <code>false</code>.
 	 */
-	public boolean isDead(final RSNPC npc) {
+	public boolean isDead2(final RSNPC npc) {
 		// getHPPercent() can return 0 when the Npc has a sliver of health left
 		// getAnimation() confirms a death animation is playing (to prevent
 		// false positives)
