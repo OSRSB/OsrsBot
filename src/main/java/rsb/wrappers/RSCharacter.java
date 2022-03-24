@@ -13,15 +13,9 @@ import rsb.wrappers.subwrap.WalkerTile;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.function.Predicate;
-
-import static net.runelite.api.coords.Direction.*;
-import static net.runelite.api.coords.Direction.EAST;
-//import java.awt.Point;
 
 @Slf4j
 public abstract class RSCharacter extends MethodProvider implements Clickable07, Positionable {
-
     private static ArrayList<Field> pathFields = new ArrayList<>();
     private static int pathXIndex = -1;
     private static int pathYIndex = -1;
@@ -38,8 +32,6 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return The client accessor.
      */
     protected abstract Actor getAccessor();
-
-
     protected abstract Actor getInteracting();
 
     public int[] getPathX() {
@@ -69,15 +61,11 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     private void setPathFields() {
         Player actor = (Player) this.getAccessor();
         for (Field field : actor.getClass().getSuperclass().getDeclaredFields()) {
-
             if (field.getType().getTypeName().equals("int[]")) {
                 field.setAccessible(true);
-
                 try {
                     if (OutputObjectComparer.unpack(field.get(actor)).length == 10) {
-
                         pathFields.add(field);
-
                     }
                 } catch (IllegalAccessException e) {
                     log.error("Accessed reflected object incorrectly", e.getCause());
@@ -118,11 +106,11 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     }
 
     public RSModel getModel() {
-        Actor c = getAccessor();
-        if (c != null) {
-            Model model = c.getModel();
+        Actor actor = getAccessor();
+        if (actor != null) {
+            Model model = actor.getModel();
             if (model != null) {
-                return new RSCharacterModel(methods, model, c);
+                return new RSCharacterModel(methods, model, actor);
             }
         }
         return null;
@@ -144,15 +132,15 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return The % of HP
      */
     public int getHPPercent() {
-        return isInCombat() ? getAccessor().getHealthRatio() * 100 / 255 : 100;
+        int healthRatio = getAccessor().getHealthRatio();
+        if (healthRatio == -1) return -1;
+        return isInCombat() ? healthRatio * 100 / 255 : 100;
     }
 
     public WalkerTile getLocation() {
-        Actor c = getAccessor();
-        if (c == null) {
-            return null;
-        }
-        return new WalkerTile(c.getWorldLocation());
+        Actor actor = getAccessor();
+        if (actor == null) { return null; }
+        return new WalkerTile(actor.getWorldLocation());
     }
 
     public String getMessage() {
@@ -166,10 +154,10 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return The location of the character on the minimap.
      */
     public Point getMinimapLocation() {
-        Actor c = getAccessor();
-        int cX = methods.client.getBaseX() + (c.getLocalLocation().getX() / 32 - 2) / 4;
-        int cY = methods.client.getBaseY() + (c.getLocalLocation().getY() / 32 - 2) / 4;
-        return methods.calc.worldToMinimap(cX, cY);
+        Actor actor = getAccessor();
+        int actorX = methods.client.getBaseX() + (actor.getLocalLocation().getX() / 32 - 2) / 4;
+        int actorY = methods.client.getBaseY() + (actor.getLocalLocation().getY() / 32 - 2) / 4;
+        return methods.calc.worldToMinimap(actorX, actorY);
     }
 
     public String getName() {
@@ -185,25 +173,22 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     }
 
     public Point getScreenLocation() {
-        Actor c = getAccessor();
+        Actor actor = getAccessor();
         RSModel model = getModel();
         if (model == null) {
-            return methods.calc.groundToScreen(c.getLocalLocation().getX(), c.getLocalLocation().getY(),
-                    c.getLogicalHeight() / 2);
+            return methods.calc.groundToScreen(
+                    actor.getLocalLocation().getX(),
+                    actor.getLocalLocation().getY(),
+                    actor.getLogicalHeight() / 2);
         } else {
             return model.getPoint();
         }
     }
 
-
-
-
     public boolean isBeingAttacked() {
         if (methods.game.isLoggedIn()) {
             if (getAccessor().getInteracting() != null) {
-                if (getAccessor().getHealthRatio() > 0) {
-                    return true;
-                }
+                return getAccessor().getHealthRatio() > 0;
             }
         }
         return false;
@@ -212,34 +197,34 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     public boolean isAttacking() {
         if (methods.game.isLoggedIn()) {
             if (getAccessor().getInteracting() != null) {
-                if (getAccessor().getInteracting().getHealthRatio() > 0) {
-                    return true;
-                }
+                return getAccessor().getInteracting().getHealthRatio() > 0;
             }
         }
         return false;
     }
 
+    // TODO: this is far from enough to decide
     public boolean isInCombat() {
-        if (isAttacking() || isBeingAttacked()) {
-            return true;
-        }
-        return false;
+        return isAttacking() || isBeingAttacked();
     }
 
     public boolean isInteractingWithLocalPlayer() {
-        return getAccessor() == methods.client.getLocalPlayer().getInteracting();
+        Player localPlayer = methods.client.getLocalPlayer();
+        if (localPlayer == null) return false;
+        return getAccessor() == localPlayer.getInteracting();
     }
 
-    public boolean isAnimating(){
+
+    /**
+    * Checks to determine whether the character is in the idle animation or not
+    *
+    * @return true if the character is in the idle animation otherwise false
+    */
+    public boolean isIdle() {
         return (getAnimation() != -1);
     }
 
-    /*
-    public boolean isMoving() {
-
-    }
-*/
+     // TODO: public boolean isMoving()
 
     public boolean isOnScreen() {
         RSModel model = getModel();
@@ -261,9 +246,8 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof RSCharacter) {
-            RSCharacter cha = (RSCharacter) obj;
-            return cha.getAccessor() == getAccessor();
+        if (obj instanceof RSCharacter character) {
+            return character.getAccessor() == getAccessor();
         }
         return false;
     }
@@ -279,24 +263,19 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
                 + ",interact="
                 + (inter == null ? "null" : inter.isValid() ? inter
                 .getMessage() : "Invalid") + "]";
-    }
-*/
+    }*/
 
     /**
      * Turns towards the RSCharacter.
      * @return <code>true</code> - If RSCharacter is on screen after attempting to move camera angle.
      */
     public boolean turnTo() {
-        RSCharacter character = this;
-        if(character != null) {
-            if(!character.isOnScreen()) {
-                methods.camera.turnTo(character);
-                return character.isOnScreen();
-            }
+        if (!this.isOnScreen()) {
+            methods.camera.turnTo(this);
+            return this.isOnScreen();
         }
         return false;
     }
-
 
     /**
      * Hovers this Player/NPC
@@ -346,33 +325,21 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
                 // round up
                 ++round;
             }
-            switch (round & 7)
-            {
-                case 0:
-                    return DIRECTION.S;
-                case 1:
-                    return DIRECTION.SW;
-                case 2:
-                    return DIRECTION.W;
-                case 3:
-                    return DIRECTION.NW;
-                case 4:
-                    return DIRECTION.N;
-                case 5:
-                    return DIRECTION.NE;
-                case 6:
-                    return DIRECTION.E;
-                case 7:
-                    return DIRECTION.SE;
-                default:
-                    throw new IllegalStateException();
-            }
+            return switch (round & 7) {
+                case 0 -> DIRECTION.S;
+                case 1 -> DIRECTION.SW;
+                case 2 -> DIRECTION.W;
+                case 3 -> DIRECTION.NW;
+                case 4 -> DIRECTION.N;
+                case 5 -> DIRECTION.NE;
+                case 6 -> DIRECTION.E;
+                case 7 -> DIRECTION.SE;
+                default -> throw new IllegalStateException();
+            };
         }
     }
 
     public enum DIRECTION {
         N, S, E, W, NE, NW, SE, SW;
     }
-
-
 }
