@@ -214,10 +214,13 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         return getAccessor() == localPlayer.getInteracting();
     }
 
-    // NOTE: the name is retarded
-    // if getAnimation() == -1 then player is animating an idle animation
-    // it's false to claim he's not playing an animation, yes he is playing idle animation
-    public boolean isAnimating() {
+
+    /**
+    * Checks to determine whether the character is in the idle animation or not
+    *
+    * @return true if the character is in the idle animation otherwise false
+    */
+    public boolean isIdle() {
         return (getAnimation() != -1);
     }
 
