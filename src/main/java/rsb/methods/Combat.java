@@ -276,6 +276,14 @@ public class Combat extends MethodProvider {
 		return npc.getHPPercent() > 0 || (isHPZero(npc) && isFinishable(npc));
 	}
 
+	/**
+	 * Checks whether the desired Npc is dead.
+	 *
+	 * @param npc The RSNPC to check.
+	 * @return <code>true</code> if the Npc is dead or dying; otherwise
+	 *         <code>false</code>.
+	 */
+	//TODO: this will need investigation as there will always be special cases
 	public boolean isDead(final RSNPC npc) {
 		return isHPZero(npc) && !isFinishable(npc);
 	}
@@ -325,23 +333,5 @@ public class Combat extends MethodProvider {
 			default -> throw new IllegalStateException("Unexpected value: " + mobName);
 		}
 		return false;
-	}
-
-	/**
-	 * Checks whether the desired Npc is dead.
-	 *
-	 * @param npc The RSNPC to check.
-	 * @return <code>true</code> if the Npc is dead or dying; otherwise
-	 *         <code>false</code>.
-	 */
-	public boolean isDead2(final RSNPC npc) {
-		// getHPPercent() can return 0 when the Npc has a sliver of health left
-		// getAnimation() confirms a death animation is playing (to prevent
-		// false positives)
-		// getInteracting() confirms because it will no longer interact if
-		// dead/dying
-		//TODO: Fix this
-		return npc == null || !npc.isValid() || (npc.getHPPercent() == 0 && npc.getAnimation() != -1 && npc
-				.getInteracting() == null);
 	}
 }
