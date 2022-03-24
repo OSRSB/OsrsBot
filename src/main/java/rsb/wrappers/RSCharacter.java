@@ -272,7 +272,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     public boolean turnTo() {
         if (!this.isOnScreen()) {
             methods.camera.turnTo(this);
-            return character.isOnScreen();
+            return this.isOnScreen();
         }
         return false;
     }
