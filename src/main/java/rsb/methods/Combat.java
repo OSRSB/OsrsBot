@@ -77,10 +77,12 @@ public class Combat extends MethodProvider {
 			return false;
 		}
 		for (RSItem edibleItem : edibleItems) {
-			for (int i = 0; i < 100; i++) {
-				sleep(random(100, 300));
-				if (firstPercent < percent) {
-					break;
+			if (edibleItem.doAction("Eat")) {
+				for (int i = 0; i < 100; i++) {
+					sleep(random(100, 300));
+					if (firstPercent < percent) {
+						break;
+					}
 				}
 			}
 			if (getHealth() >= percent) {
