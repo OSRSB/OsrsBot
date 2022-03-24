@@ -191,10 +191,10 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Returns first item with desired action
+	 * Returns all items with desired action
 	 *
 	 * @param action The item menu action to check.
-	 * @return The item, or <code>null</code> if not found.
+	 * @return The items array with desired action.
 	 */
 	public RSItem[] getAllWithAction(final String action) {
 		RSItem[] allInvItems = getItems();
