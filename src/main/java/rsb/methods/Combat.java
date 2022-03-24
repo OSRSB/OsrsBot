@@ -21,25 +21,28 @@ public class Combat extends MethodProvider {
 	/**
 	 * Eats at the desired HP %.
 	 *
-	 * @param percent The health percentage to eat at; 10%-90%
-	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @param foods   Optional: Array of foods we can eat,
+	 *                if no array supplied will eat edible stuff in inventory.
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
 	 *         <code>false</code>.
 	 */
-	@Deprecated
-	public boolean Eat(final int percent, final int... foods) {
-		return eat(percent, foods);
+	public boolean eatUntilHP(final int percent, final int... foods) {
+		if (foods == null || foods.length == 0) {
+			return eatEdibleUntilHP(percent);
+		}
+		return eatFoodsUntilHP(percent, foods);
 	}
 
 	/**
 	 * Eats at the desired HP %.
 	 *
-	 * @param percent The health percentage to eat at; 10%-90%
-	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @param foods   Array of foods we can eat.
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
 	 *         <code>false</code>.
 	 */
-	public boolean eat(final int percent, final int... foods) {
+	public boolean eatFoodsUntilHP(final int percent, final int... foods) {
 		int firstPercent = getHealth();
 		for (int food : foods) {
 			if (!methods.inventory.contains(food)) {
@@ -51,6 +54,33 @@ public class Combat extends MethodProvider {
 					if (firstPercent < percent) {
 						break;
 					}
+				}
+			}
+			if (getHealth() >= percent) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Eats at the desired HP %.
+	 *
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
+	 *         <code>false</code>.
+	 */
+	public boolean eatEdibleUntilHP(final int percent) {
+		int firstPercent = getHealth();
+		RSItem[] edibleItems = methods.inventory.getAllWithAction("Eat");
+		if (edibleItems == null || edibleItems.length == 0) {
+			return false;
+		}
+		for (RSItem edibleItem : edibleItems) {
+			for (int i = 0; i < 100; i++) {
+				sleep(random(100, 300));
+				if (firstPercent < percent) {
+					break;
 				}
 			}
 			if (getHealth() >= percent) {
@@ -109,13 +139,13 @@ public class Combat extends MethodProvider {
 	public boolean setFightMode(int fightMode) {
 		if (fightMode != getFightMode()) {
 			methods.game.openTab(GameGUI.Tab.COMBAT);
-			if (fightMode == 0) {
+			if (fightMode == VarpValues.COMBAT_STYLE_FIRST.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_ONE).doClick();
-			} else if (fightMode == 1) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_SECOND.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_TWO).doClick();
-			} else if (fightMode == 2) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_THIRD.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_THREE).doClick();
-			} else if (fightMode == 3) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_FOURTH.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_FOUR).doClick();
 			}
 		}
@@ -310,7 +340,8 @@ public class Combat extends MethodProvider {
 
 	public boolean isFinishable(final RSNPC npc) {
 		String mobName = npc.getName();
-		if (mobName == null || mobName.equals("")) return false;
+		if (mobName == null || mobName.equals(""))
+			return false;
 		String[] finishableMobs = {
 				"Rockslug", "Desert Lizard", "Small Lizard", "Lizard", "Mutated Zygomite", "Ancient Zygomite", "Gargoyle"
 		};
@@ -323,7 +354,8 @@ public class Combat extends MethodProvider {
 
 	public boolean canBeFinished(final RSNPC npc) {
 		String mobName = npc.getName();
-		if (mobName == null || mobName.equals("")) return false;
+		if (mobName == null || mobName.equals(""))
+			return false;
 		switch (mobName) {
 			case "Ancient Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(150, 8));
 			case "Gargoyle" -> isBelowOrAtHP(npc, getFinishableHP(105, 8));
