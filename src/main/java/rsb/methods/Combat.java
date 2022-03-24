@@ -309,10 +309,12 @@ public class Combat extends MethodProvider {
 	}
 
 	public boolean isFinishable(final RSNPC npc) {
+		String mobName = npc.getName();
+		if (mobName == null || mobName.equals("")) return false;
 		String[] finishableMobs = {
 				"Rockslug", "Desert Lizard", "Small Lizard", "Lizard", "Mutated Zygomite", "Ancient Zygomite", "Gargoyle"
 		};
-		return Arrays.asList(finishableMobs).contains(npc.getName());
+		return Arrays.asList(finishableMobs).contains(mobName);
 	}
 
 	public double getFinishableHP(double maxHP, double finishHP) {
@@ -321,7 +323,7 @@ public class Combat extends MethodProvider {
 
 	public boolean canBeFinished(final RSNPC npc) {
 		String mobName = npc.getName();
-		if (mobName == null) return false;
+		if (mobName == null || mobName.equals("")) return false;
 		switch (mobName) {
 			case "Ancient Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(150, 8));
 			case "Gargoyle" -> isBelowOrAtHP(npc, getFinishableHP(105, 8));
