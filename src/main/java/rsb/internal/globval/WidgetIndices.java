@@ -578,6 +578,78 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes resizable classic viewport widgets
+     * Last reviewed: 22/3/2022 2:06 am UTC+1
+     */
+    public static class ResizableModernViewport {
+        public static final int GROUP_INDEX = 164;
+        // 0 - 13 gap
+        public static final int ENTIRE_VIEWPORT_CONTAINER = 14;
+        public static final int INNER_VIEWPORT_PARENT_CONTAINER = 15;
+        public static final int DIALOG_WINDOW_CONTAINER = 16;
+        public static final int INNER_VIEWPORT_CONTAINER = 17;
+        // 18
+        public static final int MULTICOMBAT_AREA_ICON_SPRITE = 19;
+        // 20 pvp related?
+        public static final int MINIMAP_CONTAINER = 21;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_ONE_CONTAINER = 22;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_TWO_CONTAINER = 23;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_THREE_CONTAINER = 24;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_FOUR_CONTAINER = 25;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_FIVE_CONTAINER = 26;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_SIX_CONTAINER = 27;
+        public static final int MINIMAP_COMPASS_SPRITE = 28;
+        public static final int MINIMAP_DRAW_AREA_SPRITE = 29;
+        public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 30;
+        public static final int MINIMAP_SPRITE = 31;
+        public static final int MINIMAP_ORB_HOLDER = 32;
+        public static final int LOGOUT_SPRITE = 33;                  // Interactions: Logout
+        public static final int LOGOUT_BUTTON_SPRITE = 34;
+        public static final int BOTTOM_BAR_SPRITE = 35;
+        public static final int BOTTOM_BAR_CONTAINER = 36;
+        public static final int TAB_GROUPING_SPRITE = 37;         // Interactions: Grouping
+        public static final int TAB_ACC_MANAGEMENT_SPRITE = 38;   // Interactions: Account Management
+        public static final int TAB_FRIENDS_LIST_SPRITE = 39;     // Interactions: Friends List
+        public static final int TAB_SETTINGS_SPRITE = 40;         // Interactions: Settings
+        public static final int TAB_EMOTES_SPRITE = 41;           // Interactions: Emotes
+        public static final int TAB_MUSIC_PLAYER_SPRITE = 42;     // Interactions: Music Player
+        public static final int TAB_GROUPING_ICON_SPRITE = 43;
+        public static final int TAB_ACC_MANAGEMENT_ICON_SPRITE  = 44;
+        public static final int TAB_FRIENDS_LIST_ICON_SPRITE  = 45;
+        public static final int TAB_SETTINGS_ICON_SPRITE  = 46;
+        public static final int TAB_EMOTES_ICON_SPRITE  = 47;
+        public static final int TAB_MUSIC_PLAYER_ICON_SPRITE = 48;
+        public static final int TOP_BAR_SPRITE = 49;
+        public static final int TOP_BAR_CONTAINER = 50;
+        public static final int TAB_COMBAT_OPTIONS_SPRITE = 51;   // Interactions: Combat Options
+        public static final int TAB_SKILLS_SPRITE = 52;           // Interactions: Skills
+        public static final int TAB_QUESTS_SPRITE = 53;           // Interactions: Leagues
+        public static final int TAB_INVENTORY_SPRITE = 54;        // Interactions: Inventory
+        public static final int TAB_WORN_EQUIPMENT_SPRITE= 55;    // Interactions: Worn Equipment
+        public static final int TAB_PRAYER_SPRITE = 56;           // Interactions: Prayer
+        public static final int TAB_MAGIC_SPRITE = 57;            // Interactions: Magic, Disable spell filtering
+        public static final int TAB_COMBAT_ICON_SPRITE = 58;
+        public static final int TAB_SKILLS_ICON_SPRITE  = 59;
+        public static final int TAB_QUESTS_ICON_SPRITE  = 60;
+        public static final int TAB_INVENTORY_ICON_SPRITE  = 61;
+        public static final int TAB_WORN_EQUIPMENT_ICON_SPRITE  = 62;
+        public static final int TAB_PRAYER_ICON_SPRITE = 63;
+        public static final int TAB_MAGIC_ICON_SPRITE = 64;
+        // 65 - 68 gap
+        public static final int INVENTORY_SPRITE = 69;
+        public static final int INVENTORY_SPECIAL_CONTAINER = 70; // content type 1354
+        public static final int INVENTORY_PARENT_CONTAINER = 71;
+        // 72 - 74 gap
+        public static final int INVENTORY_CONTAINER = 75; // Contains the elements of inventory [149,0]
+        // 76 - 90 gap
+        public static final int MINIMAP_WIDGET_CONTAINER = 90;
+        public static final int CHATBOX_PARENT_CONTAINER = 91;
+        public static final int BOTTOM_BAR_PARENT = 92;
+        public static final int TOP_BAR_PARENT = 93;
+        public static final int INVENTORY_DYNAMIC_PARENT_CONTAINER = 94; // Contains dynamically placed sprites and other inventory parents
+    }
+
+    /**
      * Describes deposit box widgets
      * Last reviewed: 12/3/2022 1:26 am UTC+1
      */
