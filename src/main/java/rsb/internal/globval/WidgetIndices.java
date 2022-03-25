@@ -1215,6 +1215,61 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes fixed classic viewport widgets
+     * Last reviewed: 23/3/2022 0:17 am UTC+1
+     */
+    public static class FixedClassicViewport {
+        public static final int GROUP_INDEX = 548;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int LEFT_SIDE_SHADOW_SPRITE = 1;
+        public static final int MAIN_CONTAINER = 2;
+        public static final int TOP_SIDE_SHADOW_SPRITE = 6;
+        public static final int MINIMAP_CONTAINER = 8;
+        public static final int VIEWPORT_CONTAINER = 9;
+        public static final int CHATBOX_CONTAINER = 10;
+        public static final int LEFT_SIDE_TOP_COLUMN_SPRITE = 11;
+        public static final int LEFT_SIDE_BOTTOM_COLUMN_SPRITE = 12;
+        public static final int RIGHT_SIDE_COLUMN_SPRITE = 13;
+        public static final int BOTTOM_BAR_PARENT_CONTAINER = 14;
+        public static final int TOP_BAR_PARENT_CONTAINER = 15;
+        public static final int ROOT_INTERFACE_CONTAINER = 16;
+        public static final int COMPASS_DYNAMIC_CONTAINER = 23;
+        public static final int MINIMAP_ORBS_CONTAINER = 24;
+        public static final int BOTTOM_BAR_SPRITE = 44;
+        public static final int BOTTOM_BAR_CONTAINER = 45;
+        public static final int TAB_CHAT_CHANNEL_SPRITE = 46;
+        public static final int TAB_ACC_MANAGEMENT_SPRITE = 47;
+        public static final int TAB_FRIENDS_LIST_SPRITE = 48;
+        public static final int TAB_LOGOUT_SPRITE = 49;
+        public static final int TAB_SETTINGS_SPRITE = 50;
+        public static final int TAB_EMOTES_SPRITE = 51;
+        public static final int TAB_MUSIC_PLAYER_SPRITE = 52;
+        public static final int TAB_CHAT_CHANNEL_ICON_SPRITE = 53;
+        public static final int TAB_ACC_MANAGEMENT_ICON_SPRITE = 54;
+        public static final int TAB_FRIENDS_LIST_ICON_SPRITE = 55;
+        public static final int TAB_LOGOUT_ICON_SPRITE = 56;
+        public static final int TAB_SETTINGS_ICON_SPRITE = 57;
+        public static final int TAB_EMOTES_ICON_SPRITE = 58;
+        public static final int TAB_MUSIC_PLAYER_ICON_SPRITE = 59;
+        public static final int TOP_BAR_SPRITE = 60;
+        public static final int TOP_BAR_CONTAINER = 61;
+        public static final int TAB_COMBAT_OPTIONS_SPRITE = 62;
+        public static final int TAB_SKILLS_SPRITE = 63;
+        public static final int TAB_QUEST_LIST_SPRITE = 64;
+        public static final int TAB_INVENTORY_SPRITE = 65;
+        public static final int TAB_EQUIPMENT_SPRITE = 66;
+        public static final int TAB_PRAYER_SPRITE = 67;
+        public static final int TAB_MAGIC_SPRITE = 68;
+        public static final int TAB_COMBAT_OPTIONS_ICON_SPRITE = 69;
+        public static final int TAB_SKILLS_ICON_SPRITE = 70;
+        public static final int TAB_QUEST_LIST_ICON_SPRITE = 71;
+        public static final int TAB_INVENTORY_ICON_SPRITE = 72;
+        public static final int TAB_EQUIPMENT_ICON_SPRITE = 73;
+        public static final int TAB_PRAYER_ICON_SPRITE = 74;
+        public static final int TAB_MAGIC_ICON_SPRITE = 75;
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
