@@ -454,6 +454,71 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes resizable classic viewport widgets
+     * Last reviewed: 22/3/2022 1:12 am UTC+1
+     */
+    public static class ResizableClassicViewport {
+        public static final int GROUP_INDEX = 161;
+        public static final int MINIMAP_CONTAINER = 21;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_ONE_CONTAINER = 22;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_TWO_CONTAINER = 23;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_THREE_CONTAINER = 24;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_FOUR_CONTAINER = 25;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_FIVE_CONTAINER = 26;
+        public static final int MINIMAP_DRAW_AREA_SEGMENT_SIX_CONTAINER = 27;
+        public static final int MINIMAP_COMPASS_SPRITE = 28;
+        public static final int MINIMAP_DRAW_AREA_SPRITE = 29;
+        public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 30; //label[0],label[1]
+        public static final int MINIMAP_SPRITE = 31;
+        public static final int MINIMAP_ORB_HOLDER_CONTAINER = 32;
+        public static final int INVENTORY_SPRITE = 37;
+        public static final int RIGHT_SIDE_COLUMN_SPRITE = 38;
+        public static final int LEFT_SIDE_COLUMN_SPRITE = 39;
+        public static final int BOTTOM_BAR_SPRITE = 40;
+        public static final int BOTTOM_BAR_CONTAINER = 41;
+        public static final int TAB_CHAT_CHANNEL_SPRITE = 42;     // Interactions: Chat-channel
+        public static final int TAB_ACC_MANAGEMENT_SPRITE = 43;   // Interactions: Account Management
+        public static final int TAB_FRIENDS_LIST_SPRITE = 44;     // Interactions: Friends List
+        public static final int TAB_LOGOUT_SPRITE = 45;           // Interactions: Logout
+        public static final int TAB_SETTINGS_SPRITE = 46;         // Interactions: Settings
+        public static final int TAB_EMOTES_SPRITE = 47;           // Interactions: Emotes
+        public static final int TAB_MUSIC_PLAYER_SPRITE = 48;     // Interactions: Music Player
+        public static final int TAB_CHAT_CHANNEL_ICON_SPRITE = 49;
+        public static final int TAB_ACC_MANAGEMENT_ICON_SPRITE = 50;
+        public static final int TAB_FRIENDS_LIST_ICON_SPRITE = 51;
+        public static final int TAB_LOGOUT_ICON_SPRITE = 52;
+        public static final int TAB_SETTINGS_ICON_SPRITE = 53;
+        public static final int TAB_EMOTES_ICON_SPRITE = 54;
+        public static final int TAB_MUSIC_PLAYER_ICON_SPRITE = 55;
+        public static final int TOP_BAR_SPRITE = 56;
+        public static final int TOP_BAR_CONTAINER = 57;
+        public static final int TAB_COMBAT_OPTIONS_SPRITE = 58;   // Interactions: Combat Options
+        public static final int TAB_SKILLS_SPRITE = 59;           // Interactions: Skills
+        public static final int TAB_QUESTS_SPRITE = 60;           // Interactions: Leagues
+        public static final int TAB_INVENTORY_SPRITE = 61;        // Interactions: Inventory
+        public static final int TAB_WORN_EQUIPMENT_SPRITE = 62;   // Interactions: Worn Equipment
+        public static final int TAB_PRAYER_SPRITE = 63;           // Interactions: Prayer
+        public static final int TAB_MAGIC_CONTAINER = 64;         // Interactions: Magic, Disable spell filtering
+        public static final int TAB_COMBAT_ICON_SPRITE = 65;
+        public static final int TAB_SKILLS_ICON_SPRITE = 66;
+        public static final int TAB_QUESTS_ICON_SPRITE = 67;
+        public static final int TAB_INVENTORY_ICON_SPRITE = 68;
+        public static final int TAB_WORN_EQUIPMENT_ICON_SPRITE = 69;
+        public static final int TAB_PRAYER_ICON_SPRITE = 70;
+        public static final int TAB_MAGIC_ICON_SPRITE = 71;
+        public static final int INVENTORY_PARENT_FIRST_CONTAINER = 72;
+        public static final int INVENTORY_SPECIAL_CONTAINER = 73; // content type 1354, Contains the elements of inventory [15,0] if bank open
+        public static final int INVENTORY_PARENT_SECOND_CONTAINER = 74;
+        public static final int INVENTORY_CONTAINER = 78; // Contains the elements of inventory [149,0], 0-27
+        public static final int UNKNOWN_CONTAINER = 89; // content type 1337, LEET lol?
+        public static final int PRIVATE_CHAT_MESSAGE_CONTAINER = 91;
+        public static final int VIEWPORT_PARENT_CONTAINER = 92;
+        public static final int MINIMAP_PARENT_CONTAINER = 93;
+        public static final int CHATBOX_PARENT_CONTAINER = 94;
+        public static final int INVENTORY_ROOT_CONTAINER = 95;
+    }
+
+    /**
      * Describes chatbox widgets
      * TODO: review
      */
