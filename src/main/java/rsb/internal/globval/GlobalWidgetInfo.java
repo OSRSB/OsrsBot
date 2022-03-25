@@ -190,6 +190,26 @@ public enum GlobalWidgetInfo {
     // [MINIMAP]
 
     /**
+     * [RESIZABLE CLASSIC VIEWPORT] Widget Info
+     */
+    RESIZABLE_CLASSIC_MINIMAP(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_CONTAINER),
+    RESIZABLE_CLASSIC_CHAT_CHANNEL(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
+    RESIZABLE_CLASSIC_ACC_MANAGEMENT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_ACC_MANAGEMENT_SPRITE),
+    RESIZABLE_CLASSIC_FRIEND_LIST(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_FRIENDS_LIST_SPRITE),
+    RESIZABLE_CLASSIC_LOGOUT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_LOGOUT_SPRITE),
+    RESIZABLE_CLASSIC_SETTINGS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_SETTINGS_SPRITE),
+    RESIZABLE_CLASSIC_EMOTES(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_EMOTES_SPRITE),
+    RESIZABLE_CLASSIC_MUSIC_PLAYER(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_MUSIC_PLAYER_SPRITE),
+    RESIZABLE_CLASSIC_COMBAT_OPTIONS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_COMBAT_OPTIONS_SPRITE),
+    RESIZABLE_CLASSIC_SKILLS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_SKILLS_SPRITE),
+    RESIZABLE_CLASSIC_QUESTS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_QUESTS_SPRITE),
+    RESIZABLE_CLASSIC_INVENTORY(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_INVENTORY_SPRITE),
+    RESIZABLE_CLASSIC_WORN_EQUIPMENT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_WORN_EQUIPMENT_SPRITE),
+    RESIZABLE_CLASSIC_PRAYER(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_PRAYER_SPRITE),
+    RESIZABLE_CLASSIC_MAGIC(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_MAGIC_CONTAINER),
+    // [RESIZABLE CLASSIC VIEWPORT]
+
+    /**
      * [PRAYER] Widget Info
      */
     PRAYER_STANDARD_BOOK(WidgetIndices.PrayersTab.GROUP_ID, WidgetIndices.PrayersTab.PRAYERS_CONTAINER);
