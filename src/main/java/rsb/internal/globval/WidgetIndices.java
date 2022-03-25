@@ -498,7 +498,7 @@ public class WidgetIndices {
         public static final int TAB_INVENTORY_SPRITE = 61;        // Interactions: Inventory
         public static final int TAB_WORN_EQUIPMENT_SPRITE = 62;   // Interactions: Worn Equipment
         public static final int TAB_PRAYER_SPRITE = 63;           // Interactions: Prayer
-        public static final int TAB_MAGIC_CONTAINER = 64;         // Interactions: Magic, Disable spell filtering
+        public static final int TAB_MAGIC_SPRITE = 64;            // Interactions: Magic, Disable spell filtering
         public static final int TAB_COMBAT_ICON_SPRITE = 65;
         public static final int TAB_SKILLS_ICON_SPRITE = 66;
         public static final int TAB_QUESTS_ICON_SPRITE = 67;
@@ -603,11 +603,11 @@ public class WidgetIndices {
         public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 30;
         public static final int MINIMAP_SPRITE = 31;
         public static final int MINIMAP_ORB_HOLDER = 32;
-        public static final int LOGOUT_SPRITE = 33;                  // Interactions: Logout
+        public static final int LOGOUT_SPRITE = 33;               // Interactions: Logout
         public static final int LOGOUT_BUTTON_SPRITE = 34;
         public static final int BOTTOM_BAR_SPRITE = 35;
         public static final int BOTTOM_BAR_CONTAINER = 36;
-        public static final int TAB_GROUPING_SPRITE = 37;         // Interactions: Grouping
+        public static final int TAB_CHAT_CHANNEL_SPRITE = 37;     // Interactions: Chat Channel
         public static final int TAB_ACC_MANAGEMENT_SPRITE = 38;   // Interactions: Account Management
         public static final int TAB_FRIENDS_LIST_SPRITE = 39;     // Interactions: Friends List
         public static final int TAB_SETTINGS_SPRITE = 40;         // Interactions: Settings
