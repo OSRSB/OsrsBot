@@ -3,6 +3,7 @@ package rsb.methods;
 import net.runelite.api.Skill;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.internal.globval.enums.Prayers;
 import rsb.wrappers.RSWidget;
 
@@ -66,7 +67,7 @@ public class Prayer extends MethodProvider {
 		if ((pray.getBackgroundColor() != -1) == activate) {
 			return false;
 		}
-		if (methods.game.getCurrentTab() != GameGUI.Tab.PRAYER && methods.game.openTab(GameGUI.Tab.PRAYER)) {
+		if (methods.game.getCurrentTab() != InterfaceTab.PRAYER && methods.game.openTab(InterfaceTab.PRAYER)) {
 			sleep(random(100, 200));
 		}
 		return pray.doAction(activate ? "Activate" : "Deactivate");

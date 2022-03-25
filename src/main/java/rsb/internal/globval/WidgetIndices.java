@@ -494,7 +494,7 @@ public class WidgetIndices {
         public static final int TOP_BAR_CONTAINER = 57;
         public static final int TAB_COMBAT_OPTIONS_SPRITE = 58;   // Interactions: Combat Options
         public static final int TAB_SKILLS_SPRITE = 59;           // Interactions: Skills
-        public static final int TAB_QUEST_LIST_SPRITE = 60;           // Interactions: Leagues
+        public static final int TAB_QUEST_LIST_SPRITE = 60;       // Interactions: Leagues
         public static final int TAB_INVENTORY_SPRITE = 61;        // Interactions: Inventory
         public static final int TAB_WORN_EQUIPMENT_SPRITE = 62;   // Interactions: Worn Equipment
         public static final int TAB_PRAYER_SPRITE = 63;           // Interactions: Prayer

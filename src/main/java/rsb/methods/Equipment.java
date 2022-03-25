@@ -1,6 +1,7 @@
 package rsb.methods;
 
 import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.RSItem;
 import rsb.wrappers.RSWidget;
 
@@ -23,11 +24,11 @@ public class Equipment extends MethodProvider {
 	 */
 	public RSWidget getInterface() {
 		// Tab needs to be open for it to update its content -.-
-		if (methods.game.getCurrentTab() != GameGUI.Tab.EQUIPMENT) {
+		if (methods.game.getCurrentTab() != InterfaceTab.EQUIPMENT) {
 			if (methods.bank.isOpen()) {
 				methods.bank.close();
 			}
-			methods.game.openTab(GameGUI.Tab.EQUIPMENT);
+			methods.game.openTab(InterfaceTab.EQUIPMENT);
 			sleep(random(900, 1500));
 		}
 		return methods.interfaces.get(WidgetIndices.WornEquipmentTab.GROUP_INDEX);

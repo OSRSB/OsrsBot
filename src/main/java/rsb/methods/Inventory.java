@@ -3,6 +3,7 @@ package rsb.methods;
 import net.runelite.api.ItemComposition;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
@@ -43,8 +44,8 @@ public class Inventory extends MethodProvider {
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (isOpen(entry.getValue())) {
-				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-					methods.game.openTab(GameGUI.Tab.INVENTORY);
+				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+					methods.game.openTab(InterfaceTab.INVENTORY);
 					sleep(random(50, 100));
 				}
 				return entry;
@@ -245,10 +246,10 @@ public class Inventory extends MethodProvider {
 			methods.interfaces.clickContinue();
 			sleep(random(800, 1300));
 		}
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY
 				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
 				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {
 			return false;
@@ -423,8 +424,8 @@ public class Inventory extends MethodProvider {
 	 *         otherwise <code>false</code>.
 	 */
 	public boolean useItem(final RSItem item, final RSItem targetItem) {
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		return selectItem(item) && targetItem.doAction("Use");
 	}
@@ -464,8 +465,8 @@ public class Inventory extends MethodProvider {
 	 *         RSItem and RSObject; otherwise <code>false</code>.
 	 */
 	public boolean useItem(RSItem item, RSObject targetObject) {
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		return selectItem(item) && targetObject.doAction("Use", targetObject.getName());
 	}
