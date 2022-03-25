@@ -220,7 +220,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     * @return true if the character is in the idle animation otherwise false
     */
     public boolean isIdle() {
-        return (getAnimation() == -1);
+        return getAnimation() == -1;
     }
 
      // TODO: public boolean isMoving()
