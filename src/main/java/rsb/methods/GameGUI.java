@@ -1,7 +1,6 @@
 package rsb.methods;
 
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.internal.globval.enums.ViewportLayout;
@@ -18,28 +17,40 @@ public class GameGUI extends MethodProvider {
 	}
 
 	/**
-	 * @return The compasses <code>RSInterface</code>;otherwise null.
-	 * 	TODO: fix!
+	 * @return The compasses <code>Widget</code>;otherwise null.
 	 */
 	public synchronized Widget getCompass() {
-		return (isFixed())
-				? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT.getId(), 10)
-				: null;
+		ViewportLayout layout = getViewportLayout();
+		if (layout != null) {
+			switch (layout) {
+				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_COMPASS.getPackedId());
+				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_COMPASS.getPackedId());
+				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_COMPASS.getPackedId());
+				default -> throw new IllegalStateException("Unexpected value: " + layout);
+			}
+		}
+		return null;
 	}
 
 	/**
-	 * @return The minimaps <code>RSInterface</code>; otherwise null.
-	 * 	TODO: fix!
+	 * @return The minimaps <code>Widget</code>; otherwise null.
 	 */
 	public synchronized Widget getMinimapInterface() {
-		return (isFixed())
-				? methods.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP)
-				: methods.client.getWidget(WidgetInfo.RESIZABLE_MINIMAP_WIDGET);
+		ViewportLayout layout = getViewportLayout();
+		if (layout != null) {
+			switch (layout) {
+				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_MINIMAP.getPackedId());
+				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
+				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
+				default -> throw new IllegalStateException("Unexpected value: " + layout);
+			}
+		}
+		return null;
 	}
 
 	/**
 	 * @param interfaceTab The enumerated tab containing WidgetInfo of the tab.
-	 * @return The specified tab <code>RSInterface</code>; otherwise null.
+	 * @return The specified tab <code>Widget</code>; otherwise null.
 	 */
 	public synchronized Widget getTab(final InterfaceTab interfaceTab) {
 		ViewportLayout layout = getViewportLayout();
@@ -55,18 +66,11 @@ public class GameGUI extends MethodProvider {
 	}
 
 	/**
-	 * Determines whether or no the client is currently in the fixed display
-	 * mode.
+	 * Determines client viewport layout mode.
 	 *
-	 * @return <code>true</code> if in fixed mode; otherwise <code>false</code>.
-	 * 	TODO: fix!
+	 * @return <code>ViewportLayout</code>; otherwise <code>null</code>.
 	 */
-	@Deprecated
-	public boolean isFixed() {
-		return true;
-	}
-
-	public static ViewportLayout getViewportLayout() {
+	public ViewportLayout getViewportLayout() {
 		Widget minimapOnFixedClassic =
 				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
 		Widget minimapOnResizableClassic =
@@ -82,5 +86,3 @@ public class GameGUI extends MethodProvider {
 		return null;
 	}
 }
-
-

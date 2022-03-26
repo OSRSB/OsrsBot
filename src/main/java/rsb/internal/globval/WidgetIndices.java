@@ -1370,7 +1370,7 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_PARENT_CONTAINER = 14;
         public static final int TOP_BAR_PARENT_CONTAINER = 15;
         public static final int ROOT_INTERFACE_CONTAINER = 16;
-        public static final int COMPASS_DYNAMIC_CONTAINER = 23;
+        public static final int COMPASS_DYNAMIC_CONTAINER = 23; // TODO: get sprite
         public static final int MINIMAP_ORBS_CONTAINER = 24;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;

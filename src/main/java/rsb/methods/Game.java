@@ -5,6 +5,7 @@ import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
+import rsb.internal.globval.enums.ViewportLayout;
 import rsb.script.Random;
 import rsb.script.randoms.*;
 import rsb.wrappers.*;
@@ -101,13 +102,15 @@ public class Game extends MethodProvider {
 	 * Closes the currently open tab if in resizable mode.
 	 */
 	public void closeTab() {
-		InterfaceTab tab = getCurrentTab();
-		if (methods.gui.isFixed() || tab == InterfaceTab.LOGOUT) {
+		InterfaceTab interfaceTab = getCurrentTab();
+		if (methods.gui.getViewportLayout() == ViewportLayout.FIXED_CLASSIC || interfaceTab == InterfaceTab.LOGOUT) {
 			return;
 		}
-		net.runelite.api.widgets.Widget iTab = methods.gui.getTab(tab);
-		if (iTab != null) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.TO_GROUP(iTab.getParent().getId()), GlobalWidgetInfo.TO_CHILD(iTab.getId())).doClick();
+		net.runelite.api.widgets.Widget tabWidget = methods.gui.getTab(interfaceTab);
+		if (tabWidget != null) {
+			methods.interfaces.getComponent(
+					GlobalWidgetInfo.TO_GROUP(tabWidget.getParent().getId()),
+					GlobalWidgetInfo.TO_CHILD(tabWidget.getId())).doClick();
 		}
 	}
 
@@ -159,14 +162,12 @@ public class Game extends MethodProvider {
 	 * TODO: this feels broken
 	 */
 	public Boolean inRandom() {
-
 		for (Random random : methods.runeLite.getScriptHandler().getRandoms()) {
-			if (random.getClass().equals(new LoginBot()))
+			if (random.getClass().equals(new LoginBot())) {
 					//|| random.getClass().equals(new BankPins())
 					//|| random.getClass().equals(new TeleotherCloser())
 					//|| random.getClass().equals(new CloseAllInterface())
 					//|| random.getClass().equals(new ImprovedRewardsBox())) {
-			{
 				continue;
 			} else {
 				if (random.activateCondition()) {
@@ -174,8 +175,6 @@ public class Game extends MethodProvider {
 				}
 			}
 		}
-
-
 		return false;
 	}
 
