@@ -5,6 +5,7 @@ import net.runelite.api.Skill;
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.VarpValues;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.*;
 
 import java.util.Arrays;
@@ -100,10 +101,10 @@ public class Combat extends MethodProvider {
 	public void setAutoRetaliate(final boolean enable) {
 		final RSWidget autoRetaliate = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
 		if (isAutoRetaliateEnabled() != enable) {
-			if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
-				methods.game.openTab(GameGUI.Tab.COMBAT);
+			if (methods.game.getCurrentTab() != InterfaceTab.COMBAT) {
+				methods.game.openTab(InterfaceTab.COMBAT);
 			}
-			if (methods.game.getCurrentTab() == GameGUI.Tab.COMBAT && autoRetaliate != null) {
+			if (methods.game.getCurrentTab() == InterfaceTab.COMBAT && autoRetaliate != null) {
 				autoRetaliate.doClick();
 			}
 		}
@@ -140,7 +141,7 @@ public class Combat extends MethodProvider {
 	 */
 	public boolean setFightMode(int fightMode) {
 		if (fightMode != getFightMode()) {
-			methods.game.openTab(GameGUI.Tab.COMBAT);
+			methods.game.openTab(InterfaceTab.COMBAT);
 			if (fightMode == VarpValues.COMBAT_STYLE_FIRST.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_ONE).doClick();
 			} else if (fightMode == VarpValues.COMBAT_STYLE_SECOND.getValue()) {

@@ -2,8 +2,7 @@ package rsb.event.impl;
 
 import rsb.botLauncher.RuneLite;
 import rsb.event.listener.PaintListener;
-import rsb.methods.Game;
-import rsb.methods.GameGUI;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.methods.MethodContext;
 import rsb.wrappers.RSItem;
 
@@ -22,7 +21,7 @@ public class DrawInventory implements PaintListener {
 			return;
 		}
 
-		if (ctx.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
+		if (ctx.game.getCurrentTab() != InterfaceTab.INVENTORY) {
 			return;
 		}
 

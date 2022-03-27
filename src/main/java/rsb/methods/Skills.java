@@ -2,6 +2,7 @@ package rsb.methods;
 
 import net.runelite.api.Skill;
 import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.util.SkillTracker;
 
 import java.lang.reflect.Field;
@@ -158,7 +159,7 @@ public class Skills extends MethodProvider {
 	 *         index.
 	 */
 	public boolean doHover(int component) {
-		methods.game.openTab(GameGUI.Tab.STATS);
+		methods.game.openTab(InterfaceTab.SKILLS);
 		sleep(random(10, 100));
 		return methods.interfaces.getComponent(WidgetIndices.SkillsTab.GROUP_INDEX, component)
 				.doHover();

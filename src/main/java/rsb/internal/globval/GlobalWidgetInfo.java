@@ -190,6 +190,69 @@ public enum GlobalWidgetInfo {
     // [MINIMAP]
 
     /**
+     * [RESIZABLE CLASSIC VIEWPORT] Widget Info
+     */
+    RESIZABLE_CLASSIC_MINIMAP(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_CONTAINER),
+    RESIZABLE_CLASSIC_COMPASS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE),
+    RESIZABLE_CLASSIC_CHAT_CHANNEL(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
+    RESIZABLE_CLASSIC_ACC_MANAGEMENT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_ACC_MANAGEMENT_SPRITE),
+    RESIZABLE_CLASSIC_FRIEND_LIST(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_FRIENDS_LIST_SPRITE),
+    RESIZABLE_CLASSIC_LOGOUT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_LOGOUT_SPRITE),
+    RESIZABLE_CLASSIC_SETTINGS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_SETTINGS_SPRITE),
+    RESIZABLE_CLASSIC_EMOTES(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_EMOTES_SPRITE),
+    RESIZABLE_CLASSIC_MUSIC_PLAYER(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_MUSIC_PLAYER_SPRITE),
+    RESIZABLE_CLASSIC_COMBAT_OPTIONS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_COMBAT_OPTIONS_SPRITE),
+    RESIZABLE_CLASSIC_SKILLS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_SKILLS_SPRITE),
+    RESIZABLE_CLASSIC_QUESTS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_QUEST_LIST_SPRITE),
+    RESIZABLE_CLASSIC_INVENTORY(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_INVENTORY_SPRITE),
+    RESIZABLE_CLASSIC_WORN_EQUIPMENT(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_WORN_EQUIPMENT_SPRITE),
+    RESIZABLE_CLASSIC_PRAYER(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_PRAYER_SPRITE),
+    RESIZABLE_CLASSIC_MAGIC(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_MAGIC_SPRITE),
+    // [RESIZABLE CLASSIC VIEWPORT]
+
+    /**
+     * [RESIZABLE MODERN VIEWPORT] Widget Info
+     */
+    RESIZABLE_MODERN_MINIMAP(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_CONTAINER),
+    RESIZABLE_MODERN_COMPASS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE),
+    RESIZABLE_MODERN_CHAT_CHANNEL(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_CHAT_CHANNEL_SPRITE),
+    RESIZABLE_MODERN_ACC_MANAGEMENT(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_ACC_MANAGEMENT_SPRITE),
+    RESIZABLE_MODERN_FRIEND_LIST(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_FRIENDS_LIST_SPRITE),
+    RESIZABLE_MODERN_LOGOUT(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.LOGOUT_SPRITE),
+    RESIZABLE_MODERN_SETTINGS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_SETTINGS_SPRITE),
+    RESIZABLE_MODERN_EMOTES(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_EMOTES_SPRITE),
+    RESIZABLE_MODERN_MUSIC_PLAYER(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_MUSIC_PLAYER_SPRITE),
+    RESIZABLE_MODERN_COMBAT_OPTIONS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_COMBAT_OPTIONS_SPRITE),
+    RESIZABLE_MODERN_SKILLS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_SKILLS_SPRITE),
+    RESIZABLE_MODERN_QUESTS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_QUEST_LIST_SPRITE),
+    RESIZABLE_MODERN_INVENTORY(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_INVENTORY_SPRITE),
+    RESIZABLE_MODERN_WORN_EQUIPMENT(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_WORN_EQUIPMENT_SPRITE),
+    RESIZABLE_MODERN_PRAYER(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_PRAYER_SPRITE),
+    RESIZABLE_MODERN_MAGIC(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_MAGIC_SPRITE),
+    // [RESIZABLE MODERN VIEWPORT]
+
+    /**
+     * [FIXED CLASSIC VIEWPORT] Widget Info
+     */
+    FIXED_CLASSIC_MINIMAP(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_CONTAINER),
+    FIXED_CLASSIC_COMPASS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER),
+    FIXED_CLASSIC_CHAT_CHANNEL(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
+    FIXED_CLASSIC_ACC_MANAGEMENT(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_ACC_MANAGEMENT_SPRITE),
+    FIXED_CLASSIC_FRIEND_LIST(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_FRIENDS_LIST_SPRITE),
+    FIXED_CLASSIC_LOGOUT(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_LOGOUT_SPRITE),
+    FIXED_CLASSIC_SETTINGS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_SETTINGS_SPRITE),
+    FIXED_CLASSIC_EMOTES(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_EMOTES_SPRITE),
+    FIXED_CLASSIC_MUSIC_PLAYER(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_MUSIC_PLAYER_SPRITE),
+    FIXED_CLASSIC_COMBAT_OPTIONS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_COMBAT_OPTIONS_SPRITE),
+    FIXED_CLASSIC_SKILLS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_SKILLS_SPRITE),
+    FIXED_CLASSIC_QUESTS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_QUEST_LIST_SPRITE),
+    FIXED_CLASSIC_INVENTORY(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_INVENTORY_SPRITE),
+    FIXED_CLASSIC_WORN_EQUIPMENT(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_WORN_EQUIPMENT_SPRITE),
+    FIXED_CLASSIC_PRAYER(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_PRAYER_SPRITE),
+    FIXED_CLASSIC_MAGIC(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_MAGIC_SPRITE),
+    // [FIXED CLASSIC  VIEWPORT]
+
+    /**
      * [PRAYER] Widget Info
      */
     PRAYER_STANDARD_BOOK(WidgetIndices.PrayersTab.GROUP_ID, WidgetIndices.PrayersTab.PRAYERS_CONTAINER);

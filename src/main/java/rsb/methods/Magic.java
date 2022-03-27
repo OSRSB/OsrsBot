@@ -4,6 +4,7 @@ import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.VarpValues;
 import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.RSCharacter;
 import rsb.wrappers.RSGroundItem;
 import rsb.wrappers.RSObject;
@@ -75,17 +76,17 @@ public class Magic extends MethodProvider {
      * @return <code>true</code> if the spell was clicked; otherwise <code>false</code>.
      */
     public boolean castSpell(final int spell) {
-        if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
-            methods.game.openTab(GameGUI.Tab.MAGIC);
+        if (methods.game.getCurrentTab() != InterfaceTab.MAGIC) {
+            methods.game.openTab(InterfaceTab.MAGIC);
             for (int i = 0; i < 100; i++) {
                 sleep(20);
-                if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
+                if (methods.game.getCurrentTab() == InterfaceTab.MAGIC) {
                     break;
                 }
             }
             sleep(random(150, 250));
         }
-        if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
+        if (methods.game.getCurrentTab() == InterfaceTab.MAGIC) {
             RSWidget inter = getInterface();
             if (inter != null) {
                 RSWidget comp = inter.getComponent(spell);
@@ -104,17 +105,17 @@ public class Magic extends MethodProvider {
      * @return <code>true</code> if the spell was clicked; otherwise <code>false</code>.
      */
     public boolean hoverSpell(final int spell) {
-        if (methods.game.getCurrentTab() != GameGUI.Tab.MAGIC) {
-            methods.game.openTab(GameGUI.Tab.MAGIC);
+        if (methods.game.getCurrentTab() != InterfaceTab.MAGIC) {
+            methods.game.openTab(InterfaceTab.MAGIC);
             for (int i = 0; i < 100; i++) {
                 sleep(20);
-                if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
+                if (methods.game.getCurrentTab() == InterfaceTab.MAGIC) {
                     break;
                 }
             }
             sleep(random(150, 250));
         }
-        if (methods.game.getCurrentTab() == GameGUI.Tab.MAGIC) {
+        if (methods.game.getCurrentTab() == InterfaceTab.MAGIC) {
             RSWidget inter = getInterface();
             if (inter != null) {
                 RSWidget comp = inter.getComponent(spell);
@@ -134,8 +135,8 @@ public class Magic extends MethodProvider {
     public boolean autoCastSpell(final int spell) {
         if (methods.clientLocalStorage.getVarpValueAt(VarpIndices.COMBAT_STYLE)
                 != VarpValues.COMBAT_STYLE_AUTOCAST.getValue()) {
-            if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
-                methods.game.openTab(GameGUI.Tab.COMBAT);
+            if (methods.game.getCurrentTab() != InterfaceTab.COMBAT) {
+                methods.game.openTab(InterfaceTab.COMBAT);
                 sleep(random(150, 250));
             }
             if (methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_CAST_SPELL).doClick()) {
