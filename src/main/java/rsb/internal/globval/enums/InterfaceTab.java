@@ -54,7 +54,19 @@ public enum InterfaceTab {
     LOGOUT("Logout", 0,
             GlobalWidgetInfo.FIXED_CLASSIC_LOGOUT,
             GlobalWidgetInfo.RESIZABLE_CLASSIC_LOGOUT,
-            GlobalWidgetInfo.RESIZABLE_MODERN_LOGOUT);
+            GlobalWidgetInfo.RESIZABLE_MODERN_LOGOUT),
+    CHAT("Chat Channel", 0,
+            GlobalWidgetInfo.FIXED_CLASSIC_CHAT_CHANNEL,
+            GlobalWidgetInfo.RESIZABLE_CLASSIC_CHAT_CHANNEL,
+            GlobalWidgetInfo.RESIZABLE_MODERN_CHAT_CHANNEL),
+    ACC_MAN("Account Management", 0,
+            GlobalWidgetInfo.FIXED_CLASSIC_ACC_MANAGEMENT,
+            GlobalWidgetInfo.RESIZABLE_CLASSIC_ACC_MANAGEMENT,
+            GlobalWidgetInfo.RESIZABLE_MODERN_ACC_MANAGEMENT),
+    EMOTES("Emotes", 0,
+            GlobalWidgetInfo.FIXED_CLASSIC_EMOTES,
+            GlobalWidgetInfo.RESIZABLE_CLASSIC_EMOTES,
+            GlobalWidgetInfo.RESIZABLE_MODERN_EMOTES);
 
     private final String name;
     private final int hotkey;
