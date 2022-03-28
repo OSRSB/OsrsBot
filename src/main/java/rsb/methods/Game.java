@@ -3,6 +3,8 @@ package rsb.methods;
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarcIndices;
+import rsb.internal.globval.VarcValues;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.internal.globval.enums.ViewportLayout;
@@ -129,17 +131,29 @@ public class Game extends MethodProvider {
 	/**
 	 * Gets the currently open tab.
 	 *
-	 * @return The currently open tab or the logout tab by default.
+	 * @return The currently open interfaceTab if tab recognized else null;
 	 */
 	public InterfaceTab getCurrentTab() {
-		for (InterfaceTab interfaceTab : InterfaceTab.values()) {
-				net.runelite.api.widgets.Widget tab = methods.gui.getTab(interfaceTab);
-				if (tab == null) { continue; }
-				if (tab.getSpriteId() != -1) {
-					return interfaceTab;
-				}
-			}
-		return InterfaceTab.LOGOUT; // no selected ones. (never happens, always return TAB_LOGOUT
+		int varcValue = methods.client.getVarcIntValue(VarcIndices.CURRENT_INTERFACE_TAB);
+		InterfaceTab result;
+		switch (VarcValues.valueOf(varcValue)) {
+			case TAB_COMBAT_OPTIONS -> result = InterfaceTab.COMBAT;
+			case TAB_SKILLS -> result = InterfaceTab.SKILLS;
+			case TAB_QUEST_LIST -> result = InterfaceTab.QUESTS;
+			case TAB_INVENTORY -> result = InterfaceTab.INVENTORY;
+			case TAB_WORN_EQUIPMENT -> result = InterfaceTab.EQUIPMENT;
+			case TAB_PRAYER -> result = InterfaceTab.PRAYER;
+			case TAB_SPELLBOOK -> result = InterfaceTab.MAGIC;
+			case TAB_FRIEND_LIST -> result = InterfaceTab.FRIENDS;
+			case TAB_LOGOUT -> result = InterfaceTab.LOGOUT;
+			case TAB_SETTINGS -> result = InterfaceTab.SETTINGS;
+			case TAB_MUSIC -> result = InterfaceTab.MUSIC;
+			case TAB_CHAT_CHANNEL -> result = InterfaceTab.CHAT;
+			case TAB_ACC_MANAGEMENT -> result = InterfaceTab.ACC_MAN;
+			case TAB_EMOTES -> result = InterfaceTab.EMOTES;
+			default -> throw new IllegalStateException("Unexpected value: " + VarcValues.valueOf(varcValue));
+		}
+		return result;
 	}
 
 	/**
