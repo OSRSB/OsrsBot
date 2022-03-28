@@ -1,5 +1,6 @@
 package rsb.methods;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.widgets.Widget;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.enums.InterfaceTab;
@@ -10,6 +11,7 @@ import rsb.internal.globval.enums.ViewportLayout;
  *
  * @author GigiaJ
  */
+@Slf4j
 public class GameGUI extends MethodProvider {
 
 	public GameGUI(MethodContext ctx) {
@@ -72,11 +74,11 @@ public class GameGUI extends MethodProvider {
 	 */
 	public ViewportLayout getViewportLayout() {
 		Widget minimapOnFixedClassic =
-				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
-		Widget minimapOnResizableClassic =
-				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
-		Widget minimapOnResizableModern =
 				methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_MINIMAP.getPackedId());
+		Widget minimapOnResizableClassic =
+				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
+		Widget minimapOnResizableModern =
+				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
 		if (minimapOnFixedClassic != null)
 			return ViewportLayout.FIXED_CLASSIC;
 		else if (minimapOnResizableClassic != null)
