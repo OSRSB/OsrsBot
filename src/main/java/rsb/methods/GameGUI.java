@@ -2,7 +2,7 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.widgets.Widget;
-import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.internal.globval.enums.ViewportLayout;
 
@@ -24,28 +24,38 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getCompass() {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
-				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_COMPASS.getPackedId());
-				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_COMPASS.getPackedId());
-				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_COMPASS.getPackedId());
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+			return switch (layout) {
+				case FIXED_CLASSIC -> methods.client.getWidget(
+						WidgetIndices.FixedClassicViewport.GROUP_INDEX,
+						WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER);
+				case RESIZABLE_CLASSIC -> methods.client.getWidget(
+						WidgetIndices.ResizableClassicViewport.GROUP_INDEX,
+						WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE);
+				case RESIZABLE_MODERN -> methods.client.getWidget(
+						WidgetIndices.ResizableModernViewport.GROUP_INDEX,
+						WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE);
+			};
 		}
 		return null;
 	}
 
 	/**
-	 * @return The minimaps <code>Widget</code>; otherwise null.
+	 * @return The minimap <code>Widget</code>; otherwise null.
 	 */
-	public synchronized Widget getMinimapInterface() {
+	public synchronized Widget getMinimap() {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
-				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_MINIMAP.getPackedId());
-				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
-				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+			return switch (layout) {
+				case FIXED_CLASSIC -> methods.client.getWidget(
+						WidgetIndices.FixedClassicViewport.GROUP_INDEX,
+						WidgetIndices.FixedClassicViewport.MINIMAP_CONTAINER);
+				case RESIZABLE_CLASSIC -> methods.client.getWidget(
+						WidgetIndices.ResizableClassicViewport.GROUP_INDEX,
+						WidgetIndices.ResizableClassicViewport.MINIMAP_CONTAINER);
+				case RESIZABLE_MODERN -> methods.client.getWidget(
+						WidgetIndices.ResizableModernViewport.GROUP_INDEX,
+						WidgetIndices.ResizableModernViewport.MINIMAP_CONTAINER);
+			};
 		}
 		return null;
 	}
@@ -57,12 +67,11 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getTab(final InterfaceTab interfaceTab) {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
+			return switch (layout) {
 				case FIXED_CLASSIC -> interfaceTab.getFixedClassicWidget();
-				case RESIZABLE_MODERN -> interfaceTab.getResizableModernWidget();
 				case RESIZABLE_CLASSIC -> interfaceTab.getResizableClassicWidget();
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+				case RESIZABLE_MODERN -> interfaceTab.getResizableModernWidget();
+			};
 		}
 		return null;
 	}
@@ -73,16 +82,19 @@ public class GameGUI extends MethodProvider {
 	 * @return <code>ViewportLayout</code>; otherwise <code>null</code>.
 	 */
 	public ViewportLayout getViewportLayout() {
-		Widget minimapOnFixedClassic =
-				methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_MINIMAP.getPackedId());
-		Widget minimapOnResizableClassic =
-				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
-		Widget minimapOnResizableModern =
-				methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
+		Widget minimapOnFixedClassic = methods.client.getWidget(
+				WidgetIndices.FixedClassicViewport.GROUP_INDEX,
+				WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER);
+		Widget minimapOnResizableClassic = methods.client.getWidget(
+				WidgetIndices.ResizableClassicViewport.GROUP_INDEX,
+				WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE);
+		Widget minimapOnResizableModern = methods.client.getWidget(
+				WidgetIndices.ResizableModernViewport.GROUP_INDEX,
+				WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE);
 		if (minimapOnFixedClassic != null)
 			return ViewportLayout.FIXED_CLASSIC;
 		else if (minimapOnResizableClassic != null)
-		    return ViewportLayout.RESIZABLE_CLASSIC;
+			return ViewportLayout.RESIZABLE_CLASSIC;
 		else if (minimapOnResizableModern != null)
 			return ViewportLayout.RESIZABLE_MODERN;
 		return null;
