@@ -58,9 +58,9 @@ public class GameGUI extends MethodProvider {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
 			switch (layout) {
-				case FIXED_CLASSIC -> interfaceTab.getFixedClassicWidget();
-				case RESIZABLE_MODERN -> interfaceTab.getResizableModernWidget();
-				case RESIZABLE_CLASSIC -> interfaceTab.getResizableClassicWidget();
+				case FIXED_CLASSIC -> { return interfaceTab.getFixedClassicWidget(); }
+				case RESIZABLE_MODERN -> { return interfaceTab.getResizableModernWidget(); }
+				case RESIZABLE_CLASSIC -> { return interfaceTab.getResizableClassicWidget(); }
 				default -> throw new IllegalStateException("Unexpected value: " + layout);
 			}
 		}

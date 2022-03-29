@@ -1,5 +1,6 @@
 package rsb.methods;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 /**
  * Game state and GUI operations.
  */
+@Slf4j
 public class Game extends MethodProvider {
 
 	Game(final MethodContext ctx) {
