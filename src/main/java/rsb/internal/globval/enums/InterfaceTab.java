@@ -94,14 +94,14 @@ public enum InterfaceTab {
     }
 
     public Widget getFixedClassicWidget() {
-        return methods.client.getWidget(fixedClassicInfo.getPackedId());
+        return methods.client.getWidget(fixedClassicInfo.getGroupId(), fixedClassicInfo.getChildId());
     }
 
     public Widget getResizableClassicWidget() {
-        return methods.client.getWidget(resizableClassicInfo.getPackedId());
+        return methods.client.getWidget(resizableClassicInfo.getGroupId(), resizableClassicInfo.getChildId());
     }
 
     public Widget getResizableModernWidget() {
-        return methods.client.getWidget(resizableModernInfo.getPackedId());
+        return methods.client.getWidget(resizableModernInfo.getGroupId(), resizableModernInfo.getChildId());
     }
 }
