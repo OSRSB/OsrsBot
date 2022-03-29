@@ -150,6 +150,7 @@ public class Game extends MethodProvider {
 			case TAB_CHAT_CHANNEL -> InterfaceTab.CHAT;
 			case TAB_ACC_MANAGEMENT -> InterfaceTab.ACC_MAN;
 			case TAB_EMOTES -> InterfaceTab.EMOTES;
+			default -> throw new IllegalStateException("Unexpected value: " + VarcIntValues.valueOf(varcIntValue));
 		};
 	}
 
