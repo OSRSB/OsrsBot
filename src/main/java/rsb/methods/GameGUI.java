@@ -24,12 +24,11 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getCompass() {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
+			var widget = switch (layout) {
 				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_COMPASS.getPackedId());
 				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_COMPASS.getPackedId());
 				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_COMPASS.getPackedId());
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+			};
 		}
 		return null;
 	}
@@ -40,12 +39,11 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getMinimapInterface() {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
+			var widget = switch (layout) {
 				case FIXED_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.FIXED_CLASSIC_MINIMAP.getPackedId());
 				case RESIZABLE_MODERN -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_MODERN_MINIMAP.getPackedId());
 				case RESIZABLE_CLASSIC -> methods.client.getWidget(GlobalWidgetInfo.RESIZABLE_CLASSIC_MINIMAP.getPackedId());
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+			};
 		}
 		return null;
 	}
@@ -57,12 +55,11 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getTab(final InterfaceTab interfaceTab) {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			switch (layout) {
+			var widget = switch (layout) {
 				case FIXED_CLASSIC -> interfaceTab.getFixedClassicWidget();
 				case RESIZABLE_MODERN -> interfaceTab.getResizableModernWidget();
 				case RESIZABLE_CLASSIC -> interfaceTab.getResizableClassicWidget();
-				default -> throw new IllegalStateException("Unexpected value: " + layout);
-			}
+			};
 		}
 		return null;
 	}
