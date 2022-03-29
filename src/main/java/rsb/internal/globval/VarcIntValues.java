@@ -3,7 +3,7 @@ package rsb.internal.globval;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum VarcValues {
+public enum VarcIntValues {
     // Interface Tabs
     TAB_COMBAT_OPTIONS(0),
     TAB_SKILLS(1),
@@ -23,19 +23,19 @@ public enum VarcValues {
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
     static {
-        for (VarcValues varcEnum : VarcValues.values()) {
+        for (VarcIntValues varcEnum : VarcIntValues.values()) {
             hashMap.put(varcEnum.value, varcEnum);
         }
     }
 
     private final int value;
 
-    VarcValues(int value) {
+    VarcIntValues(int value) {
         this.value = value;
     }
 
-    public static VarcValues valueOf(int varcEnum) {
-        return (VarcValues) hashMap.get(varcEnum);
+    public static VarcIntValues valueOf(int varcEnum) {
+        return (VarcIntValues) hashMap.get(varcEnum);
     }
 
     public int getValue() {
