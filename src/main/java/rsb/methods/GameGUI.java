@@ -55,7 +55,7 @@ public class GameGUI extends MethodProvider {
 	public synchronized Widget getTab(final InterfaceTab interfaceTab) {
 		ViewportLayout layout = getViewportLayout();
 		if (layout != null) {
-			return switch  (layout) {
+			return switch (layout) {
 				case FIXED_CLASSIC -> interfaceTab.getFixedClassicWidget();
 				case RESIZABLE_MODERN -> interfaceTab.getResizableModernWidget();
 				case RESIZABLE_CLASSIC -> interfaceTab.getResizableClassicWidget();
