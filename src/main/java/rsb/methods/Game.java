@@ -3,8 +3,8 @@ package rsb.methods;
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
-import rsb.internal.globval.VarcIndices;
-import rsb.internal.globval.VarcValues;
+import rsb.internal.globval.VarcIntIndices;
+import rsb.internal.globval.VarcIntValues;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.internal.globval.enums.ViewportLayout;
@@ -134,26 +134,24 @@ public class Game extends MethodProvider {
 	 * @return The currently open interfaceTab if tab recognized else null;
 	 */
 	public InterfaceTab getCurrentTab() {
-		int varcValue = methods.client.getVarcIntValue(VarcIndices.CURRENT_INTERFACE_TAB);
-		InterfaceTab result;
-		switch (VarcValues.valueOf(varcValue)) {
-			case TAB_COMBAT_OPTIONS -> result = InterfaceTab.COMBAT;
-			case TAB_SKILLS -> result = InterfaceTab.SKILLS;
-			case TAB_QUEST_LIST -> result = InterfaceTab.QUESTS;
-			case TAB_INVENTORY -> result = InterfaceTab.INVENTORY;
-			case TAB_WORN_EQUIPMENT -> result = InterfaceTab.EQUIPMENT;
-			case TAB_PRAYER -> result = InterfaceTab.PRAYER;
-			case TAB_SPELLBOOK -> result = InterfaceTab.MAGIC;
-			case TAB_FRIEND_LIST -> result = InterfaceTab.FRIENDS;
-			case TAB_LOGOUT -> result = InterfaceTab.LOGOUT;
-			case TAB_SETTINGS -> result = InterfaceTab.SETTINGS;
-			case TAB_MUSIC -> result = InterfaceTab.MUSIC;
-			case TAB_CHAT_CHANNEL -> result = InterfaceTab.CHAT;
-			case TAB_ACC_MANAGEMENT -> result = InterfaceTab.ACC_MAN;
-			case TAB_EMOTES -> result = InterfaceTab.EMOTES;
-			default -> throw new IllegalStateException("Unexpected value: " + VarcValues.valueOf(varcValue));
-		}
-		return result;
+		int varcIntValue = methods.client.getVarcIntValue(VarcIntIndices.CURRENT_INTERFACE_TAB);
+		return switch (VarcIntValues.valueOf(varcIntValue)) {
+			case TAB_COMBAT_OPTIONS -> InterfaceTab.COMBAT;
+			case TAB_SKILLS -> InterfaceTab.SKILLS;
+			case TAB_QUEST_LIST -> InterfaceTab.QUESTS;
+			case TAB_INVENTORY -> InterfaceTab.INVENTORY;
+			case TAB_WORN_EQUIPMENT -> InterfaceTab.EQUIPMENT;
+			case TAB_PRAYER -> InterfaceTab.PRAYER;
+			case TAB_SPELLBOOK -> InterfaceTab.MAGIC;
+			case TAB_FRIEND_LIST -> InterfaceTab.FRIENDS;
+			case TAB_LOGOUT -> InterfaceTab.LOGOUT;
+			case TAB_SETTINGS -> InterfaceTab.SETTINGS;
+			case TAB_MUSIC -> InterfaceTab.MUSIC;
+			case TAB_CHAT_CHANNEL -> InterfaceTab.CHAT;
+			case TAB_ACC_MANAGEMENT -> InterfaceTab.ACC_MAN;
+			case TAB_EMOTES -> InterfaceTab.EMOTES;
+			default -> throw new IllegalStateException("Unexpected value: " + VarcIntValues.valueOf(varcIntValue));
+		};
 	}
 
 	/**
