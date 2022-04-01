@@ -79,6 +79,9 @@ public enum VarbitValues {
     CURRENT_BANK_TAB_SEVENTH(6),
     CURRENT_BANK_TAB_EIGHT(7),
     CURRENT_BANK_TAB_NINTH(8),
+    // Multicombat zone
+    OUTSIDE_MULTICOMBAT_ZONE(0),
+    INSIDE_MULTICOMBAT_ZONE(1),
     // XP Drops
     XP_DROPS_HIDDEN(0),
     XP_DROPS_SHOWN(1),
