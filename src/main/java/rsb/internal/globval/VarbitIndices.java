@@ -1,8 +1,14 @@
 package rsb.internal.globval;
 
 public class VarbitIndices {
+    public static final int RUNE_POUCH_FIRST_SLOT_RUNE = 29; // Permitted values: enum of allowed runes
     public static final int SPELL_TO_AUTOCAST = 276; // Permitted values: WidgetIndices.DynamicComponents.AutocastSpells
     public static final int EQUIPPED_WEAPON_TYPE = 357;
+    public static final int RUNE_POUCH_SECOND_SLOT_RUNE = 1622; // Permitted values: enum of allowed runes
+    public static final int RUNE_POUCH_THIRD_SLOT_RUNE = 1623; // Permitted values: enum of allowed runes
+    public static final int RUNE_POUCH_FIRST_SLOT_AMOUNT = 1624;
+    public static final int RUNE_POUCH_SECOND_SLOT_AMOUNT = 1625;
+    public static final int RUNE_POUCH_THIRD_SLOT_AMOUNT = 1626;
     public static final int DEFENSIVE_AUTOCAST = 2668;
     public static final int TOGGLE_BANK_ALWAYS_SET_PLACEHOLDERS = 3755;
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 3958;
