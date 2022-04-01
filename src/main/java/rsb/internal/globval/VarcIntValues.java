@@ -48,7 +48,10 @@ public enum VarcIntValues {
     TAB_LOGOUT(10),
     TAB_SETTINGS(11),
     TAB_EMOTES(12),
-    TAB_MUSIC(13);
+    TAB_MUSIC(13),
+    // Bank Worn Items
+    BANK_WORN_ITEMS_SHOWN(1),
+    BANK_WORN_ITEMS_HIDDEN(0);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
