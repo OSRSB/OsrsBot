@@ -10,5 +10,6 @@ public class VarcIntIndices {
     public static final int CURRENT_CHAT_LINE_INDEX = 57; // or message index?
     public static final int REPORT_IGNORE_PLAYER_STATE = 140;
     public static final int CURRENT_INTERFACE_TAB = 171;
+    public static final int TOGGLE_BANK_WORN_ITEMS = 386;
 }
 
