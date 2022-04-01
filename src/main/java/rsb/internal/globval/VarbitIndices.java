@@ -27,6 +27,8 @@ public class VarbitIndices {
     public static final int CURRENT_BANK_TAB = 4150;
     public static final int MULTICOMBAT_ZONE_STATE = 4605;
     public static final int TOGGLE_XP_DROPS = 4702;
+    public static final int TOGGLE_BANK_INCINERATOR_STATE = 5102;
+    public static final int TOGGLE_BANK_DEPOSIT_WORN_ITEMS_STATE = 5364;
     public static final int FAIRY_RING_LAST_DESTINATION = 5374;
     public static final int MOTHERLODE_MINE_SACK = 5558;
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
@@ -37,6 +39,7 @@ public class VarbitIndices {
     public static final int TOGGLE_MAGIC_FILTER_NO_RUNES_SPELLS = 6608;
     public static final int TOGGLE_MAGIC_FILTER_TELEPORT_SPELLS = 6609;
     public static final int TAB_QUEST_LIST_SUBTAB_INDEX = 8168;
+    public static final int TOGGLE_BANK_DEPOSIT_INVENTORY_STATE = 8352;
     public static final int TAB_SETTINGS_SUBTAB_INDEX = 9683;
     public static final int TAB_ACC_MANAGEMENT_SUBTAB_INDEX = 10060;
     public static final int TOGGLE_MAGIC_FILTER_LACKING_REQUIREMENTS_SPELLS = 12137;

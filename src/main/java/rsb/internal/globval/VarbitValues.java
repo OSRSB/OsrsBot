@@ -85,6 +85,12 @@ public enum VarbitValues {
     // XP Drops
     XP_DROPS_HIDDEN(0),
     XP_DROPS_SHOWN(1),
+    // Bank Show Incinerator
+    BANK_INCINERATOR_HIDDEN(0),
+    BANK_INCINERATOR_SHOWN(1),
+    // Deposit Worn Items
+    BANK_DEPOSIT_WORN_ITEMS_SHOWN(0),
+    BANK_DEPOSIT_WORN_ITEMS_HIDDEN(1),
     // TODO: FAIRY_RING_LAST_DESTINATION
     // Motherlode Mine Sack Size
     MOTHERLODE_MINE_SACK_EMPTY(0),
@@ -118,6 +124,9 @@ public enum VarbitValues {
     TAB_QUEST_SUBTAB_ACHIEVEMENT_DIARY(3),
     TAB_QUEST_SUBTAB_KOUREND_FAVOR(4),
     TAB_QUEST_SUBTAB_LEAGUES(5),
+    // Bank Deposit Inventory
+    BANK_DEPOSIT_INVENTORY_SHOWN(0),
+    BANK_DEPOSIT_INVENTORY_HIDDEN(1),
     // Tab Settings Subtabs
     TAB_SETTINGS_SUBTAB_CONTROLLS(0),
     TAB_SETTINGS_SUBTAB_AUDIO(1),
