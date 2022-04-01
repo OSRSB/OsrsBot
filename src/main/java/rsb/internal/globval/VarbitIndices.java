@@ -9,6 +9,7 @@ public class VarbitIndices {
     public static final int RUNE_POUCH_FIRST_SLOT_AMOUNT = 1624;
     public static final int RUNE_POUCH_SECOND_SLOT_AMOUNT = 1625;
     public static final int RUNE_POUCH_THIRD_SLOT_AMOUNT = 1626;
+    public static final int MOTHERLODE_MINE_Z_PLANE = 2086;
     public static final int DEFENSIVE_AUTOCAST = 2668;
     public static final int TOGGLE_BANK_ALWAYS_SET_PLACEHOLDERS = 3755;
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 3958;
@@ -25,6 +26,7 @@ public class VarbitIndices {
     public static final int CURRENT_BANK_TAB = 4150;
     public static final int TOGGLE_XP_DROPS = 4702;
     public static final int FAIRY_RING_LAST_DESTINATION = 5374;
+    public static final int MOTHERLODE_MINE_SACK = 5558;
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
     public static final int BANK_WITHDRAW_QUANTITY = 6590;
     public static final int TOGGLE_MAGIC_FILTER_COMBAT_SPELLS = 6605;
