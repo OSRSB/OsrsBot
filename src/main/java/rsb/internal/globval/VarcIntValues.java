@@ -7,6 +7,12 @@ public enum VarcIntValues {
     // Tooltip State
     TOOLTIP_SHOWN(0),
     TOOLTIP_HIDDEN(1),
+    // Chatbox Input Type
+    RUNELITE_CHATBOX_PANEL(-3),
+    RUNELITE(-2),
+    NONE(0),
+    PRIVATE_MESSAGE(6),
+    SEARCH(11),
     // Chatbox Scrollbar Position
     CHATBOX_SCROLLBAR_POSITION_MIN(0),
     CHATBOX_SCROLLBAR_POSITION_MAX(1302),
@@ -31,6 +37,9 @@ public enum VarcIntValues {
     HIGHLIGHTED_CHAT_TAB_CHANNEL(4),
     HIGHLIGHTED_CHAT_TAB_CLAN(5),
     HIGHLIGHTED_CHAT_TAB_TRADE(6),
+    // Bank Scrollbar Position
+    BANK_SCROLLBAR_POSITION_MIN(0),
+    BANK_SCROLLBAR_POSITION_400_ITEMS_MAX(1511),
     // Report Ignore Player State
     REPORT_IGNORE_PLAYER_CHECKED(1),
     REPORT_IGNORE_PLAYER_UNCHECKED(0),
