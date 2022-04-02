@@ -2,11 +2,8 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
-import rsb.internal.globval.VarpValues;
-import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.*;
 import rsb.internal.wrappers.Filter;
-import rsb.internal.globval.VarpIndices;
-import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.wrappers.*;
 
 import java.lang.Integer;
@@ -179,8 +176,10 @@ public class Bank extends MethodProvider {
 	public boolean depositAll() {
 		if (isOpen()) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.BANK_BUTTON_DEPOSIT_CARRIED_ITEMS).doClick();
+		} else if (isDepositOpen()) {
+			return methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_INVENTORY_ITEMS).doClick();
 		}
-		return isDepositOpen() && methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_BUTTON_DEPOSIT_INVENTORY_ITEMS).doClick();
+		return false;
 	}
 
 	/**
@@ -259,10 +258,8 @@ public class Bank extends MethodProvider {
 	 * @return int of tab (0-8), or -1 if none are selected (bank is not open).
 	 */
 	public int getCurrentTab() {
-		for (RSWidget widget : methods.interfaces.getComponent(GlobalWidgetInfo.BANK_TAB).getComponents()) {
-			if (widget.getSpriteId() == VarpIndices.SPRITE_SELECTED_VALUE) {
-				return widget.getIndex();
-			}
+		if (isOpen()) {
+			return methods.client.getVarbitValue(VarbitIndices.BANK_ACTIVE_TAB);
 		}
 		return -1;
 	}
@@ -407,9 +404,9 @@ public class Bank extends MethodProvider {
 		RSObject bankBooth = methods.objects.getNearest(BANK_BOOTHS);
 		RSNPC banker = methods.npcs.getNearest(new ReachableBankerFilter());
 		RSObject bankChest = methods.objects.getNearest(BANK_CHESTS);
-		/* Find closest one, others are set to null. Remember distance and tile. */
+		/* Find the closest one, others are set to null. Remember distance and tile. */
 		int lowestDist = Integer.MAX_VALUE;
-		RSTile tile = null;
+		RSTile tile;
 		if (bankBooth != null) {
 			tile = bankBooth.getLocation();
 			lowestDist = methods.calc.distanceTo(tile);
@@ -443,7 +440,7 @@ public class Bank extends MethodProvider {
 			RSObject bankBooth = methods.objects.getNearest(BANK_BOOTHS);
 			RSNPC banker = methods.npcs.getNearest(new ReachableBankerFilter());
 			RSObject bankChest = methods.objects.getNearest(BANK_CHESTS);
-			/* Find closest one, others are set to null. Remember distance and tile. */
+			/* Find the closest one, others are set to null. Remember distance and tile. */
 			int lowestDist = Integer.MAX_VALUE;
 			RSTile tile = null;
 			if (bankBooth != null) {
@@ -548,9 +545,8 @@ public class Bank extends MethodProvider {
 	 * @return <code>true</code> if currently searching the bank.
 	 */
 	public boolean isSearchOpen() {
-		// TODO: fix this
-		// Setting 1248 is -2147483648 when search is enabled and -2013265920
-		return (methods.clientLocalStorage.getVarpValueAt(1248) == -2147483648);
+		return methods.client.getVarcIntValue(VarcIntIndices.CHATBOX_INPUT_TYPE)
+				== VarcIntValues.SEARCH.getValue();
 	}
 
 	/**
