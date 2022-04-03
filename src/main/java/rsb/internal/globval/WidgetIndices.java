@@ -720,7 +720,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes private messages widget
+     * Describes adventure log widget
      * Last reviewed: 1/3/2022 0:59 am UTC+1
      */
     public static class AdventureLog {
@@ -730,6 +730,26 @@ public class WidgetIndices {
         public static final int SCROLLBAR_CONTAINER = 2; // NOTE: unclear
         public static final int CHOICES_DYNAMIC_CONTAINER = 3; // contains choices 0-12
         public static final int CLOSE_BUTTON_SPRITE = 4;
+    }
+
+    /**
+     * Describes mime random event widgets
+     * Last reviewed: 1/3/2022 1:14 am UTC+1
+     */
+    public static class Mime {
+        public static final int GROUP_INDEX = 188;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int BUTTON_THINK_DYNAMIC_CONTAINER = 2; // 0-8 sprites, 0 main sprite,  9 label
+        public static final int BUTTON_LAUGH_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON_CLIMB_ROPE_DYNAMIC_CONTAINER = 4;
+        public static final int BUTTON_GLASS_BOX_DYNAMIC_CONTAINER = 5;
+        public static final int BUTTON_CRY_DYNAMIC_CONTAINER = 6;
+        public static final int BUTTON_DANCE_DYNAMIC_CONTAINER = 7;
+        public static final int BUTTON_LEAN_DYNAMIC_CONTAINER = 8;
+        public static final int BUTTON_GLASS_WALL_DYNAMIC_CONTAINER = 9;
+        public static final int LEFT_SIDE_FACEMASK_MODEL = 10;
+        public static final int RIGHT_SIDE_FACEMASK_MODEL = 11;
     }
 
     /**
