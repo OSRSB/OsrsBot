@@ -608,7 +608,7 @@ public class WidgetIndices {
 
     /**
      * Describes private messages widget
-     * Last reviewed: 1/3/2022 0:27 am UTC+1
+     * Last reviewed: 1/3/2022 0:41 am UTC+1
      */
     public static class PrivateMessages {
         public static final int GROUP_INDEX = 163;
@@ -717,6 +717,19 @@ public class WidgetIndices {
         public static final int THUMB_DOWN_LEFT_SPRITE = 21;
         public static final int THUMB_DOWN_RIGHT_SPRITE = 22;
         public static final int THUMB_DOWN_MAIN_SPRITE = 23;
+    }
+
+    /**
+     * Describes private messages widget
+     * Last reviewed: 1/3/2022 0:59 am UTC+1
+     */
+    public static class AdventureLog {
+        public static final int GROUP_INDEX = 187;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //0 model, 1 title
+        public static final int UNKNOWN_DYNAMIC_CONTAINER = 1;
+        public static final int SCROLLBAR_CONTAINER = 2; // NOTE: unclear
+        public static final int CHOICES_DYNAMIC_CONTAINER = 3; // contains choices 0-12
+        public static final int CLOSE_BUTTON_SPRITE = 4;
     }
 
     /**
