@@ -1002,7 +1002,7 @@ public class WidgetIndices {
      * Describes npc dialog options widgets
      * Last reviewed: 19/3/2022 2:21 am UTC+1
      */
-    static class DialogOptions {
+    public static class DialogOptions {
         public static final int GROUP_INDEX = 219;
         public static final int CONTAINER = 0;
         public static final int DYNAMIC_CONTAINER = 1; //0 select an option title, 1-x options
@@ -1012,7 +1012,7 @@ public class WidgetIndices {
      * Describes npc dialog widgets
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
-    static class DialogNPC {
+    public static class DialogNPC {
         public static final int GROUP_INDEX = 232;
         public static final int PARENT_CONTAINER = 0;
         public static final int FRAME_CONTAINER = 1;
@@ -1049,7 +1049,7 @@ public class WidgetIndices {
      * Describes genie lamp skill selection widget
      * Last reviewed: 2/4/2022 9:48 pm UTC+1
      */
-    static class GenieLampWindow {
+    public static class GenieLampWindow {
         public static final int GROUP_INDEX = 240;
         public static final int PARENT_CONTAINER = 0;
         public static final int BACKGROUND_STONE_MODEL = 1;
@@ -1082,10 +1082,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes kourend favor widget
+     * Last reviewed: 2/4/2022 9:58 pm UTC+1
+     */
+    public static class KourendFavor {
+        public static final int GROUP_INDEX = 245;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int KOUREND_FAVOR_TITLE_LABEL = 1;
+    }
+
+    /**
      * Describes music player tab widgets
      * Last reviewed: 21/3/2022 11:06 pm UTC+1
      */
-    static class AchievementDiaries {
+    public static class AchievementDiaries {
         public static final int GROUP_INDEX = 259;
         public static final int PARENT_CONTAINER = 0;
         public static final int ACHIEVEMENT_DIARIES_TITLE_LABEL = 1;
