@@ -603,6 +603,16 @@ public class WidgetIndices {
         public static final int FIRST_MESSAGE_LABEL = 57;
         public static final int LAST_MESSAGE_LABEL = 556;
         public static final int SCROLLBAR_CONTAINER = 557;
+        public static final int DIALOG_CONTAINER = 559;
+    }
+
+    /**
+     * Describes private messages widget
+     * Last reviewed: 1/3/2022 0:27 am UTC+1
+     */
+    public static class PrivateMessages {
+        public static final int GROUP_INDEX = 163;
+        public static final int PARENT_CONTAINER = 0;
     }
 
     /**
