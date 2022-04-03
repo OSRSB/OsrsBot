@@ -817,6 +817,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes dialog which appears during quests giving/receiving item
+     * Last reviewed: 1/3/2022 1:57 am UTC+1
+     */
+    public static class DialogPlayer {
+        public static final int GROUP_INDEX = 217;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //2 option_text_label "Click here to continue"
+        public static final int PLAYER_HEAD_MODEL = 2;
+        public static final int TEXT_CONTAINER = 3;
+        public static final int PLAYER_NAME_LABEL = 4;
+        public static final int OPTION_CONTINUE_LABEL = 5;
+        public static final int PLAYER_TEXT_LABEL = 6;
+    }
+
+    /**
      * Describes spellbook tab widgets
      * Last reviewed: 3/3/2022 4:21 am UTC+1
      */
