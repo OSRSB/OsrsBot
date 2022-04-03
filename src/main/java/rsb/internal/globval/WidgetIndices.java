@@ -1046,6 +1046,42 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes genie lamp skill selection widget
+     * Last reviewed: 2/4/2022 9:48 pm UTC+1
+     */
+    static class GenieLampWindow {
+        public static final int GROUP_INDEX = 240;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BACKGROUND_STONE_MODEL = 1;
+        public static final int ATTACK_DYNAMIC_CONTAINER = 2; // contains 0-8 lines/corners of skill frame, 9 skill icon
+        public static final int STRENGHT_DYNAMIC_CONTAINER = 3;
+        public static final int RANGED_DYNAMIC_CONTAINER = 4;
+        public static final int MAGIC_DYNAMIC_CONTAINER = 5;
+        public static final int DEFENSE_DYNAMIC_CONTAINER = 6;
+        public static final int HITPOINTS_DYNAMIC_CONTAINER = 7;
+        public static final int PRAYER_DYNAMIC_CONTAINER = 8;
+        public static final int AGILITY_DYNAMIC_CONTAINER = 9;
+        public static final int HERBOLORE_DYNAMIC_CONTAINER = 10;
+        public static final int THIEVING_DYNAMIC_CONTAINER = 11;
+        public static final int CRAFTING_DYNAMIC_CONTAINER = 12;
+        public static final int RUNECRAFTING_DYNAMIC_CONTAINER = 13;
+        public static final int SLAYER_DYNAMIC_CONTAINER = 14;
+        public static final int FARMING_DYNAMIC_CONTAINER = 15;
+        public static final int MINING_DYNAMIC_CONTAINER = 16;
+        public static final int SMITHING_DYNAMIC_CONTAINER = 17;
+        public static final int FISHING_DYNAMIC_CONTAINER = 18;
+        public static final int COOKING_DYNAMIC_CONTAINER = 19;
+        public static final int FIREMAKING_DYNAMIC_CONTAINER = 20;
+        public static final int WOODCUTTING_DYNAMIC_CONTAINER = 21;
+        public static final int FLETCHING_DYNAMIC_CONTAINER = 22;
+        public static final int CONSTRUCTION_DYNAMIC_CONTAINER = 23;
+        public static final int HUNTER_DYNAMIC_CONTAINER = 24;
+        public static final int TITLE_LABEL = 25;
+        public static final int CONFIRM_DYNAMIC_CONTAINER = 26; // 0 text label
+        public static final int CLOSE_BUTTON_SPIRTE = 27;
+    }
+
+    /**
      * Describes music player tab widgets
      * Last reviewed: 21/3/2022 11:06 pm UTC+1
      */
