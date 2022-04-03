@@ -1551,6 +1551,22 @@ public class WidgetIndices {
 
     /**
      * Describes combat options tab widgets
+     * Last reviewed: 2/4/2022 0:02 am UTC+1
+     */
+    public static class DialogDestroyItem {
+        public static final int GROUP_INDEX = 584;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // contains 2 destroy warning text label, 3 left side sword sprite, 4 right side sword sprite
+        public static final int BUTTON_YES_DYNAMIC_CONTAINER = 1; // contains 0 YES_LABEL
+        public static final int BUTTON_YES_SPRITE = 2;
+        public static final int BUTTON_NO_DYNAMIC_CONTAINER = 3; // contains 0 NO_LABEL
+        public static final int BUTTON_NO_SPRITE = 4;
+        public static final int ITEM_SPRITE = 5;
+        public static final int ITEM_NAME_LABEL = 6;
+        public static final int POSSIBLE_RECOVERY_TEXT_LABEL = 7;
+    }
+
+    /**
+     * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
     public static class CombatOptionsTab {
