@@ -400,7 +400,7 @@ public class WidgetIndices {
 
     /**
      * Describes current quest diary (the quest scroll) widgets
-     * Last reviewed: 28/2/2022 1:57 am UTC+1
+     * Last reviewed: 1/3/2022 0:14 am UTC+1
      */
     public static class QuestDiary {
         public static final int GROUP_INDEX = 119;
@@ -415,6 +415,15 @@ public class WidgetIndices {
         public static final int LAST_TEXT_LINE_LABEL = 203;
         public static final int SCROLLBAR_DYNAMIC_CONTAINER = 204; // contains 0-3 scrollbar sprites, 4 button arrow up sprite, 5 button down sprite
         public static final int BUTTON_CLOSE_SPRITE = 205;
+    }
+
+    /**
+     * Describes inventory widget
+     * Last reviewed: 1/3/2022 0:27 am UTC+1
+     */
+    public static class Inventory {
+        public static final int GROUP_INDEX = 149;
+        public static final int SPRITE_GRID = 0; // contains 0-27, sprite grids with itemIDs
     }
 
     /**
