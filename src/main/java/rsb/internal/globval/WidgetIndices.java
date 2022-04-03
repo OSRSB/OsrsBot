@@ -691,7 +691,7 @@ public class WidgetIndices {
      * Describes deposit box widgets
      * Last reviewed: 12/3/2022 1:26 am UTC+1
      */
-    static class Logout {
+    public static class Logout {
         public static final int GROUP_INDEX = 182;
         public static final int PARENT_CONTAINER = 0;
         public static final int BOTTOM_BAR_CONTAINER = 1;
@@ -779,6 +779,18 @@ public class WidgetIndices {
         public static final int BUTTON_DEFAULT_QUANTITY_X_LABEL = 18;
         public static final int BUTTON_DEFAULT_QUANTITY_ALL_DYNAMIC_CONTAINER = 19; // Contains button sprites 0-8
         public static final int BUTTON_DEFAULT_QUANTITY_ALL_LABEL = 20;
+    }
+
+    /**
+     * Describes dialog which appears during quests giving/receiving item
+     * Last reviewed: 1/3/2022 1:37 am UTC+1
+     * TODO: Unclear if solely related to quests
+     */
+    public static class Dialog {
+        public static final int GROUP_INDEX = 193;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // 2 option_text_label "Click here to continue"
+        public static final int LEFT_SIDE_ITEM_MODEL = 1;
+        public static final int TEXT_LABEL = 2;
     }
 
     /**
