@@ -72,7 +72,7 @@ public class Inventory extends MethodProvider {
 		}
 		while (item != null) {
 			if (methods.interfaces.get(GlobalWidgetInfo.DIALOG_DESTROY_ITEM.getGroupId()).isValid()) {
-				methods.interfaces.getComponent(GlobalWidgetInfo.DIALOG_DESTROY_ITEM).doClick();
+				methods.interfaces.getComponent(GlobalWidgetInfo.DIALOG_DESTROY_ITEM_YES).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
