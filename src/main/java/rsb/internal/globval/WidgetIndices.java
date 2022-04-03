@@ -93,7 +93,7 @@ public class WidgetIndices {
      * Describes inventory widgets when bank is open
      * Last reviewed: 10/3/2022 0:01 am UTC+1
      */
-    static class BankInventoryItems {
+    public static class BankInventoryItems {
         public static final int GROUP_INDEX = 15;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
@@ -228,7 +228,7 @@ public class WidgetIndices {
      * Describes hairdresser widgets
      * Last reviewed: 10/3/2022 2:18 am UTC+1
      */
-    static class HairdresserSalon {
+    public static class HairdresserSalon {
         public static final int GROUP_INDEX = 82;
         public static final int PARENT_CONTAINER = 0;
         public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
@@ -396,6 +396,25 @@ public class WidgetIndices {
         public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
         public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
         public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
+    }
+
+    /**
+     * Describes current quest diary (the quest scroll) widgets
+     * Last reviewed: 28/2/2022 1:57 am UTC+1
+     */
+    public static class QuestDiary {
+        public static final int GROUP_INDEX = 119;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int SCROLL_MODEL = 1;
+        public static final int TITLE_LABEL = 2;
+        public static final int TEXT_CONTAINER = 3;
+        public static final int FIRST_TEXT_LINE_LABEL = 4;
+        // .
+        // .
+        // .
+        public static final int LAST_TEXT_LINE_LABEL = 203;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 204; // contains 0-3 scrollbar sprites, 4 button arrow up sprite, 5 button down sprite
+        public static final int BUTTON_CLOSE_SPRITE = 205;
     }
 
     /**
