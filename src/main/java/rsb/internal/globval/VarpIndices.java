@@ -38,7 +38,7 @@ public class VarpIndices {
     public static final int QUEST_DORICS_QUEST = 31;
     /**
      * Permitted values: 0 - 3
-     * Note: 0 = not started, 1 = started, 2 = talked to professor, 3 = finished
+     * Note: 0 = not started, 1 = started, 3 = finished
      */
     public static final int QUEST_EARNEST_THE_CHICKEN = 32;
     /**
@@ -46,6 +46,21 @@ public class VarpIndices {
      * Note: 0 - 3 attack styles, 4 both defensive autocast/autocast
      */
     public static final int COMBAT_STYLE = 43;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 3 = finished
+     */
+    public static final int QUEST_SHEEP_HERDER = 60;
+    /**
+     * Permitted values: 0 - 6
+     * Note: 0 = not started, 1 = started, 6 = finished
+     */
+    public static final int QUEST_RUNE_MYSTERIES = 63;
+    /**
+     * Permitted values: 0 - 8, 10
+     * Note: 0 = not started, 1 = started, 10 = finished
+     */
+    public static final int QUEST_WATERFALL_QUEST = 65;
     // TODO: recheck this
     public static final int PLAYER_POISONED_STATE = 83;
     /**
