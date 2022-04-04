@@ -35,12 +35,14 @@ public class VarbitIndices {
     public static final int BANK_TAB_SEVEN_COUNT = 4177;
     public static final int BANK_TAB_EIGHT_COUNT = 4178;
     public static final int BANK_TAB_NINE_COUNT = 4179;
+    public static final int DEPOSIT_BOX_DEPOSIT_AMOUNT = 4430;
     public static final int MULTICOMBAT_ZONE = 4605;
     public static final int TOGGLE_XP_DROPS = 4702;
     public static final int TOGGLE_BANK_INCINERATOR = 5102;
     public static final int TOGGLE_BANK_DEPOSIT_WORN_ITEMS = 5364;
     public static final int FAIRY_RING_LAST_DESTINATION = 5374;
     public static final int MOTHERLODE_MINE_SACK = 5558;
+    public static final int CHATBOX_INTERFACE_SIZE = 5983; // Note: manipulates the size of Widget 162.559
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
     public static final int BANK_WITHDRAW_QUANTITY = 6590;
     public static final int TOGGLE_MAGIC_FILTER_COMBAT_SPELLS = 6605;
