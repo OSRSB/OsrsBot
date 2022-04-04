@@ -2,6 +2,11 @@ package rsb.internal.globval;
 
 public class VarpIndices {
     /**
+     * Permitted values: 0 - 6, 8
+     * Note: 0 = not started, 1 = started, 8 = finished
+     */
+    public static final int QUEST_CLOCK_TOWER = 10;
+    /**
      * Permitted values: 0 - ??
      * Note: 0 = not-envenomed,
      */
@@ -16,6 +21,26 @@ public class VarpIndices {
      * Note: 0 = disabled, 1 = enabled
      */
     public static final int TOGGLE_LOOP_MUSIC = 19;
+    /**
+     * Permitted values: 0 - 2
+     * Note: 0 = not started, 1 = started, 2 = finished
+     */
+    public static final int QUEST_COOK_ASSISTANT = 29;
+    /**
+     * Permitted values: sequence 0:10:80
+     * Note: 0 = not started, 10 = started, 80 = finished
+     */
+    public static final int QUEST_MONKS_FRIEND = 30;
+    /**
+     * Permitted values: 0,10,100
+     * Note: 0 = not started, 10 = started, 100 = finished
+     */
+    public static final int QUEST_DORICS_QUEST = 31;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 2 = talked to professor, 3 = finished
+     */
+    public static final int QUEST_EARNEST_THE_CHICKEN = 32;
     /**
      * Permitted values: 0 - 4
      * Note: 0 - 3 attack styles, 4 both defensive autocast/autocast
