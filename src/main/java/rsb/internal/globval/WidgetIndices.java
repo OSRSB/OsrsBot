@@ -93,7 +93,7 @@ public class WidgetIndices {
      * Describes inventory widgets when bank is open
      * Last reviewed: 10/3/2022 0:01 am UTC+1
      */
-    static class BankInventoryItems {
+    public static class BankInventoryItems {
         public static final int GROUP_INDEX = 15;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
@@ -228,7 +228,7 @@ public class WidgetIndices {
      * Describes hairdresser widgets
      * Last reviewed: 10/3/2022 2:18 am UTC+1
      */
-    static class HairdresserSalon {
+    public static class HairdresserSalon {
         public static final int GROUP_INDEX = 82;
         public static final int PARENT_CONTAINER = 0;
         public static final int DYNAMIC_CONTAINER = 1; //0-11 stone borders sprite
@@ -396,6 +396,34 @@ public class WidgetIndices {
         public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
         public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
         public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
+    }
+
+    /**
+     * Describes current quest diary (the quest scroll) widgets
+     * Last reviewed: 1/3/2022 0:14 am UTC+1
+     */
+    public static class QuestDiary {
+        public static final int GROUP_INDEX = 119;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int SCROLL_MODEL = 1;
+        public static final int TITLE_LABEL = 2;
+        public static final int TEXT_CONTAINER = 3;
+        public static final int FIRST_TEXT_LINE_LABEL = 4;
+        // .
+        // .
+        // .
+        public static final int LAST_TEXT_LINE_LABEL = 203;
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 204; // contains 0-3 scrollbar sprites, 4 button arrow up sprite, 5 button down sprite
+        public static final int BUTTON_CLOSE_SPRITE = 205;
+    }
+
+    /**
+     * Describes inventory widget
+     * Last reviewed: 1/3/2022 0:27 am UTC+1
+     */
+    public static class Inventory {
+        public static final int GROUP_INDEX = 149;
+        public static final int SPRITE_GRID = 0; // contains 0-27, sprite grids with itemIDs
     }
 
     /**
@@ -575,6 +603,16 @@ public class WidgetIndices {
         public static final int FIRST_MESSAGE_LABEL = 57;
         public static final int LAST_MESSAGE_LABEL = 556;
         public static final int SCROLLBAR_CONTAINER = 557;
+        public static final int DIALOG_CONTAINER = 559;
+    }
+
+    /**
+     * Describes private messages widget
+     * Last reviewed: 1/3/2022 0:41 am UTC+1
+     */
+    public static class PrivateMessages {
+        public static final int GROUP_INDEX = 163;
+        public static final int PARENT_CONTAINER = 0;
     }
 
     /**
@@ -653,7 +691,7 @@ public class WidgetIndices {
      * Describes deposit box widgets
      * Last reviewed: 12/3/2022 1:26 am UTC+1
      */
-    static class Logout {
+    public static class Logout {
         public static final int GROUP_INDEX = 182;
         public static final int PARENT_CONTAINER = 0;
         public static final int BOTTOM_BAR_CONTAINER = 1;
@@ -679,6 +717,39 @@ public class WidgetIndices {
         public static final int THUMB_DOWN_LEFT_SPRITE = 21;
         public static final int THUMB_DOWN_RIGHT_SPRITE = 22;
         public static final int THUMB_DOWN_MAIN_SPRITE = 23;
+    }
+
+    /**
+     * Describes adventure log widget
+     * Last reviewed: 1/3/2022 0:59 am UTC+1
+     */
+    public static class AdventureLog {
+        public static final int GROUP_INDEX = 187;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //0 model, 1 title
+        public static final int UNKNOWN_DYNAMIC_CONTAINER = 1;
+        public static final int SCROLLBAR_CONTAINER = 2; // NOTE: unclear
+        public static final int CHOICES_DYNAMIC_CONTAINER = 3; // contains choices 0-12
+        public static final int CLOSE_BUTTON_SPRITE = 4;
+    }
+
+    /**
+     * Describes mime random event widgets
+     * Last reviewed: 1/3/2022 1:14 am UTC+1
+     */
+    public static class Mime {
+        public static final int GROUP_INDEX = 188;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int BUTTON_THINK_DYNAMIC_CONTAINER = 2; // 0-8 sprites, 0 main sprite,  9 label
+        public static final int BUTTON_LAUGH_DYNAMIC_CONTAINER = 3;
+        public static final int BUTTON_CLIMB_ROPE_DYNAMIC_CONTAINER = 4;
+        public static final int BUTTON_GLASS_BOX_DYNAMIC_CONTAINER = 5;
+        public static final int BUTTON_CRY_DYNAMIC_CONTAINER = 6;
+        public static final int BUTTON_DANCE_DYNAMIC_CONTAINER = 7;
+        public static final int BUTTON_LEAN_DYNAMIC_CONTAINER = 8;
+        public static final int BUTTON_GLASS_WALL_DYNAMIC_CONTAINER = 9;
+        public static final int LEFT_SIDE_FACEMASK_MODEL = 10;
+        public static final int RIGHT_SIDE_FACEMASK_MODEL = 11;
     }
 
     /**
@@ -711,6 +782,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes dialog which appears during quests giving/receiving item
+     * Last reviewed: 1/3/2022 1:37 am UTC+1
+     * TODO: Unclear if solely related to quests
+     */
+    public static class Dialog {
+        public static final int GROUP_INDEX = 193;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // 2 option_text_label "Click here to continue"
+        public static final int LEFT_SIDE_ITEM_MODEL = 1;
+        public static final int TEXT_LABEL = 2;
+    }
+
+    /**
      * Describes spell autocast widgets
      * Last reviewed: 3/3/2022 4:46 am UTC+1
      */
@@ -731,6 +814,20 @@ public class WidgetIndices {
         public static final int EMOTES_DYNAMIC_CONTAINER = 1; // 0-50 emote sprites
         public static final int SCROLLBAR_DYNAMIC_CONTAINER = 2; // 0-5 scrollbar sprites
         public static final int TOOLTIP_CONTAINER = 3;
+    }
+
+    /**
+     * Describes dialog which appears during quests giving/receiving item
+     * Last reviewed: 1/3/2022 1:57 am UTC+1
+     */
+    public static class DialogPlayer {
+        public static final int GROUP_INDEX = 217;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; //2 option_text_label "Click here to continue"
+        public static final int PLAYER_HEAD_MODEL = 2;
+        public static final int TEXT_CONTAINER = 3;
+        public static final int PLAYER_NAME_LABEL = 4;
+        public static final int OPTION_CONTINUE_LABEL = 5;
+        public static final int PLAYER_TEXT_LABEL = 6;
     }
 
     /**
@@ -905,7 +1002,7 @@ public class WidgetIndices {
      * Describes npc dialog options widgets
      * Last reviewed: 19/3/2022 2:21 am UTC+1
      */
-    static class DialogOptions {
+    public static class DialogOptions {
         public static final int GROUP_INDEX = 219;
         public static final int CONTAINER = 0;
         public static final int DYNAMIC_CONTAINER = 1; //0 select an option title, 1-x options
@@ -915,7 +1012,7 @@ public class WidgetIndices {
      * Describes npc dialog widgets
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
-    static class DialogNPC {
+    public static class DialogNPC {
         public static final int GROUP_INDEX = 232;
         public static final int PARENT_CONTAINER = 0;
         public static final int FRAME_CONTAINER = 1;
@@ -949,10 +1046,56 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes genie lamp skill selection widget
+     * Last reviewed: 2/4/2022 9:48 pm UTC+1
+     */
+    public static class GenieLampWindow {
+        public static final int GROUP_INDEX = 240;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int BACKGROUND_STONE_MODEL = 1;
+        public static final int ATTACK_DYNAMIC_CONTAINER = 2; // contains 0-8 lines/corners of skill frame, 9 skill icon
+        public static final int STRENGHT_DYNAMIC_CONTAINER = 3;
+        public static final int RANGED_DYNAMIC_CONTAINER = 4;
+        public static final int MAGIC_DYNAMIC_CONTAINER = 5;
+        public static final int DEFENSE_DYNAMIC_CONTAINER = 6;
+        public static final int HITPOINTS_DYNAMIC_CONTAINER = 7;
+        public static final int PRAYER_DYNAMIC_CONTAINER = 8;
+        public static final int AGILITY_DYNAMIC_CONTAINER = 9;
+        public static final int HERBOLORE_DYNAMIC_CONTAINER = 10;
+        public static final int THIEVING_DYNAMIC_CONTAINER = 11;
+        public static final int CRAFTING_DYNAMIC_CONTAINER = 12;
+        public static final int RUNECRAFTING_DYNAMIC_CONTAINER = 13;
+        public static final int SLAYER_DYNAMIC_CONTAINER = 14;
+        public static final int FARMING_DYNAMIC_CONTAINER = 15;
+        public static final int MINING_DYNAMIC_CONTAINER = 16;
+        public static final int SMITHING_DYNAMIC_CONTAINER = 17;
+        public static final int FISHING_DYNAMIC_CONTAINER = 18;
+        public static final int COOKING_DYNAMIC_CONTAINER = 19;
+        public static final int FIREMAKING_DYNAMIC_CONTAINER = 20;
+        public static final int WOODCUTTING_DYNAMIC_CONTAINER = 21;
+        public static final int FLETCHING_DYNAMIC_CONTAINER = 22;
+        public static final int CONSTRUCTION_DYNAMIC_CONTAINER = 23;
+        public static final int HUNTER_DYNAMIC_CONTAINER = 24;
+        public static final int TITLE_LABEL = 25;
+        public static final int CONFIRM_DYNAMIC_CONTAINER = 26; // 0 text label
+        public static final int CLOSE_BUTTON_SPIRTE = 27;
+    }
+
+    /**
+     * Describes kourend favor widget
+     * Last reviewed: 2/4/2022 9:58 pm UTC+1
+     */
+    public static class KourendFavor {
+        public static final int GROUP_INDEX = 245;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int KOUREND_FAVOR_TITLE_LABEL = 1;
+    }
+
+    /**
      * Describes music player tab widgets
      * Last reviewed: 21/3/2022 11:06 pm UTC+1
      */
-    static class AchievementDiaries {
+    public static class AchievementDiaries {
         public static final int GROUP_INDEX = 259;
         public static final int PARENT_CONTAINER = 0;
         public static final int ACHIEVEMENT_DIARIES_TITLE_LABEL = 1;
@@ -1404,6 +1547,22 @@ public class WidgetIndices {
         public static final int TAB_EQUIPMENT_ICON_SPRITE = 73;
         public static final int TAB_PRAYER_ICON_SPRITE = 74;
         public static final int TAB_MAGIC_ICON_SPRITE = 75;
+    }
+
+    /**
+     * Describes combat options tab widgets
+     * Last reviewed: 2/4/2022 0:02 am UTC+1
+     */
+    public static class DialogDestroyItem {
+        public static final int GROUP_INDEX = 584;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // contains 2 destroy warning text label, 3 left side sword sprite, 4 right side sword sprite
+        public static final int BUTTON_YES_DYNAMIC_CONTAINER = 1; // contains 0 YES_LABEL
+        public static final int BUTTON_YES_SPRITE = 2;
+        public static final int BUTTON_NO_DYNAMIC_CONTAINER = 3; // contains 0 NO_LABEL
+        public static final int BUTTON_NO_SPRITE = 4;
+        public static final int ITEM_SPRITE = 5;
+        public static final int ITEM_NAME_LABEL = 6;
+        public static final int POSSIBLE_RECOVERY_TEXT_LABEL = 7;
     }
 
     /**

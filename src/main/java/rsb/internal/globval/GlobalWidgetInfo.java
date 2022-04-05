@@ -10,18 +10,23 @@ import net.runelite.api.widgets.WidgetInfo;
  */
 public enum GlobalWidgetInfo {
     /**
+     * [DIALOG DESTROY ITEM] Widget Info
+     */
+    DIALOG_DESTROY_ITEM(WidgetIndices.DialogDestroyItem.GROUP_INDEX, WidgetIndices.DialogDestroyItem.PARENT_DYNAMIC_CONTAINER),
+    DIALOG_DESTROY_ITEM_YES(WidgetIndices.DialogDestroyItem.GROUP_INDEX, WidgetIndices.DialogDestroyItem.BUTTON_YES_SPRITE),
+    // [DIALOG DESTROY ITEM]
+
+    /**
      * [INVENTORY] Widget Info
      */
-    INVENTORY_ITEMS_CONTAINER(WidgetInfo.INVENTORY),
-    INVENTORY_DESTROY_ITEM(WidgetInfo.DESTROY_ITEM),
-    INVENTORY_DESTROY_ITEM_YES(WidgetInfo.DESTROY_ITEM_YES),
+    INVENTORY_ITEMS_CONTAINER(WidgetIndices.Inventory.GROUP_INDEX, WidgetIndices.Inventory.SPRITE_GRID),
     // [INVENTORY]
 
     /**
-     * [QUICKPRAYER]
+     * [QUICK PRAYER]
      */
     QUICK_PRAYER_PRAYERS(WidgetIndices.QuickPrayers.GROUP_INDEX, WidgetIndices.QuickPrayers.PRAYERS_DYNAMIC_CONTAINER),
-    // [QUICKPRAYER]
+    // [QUICK PRAYER]
 
     /**
      * [CHAT] Widget Info
@@ -31,10 +36,10 @@ public enum GlobalWidgetInfo {
     // [CHAT
 
     /**
-     * [DIALOGNPC]
+     * [DIALOG NPC]
      */
     DIALOG_NPC_TEXT(WidgetIndices.DialogNPC.GROUP_INDEX, WidgetIndices.DialogNPC.DIALOG_TEXT_LABEL),
-    // [DIALOGNPC]
+    // [DIALOG NPC]
 
     /**
      * [LOGOUT] Widget Info
@@ -49,10 +54,10 @@ public enum GlobalWidgetInfo {
     // [WILDERNESS]
 
     /**
-     * [WORLDMAP] Widget Info
+     * [WORLD MAP] Widget Info
      */
     WORLD_MAP_VIEW(WidgetIndices.WorldMap.GROUP_INDEX, WidgetIndices.WorldMap.MAPVIEW_CONTAINER),
-    // [WORLDMAP]
+    // [WORLD MAP]
 
     /**
      * [LOGIN] Widget Info
@@ -152,7 +157,7 @@ public enum GlobalWidgetInfo {
     // [STORE]
 
     /**
-     * [GRANDEXCHANGE]
+     * [GRAND EXCHANGE]
      */
     GRAND_EXCHANGE_SEARCH_INPUT(CHATBOX_FULL_INPUT),
     GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
@@ -162,7 +167,7 @@ public enum GlobalWidgetInfo {
     GRAND_EXCHANGE_COLLECT_AREA_ONE(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.RIGHT_ITEM_SPRITE),
     GRAND_EXCHANGE_COLLECT_AREA_TWO(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.LEFT_ITEM_SPRITE),
     GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER),
-    // [GRANDEXCHANGE]
+    // [GRAND EXCHANGE]
 
     /**
      * [MAGIC] Widget Info
