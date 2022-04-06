@@ -10,14 +10,9 @@ import rsb.internal.InputManager;
 import lombok.extern.slf4j.Slf4j;
 import rsb.wrappers.subwrap.ChooseOption;
 import rsb.wrappers.subwrap.NPCChat;
-import net.runelite.client.ui.ClientUI;
-
-import javax.swing.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static java.lang.Thread.sleep;
 
 /**
  * For internal use to link MethodProviders.
@@ -26,7 +21,6 @@ import static java.lang.Thread.sleep;
  */
 @Slf4j
 public class MethodContext {
-
 	/**
 	 * The singleton of GameScreen
 	 */
@@ -66,7 +60,6 @@ public class MethodContext {
 	 * The singleton of Menu
 	 */
 	public final Menu menu = new Menu(this);
-
 
 	/**
 	 * The Bot's input manager
@@ -149,9 +142,13 @@ public class MethodContext {
 	public final Prayer prayer = new Prayer(this);
 
 	/**
+	 * The singleton of RandomEvents
+	 */
+	public final RandomEvents randomEvents = new RandomEvents(this);
+
+	/**
 	 * The singleton of Magic
 	 */
-
 	public final Magic magic = new Magic(this);
 
 	/**
@@ -199,13 +196,11 @@ public class MethodContext {
 	 */
 	public final Client client;
 
-
 	public final RuneLite runeLite;
 
 	public Provider<ClientThread> clientThreadProvider = null;
 
 	public final ExecutorService executorService = Executors.newSingleThreadExecutor();
-
 
 	/**************************************/
 	/**EXTRA METHOD CONTEXT**/
@@ -222,5 +217,4 @@ public class MethodContext {
 		this.client = runeLite.getInjector().getInstance(Client.class);
 		this.inputManager = runeLite.getInputManager();
 	}
-
 }
