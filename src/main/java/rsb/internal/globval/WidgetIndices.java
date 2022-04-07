@@ -1138,6 +1138,19 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes become member ad widget
+     * Last reviewed: 6/4/2022 0:17 am UTC+1
+     */
+    public static class BecomeMemberAd {
+        public static final int GROUP_INDEX = 278;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_CONTAINER = 1;
+        public static final int AD_SPRITE = 2;
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 3; //0 close sprite
+        public static final int BUTTON_UPGRADE_DYNAMIC_CONTAINER = 4; //0 upgrade now sprite
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
