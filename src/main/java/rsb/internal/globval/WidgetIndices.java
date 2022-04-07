@@ -1238,6 +1238,23 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes tanning window widget
+     * Last reviewed: 6/4/2022 0:37 am UTC+1
+     * TODO: will need more attention, seems to be wrongly resolved by WidgetInspector
+     */
+    public static class TanningWindow {
+        public static final int GROUP_INDEX = 324;
+        public static final int FIRST_CHOICE_CONTAINER = 92;   // Or dynamic container?
+        public static final int SECOND_CHOICE_CONTAINER = 93;  // Or dynamic container?
+        public static final int THIRD_CHOICE_CONTAINER = 94;   // Or dynamic container?
+        public static final int FOURTH_CHOICE_CONTAINER = 95;  // Or dynamic container?
+        public static final int FIFTH_CHOICE_CONTAINER = 96;   // Or dynamic container?
+        public static final int SIXTH_CHOICE_CONTAINER = 97;   // Or dynamic container?
+        public static final int SEVENTH_CHOICE_CONTAINER = 98; // Or dynamic container?
+        public static final int EIGHT_CHOICE_CONTAINER = 99;   // Or dynamic container?
+    }
+
+    /**
      * Describe second trade screen widgets
      * Last reviewed: 5/3/2022 1:29 am UTC+1
      */
