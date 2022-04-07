@@ -60,6 +60,13 @@ public enum VarpValues {
     // Quest points
     QUEST_POINTS_NONE(0),
     QUEST_POINTS_MAX(287),
+    // Restless Ghost
+    QUEST_RESTLESS_GHOST_NOT_STARTED(0),
+    QUEST_RESTLESS_GHOST_STARTED(1),
+    QUEST_RESTLESS_AMULET_GIVEN(2),
+    QUEST_RESTLESS_TALKED_TO_GHOST(3),
+    QUEST_RESTLESS_SKULL_OBTAINED(4),
+    QUEST_RESTLESS_GHOST_FINISHED(5),
     // Selected autocast spell
     SELECTED_SPELL_WIND_STRIKE(3),
     SELECTED_SPELL_WATER_STRIKE(5),
@@ -99,7 +106,12 @@ public enum VarpValues {
     MAGIC_BOOK_STANDARD(0),
     // Area sound effects
     AREA_SOUND_EFFECT_VOLUME_MIN(0),
-    AREA_SOUND_EFFECT_VOLUME_MAX(100);
+    AREA_SOUND_EFFECT_VOLUME_MAX(100),
+    // Blast furnace bar dispenser
+    BAR_DISPENSER_NO_BAR_PROCESSING(0),
+    BAR_DISPENSER_ORE_PROCESSING(1),
+    BAR_DISPENSER_BARS_COOLING_DOWN(2),
+    BAR_DISPENSER_BARS_READY_FOR_COLLECTION(3);
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();

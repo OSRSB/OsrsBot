@@ -76,6 +76,11 @@ public class VarpIndices {
      * 	Venom damage = (this - 999997) * 2
      */
     public static final int POISON = 102;
+    /**
+     * Permitted values: 0 - 5
+     * Note: 0 = not started, 1 = started, 5 = finished
+     */
+    public static final int QUEST_RESTLESS_GHOST = 107;
     public static final int SELECTED_AUTOCAST_SPELL = 108;
     /**
      * Permitted values: 0 - 1
@@ -145,6 +150,14 @@ public class VarpIndices {
      * Note: 0 = noVolume, 100 = maxVolume
      */
     public static final int ADJUST_AREA_SOUND_EFFECT_VOLUME = 872;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = No bar processing.
+     * Note: 1 = Ores are being processed on conveyor belt.
+     * Note: 2 = Bars are cooling down.
+     * Note: 3 = Bars can be collected.
+     */
+    public static final int BLAST_FURNACE_BAR_DISPENSER = 936;
     public static final int SWAP_QUEST_DIARY = 1002;
     public static final int SPRITE_UNSELECTED_VALUE = 1077;
     public static final int SPRITE_SELECTED_VALUE = 1079;
