@@ -1799,6 +1799,36 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes canoe destination window
+     * Last reviewed: 6/4/2022 1:59 am UTC+1
+     */
+    public static class CanoeDestinationWindow {
+        public static final int GROUP_INDEX = 647;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MODELS_CONTAINER = 1;
+        public static final int WATER_MODEL = 2;
+        public static final int FRAME_MAIN_CONTAINER = 3;
+        public static final int MODELS_PARENT_CONTAINER = 4;
+        public static final int MAP_MODELS_CONTAINER = 5;
+        public static final int YOUR_DESTINATION_CONTAINER = 6;
+        public static final int MAP_MODEL = 7;
+        public static final int CAVE_MODEL = 8;
+        public static final int SKULL_MODEL = 9;
+        public static final int UNKNOWN_MODEL = 10;
+        public static final int SELECT_DESTINAITON_DYNAMIC_CONTAINER = 11; // 0 TEXT_LABEL
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 12;
+        public static final int DESTINATIONS_CONTAINER = 13;
+        // TODO: this actually depends where you are at ...
+        // 14 DEST_GRAND_EXCHANGE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 15 DEST_LUMBRIDGE_DYMAIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 16 DEST_CHAMPS_GUILD_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 17 DEST_BARB_VILLAGE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 18 DEST_EDGEVILLE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 19 DEST_FEROX_ENCLAVE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 20 DEST_WILDY_POND_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+    }
+
+    /**
      * Describes your clan sub-tab widget under social tab widget
      * Last reviewed: 18/3/2022 1:19 am UTC+1
      */
