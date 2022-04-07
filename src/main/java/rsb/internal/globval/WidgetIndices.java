@@ -1743,6 +1743,50 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes adventure paths window
+     * Last reviewed: 6/4/2022 1:21 am UTC+1
+     */
+    public static class AdventurePaths {
+        public static final int GROUP_INDEX = 642;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // contains 0 entire sprite, frame borders,corners, 13 close button sprite
+        public static final int INNER_FRAME_PARENT_CONTIANER = 2;
+        public static final int INNER_FRAME_CONTAINER = 3;
+        // 4 ??
+        public static final int PATH_PARENT_CONTAINER = 5;
+        public static final int PATH_TASK_LIST_PARENT_DYNAMIC_CONTAINER = 6; // contains borders,corners,lines of task list
+        public static final int PATH_TASK_LIST_DYNAMIC_CONTAINER = 7; // task sprites, 0-11 a first single task
+        public static final int MORE_INFO_PARENT_CONTAINER = 8;
+        public static final int MORE_INFO_DETAIL_PARENT_DYNAMIC_CONTAINER = 9; // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_TITLE_DYNAMIC_CONTAINER = 10;  // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_TITLE_LABEL = 11;
+        public static final int UNKNOWN_CONTAINER = 12;
+        public static final int MORE_INFO_DETAIL_TASK_ADVICE_DYNAMIC_CONTAINER = 13; // point sprite + text_label depends on number of advices given per task
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_DYNAMIC_CONTAINER = 14; // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_DESCRIPTION_DYNAMIC_CONTAINER = 15; // 0-7 frame sprites,
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_TEXT_LABEL = 16;
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_SPRITE = 17;
+        public static final int MORE_INFO_TOP_BAR_CONTAINER = 18;
+        public static final int MORE_INFO_TASK_TITLE_LABEL = 19;
+        public static final int MORE_INFO_BUTTON_BACK_DYNAMIC_CONTAINER = 20; // 0 entire sprite, 1-8 frame sprites, 9 text_label
+        public static final int PATH_TOP_BAR_PARENT_CONTAINER = 21;
+        public static final int PATH_TOP_BAR_WORLD_MAP_DYNAMIC_CONTAINER = 22; // 9 icon
+        public static final int BUTTON_BACK_DYNAMIC_CONTAINER = 23; // 0 sprite, 9 text_LABEL
+        public static final int BUTTON_SHOW_PATH_REWARD_DYNAMIC_CONTAINER = 24; // 0 sprite, 9 text_LABEL
+        public static final int COMPLETED_TASK_DYNAMIC_CONTAINER = 25; // 0 text_label
+        public static final int BUTTON_CHECKBOX_DYNAMIC_CONTAINER = 26; //0 entire sprite, 9 icon sprite, 10 shaodow box
+        public static final int PATH_SCROLLBAR_DYNAMIC_CONTAINER = 27; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2,3 separator between arrows up/down, 4 arrow up, 5 arrow down
+        public static final int PATH_TASK_DESCRIPTION_DYNAMIC_CONTAINER = 28; // 0-10 frame sprites
+        public static final int PATH_TASK_DESCRIPTION_DETAIL_DYNAMIC_CONTAINER = 29; // 0 box, 1 detail_text_LABEL, 2 moreinfo_text_label
+        public static final int PATH_TASK_DESCRIPTION_TITLE_LABEL = 30;
+        public static final int PATH_TASK_DESCRIPTION_REQUIREMENT_LABEL = 31;
+        public static final int PATH_TASK_DESCRIPTION_REWARDS_DYNAMIC_CONTAINER = 32; // 0 f2p text_label, 1 p2p text_label ,2 first f2p reward .... x rewards
+        // 33 ??
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 34; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2,3 separator between arrows up/down, 4 arrow up, 5 arrow down
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 35;
+    }
+
+    /**
      * Describes your clan sub-tab widget under social tab widget
      * Last reviewed: 18/3/2022 1:19 am UTC+1
      */
