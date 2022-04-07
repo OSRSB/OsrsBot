@@ -1787,6 +1787,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes adventure paths rewards window
+     * Last reviewed: 6/4/2022 1:34 am UTC+1
+     */
+    public static class AdventurePathsRewards {
+        public static final int GROUP_INDEX = 643;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title_label, 2-12 frame sprites, 13 close button sprite
+        public static final int INNER_FRAME_PARENT_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; // 0 button back sprite, 1-8 button back frame sprites, 9 text_label, 10 title ,11 reward box, 29 reward description text_label
+    }
+
+    /**
      * Describes your clan sub-tab widget under social tab widget
      * Last reviewed: 18/3/2022 1:19 am UTC+1
      */
