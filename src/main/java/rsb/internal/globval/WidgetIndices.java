@@ -1429,6 +1429,34 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes build canoe selection window
+     * Last reviewed: 6/4/2022 0:56 am UTC+1
+     */
+    public static class BuildCanoeWindow {
+        public static final int GROUP_INDEX = 416;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MODELS_CONTAINER = 1;
+        public static final int WATER_MODEL = 2;
+        public static final int FRAME_CONTAINER = 3;
+        public static final int TRAIL_MODEL_CONTAINER = 4;
+        public static final int STABLE_DUGOUT_TRAIL_MODEL = 5;
+        public static final int DUGOUT_TRAIL_MODEL = 6;
+        public static final int LOG_TRAIL_MODEL = 7;
+        public static final int WAKA_TRAIL_MODEL = 8;
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 9; // 0 close button sprite
+        public static final int TEXT_DYNAMIC_CONTAINER = 10; // 0 TEXT_LABEL
+        public static final int WAKA_MODEL_DYNAMIC_CONTAINER = 11; // 0 TEXT_LABEL
+        public static final int STABLE_DUGOUT_MODEL_DYNAMIC_CONTAINER = 12; // 0 TEXT_LABEL
+        // 13 - 16 unknown models
+        public static final int STABLE_DUGOUT_MODEL = 17;
+        public static final int DUGOUT_MODEL_DYNAMIC_CONTAINER = 18; // 0 TEXT_LABEL
+        public static final int DUGOUT_MODEL = 19;
+        public static final int LOG_MODEL_DYNAMIC_CONTAINER = 20; // 0 TEXT_LABEL
+        public static final int LOG_MODEL = 21;
+        public static final int WAKA_MODEL = 22;
+    }
+
+    /**
      * Describes friend list tab widgets
      * Last reviewed: 18/3/2022 2:46 am UTC+1
      */
