@@ -1138,6 +1138,19 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes become member ad widget
+     * Last reviewed: 6/4/2022 0:17 am UTC+1
+     */
+    public static class BecomeMemberAd {
+        public static final int GROUP_INDEX = 278;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_CONTAINER = 1;
+        public static final int AD_SPRITE = 2;
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 3; //0 close sprite
+        public static final int BUTTON_UPGRADE_DYNAMIC_CONTAINER = 4; //0 upgrade now sprite
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
@@ -1222,6 +1235,23 @@ public class WidgetIndices {
         public static final int TOTAL_LEVEL_RIGHT_SIDE_SPRITE = 26;
         public static final int TOTAL_LEVEL_LABEL = 27;
         public static final int MOUSEOVER_TOOLTIP_CONTAINER = 28;
+    }
+
+    /**
+     * Describes tanning window widget
+     * Last reviewed: 6/4/2022 0:37 am UTC+1
+     * TODO: will need more attention, seems to be wrongly resolved by WidgetInspector
+     */
+    public static class TanningWindow {
+        public static final int GROUP_INDEX = 324;
+        public static final int FIRST_CHOICE_CONTAINER = 92;   // Or dynamic container?
+        public static final int SECOND_CHOICE_CONTAINER = 93;  // Or dynamic container?
+        public static final int THIRD_CHOICE_CONTAINER = 94;   // Or dynamic container?
+        public static final int FOURTH_CHOICE_CONTAINER = 95;  // Or dynamic container?
+        public static final int FIFTH_CHOICE_CONTAINER = 96;   // Or dynamic container?
+        public static final int SIXTH_CHOICE_CONTAINER = 97;   // Or dynamic container?
+        public static final int SEVENTH_CHOICE_CONTAINER = 98; // Or dynamic container?
+        public static final int EIGHT_CHOICE_CONTAINER = 99;   // Or dynamic container?
     }
 
     /**
@@ -1396,6 +1426,34 @@ public class WidgetIndices {
         public static final int SLOT_SEVENTH_DYNAMIC_CONTAINER = 11; // sprites, layers, steel border 0-20
         public static final int SLOT_EIGHT_DYNAMIC_CONTAINER = 12; // sprites, layers, steel border 0-20
         public static final int UNKNOWN_CONTAINER = 13;
+    }
+
+    /**
+     * Describes build canoe selection window
+     * Last reviewed: 6/4/2022 0:56 am UTC+1
+     */
+    public static class BuildCanoeWindow {
+        public static final int GROUP_INDEX = 416;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MODELS_CONTAINER = 1;
+        public static final int WATER_MODEL = 2;
+        public static final int FRAME_CONTAINER = 3;
+        public static final int TRAIL_MODEL_CONTAINER = 4;
+        public static final int STABLE_DUGOUT_TRAIL_MODEL = 5;
+        public static final int DUGOUT_TRAIL_MODEL = 6;
+        public static final int LOG_TRAIL_MODEL = 7;
+        public static final int WAKA_TRAIL_MODEL = 8;
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 9; // 0 close button sprite
+        public static final int TEXT_DYNAMIC_CONTAINER = 10; // 0 TEXT_LABEL
+        public static final int WAKA_MODEL_DYNAMIC_CONTAINER = 11; // 0 TEXT_LABEL
+        public static final int STABLE_DUGOUT_MODEL_DYNAMIC_CONTAINER = 12; // 0 TEXT_LABEL
+        // 13 - 16 unknown models
+        public static final int STABLE_DUGOUT_MODEL = 17;
+        public static final int DUGOUT_MODEL_DYNAMIC_CONTAINER = 18; // 0 TEXT_LABEL
+        public static final int DUGOUT_MODEL = 19;
+        public static final int LOG_MODEL_DYNAMIC_CONTAINER = 20; // 0 TEXT_LABEL
+        public static final int LOG_MODEL = 21;
+        public static final int WAKA_MODEL = 22;
     }
 
     /**
@@ -1682,6 +1740,92 @@ public class WidgetIndices {
         public static final int TAB_LEAGUES_RIGHT_SIDE_SPRITE = 31;
         public static final int TAB_LEAGUES_ICON_SPRITE = 32;
         public static final int INNER_FRAME_CONTAINER = 33;
+    }
+
+    /**
+     * Describes adventure paths window
+     * Last reviewed: 6/4/2022 1:21 am UTC+1
+     */
+    public static class AdventurePaths {
+        public static final int GROUP_INDEX = 642;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // contains 0 entire sprite, frame borders,corners, 13 close button sprite
+        public static final int INNER_FRAME_PARENT_CONTIANER = 2;
+        public static final int INNER_FRAME_CONTAINER = 3;
+        // 4 ??
+        public static final int PATH_PARENT_CONTAINER = 5;
+        public static final int PATH_TASK_LIST_PARENT_DYNAMIC_CONTAINER = 6; // contains borders,corners,lines of task list
+        public static final int PATH_TASK_LIST_DYNAMIC_CONTAINER = 7; // task sprites, 0-11 a first single task
+        public static final int MORE_INFO_PARENT_CONTAINER = 8;
+        public static final int MORE_INFO_DETAIL_PARENT_DYNAMIC_CONTAINER = 9; // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_TITLE_DYNAMIC_CONTAINER = 10;  // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_TITLE_LABEL = 11;
+        public static final int UNKNOWN_CONTAINER = 12;
+        public static final int MORE_INFO_DETAIL_TASK_ADVICE_DYNAMIC_CONTAINER = 13; // point sprite + text_label depends on number of advices given per task
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_DYNAMIC_CONTAINER = 14; // 0-7 frame sprites
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_DESCRIPTION_DYNAMIC_CONTAINER = 15; // 0-7 frame sprites,
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_TEXT_LABEL = 16;
+        public static final int MORE_INFO_DETAIL_TASK_PICTURE_SPRITE = 17;
+        public static final int MORE_INFO_TOP_BAR_CONTAINER = 18;
+        public static final int MORE_INFO_TASK_TITLE_LABEL = 19;
+        public static final int MORE_INFO_BUTTON_BACK_DYNAMIC_CONTAINER = 20; // 0 entire sprite, 1-8 frame sprites, 9 text_label
+        public static final int PATH_TOP_BAR_PARENT_CONTAINER = 21;
+        public static final int PATH_TOP_BAR_WORLD_MAP_DYNAMIC_CONTAINER = 22; // 9 icon
+        public static final int BUTTON_BACK_DYNAMIC_CONTAINER = 23; // 0 sprite, 9 text_LABEL
+        public static final int BUTTON_SHOW_PATH_REWARD_DYNAMIC_CONTAINER = 24; // 0 sprite, 9 text_LABEL
+        public static final int COMPLETED_TASK_DYNAMIC_CONTAINER = 25; // 0 text_label
+        public static final int BUTTON_CHECKBOX_DYNAMIC_CONTAINER = 26; //0 entire sprite, 9 icon sprite, 10 shaodow box
+        public static final int PATH_SCROLLBAR_DYNAMIC_CONTAINER = 27; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2,3 separator between arrows up/down, 4 arrow up, 5 arrow down
+        public static final int PATH_TASK_DESCRIPTION_DYNAMIC_CONTAINER = 28; // 0-10 frame sprites
+        public static final int PATH_TASK_DESCRIPTION_DETAIL_DYNAMIC_CONTAINER = 29; // 0 box, 1 detail_text_LABEL, 2 moreinfo_text_label
+        public static final int PATH_TASK_DESCRIPTION_TITLE_LABEL = 30;
+        public static final int PATH_TASK_DESCRIPTION_REQUIREMENT_LABEL = 31;
+        public static final int PATH_TASK_DESCRIPTION_REWARDS_DYNAMIC_CONTAINER = 32; // 0 f2p text_label, 1 p2p text_label ,2 first f2p reward .... x rewards
+        // 33 ??
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 34; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2,3 separator between arrows up/down, 4 arrow up, 5 arrow down
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 35;
+    }
+
+    /**
+     * Describes adventure paths rewards window
+     * Last reviewed: 6/4/2022 1:34 am UTC+1
+     */
+    public static class AdventurePathsRewards {
+        public static final int GROUP_INDEX = 643;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title_label, 2-12 frame sprites, 13 close button sprite
+        public static final int INNER_FRAME_PARENT_CONTAINER = 2;
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; // 0 button back sprite, 1-8 button back frame sprites, 9 text_label, 10 title ,11 reward box, 29 reward description text_label
+    }
+
+    /**
+     * Describes canoe destination window
+     * Last reviewed: 6/4/2022 1:59 am UTC+1
+     */
+    public static class CanoeDestinationWindow {
+        public static final int GROUP_INDEX = 647;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int MODELS_CONTAINER = 1;
+        public static final int WATER_MODEL = 2;
+        public static final int FRAME_MAIN_CONTAINER = 3;
+        public static final int MODELS_PARENT_CONTAINER = 4;
+        public static final int MAP_MODELS_CONTAINER = 5;
+        public static final int YOUR_DESTINATION_CONTAINER = 6;
+        public static final int MAP_MODEL = 7;
+        public static final int CAVE_MODEL = 8;
+        public static final int SKULL_MODEL = 9;
+        public static final int UNKNOWN_MODEL = 10;
+        public static final int SELECT_DESTINAITON_DYNAMIC_CONTAINER = 11; // 0 TEXT_LABEL
+        public static final int BUTTON_CLOSE_DYNAMIC_CONTAINER = 12;
+        public static final int DESTINATIONS_CONTAINER = 13;
+        // TODO: this actually depends where you are at ...
+        // 14 DEST_GRAND_EXCHANGE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 15 DEST_LUMBRIDGE_DYMAIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 16 DEST_CHAMPS_GUILD_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 17 DEST_BARB_VILLAGE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 18 DEST_EDGEVILLE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 19 DEST_FEROX_ENCLAVE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+        // 20 DEST_WILDY_POND_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
     }
 
     /**
