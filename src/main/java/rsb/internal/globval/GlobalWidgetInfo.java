@@ -240,7 +240,7 @@ public enum GlobalWidgetInfo {
      * [FIXED CLASSIC VIEWPORT] Widget Info
      */
     FIXED_CLASSIC_MINIMAP(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_CONTAINER),
-    FIXED_CLASSIC_COMPASS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER),
+    FIXED_CLASSIC_COMPASS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_COMPASS_SPRITE),
     FIXED_CLASSIC_CHAT_CHANNEL(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
     FIXED_CLASSIC_ACC_MANAGEMENT(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_ACC_MANAGEMENT_SPRITE),
     FIXED_CLASSIC_FRIEND_LIST(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_FRIENDS_LIST_SPRITE),

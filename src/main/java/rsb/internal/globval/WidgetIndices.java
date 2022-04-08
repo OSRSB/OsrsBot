@@ -2,6 +2,49 @@ package rsb.internal.globval;
 
 public class WidgetIndices {
     /**
+     * Describes silver crafting window widgets
+     * Last reviewed: 7/4/2022 0:21 am UTC+1
+     */
+    public static class SilverCraftingWindow {
+        public static final int GROUP_INDEX = 6;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 frame border/corners sprites, 11 close button sprite
+        public static final int VERTICAL_SEPARATOR_LINE_SPRITE = 2;
+        public static final int HORIZONTAL_SEPARATOR_LINE_SPRITE = 3;
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int LEFT_SIDE_PARENT_CONTAINER = 5;
+        public static final int FIRST_ROW_PARENT_CONTAINER = 6;
+        public static final int OPAL_RING_DYNAMIC_CONTAINER = 7; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_RING_DYNAMIC_CONTAINER = 8; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_RING_DYNAMIC_CONTAINER = 9; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SECOND_ROW_PARENT_CONTAINER = 10;
+        public static final int OPAL_NECKLACE_DYNAMIC_CONTAINER = 11; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_NECKLACE_DYNAMIC_CONTAINER = 12; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_NECKLACE_DYNAMIC_CONTAINER = 13; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int THIRD_ROW_PARENT_CONTAINER = 14;
+        public static final int OPAL_AMULET_DYNAMIC_CONTAINER = 15; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_AMULET_DYNAMIC_CONTAINER = 16; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_AMULET_DYNAMIC_CONTAINER = 17; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int FOURTH_ROW_PARENT_CONTAINER = 18;
+        public static final int OPAL_BRACELET_DYNAMIC_CONTAINER = 19; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_BRACELET_DYNAMIC_CONTAINER = 20; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_BRACELET_DYNAMIC_CONTAINER = 21; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int RIGHT_SIDE_PARENT_CONTAINER = 22;
+        public static final int HOLY_SYMBOL_DYNAMIC_CONTAINER = 23; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int UNHOLY_SYMBOL_DYNAMIC_CONTAINER = 24; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVER_SICKLE_DYNAMIC_CONTAINER = 25; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int LIGHTING_ROD_DYNAMIC_CONTAINER = 26; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVER_CROSSBOW_BOLTS_DYNAMIC_CONTAINER = 27; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TIARA_DYNAMIC_CONTAINER = 28; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVTHRILL_ROD_DYNAMIC_CONTAINER = 29; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int DEMONIC_SIGIL_DYNAMIC_CONTAINER = 30; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int BUTTONS_PARENT_CONTAINER = 31;
+        public static final int BUTTON_1_DYNAMIC_CONTAINER = 32; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 35; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 36; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes chat channel widgets
      * Last reviewed: 10/3/2022 0:09 am UTC+1
      */
@@ -1477,6 +1520,61 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes silver crafting window widgets
+     * Last reviewed: 7/4/2022 0:43 am UTC+1
+     * TODO: bracelets were inferred not checked
+     * TODO: actually name these models by a proper item name?
+     */
+    public static class GoldCraftingWindow {
+        public static final int GROUP_INDEX = 446;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 frame border/corners sprites, 11 close button sprite
+        public static final int RINGS_LABEL = 2;
+        public static final int RINGS_ROW_CONTAINER = 6;
+        public static final int FIRST_RING_MODEL = 7;
+        public static final int SECOND_RING_MODEL = 8;
+        public static final int THIRD_RING_MODEL = 9;
+        public static final int FOURTH_RING_MODEL = 10;
+        public static final int FIFTH_RING_MODEL = 11;
+        public static final int SIXTH_RING_MODEL = 12;
+        public static final int SEVENTH_RING_MODEL = 13;
+        public static final int NINTH_RING_MODEL = 14;
+        public static final int EIGHT_RING_MODEL = 15;
+        public static final int NECKLACES_LABEL = 16;
+        public static final int NECKLACES_ROW_CONTAINER = 20;
+        public static final int FIRST_NECKLACE_MODEL = 21;
+        public static final int SECOND_NECKLACE_MODEL = 22;
+        public static final int THIRD_NECKLACE_MODEL = 23;
+        public static final int FOURTH_NECKLACE_MODEL = 24;
+        public static final int FIFTH_NECKLACE_MODEL = 25;
+        public static final int SIXTH_NECKLACE_MODEL = 26;
+        public static final int SEVENTH_NECKLACE_MODEL = 27;
+        public static final int EIGHT_NECKLACE_MODEL = 28;
+        public static final int AMULETS_LABEL = 29;
+        public static final int AMULETS_ROW_CONTAINER = 33;
+        public static final int FIRST_AMULET_MODEL = 34;
+        public static final int SECOND_AMULET_MODEL = 35;
+        public static final int THIRD_AMULET_MODEL = 36;
+        public static final int FOURTH_AMULET_MODEL = 37;
+        public static final int FIFTH_AMULET_MODEL = 38;
+        public static final int SIXTH_AMULET_MODEL = 39;
+        public static final int SEVENTH_AMULET_MODEL = 40;
+        public static final int EIGHT_AMULET_MODEL = 41;
+        public static final int BRACELETS_LABEL = 42;
+        public static final int BRACELETS_ROW_CONTAINER = 43;
+        public static final int FIRST_BRACELET_MODEL = 44;
+        public static final int SECOND_BRACELET_MODEL = 45;
+        public static final int THIRD_BRACELET_MODEL = 46;
+        public static final int FOURTH_BRACELET_MODEL = 47;
+        public static final int FIFTH_BRACELET_MODEL = 48;
+        public static final int SIXTH_BRACELET_MODEL = 49;
+        public static final int BUTTONS_PARENT_CONTAINER = 55;
+        public static final int BUTTON_1_DYNAMIC_CONTAINER = 56; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 59; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 60; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes grand exchange widgets
      * Last reviewed: 3/3/2022 0:14 am UTC+1
      */
@@ -1571,7 +1669,13 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_PARENT_CONTAINER = 14;
         public static final int TOP_BAR_PARENT_CONTAINER = 15;
         public static final int ROOT_INTERFACE_CONTAINER = 16;
-        public static final int COMPASS_DYNAMIC_CONTAINER = 23; // TODO: get sprite
+        public static final int MINIMAP_BOTTOM_SPRITE = 17; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_LEFT_SPRITE = 18; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_RIGHT_SPRITE = 19; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_COMPASS_SPRITE = 20;
+        public static final int MINIMAP_DRAW_AREA_SPRITE = 21;
+        public static final int MINIMAP_AREA_SPRITE = 22;
+        public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 23;
         public static final int MINIMAP_ORBS_CONTAINER = 24;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;
