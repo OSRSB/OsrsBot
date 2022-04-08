@@ -1477,6 +1477,61 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes silver crafting window widgets
+     * Last reviewed: 7/4/2022 0:43 am UTC+1
+     * TODO: bracelets were inferred not checked
+     * TODO: actually name these models by a proper item name?
+     */
+    public static class GoldCraftingWindow {
+        public static final int GROUP_INDEX = 446;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 frame border/corners sprites, 11 close button sprite
+        public static final int RINGS_LABEL = 2;
+        public static final int RINGS_ROW_CONTAINER = 6;
+        public static final int FIRST_RING_MODEL = 7;
+        public static final int SECOND_RING_MODEL = 8;
+        public static final int THIRD_RING_MODEL = 9;
+        public static final int FOURTH_RING_MODEL = 10;
+        public static final int FIFTH_RING_MODEL = 11;
+        public static final int SIXTH_RING_MODEL = 12;
+        public static final int SEVENTH_RING_MODEL = 13;
+        public static final int NINTH_RING_MODEL = 14;
+        public static final int EIGHT_RING_MODEL = 15;
+        public static final int NECKLACES_LABEL = 16;
+        public static final int NECKLACES_ROW_CONTAINER = 20;
+        public static final int FIRST_NECKLACE_MODEL = 21;
+        public static final int SECOND_NECKLACE_MODEL = 22;
+        public static final int THIRD_NECKLACE_MODEL = 23;
+        public static final int FOURTH_NECKLACE_MODEL = 24;
+        public static final int FIFTH_NECKLACE_MODEL = 25;
+        public static final int SIXTH_NECKLACE_MODEL = 26;
+        public static final int SEVENTH_NECKLACE_MODEL = 27;
+        public static final int EIGHT_NECKLACE_MODEL = 28;
+        public static final int AMULETS_LABEL = 29;
+        public static final int AMULETS_ROW_CONTAINER = 33;
+        public static final int FIRST_AMULET_MODEL = 34;
+        public static final int SECOND_AMULET_MODEL = 35;
+        public static final int THIRD_AMULET_MODEL = 36;
+        public static final int FOURTH_AMULET_MODEL = 37;
+        public static final int FIFTH_AMULET_MODEL = 38;
+        public static final int SIXTH_AMULET_MODEL = 39;
+        public static final int SEVENTH_AMULET_MODEL = 40;
+        public static final int EIGHT_AMULET_MODEL = 41;
+        public static final int BRACELETS_LABEL = 42;
+        public static final int BRACELETS_ROW_CONTAINER = 43;
+        public static final int FIRST_BRACELET_MODEL = 44;
+        public static final int SECOND_BRACELET_MODEL = 45;
+        public static final int THIRD_BRACELET_MODEL = 46;
+        public static final int FOURTH_BRACELET_MODEL = 47;
+        public static final int FIFTH_BRACELET_MODEL = 48;
+        public static final int SIXTH_BRACELET_MODEL = 49;
+        public static final int BUTTONS_PARENT_CONTAINER = 55;
+        public static final int BUTTON_1_DYNAMIC_CONTAINER = 56; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 59; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 60; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes grand exchange widgets
      * Last reviewed: 3/3/2022 0:14 am UTC+1
      */
