@@ -167,6 +167,9 @@ public enum VarbitValues {
     MOTHERLODE_MINE_SACK_NOT_UPGRADED_MAX_QUANT(108),
     MOTHERLODE_MINE_SACK_UPGRADED_MAX_QUANT(189),
     MOTHERLODE_MINE_SACK_TECHNICAL_MAX_QUANT(255),
+    // Wildneress zone
+    WILDNERESS_ZONE_OUTSIDE(0),
+    WILDNERESS_ZONE_INSIDE(1),
     // Chatbox Interface Size
     CHATBOX_INTERFACE_SMALLER(0), // Note: A NPC head is speaking.
     CHATBOX_INTERFACE_BIGGER(1), // Note: Dialog options are present, this can be also just one option "Click here to continue"

@@ -54,6 +54,7 @@ public class VarbitIndices {
     public static final int PRAYER_PROTECT_FROM_MAGIC_OVERHEAD = 4130;
     public static final int PRAYER_PROTECT_FROM_MISSILES_OVERHEAD = 4131;
     public static final int PRAYER_PROTECT_FROM_MELEE_OVERHEAD = 4132;
+    public static final int WILDERNESS_ZONE_ENTRY_COUNT = 4149;  // Note: number of times char has entered wildy in total
     public static final int BANK_ACTIVE_TAB = 4150;
     public static final int BANK_TAB_DISPLAY = 4170;
     public static final int BANK_TAB_ONE_COUNT = 4171;
@@ -72,6 +73,7 @@ public class VarbitIndices {
     public static final int TOGGLE_BANK_DEPOSIT_WORN_ITEMS = 5364;
     public static final int FAIRY_RING_LAST_DESTINATION = 5374;
     public static final int MOTHERLODE_MINE_SACK = 5558;
+    public static final int WILDNERESS_ZONE = 5963;
     public static final int CHATBOX_INTERFACE_SIZE = 5983; // Note: manipulates the size of Widget 162.559
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
     public static final int BANK_WITHDRAW_QUANTITY = 6590;
