@@ -66,7 +66,11 @@ public class VarbitIndices {
     public static final int BANK_TAB_SEVEN_COUNT = 4177;
     public static final int BANK_TAB_EIGHT_COUNT = 4178;
     public static final int BANK_TAB_NINE_COUNT = 4179;
+    public static final int GE_OFFER_QUANTITY = 4396; // Note: count of items offered
+    public static final int GE_OFFER_TYPE = 4397;
+    public static final int GE_OFFER_PRICE_PER_ITEM = 4398; // Note: price per each item
     public static final int DEPOSIT_BOX_DEPOSIT_AMOUNT = 4430;
+    public static final int GE_OFFER_SLOT_OPEN = 4439;
     public static final int MULTICOMBAT_ZONE = 4605;
     public static final int TOGGLE_XP_DROPS = 4702;
     public static final int TOGGLE_BANK_INCINERATOR = 5102;
