@@ -82,6 +82,7 @@ public class VarbitIndices {
     public static final int TOGGLE_MAGIC_FILTER_NO_LEVEL_SPELLS = 6607;
     public static final int TOGGLE_MAGIC_FILTER_NO_RUNES_SPELLS = 6608;
     public static final int TOGGLE_MAGIC_FILTER_TELEPORT_SPELLS = 6609;
+    public static final int PVP_SPEC_ORB = 8121;
     public static final int TAB_QUEST_LIST_SUBTAB_INDEX = 8168;
     public static final int TOGGLE_BANK_DEPOSIT_INVENTORY = 8352;
     public static final int TAB_SETTINGS_SUBTAB_INDEX = 9683;
