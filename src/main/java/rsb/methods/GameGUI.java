@@ -27,7 +27,7 @@ public class GameGUI extends MethodProvider {
 			return switch (layout) {
 				case FIXED_CLASSIC -> methods.client.getWidget(
 						WidgetIndices.FixedClassicViewport.GROUP_INDEX,
-						WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER);
+						WidgetIndices.FixedClassicViewport.MINIMAP_COMPASS_SPRITE);
 				case RESIZABLE_CLASSIC -> methods.client.getWidget(
 						WidgetIndices.ResizableClassicViewport.GROUP_INDEX,
 						WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE);
@@ -84,7 +84,7 @@ public class GameGUI extends MethodProvider {
 	public ViewportLayout getViewportLayout() {
 		Widget minimapOnFixedClassic = methods.client.getWidget(
 				WidgetIndices.FixedClassicViewport.GROUP_INDEX,
-				WidgetIndices.FixedClassicViewport.COMPASS_DYNAMIC_CONTAINER);
+				WidgetIndices.FixedClassicViewport.MINIMAP_COMPASS_SPRITE);
 		Widget minimapOnResizableClassic = methods.client.getWidget(
 				WidgetIndices.ResizableClassicViewport.GROUP_INDEX,
 				WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE);

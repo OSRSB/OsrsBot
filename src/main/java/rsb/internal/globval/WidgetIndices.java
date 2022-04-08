@@ -1571,7 +1571,13 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_PARENT_CONTAINER = 14;
         public static final int TOP_BAR_PARENT_CONTAINER = 15;
         public static final int ROOT_INTERFACE_CONTAINER = 16;
-        public static final int COMPASS_DYNAMIC_CONTAINER = 23; // TODO: get sprite
+        public static final int MINIMAP_BOTTOM_SPRITE = 17; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_LEFT_SPRITE = 18; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_RIGHT_SPRITE = 19; // Note: extra sprite which obscure viewport on classic layout
+        public static final int MINIMAP_COMPASS_SPRITE = 20;
+        public static final int MINIMAP_DRAW_AREA_SPRITE = 21;
+        public static final int MINIMAP_AREA_SPRITE = 22;
+        public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 23;
         public static final int MINIMAP_ORBS_CONTAINER = 24;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;
