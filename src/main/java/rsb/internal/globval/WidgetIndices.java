@@ -2,6 +2,49 @@ package rsb.internal.globval;
 
 public class WidgetIndices {
     /**
+     * Describes silver crafting window widgets
+     * Last reviewed: 7/4/2022 0:21 am UTC+1
+     */
+    public static class SilverCraftingWindow {
+        public static final int GROUP_INDEX = 6;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 frame border/corners sprites, 11 close button sprite
+        public static final int VERTICAL_SEPARATOR_LINE_SPRITE = 2;
+        public static final int HORIZONTAL_SEPARATOR_LINE_SPRITE = 3;
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int LEFT_SIDE_PARENT_CONTAINER = 5;
+        public static final int FIRST_ROW_PARENT_CONTAINER = 6;
+        public static final int OPAL_RING_DYNAMIC_CONTAINER = 7; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_RING_DYNAMIC_CONTAINER = 8; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_RING_DYNAMIC_CONTAINER = 9; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SECOND_ROW_PARENT_CONTAINER = 10;
+        public static final int OPAL_NECKLACE_DYNAMIC_CONTAINER = 11; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_NECKLACE_DYNAMIC_CONTAINER = 12; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_NECKLACE_DYNAMIC_CONTAINER = 13; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int THIRD_ROW_PARENT_CONTAINER = 14;
+        public static final int OPAL_AMULET_DYNAMIC_CONTAINER = 15; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_AMULET_DYNAMIC_CONTAINER = 16; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_AMULET_DYNAMIC_CONTAINER = 17; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int FOURTH_ROW_PARENT_CONTAINER = 18;
+        public static final int OPAL_BRACELET_DYNAMIC_CONTAINER = 19; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int JADE_BRACELET_DYNAMIC_CONTAINER = 20; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TOPAZ_BRACELET_DYNAMIC_CONTAINER = 21; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int RIGHT_SIDE_PARENT_CONTAINER = 22;
+        public static final int HOLY_SYMBOL_DYNAMIC_CONTAINER = 23; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int UNHOLY_SYMBOL_DYNAMIC_CONTAINER = 24; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVER_SICKLE_DYNAMIC_CONTAINER = 25; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int LIGHTING_ROD_DYNAMIC_CONTAINER = 26; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVER_CROSSBOW_BOLTS_DYNAMIC_CONTAINER = 27; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int TIARA_DYNAMIC_CONTAINER = 28; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int SILVTHRILL_ROD_DYNAMIC_CONTAINER = 29; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int DEMONIC_SIGIL_DYNAMIC_CONTAINER = 30; // 0 item sprite, 1 item name label, 2 unknown label
+        public static final int BUTTONS_PARENT_CONTAINER = 31;
+        public static final int BUTTON_1_DYNAMIC_CONTAINER = 32; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_X_DYNAMIC_CONTAINER = 35; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+        public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 36; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes chat channel widgets
      * Last reviewed: 10/3/2022 0:09 am UTC+1
      */
