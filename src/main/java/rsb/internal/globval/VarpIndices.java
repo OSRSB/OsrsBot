@@ -131,6 +131,11 @@ public class VarpIndices {
      * Note: 0 = not started, 1 = started, 3 = finished
      */
     public static final int QUEST_VAMPYRE_SLAYER = 178;
+    /**
+     * Permitted values: 0 - 21
+     * Note: 0 = not started, 1 = started, 21 = finished
+     */
+    public static final int QUEST_SHEEP_SHEARER = 179;
     public static final int SPLIT_PRIVATE_CHAT = 287;
     /**
      * Permitted values: 0 - 100
