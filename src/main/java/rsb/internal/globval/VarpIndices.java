@@ -126,6 +126,11 @@ public class VarpIndices {
      * Note: 0 = disabled, 1 = enabled
      */
     public static final int TOGGLE_RUN = 173;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 3 = finished
+     */
+    public static final int QUEST_VAMPYRE_SLAYER = 178;
     public static final int SPLIT_PRIVATE_CHAT = 287;
     /**
      * Permitted values: 0 - 100
