@@ -94,6 +94,11 @@ public class VarpIndices {
      */
     public static final int QUEST_ROMEO_AND_JULIET = 144;
     /**
+     * Permitted values: 0 - 2
+     * Note: 0 = not started, 1 = started, 2 = finished
+     */
+    public static final int QUEST_IMP_CATCHER = 160;
+    /**
      * Permitted values: 0 - 100
      * Note: 0 = minBrightness, 100 = maxBrightness
      */
