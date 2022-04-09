@@ -73,7 +73,7 @@ public class WidgetIndices {
 
     /**
      * Describes bank widgets
-     * Last reviewed: 2/3/2022 1:57 am UTC+1
+     * Last reviewed: 7/4/2022 1:57 am UTC+1
      */
     public static class Bank {
         public static final int GROUP_INDEX = 12;
@@ -124,12 +124,73 @@ public class WidgetIndices {
         public static final int BUTTON_DEPOSIT_WORN_ITEMS_SPRITE = 44;
         public static final int BUTTON_DEPOSIT_WORN_ITEMS_ICON_SPRITE = 45;
         public static final int INCINERATOR_DYNAMIC_CONTAINER = 46;
-        // 47-48
-        public static final int SETTINGS_CONTAINER = 49;
-        // 50 - 111
+        public static final int SETTINGS_PARENT_CONTAINER = 49;
+        public static final int SETTINGS_TAB_DISPLAY_DYNAMIC_CONTAINER = 50;
+        public static final int SETTINGS_INVENTORY_ITEM_OPTIONS_DYNAMIC_CONTAINER = 51; // 0 checkbox sprite, 1 text label
+        public static final int SETTINGS_BANK_TUTORIAL_BUTTON_DYNAMIC_CONTAINER = 52; // 0 checkbox sprite, 1 text label
+        public static final int SETTINGS_INCINERATOR_DYNAMIC_CONTAINER = 53;
+        public static final int SETTINGS_DEPOSIT_WORN_ITEMS_BUTTON_DYNAMIC_CONTAINER = 54;
+        public static final int SETTINGS_DEPOSIT_INVENTORY_ITEMS_BUTTON_DYNAMIC_CONTAINER = 55;
+        public static final int SETTINGS_BUTTON_RELEASE_ALL_PLACEHOLDERS_DYNAMIC_CONTAINER = 56;
+        public static final int SETTINGS_BANK_FILLERS_DYNAMIC_CONTAINER = 57;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_1_SPRITE = 58;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_1_LABEL = 59;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_10_SPRITE = 60;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_10_LABEL = 61;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_50_SPRITE = 62;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_50_LABEL = 63;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_X_SPRITE = 64;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_X_LABEL = 65;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_ALL_SPRITE = 66;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_ALL_LABEL = 67;
+        public static final int SETTINGS_BANK_FILLERS_BUTTON_FILL_DYNAMIC_CONTAINER = 68; //0 main sprite, 1 left sprite, 2 right sprite, 3 text label
+        public static final int WORN_EQUIPMENT_CONTAINER = 69;
+        public static final int WORN_EQUIPMENT_CHARACTER_MODEL = 70;
+        public static final int WORN_EQUIPMENT_MAIN_VERTICAL_LINE_SPRITE = 71;
+        public static final int WORN_EQUIPMENT_LEFT_VERTICAL_LINE_SPRITE = 72;
+        public static final int WORN_EQUIPMENT_RIGHT_VERTICAL_LINE_SPRITE = 73;
+        public static final int WORN_EQUIPMENT_MAIN_HORIZONTAL_LINE_SPRITE = 74;
+        public static final int WORN_EQUIPMENT_TOP_HORIZONTAL_LINE_SPRITE = 75;
+        public static final int WORN_EQUIPMENT_HEAD_DYNAMIC_CONTAINER = 76;
+        public static final int WORN_EQUIPMENT_CAPE_DYNAMIC_CONTAINER = 77;
+        public static final int WORN_EQUIPMENT_AMULET_DYNAMIC_CONTAINER = 78;
+        public static final int WORN_EQUIPMENT_WEAPON_DYNAMIC_CONTAINER = 79;
+        public static final int WORN_EQUIPMENT_CHEST_DYNAMIC_CONTAINER = 80;
+        public static final int WORN_EQUIPMENT_SHIELD_DYNAMIC_CONTAINER = 81;
+        public static final int WORN_EQUIPMENT_LEGS_DYNAMIC_CONTAINER = 82;
+        public static final int WORN_EQUIPMENT_GLOVES_DYNAMIC_CONTAINER = 83;
+        public static final int WORN_EQUIPMENT_SHOES_DYNAMIC_CONTAINER = 84;
+        public static final int WORN_EQUIPMENT_RING_DYNAMIC_CONTAINER = 85;
+        public static final int WORN_EQUIPMENT_ARROWS_DYNAMIC_CONTAINER = 86;
+        public static final int WORN_EQUIPMENT_TEXT_CONTAINER = 87;
+        public static final int WORN_EQUIPMENT_UNKNOWN_LABEL = 88;
+        public static final int WORN_EQUIPMENT_ATTACK_BONUS_TITLE_LABEL = 89;
+        public static final int WORN_EQUIPMENT_ATTACK_STAB_BONUS_LABEL = 90;
+        public static final int WORN_EQUIPMENT_ATTACK_SLASH_BONUS_LABEL = 91;
+        public static final int WORN_EQUIPMENT_ATTACK_CRUSH_BONUS_LABEL = 92;
+        public static final int WORN_EQUIPMENT_ATTACK_MAGIC_BONUS_LABEL = 93;
+        public static final int WORN_EQUIPMENT_ATTACK_RANGE_BONUS_LABEL = 94;
+        public static final int WORN_EQUIPMENT_DEFENCE_BONUS_TITLE_LABEL = 95;
+        public static final int WORN_EQUIPMENT_DEFENCE_STAB_BONUS_LABEL = 96;
+        public static final int WORN_EQUIPMENT_DEFENCE_SLASH_BONUS_LABEL = 97;
+        public static final int WORN_EQUIPMENT_DEFENCE_CRUSH_BONUS_LABEL = 98;
+        public static final int WORN_EQUIPMENT_DEFENCE_MAGIC_BONUS_LABEL = 99;
+        public static final int WORN_EQUIPMENT_DEFENCE_RANGE_BONUS_LABEL = 100;
+        public static final int WORN_EQUIPMENT_OTHER_BONUSES_TITLE_LABEL = 101;
+        public static final int WORN_EQUIPMENT_MELEE_STRENGHT_BONUS_LABEL = 102;
+        public static final int WORN_EQUIPMENT_RANGED_STRENGHT_BONUS_LABEL = 103;
+        public static final int WORN_EQUIPMENT_MAGIC_DAMAGE_BONUS_LABEL = 104;
+        public static final int WORN_EQUIPMENT_PRAYER_BONUS_LABEL = 105;
+        public static final int WORN_EQUIPMENT_TARGET_SPECIFIC_TITLE_LABEL = 106;
+        public static final int WORN_EQUIPMENT_UNDEAD_TITLE_LABEL = 107;
+        public static final int WORN_EQUIPMENT_SLAYER_TITLE_LABEL = 108;
+        // 109
+        public static final int WORN_EQUIPMENT_WEIGHT_ICON_SPRITE = 110;
+        public static final int WORN_EQUIPMENT_WEIGHT_TEXT_LABEL = 111;
         public static final int BUTTON_SETTINGS_DYNAMIC_CONTAINER = 112; // Contains 0-1 sprites
-        public static final int BUTTON_EQUIPMENT_DYNAMIC_CONTAINER = 113; // Contains 0-1 sprites
-        // 114 - 115
+        public static final int BUTTON_WORN_EQUIPMENT_DYNAMIC_CONTAINER = 113; // Contains 0-1 sprites
+        // 114
+        public static final int UNKNOWN_CONTAINER = 115;
     }
 
     /**
@@ -1397,6 +1458,27 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes bank widgets
+     * Last reviewed: 8/4/2022 10:42 pm UTC+1
+     */
+    public static class GrandExchangeTradeHistory {
+        public static final int GROUP_INDEX = 383;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; //0 entire sprite, 1 title label, 2-10 edges/corners sprites, close button sprite
+        public static final int BUTTON_EXCHANGE_DYNAMIC_CONTAINER = 2;// 0-8 sprites, 1 text label
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 2;// 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 2; // contains entries in history list
+        // entry structure:
+        // 0 entire row sprite, contains name of item
+        // 1 backpack icon sprite
+        // 2 completed offer type label
+        // 3 item name label
+        // 4 item sprite
+        // 5 price text label
+        // this repeats in ascending order so next row sprite is 6
+    }
+
+    /**
      * Describes worn equipment tab widgets
      * Last reviewed: 1/3/2022 1:21 am UTC+1
      */
@@ -1451,16 +1533,16 @@ public class WidgetIndices {
 
     /**
      * Describes collection box widgets
-     * Last reviewed: 18/3/2022 3:10 am UTC+1
+     * Last reviewed: 7/4/2022 11:02 pm UTC+1
      */
     public static class CollectionBox {
         public static final int GROUP_INDEX = 402;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
-        public static final int DYNAMIC_CONTAINER = 2; // stone borders, title, close
-        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // sprite, text
-        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // sprite, text
-        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; // sprites, layers, steel border 0-20
+        public static final int DYNAMIC_CONTAINER = 2; //0 entire sprite, 1 title label, 2-10 borders/edges sprites, 11 close button sprite
+        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // 0 sprite, 1 text label
+        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // 0 sprite, 1 text label
+        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; //0 entire sprite, 1 item sprite, 2 extra coins sprite, 5-12 edges/corners sprite, 13 status box, 14 status opacity layer, 16 status top shadow layer, 17 status left side shadow layer, 18 bag icon layer, 20 item minimized icon layer
         public static final int SLOT_SECOND_DYNAMIC_CONTAINER = 6; // sprites, layers, steel border 0-20
         public static final int SLOT_THIRD_DYNAMIC_CONTAINER = 7; // sprites, layers, steel border 0-20
         public static final int SLOT_FOURTH_DYNAMIC_CONTAINER = 8; // sprites, layers, steel border 0-20
@@ -1572,6 +1654,18 @@ public class WidgetIndices {
         public static final int BUTTON_1_DYNAMIC_CONTAINER = 56; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
         public static final int BUTTON_X_DYNAMIC_CONTAINER = 59; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
         public static final int BUTTON_ALL_DYNAMIC_CONTAINER = 60; // 0 entire sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
+     * Describes grand exchange widgets
+     * Last reviewed: 8/4/2022 0:14 am UTC+1
+     */
+    public static class ItemSetsWindow {
+        public static final int GROUP_INDEX = 451;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 frame sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 2; // 0-104 set sprites
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 3; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
     }
 
     /**
