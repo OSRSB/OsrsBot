@@ -1490,16 +1490,16 @@ public class WidgetIndices {
 
     /**
      * Describes collection box widgets
-     * Last reviewed: 18/3/2022 3:10 am UTC+1
+     * Last reviewed: 7/4/2022 11:02 pm UTC+1
      */
     public static class CollectionBox {
         public static final int GROUP_INDEX = 402;
         public static final int PARENT_CONTAINER = 0;
         public static final int CONTAINER = 1;
-        public static final int DYNAMIC_CONTAINER = 2; // stone borders, title, close
-        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // sprite, text
-        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // sprite, text
-        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; // sprites, layers, steel border 0-20
+        public static final int DYNAMIC_CONTAINER = 2; //0 entire sprite, 1 title label, 2-10 borders/edges sprites, 11 close button sprite
+        public static final int BUTTON_INVENTORY_DYNAMIC_CONTAINER = 3; // 0 sprite, 1 text label
+        public static final int BUTTON_BANK_DYNAMIC_CONTAINER = 4; // 0 sprite, 1 text label
+        public static final int SLOT_FIRST_DYNAMIC_CONTAINER = 5; //0 entire sprite, 1 item sprite, 2 extra coins sprite, 5-12 edges/corners sprite, 13 status box, 14 status opacity layer, 16 status top shadow layer, 17 status left side shadow layer, 18 bag icon layer, 20 item minimized icon layer
         public static final int SLOT_SECOND_DYNAMIC_CONTAINER = 6; // sprites, layers, steel border 0-20
         public static final int SLOT_THIRD_DYNAMIC_CONTAINER = 7; // sprites, layers, steel border 0-20
         public static final int SLOT_FOURTH_DYNAMIC_CONTAINER = 8; // sprites, layers, steel border 0-20
