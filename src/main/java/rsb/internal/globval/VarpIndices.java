@@ -89,6 +89,16 @@ public class VarpIndices {
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 115;
     public static final int TYPE_SHOP = 118;
     /**
+     * Permitted values: 0,10,20,30,40,50,60,100
+     * Note: 0 = not started, 10 = started, 100 = finished
+     */
+    public static final int QUEST_ROMEO_AND_JULIET = 144;
+    /**
+     * Permitted values: 0 - 2
+     * Note: 0 = not started, 1 = started, 2 = finished
+     */
+    public static final int QUEST_IMP_CATCHER = 160;
+    /**
      * Permitted values: 0 - 100
      * Note: 0 = minBrightness, 100 = maxBrightness
      */
@@ -116,6 +126,16 @@ public class VarpIndices {
      * Note: 0 = disabled, 1 = enabled
      */
     public static final int TOGGLE_RUN = 173;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 3 = finished
+     */
+    public static final int QUEST_VAMPYRE_SLAYER = 178;
+    /**
+     * Permitted values: 0 - 21
+     * Note: 0 = not started, 1 = started, 21 = finished
+     */
+    public static final int QUEST_SHEEP_SHEARER = 179;
     public static final int SPLIT_PRIVATE_CHAT = 287;
     /**
      * Permitted values: 0 - 100
