@@ -1560,6 +1560,18 @@ public class WidgetIndices {
 
     /**
      * Describes grand exchange widgets
+     * Last reviewed: 8/4/2022 0:14 am UTC+1
+     */
+    public static class ItemSetsWindow {
+        public static final int GROUP_INDEX = 451;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 frame sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 2; // 0-104 set sprites
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 3; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
+    }
+
+    /**
+     * Describes grand exchange widgets
      * Last reviewed: 3/3/2022 0:14 am UTC+1
      */
     public static class GrandExchange {
