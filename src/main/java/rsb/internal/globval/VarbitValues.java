@@ -239,6 +239,9 @@ public enum VarbitValues {
     // Magic Filter Lackign Requirements
     MAGIC_FILTER_LACKING_REQUIREMENTS_SPELLS_SHOWN(0),
     MAGIC_FILTER_LACKING_REQUIREMENTS_SPELLS_HIDDEN(1),
+    // Hide roofs
+    ROOFS_SHOWN(0),
+    ROOFS_HIDDEN(1),
     // Tab Chat Channel Subtabs
     TAB_CHAT_CHANNEL_SUBTAB_CHAT_CHANNEL(0),
     TAB_CHAT_CHANNEL_SUBTAB_YOUR_CLAN(1),

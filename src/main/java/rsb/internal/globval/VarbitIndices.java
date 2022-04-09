@@ -95,5 +95,6 @@ public class VarbitIndices {
     public static final int BANK_TUTORIAL_PROGRESS = 10308;
     public static final int TOGGLE_BANK_TUTORIAL = 10336;
     public static final int TOGGLE_MAGIC_FILTER_LACKING_REQUIREMENTS_SPELLS = 12137;
+    public static final int TOGGLE_ROOFS = 12378;
     public static final int TAB_CHAT_CHANNEL_SUBTAB_INDEX = 13071;
 }
