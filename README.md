@@ -12,6 +12,19 @@
 
 ___
 
+## ⚠️ This project is WIP ⚠️
+
+This project is not ready for end-users who assume it will work out of box.
+* These is currently no official end-user support.
+* These is currently no support for Macintosh and won't be in near future, stop using such junk!
+* Please don't DM developers asking for help, neither spam discord channels or you may get banned!
+* If you ask nicely and with **meaningfull details** about your problem you may get some help.
+
+As such it is required that every user which wants to run this bot has at least minimal knowledge of:
+* How to use IntelliJ IDEA.
+* How to work with Gradle tasks (edit tasks, comment lines out, update references etc.). 
+* How to adjust [Script-Template](https://github.com/OSRSB/script-template) to reflect possible breaking changes in API.
+
 ## Community
 * [Forums](https://osrsbot.org/) - Ask questions, find guides, make requests
 * [Discord](https://discord.gg/CGBXNrHREP)
