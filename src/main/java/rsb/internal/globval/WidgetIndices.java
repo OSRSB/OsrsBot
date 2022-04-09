@@ -1415,6 +1415,27 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes bank widgets
+     * Last reviewed: 8/4/2022 10:42 pm UTC+1
+     */
+    public static class GrandExchangeTradeHistory {
+        public static final int GROUP_INDEX = 383;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; //0 entire sprite, 1 title label, 2-10 edges/corners sprites, close button sprite
+        public static final int BUTTON_EXCHANGE_DYNAMIC_CONTAINER = 2;// 0-8 sprites, 1 text label
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 2;// 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
+        public static final int INNER_FRAME_DYNAMIC_CONTAINER = 2; // contains entries in history list
+        // entry structure:
+        // 0 entire row sprite, contains name of item
+        // 1 backpack icon sprite
+        // 2 completed offer type label
+        // 3 item name label
+        // 4 item sprite
+        // 5 price text label
+        // this repeats in ascending order so next row sprite is 6
+    }
+
+    /**
      * Describes worn equipment tab widgets
      * Last reviewed: 1/3/2022 1:21 am UTC+1
      */
