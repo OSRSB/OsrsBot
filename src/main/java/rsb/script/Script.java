@@ -22,7 +22,7 @@ import java.util.Set;
 @Slf4j
 public abstract class Script extends Methods implements EventListener, Runnable {
 
-	Set<Script> delegates = new HashSet<Script>();
+	Set<Script> delegates = new HashSet<>();
 	public MethodContext ctx;
 
 	private volatile boolean running = false;
