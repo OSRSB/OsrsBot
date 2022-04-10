@@ -84,8 +84,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	public ScriptSelector(RuneLite bot) {
 		super(Frame.getFrames()[0], "Script Selector", false);
 		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
+		this.scripts = new ArrayList<>();
+		this.tmpFileNames = new ArrayList<>();
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
@@ -97,8 +97,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	public ScriptSelector(Frame frame, RuneLite bot) {
 		super(frame, "Script Selector", true);
 		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
+		this.scripts = new ArrayList<>();
+		this.tmpFileNames = new ArrayList<>();
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
@@ -445,7 +445,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 		public ScriptTableModel(List<ScriptDefinition> scripts) {
 			this.scripts = scripts;
-			this.matches = new ArrayList<ScriptDefinition>();
+			this.matches = new ArrayList<>();
 		}
 
 		public void search(String substr) {
