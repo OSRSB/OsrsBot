@@ -6,7 +6,6 @@ import rsb.event.listener.PaintListener;
 import rsb.methods.MethodContext;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
