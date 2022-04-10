@@ -234,7 +234,7 @@ public class GlobalConfiguration {
 		} else {
 			CURRENT_OS = OperatingSystem.UNKNOWN;
 		}
-		final ArrayList<String> dirs = new ArrayList<String>();
+		final ArrayList<String> dirs = new ArrayList<>();
 		//This is where folders and files are generated on start-up
 		dirs.add(Paths.getOsrsBotDirectory());
 		dirs.add(Paths.getLogsDirectory());
