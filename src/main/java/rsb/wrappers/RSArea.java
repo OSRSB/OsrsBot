@@ -179,7 +179,7 @@ public class RSArea {
 	 * @return The <b>RSTiles</b> the <b>RSArea</b> contains.
 	 */
 	public RSTile[] getTileArray() {
-		ArrayList<RSTile> list = new ArrayList<RSTile>();
+		ArrayList<RSTile> list = new ArrayList<>();
 		for (int x = this.getX(); x <= (this.getX() + this.getWidth()); x++) {
 			for (int y = this.getY(); y <= (this.getY() + this.getHeight()); y++) {
 				if (this.area.contains(new Point(x, y))) {
