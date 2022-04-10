@@ -19,7 +19,7 @@ public class DrawObjects implements PaintListener {
 		ctx = bot.getMethodContext();
 	}
 
-	private static final HashMap<RSObject.Type, Color> color_map = new HashMap<RSObject.Type, Color>();
+	private static final HashMap<RSObject.Type, Color> color_map = new HashMap<>();
 
 	static {
 		color_map.put(RSObject.Type.GROUND, Color.BLACK);
