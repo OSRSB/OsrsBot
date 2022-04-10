@@ -129,7 +129,7 @@ public class Prayer extends MethodProvider {
 	 *         that represent selected prayers.
 	 */
 	public RSWidget[] getSelectedPrayers() {
-		ArrayList<RSWidget> selected = new ArrayList<RSWidget>();
+		ArrayList<RSWidget> selected = new ArrayList<>();
 		RSWidget[] prayers = methods.interfaces.getComponent(GlobalWidgetInfo.PRAYER_STANDARD_BOOK).getComponents();
 		for (RSWidget prayer : prayers) {
 			if (prayer.getDynamicComponent(WidgetIndices.DynamicComponents.PrayerWidget.ICON_SPRITE).isSelfVisible()) {
