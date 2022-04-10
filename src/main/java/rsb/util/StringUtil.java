@@ -33,18 +33,18 @@ public class StringUtil {
 		for (i = 0; i < l; i++) {
 			n += s[i].length() + x;
 		}
-		final StringBuffer buf = new StringBuffer(n - x);
+		final StringBuilder strBuilder = new StringBuilder(n - x);
 		i = 0;
 		boolean c = true;
 		while (c) {
-			buf.append(s[i]);
+			strBuilder.append(s[i]);
 			i++;
 			c = i < l;
 			if (c) {
-				buf.append(d);
+				strBuilder.append(d);
 			}
 		}
-		return buf.toString();
+		return strBuilder.toString();
 	}
 
 	/**
