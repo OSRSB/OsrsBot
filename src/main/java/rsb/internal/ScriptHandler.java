@@ -10,11 +10,11 @@ import java.util.*;
 
 public class ScriptHandler {
 
-	private final ArrayList<rsb.script.Random> randoms = new ArrayList<rsb.script.Random>();
-	private final HashMap<Integer, Script> scripts = new HashMap<Integer, Script>();
-	private final HashMap<Integer, Thread> scriptThreads = new HashMap<Integer, Thread>();
+	private final ArrayList<rsb.script.Random> randoms = new ArrayList<>();
+	private final HashMap<Integer, Script> scripts = new HashMap<>();
+	private final HashMap<Integer, Thread> scriptThreads = new HashMap<>();
 
-	private final Set<ScriptListener> listeners = Collections.synchronizedSet(new HashSet<ScriptListener>());
+	private final Set<ScriptListener> listeners = Collections.synchronizedSet(new HashSet<>());
 
 	private final RuneLite bot;
 

@@ -235,7 +235,7 @@ public class MouseHandler {
 	 */
 	public static Point[] generateSpline(final Point[] controls) {
 		final double degree = controls.length - 1;
-		final java.util.Vector<Point> spline = new java.util.Vector<Point>();
+		final java.util.Vector<Point> spline = new java.util.Vector<>();
 		boolean lastFlag = false;
 		for (double theta = 0; theta <= 1; theta += 0.01) {
 			double x = 0;

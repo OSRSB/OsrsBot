@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class DrawModel implements PaintListener, MouseListener {
 
-	private static final HashMap<RSObject.Type, Color> color_map = new HashMap<RSObject.Type, Color>();
+	private static final HashMap<RSObject.Type, Color> color_map = new HashMap<>();
 
 	static {
 		color_map.put(RSObject.Type.GROUND, Color.BLACK);

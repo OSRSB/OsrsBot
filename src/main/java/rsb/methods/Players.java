@@ -19,7 +19,7 @@ public class Players extends MethodProvider {
 	/**
 	 * A filter that accepts all matches.
 	 */
-	public static final Filter<RSPlayer> ALL_FILTER = new Filter<RSPlayer>() {
+	public static final Filter<RSPlayer> ALL_FILTER = new Filter<>() {
 		public boolean test(RSPlayer player) {
 			return true;
 		}
@@ -51,7 +51,7 @@ public class Players extends MethodProvider {
 	 */
 	public RSPlayer[] getAll(final Filter<RSPlayer> filter) {
 		Player[] playerArray = methods.client.getCachedPlayers();
-		Set<RSPlayer> players = new HashSet<RSPlayer>();
+		Set<RSPlayer> players = new HashSet<>();
 		for (Player player : playerArray) {
 			if (player != null) {
 				RSPlayer rsPlayer = new RSPlayer(methods, player);
@@ -102,7 +102,7 @@ public class Players extends MethodProvider {
 	 *         the current region.
 	 */
 	public RSPlayer getNearest(final String name) {
-		return getNearest(new Filter<RSPlayer>() {
+		return getNearest(new Filter<>() {
 			public boolean test(RSPlayer player) {
 				return player.getName().equals(name);
 			}
@@ -120,7 +120,7 @@ public class Players extends MethodProvider {
 	 *         players in the current region.
 	 */
 	public RSPlayer getNearest(final int level) {
-		return getNearest(new Filter<RSPlayer>() {
+		return getNearest(new Filter<>() {
 			public boolean test(RSPlayer player) {
 				return player.getCombatLevel() == level;
 			}

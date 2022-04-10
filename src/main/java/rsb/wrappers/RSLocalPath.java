@@ -170,8 +170,8 @@ public class RSLocalPath extends RSPath {
 		}
 
 		// structs
-		HashSet<Node> open = new HashSet<Node>();
-		HashSet<Node> closed = new HashSet<Node>();
+		HashSet<Node> open = new HashSet<>();
+		HashSet<Node> closed = new HashSet<>();
 		Node curr = new Node(curr_x, curr_y);
 		Node dest = new Node(dest_x, dest_y);
 
@@ -264,7 +264,7 @@ public class RSLocalPath extends RSPath {
 	}
 
 	private RSTile[] path(Node end, RSTile baseTile) {
-		LinkedList<RSTile> path = new LinkedList<RSTile>();
+		LinkedList<RSTile> path = new LinkedList<>();
 		Node p = end;
 		while (p != null) {
 			path.addFirst(p.toRSTile(baseTile));
@@ -274,7 +274,7 @@ public class RSLocalPath extends RSPath {
 	}
 
 	private List<Node> successors(Node t) {
-		LinkedList<Node> tiles = new LinkedList<Node>();
+		LinkedList<Node> tiles = new LinkedList<>();
 		int x = t.x, y = t.y;
 		int f_x = x - offX, f_y = y - offY;
 		int here = flags[f_x][f_y];

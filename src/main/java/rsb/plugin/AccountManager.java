@@ -284,11 +284,10 @@ public class AccountManager extends JDialog implements ActionListener {
 	 */
 	public static String[] getAccountNames() {
 		try {
-			List<String> theList = new ArrayList<String>();
+			List<String> theList = new ArrayList<>();
 			Collection<AccountStore.Account> accountCollection = AccountManager.accountStore.list();
 			for (AccountStore.Account anAccountCollection : accountCollection) {
-				AccountStore.Account account = anAccountCollection;
-				theList.add(account.getUsername());
+				theList.add(anAccountCollection.getUsername());
 			}
 			return theList.toArray(new String[theList.size()]);
 		} catch (Exception e) {

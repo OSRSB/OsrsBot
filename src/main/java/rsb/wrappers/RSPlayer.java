@@ -21,7 +21,7 @@ public class RSPlayer extends RSCharacter {
 
 	public RSPlayer(final MethodContext ctx, final Player p) {
 		super(ctx);
-		this.p = new SoftReference<Player>(p);
+		this.p = new SoftReference<>(p);
 	}
 
 

@@ -398,11 +398,9 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withRequiredArg()
                 .ofType(ClientUpdateCheckMode.class)
                 .defaultsTo(ClientUpdateCheckMode.AUTO)
-                .withValuesConvertedBy(new EnumConverter<ClientUpdateCheckMode>(ClientUpdateCheckMode.class)
-                {
+                .withValuesConvertedBy(new EnumConverter<>(ClientUpdateCheckMode.class) {
                     @Override
-                    public ClientUpdateCheckMode convert(String v)
-                    {
+                    public ClientUpdateCheckMode convert(String v) {
                         return super.convert(v.toUpperCase());
                     }
                 });

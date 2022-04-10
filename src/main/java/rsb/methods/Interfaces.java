@@ -22,7 +22,7 @@ public class Interfaces extends MethodProvider {
 	// client's cache.
 	private RSWidget[] mainCache = new RSWidget[0];
 	// If it doesn't fit in the above cache.
-	private final Map<Integer, RSWidget> sparseMap = new HashMap<Integer, RSWidget>();
+	private final Map<Integer, RSWidget> sparseMap = new HashMap<>();
 
 
 	/**
