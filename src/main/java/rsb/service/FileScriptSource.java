@@ -10,17 +10,15 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Logger;
 
 /**
  * @author GigiaJ
  */
 @Slf4j
 public class FileScriptSource implements ScriptSource {
-
-	//private final Logger log = Logger.getLogger(getClass().getSimpleName());
 
 	private File file;
 
@@ -29,31 +27,31 @@ public class FileScriptSource implements ScriptSource {
 	}
 
 	public List<ScriptDefinition> list() {
-		LinkedList<ScriptDefinition> defs = new LinkedList<ScriptDefinition>();
+		LinkedList<ScriptDefinition> scriptDefinitions = new LinkedList<>();
 		if (file != null) {
 			if (file.isDirectory()) {
 				try {
-					ClassLoader ldr = new ScriptClassLoader(file.toURI().toURL());
-					for (File f : file.listFiles()) {
-						if (isJar(f)) {
-							load(new ScriptClassLoader(getJarUrl(f)), defs, new JarFile(f));
+					ClassLoader scriptLoader = new ScriptClassLoader(file.toURI().toURL());
+					for (File file : Objects.requireNonNull(file.listFiles())) {
+						if (isJar(file)) {
+							load(new ScriptClassLoader(getJarUrl(file)), scriptDefinitions, new JarFile(file));
 						} else {
-							load(ldr, defs, f, "");
+							load(scriptLoader, scriptDefinitions, file, "");
 						}
 					}
-				} catch (IOException ignored) {
-					log.debug("Failed to list files", ignored);
+				} catch (IOException ioEx) {
+					log.debug("Failed to list files", ioEx);
 				}
 			} else if (isJar(file)) {
 				try {
-					ClassLoader ldr = new ScriptClassLoader(getJarUrl(file));
-					load(ldr, defs, new JarFile(file));
-				} catch (IOException ignored) {
-					log.debug("Failed to list files", ignored);
+					ClassLoader scriptLoader = new ScriptClassLoader(getJarUrl(file));
+					load(scriptLoader, scriptDefinitions, new JarFile(file));
+				} catch (IOException ioEx) {
+					log.debug("Failed to list files", ioEx);
 				}
 			}
 		}
-		return defs;
+		return scriptDefinitions;
 	}
 
 
