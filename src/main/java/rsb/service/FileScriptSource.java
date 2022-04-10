@@ -100,11 +100,11 @@ public class FileScriptSource implements ScriptSource {
 		Class<?> clazz;
 		try {
 			clazz = loader.loadClass(name);
-		} catch (Exception e) {
-			log.warn(name + " is not a valid script and was ignored!", e);
+		} catch (Exception ex) {
+			log.warn("Exception occurred " + name + " is not a valid script and was ignored!", ex);
 			return;
-		} catch (VerifyError e) {
-			log.warn(name + " is not a valid script and was ignored!", e);
+		} catch (VerifyError verEx) {
+			log.warn("VerifyError exception occurred " + name + " is not a valid script and was ignored!", verEx);
 			return;
 		}
 		if (clazz.isAnnotationPresent(ScriptManifest.class)) {
