@@ -26,7 +26,7 @@ public class EventManager implements Runnable {
 	private final Logger log = Logger.getLogger(EventManager.class.getName());
 
 	private final EventMulticaster multicaster = new EventMulticaster();
-	private final Map<Integer, EventObject> queue = new HashMap<Integer, EventObject>();
+	private final Map<Integer, EventObject> queue = new HashMap<>();
 
 	private final Object threadLock = new Object();
 
