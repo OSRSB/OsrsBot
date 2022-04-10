@@ -6,7 +6,6 @@ import rsb.event.listener.PaintListener;
 import rsb.methods.MethodContext;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,9 +39,7 @@ public class DrawMouse implements PaintListener {
 				}
 			}
 			synchronized (lock) {
-				Iterator<Cross> clickIterator = clicks.listIterator();
-				while (clickIterator.hasNext()) {
-					Cross toDraw = clickIterator.next();
+				for (Cross toDraw : clicks) {
 					if (toDraw.handle()) {
 						drawPoint(toDraw.getLocation(), toDraw.getRot(), gg, toDraw.getAlpha());
 					} else {

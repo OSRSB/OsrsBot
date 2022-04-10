@@ -57,8 +57,8 @@ public class ChooseOption extends Menu {
     public boolean isOptionValid(String... options) {
         MenuEntry[] entries = getEntries();
         for (String option : options) {
-            for (int i = 0; i < entries.length; i++) {
-                if (entries[i].getOption().toLowerCase().contains(option)) {
+            for (MenuEntry entry : entries) {
+                if (entry.getOption().toLowerCase().contains(option)) {
                     return true;
                 }
             }
