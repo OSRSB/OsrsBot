@@ -40,9 +40,7 @@ public class DrawMouse implements PaintListener {
 				}
 			}
 			synchronized (lock) {
-				Iterator<Cross> clickIterator = clicks.listIterator();
-				while (clickIterator.hasNext()) {
-					Cross toDraw = clickIterator.next();
+				for (Cross toDraw : clicks) {
 					if (toDraw.handle()) {
 						drawPoint(toDraw.getLocation(), toDraw.getRot(), gg, toDraw.getAlpha());
 					} else {
