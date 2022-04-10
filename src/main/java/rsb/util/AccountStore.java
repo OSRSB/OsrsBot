@@ -29,7 +29,7 @@ public class AccountStore {
 
 		private final String username;
 		private String password;
-		private final Map<String, String> attributes = new TreeMap<String, String>();
+		private final Map<String, String> attributes = new TreeMap<>();
 
 		public Account(String username) {
 			this.username = username;
@@ -92,7 +92,7 @@ public class AccountStore {
 	private byte[] digest;
 	private final String[] protectedAttributes = {"pin"};
 
-	private final Map<String, Account> accounts = new TreeMap<String, Account>();
+	private final Map<String, Account> accounts = new TreeMap<>();
 
 	public AccountStore(File file) {
 		this.file = file;
