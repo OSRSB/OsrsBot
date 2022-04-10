@@ -481,11 +481,12 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         try
         {
+            final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
                     options.valueOf(
                             optionSpecs[Options.updatemode.getIndex()].ofType(ClientUpdateCheckMode.class)),
+                    runtimeConfigLoader,
                     (String) options.valueOf("jav_config"));
-            final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
 
             new Thread(() ->
             {
