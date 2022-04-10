@@ -32,7 +32,7 @@ public class RSModel extends MethodProvider {
 	 * @return The vertex point index based model filter.
 	 */
 	public static Filter<RSModel> newVertexFilter(final int[] vertex_a) {
-		return new Filter<RSModel>() {
+		return new Filter<>() {
 			public boolean test(RSModel m) {
 				return Arrays.equals(m.indices1, vertex_a);
 			}
