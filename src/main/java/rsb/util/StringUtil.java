@@ -17,7 +17,7 @@ import java.util.Map;
 public class StringUtil {
 
 	private static final String[] COLOURS_STR = new String[]{"red", "green", "cyan", "purple", "white"};
-	private static final Map<String, Color> COLOR_MAP = new HashMap<String, Color>();
+	private static final Map<String, Color> COLOR_MAP = new HashMap<>();
 
 	public static String join(final String[] s) {
 		final int l = s.length;
