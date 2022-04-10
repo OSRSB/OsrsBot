@@ -21,7 +21,7 @@ public class Objects extends MethodProvider {
     /**
      * A filter that accepts all matches.
      */
-    public static final Predicate<RSObject> ALL_FILTER = new Predicate<RSObject>() {
+    public static final Predicate<RSObject> ALL_FILTER = new Predicate<>() {
         public boolean test(RSObject npc) {
             return true;
         }
