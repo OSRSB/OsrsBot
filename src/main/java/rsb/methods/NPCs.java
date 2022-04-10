@@ -20,7 +20,7 @@ public class NPCs extends MethodProvider {
     /**
      * A filter that accepts all matches.
      */
-    public static final Predicate<RSNPC> ALL_FILTER = new Predicate<RSNPC>() {
+    public static final Predicate<RSNPC> ALL_FILTER = new Predicate<>() {
         @Override
         public boolean test(RSNPC npc) {
             return true;
@@ -45,7 +45,7 @@ public class NPCs extends MethodProvider {
      */
     public RSNPC[] getAll(final Predicate<RSNPC> filter) {
         NPC[] npcs = getNPCs();
-        Set<RSNPC> rsNPCs = new HashSet<RSNPC>();
+        Set<RSNPC> rsNPCs = new HashSet<>();
         for (NPC npc : npcs) {
             RSNPC rsnpc = new RSNPC(methods, npc);
             if (filter.test(rsnpc)) {
