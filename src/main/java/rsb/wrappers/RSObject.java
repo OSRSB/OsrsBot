@@ -20,7 +20,6 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
  * acts as a factory for the RSModel of the RSObject (refer to getModel for better explanation)
@@ -242,10 +241,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 			log.debug("Error", ignored);
 		}
 		return null;
-
-
 	}
-
 
 	/**
 	 * Determines whether this object is on the game screen.
@@ -407,7 +403,6 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		return obj;
 	}
 
-
 	/**
 	 * The type of game object
 	 * Game, Decorative, Ground, or Wall
@@ -448,6 +443,5 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 			}
 			return sum;
 		}
-
 	}
 }
