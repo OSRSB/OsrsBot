@@ -1435,6 +1435,29 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes last man standing stat info widget
+     * Last reviewed: 10/4/2022 0:42 am UTC+1
+     */
+    public static class LastManStandingStats {
+        public static final int GROUP_INDEX = 333;
+        public static final int VIEWPORT_CONTAINER = 0;
+        public static final int LMS_PARENT_CONTAINER = 1;
+        public static final int INFO_CONTAINER = 2;
+        public static final int INFO_BOX = 3;
+        public static final int INFO_INNER_BOX = 4;
+        public static final int INFO_RANK_TEXT_LABEL = 5;
+        public static final int INFO_CURRENT_RANK_LABEL = 6;
+        public static final int INFO_COFFER_TEXT_LABEL = 7;
+        public static final int INFO_CURRENT_DEPOSIT_LABEL = 8;
+        public static final int INFO_CASUAL_TEXT_LABEL = 9;
+        public static final int INFO_CURRENT_CASUAL_GAMES_LABEL = 10;
+        public static final int INFO_COMPETITIVE_TEXT_LABEL = 11;
+        public static final int INFO_CURRENT_COMPETITIVE_GAMES_LABEL = 12;
+        public static final int INFO_HIGH_STAKES_TEXT_LABEL = 13;
+        public static final int INFO_CURRENT_HIGH_STAKES_GAMES_LABEL = 14;
+    }
+
+    /**
      * Describe second trade screen widgets
      * Last reviewed: 5/3/2022 1:29 am UTC+1
      */
