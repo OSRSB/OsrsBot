@@ -1,14 +1,10 @@
 package rsb.internal;
 
-import com.github.joonasvali.naturalmouse.api.MouseInfoAccessor;
 import com.github.joonasvali.naturalmouse.api.MouseMotionFactory;
-import com.github.joonasvali.naturalmouse.api.SpeedManager;
 import com.github.joonasvali.naturalmouse.support.*;
 import com.github.joonasvali.naturalmouse.util.FactoryTemplates;
-import com.github.joonasvali.naturalmouse.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import rsb.internal.naturalmouse.RSBSystemCalls;
-import rsb.methods.Mouse;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,7 +14,6 @@ import java.util.Random;
  */
 @Slf4j
 public class MouseHandler {
-
 	/**
 	 * The default mouse speed. This is the delay in ms between actual mouse
 	 * moves. Lower is faster.
@@ -359,5 +354,4 @@ public class MouseHandler {
 			log.debug("Mouse move thread failed to join properly.", e);
 		}
 	}
-
 }
