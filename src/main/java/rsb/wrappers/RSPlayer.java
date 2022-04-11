@@ -1,16 +1,12 @@
 package rsb.wrappers;
 
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
+import net.runelite.api.Actor;
+import net.runelite.api.MenuEntry;
+import net.runelite.api.Player;
+import net.runelite.api.Point;
 import rsb.methods.MethodContext;
-import rsb.util.OutputObjectComparer;
 
 import java.lang.ref.SoftReference;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 
 /**
  * Represents a player.
@@ -23,7 +19,6 @@ public class RSPlayer extends RSCharacter {
 		super(ctx);
 		this.p = new SoftReference<>(p);
 	}
-
 
 	public Actor getAccessor() {
 		return p.get();
@@ -65,13 +60,11 @@ public class RSPlayer extends RSCharacter {
 		}
 		return -1;
 	}
-*/
+	*/
 	public boolean isIdle() {
-
 		return getAnimation() == -1 && !isInCombat();
 		//return !isMoving() && (getAnimation() == -1) && !isInCombat();
 	}
-
 
 	@Override
 	public boolean doAction(final String action) {
@@ -118,9 +111,7 @@ public class RSPlayer extends RSCharacter {
 		return "Player[" + getName() + "]" + super.toString();
 	}
 
-
 	public RSTile getPosition() {
 		return getLocation();
 	}
-
 }
