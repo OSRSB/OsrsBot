@@ -1905,6 +1905,29 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes makeovers offered by thessalia's widget
+     * Last reviewed: 9/4/2022 11:04 pm UTC+1
+     */
+    public static class ThessaliasMakeovers {
+        public static final int GROUP_INDEX = 591;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int STYLE_PARENT_CONTAINER = 2;
+        public static final int SELECT_BODY_STYLE_DYNAMIC_CONTAINER = 3; // 0-13 boxes, 14 torso model of first choice, 15 cloth model of first choice, 16 cloth sprite, this repeats ...
+        public static final int SELECT_BODY_STYLE_TITLE_LABEL = 4;
+        public static final int SELECT_ARMS_STYLE_DYNAMIC_CONTAINER = 5; // 0-11 boxes, 12 torso model of first choice, 13 cloth model of first choice, 14 cloth sprite, this repeats ...
+        public static final int SELECT_ARMS_STYLE_TITLE_LABEL = 6;
+        public static final int SELECT_LEG_STYLE_DYNAMIC_CONTAINER = 7; // 0-10 boxes, 11 leg model of first choice, 12 sprite of first choice this repeats ...
+        public static final int SELECT_LEG_STYLE_TITLE_LABEL = 8;
+        public static final int SELECT_COLOUR_PARENT_CONTAINER = 9;
+        public static final int SELECT_COLOUR_TITLE_LABEL = 10;
+        public static final int SELECT_COLOUR_FIRST_ROW_BOX = 11;
+        public static final int SELECT_COLOUR_SECOND_ROW_BOX = 12;
+        public static final int SELECT_COLOUR_COLORS_DYNAMIC_CONTAINER = 13; //1-28 colour boxes, 29-57 colour sprites
+        public static final int CONFIRM_TEXT_LABEL = 14;
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 1/3/2022 0:31 am UTC+1
      */
