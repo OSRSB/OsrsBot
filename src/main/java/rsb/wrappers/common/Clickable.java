@@ -1,9 +1,6 @@
 package rsb.wrappers.common;
 
-import net.runelite.api.Point;
-
 public interface Clickable {
-
     boolean doAction(String action);
 
     boolean doAction(String action, String option);
@@ -13,6 +10,4 @@ public interface Clickable {
     boolean doClick(boolean leftClick);
 
     boolean doHover();
-
-
 }

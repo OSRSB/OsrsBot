@@ -12,15 +12,13 @@ import rsb.script.ScriptManifest;
 
 import java.awt.*;
 
-import static java.lang.Thread.sleep;
-
 /**
  * @author Gigiaj
  */
 @ScriptManifest(authors = {"GigiaJ"}, name = "Login", version = 1.0)
 @Slf4j
 public class LoginBot extends Random {
-
+    //TODO: this should be elsewhere
     private static final int INTERFACE_MAIN = 905;
     private static final int INTERFACE_MAIN_CHILD = 59;
     private static final int INTERFACE_MAIN_CHILD_COMPONENT_ID = 4;
@@ -42,12 +40,10 @@ public class LoginBot extends Random {
     private static final int INTERFACE_WELCOME_SCREEN_HIGH_RISK_WORLD_LOGIN_BUTTON = 93;
     private static final int INTERFACE_GRAPHICS_NOTICE = 976;
     private static final int INTERFACE_GRAPHICS_LEAVE_ALONE = 6;
-
     private static final int INDEX_LOGGED_OUT = 3;
     private static final int INDEX_LOBBY = 7;
 
     private int invalidCount, worldFullCount;
-
     public Random Rand;
 
     @Override

@@ -4,8 +4,6 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.win32.StdCallLibrary;
 
-import java.awt.*;
-
 public class SetForegroundWindowUtil {
     public interface User32 extends StdCallLibrary {
         User32 INSTANCE = (User32) Native.loadLibrary("user32", User32.class);
@@ -49,7 +47,4 @@ public class SetForegroundWindowUtil {
             }
         }, null);
     }
-
-
-
 }

@@ -1,14 +1,8 @@
 package rsb.wrappers;
 
 import net.runelite.api.Model;
-import net.runelite.api.Perspective;
 import net.runelite.api.Tile;
-import net.runelite.api.coords.LocalPoint;
 import rsb.methods.MethodContext;
-
-import java.awt.*;
-import java.util.ArrayList;
-
 
 public class RSGroundObjectModel extends RSModel {
     private final Tile tile;
@@ -19,7 +13,6 @@ public class RSGroundObjectModel extends RSModel {
     }
 
     protected void update() {
-
     }
 
     @Override
@@ -31,5 +24,4 @@ public class RSGroundObjectModel extends RSModel {
     protected int getLocalY() {
         return tile.getLocalLocation().getY();
     }
-
 }

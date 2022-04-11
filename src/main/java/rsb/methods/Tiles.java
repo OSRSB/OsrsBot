@@ -1,8 +1,7 @@
 package rsb.methods;
 
-import rsb.wrappers.RSTile;
 import net.runelite.api.Point;
-import java.awt.*;
+import rsb.wrappers.RSTile;
 
 /**
  * Tile related operations.
@@ -120,26 +119,26 @@ public class Tiles extends MethodProvider {
 	/**
 	 * Gets the tile under a point.
 	 *
-	 * @param p	a point (X, Y)
+	 * @param point	a point (X, Y)
 	 * @return RSTile at the point's location
 	 */
-	public RSTile getTileUnderPoint(final Point p) {
-		if (!methods.calc.pointOnScreen(p)) {
+	public RSTile getTileUnderPoint(final Point point) {
+		if (!methods.calc.pointOnScreen(point)) {
 			return null;
 		}
 		RSTile close = null;
 		for (int x = 0; x < 104; x++) {
 			for (int y = 0; y < 104; y++) {
-				RSTile t = new RSTile(x + methods.client.getBaseX(), y
+				RSTile tile = new RSTile(x + methods.client.getBaseX(), y
 						+ methods.client.getBaseY(), methods.client.getPlane());
-				Point s = methods.calc.tileToScreen(t);
-				if (s.getX() != -1 && s.getY() != -1) {
+				Point pointOfTile = methods.calc.tileToScreen(tile);
+				if (pointOfTile.getX() != -1 && pointOfTile.getY() != -1) {
 					if (close == null) {
-						close = t;
+						close = tile;
 					}
-					if (methods.calc.tileToScreen(close).distanceTo(p) > methods.calc
-							.tileToScreen(t).distanceTo(p)) {
-						close = t;
+					if (methods.calc.tileToScreen(close).distanceTo(point) > methods.calc
+							.tileToScreen(tile).distanceTo(point)) {
+						close = tile;
 					}
 				}
 			}
@@ -150,13 +149,12 @@ public class Tiles extends MethodProvider {
 	/**
 	 * Checks if the tile "t" is closer to the player than the tile "tt"
 	 *
-	 * @param t  First tile.
-	 * @param tt Second tile.
+	 * @param tile1 First tile.
+	 * @param tile2 Second tile.
 	 * @return True if the first tile is closer to the player than the second
 	 *         tile, otherwise false.
 	 */
-	public boolean isCloser(RSTile t, RSTile tt) {
-		return methods.calc.distanceTo(t) < methods.calc.distanceTo(tt);
+	public boolean isCloser(RSTile tile1, RSTile tile2) {
+		return methods.calc.distanceTo(tile1) < methods.calc.distanceTo(tile2);
 	}
-
 }

@@ -3,7 +3,6 @@ package rsb.methods;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.Point;
 import rsb.wrappers.*;
 import rsb.wrappers.common.Positionable;
@@ -16,7 +15,6 @@ import java.awt.*;
  */
 @Slf4j
 public class Calculations extends MethodProvider {
-
 	private final Render render = new Render();
 	private final RenderData renderData = new RenderData();
 

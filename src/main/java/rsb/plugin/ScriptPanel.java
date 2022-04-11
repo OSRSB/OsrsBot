@@ -6,13 +6,13 @@ import net.runelite.client.util.ImageUtil;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.globval.GlobalConfiguration;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.swing.*;
-import javax.swing.GroupLayout;
-
 
 public class ScriptPanel extends JPanel {
 	private RuneLite bot;
@@ -33,6 +33,7 @@ public class ScriptPanel extends JPanel {
 		scriptSelector = new ScriptSelector(bot);
 		initComponents();
 	}
+
 	/**
 	 * Opens the scripts folder in the default file explorer
 	 *
@@ -103,8 +104,8 @@ public class ScriptPanel extends JPanel {
 		scriptsSelectionScrollPane.setViewportView(scriptSelector.table);
 
 		//---- buttonStart ----
-//		scriptSelector.buttonStart.setText("Start");
-//		scriptSelector.buttonStart.addActionListener(scriptSelector::buttonStartActionPerformed);
+		//scriptSelector.buttonStart.setText("Start");
+		//scriptSelector.buttonStart.addActionListener(scriptSelector::buttonStartActionPerformed);
 		final BufferedImage startIcon = ImageUtil.loadImageResource(getClass(), "start.png");
 		scriptSelector.buttonStart = new MaterialTab(new ImageIcon(startIcon.getScaledInstance(24, 24, 5)), scriptPanelToolbar, null);
 		scriptSelector.buttonStart.setToolTipText("Start selected script");
@@ -122,8 +123,8 @@ public class ScriptPanel extends JPanel {
 		scriptPanelToolbar.addTab(scriptSelector.buttonStart);
 
 		//---- buttonPause ----
-//		scriptSelector.buttonPause.setText("Pause");
-//		scriptSelector.buttonPause.addActionListener(scriptSelector::buttonPauseActionPerformed);
+		//scriptSelector.buttonPause.setText("Pause");
+		//scriptSelector.buttonPause.addActionListener(scriptSelector::buttonPauseActionPerformed);
 		final BufferedImage pauseIcon = ImageUtil.loadImageResource(getClass(), "pause.png");
 		scriptSelector.buttonPause = new MaterialTab(new ImageIcon(pauseIcon.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
 		scriptSelector.buttonPause.setToolTipText("Pause the active script");
@@ -138,10 +139,9 @@ public class ScriptPanel extends JPanel {
 		});
 		scriptPanelToolbar.addTab(scriptSelector.buttonPause);
 
-
-//		//---- buttonStop ----
-//		scriptSelector.buttonStop.setText("Stop");
-//		scriptSelector.buttonStop.addActionListener(scriptSelector::buttonStopActionPerformed);
+		//---- buttonStop ----
+		//scriptSelector.buttonStop.setText("Stop");
+		//scriptSelector.buttonStop.addActionListener(scriptSelector::buttonStopActionPerformed);
 		final BufferedImage stopIcon = ImageUtil.loadImageResource(getClass(), "stop.png");
 		scriptSelector.buttonStop = new MaterialTab(new ImageIcon(stopIcon.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
 		scriptSelector.buttonStop.setToolTipText("Stop running the active script");
@@ -188,9 +188,7 @@ public class ScriptPanel extends JPanel {
 		//---- buttonForums ----
 		buttonForums.setText("Forums");
 		buttonForums.addActionListener(e -> openForumsPerformed(e));
-
 		assignLayouts();
-
 	}
 
 	/**

@@ -1,8 +1,6 @@
 package rsb.event.impl;
 
-import net.runelite.api.Perspective;
 import net.runelite.api.Point;
-import net.runelite.api.coords.LocalPoint;
 import rsb.botLauncher.RuneLite;
 import rsb.event.listener.PaintListener;
 import rsb.methods.MethodContext;
@@ -11,7 +9,6 @@ import rsb.wrappers.RSNPC;
 import java.awt.*;
 
 public class DrawNPCs implements PaintListener {
-
 	private final MethodContext ctx;
 
 	public DrawNPCs(RuneLite bot) {

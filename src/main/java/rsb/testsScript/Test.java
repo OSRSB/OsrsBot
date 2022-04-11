@@ -1,24 +1,17 @@
 package rsb.testsScript;
 
 import net.runelite.api.Point;
-import rsb.botLauncher.RuneLite;
 import rsb.botLauncher.RuneLiteTestFeatures;
-import rsb.event.impl.TFPS;
 import rsb.event.listener.PaintListener;
-import rsb.methods.Magic;
-import rsb.methods.MethodContext;
 import rsb.script.Script;
 import rsb.script.ScriptManifest;
 import rsb.util.StdRandom;
-import rsb.wrappers.*;
 
-import javax.swing.*;
 import java.awt.*;
 
 @ScriptManifest(authors={"Gigia"}, description="Example Script.", version=0.1, name="Test")
 public class Test extends Script implements PaintListener {
     public int i = 50;
-
     public boolean up = false;
 
     public int loop() {
@@ -29,7 +22,6 @@ public class Test extends Script implements PaintListener {
         sleep(StdRandom.uniform(1000, 1500));
         return random(1000, 1000);
     }
-
 
     public final void onRepaint(Graphics g) {
         Point p = mouse.getLocation();

@@ -1,8 +1,6 @@
 package rsb.internal.instrumentate;
 
 import javassist.*;
-import javassist.bytecode.ClassFile;
-import rsb.botLauncher.Application;
 
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;

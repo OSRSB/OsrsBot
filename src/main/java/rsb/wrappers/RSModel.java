@@ -1,8 +1,8 @@
 package rsb.wrappers;
 
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
+import net.runelite.api.Model;
+import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.geometry.SimplePolygon;
@@ -14,7 +14,6 @@ import rsb.methods.MethodProvider;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 /**
  * A screen space model.
@@ -23,7 +22,6 @@ import java.util.LinkedList;
  */
 @Slf4j
 public class RSModel extends MethodProvider {
-
 	/**
 	 * Returns a filter that matches against the array of point indices for the
 	 * A vertices of each triangle. Use in scripts is discouraged.
@@ -40,11 +38,9 @@ public class RSModel extends MethodProvider {
 	}
 
 	protected Model model;
-
 	protected int[] xPoints;
 	protected int[] yPoints;
 	protected int[] zPoints;
-
 	protected int[] indices1;
 	protected int[] indices2;
 	protected int[] indices3;
@@ -83,7 +79,6 @@ public class RSModel extends MethodProvider {
 		if (this == null) {
 			return false;
 		}
-
 		Polygon[] triangles = getTriangles();
 		if (triangles == null) {
 			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
@@ -113,7 +108,6 @@ public class RSModel extends MethodProvider {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -298,7 +292,6 @@ public class RSModel extends MethodProvider {
 		if (model == null) {
 			return null;
 		}
-
 		int count = model.getVerticesCount();
 
 		int[] x2d = new int[count];
@@ -308,8 +301,6 @@ public class RSModel extends MethodProvider {
 		int localY = getLocalY();
 
 		final int tileHeight = Perspective.getTileHeight(methods.client, new LocalPoint(localX, localY), methods.client.getPlane());
-
-
 
 		Perspective.modelToCanvas(methods.client, count, localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
 		ArrayList polys = new ArrayList(model.getFaceCount());
@@ -339,7 +330,6 @@ public class RSModel extends MethodProvider {
 
 			polys.add(new Polygon(xx, yy, 3));
 		}
-
 		return (Polygon[]) polys.toArray(new Polygon[0]);
 	}
 
@@ -463,5 +453,4 @@ public class RSModel extends MethodProvider {
 		SimplePolygon simplePolygon = Jarvis.convexHull(x2d, y2d);
 		return new Polygon(simplePolygon.getX(), simplePolygon.getY(), simplePolygon.size());
 	}
-
 }

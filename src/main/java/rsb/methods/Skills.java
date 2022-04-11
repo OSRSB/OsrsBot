@@ -5,8 +5,6 @@ import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.util.SkillTracker;
 
-import java.lang.reflect.Field;
-
 /**
  * This class is for all the skill calculations.
  *

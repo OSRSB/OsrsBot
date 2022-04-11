@@ -1,9 +1,5 @@
 package rsb.wrappers;
 
-import net.runelite.api.CollisionData;
-import net.runelite.api.Tile;
-import net.runelite.api.coords.WorldArea;
-import net.runelite.api.coords.WorldPoint;
 import rsb.methods.MethodContext;
 
 import java.util.*;
@@ -12,7 +8,6 @@ import java.util.*;
  * @author GigiaJ
  */
 public class RSLocalPath extends RSPath {
-
 	public static final int WALL_NORTH_WEST = 0x1;
 	public static final int WALL_NORTH = 0x2;
 	public static final int WALL_NORTH_EAST = 0x4;
@@ -94,7 +89,6 @@ public class RSLocalPath extends RSPath {
 	}
 
 	protected class Node {
-
 		public final int x;
 		public final int y;
 		public Node prev;
@@ -136,7 +130,6 @@ public class RSLocalPath extends RSPath {
 		public RSTile toRSTile(RSTile baseTile) {
 			return new RSTile(x + baseTile.getWorldLocation().getX(), y + baseTile.getWorldLocation().getY(), baseTile.getWorldLocation().getPlane());
 		}
-
 	}
 
 	protected RSTile[] findPath(RSTile start, RSTile end) {
@@ -211,7 +204,6 @@ public class RSLocalPath extends RSPath {
 			return null;
 		}
 		return findPath(start, pull(end));
-
 	}
 
 	private RSTile pull(RSTile tile) {
@@ -317,5 +309,4 @@ public class RSLocalPath extends RSPath {
 		}
 		return tiles;
 	}
-
 }
