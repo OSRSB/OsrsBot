@@ -206,6 +206,39 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes world switcher widget
+     * Last reviewed: 10/4/2022 10:27 pm UTC+1
+     */
+    public static class WorldSwitcher {
+        public static final int GROUP_INDEX = 69;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_SPRITE = 1;
+        public static final int CURRENT_WORLD_LABEL = 2;
+        public static final int BUTTON_CLOSE_SPRITE = 3;
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int INNER_FRAME_SHADOW_BOX = 5;
+        public static final int INNER_FRAME_TOP_SEPARATOR_BOX = 6;
+        public static final int INNER_FRAME_BOTTOM_SEPARATOR_BOX = 7;
+        public static final int INNER_FRAME_CONTAINER = 8;
+        public static final int INNER_FRAME_TOP_BAR_CONTAINER = 9;
+        public static final int INNER_FRAME_SORT_BY_STAR_DYNAMIC_CONTAINER = 10; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_NUM_DYNAMIC_CONTAINER = 11; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_FLAG_CONTAINER = 12; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_PLAYER_COUNT_CONTAINER = 13; // 0 button sprite
+        public static final int INNER_FRAME_SORT_DESCRIPTION_CONTAINER = 14; // 0 button sprite
+        public static final int INNER_FRAME_WORLD_LIST_CONTAINER = 15;
+        public static final int INNER_FRAME_WORLD_LIST_DYNAMIC_CONTAINER = 16; // 301-580 world row sprites
+        public static final int INNER_FRAME_WORLD_LIST_ROWS_DYNAMIC_CONTAINER = 17; // 0 row box, 1 star sprite, 2 world num, 3 world flag, 4 world player cnt, 5 world description, repeats ...
+        public static final int INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER = 18;
+        public static final int INNER_FRAME_BOTTOM_BAR_CONTAINER = 19;
+        public static final int INNER_FRAME_BOTTOM_BAR_TEXT_LABEL = 20;
+        public static final int INNER_FRAME_BOTTOM_BAR_FIRST_ROW_CONTAINER = 21;
+        public static final int INNER_FRAME_BOTTOM_BAR_SECOND_ROW_CONTAINER = 22;
+        public static final int INNER_FRAME_LOGOUT_SPRITE = 23;
+        public static final int INNER_FRAME_MOUSEOVER_TOOLTIP_CONTAINER = 24;
+    }
+
+    /**
      * Describes contact npc widgets
      * Last reviewed: 10/3/2022 1:17 am UTC+1
      */
