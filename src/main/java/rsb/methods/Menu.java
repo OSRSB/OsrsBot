@@ -3,9 +3,7 @@ package rsb.methods;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.MenuEntry;
 import rsb.wrappers.RSItem;
-import rsb.wrappers.subwrap.RSMenuNode;
 import net.runelite.client.ui.FontManager;
-
 
 import java.awt.*;
 import java.util.regex.Pattern;
@@ -14,7 +12,6 @@ import java.util.regex.Pattern;
  * Context menu related operations.
  */
 public class Menu extends MethodProvider {
-
     private static final Pattern HTML_TAG = Pattern
             .compile("(^[^<]+>|<[^>]+>|<[^>]+$)");
 
@@ -76,8 +73,6 @@ public class Menu extends MethodProvider {
         }
         return clickIndex(idx);
     }
-
-
 
     /**
      * Determines if the item contains the desired action.
@@ -171,168 +166,165 @@ public class Menu extends MethodProvider {
         return HTML_TAG.matcher(input).replaceAll("");
     }
 
-        /**
-         * Calculates the width of the menu
-         *
-         * @return the menu width
-         */
-        protected int calculateWidth() {
-            MenuEntry[] entries = getEntries();
+    /**
+     * Calculates the width of the menu
+     *
+     * @return the menu width
+     */
+    protected int calculateWidth() {
+        MenuEntry[] entries = getEntries();
+        final int MIN_MENU_WIDTH = 102;
+        FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
+        int longestEntry = 0;
+        for (MenuEntry entry : entries) longestEntry = (fm.stringWidth(entry.getOption() + " " +
+                entry.getTarget().replaceAll("<.*?>", ""))
+                > longestEntry) ? fm.stringWidth(entry.getOption() + " " +
+                entry.getTarget().replaceAll("<.*?>", "")) : longestEntry;
+        return (longestEntry + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? MIN_MENU_WIDTH : longestEntry + MENU_SIDE_BORDER;
+    }
+
+    /**
+     * Calculates the height of the menu
+     *
+     * @return the menu height
+     */
+    protected int calculateHeight() {
+        MenuEntry[] entries = getEntries();
+        int numberOfEntries = entries.length;
+        return MENU_ENTRY_LENGTH * numberOfEntries + TOP_OF_MENU_BAR;
+    }
+
+    /**
+     * Calculates the top left corner X of the menu
+     *
+     * @return the menu x
+     */
+    protected int calculateX() {
+        if (isOpen()) {
             final int MIN_MENU_WIDTH = 102;
-            FontMetrics fm = methods.runeLite.getLoader().getGraphics().getFontMetrics(FontManager.getRunescapeBoldFont());
-            int longestEntry = 0;
-            for (MenuEntry entry : entries) longestEntry = (fm.stringWidth(entry.getOption() + " " +
-                    entry.getTarget().replaceAll("<.*?>", ""))
-                    > longestEntry) ? fm.stringWidth(entry.getOption() + " " +
-                    entry.getTarget().replaceAll("<.*?>", "")) : longestEntry;
-            return (longestEntry + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? MIN_MENU_WIDTH : longestEntry + MENU_SIDE_BORDER;
+            int width = calculateWidth();
+            return (width + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? (methods.virtualMouse.getClientPressX() - (MIN_MENU_WIDTH / 2)) : (methods.virtualMouse.getClientPressX() - (width / 2));
         }
+        return -1;
+    }
 
-        /**
-         * Calculates the height of the menu
-         *
-         * @return the menu height
-         */
-        protected int calculateHeight() {
+    /**
+     * Calculates the top left corner Y of the menu
+     *
+     * @return the menu y
+     */
+    protected int calculateY() {
+        if (isOpen()) {
+            final int CANVAS_LENGTH = methods.client.getCanvasHeight();
             MenuEntry[] entries = getEntries();
-            int numberOfEntries = entries.length;
-            return MENU_ENTRY_LENGTH * numberOfEntries + TOP_OF_MENU_BAR;
-        }
-
-
-        /**
-         * Calculates the top left corner X of the menu
-         *
-         * @return the menu x
-         */
-        protected int calculateX() {
-            if (isOpen()) {
-                final int MIN_MENU_WIDTH = 102;
-                int width = calculateWidth();
-                return (width + MENU_SIDE_BORDER < MIN_MENU_WIDTH) ? (methods.virtualMouse.getClientPressX() - (MIN_MENU_WIDTH / 2)) : (methods.virtualMouse.getClientPressX() - (width / 2));
+            int offset = CANVAS_LENGTH - (methods.virtualMouse.getClientPressY() + calculateHeight());
+            if (offset < 0 && entries.length >= MAX_DISPLAYABLE_ENTRIES) {
+                return 0;
             }
-            return -1;
-        }
-
-        /**
-         * Calculates the top left corner Y of the menu
-         *
-         * @return the menu y
-         */
-        protected int calculateY() {
-            if (isOpen()) {
-                final int CANVAS_LENGTH = methods.client.getCanvasHeight();
-                MenuEntry[] entries = getEntries();
-                int offset = CANVAS_LENGTH - (methods.virtualMouse.getClientPressY() + calculateHeight());
-                if (offset < 0 && entries.length >= MAX_DISPLAYABLE_ENTRIES) {
-                    return 0;
-                }
-                if (offset < 0) {
-                    return methods.virtualMouse.getClientPressY() + offset;
-                }
-                return methods.virtualMouse.getClientPressY();
+            if (offset < 0) {
+                return methods.virtualMouse.getClientPressY() + offset;
             }
-            return -1;
+            return methods.virtualMouse.getClientPressY();
         }
+        return -1;
+    }
 
-        public MenuEntry[] getEntries() {
-            MenuEntry[] entries = methods.client.getMenuEntries();
-            MenuEntry[] reversed = new MenuEntry[entries.length];
-            for (int i = entries.length - 1, x = 0; i >= 0; i--, x++)
-                reversed[i] = entries[x];
-            return reversed;
+    public MenuEntry[] getEntries() {
+        MenuEntry[] entries = methods.client.getMenuEntries();
+        MenuEntry[] reversed = new MenuEntry[entries.length];
+        for (int i = entries.length - 1, x = 0; i >= 0; i--, x++)
+            reversed[i] = entries[x];
+        return reversed;
+    }
+
+    public String[] getEntriesString() {
+        MenuEntry[] entries = getEntries();
+        String[] entryStrings = new String[entries.length];
+        for (int i = 0; i < entries.length; i++) {
+            entryStrings[i] = stripFormatting(entries[i].getOption()) + " " + ((entries[i].getTarget() != null) ? stripFormatting(entries[i].getTarget()) : "");
         }
+        return entryStrings;
+    }
 
-        public String[] getEntriesString() {
-            MenuEntry[] entries = getEntries();
-            String[] entryStrings = new String[entries.length];
-            for (int i = 0; i < entries.length; i++) {
-                entryStrings[i] = stripFormatting(entries[i].getOption()) + " " + ((entries[i].getTarget() != null) ? stripFormatting(entries[i].getTarget()) : "");
-            }
-            return entryStrings;
-        }
-
-        public String[] getActions() {
-            MenuEntry[] entries = getEntries();
-            String[] actions = new String[entries.length];
-            for (int i = 0; i < entries.length; i++) {
-                if (entries[i] != null) {
-                    actions[i] = entries[i].getOption();
-                }
-                else {
-                    actions[i] = "";
-                }
-            }
-            return actions;
-        }
-
-        public String[] getTargets() {
-            MenuEntry[] entries = getEntries();
-            String[] targets = new String[entries.length];
-            for (int i = 0; i < entries.length; i++) {
-                if (entries[i] != null) {
-                    targets[i] = entries[i].getTarget();
-                }
-                else {
-                    targets[i] = "";
-                }
-            }
-            return targets;
-        }
-
-
-        /**
-         * Returns the index in the menu for a given action. Starts at 0.
-         *
-         * @param action The action that you want the index of.
-         * @return The index of the given target in the context menu; otherwise -1.
-         */
-        public int getIndex(String action) {
-            MenuEntry[] entries = getEntries();
-            action = action.toLowerCase();
-            for (int i = 0; i < entries.length; i++) {
-                if (entries[i].getOption().toLowerCase().contains(action)) {
-                    lastIndex = i;
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        /**
-         * Returns the index in the menu for a given action with a given target.
-         * Starts at 0.
-         *
-         * @param action The action of the menu entry of which you want the index.
-         * @param target The target of the menu entry of which you want the index.
-         *               If target is null, operates like getIndex(String action).
-         * @return The index of the given target in the context menu; otherwise -1.
-         */
-        public int getIndex(String action, String... target) {
-            if (target == null) {
-                return getIndex(action);
-            }
-            action = action.toLowerCase();
-            String[] actions = getActions();
-            String[] targets = getTargets();
-            /* Throw exception if lengths unequal? */
-            if (action != null) {
-                for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
-                    if (actions[i].toLowerCase().contains(action)) {
-                        lastIndex = checkTargetMatch(target, targets, i);
-                        return lastIndex;
-                    }
-                }
+    public String[] getActions() {
+        MenuEntry[] entries = getEntries();
+        String[] actions = new String[entries.length];
+        for (int i = 0; i < entries.length; i++) {
+            if (entries[i] != null) {
+                actions[i] = entries[i].getOption();
             }
             else {
-                for (int i = 0; i < targets.length; i++) {
+                actions[i] = "";
+            }
+        }
+        return actions;
+    }
+
+    public String[] getTargets() {
+        MenuEntry[] entries = getEntries();
+        String[] targets = new String[entries.length];
+        for (int i = 0; i < entries.length; i++) {
+            if (entries[i] != null) {
+                targets[i] = entries[i].getTarget();
+            }
+            else {
+                targets[i] = "";
+            }
+        }
+        return targets;
+    }
+
+    /**
+     * Returns the index in the menu for a given action. Starts at 0.
+     *
+     * @param action The action that you want the index of.
+     * @return The index of the given target in the context menu; otherwise -1.
+     */
+    public int getIndex(String action) {
+        MenuEntry[] entries = getEntries();
+        action = action.toLowerCase();
+        for (int i = 0; i < entries.length; i++) {
+            if (entries[i].getOption().toLowerCase().contains(action)) {
+                lastIndex = i;
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index in the menu for a given action with a given target.
+     * Starts at 0.
+     *
+     * @param action The action of the menu entry of which you want the index.
+     * @param target The target of the menu entry of which you want the index.
+     *               If target is null, operates like getIndex(String action).
+     * @return The index of the given target in the context menu; otherwise -1.
+     */
+    public int getIndex(String action, String... target) {
+        if (target == null) {
+            return getIndex(action);
+        }
+        action = action.toLowerCase();
+        String[] actions = getActions();
+        String[] targets = getTargets();
+        /* Throw exception if lengths unequal? */
+        if (action != null) {
+            for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
+                if (actions[i].toLowerCase().contains(action)) {
                     lastIndex = checkTargetMatch(target, targets, i);
                     return lastIndex;
                 }
             }
-            return -1;
         }
-
+        else {
+            for (int i = 0; i < targets.length; i++) {
+                lastIndex = checkTargetMatch(target, targets, i);
+                return lastIndex;
+            }
+        }
+        return -1;
+    }
 
     /**
      * Checks the target list to the menu targets for matches and returns the first index that matches
@@ -341,45 +333,44 @@ public class Menu extends MethodProvider {
      * @param index The index of the last iteration of the loop acted upon this method
      * @return The index of a matching target or -1
      */
-        private int checkTargetMatch(String[] target, String[] targets, int index) {
-            boolean targetMatch = false;
-            if (target[0] != null) {
-                for (String targetPart : target) {
-                    if (targets[index].toLowerCase().contains(targetPart.toLowerCase())) {
-                        targetMatch = true;
-                    } else {
-                        targetMatch = false;
-                    }
+    private int checkTargetMatch(String[] target, String[] targets, int index) {
+        boolean targetMatch = false;
+        if (target[0] != null) {
+            for (String targetPart : target) {
+                if (targets[index].toLowerCase().contains(targetPart.toLowerCase())) {
+                    targetMatch = true;
+                } else {
+                    targetMatch = false;
                 }
-                if (targetMatch)
-                    return index;
-            } else {
-                return index;
             }
-            return -1;
+            if (targetMatch)
+                return index;
+        } else {
+            return index;
         }
+        return -1;
+    }
 
-        /**
-         * Checks whether or not a given action (or action substring) is present in
-         * the menu.
-         *
-         * @param action The action or action substring.
-         * @return <code>true</code> if present, otherwise <code>false</code>.
-         */
-        public boolean contains(final String action) {
-            return getIndex(action) != -1;
-        }
+    /**
+     * Checks whether or not a given action (or action substring) is present in
+     * the menu.
+     *
+     * @param action The action or action substring.
+     * @return <code>true</code> if present, otherwise <code>false</code>.
+     */
+    public boolean contains(final String action) {
+        return getIndex(action) != -1;
+    }
 
-        /**
-         * Checks whether or not a given action with given target is present
-         * in the menu.
-         *
-         * @param action The action or action substring.
-         * @param target The target or target substring.
-         * @return <code>true</code> if present, otherwise <code>false</code>.
-         */
-        public boolean contains(final String action, final String target) {
-            return getIndex(action, target) != -1;
-        }
-
+    /**
+     * Checks whether or not a given action with given target is present
+     * in the menu.
+     *
+     * @param action The action or action substring.
+     * @param target The target or target substring.
+     * @return <code>true</code> if present, otherwise <code>false</code>.
+     */
+    public boolean contains(final String action, final String target) {
+        return getIndex(action, target) != -1;
+    }
 }
