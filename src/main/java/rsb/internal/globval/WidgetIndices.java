@@ -1945,6 +1945,33 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes set display name widget
+     * Last reviewed: 10/4/2022 2:14 am UTC+1
+     */
+    public static class SetDisplayName {
+        public static final int GROUP_INDEX = 558;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int UNKNOWN_CONTAINER = 1;
+        public static final int FRAME_PARENT_CONTAINER = 2;
+        public static final int FRAME_DYNAMIC_CONTAINER = 3;  // 0 sprite, 1 title label, 2-10 corners/edges sprites
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int INNER_FRAME_DESCRIPTION_TEXT_LABEL = 5;
+        public static final int INNER_FRAME_TITLE_TEXT_LABEL = 6;
+        public static final int INNER_FRAME_INPUT_BOX_CONTAINER = 7;
+        public static final int INNER_FRAME_INPUT_BOX_SHADOW_BOX = 8;
+        public static final int INNER_FRAME_INPUT_BOX_MAIN_SPRITE = 9;
+        public static final int INNER_FRAME_INPUT_BOX_LEFT_SPRITE = 10;
+        public static final int INNER_FRAME_INPUT_BOX_RIGHT_SPRITE = 11;
+        public static final int INNER_FRAME_INPUT_BOX_INPUTTED_NAME_LABEL = 12; // Note: * is no input present
+        public static final int INNER_FRAME_LOOKUP_NAME_TEXT_LABEL = 13; // Note: changes upon clicking button lookup name
+        public static final int INNER_FRAME_AVAILABLE_NAMES_CONTAINER = 14;
+        public static final int INNER_FRAME_AVAILABLE_NAME1_LABEL = 15;
+        public static final int INNER_FRAME_AVAILABLE_NAME2_LABEL = 16;
+        public static final int INNER_FRAME_AVAILABLE_NAME3_LABEL = 17;
+        public static final int INNER_FRAME_BUTTON_LOOKUP_NAME_DYNAMIC_CONTAINER = 18; // 0 sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 2/4/2022 0:02 am UTC+1
      */
