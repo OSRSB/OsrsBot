@@ -1255,6 +1255,35 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes sandwich lady random event widgets
+     * Last reviewed: 10/4/2022 0:12 am UTC+1
+     */
+    public static class SandwichLady {
+        public static final int GROUP_INDEX = 297;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int ENTIRE_MODEL = 1;
+        public static final int FOOD_GIVEN_TEXT_LABEL = 2;
+        public static final int BUTTON_CLOSE_SPRITE = 3;
+        public static final int CHOICES_CONTAINER = 5;
+        public static final int FIRST_CHOICE_MODEL = 6;
+        public static final int SECOND_CHOICE_MODEL = 7;
+        public static final int THIRD_CHOICE_MODEL = 8;
+        public static final int FOURTH_CHOICE_MODEL = 9;
+        public static final int FIFTH_CHOICE_MODEL = 10;
+        public static final int SIXTH_CHOICE_MODEL = 11;
+        public static final int SEVENTH_CHOICE_MODEL = 12;
+        public static final int KEY_TEXT_LABEL = 13;
+        // NOTE: choices are randomized every time read the modelIds
+        // baguette_modelId = 10726
+        // bread_modelId = 10727
+        // chocolate_modelId = 10728
+        // kebab_modelId = 10729
+        // pie_modelId = 10730
+        // square_sandwich_modelId = 10731
+        // triangle_sandwich_modelId = 10732
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
