@@ -1803,31 +1803,6 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes apothecary's potions widget
-     * Last reviewed: 9/4/2022 11:04 pm UTC+1
-     */
-    public static class ApothecarysPotions {
-        public static final int GROUP_INDEX = 556;
-        public static final int PARENT_CONTAINER = 0;
-        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
-        public static final int FIRST_POTION_PARENT_CONTAINER = 2;
-        public static final int FIRST_POTION_DYNAMIC_CONTAINER = 3; // 0 sprite, 1-8 corners/edges sprites
-        public static final int FIRST_POTION_MODEL = 4;
-        public static final int FIRST_POTION_NAME_LABEL = 5;
-        public static final int FIRST_POTION_REQUIREMENTS_TEXT_LABEL = 6;
-        public static final int SECOND_POTION_PARENT_CONTAINER = 7;
-        public static final int SECOND_POTION_DYNAMIC_CONTAINER = 8; // 0 sprite, 1-8 corners/edges sprites
-        public static final int SECOND_POTION_MODEL = 9;
-        public static final int SECOND_POTION_NAME_LABEL = 10;
-        public static final int SECOND_POTION_REQUIREMENTS_TEXT_LABEL = 11;
-        public static final int THIRD_POTION_PARENT_CONTAINER = 12;
-        public static final int THIRD_POTION_DYNAMIC_CONTAINER = 13; // 0 sprite, 1-8 corners/edges sprites
-        public static final int THIRD_POTION_MODEL = 14;
-        public static final int THIRD_POTION_NAME_LABEL = 15;
-        public static final int THIRD_POTION_REQUIREMENTS_TEXT_LABEL = 16;
-    }
-
-    /**
      * Describes fixed classic viewport widgets
      * Last reviewed: 23/3/2022 0:17 am UTC+1
      */
@@ -1886,6 +1861,31 @@ public class WidgetIndices {
         public static final int TAB_EQUIPMENT_ICON_SPRITE = 73;
         public static final int TAB_PRAYER_ICON_SPRITE = 74;
         public static final int TAB_MAGIC_ICON_SPRITE = 75;
+    }
+
+    /**
+     * Describes apothecary's potions widget
+     * Last reviewed: 9/4/2022 11:04 pm UTC+1
+     */
+    public static class ApothecarysPotions {
+        public static final int GROUP_INDEX = 556;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int FIRST_POTION_PARENT_CONTAINER = 2;
+        public static final int FIRST_POTION_DYNAMIC_CONTAINER = 3; // 0 sprite, 1-8 corners/edges sprites
+        public static final int FIRST_POTION_MODEL = 4;
+        public static final int FIRST_POTION_NAME_LABEL = 5;
+        public static final int FIRST_POTION_REQUIREMENTS_TEXT_LABEL = 6;
+        public static final int SECOND_POTION_PARENT_CONTAINER = 7;
+        public static final int SECOND_POTION_DYNAMIC_CONTAINER = 8; // 0 sprite, 1-8 corners/edges sprites
+        public static final int SECOND_POTION_MODEL = 9;
+        public static final int SECOND_POTION_NAME_LABEL = 10;
+        public static final int SECOND_POTION_REQUIREMENTS_TEXT_LABEL = 11;
+        public static final int THIRD_POTION_PARENT_CONTAINER = 12;
+        public static final int THIRD_POTION_DYNAMIC_CONTAINER = 13; // 0 sprite, 1-8 corners/edges sprites
+        public static final int THIRD_POTION_MODEL = 14;
+        public static final int THIRD_POTION_NAME_LABEL = 15;
+        public static final int THIRD_POTION_REQUIREMENTS_TEXT_LABEL = 16;
     }
 
     /**
