@@ -2,7 +2,6 @@ package rsb.internal.input;
 
 import lombok.extern.slf4j.Slf4j;
 import rsb.methods.MethodContext;
-import rsb.methods.MethodProvider;
 
 import java.applet.Applet;
 import java.awt.event.FocusEvent;
@@ -12,7 +11,6 @@ import java.awt.event.MouseWheelEvent;
 @Slf4j
 @SuppressWarnings("removal")
 public class VirtualMouse {
-
     private MethodContext methods;
     private int clientX;
     private int clientY;
@@ -158,6 +156,4 @@ public class VirtualMouse {
             log.debug("Listener is being re-instantiated on the client", ignored);
         }
     }
-
-
 }
