@@ -79,6 +79,7 @@ public class VarbitIndices {
     public static final int MOTHERLODE_MINE_SACK = 5558;
     public static final int WILDNERESS_ZONE = 5963;
     public static final int CHATBOX_INTERFACE_SIZE = 5983; // Note: manipulates the size of Widget 162.559
+    public static final int QUESTS_COMPLETED_COUNT = 6347;
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
     public static final int BANK_WITHDRAW_QUANTITY = 6590;
     public static final int TOGGLE_MAGIC_FILTER_COMBAT_SPELLS = 6605;
@@ -86,6 +87,11 @@ public class VarbitIndices {
     public static final int TOGGLE_MAGIC_FILTER_NO_LEVEL_SPELLS = 6607;
     public static final int TOGGLE_MAGIC_FILTER_NO_RUNES_SPELLS = 6608;
     public static final int TOGGLE_MAGIC_FILTER_TELEPORT_SPELLS = 6609;
+    /**
+     * Permitted values: 0 - 8
+     * Note: 0 = not started, 1 = started, 8 = finished
+     */
+    public static final int QUEST_X_MARKS_THE_SPOT = 8063;
     public static final int PVP_SPEC_ORB = 8121;
     public static final int TAB_QUEST_LIST_SUBTAB_INDEX = 8168;
     public static final int TOGGLE_BANK_DEPOSIT_INVENTORY = 8352;
