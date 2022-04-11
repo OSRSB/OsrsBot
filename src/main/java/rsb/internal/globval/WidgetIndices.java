@@ -1255,6 +1255,35 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes sandwich lady random event widgets
+     * Last reviewed: 10/4/2022 0:12 am UTC+1
+     */
+    public static class SandwichLady {
+        public static final int GROUP_INDEX = 297;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int ENTIRE_MODEL = 1;
+        public static final int FOOD_GIVEN_TEXT_LABEL = 2;
+        public static final int BUTTON_CLOSE_SPRITE = 3;
+        public static final int CHOICES_CONTAINER = 5;
+        public static final int FIRST_CHOICE_MODEL = 6;
+        public static final int SECOND_CHOICE_MODEL = 7;
+        public static final int THIRD_CHOICE_MODEL = 8;
+        public static final int FOURTH_CHOICE_MODEL = 9;
+        public static final int FIFTH_CHOICE_MODEL = 10;
+        public static final int SIXTH_CHOICE_MODEL = 11;
+        public static final int SEVENTH_CHOICE_MODEL = 12;
+        public static final int KEY_TEXT_LABEL = 13;
+        // NOTE: choices are randomized every time read the modelIds
+        // baguette_modelId = 10726
+        // bread_modelId = 10727
+        // chocolate_modelId = 10728
+        // kebab_modelId = 10729
+        // pie_modelId = 10730
+        // square_sandwich_modelId = 10731
+        // triangle_sandwich_modelId = 10732
+    }
+
+    /**
      * Describes store widgets
      * Last reviewed: 2/3/2022 1:47 am UTC+1
      */
@@ -1264,6 +1293,20 @@ public class WidgetIndices {
         public static final int DYNAMIC_CONTAINER = 1; // Contains stone border sprites 0-11
         public static final int ITEMS_DYNAMIC_CONTAINER = 16; // Contains items sold sprites 0-16
         public static final int BOTTOM_TEXT_LABEL = 18;
+    }
+
+    /**
+     * Describes poll history widget
+     * Last reviewed: 9/4/2022 11:17 pm UTC+1
+     */
+    public static class PollHistory {
+        public static final int GROUP_INDEX = 310;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_PARENT_CONTAINER = 1;
+        public static final int FRAME_DYNAMIC_CONTAINER = 2; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int CHOOSE_POLL_TEXT_LABEL = 3;
+        public static final int POLLS_DYNAMIC_CONTAINER = 4; // 30 box of first poll, 31 title label of first poll, 32 open from till label, this repeats ...
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 5; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
     }
 
     /**
@@ -1415,6 +1458,21 @@ public class WidgetIndices {
         public static final int PARTNER_OFFER_TRADE_STATUS_LABEL = 29;
         public static final int TRADE_STATUS_LABEL = 30;
         public static final int NAME_OF_TRADE_PARTNER_LABEL = 31;
+    }
+
+    /**
+     * Describes a concrete poll details widget
+     * Last reviewed: 9/4/2022 11:17 pm UTC+1
+     */
+    public static class CurrentPollDetails {
+        public static final int GROUP_INDEX = 345;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_PARENT_CONTAINER = 1;
+        public static final int FRAME_DYNAMIC_CONTAINER = 2; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int POLL_STATE_TEXT_LABEL = 3; // Note: closed/open
+        public static final int BUTTON_HISTORY_DYNAMIC_CONTAINER = 8; // 0 sprite, 1 text label
+        public static final int POLLS_DETAILS_DYNAMIC_CONTAINER = 11; // 0 poll description text label, 1 close information label, 2 votes obtained label, 3 question 1 box, 4 shadow box, 5 green colour box, 6 q1 label, 7 q1 details label, 8 q1 yes label, 9 q1 yes percentage/votes total label, 10 q1 yes bar sprite, 11/12/13 same for no, 14 q1 skip label, 15 q1 skip votes
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 12; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
     }
 
     /**
@@ -1806,6 +1864,31 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes apothecary's potions widget
+     * Last reviewed: 9/4/2022 11:04 pm UTC+1
+     */
+    public static class ApothecarysPotions {
+        public static final int GROUP_INDEX = 556;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int FIRST_POTION_PARENT_CONTAINER = 2;
+        public static final int FIRST_POTION_DYNAMIC_CONTAINER = 3; // 0 sprite, 1-8 corners/edges sprites
+        public static final int FIRST_POTION_MODEL = 4;
+        public static final int FIRST_POTION_NAME_LABEL = 5;
+        public static final int FIRST_POTION_REQUIREMENTS_TEXT_LABEL = 6;
+        public static final int SECOND_POTION_PARENT_CONTAINER = 7;
+        public static final int SECOND_POTION_DYNAMIC_CONTAINER = 8; // 0 sprite, 1-8 corners/edges sprites
+        public static final int SECOND_POTION_MODEL = 9;
+        public static final int SECOND_POTION_NAME_LABEL = 10;
+        public static final int SECOND_POTION_REQUIREMENTS_TEXT_LABEL = 11;
+        public static final int THIRD_POTION_PARENT_CONTAINER = 12;
+        public static final int THIRD_POTION_DYNAMIC_CONTAINER = 13; // 0 sprite, 1-8 corners/edges sprites
+        public static final int THIRD_POTION_MODEL = 14;
+        public static final int THIRD_POTION_NAME_LABEL = 15;
+        public static final int THIRD_POTION_REQUIREMENTS_TEXT_LABEL = 16;
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 2/4/2022 0:02 am UTC+1
      */
@@ -1819,6 +1902,29 @@ public class WidgetIndices {
         public static final int ITEM_SPRITE = 5;
         public static final int ITEM_NAME_LABEL = 6;
         public static final int POSSIBLE_RECOVERY_TEXT_LABEL = 7;
+    }
+
+    /**
+     * Describes makeovers offered by thessalia's widget
+     * Last reviewed: 9/4/2022 11:04 pm UTC+1
+     */
+    public static class ThessaliasMakeovers {
+        public static final int GROUP_INDEX = 591;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_DYNAMIC_CONTAINER = 1; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int STYLE_PARENT_CONTAINER = 2;
+        public static final int SELECT_BODY_STYLE_DYNAMIC_CONTAINER = 3; // 0-13 boxes, 14 torso model of first choice, 15 cloth model of first choice, 16 cloth sprite, this repeats ...
+        public static final int SELECT_BODY_STYLE_TITLE_LABEL = 4;
+        public static final int SELECT_ARMS_STYLE_DYNAMIC_CONTAINER = 5; // 0-11 boxes, 12 torso model of first choice, 13 cloth model of first choice, 14 cloth sprite, this repeats ...
+        public static final int SELECT_ARMS_STYLE_TITLE_LABEL = 6;
+        public static final int SELECT_LEG_STYLE_DYNAMIC_CONTAINER = 7; // 0-10 boxes, 11 leg model of first choice, 12 sprite of first choice this repeats ...
+        public static final int SELECT_LEG_STYLE_TITLE_LABEL = 8;
+        public static final int SELECT_COLOUR_PARENT_CONTAINER = 9;
+        public static final int SELECT_COLOUR_TITLE_LABEL = 10;
+        public static final int SELECT_COLOUR_FIRST_ROW_BOX = 11;
+        public static final int SELECT_COLOUR_SECOND_ROW_BOX = 12;
+        public static final int SELECT_COLOUR_COLORS_DYNAMIC_CONTAINER = 13; //1-28 colour boxes, 29-57 colour sprites
+        public static final int CONFIRM_TEXT_LABEL = 14;
     }
 
     /**
