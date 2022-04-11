@@ -89,6 +89,11 @@ public class VarpIndices {
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 115;
     public static final int TYPE_SHOP = 118;
     /**
+     * Permitted values: 0 - 4
+     * Note: 0 = not started, 1 = started, 4 = finished
+     */
+    public static final int QUEST_BLACK_KNIGHTS_FORTRESS = 130;
+    /**
      * Permitted values: 0,10,20,30,40,50,60,100
      * Note: 0 = not started, 10 = started, 100 = finished
      */
