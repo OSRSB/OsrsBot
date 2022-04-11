@@ -1296,6 +1296,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes poll history widget
+     * Last reviewed: 9/4/2022 11:17 pm UTC+1
+     */
+    public static class PollHistory {
+        public static final int GROUP_INDEX = 310;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_PARENT_CONTAINER = 1;
+        public static final int FRAME_DYNAMIC_CONTAINER = 2; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int CHOOSE_POLL_TEXT_LABEL = 3;
+        public static final int POLLS_DYNAMIC_CONTAINER = 4; // 30 box of first poll, 31 title label of first poll, 32 open from till label, this repeats ...
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 5; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
+    }
+
+    /**
      * Describes smithing window widgets
      * Last reviewed: 18/3/2022 4:02 am UTC+1
      */
