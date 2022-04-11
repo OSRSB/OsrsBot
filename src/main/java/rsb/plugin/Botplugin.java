@@ -1,9 +1,7 @@
 package rsb.plugin;
 
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
@@ -16,7 +14,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import rsb.botLauncher.RuneLite;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.ClientToolbar;
-import rsb.internal.globval.GlobalConfiguration;
 
 @PluginDescriptor(
         name = "Bot panel",
@@ -24,11 +21,11 @@ import rsb.internal.globval.GlobalConfiguration;
         loadWhenOutdated = true
 )
 @Slf4j
-public class Botplugin extends Plugin
-{
+public class Botplugin extends Plugin {
     public Botplugin(Injector injector) {
         super.injector = injector;
     }
+
     @Inject
     private ClientToolbar clientToolbar;
 
@@ -37,7 +34,6 @@ public class Botplugin extends Plugin
     private static ScriptPanel scriptPanel;
 
     private static AccountPanel accountPanel;
-
 
     @Override
     protected void startUp() throws Exception
