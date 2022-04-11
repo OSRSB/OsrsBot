@@ -1461,6 +1461,21 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes a concrete poll details widget
+     * Last reviewed: 9/4/2022 11:17 pm UTC+1
+     */
+    public static class CurrentPollDetails {
+        public static final int GROUP_INDEX = 345;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_PARENT_CONTAINER = 1;
+        public static final int FRAME_DYNAMIC_CONTAINER = 2; // 0 entire sprite, 1 title label, 2-10 corners/edges sprites, 11 close button sprite
+        public static final int POLL_STATE_TEXT_LABEL = 3; // Note: closed/open
+        public static final int BUTTON_HISTORY_DYNAMIC_CONTAINER = 8; // 0 sprite, 1 text label
+        public static final int POLLS_DETAILS_DYNAMIC_CONTAINER = 11; // 0 poll description text label, 1 close information label, 2 votes obtained label, 3 question 1 box, 4 shadow box, 5 green colour box, 6 q1 label, 7 q1 details label, 8 q1 yes label, 9 q1 yes percentage/votes total label, 10 q1 yes bar sprite, 11/12/13 same for no, 14 q1 skip label, 15 q1 skip votes
+        public static final int SCROLLBAR_DYNAMIC_CONTAINER = 12; // 0 entire scrollbar sprite, 1 actual scrollbar sprite, 2 top separator sprite, 3 bottom separator sprite, 4 arrow up sprite, 5 arrow down sprite
+    }
+
+    /**
      * Describes click to play screen widgets
      * Last reviewed: 2/3/2022 2:28 am UTC+1
      */
