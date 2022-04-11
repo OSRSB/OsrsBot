@@ -206,6 +206,39 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes world switcher widget
+     * Last reviewed: 10/4/2022 10:27 pm UTC+1
+     */
+    public static class WorldSwitcher {
+        public static final int GROUP_INDEX = 69;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int FRAME_SPRITE = 1;
+        public static final int CURRENT_WORLD_LABEL = 2;
+        public static final int BUTTON_CLOSE_SPRITE = 3;
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int INNER_FRAME_SHADOW_BOX = 5;
+        public static final int INNER_FRAME_TOP_SEPARATOR_BOX = 6;
+        public static final int INNER_FRAME_BOTTOM_SEPARATOR_BOX = 7;
+        public static final int INNER_FRAME_CONTAINER = 8;
+        public static final int INNER_FRAME_TOP_BAR_CONTAINER = 9;
+        public static final int INNER_FRAME_SORT_BY_STAR_DYNAMIC_CONTAINER = 10; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_NUM_DYNAMIC_CONTAINER = 11; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_WORLD_FLAG_CONTAINER = 12; // 0 button sprite
+        public static final int INNER_FRAME_SORT_BY_PLAYER_COUNT_CONTAINER = 13; // 0 button sprite
+        public static final int INNER_FRAME_SORT_DESCRIPTION_CONTAINER = 14; // 0 button sprite
+        public static final int INNER_FRAME_WORLD_LIST_CONTAINER = 15;
+        public static final int INNER_FRAME_WORLD_LIST_DYNAMIC_CONTAINER = 16; // 301-580 world row sprites
+        public static final int INNER_FRAME_WORLD_LIST_ROWS_DYNAMIC_CONTAINER = 17; // 0 row box, 1 star sprite, 2 world num, 3 world flag, 4 world player cnt, 5 world description, repeats ...
+        public static final int INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER = 18;
+        public static final int INNER_FRAME_BOTTOM_BAR_CONTAINER = 19;
+        public static final int INNER_FRAME_BOTTOM_BAR_TEXT_LABEL = 20;
+        public static final int INNER_FRAME_BOTTOM_BAR_FIRST_ROW_CONTAINER = 21;
+        public static final int INNER_FRAME_BOTTOM_BAR_SECOND_ROW_CONTAINER = 22;
+        public static final int INNER_FRAME_LOGOUT_SPRITE = 23;
+        public static final int INNER_FRAME_MOUSEOVER_TOOLTIP_CONTAINER = 24;
+    }
+
+    /**
      * Describes contact npc widgets
      * Last reviewed: 10/3/2022 1:17 am UTC+1
      */
@@ -1402,6 +1435,29 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes last man standing stat info widget
+     * Last reviewed: 10/4/2022 0:42 am UTC+1
+     */
+    public static class LastManStandingStats {
+        public static final int GROUP_INDEX = 333;
+        public static final int VIEWPORT_CONTAINER = 0;
+        public static final int LMS_PARENT_CONTAINER = 1;
+        public static final int INFO_CONTAINER = 2;
+        public static final int INFO_BOX = 3;
+        public static final int INFO_INNER_BOX = 4;
+        public static final int INFO_RANK_TEXT_LABEL = 5;
+        public static final int INFO_CURRENT_RANK_LABEL = 6;
+        public static final int INFO_COFFER_TEXT_LABEL = 7;
+        public static final int INFO_CURRENT_DEPOSIT_LABEL = 8;
+        public static final int INFO_CASUAL_TEXT_LABEL = 9;
+        public static final int INFO_CURRENT_CASUAL_GAMES_LABEL = 10;
+        public static final int INFO_COMPETITIVE_TEXT_LABEL = 11;
+        public static final int INFO_CURRENT_COMPETITIVE_GAMES_LABEL = 12;
+        public static final int INFO_HIGH_STAKES_TEXT_LABEL = 13;
+        public static final int INFO_CURRENT_HIGH_STAKES_GAMES_LABEL = 14;
+    }
+
+    /**
      * Describe second trade screen widgets
      * Last reviewed: 5/3/2022 1:29 am UTC+1
      */
@@ -1889,6 +1945,33 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes set display name widget
+     * Last reviewed: 10/4/2022 2:14 am UTC+1
+     */
+    public static class SetDisplayName {
+        public static final int GROUP_INDEX = 558;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int UNKNOWN_CONTAINER = 1;
+        public static final int FRAME_PARENT_CONTAINER = 2;
+        public static final int FRAME_DYNAMIC_CONTAINER = 3;  // 0 sprite, 1 title label, 2-10 corners/edges sprites
+        public static final int INNER_FRAME_PARENT_CONTAINER = 4;
+        public static final int INNER_FRAME_DESCRIPTION_TEXT_LABEL = 5;
+        public static final int INNER_FRAME_TITLE_TEXT_LABEL = 6;
+        public static final int INNER_FRAME_INPUT_BOX_CONTAINER = 7;
+        public static final int INNER_FRAME_INPUT_BOX_SHADOW_BOX = 8;
+        public static final int INNER_FRAME_INPUT_BOX_MAIN_SPRITE = 9;
+        public static final int INNER_FRAME_INPUT_BOX_LEFT_SPRITE = 10;
+        public static final int INNER_FRAME_INPUT_BOX_RIGHT_SPRITE = 11;
+        public static final int INNER_FRAME_INPUT_BOX_INPUTTED_NAME_LABEL = 12; // Note: * is no input present
+        public static final int INNER_FRAME_LOOKUP_NAME_TEXT_LABEL = 13; // Note: changes upon clicking button lookup name
+        public static final int INNER_FRAME_AVAILABLE_NAMES_CONTAINER = 14;
+        public static final int INNER_FRAME_AVAILABLE_NAME1_LABEL = 15;
+        public static final int INNER_FRAME_AVAILABLE_NAME2_LABEL = 16;
+        public static final int INNER_FRAME_AVAILABLE_NAME3_LABEL = 17;
+        public static final int INNER_FRAME_BUTTON_LOOKUP_NAME_DYNAMIC_CONTAINER = 18; // 0 sprite, 1-8 corners/edges sprites, 9 text label
+    }
+
+    /**
      * Describes combat options tab widgets
      * Last reviewed: 2/4/2022 0:02 am UTC+1
      */
@@ -2130,6 +2213,83 @@ public class WidgetIndices {
         // 18 DEST_EDGEVILLE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
         // 19 DEST_FEROX_ENCLAVE_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
         // 20 DEST_WILDY_POND_DYNAMIC_CONTAINER // 0 box, 1 dest_label, 2, canoe_model
+    }
+
+    /**
+     * Describes character creator widget
+     * Last reviewed: 10/4/2022 3:42 am UTC+1
+     */
+    public static class CharacterCreator {
+        public static final int GROUP_INDEX = 679;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int UNKNOWN_CONTAINER = 1;
+        public static final int FRAME_PARENT_CONTAINER = 2;
+        public static final int FRAME_DYNAMIC_CONTAINER = 3; // 0 sprite, 1 title label, 2-10 edges/cornes sprites
+        public static final int LEFT_VERICAL_LINE_SPRITE = 4;
+        public static final int RIGHT_VERICAL_LINE_SPRITE = 5;
+        public static final int COLOUR_GENDER_HORIZONTAL_LINE_SPRITE = 6;
+        public static final int DESIGN_PARENT_CONTAINER = 7;
+        public static final int DESIGN_LABEL = 8;
+        public static final int DESIGN_INNER_FRAME_PARENT_CONTAINER = 9;
+        public static final int DESIGN_HEAD_PARENT_CONTAINER = 10;
+        public static final int DESIGN_HEAD_LABEL = 11;
+        public static final int DESIGN_HEAD_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 12; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_HEAD_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 13; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_JAW_PARENT_CONTAINER = 14;
+        public static final int DESIGN_JAW_LABEL = 15;
+        public static final int DESIGN_JAW_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 16; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_JAW_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 17; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_TORSO_PARENT_CONTAINER = 18;
+        public static final int DESIGN_TORSO_LABEL = 19;
+        public static final int DESIGN_TORSO_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 20; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_TORSO_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 21; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_ARMS_PARENT_CONTAINER = 22;
+        public static final int DESIGN_ARMS_LABEL = 23;
+        public static final int DESIGN_ARMS_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 24; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_ARMS_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 25; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_HANDS_PARENT_CONTAINER = 26;
+        public static final int DESIGN_HANDS_LABEL = 27;
+        public static final int DESIGN_HANDS_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 28; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_HANDS_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 29; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_LEGS_PARENT_CONTAINER = 30;
+        public static final int DESIGN_LEGS_LABEL = 31;
+        public static final int DESIGN_LEGS_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 32; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_LEGS_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 33; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_FEET_PARENT_CONTAINER = 34;
+        public static final int DESIGN_FEET_LABEL = 35;
+        public static final int DESIGN_FEET_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 36; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int DESIGN_FEET_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 37; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_PARENT_CONTAINER = 38;
+        public static final int COLOUR_LABEL = 39;
+        public static final int COLOUR_INNER_FRAME_PARENT_CONTAINER = 40;
+        public static final int COLOUR_HAIR_PARENT_CONTAINER = 41;
+        public static final int COLOUR_HAIR_LABEL = 42;
+        public static final int COLOUR_HAIR_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 43; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_HAIR_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 44; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_TORSO_PARENT_CONTAINER = 45;
+        public static final int COLOUR_TORSO_LABEL = 46;
+        public static final int COLOUR_TORSO_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 47; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_TORSO_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 48; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_LEGS_PARENT_CONTAINER = 49;
+        public static final int COLOUR_LEGS_LABEL = 50;
+        public static final int COLOUR_LEGS_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 51; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_LEGS_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 52; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_FEET_PARENT_CONTAINER = 53;
+        public static final int COLOUR_FEET_LABEL = 54;
+        public static final int COLOUR_FEET_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 55; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_FEET_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 56; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_SKIN_PARENT_CONTAINER = 57;
+        public static final int COLOUR_SKIN_LABEL = 58;
+        public static final int COLOUR_SKIN_BUTTON_ARROW_LEFT_DYNAMIC_CONTAINER = 59; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int COLOUR_SKIN_BUTTON_ARROW_RIGHT_DYNAMIC_CONTAINER = 60; // 0 sprite, 1-8 corner/edges sprites, 9 arrow sprite
+        public static final int GENDER_PARENT_CONTAINER = 61;
+        public static final int GENDER_LABEL = 62;
+        public static final int GENDER_INNER_FRAME_PARENT_CONTAINER = 63;
+        public static final int GENDER_BUTTONS_CONTAINER = 64;
+        public static final int GENDER_BUTTON_MALE_DYNAMIC_CONTAINER = 65; // 0 sprite, 1-8 corner/edges sprites, 9 text label
+        public static final int GENDER_BUTTON_FEMALE_DYNAMIC_CONTAINER = 66; // 0 sprite, 1-8 corner/edges sprites, 9 text label
+        public static final int CHARACTER_MODEL = 67;
+        public static final int CONFIRM_BUTTON_DYNAMIC_CONTAINER = 68; // 0 sprite, 1-8 corner/edges sprites, 9 text label
     }
 
     /**
