@@ -1,6 +1,5 @@
 package rsb.wrappers;
 
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetItem;
 import rsb.internal.globval.GlobalWidgetInfo;
@@ -9,17 +8,13 @@ import rsb.methods.MethodProvider;
 import rsb.wrappers.common.Clickable07;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RSWidget extends MethodProvider implements Clickable07 {
-
     private final int id;
-
     private final int parentId;
-
     private final Widget widget;
-
     private final Widget parentWidget;
 
     public RSWidget(final MethodContext ctx, final int parentId, final int id) {
@@ -193,13 +188,10 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return The components or RSWidget[0] if null
      */
     public RSWidget[] getComponents() {
-        if (widget == null)
-    {
-        return null;
-    }
+        if (widget == null) {
+            return null;
+        }
         ArrayList<RSWidget> components = new ArrayList<>();
-
-
         Widget[] children = widget.getDynamicChildren();
         RSWidget[] childComponents;
         if (children != null) {
@@ -332,7 +324,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (component != null) {
             return component.getItemQuantity();
         }
-
         return -1;
     }
 
@@ -346,7 +337,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (component != null) {
             return component.getName();
         }
-
         return "";
     }
 
@@ -359,7 +349,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (!isInScrollableArea()) {
             return getRealHeight();
         }
-
         final Widget childInterface = this.widget;
         if (childInterface != null) {
             return childInterface.getHeight() - 4;
@@ -377,7 +366,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (inter != null) {
             return inter.getSpriteId();
         }
-
         return -1;
     }
 
@@ -391,7 +379,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (inter != null) {
             return inter.getItemId();
         }
-
         return -1;
     }
 
@@ -405,7 +392,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (inter != null) {
             return inter.getModelId();
         }
-
         return -1;
     }
 
@@ -447,8 +433,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     public int getChildIndex() {
         return GlobalWidgetInfo.TO_CHILD(widget.getId());
     }
-
-
 
     /**
      * Gets the absolute position of the child
@@ -554,7 +538,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         while ((scrollableArea.getScrollableContentHeight() == 0) && (scrollableArea.getParentId() != -1)) {
             scrollableArea = scrollableArea.getParent();
         }
-
         //Return if we are in a scrollable area
         return (scrollableArea.getScrollableContentHeight() != 0);
     }
@@ -676,7 +659,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return getText().contains(phrase);
     }
 
-
     /**
      * Gets the value index array of this component
      *
@@ -713,7 +695,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (!isInScrollableArea()) {
             return getRealWidth();
         }
-
         final Widget childInterface = this.widget;
         if (childInterface != null) {
             return childInterface.getWidth() - 4;
@@ -722,8 +703,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     }
 
     public Rectangle getBounds() {
-        final Widget inter = this.widget;
-        return inter.getBounds();
+        return this.widget.getBounds();
     }
 
     @Override
@@ -731,8 +711,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         if (obj == this) {
             return true;
         }
-        if (obj instanceof RSWidget) {
-            final RSWidget child = (RSWidget) obj;
+        if (obj instanceof final RSWidget child) {
             return (id == child.getId()) && child.parentWidget.equals(parentWidget);
         }
         return false;
@@ -743,12 +722,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return this.widget.hashCode();
     }
 
-
-
-
     public boolean isClickable() {
         return isVisible() && isValid() && isSelfVisible();
     }
-
-
 }
