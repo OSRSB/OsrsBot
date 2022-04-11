@@ -1,12 +1,11 @@
 package rsb.internal.naturalmouse;
+
 import com.github.joonasvali.naturalmouse.api.SystemCalls;
 import rsb.internal.InputManager;
-import rsb.methods.MethodContext;
 
 import java.awt.*;
 
 public class RSBSystemCalls implements SystemCalls {
-
     InputManager inputManager;
     public RSBSystemCalls(InputManager inputManager) {
         this.inputManager = inputManager;
