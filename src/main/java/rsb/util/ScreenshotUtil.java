@@ -2,6 +2,7 @@ package rsb.util;
 
 import rsb.botLauncher.RuneLite;
 import rsb.internal.globval.GlobalConfiguration;
+import rsb.internal.globval.enums.ViewportLayout;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -46,7 +47,7 @@ public class ScreenshotUtil {
 		final Graphics2D graphics = bufferedImage.createGraphics();
 
 		if (hideUsername) {
-			if (bot.getMethodContext().gui.isFixed()) {
+			if (bot.getMethodContext().gui.getViewportLayout() == ViewportLayout.FIXED_CLASSIC) {
 				graphics.setColor(Color.black);
 				graphics.fill(new Rectangle(9, 459, 100, 15));
 				graphics.dispose();

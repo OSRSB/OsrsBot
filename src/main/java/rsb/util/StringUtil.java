@@ -17,7 +17,7 @@ import java.util.Map;
 public class StringUtil {
 
 	private static final String[] COLOURS_STR = new String[]{"red", "green", "cyan", "purple", "white"};
-	private static final Map<String, Color> COLOR_MAP = new HashMap<String, Color>();
+	private static final Map<String, Color> COLOR_MAP = new HashMap<>();
 
 	public static String join(final String[] s) {
 		final int l = s.length;
@@ -33,18 +33,18 @@ public class StringUtil {
 		for (i = 0; i < l; i++) {
 			n += s[i].length() + x;
 		}
-		final StringBuffer buf = new StringBuffer(n - x);
+		final StringBuilder strBuilder = new StringBuilder(n - x);
 		i = 0;
 		boolean c = true;
 		while (c) {
-			buf.append(s[i]);
+			strBuilder.append(s[i]);
 			i++;
 			c = i < l;
 			if (c) {
-				buf.append(d);
+				strBuilder.append(d);
 			}
 		}
-		return buf.toString();
+		return strBuilder.toString();
 	}
 
 	/**

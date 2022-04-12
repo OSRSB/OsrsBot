@@ -1,10 +1,9 @@
 package rsb.methods;
 
 import net.runelite.api.Skill;
-import rsb.internal.globval.GlobalWidgetId;
+import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.util.SkillTracker;
-
-import java.lang.reflect.Field;
 
 /**
  * This class is for all the skill calculations.
@@ -16,7 +15,6 @@ public class Skills extends MethodProvider {
 	Skills(final MethodContext ctx) {
 		super(ctx);
 	}
-
 
 	public static Skill getSkill(final int index) {
 		if (index > 0 && index < Skill.values().length)
@@ -32,7 +30,7 @@ public class Skills extends MethodProvider {
 	 * @return The index of the specified skill; otherwise -1.
 	 */
 	public static int getIndex(final String statName) {
-		for (GlobalWidgetId.Skill skill : GlobalWidgetId.Skill.values()) {
+		for (Skill skill : Skill.values()) {
 			if (skill.name().contains(statName.toUpperCase())) {
 				return Skill.valueOf(statName.toUpperCase()).ordinal();
 			}
@@ -54,7 +52,6 @@ public class Skills extends MethodProvider {
 		}
 		return 1;
 	}
-
 
 	/**
 	 * Gets the current experience for the given skill.
@@ -160,9 +157,9 @@ public class Skills extends MethodProvider {
 	 *         index.
 	 */
 	public boolean doHover(int component) {
-		methods.game.openTab(GameGUI.Tab.STATS);
+		methods.game.openTab(InterfaceTab.SKILLS);
 		sleep(random(10, 100));
-		return methods.interfaces.getComponent(GlobalWidgetId.INTERFACE_STATS, component)
+		return methods.interfaces.getComponent(WidgetIndices.SkillsTab.GROUP_INDEX, component)
 				.doHover();
 	}
 
@@ -178,11 +175,10 @@ public class Skills extends MethodProvider {
 		return new SkillTracker(methods.runeLite, skills);
 	}
 
-
 	/**
 	 * A table containing the experiences that begin each level.
 	 */
-	public static final int[] XP_TABLE = {0, 0, 83, 174, 276, 388, 512, 650,
+	public static final int[] XP_TABLE = { 0, 0, 83, 174, 276, 388, 512, 650,
 			801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523,
 			3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031,
 			13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473, 30408,
@@ -197,5 +193,5 @@ public class Skills extends MethodProvider {
 			14391160, 15889109, 17542976, 19368992, 21385073, 23611006,
 			26068632, 28782069, 31777943, 35085654, 38737661, 42769801,
 			47221641, 52136869, 57563718, 63555443, 70170840, 77474828,
-			85539082, 94442737, 104273167};
+			85539082, 94442737, 104273167 };
 }

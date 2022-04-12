@@ -1,11 +1,8 @@
 package rsb.wrappers;
 
-import net.runelite.api.GroundObject;
-import net.runelite.api.Model;
 import net.runelite.api.Tile;
 import rsb.methods.MethodContext;
 import rsb.methods.MethodProvider;
-import rsb.wrappers.common.Clickable;
 import rsb.wrappers.common.Clickable07;
 import rsb.wrappers.common.Positionable;
 import rsb.wrappers.subwrap.WalkerTile;
@@ -14,7 +11,6 @@ import rsb.wrappers.subwrap.WalkerTile;
  * Represents an item on a tile.
  */
 public class RSGroundItem extends MethodProvider implements Clickable07, Positionable {
-
 	private final RSItem groundItem;
 	private final RSTile location;
 
@@ -31,7 +27,6 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	 */
 	public RSModel getModel() {
 		Tile tile = location.getTile(methods);
-
 		if (tile != null) {
 			if (!tile.getGroundItems().isEmpty()) {
 				//if (obj != null) {
@@ -47,15 +42,11 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 				if (model != null) {
 					return new RSModel(methods, model);
 				}
-
-				 */
+				*/
 			}
 		}
 		return null;
 	}
-
-
-
 
 	/**
 	 * Performs the given action on this RSGroundItem.
@@ -146,4 +137,3 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 		return model.getModel().isClickable();
 	}
 }
-

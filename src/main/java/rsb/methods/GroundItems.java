@@ -17,7 +17,7 @@ public class GroundItems extends MethodProvider {
 	//This will hold the maximum number of tiles away the client can render
 	private static final int MAX_RENDER_RANGE = 25;
 
-	public static final Filter<RSGroundItem> ALL_FILTER = new Filter<RSGroundItem>() {
+	public static final Filter<RSGroundItem> ALL_FILTER = new Filter<>() {
 		public boolean test(RSGroundItem item) {
 			return true;
 		}
@@ -66,7 +66,7 @@ public class GroundItems extends MethodProvider {
 	 * @return <code>RSGroundItem</code> array containing all of the items in range.
 	 */
 	public RSGroundItem[] getAll(int range, Filter<RSGroundItem> filter) {
-		ArrayList<RSGroundItem> temp = new ArrayList<RSGroundItem>();
+		ArrayList<RSGroundItem> temp = new ArrayList<>();
 		int pX = methods.players.getMyPlayer().getLocation().getWorldLocation().getX();
 		int pY = methods.players.getMyPlayer().getLocation().getWorldLocation().getY();
 		int minX = pX - range, minY = pY - range;
@@ -131,7 +131,7 @@ public class GroundItems extends MethodProvider {
 	 *         were found.
 	 */
 	public RSGroundItem getNearest(final int... ids) {
-		return getNearest(new Filter<RSGroundItem>() {
+		return getNearest(new Filter<>() {
 			public boolean test(RSGroundItem item) {
 				int iid = item.getItem().getID();
 				for (int id : ids) {

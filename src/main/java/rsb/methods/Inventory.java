@@ -1,8 +1,9 @@
 package rsb.methods;
 
 import net.runelite.api.ItemComposition;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.*;
 import net.runelite.client.ui.DrawManager;
 
@@ -36,15 +37,15 @@ public class Inventory extends MethodProvider {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		HashMap<String, RSWidget> widgets = new HashMap<>();
 		widgets.put(INVENTORY, methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER));
-		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_INVENTORY_ITEMS_CONTAINER));
+		widgets.put(BANK, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER)); //Bug #137 - Bank has its own inventory container
+		widgets.put(STORE, methods.interfaces.getComponent(GlobalWidgetInfo.STORE_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
-		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN__INVENTORY_ITEMS_CONTAINER));
+		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (isOpen(entry.getValue())) {
-				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-					methods.game.openTab(GameGUI.Tab.INVENTORY);
+				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+					methods.game.openTab(InterfaceTab.INVENTORY);
 					sleep(random(50, 100));
 				}
 				return entry;
@@ -56,7 +57,6 @@ public class Inventory extends MethodProvider {
 	private static boolean isOpen(RSWidget widget) {
 		return (widget.isValid() && widget.isVisible());
 	}
-
 
 	/**
 	 * Destroys any inventory items with the given ID.
@@ -71,8 +71,8 @@ public class Inventory extends MethodProvider {
 			return false;
 		}
 		while (item != null) {
-			if (methods.interfaces.get(GlobalWidgetInfo.INVENTORY_DESTROY_ITEM.getGroupId()).isValid()) {
-				methods.interfaces.getComponent(GlobalWidgetInfo.INVENTORY_DESTROY_ITEM).doClick();
+			if (methods.interfaces.get(GlobalWidgetInfo.DIALOG_DESTROY_ITEM.getGroupId()).isValid()) {
+				methods.interfaces.getComponent(GlobalWidgetInfo.DIALOG_DESTROY_ITEM_YES).doClick();
 			} else {
 				item.doAction("Destroy");
 			}
@@ -107,14 +107,12 @@ public class Inventory extends MethodProvider {
 				break;
 			}
 			found_droppable = false;
-
 			for (int j = 0; j < 28; j++) {
 				int c = leftToRight ? j % 4 : j / 7;
 				int r = leftToRight ? j / 4 : j % 7;
 				RSItem curItem = getItems()[c + r * 4];
 				int id;
-				if (curItem != null
-						&& (id = curItem.getID()) != -1) {
+				if (curItem != null && (id = curItem.getID()) != -1) {
 					boolean isInItems = false;
 					for (int i : items) {
 						isInItems |= (i == id);
@@ -148,9 +146,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean itemHasAction(final RSItem item, final String action) {
 		// Used to determine if an item is droppable/destroyable
-		if (item == null) {
-			return false;
-		}
+		if (item == null) { return false; }
 		ItemComposition itemDef = item.getDefinition();
 		if (itemDef != null) {
 			for (String a : itemDef.getInventoryActions()) {
@@ -160,6 +156,56 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Determines if inventory contains at least one item with the desired action.
+	 *
+	 * @param action The item menu action to check.
+	 * @return <code>true</code> if any item has the action; otherwise
+	 *         <code>false</code>.
+	 */
+	public boolean containsItemWithAction(final String action) {
+		RSItem[] allInvItems = getItems();
+		for (RSItem item : allInvItems) {
+			if (itemHasAction(item, action)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns first item with desired action
+	 *
+	 * @param action The item menu action to check.
+	 * @return The item, or <code>null</code> if not found.
+	 */
+	public RSItem getFirstWithAction(final String action) {
+		RSItem[] allInvItems = getItems();
+		for (RSItem item : allInvItems) {
+			if (itemHasAction(item, action)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns all items with desired action
+	 *
+	 * @param action The item menu action to check.
+	 * @return The items array with desired action.
+	 */
+	public RSItem[] getAllWithAction(final String action) {
+		RSItem[] allInvItems = getItems();
+		RSItem[] resultItems = new RSItem[allInvItems.length];
+		for (int i = 0; i < allInvItems.length; i++) {
+			if (itemHasAction(allInvItems[i], action)) {
+				resultItems[i] = allInvItems[i];
+			}
+		}
+		return resultItems;
 	}
 
 	/**
@@ -200,10 +246,10 @@ public class Inventory extends MethodProvider {
 			methods.interfaces.clickContinue();
 			sleep(random(800, 1300));
 		}
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY
-				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_BANK).isValid()
-				&& !methods.interfaces.get(GlobalWidgetId.INTERFACE_STORE).isValid()) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY
+				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
+				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		if (col < 0 || col > 3 || row < 0 || row > 6) {
 			return false;
@@ -353,16 +399,12 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean selectItem(RSItem item) {
 		final int itemID = item.getID();
-		if (itemID == -1) {
-			return false;
-		}
+		if (itemID == -1) { return false; }
 		RSItem selItem = getSelectedItem();
 		if (selItem != null && selItem.getID() == itemID) {
 			return true;
 		}
-		if (!item.doAction("Use")) {
-			return false;
-		}
+		if (!item.doAction("Use")) { return false; }
 		/*
 		for (int c = 0; c < 5 && getSelectedItem() == null; c++) {
 			sleep(random(40, 60));
@@ -382,8 +424,8 @@ public class Inventory extends MethodProvider {
 	 *         otherwise <code>false</code>.
 	 */
 	public boolean useItem(final RSItem item, final RSItem targetItem) {
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		return selectItem(item) && targetItem.doAction("Use");
 	}
@@ -423,8 +465,8 @@ public class Inventory extends MethodProvider {
 	 *         RSItem and RSObject; otherwise <code>false</code>.
 	 */
 	public boolean useItem(RSItem item, RSObject targetObject) {
-		if (methods.game.getCurrentTab() != GameGUI.Tab.INVENTORY) {
-			methods.game.openTab(GameGUI.Tab.INVENTORY);
+		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+			methods.game.openTab(InterfaceTab.INVENTORY);
 		}
 		return selectItem(item) && targetObject.doAction("Use", targetObject.getName());
 	}
@@ -473,20 +515,19 @@ public class Inventory extends MethodProvider {
 	 *         selected.
 	 */
 	public String getSelectedItemName() {
-		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
+		RSWidget invInterface = getInterface().getValue();
+		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
 			int index = getSelectedItemIndex();
 			if (index == -1)
 				return null;
-			String name = new RSItem(methods, invIface.getWidgetItems()[index]).getName();
+			String name = new RSItem(methods, invInterface.getWidgetItems()[index]).getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
-		}
-		else {
+		} else {
 			int index = getSelectedItemIndex();
 			if (index == -1)
 				return null;
-			String name = invIface.getComponents()[index].getName();
+			String name = invInterface.getComponents()[index].getName();
 			return !isItemSelected() || name == null ? null : name.replaceAll(
 					"<[\\w\\d]+=[\\w\\d]+>", "");
 		}
@@ -498,13 +539,12 @@ public class Inventory extends MethodProvider {
 	 * @return The index of current selected item, or -1 if none is selected.
 	 */
 	public int getSelectedItemIndex() {
-		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem[] comps = invIface.getWidgetItems();
+		RSWidget invInterface = getInterface().getValue();
+		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
+			RSWidgetItem[] comps = invInterface.getWidgetItems();
 			return checkIsSelected(comps);
-		}
-		else {
-			RSWidget[] comps = invIface.getComponents();
+		} else {
+			RSWidget[] comps = invInterface.getComponents();
 			for (int i = 0; i < Math.min(28, comps.length); ++i) {
 				if (comps[i].getBorderThickness() == 2) {
 					return i;
@@ -531,11 +571,9 @@ public class Inventory extends MethodProvider {
 				return selected;
 			}
 		}
-
 		Selector selector = new Selector();
-		Consumer<Image> imageCallback = (img)->
-		{
-			// This callback is on the game thread, move to executor thread
+		Consumer<Image> imageCallback = (img) ->
+		{ // This callback is on the game thread, move to executor thread
 			{
 				methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(()-> {
 					selector.setSelected(getSelected(img, comps));
@@ -545,9 +583,7 @@ public class Inventory extends MethodProvider {
 				});
 			}
 		};
-
 		methods.runeLite.getInjector().getInstance(DrawManager.class).requestNextFrameListener(imageCallback);
-
 		synchronized (selector) {
 			try {
 				selector.wait();
@@ -571,7 +607,6 @@ public class Inventory extends MethodProvider {
 		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = im.getGraphics();
 		graphics.drawImage(img, 0, 0, null);
-
 		for (int c = 0; c < Math.min(comps.length, 28); ++c) {
 			RSItem item = new RSItem(methods, comps[c]);
 			int x = item.getItem().getItemLocation().getX();
@@ -594,7 +629,6 @@ public class Inventory extends MethodProvider {
 		}
 		return -1;
 	}
-
 
 	/**
 	 * Gets the selected inventory item.
@@ -635,15 +669,13 @@ public class Inventory extends MethodProvider {
 	 * @return The item, or <code>null</code> if not found.
 	 */
 	public RSItem getItemAt(final int index) {
-		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem comp = invIface.getWidgetItems()[index];
-			return index < 28 && comp != null ? new RSItem(methods,
-					comp) : null;
+		RSWidget invInterface = getInterface().getValue();
+		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
+			RSWidgetItem comp = invInterface.getWidgetItems()[index];
+			return index < 28 && comp != null ? new RSItem(methods, comp) : null;
 		}
-		RSWidget comp = invIface.getComponent(index);
-		return 0 <= index && index < 28 && comp != null ? new RSItem(methods,
-				comp) : null;
+		RSWidget comp = invInterface.getComponent(index);
+		return 0 <= index && index < 28 && comp != null ? new RSItem(methods, comp) : null;
 	}
 
 	/**
@@ -653,22 +685,21 @@ public class Inventory extends MethodProvider {
 	 *         <code>RSItem[0]</code>.
 	 */
 	public RSItem[] getItems() {
-		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem[] invItems = invIface.getWidgetItems();
+		RSWidget invInterface = getInterface().getValue();
+		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
+			RSWidgetItem[] invItems = invInterface.getWidgetItems();
 			RSItem[] items = new RSItem[invItems.length];
 			for (int i = 0; i < invItems.length; i++) {
 				items[i] = new RSItem(methods, invItems[i]);
 			}
 			return items;
 		}
-		RSWidget[] invItems = invIface.getComponents();
+		RSWidget[] invItems = invInterface.getComponents();
 		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < invItems.length; i++) {
 			items[i] = new RSItem(methods, invItems[i]);
 		}
 		return items;
-
 	}
 
 	/**
@@ -678,7 +709,7 @@ public class Inventory extends MethodProvider {
 	 * @return <code>RSItem</code> array of the matching inventory items.
 	 */
 	public RSItem[] getItems(final int... ids) {
-		LinkedList<RSItem> items = new LinkedList<RSItem>();
+		LinkedList<RSItem> items = new LinkedList<>();
 		for (RSItem item : getItems()) {
 			for (int i : ids) {
 				if (item.getID() == i) {
@@ -708,28 +739,22 @@ public class Inventory extends MethodProvider {
 	 *         <code>RSItem[0]</code>.
 	 */
 	public RSItem[] getCachedItems() {
-		RSWidget invIface = getInterface().getValue();
-		if (invIface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			if (invIface != null) {
-				RSWidgetItem[] invItems = invIface.getWidgetItems();
-				RSItem[] items = new RSItem[invItems.length];
-				for (int i = 0; i < invItems.length; i++) {
-					items[i] = new RSItem(methods, invItems[i]);
-				}
-				return items;
-			}
-		}
-		if (invIface != null) {
-			RSWidget[] invItems = invIface.getComponents();
+		RSWidget invInterface = getInterface().getValue();
+		if (invInterface == null) return null;
+		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
+			RSWidgetItem[] invItems = invInterface.getWidgetItems();
 			RSItem[] items = new RSItem[invItems.length];
 			for (int i = 0; i < invItems.length; i++) {
 				items[i] = new RSItem(methods, invItems[i]);
 			}
 			return items;
 		}
-
-
-		return new RSItem[0];
+		RSWidget[] invItems = invInterface.getComponents();
+		RSItem[] items = new RSItem[invItems.length];
+		for (int i = 0; i < invItems.length; i++) {
+			items[i] = new RSItem(methods, invItems[i]);
+		}
+		return items;
 	}
 
 	/**
@@ -765,7 +790,6 @@ public class Inventory extends MethodProvider {
 				itemIDs.add(itemID);
 			}
 		}
-
 		int[] arr = new int[itemIDs.size()];
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = itemIDs.get(i);
@@ -915,19 +939,16 @@ public class Inventory extends MethodProvider {
 	 */
 	public int getCount(final boolean includeStacks, final int... itemIDs) {
 		int total = 0;
-
 		for (RSItem item : getItems()) {
 			if (item == null) {
 				continue;
 			}
-
 			for (int ID : itemIDs) {
 				if (item.getID() == ID) {
 					total += includeStacks ? item.getStackSize() : 1;
 				}
 			}
 		}
-
 		return total;
 	}
 
@@ -973,10 +994,6 @@ public class Inventory extends MethodProvider {
 				}
 			}
 		}
-
 		return count;
 	}
-
-
-
 }

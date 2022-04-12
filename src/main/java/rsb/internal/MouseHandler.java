@@ -1,14 +1,10 @@
 package rsb.internal;
 
-import com.github.joonasvali.naturalmouse.api.MouseInfoAccessor;
 import com.github.joonasvali.naturalmouse.api.MouseMotionFactory;
-import com.github.joonasvali.naturalmouse.api.SpeedManager;
 import com.github.joonasvali.naturalmouse.support.*;
 import com.github.joonasvali.naturalmouse.util.FactoryTemplates;
-import com.github.joonasvali.naturalmouse.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import rsb.internal.naturalmouse.RSBSystemCalls;
-import rsb.methods.Mouse;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,7 +14,6 @@ import java.util.Random;
  */
 @Slf4j
 public class MouseHandler {
-
 	/**
 	 * The default mouse speed. This is the delay in ms between actual mouse
 	 * moves. Lower is faster.
@@ -235,7 +230,7 @@ public class MouseHandler {
 	 */
 	public static Point[] generateSpline(final Point[] controls) {
 		final double degree = controls.length - 1;
-		final java.util.Vector<Point> spline = new java.util.Vector<Point>();
+		final java.util.Vector<Point> spline = new java.util.Vector<>();
 		boolean lastFlag = false;
 		for (double theta = 0; theta <= 1; theta += 0.01) {
 			double x = 0;
@@ -343,11 +338,20 @@ public class MouseHandler {
 	}
 
 	public void moveMouse(final int x, final int y) {
+		// Todo - don't use a thread with killing and actually fix https://osrsbot.org/t/mouse-did-not-end-up-on-target-pixel-compilation/35/3
+		Thread moveMouseThread = new Thread(() -> {
+			try {
+				motionFactory.move(x, y);
+			} catch (InterruptedException e) {
+				log.debug("Mouse move failed to execute properly.", e);
+			}
+		});
+		moveMouseThread.start();
+		// kill the thread after 5 seconds
 		try {
-			motionFactory.move(x, y);
+			moveMouseThread.join(5000);
 		} catch (InterruptedException e) {
-			log.debug("Mouse move failed to execute properly.", e);
+			log.debug("Mouse move thread failed to join properly.", e);
 		}
 	}
-
 }

@@ -6,10 +6,9 @@ import rsb.methods.MethodProvider;
 import java.awt.event.MouseListener;
 import java.awt.*;
 import java.awt.event.*;
+
 @Slf4j
 public abstract class Mouse extends Focus implements MouseListener, net.runelite.client.input.MouseWheelListener {
-
-
 	private int clientX;
 	private int clientY;
 	private int clientPressX = -1;
@@ -110,7 +109,6 @@ public abstract class Mouse extends Focus implements MouseListener, net.runelite
 		if (isInFocus()) {
 			MethodProvider.methods.virtualMouse.sendEvent(e);
 		}
-
 	}
 
 	public MouseWheelEvent mouseWheelMoved(MouseWheelEvent e) {
@@ -121,6 +119,4 @@ public abstract class Mouse extends Focus implements MouseListener, net.runelite
 		}
 		return e;
 	}
-
-
 }

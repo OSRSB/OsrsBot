@@ -85,7 +85,7 @@ public class LogTextArea extends JList {
 	private class LogAreaListModel extends AbstractListModel {
 		private static final long serialVersionUID = 0;
 
-		private List<WrappedLogRecord> records = new ArrayList<WrappedLogRecord>(
+		private List<WrappedLogRecord> records = new ArrayList<>(
 				LogTextArea.MAX_ENTRIES);
 
 		public void addAllElements(List<WrappedLogRecord> obj) {
@@ -119,7 +119,7 @@ public class LogTextArea extends JList {
 
 		private final Object lock = new Object();
 
-		private List<WrappedLogRecord> queue = new ArrayList<WrappedLogRecord>(
+		private List<WrappedLogRecord> queue = new ArrayList<>(
 				100);
 
 		public void queue(final WrappedLogRecord record) {
@@ -134,7 +134,7 @@ public class LogTextArea extends JList {
 
 				synchronized (lock) {
 					if (queue.size() != 0) {
-						toFlush = new ArrayList<WrappedLogRecord>(queue);
+						toFlush = new ArrayList<>(queue);
 						queue = queue.subList(0, 0);
 					}
 				}

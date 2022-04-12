@@ -1,10 +1,14 @@
 package rsb.methods;
 
-import net.runelite.api.*;
+import net.runelite.api.CollisionData;
 import net.runelite.api.Point;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.VarpIndices;
-import rsb.wrappers.*;
+import rsb.internal.globval.VarpValues;
+import rsb.wrappers.RSLocalPath;
+import rsb.wrappers.RSPath;
+import rsb.wrappers.RSTile;
+import rsb.wrappers.RSTilePath;
 
 import java.lang.reflect.Field;
 
@@ -175,7 +179,6 @@ public class Walking extends MethodProvider {
 		return methods.tiles.doAction(methods.calc.getTileOnScreen(tileToWalk), "Walk ");
 	}
 
-
 	/**
 	 * Turns run on or off using the game GUI controls.
 	 *
@@ -244,7 +247,8 @@ public class Walking extends MethodProvider {
 	 * @return <code>true</code> if run mode is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isRunEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_RUN_ENABLED) == 1;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_RUN)
+				== VarpValues.RUN_ENABLED.getValue();
 	}
 
 	/**
@@ -332,9 +336,6 @@ public class Walking extends MethodProvider {
 		return typeName;
 	}
 
-
-	// DEPRECATED
-
 	/**
 	 * Randomizes a single tile.
 	 *
@@ -345,7 +346,8 @@ public class Walking extends MethodProvider {
 	 *             .
 	 */
 	@Deprecated
-	public RSTile randomizeTile(RSTile tile, int maxXDeviation,
+	public RSTile randomizeTile(RSTile tile,
+								int maxXDeviation,
 	                            int maxYDeviation) {
 		return randomize(tile, maxXDeviation, maxYDeviation);
 	}

@@ -3,14 +3,17 @@ package rsb.methods;
 import net.runelite.api.GameState;
 import net.runelite.api.widgets.WidgetID;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarcIntIndices;
+import rsb.internal.globval.VarcIntValues;
+import rsb.internal.globval.WidgetIndices;
+import rsb.internal.globval.enums.InterfaceTab;
+import rsb.internal.globval.enums.ViewportLayout;
 import rsb.script.Random;
 import rsb.script.randoms.*;
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.wrappers.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 
 /**
  * Game state and GUI operations.
@@ -49,11 +52,11 @@ public class Game extends MethodProvider {
 	 */
 	public String getLastMessage() {
 		RSWidget messages = methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_MESSAGES);
-			if (!messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_FIRST_MESSAGE).getText().isEmpty()) {
-				if (messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).isVisible()
-						&& !messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).getText().isEmpty())
-					return messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_LATEST_MESSAGE).getText();
-				return messages.getDynamicComponent(GlobalWidgetId.DYNAMIC_CHAT_BOX_FIRST_MESSAGE).getText();
+			if (!messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText().isEmpty()) {
+				if (messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).isVisible()
+						&& !messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText().isEmpty())
+					return messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText();
+				return messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText();
 			}
 		return "";
 	}
@@ -64,57 +67,52 @@ public class Game extends MethodProvider {
 	 * @param tab The tab to open.
 	 * @return <code>true</code> if tab successfully selected; otherwise
 	 *         <code>false</code>.
-	 * @see #openTab(GameGUI.Tab tab, boolean functionKey)
+	 * @see #openTab(InterfaceTab tab, boolean functionKey)
 	 */
-	public boolean openTab(GameGUI.Tab tab) {
+	public boolean openTab(InterfaceTab tab) {
 		return openTab(tab, false);
 	}
 
 	/**
 	 * Opens the specified tab at the specified index.
 	 *
-	 * @param tab 				The tab to open
-	 * @param functionKey       If wanting to use function keys to switch.
+	 * @param interfaceTab The tab to open
+	 * @param useHotkey If wanting to use hotkeys to switch.
 	 * @return <code>true</code> if tab successfully selected; otherwise
 	 *         <code>false</code>.
 	 */
-	public boolean openTab(GameGUI.Tab tab, boolean functionKey) {
+	public boolean openTab(InterfaceTab interfaceTab, boolean useHotkey) {
 		// Check current tab
-		if (tab == getCurrentTab()) {
-			return true;
-		}
-
-		if (functionKey) {
-			if (tab.getFunctionKey() == 0) {
-				return false;// no function key for specified tab
-			}
-
-			methods.keyboard.pressKey((char) tab.getFunctionKey());
+		if (interfaceTab == getCurrentTab()) { return true; }
+		if (useHotkey) {
+			if (interfaceTab.getHotkey() == 0) { return false; } // no hotkey for specified tab
+			methods.keyboard.pressKey((char) interfaceTab.getHotkey());
 			sleep(random(80, 200));
-			methods.keyboard.releaseKey((char) tab.getFunctionKey());
+			methods.keyboard.releaseKey((char) interfaceTab.getHotkey());
 		} else {
-			net.runelite.api.widgets.Widget iTab = methods.gui.getTab(tab);
-			if (iTab == null) {
-				return false;
-			}
-			methods.interfaces.getComponent(GlobalWidgetInfo.TO_GROUP(iTab.getParent().getId()), GlobalWidgetInfo.TO_CHILD(iTab.getId())).doClick();
+			net.runelite.api.widgets.Widget tabWidget = methods.gui.getTab(interfaceTab);
+			if (tabWidget == null) { return false; }
+			methods.interfaces.getComponent(
+					GlobalWidgetInfo.TO_GROUP(tabWidget.getParent().getId()),
+					GlobalWidgetInfo.TO_CHILD(tabWidget.getId())).doClick();
 		}
-
 		sleep(random(400, 600));
-		return tab == getCurrentTab();
+		return interfaceTab == getCurrentTab();
 	}
 
 	/**
 	 * Closes the currently open tab if in resizable mode.
 	 */
 	public void closeTab() {
-		GameGUI.Tab tab = getCurrentTab();
-		if (methods.gui.isFixed() || tab == GameGUI.Tab.LOGOUT) {
+		InterfaceTab interfaceTab = getCurrentTab();
+		if (methods.gui.getViewportLayout() == ViewportLayout.FIXED_CLASSIC || interfaceTab == InterfaceTab.LOGOUT) {
 			return;
 		}
-		net.runelite.api.widgets.Widget iTab = methods.gui.getTab(tab);
-		if (iTab != null) {
-			methods.interfaces.getComponent(GlobalWidgetInfo.TO_GROUP(iTab.getParent().getId()), GlobalWidgetInfo.TO_CHILD(iTab.getId())).doClick();
+		net.runelite.api.widgets.Widget tabWidget = methods.gui.getTab(interfaceTab);
+		if (tabWidget != null) {
+			methods.interfaces.getComponent(
+					GlobalWidgetInfo.TO_GROUP(tabWidget.getParent().getId()),
+					GlobalWidgetInfo.TO_CHILD(tabWidget.getId())).doClick();
 		}
 	}
 
@@ -133,20 +131,27 @@ public class Game extends MethodProvider {
 	/**
 	 * Gets the currently open tab.
 	 *
-	 * @return The currently open tab or the logout tab by default.
+	 * @return The currently open interfaceTab if tab recognized else null;
 	 */
-	public GameGUI.Tab getCurrentTab() {
-		for (GameGUI.Tab i : GameGUI.Tab.values()) {
-				net.runelite.api.widgets.Widget tab = methods.gui.getTab(i);
-				if (tab == null) {
-					continue;
-				}
-
-				if (tab.getSpriteId() != -1) {
-					return i;
-				}
-			}
-		return GameGUI.Tab.LOGOUT; // no selected ones. (never happens, always return TAB_LOGOUT
+	public InterfaceTab getCurrentTab() {
+		int varcIntValue = methods.client.getVarcIntValue(VarcIntIndices.CURRENT_INTERFACE_TAB);
+		return switch (VarcIntValues.valueOf(varcIntValue)) {
+			case TAB_COMBAT_OPTIONS -> InterfaceTab.COMBAT;
+			case TAB_SKILLS -> InterfaceTab.SKILLS;
+			case TAB_QUEST_LIST -> InterfaceTab.QUESTS;
+			case TAB_INVENTORY -> InterfaceTab.INVENTORY;
+			case TAB_WORN_EQUIPMENT -> InterfaceTab.EQUIPMENT;
+			case TAB_PRAYER -> InterfaceTab.PRAYER;
+			case TAB_SPELLBOOK -> InterfaceTab.MAGIC;
+			case TAB_FRIEND_LIST -> InterfaceTab.FRIENDS;
+			case TAB_LOGOUT -> InterfaceTab.LOGOUT;
+			case TAB_SETTINGS -> InterfaceTab.SETTINGS;
+			case TAB_MUSIC -> InterfaceTab.MUSIC;
+			case TAB_CHAT_CHANNEL -> InterfaceTab.CHAT;
+			case TAB_ACC_MANAGEMENT -> InterfaceTab.ACC_MAN;
+			case TAB_EMOTES -> InterfaceTab.EMOTES;
+			default -> throw new IllegalStateException("Unexpected value: " + VarcIntValues.valueOf(varcIntValue));
+		};
 	}
 
 	/**
@@ -166,16 +171,15 @@ public class Game extends MethodProvider {
 	 * ImprovedRewardsBox
 	 *
 	 * @return True if player is in a random
+	 * TODO: this feels broken
 	 */
 	public Boolean inRandom() {
-
 		for (Random random : methods.runeLite.getScriptHandler().getRandoms()) {
-			if (random.getClass().equals(new LoginBot()))
+			if (random.getClass().equals(new LoginBot())) {
 					//|| random.getClass().equals(new BankPins())
 					//|| random.getClass().equals(new TeleotherCloser())
 					//|| random.getClass().equals(new CloseAllInterface())
 					//|| random.getClass().equals(new ImprovedRewardsBox())) {
-			{
 				continue;
 			} else {
 				if (random.activateCondition()) {
@@ -183,8 +187,6 @@ public class Game extends MethodProvider {
 				}
 			}
 		}
-
-
 		return false;
 	}
 
@@ -216,7 +218,7 @@ public class Game extends MethodProvider {
 	 * @return <code>true</code> if on the logout tab.
 	 */
 	public boolean isOnLogoutTab() {
-		return getCurrentTab() == GameGUI.Tab.LOGOUT;
+		return getCurrentTab() == InterfaceTab.LOGOUT;
 	}
 
 	/**
@@ -233,10 +235,10 @@ public class Game extends MethodProvider {
 			return false;
 		}
 		if (methods.inventory.isItemSelected()) {
-			GameGUI.Tab currentTab = methods.game.getCurrentTab();
-			GameGUI.Tab randomTab = GameGUI.Tab.values()[random(1, 6)];
+			InterfaceTab currentTab = methods.game.getCurrentTab();
+			InterfaceTab randomTab = InterfaceTab.values()[random(1, 6)];
 			while (randomTab == currentTab) {
-				randomTab = GameGUI.Tab.values()[random(1, 6)];
+				randomTab = InterfaceTab.values()[random(1, 6)];
 			}
 			methods.game.openTab(randomTab);
 			sleep(random(400, 800));
@@ -246,7 +248,7 @@ public class Game extends MethodProvider {
 		}
 
 		if (!isOnLogoutTab()) {
-			openTab(GameGUI.Tab.LOGOUT);
+			openTab(InterfaceTab.LOGOUT);
 			sleep(random(300, 600));
 		}
 
@@ -293,7 +295,7 @@ public class Game extends MethodProvider {
 	 *         otherwise <code>false</code>.
 	 */
 	public boolean isWelcomeScreen() {
-		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY_SCREEN_MESSAGE_OF_THE_DAY)
+		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_MOTW_TEXT)
 				.getAbsoluteY() > 2;
 	}
 

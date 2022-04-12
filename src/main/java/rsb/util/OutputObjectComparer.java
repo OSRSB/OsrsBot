@@ -1,4 +1,5 @@
 /**
+ * TODO: wth, does this rly belong here?
  * This class assists in getting the methods to a reflection object and also comparing a reflection object to a
  * likely past incarnation of the object.
  * This will not compare any objects that are arrays or contain parameters.
@@ -24,6 +25,7 @@
 
  log.debug("\n" + namesOfNonmatchingMethods);
  }
+
  *
  * @author Gigia
  */
@@ -32,13 +34,12 @@ package rsb.util;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-
+//TODO: why comparer, electrical engineers use comparators so does java "Interface Comparator<T>"
 public class OutputObjectComparer {
     private String[] stringsToIgnoreInName;
     private String[] typesToIgnore;
@@ -129,8 +130,7 @@ public class OutputObjectComparer {
                                     case OUTPUT:
                                         try {
                                             output = i.invoke(object);
-                                        } catch (Exception e) {
-                                        }
+                                        } catch (Exception ignored) {}
                                         break;
                                     case DECLARED:
                                         //This is just a modifier to decide what returns to have so we do nothing
@@ -223,8 +223,7 @@ public class OutputObjectComparer {
                                 case OUTPUT:
                                     try {
                                         output = i.get(object);
-                                    } catch (Exception e) {
-                                    }
+                                    } catch (Exception ignored) {}
                                     break;
                                 case DECLARED:
                                     //This is just a modifier to decide what returns to have so we do nothing
@@ -253,7 +252,6 @@ public class OutputObjectComparer {
                             outputs.put(outputString, output);
                     }
                 }
-
             }
         }
         return outputs;
@@ -330,8 +328,7 @@ public class OutputObjectComparer {
                                     case OUTPUT:
                                         try {
                                             output = i.invoke(objectToInvoke);
-                                        } catch (Exception e) {
-                                        }
+                                        } catch (Exception ignored) {}
                                         break;
                                     case DECLARED:
                                         //This is just a modifier to decide what returns to have so we do nothing
@@ -339,7 +336,6 @@ public class OutputObjectComparer {
                                 }
                             }
                             outputs.put(outputString, output);
-
                         }
                     }
                 }
@@ -371,20 +367,14 @@ public class OutputObjectComparer {
                             Object output = null;
                             try {
                                 output = i.invoke(object);
-                            } catch (Exception e) {
-                            }
+                            } catch (Exception ignored) {}
                             outputs.put(i.getName(), output);
-
                         }
-
                     }
                 }
-
             }
         }
-
         return outputs;
-
     }
 
     /**
@@ -417,20 +407,15 @@ public class OutputObjectComparer {
                             Object output = null;
                             try {
                                 output = i.invoke(objectToInvoke);
-                            } catch (Exception e) {
-                            }
+                            } catch (Exception ignored) {}
                             outputs.put(i.getName(), output);
-
                         }
                     }
                 }
-
             }
         }
-
         return outputs;
     }
-
 
     /**
      * Creates a hashmap of strings and object outputs to then compares to another hashmap of strings and object outputs
@@ -451,7 +436,6 @@ public class OutputObjectComparer {
             if (previousOutputs[i] != currentOutputs[i]) {
                 notMatching.add(previousNames[i]);
             }
-
         }
         return notMatching;
     }
@@ -465,10 +449,7 @@ public class OutputObjectComparer {
      */
     public boolean checkForTypeAndNoMatch(Object firstObject, Object secondObject) {
         if (firstObject == null)
-            if (secondObject != null)
-                return true;
-            else
-                return false;
+            return secondObject != null;
 
         if (firstObject instanceof Integer) {
             if ((int) firstObject != (int) secondObject) {
@@ -480,13 +461,11 @@ public class OutputObjectComparer {
                 return true;
             }
         }
-
         if (firstObject instanceof Long) {
             if ((long) firstObject != (long) secondObject) {
                 return true;
             }
         }
-
         if (firstObject instanceof Double) {
             if ((double) firstObject != (double) secondObject) {
                 return true;
@@ -537,8 +516,7 @@ public class OutputObjectComparer {
 
                             notMatching.put(previousNames[i], previousOutputs[i]);
 
-                    } catch
-                    (NullPointerException e) {
+                    } catch (NullPointerException e) {
                         System.err.println(e);
                     }
                 }
@@ -566,7 +544,6 @@ public class OutputObjectComparer {
             }
             string += "\"" + stringToConvert.get(stringToConvert.size() - 1) + "\"" + "}";
         }
-
         return string;
     }
 
@@ -588,10 +565,8 @@ public class OutputObjectComparer {
             }
             string += "\"" + stringToConvert.get(stringToConvert.size() - 1) + "\"" + "}";
         }
-
         return string;
     }
-
 
     /**
      * Returns everything in the hashmap as a String[] styled string
@@ -672,7 +647,6 @@ public class OutputObjectComparer {
         return convertToStringArrayStyleEx(outputs, param);
     }
 
-
     /**
      * Gets the names of the methods into a readable string
      *
@@ -723,7 +697,6 @@ public class OutputObjectComparer {
         return array;
     }
 
-
     public String[] getStringsToIgnoreInName() {
         return stringsToIgnoreInName;
     }
@@ -764,7 +737,6 @@ public class OutputObjectComparer {
         this.typesToInclude = typesToInclude;
     }
 
-
     public Integer[] getParameterConstraints() {
         return parameterConstraints;
     }
@@ -772,5 +744,4 @@ public class OutputObjectComparer {
     public void setParameterConstraints(Integer[] parameterConstraints) {
         this.parameterConstraints = parameterConstraints;
     }
-
 }

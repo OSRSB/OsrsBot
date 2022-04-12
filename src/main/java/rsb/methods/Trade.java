@@ -1,7 +1,7 @@
 package rsb.methods;
 
-import rsb.internal.globval.GlobalWidgetId;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.RSPlayer;
 import rsb.wrappers.RSWidget;
 
@@ -29,7 +29,7 @@ public class Trade extends MethodProvider {
 	 * @return <code>true</code> if in first stage.
 	 */
 	public boolean inTradeMain() {
-		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_MAIN);
+		RSWidget tradeInterface = methods.interfaces.get(WidgetIndices.TradeFirstScreen.GROUP_INDEX);
 		return tradeInterface != null && tradeInterface.isValid();
 	}
 
@@ -39,7 +39,7 @@ public class Trade extends MethodProvider {
 	 * @return <code>true</code> if in second stage.
 	 */
 	public boolean inTradeSecond() {
-		RSWidget tradeInterface = methods.interfaces.get(GlobalWidgetId.INTERFACE_TRADE_SECOND);
+		RSWidget tradeInterface = methods.interfaces.get(WidgetIndices.TradeSecondScreen.GROUP_INDEX);
 		return tradeInterface != null && tradeInterface.isValid();
 	}
 
@@ -178,10 +178,10 @@ public class Trade extends MethodProvider {
 	 */
 	private String getTradingWith() {
 		if (inTradeMain()) {
-			String name = methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_MAIN_NAME).getText();
+			String name = methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER_NAME).getText();
 			return name.substring(name.indexOf(": ") + 2);
 		} else if (inTradeSecond()) {
-			return methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_SECOND_SCREEN_SECOND_NAME).getText();
+			return methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_SECOND_SCREEN_PARTNER_NAME).getText();
 		}
 		return null;
 	}
@@ -204,7 +204,7 @@ public class Trade extends MethodProvider {
 	private int getNumberOfItemsOffered() {
 		int number = 0;
 		for (int i = 0; i < 28; i++) {
-			if (methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER).getComponent(i).getStackSize() != 0) {
+			if (methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER_OFFER_ITEMS).getComponent(i).getStackSize() != 0) {
 				++number;
 			}
 		}

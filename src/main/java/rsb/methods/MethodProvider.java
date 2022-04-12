@@ -2,6 +2,8 @@ package rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.function.BooleanSupplier;
+
 /**
  * A class that provides methods that use data from the game client. For
  * internal use.
@@ -81,6 +83,7 @@ public abstract class MethodProvider {
 
 	/**
 	 * @param toSleep The time to sleep in milliseconds.
+	 * TODO: busy-wait anti-pattern, not nice :{
 	 */
 	public void sleep(int toSleep) {
 		try {
@@ -93,6 +96,20 @@ public abstract class MethodProvider {
 		} catch (InterruptedException ignored) {
 			log.debug("Method sleep disrupted", ignored);
 		}
+	}
+
+	/**
+	 * Pauses execution for a given number of milliseconds.
+	 *
+	 * @param awaitedCondition Condition which breaks awaiting.
+	 * @param awaitTimeout The time to sleep in milliseconds.
+	 */
+	public void sleepUntil(BooleanSupplier awaitedCondition, int awaitTimeout) {
+		boolean done;
+		long startTime = System.currentTimeMillis();
+		do {
+			done = awaitedCondition.getAsBoolean();
+		} while (!done && System.currentTimeMillis() - startTime < awaitTimeout);
 	}
 
 	/**

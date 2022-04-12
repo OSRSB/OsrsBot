@@ -1,13 +1,37 @@
-# OSRSBot
-An automation API for Old School RuneScape
+<h1 align="center">OSRSBot</h1>
+
+<p align="center">An automation API for Old School RuneScape</p>
+
+<p align="center">
+  <img src="./assets/osrs-bot-demo.png"
+    alt="OSRSBot automating the RuneLite client"
+    width="400"/>
+</p>
+
+<p align="center"><em style="font-size: 11px">OSRSBot automating the RuneLite client</em></p>
+
 ___
 
-## Community Discord
-[Click here](https://discord.gg/CGBXNrHREP) to join our community Discord for more support and help
+## ⚠️ This project is WIP ⚠️
+
+This project is not ready for end-users who assume it will work out of box.
+* These is currently no official end-user support.
+* These is currently no support for Macintosh and won't be in near future, stop using such junk!
+* Please don't DM developers asking for help, neither spam discord channels or you may get banned!
+* If you ask nicely and with **meaningfull details** about your problem you may get some help.
+
+As such it is required that every user which wants to run this bot has at least minimal knowledge of:
+* How to use IntelliJ IDEA.
+* How to work with Gradle tasks (edit tasks, comment lines out, update references etc.). 
+* How to adjust [Script-Template](https://github.com/OSRSB/script-template) to reflect possible breaking changes in API.
+
+## Community
+* [Forums](https://osrsbot.org/) - Ask questions, find guides, make requests
+* [Discord](https://discord.gg/CGBXNrHREP)
 
 ### What is OSRSBot?
 OSRSBot is an API designed to aid in automating the gameplay of Old School RuneScape using RuneLite's 
-third party client. 
+third party client.
 
 ###### RuneLite?
 RuneLite is an open-source API that seeks to enable a player to make 
@@ -42,9 +66,9 @@ To build make sure to use the Gradle build tasks to build the classes or the jar
 ###### Installing a script
 To install a .jar script, put it in the following folder:
 
-Windows: C:\Users\[username]\AppData\Roaming\OsrsBot\Scripts\Precompiled
-Linux: /home/[username]/.config/OsrsBot/Scripts/Precompiled
-MacOS: /Users/[username]/Library/Application Support/OsrsBot/Scripts/Precompiled
+**Windows:** C:\\Users\\[username]\\OsrsBot\\Scripts\\Precompiled \
+**Linux:** /home/[username]/.config/OsrsBot/Scripts/Precompiled \
+**MacOS:** /Users/[username]/Library/Application Support/OsrsBot/Scripts/Precompiled
 
 
 ###### Running a script

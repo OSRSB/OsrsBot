@@ -1,20 +1,19 @@
 package rsb.plugin;
 
+import net.runelite.client.ui.components.materialtabs.MaterialTab;
+import net.runelite.client.ui.components.materialtabs.MaterialTabGroup;
+import net.runelite.client.util.ImageUtil;
 import net.runelite.client.ui.PluginPanel;
 import rsb.botLauncher.RuneLite;
-import rsb.internal.ScriptHandler;
 import rsb.internal.globval.GlobalConfiguration;
-import rsb.script.Script;
-import rsb.service.ScriptDefinition;
-import rsb.service.ServiceException;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.IOException;
-import java.util.Map;
 import javax.swing.*;
-import javax.swing.GroupLayout;
-
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class ScriptPanel extends PluginPanel {
 	private RuneLite bot;
@@ -25,15 +24,17 @@ public class ScriptPanel extends PluginPanel {
 	private JButton buttonStart;
 	private JButton buttonPause;
 	private JButton buttonStop;
-	private JButton buttonScriptsFolder;
+	private MaterialTab buttonScriptsFolder;
 	private JButton buttonForums;
 	private ScriptSelector scriptSelector;
+	private MaterialTabGroup scriptPanelToolbar;
 
 	public ScriptPanel(RuneLite bot) {
 		this.bot = bot;
 		scriptSelector = new ScriptSelector(bot);
 		initComponents();
 	}
+
 	/**
 	 * Opens the scripts folder in the default file explorer
 	 *
@@ -88,12 +89,10 @@ public class ScriptPanel extends PluginPanel {
 		//Make a search area
 		scriptSelector.getSearch();
 		scriptSelector.load();
-		scriptSelector.buttonStart = new JButton();
-		scriptSelector.buttonPause = new JButton();
-		scriptSelector.buttonStop = new JButton();
-		scriptSelector.buttonReload = new JButton();
-		buttonScriptsFolder = new JButton();
 		buttonForums = new JButton();
+
+		scriptPanelToolbar = new MaterialTabGroup();
+		scriptPanelToolbar.setLayout(new GridLayout(1, 5, 5, 5));
 
 		//======== this ========
 		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
@@ -106,31 +105,91 @@ public class ScriptPanel extends PluginPanel {
 		scriptsSelectionScrollPane.setViewportView(scriptSelector.table);
 
 		//---- buttonStart ----
-		scriptSelector.buttonStart.setText("Start");
-		scriptSelector.buttonStart.addActionListener(scriptSelector::buttonStartActionPerformed);
+		//scriptSelector.buttonStart.setText("Start");
+		//scriptSelector.buttonStart.addActionListener(scriptSelector::buttonStartActionPerformed);
+		final BufferedImage startIcon = ImageUtil.loadImageResource(getClass(), "start.png");
+		scriptSelector.buttonStart = new MaterialTab(new ImageIcon(startIcon.getScaledInstance(24, 24, 5)), scriptPanelToolbar, null);
+		scriptSelector.buttonStart.setToolTipText("Start selected script");
+		scriptSelector.buttonStart.setSize(new Dimension(28, 28));
+		scriptSelector.buttonStart.setMinimumSize(new Dimension(0, 28));
+		scriptSelector.buttonStart.setEnabled(false);
+		scriptSelector.buttonStart.setOpaque(true);
+		scriptSelector.buttonStart.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent)
+			{
+				scriptSelector.buttonStartActionPerformed(null);
+			}
+		});
+		scriptPanelToolbar.addTab(scriptSelector.buttonStart);
 
 		//---- buttonPause ----
-		scriptSelector.buttonPause.setText("Pause");
-		scriptSelector.buttonPause.addActionListener(scriptSelector::buttonPauseActionPerformed);
+		//scriptSelector.buttonPause.setText("Pause");
+		//scriptSelector.buttonPause.addActionListener(scriptSelector::buttonPauseActionPerformed);
+		final BufferedImage pauseIcon = ImageUtil.loadImageResource(getClass(), "pause.png");
+		scriptSelector.buttonPause = new MaterialTab(new ImageIcon(pauseIcon.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
+		scriptSelector.buttonPause.setToolTipText("Pause the active script");
+		scriptSelector.buttonPause.setSize(new Dimension(28, 28));
+		scriptSelector.buttonPause.setMinimumSize(new Dimension(0, 0));
+		scriptSelector.buttonPause.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent)
+			{
+				scriptSelector.buttonPauseActionPerformed(null);
+			}
+		});
+		scriptPanelToolbar.addTab(scriptSelector.buttonPause);
 
 		//---- buttonStop ----
-		scriptSelector.buttonStop.setText("Stop");
-		scriptSelector.buttonStop.addActionListener(scriptSelector::buttonStopActionPerformed);
+		//scriptSelector.buttonStop.setText("Stop");
+		//scriptSelector.buttonStop.addActionListener(scriptSelector::buttonStopActionPerformed);
+		final BufferedImage stopIcon = ImageUtil.loadImageResource(getClass(), "stop.png");
+		scriptSelector.buttonStop = new MaterialTab(new ImageIcon(stopIcon.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
+		scriptSelector.buttonStop.setToolTipText("Stop running the active script");
+		scriptSelector.buttonStop.setSize(new Dimension(28, 28));
+		scriptSelector.buttonStop.setMinimumSize(new Dimension(0, 28));
+		scriptSelector.buttonStop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent)
+			{
+				scriptSelector.buttonStopActionPerformed(null);
+			}
+		});
+		scriptPanelToolbar.addTab(scriptSelector.buttonStop);
 
 		//---- buttonReload ----
-		scriptSelector.buttonReload.setText("Reload");
-		scriptSelector.buttonReload.addActionListener(scriptSelector::buttonReloadActionPerformed);
+		final BufferedImage iconImage = ImageUtil.loadImageResource(getClass(), "reload.png");
+		scriptSelector.buttonReload = new MaterialTab(new ImageIcon(iconImage.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
+		scriptSelector.buttonReload.setToolTipText("Reload Plugins");
+		scriptSelector.buttonReload.setSize(new Dimension(28, 28));
+		scriptSelector.buttonReload.setMinimumSize(new Dimension(0, 28));
+		scriptSelector.buttonReload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent)
+			{
+				scriptSelector.buttonReloadActionPerformed();
+			}
+		});
+		scriptPanelToolbar.addTab(scriptSelector.buttonReload);
 
 		//---- buttonScriptsFolder ----
-		buttonScriptsFolder.setText("Scripts Folder");
-		buttonScriptsFolder.addActionListener(e -> openScriptsFolderPerformed(e));
+		final BufferedImage folder = ImageUtil.loadImageResource(getClass(), "open-folder.png");
+		buttonScriptsFolder = new MaterialTab(new ImageIcon(folder.getScaledInstance(20, 20, 5)), scriptPanelToolbar, null);
+		buttonScriptsFolder.setToolTipText("Open scripts folder");
+		buttonScriptsFolder.setOpaque(true);
+		buttonScriptsFolder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent)
+			{
+				openScriptsFolderPerformed(null);
+			}
+		});
+		scriptPanelToolbar.addTab(buttonScriptsFolder);
 
 		//---- buttonForums ----
 		buttonForums.setText("Forums");
 		buttonForums.addActionListener(e -> openForumsPerformed(e));
-
 		assignLayouts();
-
 	}
 
 	/**
@@ -139,29 +198,20 @@ public class ScriptPanel extends PluginPanel {
 	private void assignLayouts() {
 		GroupLayout layout = new GroupLayout(this);
 		setLayout(layout);
+
 		layout.setHorizontalGroup(
 				layout.createParallelGroup()
+						.addComponent(scriptPanelToolbar, 0, 240, Short.MAX_VALUE)
+						.addGap(10, 10, 10)
 						.addComponent(scriptsSelectionScrollPane, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
 								.addGroup(layout.createParallelGroup()
 										.addGroup(layout.createSequentialGroup()
 												.addGap(47, 47, 47)
 												.addComponent(scriptSelector.accounts, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+
 										.addGroup(layout.createSequentialGroup()
 												.addContainerGap()
-												.addComponent(scriptSelector.buttonStart, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-												.addGap(18, 18, 18)
-												.addComponent(scriptSelector.buttonPause, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-										.addGroup(layout.createSequentialGroup()
-												.addGap(73, 73, 73)
-												.addComponent(scriptSelector.buttonStop, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-										.addGroup(layout.createSequentialGroup()
-												.addGap(73, 73, 73)
-												.addComponent(scriptSelector.buttonReload, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-										.addGroup(layout.createSequentialGroup()
-												.addContainerGap()
-												.addGap(10, 10, 10)
-												.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
 												.addGap(18, 18, 18)
 												.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
 										.addGap(10, 10, 10))
@@ -170,22 +220,14 @@ public class ScriptPanel extends PluginPanel {
 		layout.setVerticalGroup(
 				layout.createParallelGroup()
 						.addGroup(layout.createSequentialGroup()
+								.addComponent(scriptPanelToolbar, 28, 40, 40)
 								.addComponent(scriptsSelectionScrollPane, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
-								.addGap(28, 28, 28)
+								.addGap(10, 10, 10)
 								.addComponent(scriptSelector.accounts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGap(57, 57, 57)
+								.addGap(0, 10, Short.MAX_VALUE)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(scriptSelector.buttonStart, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-										.addComponent(scriptSelector.buttonPause, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-								.addGap(28, 28, 28)
-								.addComponent(scriptSelector.buttonStop, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addGap(0, 60, Short.MAX_VALUE)
-								.addComponent(scriptSelector.buttonReload, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addGap(0, 60, Short.MAX_VALUE)
-								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(buttonScriptsFolder, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 										.addComponent(buttonForums, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(30, Short.MAX_VALUE))
+								.addContainerGap(10, Short.MAX_VALUE))
 
 
 		);

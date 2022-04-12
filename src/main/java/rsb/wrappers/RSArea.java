@@ -1,6 +1,5 @@
 package rsb.wrappers;
 
-import net.runelite.api.Tile;
 import net.runelite.api.coords.WorldPoint;
 import rsb.wrappers.common.Positionable;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
  * @author GigiaJ
  */
 public class RSArea {
-
 	private final TileArea area;
 	private final int plane;
 
@@ -97,8 +95,6 @@ public class RSArea {
 		area = tileArea;
 	}
 
-
-
     public boolean contains(WorldPoint point) {
 		return this.contains(new RSTile(point));
 	}
@@ -179,7 +175,7 @@ public class RSArea {
 	 * @return The <b>RSTiles</b> the <b>RSArea</b> contains.
 	 */
 	public RSTile[] getTileArray() {
-		ArrayList<RSTile> list = new ArrayList<RSTile>();
+		ArrayList<RSTile> list = new ArrayList<>();
 		for (int x = this.getX(); x <= (this.getX() + this.getWidth()); x++) {
 			for (int y = this.getY(); y <= (this.getY() + this.getHeight()); y++) {
 				if (this.area.contains(new Point(x, y))) {
@@ -288,7 +284,6 @@ public class RSArea {
 				* (curr.getWorldLocation().getY() - dest.getWorldLocation().getY()));
 	}
 
-
 	class TileArea extends Polygon {
 		Point[] points = new Point[]{};
 
@@ -309,8 +304,7 @@ public class RSArea {
 
 		@Override
 		public boolean contains(Point test) {
-			int i;
-			int j;
+			int i, j;
 
 			for (i = 0, j = points.length - 1; i < points.length; j = i++) {
 				boolean checkOne = (points[i].y > test.y) != (points[j].y > test.y) &&

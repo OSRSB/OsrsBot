@@ -1,21 +1,17 @@
 package rsb.methods;
 
 import rsb.wrappers.*;
-import rsb.methods.*;
 import rsb.wrappers.subwrap.ChooseOption;
 import rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
-import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  * Provides access to methods that can be used by RSBot scripts.
  */
 public class Methods {
-	
 	public MethodContext ctx;
 
 	/**
@@ -114,7 +110,6 @@ public class Methods {
 	 * The singleton of Account
 	 */
 	protected Account account;
-
 	/**
 	 * The singleton of Environment
 	 */
@@ -127,32 +122,26 @@ public class Methods {
 	 * The singleton of Trade
 	 */
 	protected Trade trade;
-
 	/**
 	 * The singleton of Web
 	 */
 	protected Web web;
-
 	/**
 	 * The singleton of GrandExchange
 	 */
 	protected GrandExchange grandExchange;
-
 	/**
 	 * The singleton of WorldHopper
 	 */
 	protected WorldHopper worldHopper;
-
 	/**
 	 * The singleton of ChooseOption
 	 */
 	protected ChooseOption chooseOption;
-
 	/**
-	*  The singleton of NPCChat
+	 *  The singleton of NPCChat
 	 */
 	protected NPCChat npcChat;
-
 
 	/**
 	 * For internal use only: initializes the method providers.
@@ -189,11 +178,8 @@ public class Methods {
 		this.web = ctx.web;
 		this.trade = ctx.trade;
 		this.worldHopper = ctx.worldHopper;
-
-
 		this.chooseOption = ctx.chooseOption;
 		this.npcChat = ctx.npcChat;
-
 	}
 
 	/**

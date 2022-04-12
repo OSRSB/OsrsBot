@@ -1,5 +1,6 @@
 package rsb.plugin;
 
+import net.runelite.client.ui.components.materialtabs.MaterialTab;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
 import rsb.internal.listener.ScriptListener;
@@ -56,10 +57,10 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	protected JTable table;
 	protected JTextField search;
 	protected JComboBox accounts;
-	protected JButton buttonStart;
-	protected JButton buttonPause;
-	protected JButton buttonStop;
-	protected JButton buttonReload;
+	protected MaterialTab buttonStart;
+	protected MaterialTab buttonPause;
+	protected MaterialTab buttonStop;
+	protected MaterialTab buttonReload;
 
 	/**
 	 * Assigns the constant values
@@ -83,8 +84,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	public ScriptSelector(RuneLite bot) {
 		super(Frame.getFrames()[0], "Script Selector", false);
 		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
+		this.scripts = new ArrayList<>();
+		this.tmpFileNames = new ArrayList<>();
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
@@ -96,8 +97,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	public ScriptSelector(Frame frame, RuneLite bot) {
 		super(frame, "Script Selector", true);
 		this.bot = bot;
-		this.scripts = new ArrayList<ScriptDefinition>();
-		this.tmpFileNames = new ArrayList<String>();
+		this.scripts = new ArrayList<>();
+		this.tmpFileNames = new ArrayList<>();
 		this.model = new ScriptTableModel(this.scripts);
 	}
 
@@ -275,7 +276,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 * Sets the action to occur when the reload button is pressed.
 	 * @param e		the action event
 	 */
-	void buttonReloadActionPerformed(ActionEvent e) {
+	boolean buttonReloadActionPerformed() {
+
 		stopAction();
 		accounts = getAccounts();
 		//
@@ -284,6 +286,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		//Reload the scripts
 		load();
 		//buttonStart = scriptSelector.getSubmit();
+		return true;
 
 	}
 
@@ -442,7 +445,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 		public ScriptTableModel(List<ScriptDefinition> scripts) {
 			this.scripts = scripts;
-			this.matches = new ArrayList<ScriptDefinition>();
+			this.matches = new ArrayList<>();
 		}
 
 		public void search(String substr) {

@@ -3,14 +3,12 @@ package rsb.event.impl;
 import rsb.botLauncher.RuneLite;
 import rsb.event.listener.TextPaintListener;
 import rsb.methods.MethodContext;
-import rsb.methods.Players;
 import rsb.util.StringUtil;
 import rsb.wrappers.RSTile;
 
 import java.awt.*;
 
 public class TPlayerPosition implements TextPaintListener {
-
 	private MethodContext ctx;
 
 	public TPlayerPosition(RuneLite bot) {
@@ -26,5 +24,4 @@ public class TPlayerPosition implements TextPaintListener {
 		}
 		return idx+2;
 	}
-
 }

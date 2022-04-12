@@ -1,20 +1,15 @@
 package rsb.wrappers;
 
 import net.runelite.api.Model;
-import net.runelite.api.Point;
 import net.runelite.api.TileObject;
 import net.runelite.api.WallObject;
 import rsb.methods.MethodContext;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * @author GigiaJ
  */
 public class RSWallObjectModel extends RSModel {
     private WallObject object;
-
 
     RSWallObjectModel(MethodContext ctx, Model model, TileObject object) {
         super(ctx, model);
@@ -36,7 +31,6 @@ public class RSWallObjectModel extends RSModel {
     }
 
     protected void update() {
-
     }
 
     @Override

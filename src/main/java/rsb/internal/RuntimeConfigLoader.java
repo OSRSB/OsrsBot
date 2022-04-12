@@ -18,13 +18,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 @Slf4j
-public class RuntimeConfigLoader implements Supplier<RuntimeConfig>
+public class RuntimeConfigLoader extends net.runelite.client.RuntimeConfigLoader implements Supplier<RuntimeConfig>
 {
     private final OkHttpClient okHttpClient;
     private final CompletableFuture<RuntimeConfig> configFuture;
 
     public RuntimeConfigLoader(OkHttpClient okHttpClient)
     {
+        super(okHttpClient);
         this.okHttpClient = okHttpClient;
         configFuture = fetch();
     }

@@ -1,9 +1,5 @@
 package rsb.wrappers;
 
-import net.runelite.api.CollisionData;
-import net.runelite.api.Tile;
-import net.runelite.api.coords.WorldArea;
-import net.runelite.api.coords.WorldPoint;
 import rsb.methods.MethodContext;
 
 import java.util.*;
@@ -12,7 +8,6 @@ import java.util.*;
  * @author GigiaJ
  */
 public class RSLocalPath extends RSPath {
-
 	public static final int WALL_NORTH_WEST = 0x1;
 	public static final int WALL_NORTH = 0x2;
 	public static final int WALL_NORTH_EAST = 0x4;
@@ -94,7 +89,6 @@ public class RSLocalPath extends RSPath {
 	}
 
 	protected class Node {
-
 		public final int x;
 		public final int y;
 		public Node prev;
@@ -136,7 +130,6 @@ public class RSLocalPath extends RSPath {
 		public RSTile toRSTile(RSTile baseTile) {
 			return new RSTile(x + baseTile.getWorldLocation().getX(), y + baseTile.getWorldLocation().getY(), baseTile.getWorldLocation().getPlane());
 		}
-
 	}
 
 	protected RSTile[] findPath(RSTile start, RSTile end) {
@@ -170,8 +163,8 @@ public class RSLocalPath extends RSPath {
 		}
 
 		// structs
-		HashSet<Node> open = new HashSet<Node>();
-		HashSet<Node> closed = new HashSet<Node>();
+		HashSet<Node> open = new HashSet<>();
+		HashSet<Node> closed = new HashSet<>();
 		Node curr = new Node(curr_x, curr_y);
 		Node dest = new Node(dest_x, dest_y);
 
@@ -211,7 +204,6 @@ public class RSLocalPath extends RSPath {
 			return null;
 		}
 		return findPath(start, pull(end));
-
 	}
 
 	private RSTile pull(RSTile tile) {
@@ -264,7 +256,7 @@ public class RSLocalPath extends RSPath {
 	}
 
 	private RSTile[] path(Node end, RSTile baseTile) {
-		LinkedList<RSTile> path = new LinkedList<RSTile>();
+		LinkedList<RSTile> path = new LinkedList<>();
 		Node p = end;
 		while (p != null) {
 			path.addFirst(p.toRSTile(baseTile));
@@ -274,7 +266,7 @@ public class RSLocalPath extends RSPath {
 	}
 
 	private List<Node> successors(Node t) {
-		LinkedList<Node> tiles = new LinkedList<Node>();
+		LinkedList<Node> tiles = new LinkedList<>();
 		int x = t.x, y = t.y;
 		int f_x = x - offX, f_y = y - offY;
 		int here = flags[f_x][f_y];
@@ -317,5 +309,4 @@ public class RSLocalPath extends RSPath {
 		}
 		return tiles;
 	}
-
 }

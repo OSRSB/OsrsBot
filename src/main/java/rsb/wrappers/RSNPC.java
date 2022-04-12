@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.runelite.api.*;
 import net.runelite.cache.definitions.NpcDefinition;
-import net.runelite.cache.definitions.ObjectDefinition;
 import rsb.internal.globval.GlobalConfiguration;
 import rsb.methods.MethodContext;
 
@@ -16,12 +15,11 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 
 public class RSNPC extends RSCharacter {
-    private static HashMap<Integer, NpcDefinition> npcDefinitonCache;
+    private static HashMap<Integer, NpcDefinition> npcDefinitionCache;
     private static HashMap<Integer, File> npcFileCache;
     private final SoftReference<NPC> npc;
-    private NpcDefinition def;
+    private final NpcDefinition def;
     //private final NPC npc;
-
 
     public RSNPC(final MethodContext ctx, final NPC npc) {
         super(ctx);
@@ -33,14 +31,20 @@ public class RSNPC extends RSCharacter {
      * Fills the runtime file cache with all the files in the cache directory.
      */
     private void fillFileCache() {
-        File dir = new File(GlobalConfiguration.Paths.getNPCsCacheDirectory());
-        File[] directoryListing = dir.listFiles();
-        npcFileCache = new HashMap<>();
-        npcDefinitonCache = new HashMap<>();
-        for (File file : directoryListing) {
-            if (file.getName().contains(".json")) {
-                npcFileCache.put(Integer.parseInt(file.getName().replace(".json", "")), file);
+        try {
+            File dir = new File(GlobalConfiguration.Paths.getNPCsCacheDirectory());
+            File[] directoryListing = dir.listFiles();
+            npcFileCache = new HashMap<>();
+            npcDefinitionCache = new HashMap<>();
+            if (directoryListing != null) {
+                for (File file : directoryListing) {
+                    if (file.getName().contains(".json")) {
+                        npcFileCache.put(Integer.parseInt(file.getName().replace(".json", "")), file);
+                    }
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -52,7 +56,7 @@ public class RSNPC extends RSCharacter {
         try {
             NpcDefinition def = readFileAndGenerateDefinition(npcFileCache.get(id));
             if (def != null && def.getId() != -1) {
-                npcDefinitonCache.put(def.getId(), def);
+                npcDefinitionCache.put(def.getId(), def);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,10 +87,10 @@ public class RSNPC extends RSCharacter {
         if (npcFileCache == null || npcFileCache.isEmpty()) {
             fillFileCache();
         }
-        if (!npcDefinitonCache.containsKey(id)) {
+        if (!npcDefinitionCache.containsKey(id)) {
             addDefinitionToLoadedCache(id);
         }
-        return (npcDefinitonCache != null) ? npcDefinitonCache.get(id) : null;
+        return (npcDefinitionCache != null) ? npcDefinitionCache.get(id) : null;
     }
 
     @Override
@@ -98,7 +102,6 @@ public class RSNPC extends RSCharacter {
     public Actor getInteracting() {
         return getAccessor().getInteracting();
     }
-
 
     public String[] getActions() {
         NpcDefinition def = getDef();
@@ -142,14 +145,12 @@ public class RSNPC extends RSCharacter {
      */
     @Override
     public boolean isInteractingWithLocalPlayer() {
-       // RSNPC npc = methods.npcs.getNearest(getID())
         RSNPC npc = this;
-        return npc.getInteracting() != null && npc.getInteracting().equals(
-                methods.players.getMyPlayer());
+        return npc.getInteracting() != null
+                && npc.getInteracting().equals(methods.players.getMyPlayer());
     }
 
-
-/*
+    /*
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -162,9 +163,7 @@ public class RSNPC extends RSCharacter {
         }
         return "NPC[" + getName() + "],actions=[" + sb.toString() + "]"
                 + super.toString();
-    }
-*/
-
+    }*/
 
     NpcDefinition getDef() {
         return this.def;
@@ -173,7 +172,4 @@ public class RSNPC extends RSCharacter {
     public RSTile getPosition() {
         return getLocation();
     }
-
-
-
 }

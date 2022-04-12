@@ -8,10 +8,10 @@ import rsb.script.PassiveScriptManifest;
 import java.util.*;
 
 public class PassiveScriptHandler {
-	private final HashMap<Integer, PassiveScript> scripts = new HashMap<Integer, PassiveScript>();
-	private final HashMap<Integer, Thread> scriptThreads = new HashMap<Integer, Thread>();
+	private final HashMap<Integer, PassiveScript> scripts = new HashMap<>();
+	private final HashMap<Integer, Thread> scriptThreads = new HashMap<>();
 
-	private final Set<PassiveScriptListener> listeners = Collections.synchronizedSet(new HashSet<PassiveScriptListener>());
+	private final Set<PassiveScriptListener> listeners = Collections.synchronizedSet(new HashSet<>());
 
 	private final RuneLite bot;
 

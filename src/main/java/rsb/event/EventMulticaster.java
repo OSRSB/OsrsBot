@@ -122,9 +122,9 @@ public class EventMulticaster implements EventListener {
 	}
 
 	private long enabledMask;
-	private final List<Long> listenerMasks = new ArrayList<Long>();
+	private final List<Long> listenerMasks = new ArrayList<>();
 
-	private final List<EventListener> listeners = new ArrayList<EventListener>(5);
+	private final List<EventListener> listeners = new ArrayList<>(5);
 
 	private EventMulticaster parent;
 

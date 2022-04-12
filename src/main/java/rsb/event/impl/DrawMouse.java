@@ -6,13 +6,12 @@ import rsb.event.listener.PaintListener;
 import rsb.methods.MethodContext;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DrawMouse implements PaintListener {
 	private final MethodContext ctx;
-	private final List<Cross> clicks = new LinkedList<Cross>();
+	private final List<Cross> clicks = new LinkedList<>();
 	private final Object lock = new Object();
 
 	public DrawMouse(RuneLite bot) {
@@ -40,9 +39,7 @@ public class DrawMouse implements PaintListener {
 				}
 			}
 			synchronized (lock) {
-				Iterator<Cross> clickIterator = clicks.listIterator();
-				while (clickIterator.hasNext()) {
-					Cross toDraw = clickIterator.next();
+				for (Cross toDraw : clicks) {
 					if (toDraw.handle()) {
 						drawPoint(toDraw.getLocation(), toDraw.getRot(), gg, toDraw.getAlpha());
 					} else {
@@ -98,10 +95,9 @@ public class DrawMouse implements PaintListener {
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			if (o instanceof Cross) {
-				Cross oo = (Cross) o;
-				return oo.location.equals(this.location);
+		public boolean equals(Object obj) {
+			if (obj instanceof Cross cross) {
+				return cross.location.equals(this.location);
 			}
 			return false;
 		}

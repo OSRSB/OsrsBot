@@ -4,7 +4,11 @@ import net.runelite.api.Actor;
 import net.runelite.api.Skill;
 import rsb.internal.globval.VarpIndices;
 import rsb.internal.globval.GlobalWidgetInfo;
+import rsb.internal.globval.VarpValues;
+import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.*;
+
+import java.util.Arrays;
 
 /**
  * Combat related operations.
@@ -18,25 +22,28 @@ public class Combat extends MethodProvider {
 	/**
 	 * Eats at the desired HP %.
 	 *
-	 * @param percent The health percentage to eat at; 10%-90%
-	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @param foods   Optional: Array of foods we can eat,
+	 *                if no array supplied will eat edible stuff in inventory.
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
 	 *         <code>false</code>.
 	 */
-	@Deprecated
-	public boolean Eat(final int percent, final int... foods) {
-		return eat(percent, foods);
+	public boolean eatUntilHP(final int percent, final int... foods) {
+		if (foods == null || foods.length == 0) {
+			return eatEdibleUntilHP(percent);
+		}
+		return eatFoodsUntilHP(percent, foods);
 	}
 
 	/**
 	 * Eats at the desired HP %.
 	 *
-	 * @param percent The health percentage to eat at; 10%-90%
-	 * @param foods   Array of Foods we can eat.
-	 * @return <code>true</code> once we eaten to the health % (percent); otherwise
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @param foods   Array of foods we can eat.
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
 	 *         <code>false</code>.
 	 */
-	public boolean eat(final int percent, final int... foods) {
+	public boolean eatFoodsUntilHP(final int percent, final int... foods) {
 		int firstPercent = getHealth();
 		for (int food : foods) {
 			if (!methods.inventory.contains(food)) {
@@ -58,19 +65,47 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
+	 * Eats at the desired HP %.
+	 *
+	 * @param percent The health percentage to eat to; eg.10%-90%
+	 * @return <code>true</code> once we ate to the health % (percent); otherwise
+	 *         <code>false</code>.
+	 */
+	public boolean eatEdibleUntilHP(final int percent) {
+		int firstPercent = getHealth();
+		RSItem[] edibleItems = methods.inventory.getAllWithAction("Eat");
+		if (edibleItems == null || edibleItems.length == 0) {
+			return false;
+		}
+		for (RSItem edibleItem : edibleItems) {
+			if (edibleItem.doAction("Eat")) {
+				for (int i = 0; i < 100; i++) {
+					sleep(random(100, 300));
+					if (firstPercent < percent) {
+						break;
+					}
+				}
+			}
+			if (getHealth() >= percent) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Turns auto-retaliate on or off in the combat tab.
 	 *
 	 * @param enable <code>true</code> to enable; <code>false</code> to disable.
 	 */
 	public void setAutoRetaliate(final boolean enable) {
-		final RSWidget autoRetal = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
+		final RSWidget autoRetaliate = methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_AUTO_RETALIATE);
 		if (isAutoRetaliateEnabled() != enable) {
-			if (methods.game.getCurrentTab() != GameGUI.Tab.COMBAT) {
-				methods.game.openTab(GameGUI.Tab.COMBAT);
+			if (methods.game.getCurrentTab() != InterfaceTab.COMBAT) {
+				methods.game.openTab(InterfaceTab.COMBAT);
 			}
-			if (methods.game.getCurrentTab() == GameGUI.Tab.COMBAT
-					&& autoRetal != null) {
-				autoRetal.doClick();
+			if (methods.game.getCurrentTab() == InterfaceTab.COMBAT && autoRetaliate != null) {
+				autoRetaliate.doClick();
 			}
 		}
 	}
@@ -81,7 +116,8 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */
 	public boolean isAutoRetaliateEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.AUTO_RETALIATE_ENABLED) == 0;
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_AUTO_RETALIATE)
+				== VarpValues.AUTO_RETALIATE_ENABLED.getValue();
 	}
 
 	/**
@@ -105,14 +141,14 @@ public class Combat extends MethodProvider {
 	 */
 	public boolean setFightMode(int fightMode) {
 		if (fightMode != getFightMode()) {
-			methods.game.openTab(GameGUI.Tab.COMBAT);
-			if (fightMode == 0) {
+			methods.game.openTab(InterfaceTab.COMBAT);
+			if (fightMode == VarpValues.COMBAT_STYLE_FIRST.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_ONE).doClick();
-			} else if (fightMode == 1) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_SECOND.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_TWO).doClick();
-			} else if (fightMode == 2) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_THIRD.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_THREE).doClick();
-			} else if (fightMode == 3) {
+			} else if (fightMode == VarpValues.COMBAT_STYLE_FOURTH.getValue()) {
 				return methods.interfaces.getComponent(GlobalWidgetInfo.COMBAT_STYLE_FOUR).doClick();
 			}
 		}
@@ -196,12 +232,13 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether the special-attack option is enabled.
+	 * Returns whether the special attack option is enabled.
 	 *
-	 * @return <code>true</code> if special is enabled; otherwise <code>false</code>.
+	 * @return <code>true</code> if special attack is enabled; otherwise <code>false</code>.
 	 */
-	public boolean isSpecialEnabled() {
-		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.SPECIAL_ATTACK_ENABLED) == 1;
+	public boolean isSpecialAttackEnabled() {
+		return methods.clientLocalStorage.getVarpValueAt(VarpIndices.TOGGLE_SPECIAL_ATTACK)
+				== VarpValues.SPECIAL_ATTACK_ENABLED.getValue();
 	}
 
 	/**
@@ -235,7 +272,7 @@ public class Combat extends MethodProvider {
 	 */
 	public int getPrayerPoints() {
 		try {
-			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_PRAYER_ORB_TEXT)
+			return Integer.parseInt(methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB_TEXT)
 					.getText()
 					.trim());
 		} catch (NumberFormatException ex) {
@@ -264,6 +301,14 @@ public class Combat extends MethodProvider {
 		return interact != null && interact.equals(npc.getAccessor());
 	}
 
+	public boolean isHPZero(final RSNPC npc) {
+		return npc.getHPPercent() == 0;
+	}
+
+	public boolean isAlive(final RSNPC npc) {
+		return npc.getHPPercent() > 0 || (isHPZero(npc) && isFinishable(npc));
+	}
+
 	/**
 	 * Checks whether the desired Npc is dead.
 	 *
@@ -271,14 +316,59 @@ public class Combat extends MethodProvider {
 	 * @return <code>true</code> if the Npc is dead or dying; otherwise
 	 *         <code>false</code>.
 	 */
+	//TODO: this will need investigation as there will always be special cases
 	public boolean isDead(final RSNPC npc) {
-		// getHPPercent() can return 0 when the Npc has a sliver of health left
-		// getAnimation() confirms a death animation is playing (to prevent
-		// false positives)
-		// getInteracting() confirms because it will no longer interact if
-		// dead/dying
-		//TODO: Fix this
-		return npc == null || !npc.isValid() || (npc.getHPPercent() == 0 && npc.getAnimation() != -1 && npc
-				.getInteracting() == null);
+		return isHPZero(npc) && !isFinishable(npc);
+	}
+
+	public boolean isBelowHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() < healthPercentage;
+	}
+
+	public boolean isBelowOrAtHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() <= healthPercentage;
+	}
+
+	public boolean isAboveHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() > healthPercentage;
+	}
+
+	public boolean isAboveOrAtHP(final RSNPC npc, final double healthPercentage) {
+		return npc.getHPPercent() >= healthPercentage;
+	}
+
+	public boolean isLowHealth(final RSNPC npc) {
+		return isAboveHP(npc, 0) && isBelowHP(npc, 15);
+	}
+
+	public boolean isFinishable(final RSNPC npc) {
+		String mobName = npc.getName();
+		if (mobName == null || mobName.equals(""))
+			return false;
+		String[] finishableMobs = {
+				"Rockslug", "Desert Lizard", "Small Lizard", "Lizard", "Mutated Zygomite", "Ancient Zygomite", "Gargoyle"
+		};
+		return Arrays.asList(finishableMobs).contains(mobName);
+	}
+
+	public double getFinishableHP(double maxHP, double finishHP) {
+		return Math.floor(finishHP/(maxHP/100));
+	}
+
+	public boolean canBeFinished(final RSNPC npc) {
+		String mobName = npc.getName();
+		if (mobName == null || mobName.equals(""))
+			return false;
+		switch (mobName) {
+			case "Ancient Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(150, 7));
+			case "Gargoyle" -> isBelowOrAtHP(npc, getFinishableHP(105, 8));
+			case "Zygomite" -> isBelowOrAtHP(npc, getFinishableHP(75, 7));
+			case "Lizard" -> isBelowOrAtHP(npc, getFinishableHP(40, 4));
+			case "Rockslug" -> isBelowOrAtHP(npc, getFinishableHP(27, 5));
+			case "Desert Lizard" -> isBelowOrAtHP(npc, getFinishableHP(25, 4));
+			case "Small Lizard" -> isBelowOrAtHP(npc, getFinishableHP(15, 4));
+			default -> throw new IllegalStateException("Unexpected value: " + mobName);
+		}
+		return false;
 	}
 }

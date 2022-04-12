@@ -612,9 +612,9 @@ public class Base64 {
 	 *         <code>false</code>, otherwise
 	 */
 	public boolean isInAlphabet(byte[] arrayOctet, boolean allowWSPad) {
-		for (int i = 0; i < arrayOctet.length; i++) {
-			if (!isInAlphabet(arrayOctet[i]) &&
-					(!allowWSPad || (arrayOctet[i] != PAD) && !isWhiteSpace(arrayOctet[i]))) {
+		for (byte b : arrayOctet) {
+			if (!isInAlphabet(b) &&
+					(!allowWSPad || (b != PAD) && !isWhiteSpace(b))) {
 				return false;
 			}
 		}
@@ -646,8 +646,8 @@ public class Base64 {
 		if (arrayOctet == null) {
 			return false;
 		}
-		for (int i = 0; i < arrayOctet.length; i++) {
-			if (PAD == arrayOctet[i] || isInAlphabet(arrayOctet[i])) {
+		for (byte b : arrayOctet) {
+			if (PAD == b || isInAlphabet(b)) {
 				return true;
 			}
 		}
@@ -870,8 +870,8 @@ public class Base64 {
 	 * @since 1.5
 	 */
 	public static boolean isBase64(byte[] arrayOctet) {
-		for (int i = 0; i < arrayOctet.length; i++) {
-			if (!isBase64(arrayOctet[i]) && !isWhiteSpace(arrayOctet[i])) {
+		for (byte b : arrayOctet) {
+			if (!isBase64(b) && !isWhiteSpace(b)) {
 				return false;
 			}
 		}

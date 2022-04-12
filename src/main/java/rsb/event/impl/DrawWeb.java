@@ -9,7 +9,6 @@ import rsb.wrappers.RSPlayer;
 import rsb.wrappers.RSTile;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.Map;
 
 public class DrawWeb implements PaintListener {
@@ -35,9 +34,8 @@ public class DrawWeb implements PaintListener {
 		if (player == null) {
 			return;
 		}
-		Iterator<Map.Entry<RSTile, TileFlags>> rs = Web.map.entrySet().iterator();
-		while (rs.hasNext()) {
-			TileFlags t = rs.next().getValue();
+		for (Map.Entry<RSTile, TileFlags> rsTileTileFlagsEntry : Web.map.entrySet()) {
+			TileFlags t = rsTileTileFlagsEntry.getValue();
 			render.setColor(t.isWalkable() ? t.isQuestionable() ? Color.yellow : Color.green : t.isWater() ? Color.cyan : Color.red);
 			Point p = tileToMap(t.getTile(), player);
 			render.drawLine(p.x, p.y, p.x, p.y);

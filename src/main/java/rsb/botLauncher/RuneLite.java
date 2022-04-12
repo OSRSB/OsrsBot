@@ -412,11 +412,9 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withRequiredArg()
                 .ofType(ClientUpdateCheckMode.class)
                 .defaultsTo(ClientUpdateCheckMode.AUTO)
-                .withValuesConvertedBy(new EnumConverter<ClientUpdateCheckMode>(ClientUpdateCheckMode.class)
-                {
+                .withValuesConvertedBy(new EnumConverter<>(ClientUpdateCheckMode.class) {
                     @Override
-                    public ClientUpdateCheckMode convert(String v)
-                    {
+                    public ClientUpdateCheckMode convert(String v) {
                         return super.convert(v.toUpperCase());
                     }
                 });
@@ -495,11 +493,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         try
         {
+            final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
                     options.valueOf(
                             optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
                     (String) options.valueOf("jav_config"));
-            final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
 
             new Thread(() ->
             {
