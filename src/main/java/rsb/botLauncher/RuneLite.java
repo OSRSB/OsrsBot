@@ -76,6 +76,7 @@ import okhttp3.OkHttpClient;
 
 
 @Slf4j
+@Singleton
 @SuppressWarnings("removal")
 public class RuneLite extends net.runelite.client.RuneLite {
     public static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".runelite");
@@ -495,8 +496,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
         {
             final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
-                    options.valueOf(
-                            optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
+                    options.valueOf(optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
+                    runtimeConfigLoader,
                     (String) options.valueOf("jav_config"));
 
             new Thread(() ->
@@ -522,13 +523,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             setInjector(injector);
 
-            if (options.has("sub-bot")) {
-                this.init(true);
-                //injector.getInstance(RuneLite.class).init(true);
-            } else if (options.has("bot-runelite")) {
-                //this.init(false);
-                injector.getInstance(RuneLite.class).init(false);
-            }
+            injector.getInstance(RuneLite.class).init(false);
 
             final long end = System.currentTimeMillis();
             final RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
