@@ -7,14 +7,19 @@ package rsb.botLauncher;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
+import lombok.extern.slf4j.Slf4j;
 import rsb.internal.globval.GlobalConfiguration;
+import rsb.plugin.Botplugin;
 
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public class Application {
 
 	static RuneLite[] bots = new RuneLite[]{};
+	static String[] programArgs = new String[]{};
+	final static OptionParser parser = new OptionParser();
 
 	/**
 	 * Parses the command-line arguments and then passes the parsed arguments in the form of the parser, optionSpecs,
@@ -24,9 +29,9 @@ public class Application {
 	 * @throws Throwable	Any error that might be thrown
 	 */
 	public static void main(final String[] args) throws Throwable {
-		final OptionParser parser = new OptionParser();
 		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
 		OptionSet options = parser.parse(args);
+		programArgs = args;
 
 		checkForCacheAndLoad();
 
@@ -87,7 +92,20 @@ public class Application {
 				net.runelite.cache.Cache.main(spriteArgs);
 			}
 		}
+	}
 
+	public static void setBot(int index) {
+		RuneLite bot = getBots()[index];
+		String[] args = new String[programArgs.length + 1];
+		System.arraycopy(programArgs, 0, args, 0, programArgs.length);
+		args[programArgs.length] = "--sub-bot";
+		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
+		OptionSet options = parser.parse(args);
+		try {
+			bot.launch(parser, optionSpecs, options);
+		} catch (Throwable e) {
+			log.error("Error while starting bot", e);
+		}
 
 	}
 
