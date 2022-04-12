@@ -206,6 +206,37 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes random event pillory widget
+     * Last reviewed: 11/4/2022 0:42 am UTC+1
+     * TODO: obtain the missing keyhole shape modelIds, diamond shape, square shape
+     */
+    public static class Pillory {
+        public static final int GROUP_INDEX = 27;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // 0 box colour #0C0E1E , 1 box colour #474745
+        public static final int OPACITY_BOX = 1;
+        public static final int UNKNOWN_MODEL1 = 2; // modelId 9748
+        public static final int CURRENT_LOCK_SHAPED_HOLE_MODEL = 3; // modelId 13393 - triangle, modelId 13382 - round
+        public static final int SWINGING_KEY1_MODEL = 4; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY2_MODEL = 5; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY3_MODEL = 6; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY1_DYNAMIC_CONTAINER = 7; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SWINGING_KEY2_DYNAMIC_CONTAINER = 8; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SWINGING_KEY3_DYNAMIC_CONTAINER = 9; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SHAPED_LOCK1_MODEL = 10; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int SHAPED_LOCK2_MODEL = 11; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int SHAPED_LOCK3_MODEL = 12; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int UNKNOWN_MODEL2 = 13; // modelId 4730
+        public static final int UNKNOWN_MODEL3 = 14; // modelId 4730
+        public static final int UNKNOWN_MODEL4 = 15; // modelId 4730
+        public static final int UNKNOWN_MODEL5 = 16; // modelId 15272
+        public static final int UNKNOWN_MODEL6 = 17; // modelId 15272
+        public static final int UNKNOWN_MODEL7 = 18; // modelId 15272
+        public static final int UNKNOWN_MODEL8 = 19; // modelId 15272
+        public static final int UNKNOWN_MODEL9 = 20; // modelId 15272
+        public static final int UNKNOWN_MODEL10 = 21; // modelId 15272
+    }
+
+    /**
      * Describes world switcher widget
      * Last reviewed: 10/4/2022 10:27 pm UTC+1
      */
