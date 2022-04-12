@@ -206,6 +206,37 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes random event pillory widget
+     * Last reviewed: 11/4/2022 0:42 am UTC+1
+     * TODO: obtain the missing keyhole shape modelIds, diamond shape, square shape
+     */
+    public static class Pillory {
+        public static final int GROUP_INDEX = 27;
+        public static final int PARENT_DYNAMIC_CONTAINER = 0; // 0 box colour #0C0E1E , 1 box colour #474745
+        public static final int OPACITY_BOX = 1;
+        public static final int UNKNOWN_MODEL1 = 2; // modelId 9748
+        public static final int CURRENT_LOCK_SHAPED_HOLE_MODEL = 3; // modelId 13393 - triangle, modelId 13382 - round
+        public static final int SWINGING_KEY1_MODEL = 4; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY2_MODEL = 5; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY3_MODEL = 6; // modelId 4141 - square, modelId 11032 - triangle, modelId 13395 - diamond, modelId 13396 - round
+        public static final int SWINGING_KEY1_DYNAMIC_CONTAINER = 7; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SWINGING_KEY2_DYNAMIC_CONTAINER = 8; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SWINGING_KEY3_DYNAMIC_CONTAINER = 9; // 0 box, colour #FFFFFF, opacity 255, likely selection box
+        public static final int SHAPED_LOCK1_MODEL = 10; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int SHAPED_LOCK2_MODEL = 11; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int SHAPED_LOCK3_MODEL = 12; // modelId 9757 - locked, modelId 9758 - unlocked
+        public static final int UNKNOWN_MODEL2 = 13; // modelId 4730
+        public static final int UNKNOWN_MODEL3 = 14; // modelId 4730
+        public static final int UNKNOWN_MODEL4 = 15; // modelId 4730
+        public static final int UNKNOWN_MODEL5 = 16; // modelId 15272
+        public static final int UNKNOWN_MODEL6 = 17; // modelId 15272
+        public static final int UNKNOWN_MODEL7 = 18; // modelId 15272
+        public static final int UNKNOWN_MODEL8 = 19; // modelId 15272
+        public static final int UNKNOWN_MODEL9 = 20; // modelId 15272
+        public static final int UNKNOWN_MODEL10 = 21; // modelId 15272
+    }
+
+    /**
      * Describes world switcher widget
      * Last reviewed: 10/4/2022 10:27 pm UTC+1
      */
@@ -1275,6 +1306,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes prison pete random event widgets after pulling lever
+     * Last reviewed: 11/4/2022 11:06 pm UTC+1
+     */
+    public static class PrisonPete {
+        public static final int GROUP_INDEX = 273;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int IRON_BARS_MODEL = 1;
+        public static final int TEXT_LABEL = 2;
+        public static final int MODEL_CONTAINER = 3;
+        public static final int BALLOON_ANIMAL_MODEL = 4; // Note: holds the modelId of balloon animals to pop
+        public static final int BUTTON_CLOSE_SPRITE = 5;
+    }
+
+    /**
      * Describes become member ad widget
      * Last reviewed: 6/4/2022 0:17 am UTC+1
      */
@@ -1917,6 +1962,87 @@ public class WidgetIndices {
         public static final int TAB_EQUIPMENT_ICON_SPRITE = 73;
         public static final int TAB_PRAYER_ICON_SPRITE = 74;
         public static final int TAB_MAGIC_ICON_SPRITE = 75;
+    }
+
+    /**
+     * Describes misthalin manor piano widgets
+     * Last reviewed: 11/4/2022 1:01 pm UTC+1
+     * TODO: Are those models rly at same position or just widget inspector going nuts?
+     */
+    public static class ManorPiano {
+        public static final int GROUP_INDEX = 554;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int MODEL_CONTAINER = 2; // likely the piano model and some other one
+        public static final int UNKNOWN_MODEL1 = 3; // modelId 25889
+        public static final int UNKNOWN_MODEL2 = 4; // modelId 32344
+        public static final int KEYNOTES_CONTAINER = 5;
+        // 6 - 19 models, likely the key notes models
+        public static final int KEYNOTE_C_LABEL = 20;
+        public static final int KEYNOTE_D_LABEL = 21;
+        public static final int KEYNOTE_E_LABEL = 22;
+        public static final int KEYNOTE_F_LABEL = 23;
+        public static final int KEYNOTE_G_LABEL = 24;
+        public static final int KEYNOTE_A_LABEL = 25;
+        public static final int KEYNOTE_B_LABEL = 26;
+        public static final int SECOND_KEYNOTE_C_LABEL = 27;
+        public static final int SECOND_KEYNOTE_D_LABEL = 28;
+        public static final int SECOND_KEYNOTE_E_LABEL = 29;
+        public static final int SECOND_KEYNOTE_F_LABEL = 30;
+        public static final int SECOND_KEYNOTE_G_LABEL = 31;
+        public static final int SECOND_KEYNOTE_A_LABEL = 32;
+        public static final int SECOND_KEYNOTE_B_LABEL = 33;
+        public static final int CLOSE_BUTTON_CONTAINER = 34;
+        public static final int CLOSE_BUTTON_SPRITE = 35;
+    }
+
+    /**
+     * Describes misthalin manor gemstone switch panel widgets
+     * Last reviewed: 11/4/2022 1:28 pm UTC+1
+     */
+    public static class ManorGemstoneSwitchPanel {
+        public static final int GROUP_INDEX = 555;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // 0 sprite, 1 title label, 2-12 edges/corners sprites, 13 button close sprite
+        public static final int INNER_FRAME_PARENT_CONTAINER = 2;
+        public static final int BUTTON_DIAMOND_PARENT_CONTAINER = 3;
+        public static final int BUTTON_DIAMOND_DYNAMIC_CONTAINER = 4; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_DIAMOND_LABEL = 5;
+        public static final int BUTTON_DIAMOND_MODEL = 6;
+        public static final int BUTTON_ONYX_PARENT_CONTAINER = 7;
+        public static final int BUTTON_ONYX_DYNAMIC_CONTAINER = 8; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_ONYX_LABEL = 9;
+        public static final int BUTTON_ONYX_MODEL = 10;
+        public static final int BUTTON_ZENYTE_PARENT_CONTAINER = 11;
+        public static final int BUTTON_ZENYTE_DYNAMIC_CONTAINER = 12; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_ZENYTE_LABEL = 13;
+        public static final int BUTTON_ZENYTE_MODEL = 14;
+        public static final int BUTTON_RUBY_PARENT_CONTAINER = 15;
+        public static final int BUTTON_RUBY_DYNAMIC_CONTAINER = 16; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_RUBY_LABEL = 17;
+        public static final int BUTTON_RUBY_MODEL = 18;
+        public static final int BUTTON_SAPPHIRE_PARENT_CONTAINER = 19;
+        public static final int BUTTON_SAPPHIRE_DYNAMIC_CONTAINER = 20; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_SAPPHIRE_LABEL = 21;
+        public static final int BUTTON_SAPPHIRE_MODEL = 22;
+        public static final int BUTTON_EMERALD_PARENT_CONTAINER = 23;
+        public static final int BUTTON_EMERALD_DYNAMIC_CONTAINER = 24; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_EMERALD_LABEL = 25;
+        public static final int BUTTON_EMERALD_MODEL = 26;
+        public static final int GEMS_CHOSEN_ORDER_PARENT_CONTAINER = 27;
+        public static final int GEMS_CHOSEN_ORDER_CONTAINER = 28;
+        public static final int FIRST_GEM_CHOSEN_LABEL = 29;
+        public static final int SECOND_GEM_CHOSEN_LABEL = 30;
+        public static final int THIRD_GEM_CHOSEN_LABEL = 31;
+        public static final int FOURTH_GEM_CHOSEN_LABEL = 32;
+        public static final int FIFTH_GEM_CHOSEN_LABEL = 33;
+        public static final int SIXTH_GEM_CHOSEN_LABEL = 34;
+        public static final int FIRST_GEM_CHOSEN_MODEL = 35;
+        public static final int SECOND_GEM_CHOSEN_MODEL = 36;
+        public static final int THIRD_GEM_CHOSEN_MODEL = 37;
+        public static final int FOURTH_GEM_CHOSEN_MODEL = 38;
+        public static final int FIFTH_GEM_CHOSEN_MODEL = 39;
+        public static final int SIXTH_GEM_CHOSEN_MODEL = 40;
     }
 
     /**
