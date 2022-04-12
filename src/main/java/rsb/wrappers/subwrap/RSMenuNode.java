@@ -66,13 +66,6 @@ public class RSMenuNode {
         return false;
     }
 
-
-    /*
-    public boolean equals(Object o) {
-    }
-     */
-
-
     public int getIndex() {
         return index;
     }

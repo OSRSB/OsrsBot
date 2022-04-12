@@ -19,7 +19,6 @@ public class RSNPC extends RSCharacter {
     private static HashMap<Integer, File> npcFileCache;
     private final SoftReference<NPC> npc;
     private final NpcDefinition def;
-    //private final NPC npc;
 
     public RSNPC(final MethodContext ctx, final NPC npc) {
         super(ctx);
@@ -149,21 +148,6 @@ public class RSNPC extends RSCharacter {
         return npc.getInteracting() != null
                 && npc.getInteracting().equals(methods.players.getMyPlayer());
     }
-
-    /*
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (final String act : getActions()) {
-            sb.append(act);
-            sb.append(",");
-        }
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
-        }
-        return "NPC[" + getName() + "],actions=[" + sb.toString() + "]"
-                + super.toString();
-    }*/
 
     NpcDefinition getDef() {
         return this.def;

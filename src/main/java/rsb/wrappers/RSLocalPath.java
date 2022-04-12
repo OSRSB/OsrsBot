@@ -232,9 +232,6 @@ public class RSLocalPath extends RSPath {
 			dy = -dy;
 		}
 		return dx < dy ? dy : dx;
-		//double diagonal = dx > dy ? dy : dx;
-		//double manhattan = dx + dy;
-		//return 1.41421356 * diagonal + (manhattan - 2 * diagonal);
 	}
 
 	private double dist(Node start, Node end) {

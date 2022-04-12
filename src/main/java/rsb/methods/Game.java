@@ -82,7 +82,6 @@ public class Game extends MethodProvider {
 	 *         <code>false</code>.
 	 */
 	public boolean openTab(InterfaceTab interfaceTab, boolean useHotkey) {
-		// Check current tab
 		if (interfaceTab == getCurrentTab()) { return true; }
 		if (useHotkey) {
 			if (interfaceTab.getHotkey() == 0) { return false; } // no hotkey for specified tab
