@@ -3,6 +3,7 @@ package rsb.plugin;
 import net.runelite.client.ui.components.materialtabs.MaterialTab;
 import net.runelite.client.ui.components.materialtabs.MaterialTabGroup;
 import net.runelite.client.util.ImageUtil;
+import net.runelite.client.ui.PluginPanel;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.globval.GlobalConfiguration;
 
@@ -14,7 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ScriptPanel extends JPanel {
+public class ScriptPanel extends PluginPanel {
 	private RuneLite bot;
 	private JScrollPane scrollPane1;
 	private JScrollPane scriptsSelectionScrollPane;

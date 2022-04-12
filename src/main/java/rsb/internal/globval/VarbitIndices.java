@@ -4,13 +4,29 @@ public class VarbitIndices {
     public static final int RUNE_POUCH_FIRST_SLOT_RUNE = 29; // Permitted values: enum of allowed runes
     public static final int SPELL_TO_AUTOCAST = 276; // Permitted values: WidgetIndices.DynamicComponents.AutocastSpells
     public static final int EQUIPPED_WEAPON_TYPE = 357;
+    public static final int PRISON_PETE_CORRECT_KEYS_GIVEN = 1547;
     public static final int RUNE_POUCH_SECOND_SLOT_RUNE = 1622; // Permitted values: enum of allowed runes
     public static final int RUNE_POUCH_THIRD_SLOT_RUNE = 1623; // Permitted values: enum of allowed runes
     public static final int RUNE_POUCH_FIRST_SLOT_AMOUNT = 1624;
     public static final int RUNE_POUCH_SECOND_SLOT_AMOUNT = 1625;
     public static final int RUNE_POUCH_THIRD_SLOT_AMOUNT = 1626;
     public static final int MOTHERLODE_MINE_Z_PLANE = 2086;
+    /**
+     * Permitted values: 0,3,4,5,6
+     * Note: 0 = not started, 3 = started, 6 = finished
+     */
+    public static final int QUEST_GOBLIN_DIPLOMACY = 2378;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 3 = finished
+     */
+    public static final int QUEST_DEMON_SLAYER = 2561;
     public static final int DEFENSIVE_AUTOCAST = 2668;
+    /**
+     * Permitted values: 0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,111,115,120,125,130,135
+     * Note: 0 = not started, 5 = started, 135 = finished
+     */
+    public static final int QUEST_MISTHALIN_MYSTERY = 3468;
     public static final int TOGGLE_BANK_ALWAYS_SET_PLACEHOLDERS = 3755;
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 3958;
     public static final int TOGGLE_BANK_REARRANGE_MODE = 3959;

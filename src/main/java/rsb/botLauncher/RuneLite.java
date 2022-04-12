@@ -26,6 +26,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Nullable;
@@ -48,9 +49,11 @@ import net.runelite.client.discord.DiscordService;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.rs.ClientLoader;
 import net.runelite.client.rs.ClientUpdateCheckMode;
+import net.runelite.client.ui.overlay.WidgetOverlay;
 import okhttp3.Request;
 import okhttp3.Response;
 import rsb.event.EventManager;
@@ -72,7 +75,6 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
 
-@Singleton
 @Slf4j
 @SuppressWarnings("removal")
 public class RuneLite extends net.runelite.client.RuneLite {
@@ -130,6 +132,10 @@ public class RuneLite extends net.runelite.client.RuneLite {
     @Nullable
     private Client client;
 
+    @Inject
+    @Nullable
+    private Applet applet;
+
     private String account;
     private MethodContext methods;
     private Component panel;
@@ -137,7 +143,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private TextPaintEvent textPaintEvent;
     private EventManager eventManager;
     private BufferedImage backBuffer;
-    private BufferedImage image;
+    private Image image;
     private InputManager im;
     private ScriptHandler sh;
     private PassiveScriptHandler psh;
@@ -145,6 +151,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private Map<String, EventListener> listeners;
     private boolean kill_passive = false;
     private Canvas canvas;
+    private Botplugin botplugin;
 
     /**
      * Defines what types of input are enabled when overrideInput is false.
@@ -195,6 +202,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
     public Client getClient() {
         return client = injector.getInstance(Client.class);
     }
+
+    public Applet getApplet() {return applet = injector.getInstance(Applet.class);}
 
     public ItemManager getItemManager() { return injector.getInstance(ItemManager.class);}
 
@@ -254,8 +263,12 @@ public class RuneLite extends net.runelite.client.RuneLite {
         return clazz != null && listeners.get(clazz.getName()) != null;
     }
 
-    public BufferedImage getImage() {
+    public Image getImage() {
         return image;
+    }
+
+    public BufferedImage getBackBuffer() {
+        return backBuffer;
     }
 
     public Component getPanel() {
@@ -311,6 +324,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * @return  The graphics of the Canvas
      */
     public Graphics getBufferGraphics(MainBufferProvider mainBufferProvider) {
+        image = mainBufferProvider.getImage();
         Graphics back = mainBufferProvider.getImage().getGraphics();
         paintEvent.graphics = back;
         textPaintEvent.graphics = back;
@@ -338,7 +352,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * @param options       The option set for the program
      * @throws Exception Any exception the client or RuneLite might throw
      */
-    public static void launch(OptionParser parser, ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) throws Exception {
+    public void launch(OptionParser parser, ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
         handleOptions(parser, optionSpecs, options);
         setDefaultUncaughtExceptionHandler();
@@ -350,7 +364,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * The values assigned are their positions within the relating ArgumentAcceptingOptionSpec array
      */
     enum Options {
-        sessionfile(0),configfile(1), updatemode(2), proxyinfo(3);
+        SESSION_FILE(0),CONFIG_FILE(1), UPDATE_MODE(2), PROXY_INFO(3);
 
         private int index;
 
@@ -371,8 +385,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
      */
     public static ArgumentAcceptingOptionSpec<?>[] handleParsing(OptionParser parser) {
 
-        parser.accepts("bot", "Starts the client in bot mode");
         parser.accepts("bot-runelite", "Starts the client in Bot RuneLite mode");
+        parser.accepts("sub-bot", "Starts a sub-bot client without the additional features of RuneLite");
         parser.accepts("runelite", "Starts the client in RuneLite mode");
         parser.accepts("developer-mode", "Enable developer tools");
         parser.accepts("ea", "Enable assertions");
@@ -426,7 +440,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
         }
 
         if (options.has("proxy")) {
-            String[] proxy = options.valueOf(optionSpecs[Options.proxyinfo.getIndex()].ofType(String.class)).split(":");
+            String[] proxy = options.valueOf(optionSpecs[Options.PROXY_INFO.getIndex()].ofType(String.class)).split(":");
 
             if (proxy.length >= 2) {
                 System.setProperty("socksProxyHost", proxy[0]);
@@ -470,20 +484,19 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * @param optionSpecs   The associated fields to the corresponding options
      * @param options       The actual set of options required for initialization
      */
-    public static void initializeClient(ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) {
+    public void initializeClient(ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) {
         final OkHttpClient okHttpClient = buildHttpClient(options.has("insecure-skip-tls-verification"));
         RuneLiteAPI.CLIENT = okHttpClient;
 
-        SplashScreen.init();
-        SplashScreen.stage(0, "Retrieving client", "");
+        //SplashScreen.init();
+        //SplashScreen.stage(0, "Retrieving client", "");
 
         try
         {
             final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
                     options.valueOf(
-                            optionSpecs[Options.updatemode.getIndex()].ofType(ClientUpdateCheckMode.class)),
-                    runtimeConfigLoader,
+                            optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
                     (String) options.valueOf("jav_config"));
 
             new Thread(() ->
@@ -503,18 +516,18 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     runtimeConfigLoader,
                     options.has("developer-mode"),
                     false,
-                    options.valueOf(optionSpecs[Options.sessionfile.getIndex()].ofType(File.class)),
-                    options.valueOf(optionSpecs[Options.configfile.getIndex()].ofType(File.class)
+                    options.valueOf(optionSpecs[Options.SESSION_FILE.getIndex()].ofType(File.class)),
+                    options.valueOf(optionSpecs[Options.CONFIG_FILE.getIndex()].ofType(File.class)
                     )));
 
             setInjector(injector);
 
-            if (options.has("bot-runelite")) {
-                //setInjector();
-                injector.getInstance(RuneLite.class).init();
-            }
-            else {
-                injector.getInstance(RuneLite.class).init();
+            if (options.has("sub-bot")) {
+                this.init(true);
+                //injector.getInstance(RuneLite.class).init(true);
+            } else if (options.has("bot-runelite")) {
+                //this.init(false);
+                injector.getInstance(RuneLite.class).init(false);
             }
 
             final long end = System.currentTimeMillis();
@@ -553,9 +566,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * The actual method associated with initializing the client-related data. Such as creating the client sizing and
      * binding the plethora of handlers, listeners, and managers to this particular RuneLite instance
      * (outside the injector binding)
-     * @throws Exception    Any exception the client, bot, or RuneLite might throw.
+     *
+     * @param  startClientBare  Whether to launch the client without any additional initialization settings or not
+     * @throws Exception        Any exception the client, bot, or RuneLite might throw.
      */
-    public void init() throws Exception {
+    public void init(boolean startClientBare) throws Exception {
         im = new InputManager(this);
         Executors.newSingleThreadScheduledExecutor().submit(() -> {
             while(this.getClient() == null){}
@@ -572,12 +587,179 @@ public class RuneLite extends net.runelite.client.RuneLite {
         paintEvent = new PaintEvent();
         textPaintEvent = new TextPaintEvent();
         listeners = new TreeMap<>();
-        pluginManager.add(new Botplugin(injector));
+        Botplugin botplugin = new Botplugin(injector);
+        pluginManager.add(botplugin);
         setMethodContext();
 
         eventManager.start();
 
-        this.start();
+        if (!startClientBare) {
+            this.start();
+        }
+        else {
+            this.bareStart();
+        }
+    }
+
+    /**
+     * Test purposes only.
+     */
+    public void start() throws Exception {
+        // Load RuneLite or Vanilla client
+        final boolean isOutdated = client == null;
+
+        if (!isOutdated)
+        {
+            // Inject members into client
+            injector.injectMembers(client);
+        }
+
+        // Start the applet
+        if (applet != null)
+        {
+
+            // Client size must be set prior to init
+            applet.setSize(Constants.GAME_FIXED_SIZE);
+
+            // Change user.home so the client places jagexcache in the .runelite directory
+            String oldHome = System.setProperty("user.home", RUNELITE_DIR.getAbsolutePath());
+            try
+            {
+                applet.init();
+            }
+            finally
+            {
+                System.setProperty("user.home", oldHome);
+            }
+
+            applet.start();
+        }
+
+        SplashScreen.stage(.57, null, "Loading configuration");
+
+        // Load user configuration
+        configManager.load();
+
+        // Load the session, including saved configuration
+        sessionManager.loadSession();
+
+        // Tell the plugin manager if client is outdated or not
+        pluginManager.setOutdated(isOutdated);
+
+        // Load the plugins, but does not start them yet.
+        // This will initialize configuration
+        pluginManager.loadCorePlugins();
+        externalPluginManager.loadExternalPlugins();
+
+        SplashScreen.stage(.70, null, "Finalizing configuration");
+
+        // Plugins have provided their config, so set default config
+        // to main settings
+        pluginManager.loadDefaultPluginConfiguration(null);
+
+        // Start client session
+        clientSessionManager.start();
+        eventBus.register(clientSessionManager);
+
+        SplashScreen.stage(.75, null, "Starting core interface");
+
+        // Initialize UI
+        clientUI.init();
+
+        // Initialize Discord service
+        discordService.init();
+
+        // Register event listeners
+        eventBus.register(clientUI);
+        eventBus.register(pluginManager);
+        eventBus.register(externalPluginManager);
+        eventBus.register(overlayManager);
+        eventBus.register(configManager);
+        eventBus.register(discordService);
+
+        if (!isOutdated)
+        {
+            // Add core overlays
+            WidgetOverlay.createOverlays(overlayManager, client).forEach(overlayManager::add);
+            overlayManager.add(worldMapOverlay.get());
+            overlayManager.add(tooltipOverlay.get());
+        }
+
+        // Start plugins
+        pluginManager.startPlugins();
+
+        SplashScreen.stop();
+
+        clientUI.show();
+    }
+
+    /**
+     * Launches a client with the bare minimum of settings needed. This is used for the sub-bots and do not use
+     * the additional initializations that the standard RuneLite start method does.
+     * @throws Exception    Any exception the client, bot, or RuneLite might throw.
+     */
+    public void bareStart() throws Exception {
+        // Load RuneLite or Vanilla client
+        final boolean isOutdated = client == null;
+
+        if (!isOutdated)
+        {
+            // Inject members into client
+            injector.injectMembers(client);
+        }
+
+        // Start the applet
+        if (applet != null)
+        {
+            // Client size must be set prior to init
+            applet.setSize(Constants.GAME_FIXED_SIZE);
+
+            // Change user.home so the client places jagexcache in the .runelite directory
+            String oldHome = System.setProperty("user.home", RUNELITE_DIR.getAbsolutePath());
+            try
+            {
+                applet.init();
+            }
+            finally
+            {
+                System.setProperty("user.home", oldHome);
+            }
+
+            applet.start();
+        }
+
+        // Load user configuration
+        configManager.load();
+
+        // Load the session, including saved configuration
+        sessionManager.loadSession();
+
+
+        // Load the plugins, but does not start them yet.
+        // This will initialize configuration
+
+        // Plugins have provided their config, so set default config
+        // to main settings
+
+        // Start client session
+        clientSessionManager.start();
+        eventBus.register(clientSessionManager);
+
+        // Register event listeners
+        eventBus.register(clientUI);
+        eventBus.register(pluginManager);
+        eventBus.register(externalPluginManager);
+        eventBus.register(overlayManager);
+        eventBus.register(configManager);
+
+        if (!isOutdated)
+        {
+            // Add core overlays
+            WidgetOverlay.createOverlays(overlayManager, client).forEach(overlayManager::add);
+            overlayManager.add(worldMapOverlay.get());
+            overlayManager.add(tooltipOverlay.get());
+        }
+
     }
 
     /**

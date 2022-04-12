@@ -39,7 +39,7 @@ public class ScreenshotUtil {
 	}
 
 	public static BufferedImage takeScreenshot(final RuneLite bot, final boolean hideUsername) {
-		final BufferedImage source = bot.getImage();
+		final BufferedImage source = bot.getBackBuffer();
 		final WritableRaster raster = source.copyData(null);
 
 		final BufferedImage bufferedImage = new BufferedImage(source.getColorModel(), raster,

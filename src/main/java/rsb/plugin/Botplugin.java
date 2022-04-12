@@ -14,6 +14,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import rsb.botLauncher.RuneLite;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.ClientToolbar;
+import rsb.plugin.base.BotViewPanel;
 
 @PluginDescriptor(
         name = "Bot panel",
@@ -89,4 +90,9 @@ public class Botplugin extends Plugin {
     public void setAccountPanel(AccountPanel accountPanel) {
         Botplugin.accountPanel = accountPanel;
     }
+
+    public void setInjector(Injector injector) {
+        super.injector = injector;
+    }
+
 }
