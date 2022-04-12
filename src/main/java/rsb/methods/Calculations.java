@@ -35,8 +35,6 @@ public class Calculations extends MethodProvider {
 	 * @see #tileToMinimap(RSTile)
 	 */
 	public boolean tileOnMap(RSTile t) {
-		// Point p = tileToMinimap(t);
-		// return p != null && p.x != -1 && p.y != -1;
 		return tileToMinimap(t) != null;
 	}
 
@@ -166,11 +164,6 @@ public class Calculations extends MethodProvider {
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
 		WalkerTile walkerTile = new WalkerTile(tile).toLocalTile();
 		return Perspective.localToCanvas(methods.client, new LocalPoint(walkerTile.getX(), walkerTile.getY()), methods.client.getPlane(), height);
-		/*
-		return groundToScreen((int) ((tile.getWorldLocation().getX() - methods.client.getBaseX() + 0.5)),
-				(int) ((tile.getWorldLocation().getY() - methods.client.getBaseY() + 0.5)), height);
-
-		 */
 	}
 
 	/**
@@ -305,59 +298,6 @@ public class Calculations extends MethodProvider {
 		if (test!=null)
 			return Perspective.localToMinimap(methods.client,  test, 2500);
 		return null;
-		/*
-		if (distanceBetween(methods.players.getMyPlayer().getLocation(), new RSTile((int) x, (int) y)) > 17) {
-			return new Point(-1, -1);
-		}
-		x -= methods.client.getBaseX();
-		y -= methods.client.getBaseY();
-		final int calculatedX = (int) (x * 4 + 2) - methods.client.getLocalPlayer().getWorldLocation().getX() / 128;
-		final int calculatedY = (int) (y * 4 + 2) - methods.client.getLocalPlayer().getWorldLocation().getY() / 128;
-		try {
-			final net.runelite.api.widgets.Widget mm = methods.gui.getMinimapInterface();
-			if (mm == null) {
-				return new Point(-1, -1);
-			}
-			final RSWidget mm2 = new RSWidget(methods, mm);
-			final int actDistSq = calculatedX * calculatedX + calculatedY * calculatedY;
-			final int mmDist = 10 + Math.max(mm2.getWidth() / 2, mm2.getHeight() / 2);
-			if (mmDist * mmDist >= actDistSq) {
-
-				int angle = methods.client.getMapAngle() & 0x7FF;
-
-				int cs = Calculations.SIN_TABLE[angle];
-				int cc = Calculations.COS_TABLE[angle];
-
-
-				if (methods.client.isResized()) {
-					final int fact = 256 + methods.client.getWidget(WidgetInfo.RESIZABLE_MINIMAP_DRAW_AREA).getModelZoom();
-					cs = 256 * cs / fact;
-					cc = 256 * cc / fact;
-				}
-
-
-
-				final int calcCenterX = cc * calculatedX + cs * calculatedY >> 15;
-				final int calcCenterY = cc * calculatedY - cs * calculatedX >> 15;
-				final int screenx = calcCenterX + mm2.getAbsoluteX() + mm2.getWidth() / 2;
-				final int screeny = -calcCenterY + mm2.getAbsoluteY() + mm2.getHeight() / 2;
-
-				// Check whether point is within the circle of the minimap
-				// rather than the rectangle.
-				// if ((Math.max(calcCenterY, -calcCenterY) <= mm2.getWidth() /
-				// 2.0 * .8) && (Math.max(calcCenterX, -calcCenterX) <=
-				// mm2.getHeight() / 2 * .8))
-				return new Point(screenx, screeny);
-				// else
-				// return new Point(-1, -1);
-			}
-		} catch (final NullPointerException ignored) {
-			ignored.printStackTrace();
-		}
-
-		return new Point(-1, -1);
-
-		 */
 	}
 
 	/**
@@ -372,14 +312,6 @@ public class Calculations extends MethodProvider {
 	 */
 	public Point groundToScreen(final int x, final int y, final int height) {
 		return Perspective.localToCanvas(methods.client, x, y, height);
-		/*
-		if ((methods.client.getTileSettings() == null) || (methods.client.getTileHeights() == null) || (x < 512) ||
-				(y < 512) || (x > 13056) || (y > 52224)) {
-			return new Point(-1, -1);
-		}
-		int z = tileHeight(x, y) + height;
-		return worldToScreen(x, y, z);
-		 */
 	}
 
 	/**
@@ -439,41 +371,6 @@ public class Calculations extends MethodProvider {
 		return new Point(polygon.xpoints[random(0,polygon.npoints)], polygon.ypoints[random(0,polygon.npoints)]);
 	}
 
-	// ---- Internal ----
-
-	/**
-	 * Updates the rendering data. For internal use only.
-	 *
-	 * @param r  The client graphics toolkit.
-	 * @param rd The client viewport.
-	 */
-	/*
-	public void updateRenderInfo(final org.rsbot.client.Render r, final org.rsbot.client.RenderData rd) {
-		if ((r == null) || (rd == null)) {
-			return;
-		}
-		render.absoluteX1 = r.getAbsoluteX1();
-		render.absoluteX2 = r.getAbsoluteX2();
-		render.absoluteY1 = r.getAbsoluteY1();
-		render.absoluteY2 = r.getAbsoluteY2();
-		render.xMultiplier = r.getXMultiplier();
-		render.yMultiplier = r.getYMultiplier();
-		render.zNear = r.getZNear();
-		render.zFar = r.getZFar();
-		renderData.xOff = rd.getXOff();
-		renderData.xX = rd.getXX();
-		renderData.xY = rd.getXY();
-		renderData.xZ = rd.getXZ();
-		renderData.yOff = rd.getYOff();
-		renderData.yX = rd.getYX();
-		renderData.yY = rd.getYY();
-		renderData.yZ = rd.getYZ();
-		renderData.zOff = rd.getZOff();
-		renderData.zX = rd.getZX();
-		renderData.zY = rd.getZY();
-		renderData.zZ = rd.getZZ();
-	}
-*/
 	/**
 	 * @param startX   the startX (0 < startX < 104)
 	 * @param startY   the startY (0 < startY < 104)

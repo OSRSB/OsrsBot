@@ -52,18 +52,8 @@ public class RSPlayer extends RSCharacter {
 		return p.get().getTeam();
 	}
 
-	/*
-	public int getNPCID() {
-		PlayerComposition comp = p.get().getPlayerComposition();
-		if (comp != null) {
-			return comp.getTransformedNpcId();
-		}
-		return -1;
-	}
-	*/
 	public boolean isIdle() {
 		return getAnimation() == -1 && !isInCombat();
-		//return !isMoving() && (getAnimation() == -1) && !isInCombat();
 	}
 
 	@Override

@@ -17,8 +17,6 @@ import java.util.Arrays;
 
 /**
  * A screen space model.
- *
- * @author GigiaJ
  */
 @Slf4j
 public class RSModel extends MethodProvider {
