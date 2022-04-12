@@ -16,6 +16,11 @@ public class VarbitIndices {
      * Note: 0 = not started, 3 = started, 6 = finished
      */
     public static final int QUEST_GOBLIN_DIPLOMACY = 2378;
+    /**
+     * Permitted values: 0 - 3
+     * Note: 0 = not started, 1 = started, 3 = finished
+     */
+    public static final int QUEST_DEMON_SLAYER = 2561;
     public static final int DEFENSIVE_AUTOCAST = 2668;
     public static final int TOGGLE_BANK_ALWAYS_SET_PLACEHOLDERS = 3755;
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 3958;
