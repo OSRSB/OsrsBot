@@ -1997,6 +1997,55 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes misthalin manor gemstone switch panel widgets
+     * Last reviewed: 11/4/2022 1:28 pm UTC+1
+     */
+    public static class ManorGemstoneSwitchPanel {
+        public static final int GROUP_INDEX = 555;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int DYNAMIC_CONTAINER = 1; // 0 sprite, 1 title label, 2-12 edges/corners sprites, 13 button close sprite
+        public static final int INNER_FRAME_PARENT_CONTAINER = 2;
+        public static final int BUTTON_DIAMOND_PARENT_CONTAINER = 3;
+        public static final int BUTTON_DIAMOND_DYNAMIC_CONTAINER = 4; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_DIAMOND_LABEL = 5;
+        public static final int BUTTON_DIAMOND_MODEL = 6;
+        public static final int BUTTON_ONYX_PARENT_CONTAINER = 7;
+        public static final int BUTTON_ONYX_DYNAMIC_CONTAINER = 8; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_ONYX_LABEL = 9;
+        public static final int BUTTON_ONYX_MODEL = 10;
+        public static final int BUTTON_ZENYTE_PARENT_CONTAINER = 11;
+        public static final int BUTTON_ZENYTE_DYNAMIC_CONTAINER = 12; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_ZENYTE_LABEL = 13;
+        public static final int BUTTON_ZENYTE_MODEL = 14;
+        public static final int BUTTON_RUBY_PARENT_CONTAINER = 15;
+        public static final int BUTTON_RUBY_DYNAMIC_CONTAINER = 16; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_RUBY_LABEL = 17;
+        public static final int BUTTON_RUBY_MODEL = 18;
+        public static final int BUTTON_SAPPHIRE_PARENT_CONTAINER = 19;
+        public static final int BUTTON_SAPPHIRE_DYNAMIC_CONTAINER = 20; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_SAPPHIRE_LABEL = 21;
+        public static final int BUTTON_SAPPHIRE_MODEL = 22;
+        public static final int BUTTON_EMERALD_PARENT_CONTAINER = 23;
+        public static final int BUTTON_EMERALD_DYNAMIC_CONTAINER = 24; // 0 sprite, 1-8 edges/corners sprites
+        public static final int BUTTON_EMERALD_LABEL = 25;
+        public static final int BUTTON_EMERALD_MODEL = 26;
+        public static final int GEMS_CHOSEN_ORDER_PARENT_CONTAINER = 27;
+        public static final int GEMS_CHOSEN_ORDER_CONTAINER = 28;
+        public static final int FIRST_GEM_CHOSEN_LABEL = 29;
+        public static final int SECOND_GEM_CHOSEN_LABEL = 30;
+        public static final int THIRD_GEM_CHOSEN_LABEL = 31;
+        public static final int FOURTH_GEM_CHOSEN_LABEL = 32;
+        public static final int FIFTH_GEM_CHOSEN_LABEL = 33;
+        public static final int SIXTH_GEM_CHOSEN_LABEL = 34;
+        public static final int FIRST_GEM_CHOSEN_MODEL = 35;
+        public static final int SECOND_GEM_CHOSEN_MODEL = 36;
+        public static final int THIRD_GEM_CHOSEN_MODEL = 37;
+        public static final int FOURTH_GEM_CHOSEN_MODEL = 38;
+        public static final int FIFTH_GEM_CHOSEN_MODEL = 39;
+        public static final int SIXTH_GEM_CHOSEN_MODEL = 40;
+    }
+
+    /**
      * Describes apothecary's potions widget
      * Last reviewed: 9/4/2022 11:04 pm UTC+1
      */
