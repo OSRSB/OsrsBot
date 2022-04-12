@@ -1306,7 +1306,7 @@ public class WidgetIndices {
     }
 
     /**
-     * Describes music player tab widgets
+     * Describes prison pete random event widgets after pulling lever
      * Last reviewed: 11/4/2022 11:06 pm UTC+1
      */
     public static class PrisonPete {
