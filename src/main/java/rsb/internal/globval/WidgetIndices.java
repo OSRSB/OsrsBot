@@ -1965,6 +1965,38 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes misthalin manor piano widgets
+     * Last reviewed: 11/4/2022 1:01 pm UTC+1
+     * TODO: Are those models rly at same position or just widget inspector going nuts?
+     */
+    public static class ManorPiano {
+        public static final int GROUP_INDEX = 554;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int CONTAINER = 1;
+        public static final int MODEL_CONTAINER = 2; // likely the piano model and some other one
+        public static final int UNKNOWN_MODEL1 = 3; // modelId 25889
+        public static final int UNKNOWN_MODEL2 = 4; // modelId 32344
+        public static final int KEYNOTES_CONTAINER = 5;
+        // 6 - 19 models, likely the key notes models
+        public static final int KEYNOTE_C_LABEL = 20;
+        public static final int KEYNOTE_D_LABEL = 21;
+        public static final int KEYNOTE_E_LABEL = 22;
+        public static final int KEYNOTE_F_LABEL = 23;
+        public static final int KEYNOTE_G_LABEL = 24;
+        public static final int KEYNOTE_A_LABEL = 25;
+        public static final int KEYNOTE_B_LABEL = 26;
+        public static final int SECOND_KEYNOTE_C_LABEL = 27;
+        public static final int SECOND_KEYNOTE_D_LABEL = 28;
+        public static final int SECOND_KEYNOTE_E_LABEL = 29;
+        public static final int SECOND_KEYNOTE_F_LABEL = 30;
+        public static final int SECOND_KEYNOTE_G_LABEL = 31;
+        public static final int SECOND_KEYNOTE_A_LABEL = 32;
+        public static final int SECOND_KEYNOTE_B_LABEL = 33;
+        public static final int CLOSE_BUTTON_CONTAINER = 34;
+        public static final int CLOSE_BUTTON_SPRITE = 35;
+    }
+
+    /**
      * Describes apothecary's potions widget
      * Last reviewed: 9/4/2022 11:04 pm UTC+1
      */
