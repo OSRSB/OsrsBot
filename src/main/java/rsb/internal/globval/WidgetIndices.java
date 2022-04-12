@@ -1306,6 +1306,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes music player tab widgets
+     * Last reviewed: 11/4/2022 11:06 pm UTC+1
+     */
+    public static class PrisonPete {
+        public static final int GROUP_INDEX = 273;
+        public static final int PARENT_CONTAINER = 0;
+        public static final int IRON_BARS_MODEL = 1;
+        public static final int TEXT_LABEL = 2;
+        public static final int MODEL_CONTAINER = 3;
+        public static final int BALLOON_ANIMAL_MODEL = 4; // Note: holds the modelId of balloon animals to pop
+        public static final int BUTTON_CLOSE_SPRITE = 5;
+    }
+
+    /**
      * Describes become member ad widget
      * Last reviewed: 6/4/2022 0:17 am UTC+1
      */
