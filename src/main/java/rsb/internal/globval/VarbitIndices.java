@@ -22,6 +22,11 @@ public class VarbitIndices {
      */
     public static final int QUEST_DEMON_SLAYER = 2561;
     public static final int DEFENSIVE_AUTOCAST = 2668;
+    /**
+     * Permitted values: 0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,111,115,120,125,130,135
+     * Note: 0 = not started, 5 = started, 135 = finished
+     */
+    public static final int QUEST_MISTHALIN_MYSTERY = 3468;
     public static final int TOGGLE_BANK_ALWAYS_SET_PLACEHOLDERS = 3755;
     public static final int TOGGLE_BANK_WITHDRAW_MODE = 3958;
     public static final int TOGGLE_BANK_REARRANGE_MODE = 3959;
