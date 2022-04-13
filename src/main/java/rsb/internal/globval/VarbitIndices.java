@@ -95,6 +95,15 @@ public class VarbitIndices {
     public static final int MOTHERLODE_MINE_SACK = 5558;
     public static final int WILDNERESS_ZONE = 5963;
     public static final int CHATBOX_INTERFACE_SIZE = 5983; // Note: manipulates the size of Widget 162.559
+    /**
+     * Permitted values: 0,5,10,15,20,25,30,35,40,45,49,50,52,55,60
+     * Note: 0 = not started, 1 = started, 60 = finished
+     */
+    public static final int QUEST_CORSAIR_CURSE = 6071;
+    public static final int CABIN_BOY_COLIN = 6072;
+    public static final int GNOCCI_COOK = 6073;
+    public static final int ARSEN_THIEF = 6074;
+    public static final int ITHOI_NAVIGATOR = 6075;
     public static final int QUESTS_COMPLETED_COUNT = 6347;
     public static final int TOGGLE_MOUSE_WHEEL_ZOOM = 6357;
     public static final int BANK_WITHDRAW_QUANTITY = 6590;
@@ -116,6 +125,16 @@ public class VarbitIndices {
     public static final int TOGGLE_BANK_INVENTORY_OPTIONS = 10079;
     public static final int BANK_TUTORIAL_PROGRESS = 10308;
     public static final int TOGGLE_BANK_TUTORIAL = 10336;
+    /**
+     * Permitted values: 0,5,7,10,15,20,25,30,35,40,120
+     * Note: 0 = not started, 5 = started, 120 = finished
+     */
+    public static final int QUEST_BELOW_ICE_MOUNTAIN = 12063;
+    public static final int MARLEY = 12064;
+    public static final int CHECKAL = 12065;
+    public static final int BURNTOF = 12066;
+    public static final int RUINS_OF_CAMDOZAAL = 12067;
+    public static final int RAMARNO = 12068;
     public static final int TOGGLE_MAGIC_FILTER_LACKING_REQUIREMENTS_SPELLS = 12137;
     public static final int TOGGLE_ROOFS = 12378;
     public static final int TAB_CHAT_CHANNEL_SUBTAB_INDEX = 13071;
