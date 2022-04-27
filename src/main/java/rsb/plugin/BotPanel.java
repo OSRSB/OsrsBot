@@ -53,7 +53,7 @@ class BotPanel extends PluginPanel
 
 
 	@Inject
-	private BotPanel(ClientThread clientThread, ItemManager itemManager, ScheduledExecutorService executor)
+	private BotPanel()
 	{
 		super(false);
 		setLayout(new BorderLayout());

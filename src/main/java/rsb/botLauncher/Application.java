@@ -33,10 +33,9 @@ public class Application {
 		OptionSet options = parser.parse(args);
 		programArgs = args;
 
-		checkForCacheAndLoad();
-
 		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
 			if (options.has("bot-runelite") && !options.has("runelite")) {
+				checkForCacheAndLoad();
 				RuneLite bot = new RuneLite();
 				bot.launch(parser, optionSpecs, options);
 				addBot(bot);
