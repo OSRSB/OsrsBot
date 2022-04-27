@@ -52,12 +52,15 @@ public class BotModule extends RuneLiteModule {
     @Override
     protected void configure()
     {
+        // bind properties
         Properties properties = BotProperties.getProperties();
         for (String key : properties.stringPropertyNames())
         {
             String value = properties.getProperty(key);
             bindConstant().annotatedWith(Names.named(key)).to(value);
         }
+
+        // bind runtime config
         RuntimeConfig runtimeConfig = configSupplier.get();
         if (runtimeConfig != null && runtimeConfig.getProps() != null)
         {
@@ -71,13 +74,13 @@ public class BotModule extends RuneLiteModule {
                 else if (entry.getValue() instanceof Double)
                 {
                     ConstantBindingBuilder binder = bindConstant().annotatedWith(Names.named(entry.getKey()));
-                    if (DoubleMath.isMathematicalInteger((Double) entry.getValue()))
+                    if (DoubleMath.isMathematicalInteger((double) entry.getValue()))
                     {
-                        binder.to(((Double) entry.getValue()).intValue());
+                        binder.to((int) (double) entry.getValue());
                     }
                     else
                     {
-                        binder.to((Double) entry.getValue());
+                        binder.to((double) entry.getValue());
                     }
                 }
             }
