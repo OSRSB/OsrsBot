@@ -89,10 +89,10 @@ public class Interfaces extends MethodProvider {
 	 *         otherwise null.
 	 */
 	public RSWidget getContinueComponent() {
-		Widget widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_TEXT.getPackedId());
+		Widget widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getPackedId());
 		if (widget != null && !widget.isHidden())
 		{
-			return new RSWidget(methods, GlobalWidgetInfo.DIALOG_NPC_TEXT.getGroupId(),  GlobalWidgetInfo.DIALOG_NPC_TEXT.getChildId());
+			return new RSWidget(methods, GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getGroupId(),  GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getChildId());
 		}
 		return null;
 	}
