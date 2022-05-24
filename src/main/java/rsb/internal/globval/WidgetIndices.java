@@ -1181,7 +1181,7 @@ public class WidgetIndices {
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
     public static class DialogNPC {
-        public static final int GROUP_INDEX = 232;
+        public static final int GROUP_INDEX = 231;
         public static final int PARENT_CONTAINER = 0;
         public static final int FRAME_CONTAINER = 1;
         public static final int NPC_HEAD_MODEL = 2;
