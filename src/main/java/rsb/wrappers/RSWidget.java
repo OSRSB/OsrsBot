@@ -22,7 +22,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         this.id = id;
         this.widget = ctx.client.getWidget(GlobalWidgetInfo.TO_GROUP(parentId), GlobalWidgetInfo.TO_CHILD(id));
         this.parentId = parentId;
-        this.parentWidget = (widget != null && widget.getParent() != null) ? widget.getParent() : null;
+        this.parentWidget = widget.getParent();
     }
 
     public RSWidget(final MethodContext ctx, final Widget widget) {

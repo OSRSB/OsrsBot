@@ -1,9 +1,5 @@
 package rsb.service;
 
-
-/**
- * @author Paris
- */
 public class Monitoring {
 	public static enum Event {
 		Start, Finish, Random, Script, Hack
