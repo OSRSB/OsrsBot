@@ -43,11 +43,12 @@ public class Inventory extends MethodProvider {
 		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
+			if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
+				methods.game.openTab(InterfaceTab.INVENTORY);
+				sleep(random(50, 100));
+				return entry;
+			}
 			if (isOpen(entry.getValue())) {
-				if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
-					methods.game.openTab(InterfaceTab.INVENTORY);
-					sleep(random(50, 100));
-				}
 				return entry;
 			}
 		}
@@ -516,21 +517,12 @@ public class Inventory extends MethodProvider {
 	 */
 	public String getSelectedItemName() {
 		RSWidget invInterface = getInterface().getValue();
-		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			int index = getSelectedItemIndex();
-			if (index == -1)
-				return null;
-			String name = new RSItem(methods, invInterface.getWidgetItems()[index]).getName();
-			return !isItemSelected() || name == null ? null : name.replaceAll(
-					"<[\\w\\d]+=[\\w\\d]+>", "");
-		} else {
-			int index = getSelectedItemIndex();
-			if (index == -1)
-				return null;
-			String name = invInterface.getComponents()[index].getName();
-			return !isItemSelected() || name == null ? null : name.replaceAll(
-					"<[\\w\\d]+=[\\w\\d]+>", "");
-		}
+		int index = getSelectedItemIndex();
+		if (index == -1)
+			return null;
+		String name = invInterface.getComponents()[index].getName();
+		return !isItemSelected() || name == null ? null : name.replaceAll(
+				"<[\\w\\d]+=[\\w\\d]+>", "");
 	}
 
 	/**
@@ -540,16 +532,11 @@ public class Inventory extends MethodProvider {
 	 */
 	public int getSelectedItemIndex() {
 		RSWidget invInterface = getInterface().getValue();
-		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem[] comps = invInterface.getWidgetItems();
-			return checkIsSelected(comps);
-		} else {
 			RSWidget[] comps = invInterface.getComponents();
 			for (int i = 0; i < Math.min(28, comps.length); ++i) {
 				if (comps[i].getBorderThickness() == 2) {
 					return i;
 				}
-			}
 		}
 		return -1;
 	}
@@ -670,10 +657,6 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
-		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem comp = invInterface.getWidgetItems()[index];
-			return index < 28 && comp != null ? new RSItem(methods, comp) : null;
-		}
 		RSWidget comp = invInterface.getComponent(index);
 		return 0 <= index && index < 28 && comp != null ? new RSItem(methods, comp) : null;
 	}
@@ -686,14 +669,6 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
-		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem[] invItems = invInterface.getWidgetItems();
-			RSItem[] items = new RSItem[invItems.length];
-			for (int i = 0; i < invItems.length; i++) {
-				items[i] = new RSItem(methods, invItems[i]);
-			}
-			return items;
-		}
 		RSWidget[] invItems = invInterface.getComponents();
 		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < invItems.length; i++) {
@@ -741,14 +716,6 @@ public class Inventory extends MethodProvider {
 	public RSItem[] getCachedItems() {
 		RSWidget invInterface = getInterface().getValue();
 		if (invInterface == null) return null;
-		if (invInterface.getGroupIndex() == GlobalWidgetInfo.INVENTORY_ITEMS_CONTAINER.getGroupId()) {
-			RSWidgetItem[] invItems = invInterface.getWidgetItems();
-			RSItem[] items = new RSItem[invItems.length];
-			for (int i = 0; i < invItems.length; i++) {
-				items[i] = new RSItem(methods, invItems[i]);
-			}
-			return items;
-		}
 		RSWidget[] invItems = invInterface.getComponents();
 		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < invItems.length; i++) {
