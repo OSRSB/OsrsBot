@@ -1,3 +1,6 @@
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 plugins {
     id 'java'
 }
@@ -7,11 +10,38 @@ repositories {
     maven {
         url = 'https://repo.runelite.net'
     }
-
     mavenCentral()
 }
 
-def runeLiteVersion = '1.8.18.4'
+def runeLiteVersion = getRuneLiteVersion()
+
+static def getRuneLiteVersion() {
+    URL url = new URL("http://repo.runelite.net/net/runelite/client/");
+    URLConnection urlConnection = url.openConnection()
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+            urlConnection.getInputStream()))
+    Date latestDate = null
+    String latestName = null
+    String inputLine
+    while ((inputLine = bufferedReader.readLine()) != null) {
+        inputLine = inputLine.trim().replaceAll(" +", " ")
+        if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
+            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1);
+            String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
+            Date date;
+            if (removeName != "") {
+                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -");
+                date = df.parse(removeName);
+                if (latestDate == null || date.after(latestDate)) {
+                    latestDate = date;
+                    latestName = name;
+                }
+            }
+        }
+    }
+    bufferedReader.close()
+    return latestName;
+}
 
 dependencies {
     implementation group: 'net.runelite', name: 'client', version: runeLiteVersion
@@ -65,7 +95,7 @@ jar {
     destinationDirectory.set(file("$rootDir"))
 }
 
-group = 'rsb'
+group = 'OSRSBot'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
