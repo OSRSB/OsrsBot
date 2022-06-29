@@ -16,7 +16,7 @@ repositories {
 def runeLiteVersion = getRuneLiteVersion()
 
 static def getRuneLiteVersion() {
-    URL url = new URL("http://repo.runelite.net/net/runelite/client/");
+    URL url = new URL("http://repo.runelite.net/net/runelite/client/")
     URLConnection urlConnection = url.openConnection()
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
             urlConnection.getInputStream()))
@@ -26,21 +26,21 @@ static def getRuneLiteVersion() {
     while ((inputLine = bufferedReader.readLine()) != null) {
         inputLine = inputLine.trim().replaceAll(" +", " ")
         if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
-            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1);
+            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
-            Date date;
+            Date date
             if (removeName != "") {
-                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -");
-                date = df.parse(removeName);
+                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -")
+                date = df.parse(removeName)
                 if (latestDate == null || date.after(latestDate)) {
-                    latestDate = date;
-                    latestName = name;
+                    latestDate = date
+                    latestName = name
                 }
             }
         }
     }
     bufferedReader.close()
-    return latestName;
+    return latestName
 }
 
 dependencies {
