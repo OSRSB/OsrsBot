@@ -39,14 +39,7 @@ public class Application {
 			if (options.has("bot-runelite") && !options.has("runelite")) {
 				RuneLite bot = new RuneLite();
 				bot.launch(parser, optionSpecs, options);
-				ExecutorService executor = Executors.newSingleThreadExecutor();
-				executor.submit(() -> {
-					try {
-						checkForCacheAndLoad();
-					} catch (IOException e) {
-						log.error(e.getMessage());
-					}
-				});
+				checkForCacheAndLoad();
 				addBot(bot);
 			} else {
 				String[] nonBotArgs = new String[args.length];
