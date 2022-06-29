@@ -13,6 +13,8 @@ import rsb.plugin.Botplugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Slf4j
 public class Application {
@@ -35,9 +37,16 @@ public class Application {
 
 		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
 			if (options.has("bot-runelite") && !options.has("runelite")) {
-				checkForCacheAndLoad();
 				RuneLite bot = new RuneLite();
 				bot.launch(parser, optionSpecs, options);
+				ExecutorService executor = Executors.newSingleThreadExecutor();
+				executor.submit(() -> {
+					try {
+						checkForCacheAndLoad();
+					} catch (IOException e) {
+						log.error(e.getMessage());
+					}
+				});
 				addBot(bot);
 			} else {
 				String[] nonBotArgs = new String[args.length];
@@ -71,7 +80,6 @@ public class Application {
 		String npcCacheLocation = GlobalConfiguration.Paths.getNPCsCacheDirectory();
 		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
 
-
 		String[] itemArgs = {"--cache", gameCacheLocation,
 				"--items", itemCacheLocation};
 		String[] objectArgs = {"--cache", gameCacheLocation,
@@ -82,6 +90,7 @@ public class Application {
 				"--sprites", spriteCacheLocation};
 
 		//TODO Some sort of better validation here
+		//Version check
 		if (!new File(itemCacheLocation).exists() && new File(itemCacheLocation).getTotalSpace() < 100) {
 			net.runelite.cache.Cache.main(itemArgs);
 			net.runelite.cache.Cache.main(objectArgs);
