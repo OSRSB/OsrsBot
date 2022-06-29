@@ -72,19 +72,18 @@ public class Application {
 		String itemCacheLocation = GlobalConfiguration.Paths.getItemsCacheDirectory();
 		String npcCacheLocation = GlobalConfiguration.Paths.getNPCsCacheDirectory();
 		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
-
-		String[] itemArgs = {"--cache", gameCacheLocation,
-				"--items", itemCacheLocation};
-		String[] objectArgs = {"--cache", gameCacheLocation,
-				"--objects", objectCacheLocation};
-		String[] npcArgs = {"--cache", gameCacheLocation,
-				"--npcs", npcCacheLocation};
-		String[] spriteArgs = {"--cache", gameCacheLocation,
-				"--sprites", spriteCacheLocation};
-
 		//TODO Some sort of better validation here
-		//Version check
+		//Add a version check
 		if (!new File(itemCacheLocation).exists() && new File(itemCacheLocation).getTotalSpace() < 100) {
+			String[] itemArgs = {"--cache", gameCacheLocation,
+					"--items", itemCacheLocation};
+			String[] objectArgs = {"--cache", gameCacheLocation,
+					"--objects", objectCacheLocation};
+			String[] npcArgs = {"--cache", gameCacheLocation,
+					"--npcs", npcCacheLocation};
+			String[] spriteArgs = {"--cache", gameCacheLocation,
+					"--sprites", spriteCacheLocation};
+
 			net.runelite.cache.Cache.main(itemArgs);
 			net.runelite.cache.Cache.main(objectArgs);
 			net.runelite.cache.Cache.main(npcArgs);
