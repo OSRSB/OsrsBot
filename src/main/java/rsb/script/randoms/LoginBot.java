@@ -2,13 +2,11 @@ package rsb.script.randoms;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.GameState;
-import net.runelite.api.Point;
-import net.runelite.api.widgets.Widget;
 import rsb.internal.globval.GlobalWidgetInfo;
-import rsb.script.Random;
 import rsb.plugin.AccountManager;
-import rsb.wrappers.RSWidget;
+import rsb.script.Random;
 import rsb.script.ScriptManifest;
+import rsb.wrappers.RSWidget;
 
 import java.awt.*;
 
@@ -49,44 +47,50 @@ public class LoginBot extends Random {
     @Override
     public boolean activateCondition() {
         GameState idx = game.getClientState();
-        return ((ctx.menu.getIndex("Play") == 0 || (idx == GameState.LOGIN_SCREEN || idx == GameState.LOGGING_IN)) && account.getName() != null);
+        return ((ctx.menu.getIndex("Play") == 0 || (idx == GameState.LOGIN_SCREEN || idx == GameState.LOGGING_IN)) && account.getName() != null)
+                || (idx == GameState.LOGGED_IN && ctx.client.getWidget(GlobalWidgetInfo.LOGIN_MOTW_TEXT.getPackedId()) != null);
     }
 
     @Override
     public int loop() {
         if (game.getClientState() != GameState.LOGGED_IN) {
             try {
-                    String username = account.getName().toLowerCase().trim();
-                    if (ctx.client.getLoginIndex() == 0) {
+                switch (ctx.client.getLoginIndex()) {
+                    case 0:
                         ctx.keyboard.sendText("\n", false);
-                        sleep(random(1000, 5000));
-                    }
-                    if (ctx.client.getLoginIndex() == 2) {
-                        if (ctx.client.getCurrentLoginField() == 0) {
-                            ctx.keyboard.sendText(username, true);
-                            sleep(random(1000, 5000));
-                            if (ctx.client.getCurrentLoginField() == 1) {
+                        return random(1000, 5000);
+                    case 1:
+                        log.info("State 1");
+                        return 10000;
+                    case 2:
+                        switch (ctx.client.getCurrentLoginField()) {
+                            case 0 -> {
+                                ctx.keyboard.sendText(account.getName().toLowerCase().trim(), true);
+                                return random(1000, 5000);
+                            }
+                            case 1 -> {
                                 ctx.keyboard.sendText(AccountManager.getPassword(account.getName()), true);
-                                sleep(random(5000, 10000));
+                                return random(5000, 10000);
+                            }
+                            default -> {
+                                throw new Exception("Unknown login state");
                             }
                         }
-                    }
-                    //Authenticator
-                    if (ctx.client.getLoginIndex() == 4) {
-                    }
-                    Rectangle clickHereToPlayButton = new Rectangle(270, 295, 225, 80);
-                    ctx.mouse.move(new Point(clickHereToPlayButton.x, clickHereToPlayButton.y), clickHereToPlayButton.width, clickHereToPlayButton.height);
-                    sleep(5000);
+                    case 3:
+                        log.info("State 3");
+                        return 10000;
+                    case 4:
+                        log.info("Auth");
+                        return 10000;
+                }
             } catch (Exception e) {
                 log.error("Login failed. Try again.");
             }
         }
         if (game.getClientState() == GameState.LOGGED_IN) {
-            Widget welcomeScreenMOTD = ctx.client.getWidget(GlobalWidgetInfo.LOGIN_MOTW_TEXT.getPackedId());
-            if (welcomeScreenMOTD != null) {
-                if (welcomeScreenMOTD.getTextColor() != -1) {
-                    ctx.mouse.click(true);
-                }
+            RSWidget clickToPlay = ctx.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY);
+            if (clickToPlay != null && clickToPlay.doClick()) {
+                return random(800, 2000);
             }
         }
         return -1;
