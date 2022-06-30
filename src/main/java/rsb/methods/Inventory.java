@@ -1,11 +1,11 @@
 package rsb.methods;
 
 import net.runelite.api.ItemComposition;
+import net.runelite.client.ui.DrawManager;
 import rsb.internal.globval.GlobalWidgetInfo;
 import rsb.internal.globval.WidgetIndices;
 import rsb.internal.globval.enums.InterfaceTab;
 import rsb.wrappers.*;
-import net.runelite.client.ui.DrawManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,6 +23,8 @@ import java.util.function.Predicate;
  * @author GigiaJ
  */
 public class Inventory extends MethodProvider {
+
+	private final int EMPTY_SLOT_ITEM_ID = 6512;
 
 	Inventory(MethodContext ctx) {
 		super(ctx);
@@ -113,7 +115,7 @@ public class Inventory extends MethodProvider {
 				int r = leftToRight ? j / 4 : j % 7;
 				RSItem curItem = getItems()[c + r * 4];
 				int id;
-				if (curItem != null && (id = curItem.getID()) != -1) {
+				if (curItem != null && (id = curItem.getID()) != -1 && id != EMPTY_SLOT_ITEM_ID) {
 					boolean isInItems = false;
 					for (int i : items) {
 						isInItems |= (i == id);
@@ -256,7 +258,7 @@ public class Inventory extends MethodProvider {
 			return false;
 		}
 		RSItem item = getItems()[col + row * 4];
-		return item != null && item.getID() != -1 && item.doAction("Drop");
+		return item != null && item.getID() != -1 && item.getID() != EMPTY_SLOT_ITEM_ID && item.doAction("Drop");
 	}
 
 	/**
@@ -400,7 +402,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean selectItem(RSItem item) {
 		final int itemID = item.getID();
-		if (itemID == -1) { return false; }
+		if (itemID == -1 || itemID == EMPTY_SLOT_ITEM_ID) { return false; }
 		RSItem selItem = getSelectedItem();
 		if (selItem != null && selItem.getID() == itemID) {
 			return true;
@@ -753,7 +755,7 @@ public class Inventory extends MethodProvider {
 		ArrayList<Integer> itemIDs = new ArrayList<>();
 		for (String name : names) {
 			int itemID = getItemID(name);
-			if (itemID != -1) {
+			if (itemID != -1 && itemID != EMPTY_SLOT_ITEM_ID) {
 				itemIDs.add(itemID);
 			}
 		}
@@ -953,7 +955,7 @@ public class Inventory extends MethodProvider {
 		RSItem[] items = getItems();
 		for (RSItem item : items) {
 			int iid = item.getID();
-			if (iid != -1) {
+			if (iid != -1 && iid != EMPTY_SLOT_ITEM_ID) {
 				if (includeStacks) {
 					count += item.getStackSize();
 				} else {
