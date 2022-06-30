@@ -626,7 +626,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getSelectedItem() {
 		int index = getSelectedItemIndex();
-		return (index == -1 ? null : getItemAt(index));
+		return index == -1 ? null : getItemAt(index);
 	}
 
 	/**
