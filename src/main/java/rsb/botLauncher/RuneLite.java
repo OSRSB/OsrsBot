@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -644,6 +645,20 @@ public class RuneLite extends net.runelite.client.RuneLite {
         // Load the plugins, but does not start them yet.
         // This will initialize configuration
         pluginManager.loadCorePlugins();
+        
+        ArrayList<Plugin> pluginsToRemove = new ArrayList<Plugin>();
+        
+        for (Plugin plugin : pluginManager.getPlugins()) {
+        
+            if (plugin.getName().equals("Music") || plugin.getName().equals("World Hopper")) {
+                pluginsToRemove.add(plugin);
+            }
+
+        }
+        for (Plugin plugin : pluginsToRemove) {
+            pluginManager.remove(plugin);
+        }
+
         externalPluginManager.loadExternalPlugins();
 
         SplashScreen.stage(.70, null, "Finalizing configuration");
