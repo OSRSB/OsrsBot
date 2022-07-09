@@ -29,8 +29,8 @@ static def getRuneLiteVersion() {
             String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
             Date date
-            if (removeName != "") {
-                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -")
+            if (!name.contains("SNAPSHOT") && removeName != "") {
+                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -", Locale.ENGLISH)
                 date = df.parse(removeName)
                 if (latestDate == null || date.after(latestDate)) {
                     latestDate = date
@@ -55,7 +55,7 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
 
-    implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.2'
+    implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
     implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
 }

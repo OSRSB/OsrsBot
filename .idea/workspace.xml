@@ -9,10 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Javadocs Update&#10;&#10;Resolved Conflicts in Combat.java">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/OSRSBot.iml" afterDir="false" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Removed">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/RSBBB.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/RSBBB.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/RSBBB.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/methods/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rsb/plugin/base/GeneralPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rsb/plugin/base/GeneralPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +44,16 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="RSBBB" type="f1a62948:ProjectNode" />
+                <item name="OSRSBot" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="RSBBB" type="f1a62948:ProjectNode" />
+                <item name="OSRSBot" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="RSBBB" type="f1a62948:ProjectNode" />
+                <item name="OSRSBot" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
@@ -63,6 +72,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -78,16 +100,23 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GroovyConsoleState">
+    <option name="list">
+      <list>
+        <Entry>
+          <option name="moduleName" value="OSRSBot" />
+          <option name="url" value="file://$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
+        </Entry>
+      </list>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/Application.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/RuneLite.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/rsb/util/AccountStore.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/methods/Environment.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/botLauncher/ClassPreloader.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/rsb/internal/globval/GlobalConfiguration.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1lnUdVLSWmkt81J803IojbTxJKT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -108,9 +137,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.proportion" value="0.329653" />
     <property name="project.structure.side.proportion" value="0.0963939" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -125,10 +154,12 @@
       <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Bot Run">
+  <component name="RunManager" selected="Gradle.TestRSB [jar]">
     <configuration name="Bot Run" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="rsb.botLauncher.Application" />
-      <module name="RSBBB.main" />
+      <module name="OSRSBot.main" />
       <option name="PROGRAM_PARAMETERS" value="--bot-runelite --developer-mode" />
       <option name="VM_PARAMETERS" value="-debug" />
       <extension name="coverage">
@@ -156,57 +187,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="OSRSBot" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="OSRSBot" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="TestRSB [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.RuneLite Run" />
       <item itemvalue="Application.Bot Run" />
+      <item itemvalue="Gradle.TestRSB [jar]" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TestRSB [jar]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -353,7 +364,119 @@
       <option name="project" value="LOCAL" />
       <updated>1649577060787</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Project Language Level 16">
+      <created>1649577181613</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1649577181613</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Fix launch error involving RuneLite adding RuntimeConfigLoader as a parameter for the client loader">
+      <created>1649577413915</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1649577413915</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Reverting Kotlin change as it breaks with Jitpack&#10;Will look for alternatives later">
+      <created>1649578840346</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1649578840346</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updating RuneLite Version">
+      <created>1649578937136</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1649578937136</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Remove waste code from wrappers">
+      <created>1649781005452</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1649781005452</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fix the issues caused by multi-bot prep">
+      <created>1649806670362</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1649806670362</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fix recent update breaking the client">
+      <created>1651095014441</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1651095014441</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Fixes some RSWidget issues">
+      <created>1653416452225</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1653416452225</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Forgot the index value">
+      <created>1653416710709</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1653416710709</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Remove waste code from wrappers&#10;Fix new hook">
+      <created>1656033217394</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1656033217394</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Added auto-versioning to he Gradle build file">
+      <created>1656454175657</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1656454175658</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Removed semicolons from Groovy build.gradle">
+      <created>1656455050462</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1656455050462</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixed the issue causing initial boots to fail when a user has never ran RuneLite before &#10;&#10;Added Dockerfile configs&#10;&#10;Updated the gitignore">
+      <created>1656468890869</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1656468890869</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Removed Dockerfile from main repo">
+      <created>1656471682404</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1656471682404</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Removed running the cache loading on a separate thread (I mean if you were fast enough this would break it for sure)">
+      <created>1656471820988</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1656471820988</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Rephrased a todo and moved code to a more correct location in the cache loader">
+      <created>1656471982236</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1656471982236</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -369,18 +492,8 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="API is now functional. Updated a plethora of methods and revised the hook class. Some widget ids are likely broken and will need revisiting. I should really check on the shoddy built-in compilation sometime." />
-    <MESSAGE value="Forgot a fairly important class" />
-    <MESSAGE value="Modulated and revised Application.java and RuneLite.java" />
-    <MESSAGE value="Prepped dependency changes and some misc things" />
-    <MESSAGE value="gradle fix" />
-    <MESSAGE value="In progress update to how widget info should be stored and called" />
-    <MESSAGE value="Continued to revise codebase to centralize WidgetIds&#10;Started prepping transitional stuff to enable resizable mode functionality" />
-    <MESSAGE value="Skills and GrandExchange revised" />
-    <MESSAGE value="Finished revising Prayer for widget id centralization" />
-    <MESSAGE value="Revised the input location for scripts" />
-    <MESSAGE value="README.md update" />
     <MESSAGE value="Fix README.md" />
     <MESSAGE value="Added generated API reference" />
     <MESSAGE value="Removed legacy code, updated non-functional UI aspects to look significantly better, improved security functionality for the password/pin display as well as fixed a bug causing them to display if they were filled. Fixed a bug that required a client relaunch due to the model of the combobox for Account store not being updated. Revised README.md." />
@@ -390,17 +503,23 @@
     <MESSAGE value="Javadocs Update&#10;&#10;Replaced all instances of the tt tag with code&#10;Updated all Javadocs" />
     <MESSAGE value="Javadocs Update&#10;&#10;Resolved Conflicts in Combat.java" />
     <MESSAGE value="Revised build files to be Kotlin" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revised build files to be Kotlin" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="net.runelite.client.plugins.PluginInstantiationException" package="net.runelite.client.plugins" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Project Language Level 16" />
+    <MESSAGE value="Fix launch error involving RuneLite adding RuntimeConfigLoader as a parameter for the client loader" />
+    <MESSAGE value="Reverting Kotlin change as it breaks with Jitpack&#10;Will look for alternatives later" />
+    <MESSAGE value="Updating RuneLite Version" />
+    <MESSAGE value="Remove waste code from wrappers" />
+    <MESSAGE value="Fix the issues caused by multi-bot prep" />
+    <MESSAGE value="Fix recent update breaking the client" />
+    <MESSAGE value="Fixes some RSWidget issues" />
+    <MESSAGE value="Forgot the index value" />
+    <MESSAGE value="Remove waste code from wrappers&#10;Fix new hook" />
+    <MESSAGE value="Added auto-versioning to he Gradle build file" />
+    <MESSAGE value="Removed semicolons from Groovy build.gradle" />
+    <MESSAGE value="Fixed the issue causing initial boots to fail when a user has never ran RuneLite before &#10;&#10;Added Dockerfile configs&#10;&#10;Updated the gitignore" />
+    <MESSAGE value="Removed Dockerfile from main repo" />
+    <MESSAGE value="Removed running the cache loading on a separate thread (I mean if you were fast enough this would break it for sure)" />
+    <MESSAGE value="Rephrased a todo and moved code to a more correct location in the cache loader" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rephrased a todo and moved code to a more correct location in the cache loader" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
