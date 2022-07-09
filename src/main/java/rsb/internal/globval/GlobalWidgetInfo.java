@@ -41,6 +41,7 @@ public enum GlobalWidgetInfo {
     DIALOG_NPC_TEXT(WidgetIndices.DialogNPC.GROUP_INDEX, WidgetIndices.DialogNPC.DIALOG_TEXT_LABEL),
     DIALOG_NPC_CONTINUE(WidgetIndices.DialogNPC.GROUP_INDEX, WidgetIndices.DialogNPC.DIALOG_CONTINUE_LABEL),
     // [DIALOG NPC]
+    DIALOG_OPTION(WidgetIndices.DialogOptions.GROUP_INDEX, WidgetIndices.DialogOptions.CONTAINER),
 
     /**
      * [LOGOUT] Widget Info
