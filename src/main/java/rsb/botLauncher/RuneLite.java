@@ -25,6 +25,8 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -53,6 +55,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.rs.ClientLoader;
 import net.runelite.client.rs.ClientUpdateCheckMode;
+import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetOverlay;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -78,7 +81,7 @@ import okhttp3.OkHttpClient;
 @Slf4j
 @Singleton
 @SuppressWarnings("removal")
-public class RuneLite extends net.runelite.client.RuneLite {
+public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteInterface {
     public static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".runelite");
     public static final File CACHE_DIR = new File(RUNELITE_DIR, "cache");
     public static final File PLUGINS_DIR = new File(RUNELITE_DIR, "plugins");
@@ -91,9 +94,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
     public static String USER_AGENT = "RuneLite/" + BotProperties.getVersion() + "-" + BotProperties.getCommit() + (BotProperties.isDirty() ? "+" : "");
 
-
-    @Getter
-    private static Injector injector;
+    public static Injector injector;
 
     @Inject
     public ClientUI clientUI;
@@ -337,6 +338,23 @@ public class RuneLite extends net.runelite.client.RuneLite {
         return back;
     }
 
+    /**
+     * Returns the size of the panel that clients should be drawn into. For
+     * internal use.
+     *
+     * @return The client panel size.
+     */
+    public Dimension getPanelSize() {
+        for (RuneLiteInterface bot : Application.getBots()) {
+            if (bot != null) {
+                if (bot.getClient().getClass().getClassLoader() == this.getClient().getClass().getClassLoader()) {
+                    return bot.getPanel().getSize();
+                }
+            }
+        }
+        return null;
+    }
+
     public Applet getLoader() {
         return (Applet) this.getClient();
     }
@@ -361,24 +379,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
     }
 
     /**
-     * Our set of options corresponding to the command-line arguments that should be parsed.
-     * The values assigned are their positions within the relating ArgumentAcceptingOptionSpec array
-     */
-    enum Options {
-        SESSION_FILE(0),CONFIG_FILE(1), UPDATE_MODE(2), PROXY_INFO(3);
-
-        private int index;
-
-        Options(int arrayIndex) {
-            this.index = arrayIndex;
-        }
-
-        public int getIndex() {
-            return index;
-        }
-    }
-
-    /**
      * Handles the command-line arguments using the OptionParser passed through and assigns our option specs
      * accordingly and then returns them for use
      * @param parser    The parser to use for handling the command-line arguments
@@ -387,8 +387,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
     public static ArgumentAcceptingOptionSpec<?>[] handleParsing(OptionParser parser) {
 
         parser.accepts("bot-runelite", "Starts the client in Bot RuneLite mode");
-        parser.accepts("sub-bot", "Starts a sub-bot client without the additional features of RuneLite");
-        parser.accepts("runelite", "Starts the client in RuneLite mode");
+        parser.accepts("headless", "Starts a client without the additional features of RuneLite");
         parser.accepts("developer-mode", "Enable developer tools");
         parser.accepts("ea", "Enable assertions");
         parser.accepts("debug", "Show extra debugging output");
@@ -503,7 +502,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
             new Thread(() ->
             {
                 clientLoader.get();
-                ClassPreloader.preload();
+                preload();
             }, "Preloader").start();
 
 
@@ -522,8 +521,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
                     )));
 
             setInjector(injector);
-
-            injector.getInstance(RuneLite.class).init(false);
+            injector.getInstance(RuneLite.class).init(options.has("headless"));
 
             final long end = System.currentTimeMillis();
             final RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
@@ -538,24 +536,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
                             .open());
         }
     }
-
-    /**
-     * Returns the size of the panel that clients should be drawn into. For
-     * internal use.
-     *
-     * @return The client panel size.
-     */
-    public Dimension getPanelSize() {
-        for (RuneLite bot : Application.getBots()) {
-            if (bot != null) {
-                if (bot.getClient().getClass().getClassLoader() == this.getClient().getClass().getClassLoader()) {
-                    return bot.getPanel().getSize();
-                }
-            }
-        }
-        return null;
-    }
-
 
     /**
      * The actual method associated with initializing the client-related data. Such as creating the client sizing and
@@ -658,7 +638,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
         SplashScreen.stage(.75, null, "Starting core interface");
 
-        // Initialize UI
+
         clientUI.init();
 
         // Initialize Discord service
@@ -729,13 +709,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
         // Load the session, including saved configuration
         sessionManager.loadSession();
 
-
-        // Load the plugins, but does not start them yet.
-        // This will initialize configuration
-
-        // Plugins have provided their config, so set default config
-        // to main settings
-
         // Start client session
         clientSessionManager.start();
         eventBus.register(clientSessionManager);
@@ -754,7 +727,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
             overlayManager.add(worldMapOverlay.get());
             overlayManager.add(tooltipOverlay.get());
         }
-
     }
 
     /**
@@ -868,6 +840,21 @@ public class RuneLite extends net.runelite.client.RuneLite {
     }
 
     /**
+     * Loads some slow to initialize classes (hopefully) before they are needed to streamline client startup
+     */
+    static void preload()
+    {
+        // This needs to enumerate the system fonts for some reason, and that takes a while
+        FontManager.getRunescapeSmallFont();
+
+        // This needs to load a timezone database that is mildly large
+        ZoneId.of("Europe/London");
+
+        // This just needs to call 20 different DateTimeFormatter constructors, which are slow
+        Object unused = DateTimeFormatter.BASIC_ISO_DATE;
+    }
+
+    /**
      * RuneLite method
      * Uncertain behavior
      * Looks to verify client trust?
@@ -905,5 +892,9 @@ public class RuneLite extends net.runelite.client.RuneLite {
         {
             log.warn("unable to setup insecure trust manager", ex);
         }
+    }
+
+    public static Injector getInjector() {
+        return injector;
     }
 }

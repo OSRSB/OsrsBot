@@ -660,7 +660,7 @@ public class Inventory extends MethodProvider {
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget comp = invInterface.getComponent(index);
-		return 0 <= index && index < 28 && comp != null ? new RSItem(methods, comp) : null;
+		return 0 <= index && index < 28 && comp.getId() != EMPTY_SLOT_ITEM_ID ? new RSItem(methods, comp) : null;
 	}
 
 	/**
@@ -674,7 +674,8 @@ public class Inventory extends MethodProvider {
 		RSWidget[] invItems = invInterface.getComponents();
 		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < invItems.length; i++) {
-			items[i] = new RSItem(methods, invItems[i]);
+			if (invItems[i].getId() != EMPTY_SLOT_ITEM_ID)
+				items[i] = new RSItem(methods, invItems[i]);
 		}
 		return items;
 	}

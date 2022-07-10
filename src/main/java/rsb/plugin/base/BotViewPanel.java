@@ -4,6 +4,7 @@ import net.runelite.client.RuneLiteProperties;
 import net.runelite.client.ui.PluginPanel;
 import rsb.botLauncher.Application;
 import rsb.botLauncher.RuneLite;
+import rsb.botLauncher.RuneLiteInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class BotViewPanel extends PluginPanel {
 
     // TODO: Replace; temporary preview.
     public void paint(Graphics g) {
-        RuneLite[] bots = Application.getBots();
+        RuneLiteInterface[] bots = Application.getBots();
         int width = getWidth(), height = getHeight();
         g.setColor(Color.white);
         g.fillRect(0, 0, width, height);
@@ -67,7 +68,7 @@ public class BotViewPanel extends PluginPanel {
     }
 
     public void draw(Graphics g, int idx, int x, int y, int width, int height) {
-        RuneLite[] bots = Application.getBots();
+        RuneLiteInterface[] bots = Application.getBots();
         BufferedImage img = bots[idx].getBackBuffer();
         if (img != null && img.getWidth() > 0) {
             int w_img = img.getWidth(), h_img = img.getHeight();

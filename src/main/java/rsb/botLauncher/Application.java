@@ -10,16 +10,23 @@ import joptsimple.OptionSet;
 import lombok.extern.slf4j.Slf4j;
 import rsb.internal.globval.GlobalConfiguration;
 import rsb.plugin.Botplugin;
+import rsb.plugin.ScriptSelector;
+import rsb.service.ScriptDefinition;
+import rsb.service.ServiceException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Slf4j
 public class Application {
 
-	static RuneLite[] bots = new RuneLite[]{};
+	static RuneLiteInterface[] bots = new RuneLite[]{};
 	static String[] programArgs = new String[]{};
 	final static OptionParser parser = new OptionParser();
 
@@ -33,28 +40,51 @@ public class Application {
 	public static void main(final String[] args) throws Throwable {
 		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
 		OptionSet options = parser.parse(args);
-		programArgs = args;
 
-		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
-			if (options.has("bot-runelite") && !options.has("runelite")) {
-				RuneLite bot = new RuneLite();
-				bot.launch(parser, optionSpecs, options);
-				checkForCacheAndLoad();
-				addBot(bot);
-			} else {
-				String[] nonBotArgs = new String[args.length];
-				int o = 0;
-				for (int i = 0; i < args.length; i++) {
-					if (!args[i].equals("--runelite")) {
-						nonBotArgs[o] = args[i];
-						o++;
+		if (options.has("bot-runelite")) {
+			BotClassLoader loader = new BotClassLoader(null);
+			Class<?> c = loader.loadClass("rsb.botLauncher.RuneLite");
+			RuneLiteInterface bot = (RuneLiteInterface) c.getDeclaredConstructor().newInstance();
+			bot.launch(parser, optionSpecs, options);
+			checkForCacheAndLoad();
+			addBot(bot);
+			if (options.has("headless")) {
+				new Thread(() -> {
+					Scanner input = new Scanner(System.in);
+					while(input.hasNext()) {
+						String[] command = input.nextLine().split(" ");
+						System.out.println(Arrays.toString(command));
+						if (command[0].equalsIgnoreCase("runScript")) {
+							RuneLite botInstance = (RuneLite) ((RuneLite) Application.getBots()[Integer.parseInt(command[1])]).getInjector().getInstance(bot.getClass());
+							botInstance.setAccount(command[2]);
+							ScriptSelector scriptSelector = new ScriptSelector(botInstance);
+							scriptSelector.load();
+							ScriptDefinition def = scriptSelector.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(command[3])).findFirst().get();
+							try {
+								botInstance.getScriptHandler().runScript(def.source.load(def));
+							} catch (ServiceException e) {
+								e.printStackTrace();
+							}
+
+						}
+						if (command[0].equalsIgnoreCase("addBot")) {
+							BotClassLoader bLoader = new BotClassLoader(null);
+							Class<?> loadClass = null;
+							try {
+								loadClass = loader.loadClass("rsb.botLauncher.RuneLite");
+								RuneLiteInterface newBot = (RuneLiteInterface) loadClass.getDeclaredConstructor().newInstance();
+								newBot.launch(parser, optionSpecs, options);
+								addBot(newBot);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						}
 					}
-					if (nonBotArgs[i] == null) {
-						nonBotArgs[i] = "";
-					}
-				}
-				net.runelite.client.RuneLite.main(nonBotArgs);
+				}).start();
 			}
+		} else {
+			net.runelite.client.RuneLite.main(args);
 		}
 
 	}
@@ -95,12 +125,20 @@ public class Application {
 	}
 
 	public static void setBot(int index) {
-		RuneLite bot = getBots()[index];
+		RuneLiteInterface bot = getBots()[index];
 		String[] args = new String[programArgs.length + 1];
 		System.arraycopy(programArgs, 0, args, 0, programArgs.length);
-		args[programArgs.length] = "--sub-bot";
+		args[programArgs.length] = "--headless";
 		ArgumentAcceptingOptionSpec<?>[] optionSpecs = RuneLite.handleParsing(parser);
 		OptionSet options = parser.parse(args);
+		BotClassLoader loader = new BotClassLoader(null);
+		Class<?> c;
+		try {
+			c = loader.loadClass("rsb.botLauncher.RuneLite");
+			bot = (RuneLiteInterface) c.getDeclaredConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		try {
 			bot.launch(parser, optionSpecs, options);
 		} catch (Throwable e) {
@@ -116,9 +154,9 @@ public class Application {
 	 * @param o Any object from within the client.
 	 * @return The Bot for the client.
 	 */
-	public static RuneLite getBot(Object o) {
+	public static RuneLiteInterface getBot(Object o) {
 		ClassLoader cl = o.getClass().getClassLoader();
-		for (RuneLite bot : bots) {
+		for (RuneLiteInterface bot : bots) {
 			if (cl == bot.getClass().getClassLoader()) {
 				return bot;
 			}
@@ -131,8 +169,8 @@ public class Application {
 	 *
 	 * @param bot the bot to be added to the array
 	 */
-	public static void addBot(RuneLite bot) {
-		RuneLite[] update = new RuneLite[bots.length + 1];
+	public static void addBot(RuneLiteInterface bot) {
+		RuneLiteInterface[] update = new RuneLiteInterface[bots.length + 1];
 		for (int i = 0; i < bots.length; i++) {
 			update[i] = bots[i];
 		}
@@ -144,7 +182,7 @@ public class Application {
 	 * Retrieves all running bot instances
 	 * @return	the bot instances
 	 */
-	public static RuneLite[] getBots() {
+	public static RuneLiteInterface[] getBots() {
 		return bots;
 	}
 

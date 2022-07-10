@@ -77,8 +77,8 @@ class BotPanel extends PluginPanel
 		JPanel botViewPanel = new BotViewPanel();
 
 		accordion.addBar("General", generalPanel);
-		//accordion.addBar("Debug", debugPanel);
-		//accordion.addBar("Bot View", botViewPanel);
+		accordion.addBar("Debug", debugPanel);
+		accordion.addBar("Bot View", botViewPanel);
 
 		MaterialTab baseTab = new MaterialTab("Settings", tabGroup, accordion);
 		MaterialTab  accountTab = new MaterialTab("Accounts", tabGroup, accountPanel);

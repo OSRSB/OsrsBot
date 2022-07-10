@@ -1,5 +1,7 @@
 package rsb.plugin;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.runelite.client.ui.components.materialtabs.MaterialTab;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
@@ -50,6 +52,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private static final String TMP_REGEX = "^tmp[0-9]+";
 
 	private ScriptTableModel model;
+	@Getter
 	private List<ScriptDefinition> scripts;
 	private List<String> tmpFileNames;
 	private boolean connected = true;
@@ -82,7 +85,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 * @param bot	the bot instance
 	 */
 	public ScriptSelector(RuneLite bot) {
-		super(Frame.getFrames()[0], "Script Selector", false);
+		super((Frame.getFrames().length > 0) ? Frame.getFrames()[0] : null, "Script Selector", false);
 		this.bot = bot;
 		this.scripts = new ArrayList<>();
 		this.tmpFileNames = new ArrayList<>();
@@ -100,16 +103,6 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		this.scripts = new ArrayList<>();
 		this.tmpFileNames = new ArrayList<>();
 		this.model = new ScriptTableModel(this.scripts);
-	}
-
-	/**
-	 * Gets the singleton for the script selector
-	 * TODO: remove the bot instance being required
-	 * @param bot 	the bot instance
-	 * @return 		the singleton for script selector
-	 */
-	public static ScriptSelector getInstance(RuneLite bot) {
-		return new ScriptSelector(Frame.getFrames()[0], bot);
 	}
 
 	/**
@@ -179,15 +172,13 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 */
 	public void update() {
 		boolean available = bot.getScriptHandler().getRunningScripts().size() == 0;
-		buttonStart.setEnabled(available && table.getSelectedRow() != -1);
-		table.setEnabled(available);
-		search.setEnabled(available);
-		accounts.setEnabled(available);
-		table.clearSelection();
-		/**
-		 * ADD A LOAD HERE
-		 * load();
-		 */
+		if (buttonStart != null) {
+			buttonStart.setEnabled(available && table.getSelectedRow() != -1);
+			table.setEnabled(available);
+			search.setEnabled(available);
+			accounts.setEnabled(available);
+			table.clearSelection();
+		}
 	}
 
 	/**
@@ -201,7 +192,8 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		scripts.addAll(SRC_SOURCES.list());
 		//generateTestScripts();
 		//scripts.addAll(SRC_TEST.list());
-		model.search(search.getText());
+		if (search != null)
+			model.search(search.getText());
 		deleteTemporaryFiles();
 		table = (table == null) ? getTable(0, 70, 45, 30) : table;
 	}
@@ -274,7 +266,6 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 	/**
 	 * Sets the action to occur when the reload button is pressed.
-	 * @param e		the action event
 	 */
 	boolean buttonReloadActionPerformed() {
 

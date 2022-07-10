@@ -3,6 +3,7 @@ package rsb.internal.input;
 import net.runelite.api.MainBufferProvider;
 import rsb.botLauncher.Application;
 import rsb.botLauncher.RuneLite;
+import rsb.botLauncher.RuneLiteInterface;
 //import net.runelite.client.Application;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ public class Canvas extends java.awt.Canvas {
 		//This may need more variables set in the future
 	}
 
-	public final Graphics getGraphics(RuneLite bot, MainBufferProvider mainBufferProvider) {
+	public final Graphics getGraphics(RuneLiteInterface bot, MainBufferProvider mainBufferProvider) {
 		if (bot == null) {
 			if (toshi) {
 				return super.getGraphics();
