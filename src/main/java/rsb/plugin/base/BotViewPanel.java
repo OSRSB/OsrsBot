@@ -69,7 +69,7 @@ public class BotViewPanel extends PluginPanel {
 
     public void draw(Graphics g, int idx, int x, int y, int width, int height) {
         RuneLiteInterface[] bots = Application.getBots();
-        BufferedImage img = bots[idx].getBackBuffer();
+        BufferedImage img = ((RuneLite) bots[idx]).getBackBuffer();
         if (img != null && img.getWidth() > 0) {
             int w_img = img.getWidth(), h_img = img.getHeight();
             float img_ratio = (float) w_img / (float) h_img;

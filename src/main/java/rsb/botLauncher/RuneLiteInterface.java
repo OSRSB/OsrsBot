@@ -1,24 +1,10 @@
 package rsb.botLauncher;
 
-import joptsimple.ArgumentAcceptingOptionSpec;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import net.runelite.api.Client;
-import net.runelite.api.MainBufferProvider;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public interface RuneLiteInterface {
-    void launch(OptionParser parser, ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) throws Exception;
 
-    Graphics getBufferGraphics(MainBufferProvider mainBufferProvider);
+    RuneLiteInterface getInstance();
 
-    Client getClient();
-
-    Component getPanel();
-
-    BufferedImage getBackBuffer();
+    void launch(String[]s) throws Exception;
 
     void init(boolean startClientBare) throws Exception;
 

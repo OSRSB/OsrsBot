@@ -1,4 +1,14 @@
 package rsb.botLauncher;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class BotClassLoader extends ClassLoader {
 
     private ChildClassLoader childClassLoader;
@@ -18,6 +28,13 @@ public class BotClassLoader extends ClassLoader {
         {
             return super.findClass(name);
         }
+
+
+
+        public Class<?> findLoaded(String name)
+        {
+            return this.findLoadedClass(name);
+        }
     }
 
     /**
@@ -26,33 +43,100 @@ public class BotClassLoader extends ClassLoader {
      */
     private static class ChildClassLoader extends ClassLoader
     {
-        private FindClassClassLoader realParent;
+        private final FindClassClassLoader realParent;
 
         public ChildClassLoader(String name, FindClassClassLoader realParent)
         {
             super(name, null);
-
             this.realParent = realParent;
         }
 
         @Override
         public Class<?> findClass(String name) throws ClassNotFoundException
         {
-            Class<?> loaded = super.findLoadedClass(name);
-            if(loaded != null)
-                return loaded;
-            try
-            {
-                // first try to use the URLClassLoader findClass
-                return super.findClass(name);
+            Class<?> loaded = realParent.findLoaded(name);
+            if( loaded != null )
+                return realParent.findClass(name);
+            if (name.contains("java.")) {
+                return ClassLoader.getPlatformClassLoader().loadClass(name);
             }
-            catch( ClassNotFoundException e )
-            {
-                // if that fails, we ask our real parent classloader to load the class (we give up)
-                return realParent.loadClass(name);
+
+            try {
+                if (name.equals("rsb.botLauncher.RuneLiteInterface")) {
+                    return realParent.loadClass(name);
+                }
+                // System.out.println(name);
+                byte[] bt = loadClassData(name);
+                return defineClass(name, bt, 0, bt.length);
+            } catch (Exception e) {
+                //e.printStackTrace();
+                return realParent.findClass(name);
             }
         }
+
+        private byte[] loadClassData(String className) {
+            //read class
+            InputStream is = getResourceAsStream(className.replace(".", "/")+".class");
+            ByteArrayOutputStream byteSt = new ByteArrayOutputStream();
+            //write into byte
+            int len =0;
+            try {
+                while((len=is.read())!=-1){
+                    byteSt.write(len);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //convert into byte array
+            return byteSt.toByteArray();
+        }
+
+        @Override
+        public Enumeration<URL> getResources(String name) throws IOException {
+            List<URL> allRes = new LinkedList<>();
+
+            // load resource from this classloader
+            Enumeration<URL> thisRes = findResources(name);
+            if (thisRes != null) {
+                while (thisRes.hasMoreElements()) {
+                    allRes.add(thisRes.nextElement());
+                }
+            }
+
+            // then try finding resources from parent classloaders
+            Enumeration<URL> parentRes = super.findResources(name);
+            if (parentRes != null) {
+                while (parentRes.hasMoreElements()) {
+                    allRes.add(parentRes.nextElement());
+                }
+            }
+
+            return new Enumeration<URL>() {
+                Iterator<URL> it = allRes.iterator();
+
+                @Override
+                public boolean hasMoreElements() {
+                    return it.hasNext();
+                }
+
+                @Override
+                public URL nextElement() {
+                    return it.next();
+                }
+            };
+        }
+
+        @Override
+        public URL getResource(String name) {
+            URL res = findResource(name);
+            if (res == null) {
+                res = realParent.getResource(name);
+            }
+            return res;
+        }
+
     }
+
 
     public BotClassLoader(String name)
     {

@@ -28,8 +28,7 @@ public class GeneralPanel extends JPanel {
     }
 
     public void addBotButtonAction() {
-        RuneLite bot = new RuneLite();
-        Application.addBot(bot);
+        Application.addBot(true);
         Application.setBot(Application.getBots().length - 1);
     }
 

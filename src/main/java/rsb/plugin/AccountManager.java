@@ -45,8 +45,8 @@ public class AccountManager extends JDialog implements ActionListener {
 		accountStore.setPassword("0000000000000000000000000000000000000000");
 		try {
 			accountStore.load();
-		} catch (IOException ignored) {
-			log.debug("Failed to load accounts", ignored);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

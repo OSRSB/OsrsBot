@@ -50,6 +50,7 @@ public class BotModule extends RuneLiteModule {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void configure()
     {
         // bind properties
@@ -86,28 +87,28 @@ public class BotModule extends RuneLiteModule {
             }
         }
 
-        bindConstant().annotatedWith(Names.named("developerMode")).to(developerMode);
-        bindConstant().annotatedWith(Names.named("safeMode")).to(safeMode);
-        bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
-        bind(File.class).annotatedWith(Names.named("config")).toInstance(config);
-        bind(ScheduledExecutorService.class).toInstance(new ExecutorServiceExceptionLogger(Executors.newSingleThreadScheduledExecutor()));
-        bind(OkHttpClient.class).toInstance(okHttpClient);
-        bind(MenuManager.class);
-        bind(ChatMessageManager.class);
-        bind(ItemManager.class);
-        bind(Scheduler.class);
-        bind(PluginManager.class);
-        bind(SessionManager.class);
+            bindConstant().annotatedWith(Names.named("developerMode")).to(developerMode);
+            bindConstant().annotatedWith(Names.named("safeMode")).to(safeMode);
+            bind(File.class).annotatedWith(Names.named("sessionfile")).toInstance(sessionfile);
+            bind(File.class).annotatedWith(Names.named("config")).toInstance(config);
+            bind(ScheduledExecutorService.class).toInstance(new ExecutorServiceExceptionLogger(Executors.newSingleThreadScheduledExecutor()));
+            bind(OkHttpClient.class).toInstance(okHttpClient);
+            bind(MenuManager.class);
+            bind(ChatMessageManager.class);
+            bind(ItemManager.class);
+            bind(Scheduler.class);
+            bind(PluginManager.class);
+            bind(SessionManager.class);
 
-        bind(Gson.class).toInstance(RuneLiteAPI.GSON);
+            bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
-        bind(Callbacks.class).to(NewHooks.class);
+            bind(Callbacks.class).to(NewHooks.class);
 
-        bind(EventBus.class)
-                .toInstance(new EventBus());
+            bind(EventBus.class)
+                    .toInstance(new EventBus());
 
-        bind(EventBus.class)
-                .annotatedWith(Names.named("Deferred EventBus"))
-                .to(DeferredEventBus.class);
+            bind(EventBus.class)
+                    .annotatedWith(Names.named("Deferred EventBus"))
+                    .to(DeferredEventBus.class);
     }
 }

@@ -20,7 +20,6 @@ public class Canvas extends java.awt.Canvas {
 	private static final long serialVersionUID = -2276037172265300477L;
 
 	private RuneLite bot;
-	private boolean toshi;
 
 	private boolean visible;
 	private boolean focused;
@@ -37,14 +36,9 @@ public class Canvas extends java.awt.Canvas {
 		//This may need more variables set in the future
 	}
 
-	public final Graphics getGraphics(RuneLiteInterface bot, MainBufferProvider mainBufferProvider) {
+	public final Graphics getGraphics(RuneLite bot, MainBufferProvider mainBufferProvider) {
 		if (bot == null) {
-			if (toshi) {
-				return super.getGraphics();
-			} else {
-				bot = Application.getBot(this);
-				toshi = true;
-			}
+			bot = (RuneLite) Application.getBot(this);
 		}
 		return bot.getBufferGraphics(mainBufferProvider);
 	}

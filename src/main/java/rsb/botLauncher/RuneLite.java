@@ -94,6 +94,7 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
     private static final int MAX_OKHTTP_CACHE_SIZE = 20 * 1024 * 1024; // 20mb
     public static String USER_AGENT = "RuneLite/" + BotProperties.getVersion() + "-" + BotProperties.getCommit() + (BotProperties.isDirty() ? "+" : "");
 
+    @Getter
     public static Injector injector;
 
     @Inject
@@ -301,6 +302,10 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
         return false;
     }
 
+    public RuneLiteInterface getInstance() {
+        return injector.getInstance(RuneLite.class);
+    }
+
     /**
      * Gets the canvas object while checking to make sure we don't do this before it has actually
      * loaded
@@ -347,8 +352,8 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
     public Dimension getPanelSize() {
         for (RuneLiteInterface bot : Application.getBots()) {
             if (bot != null) {
-                if (bot.getClient().getClass().getClassLoader() == this.getClient().getClass().getClassLoader()) {
-                    return bot.getPanel().getSize();
+                if (((RuneLite) bot).getClient().getClass().getClassLoader() == this.getClient().getClass().getClassLoader()) {
+                    return this.getPanel().getSize();
                 }
             }
         }
@@ -366,13 +371,14 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
     /**
      * Launches a single instance of RuneLite
      *
-     * @param parser        The command-line parser for the program
-     * @param optionSpecs   The option specs for the program
-     * @param options       The option set for the program
+     * @param args      The args for the program (plus any extras added on)
      * @throws Exception Any exception the client or RuneLite might throw
      */
-    public void launch(OptionParser parser, ArgumentAcceptingOptionSpec<?>[] optionSpecs, OptionSet options) throws Exception {
+    public void launch(String[] args) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
+        OptionParser parser = new OptionParser();
+        ArgumentAcceptingOptionSpec<?>[] optionSpecs = handleParsing(parser);
+        OptionSet options = parser.parse(args);
         handleOptions(parser, optionSpecs, options);
         setDefaultUncaughtExceptionHandler();
         initializeClient(optionSpecs, options);
@@ -385,7 +391,6 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
      * @return          The ArgumentAcceptingOptionSpec array (the fields for our options)
      */
     public static ArgumentAcceptingOptionSpec<?>[] handleParsing(OptionParser parser) {
-
         parser.accepts("bot-runelite", "Starts the client in Bot RuneLite mode");
         parser.accepts("headless", "Starts a client without the additional features of RuneLite");
         parser.accepts("developer-mode", "Enable developer tools");
@@ -396,7 +401,6 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
                 .withRequiredArg()
                 .defaultsTo(BotProperties.getJavConfig());
         parser.accepts("help", "Show this text").forHelp();
-
         final ArgumentAcceptingOptionSpec<File> sessionfile = parser.accepts("sessionfile", "Use a specified session file")
                 .withRequiredArg()
                 .withValuesConvertedBy(new ConfigFileConverter())
@@ -750,8 +754,8 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
         kill_passive = true;
     }
 
-    public static void setInjector() {
-        setInjector(RuneLite.injector);
+    public void setInjector() {
+        setInjector(this.injector);
     }
 
     /**
@@ -894,7 +898,4 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
         }
     }
 
-    public static Injector getInjector() {
-        return injector;
-    }
 }
