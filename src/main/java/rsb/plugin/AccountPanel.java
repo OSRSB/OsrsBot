@@ -1,6 +1,7 @@
 package rsb.plugin;
 
 import rsb.botLauncher.RuneLite;
+import rsb.botLauncher.RuneLiteInterface;
 import rsb.internal.ScriptHandler;
 import rsb.internal.listener.ScriptListener;
 import rsb.script.Script;
@@ -83,7 +84,7 @@ public class AccountPanel extends PluginPanel implements ScriptListener {
 	public void scriptStarted(final ScriptHandler handler, Script script) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				RuneLite bot = handler.getBot();
+				RuneLiteInterface bot = handler.getBot();
 			}
 		});
 	}

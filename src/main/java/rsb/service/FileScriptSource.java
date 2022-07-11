@@ -31,6 +31,7 @@ public class FileScriptSource implements ScriptSource {
 		if (file != null) {
 			if (file.isDirectory()) {
 				try {
+
 					ClassLoader scriptLoader = new ScriptClassLoader(file.toURI().toURL());
 					for (File file : Objects.requireNonNull(file.listFiles())) {
 						if (isJar(file)) {
@@ -83,11 +84,15 @@ public class FileScriptSource implements ScriptSource {
 		if (file.isDirectory()) {
 			if (!file.getName().startsWith(".")) {
 				for (File f : file.listFiles()) {
+					System.out.println("TEST1");
+					System.out.println(file.toURI());
 					load(loader, scripts, f, prefix + file.getName() + ".");
 				}
 			}
 		} else {
 			String name = prefix + file.getName();
+			System.out.println("TEST2");
+			System.out.println(file.toURI());
 			String ext = ".class";
 			if (name.endsWith(ext) && !name.startsWith(".") && !name.contains("!") && !name.contains("$")) {
 				name = name.substring(0, name.length() - ext.length());

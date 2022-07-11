@@ -4,18 +4,13 @@
  */
 package rsb.botLauncher;
 
-import joptsimple.ArgumentAcceptingOptionSpec;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
 import lombok.extern.slf4j.Slf4j;
-import rsb.internal.BotProperties;
 import rsb.internal.globval.GlobalConfiguration;
-import rsb.plugin.ScriptSelector;
 import rsb.service.ScriptDefinition;
-import rsb.service.ServiceException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -44,16 +39,8 @@ public class Application {
 						String[] command = input.nextLine().split(" ");
 						System.out.println(Arrays.toString(command));
 						if (command[0].equalsIgnoreCase("runScript")) {
-							RuneLite botInstance = (RuneLite) Application.getBots()[Integer.parseInt(command[1])].getInstance();
-							botInstance.setAccount(command[2]);
-							ScriptSelector scriptSelector = new ScriptSelector(botInstance);
-							scriptSelector.load();
-							ScriptDefinition def = scriptSelector.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(command[3])).findFirst().get();
-							try {
-								botInstance.getScriptHandler().runScript(def.source.load(def));
-							} catch (ServiceException e) {
-								e.printStackTrace();
-							}
+							RuneLiteInterface botInterface = Application.getBots()[Integer.parseInt(command[1])];
+							botInterface.runScript(command[2], command[3]);
 
 						}
 						if (command[0].equalsIgnoreCase("addBot")) {
@@ -61,7 +48,7 @@ public class Application {
 						}
 						if (command[0].equalsIgnoreCase("checkState")) {
 							for (RuneLiteInterface botInstance : bots) {
-								System.out.println(botInstance.getInstance().getClass().getClassLoader().getName());
+								System.out.println(botInstance.getClass().getClassLoader());
 							}
 						}
 					}
@@ -148,7 +135,7 @@ public class Application {
 		Class<?> c;
 		try {
 			c = loader.loadClass("rsb.botLauncher.RuneLite");
-			bot = (RuneLiteInterface) c.getDeclaredConstructor().newInstance();
+			bot = (RuneLiteInterface) c.getConstructor().newInstance();
 			bot.launch(args);
 			RuneLiteInterface[] update = new RuneLiteInterface[bots.length + 1];
 			for (int i = 0; i < bots.length; i++) {

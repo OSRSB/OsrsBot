@@ -2,7 +2,7 @@ package rsb.botLauncher;
 
 public interface RuneLiteInterface {
 
-    RuneLiteInterface getInstance();
+    void runScript(String account, String scriptName);
 
     void launch(String[]s) throws Exception;
 

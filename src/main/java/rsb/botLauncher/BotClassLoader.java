@@ -1,5 +1,7 @@
 package rsb.botLauncher;
 
+import rsb.internal.globval.GlobalConfiguration;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,16 +62,16 @@ public class BotClassLoader extends ClassLoader {
             if (name.contains("java.")) {
                 return ClassLoader.getPlatformClassLoader().loadClass(name);
             }
-
             try {
-                if (name.equals("rsb.botLauncher.RuneLiteInterface")) {
+                //Contains for subclasses and subpackages
+                if (name.equals("rsb.botLauncher.RuneLiteInterface") ||
+                    name.startsWith("rsb.internal.globval.GlobalConfiguration")
+                ) {
                     return realParent.loadClass(name);
                 }
-                // System.out.println(name);
                 byte[] bt = loadClassData(name);
                 return defineClass(name, bt, 0, bt.length);
             } catch (Exception e) {
-                //e.printStackTrace();
                 return realParent.findClass(name);
             }
         }

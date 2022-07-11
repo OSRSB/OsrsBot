@@ -76,6 +76,8 @@ import net.runelite.client.ui.overlay.worldmap.WorldMapOverlay;
 import net.runelite.http.api.RuneLiteAPI;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import rsb.plugin.ScriptSelector;
+import rsb.service.ScriptDefinition;
 
 
 @Slf4j
@@ -302,7 +304,11 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
         return false;
     }
 
-    public RuneLiteInterface getInstance() {
+    public RuneLite getInstance() {
+        return this;
+    }
+
+    public RuneLite getInjectorInstance() {
         return injector.getInstance(RuneLite.class);
     }
 
@@ -358,6 +364,19 @@ public class RuneLite extends net.runelite.client.RuneLite implements RuneLiteIn
             }
         }
         return null;
+    }
+
+    public void runScript(String account, String scriptName) {
+        getInjectorInstance().setAccount(account);
+        System.out.println(getInjectorInstance().getAccountName());
+        ScriptSelector ss = new ScriptSelector(getInjectorInstance());
+        ss.load();
+        ScriptDefinition def = ss.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(scriptName)).findFirst().get();
+        try {
+            getInjectorInstance().getScriptHandler().runScript(def.source.load(def));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Applet getLoader() {

@@ -1,7 +1,6 @@
 package rsb.plugin;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.runelite.client.ui.components.materialtabs.MaterialTab;
 import rsb.botLauncher.RuneLite;
 import rsb.internal.ScriptHandler;
@@ -41,11 +40,6 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	private static final long serialVersionUID = 5475451138208522511L;
 
 	private static final String[] COLUMN_NAMES = new String[]{"", "Name", "Version", "Author", "Description"};
-	private static final ScriptSource SRC_SOURCES;
-	private static final ScriptSource SRC_PRECOMPILED;
-	private static final ScriptSource SRC_BUNDLED;
-	private static final ScriptSource SRC_TEST;
-	private static final String TEST_PATH;
 	private static final String JAVA_EXT = ".java";
 	private static final String CLASS_EXT = ".class";
 	private static final String NO_EXT = "";
@@ -65,20 +59,11 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	protected MaterialTab buttonStop;
 	protected MaterialTab buttonReload;
 
-	/**
-	 * Assigns the constant values
-	 */
-	static {
-		TEST_PATH = convertIntelliJPath(rsb.testsScript.Test.class, "Test.class");
-		SRC_TEST = new FileScriptSource(new File(TEST_PATH));
-		SRC_SOURCES = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsSourcesDirectory()));
-		SRC_PRECOMPILED = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsPrecompiledDirectory()));
-		if (GlobalConfiguration.RUNNING_FROM_JAR) {
-			SRC_BUNDLED = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsExtractedCache()));
-		} else {
-			SRC_BUNDLED = new FileScriptSource(new File("." + File.separator + GlobalConfiguration.Paths.SCRIPTS_NAME_SRC));
-		}
-	}
+	static String TEST_PATH = convertIntelliJPath(rsb.testsScript.Test.class, "Test.class");
+	static ScriptSource SRC_TEST = new FileScriptSource(new File(TEST_PATH));
+	static ScriptSource SRC_SOURCES = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsSourcesDirectory()));
+	static ScriptSource SRC_PRECOMPILED = new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsPrecompiledDirectory()));
+	static ScriptSource SRC_BUNDLED = (GlobalConfiguration.RUNNING_FROM_JAR) ? new FileScriptSource(new File(GlobalConfiguration.Paths.getScriptsExtractedCache())) : new FileScriptSource(new File("." + File.separator + GlobalConfiguration.Paths.SCRIPTS_NAME_SRC));
 
 	/**
 	 * Creates a script selector for the given bot instance
@@ -186,10 +171,14 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 */
 	public void load() {
 		scripts.clear();
+		File testFile = new File(GlobalConfiguration.Paths.getScriptsSourcesDirectory());
+		FileScriptSource test = new FileScriptSource(testFile);
+		test.list().forEach(System.out::println);
 		deleteTemporaryFiles();
 		scripts.addAll(SRC_BUNDLED.list());
 		scripts.addAll(SRC_PRECOMPILED.list());
 		scripts.addAll(SRC_SOURCES.list());
+		scripts.forEach(System.out::println);
 		//generateTestScripts();
 		//scripts.addAll(SRC_TEST.list());
 		if (search != null)

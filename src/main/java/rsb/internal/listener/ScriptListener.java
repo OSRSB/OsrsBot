@@ -1,6 +1,7 @@
 package rsb.internal.listener;
 
 import rsb.botLauncher.RuneLite;
+import rsb.botLauncher.RuneLiteInterface;
 import rsb.script.Script;
 import rsb.internal.ScriptHandler;
 
