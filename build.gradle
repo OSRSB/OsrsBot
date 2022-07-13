@@ -20,7 +20,6 @@ static def getRuneLiteVersion() {
     URLConnection urlConnection = url.openConnection()
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
             urlConnection.getInputStream()))
-    Date latestDate = null
     String latestName = null
     String inputLine
     while ((inputLine = bufferedReader.readLine()) != null) {
@@ -28,19 +27,47 @@ static def getRuneLiteVersion() {
         if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
             String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
-            Date date
             if (!name.contains("SNAPSHOT") && removeName != "") {
-                DateFormat df = new SimpleDateFormat(" dd-MMM-yyyy HH:mm -", Locale.ENGLISH)
-                date = df.parse(removeName)
-                if (latestDate == null || date.after(latestDate)) {
-                    latestDate = date
-                    latestName = name
+                if (compareSemanticVersion(latestName, name)) {
+                    latestName = name;
                 }
             }
         }
     }
     bufferedReader.close()
     return latestName
+}
+
+static def compareSemanticVersion(String s1, String s2) {
+    if (s1 != null && s2 != null) {
+        while (true) {
+            if (s1.indexOf('.') != -1 && s2.indexOf('.') != -1) {
+                if (s1.substring(0, s1.indexOf('.')) == s2.substring(0, s2.indexOf('.'))) {
+                    s1 = s1.substring(s1.indexOf('.') + 1)
+                    s2 = s2.substring(s2.indexOf('.') + 1)
+                }
+                else {
+                    if (s1.indexOf('.') != -1) {
+                        s1 = s1.substring(0, s1.indexOf('.'))
+                    }
+                    if (s2.indexOf('.') != -1) {
+                        s2 = s2.substring(0, s2.indexOf('.'))
+                    }
+                    return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
+                }
+            }
+            else {
+                if (s1.indexOf('.') != -1) {
+                    s1 = s1.substring(0, s1.indexOf('.'))
+                }
+                if (s2.indexOf('.') != -1) {
+                    s2 = s2.substring(0, s2.indexOf('.'))
+                }
+                return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
+            }
+        }
+    }
+    return s1 == null && s2 != null
 }
 
 dependencies {
