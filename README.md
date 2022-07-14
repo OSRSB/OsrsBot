@@ -14,6 +14,7 @@ ___
 
 ## ⚠️ This project is WIP ⚠️
 
+If you are interested in botting go to [GitHub](https://github.com/OSRSB/script-template)
 * Please don't DM developers asking for help, neither spam discord channels or you may get banned!
 * If you ask nicely and with **meaningfull details** about your problem you may get some help.
 
