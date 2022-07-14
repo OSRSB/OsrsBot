@@ -16,7 +16,7 @@ import java.util.Scanner;
 @Slf4j
 public class Application {
 
-	static RuneLiteInterface[] bots = new RuneLiteInterface[]{};
+	static BotLiteInterface[] bots = new BotLiteInterface[]{};
 	static String[] programArgs = new String[]{};
 
 	/**
@@ -39,7 +39,7 @@ public class Application {
 						String[] command = input.nextLine().split(" ");
 						System.out.println(Arrays.toString(command));
 						if (command[0].equalsIgnoreCase("runScript")) {
-							RuneLiteInterface botInterface = Application.getBots()[Integer.parseInt(command[1])];
+							BotLiteInterface botInterface = Application.getBots()[Integer.parseInt(command[1])];
 							botInterface.runScript(command[2], command[3]);
 
 						}
@@ -47,7 +47,7 @@ public class Application {
 							addBot(true);
 						}
 						if (command[0].equalsIgnoreCase("checkState")) {
-							for (RuneLiteInterface botInstance : bots) {
+							for (BotLiteInterface botInstance : bots) {
 								System.out.println(botInstance.getClass().getClassLoader());
 							}
 						}
@@ -93,7 +93,7 @@ public class Application {
 	}
 
 	public static void setBot(int index) {
-		RuneLiteInterface bot = getBots()[index];
+		BotLiteInterface bot = getBots()[index];
 
 
 	}
@@ -105,9 +105,9 @@ public class Application {
 	 * @param o Any object from within the client.
 	 * @return The Bot for the client.
 	 */
-	public static RuneLiteInterface getBot(Object o) {
+	public static BotLiteInterface getBot(Object o) {
 		ClassLoader cl = o.getClass().getClassLoader();
-		for (RuneLiteInterface bot : bots) {
+		for (BotLiteInterface bot : bots) {
 			if (cl == bot.getClass().getClassLoader()) {
 				return bot;
 			}
@@ -121,7 +121,7 @@ public class Application {
 	 * @param headless To run the bot headless or not
 	 */
 	public static void addBot(boolean headless) {
-		RuneLiteInterface bot;
+		BotLiteInterface bot;
 		String[] args = new String[programArgs.length + 1];
 		if (headless) {
 			System.arraycopy(programArgs, 0, args, 0, programArgs.length);
@@ -133,10 +133,10 @@ public class Application {
 		BotClassLoader loader = new BotClassLoader("BotLoader" + bots.length);
 		// Class<?> c;
 		try {
-			// c = loader.loadClass("net.runelite.rsb.botLauncher.RuneLite");
-			// bot = (RuneLiteInterface) c.getConstructor().newInstance();
+			// c = loader.loadClass("net.runelite.client.modified.RuneLite");
+			// bot = (BotLiteInterface) c.getConstructor().newInstance();
 			BotLite.launch(args);
-			RuneLiteInterface[] update = new RuneLiteInterface[bots.length + 1];
+			BotLiteInterface[] update = new BotLiteInterface[bots.length + 1];
 			for (int i = 0; i < bots.length; i++) {
 				update[i] = bots[i];
 			}
@@ -151,7 +151,7 @@ public class Application {
 	 * Retrieves all running bot instances
 	 * @return	the bot instances
 	 */
-	public static RuneLiteInterface[] getBots() {
+	public static BotLiteInterface[] getBots() {
 		return bots;
 	}
 

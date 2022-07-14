@@ -44,7 +44,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import net.runelite.rsb.botLauncher.BotLite;
-import net.runelite.rsb.botLauncher.RuneLite;
+import net.runelite.client.modified.RuneLite;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 
 /**

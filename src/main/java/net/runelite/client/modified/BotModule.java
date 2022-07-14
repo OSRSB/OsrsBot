@@ -1,4 +1,4 @@
-package net.runelite.rsb.internal;
+package net.runelite.client.modified;
 
 import com.google.common.base.Strings;
 import com.google.common.math.DoubleMath;
@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 
 import net.runelite.api.Client;
 import net.runelite.api.hooks.Callbacks;
+import net.runelite.client.RuntimeConfig;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
@@ -35,7 +36,6 @@ import net.runelite.client.util.ExecutorServiceExceptionLogger;
 import net.runelite.http.api.RuneLiteAPI;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import net.runelite.client.RuntimeConfig;
 
 import javax.annotation.Nullable;
 
@@ -45,14 +45,14 @@ public class BotModule extends AbstractModule {
 
     private final OkHttpClient okHttpClient;
     private final Supplier<Applet> clientLoader;
-    private final Supplier<RuntimeConfig> configSupplier;
+    private final RuntimeConfigLoader configSupplier;
     private final boolean developerMode;
     private final boolean safeMode;
     private final File sessionfile;
     private final File config;
 
 
-    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, Supplier<RuntimeConfig> configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
+    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
         this.configSupplier = configSupplier;

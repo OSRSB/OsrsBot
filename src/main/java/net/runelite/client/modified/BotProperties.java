@@ -1,4 +1,4 @@
-package net.runelite.rsb.internal;
+package net.runelite.client.modified;
 
 import java.io.IOException;
 import java.io.InputStream;

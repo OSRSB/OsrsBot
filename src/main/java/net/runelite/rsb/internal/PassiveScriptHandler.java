@@ -1,7 +1,7 @@
 package net.runelite.rsb.internal;
 
 import net.runelite.rsb.botLauncher.BotLite;
-import net.runelite.rsb.botLauncher.RuneLite;
+import net.runelite.client.modified.RuneLite;
 import net.runelite.rsb.internal.listener.PassiveScriptListener;
 import net.runelite.rsb.script.PassiveScript;
 import net.runelite.rsb.script.PassiveScriptManifest;

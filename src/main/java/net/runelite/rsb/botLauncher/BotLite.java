@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MainBufferProvider;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.modified.RuneLite;
 import net.runelite.rsb.event.EventManager;
 import net.runelite.rsb.event.events.PaintEvent;
 import net.runelite.rsb.event.events.TextPaintEvent;
@@ -30,7 +31,7 @@ import java.util.concurrent.Executors;
 
 @Singleton
 @Slf4j
-public class BotLite extends RuneLite implements RuneLiteInterface {
+public class BotLite extends RuneLite implements BotLiteInterface {
     private String account;
     private MethodContext methods;
     private Component panel;
@@ -198,7 +199,7 @@ public class BotLite extends RuneLite implements RuneLiteInterface {
      * @return The client panel size.
      */
     public Dimension getPanelSize() {
-        for (RuneLiteInterface bot : Application.getBots()) {
+        for (BotLiteInterface bot : Application.getBots()) {
             if (bot != null) {
                 if (((BotLite) bot).getClient().getClass().getClassLoader() == this.getClient().getClass().getClassLoader()) {
                     return this.getPanel().getSize();

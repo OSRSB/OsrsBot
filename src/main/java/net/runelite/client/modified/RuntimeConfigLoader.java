@@ -1,4 +1,4 @@
-package net.runelite.rsb.internal;
+package net.runelite.client.modified;
 
 import com.google.common.base.Strings;
 import java.io.IOException;

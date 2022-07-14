@@ -1,6 +1,6 @@
 package net.runelite.rsb.botLauncher;
 
-public interface RuneLiteInterface {
+public interface BotLiteInterface {
 
     void runScript(String account, String scriptName);
 

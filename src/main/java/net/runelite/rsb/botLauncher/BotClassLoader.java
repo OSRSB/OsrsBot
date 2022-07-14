@@ -62,7 +62,7 @@ public class BotClassLoader extends ClassLoader {
             }
             try {
                 //Contains for subclasses and subpackages
-                if (name.equals("net.runelite.rsb.botLauncher.RuneLiteInterface") ||
+                if (name.equals("net.runelite.rsb.botLauncher.BotLiteInterface") ||
                     name.startsWith("net.runelite.rsb.internal.globval.GlobalConfiguration")
                 ) {
                     return realParent.loadClass(name);

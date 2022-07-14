@@ -4,10 +4,8 @@
  * A modified RuneLite class that enables the utilization of the RSB API
  *
  */
-package net.runelite.rsb.botLauncher;
+package net.runelite.client.modified;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -42,6 +40,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.client.ClientSessionManager;
+import net.runelite.client.RuntimeConfig;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.discord.DiscordService;
@@ -52,10 +51,9 @@ import net.runelite.client.rs.ClientLoader;
 import net.runelite.client.rs.ClientUpdateCheckMode;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetOverlay;
+import net.runelite.rsb.botLauncher.BotLite;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.slf4j.LoggerFactory;
-import net.runelite.rsb.internal.*;
 import net.runelite.client.ui.ClientUI;
 import net.runelite.client.ui.FatalErrorDialog;
 import net.runelite.client.ui.overlay.OverlayManager;
@@ -129,7 +127,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     @Inject
     @Nullable
-    private net.runelite.client.RuntimeConfig runtimeConfig;
+    private RuntimeConfig runtimeConfig;
 
     /**
      * Launches a single instance of RuneLite
