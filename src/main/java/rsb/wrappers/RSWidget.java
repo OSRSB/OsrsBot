@@ -665,24 +665,8 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return the value index array or new int[0][0] if null
      */
     public int[][] getValueIndexArray() {
-        //Outdated method likely, will need to remake later
-		/*
-		final net.runelite.api.widgets.Widget childInterface = this.widget;
-		if (childInterface != null) {
-			final int[][] vindex = childInterface.getValueIndexArray();
-			if (vindex != null) { // clone does NOT deep copy
-				final int[][] out = new int[vindex.length][0];
-				for (int i = 0; i < vindex.length; i++) {
-					final int[] cur = vindex[i];
-					if (cur != null) {
-						// clone, otherwise you have a pointer
-						out[i] = cur.clone();
-					}
-				}
-				return out;
-			}
-		}
-		*/
+        //TODO: Remake this method
+        // Method needs to return the array of indexes within this parent widget
         return new int[0][0];
     }
 

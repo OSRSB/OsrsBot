@@ -12,17 +12,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.MainBufferProvider;
-import net.runelite.api.RenderOverview;
+import net.runelite.api.*;
 import net.runelite.api.Skill;
-import net.runelite.api.WorldMapManager;
 import net.runelite.api.events.BeforeRender;
 import net.runelite.api.events.FakeXpDrop;
 import net.runelite.api.events.GameStateChanged;
@@ -32,6 +30,7 @@ import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.Notifier;
+import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
@@ -89,6 +88,14 @@ public class NewHooks implements Callbacks
 
     private final Injector injector = RuneLite.getInjector();
     private final RuneLite bot = injector.getInstance(RuneLite.class);
+
+    @FunctionalInterface
+    public interface RenderableDrawListener
+    {
+        boolean draw(Renderable renderable, boolean ui);
+    }
+
+    private final List<Hooks.RenderableDrawListener> renderableDrawListeners = new ArrayList<>();
 
     /**
      * Get the Graphics2D for the MainBufferProvider image
@@ -530,5 +537,28 @@ public class NewHooks implements Callbacks
                 xp
         );
         eventBus.post(fakeXpDrop);
+    }
+
+    public void registerRenderableDrawListener(Hooks.RenderableDrawListener listener)
+    {
+        renderableDrawListeners.add(listener);
+    }
+
+    public void unregisterRenderableDrawListener(Hooks.RenderableDrawListener listener)
+    {
+        renderableDrawListeners.remove(listener);
+    }
+
+    @Override
+    public boolean draw(Renderable renderable, boolean drawingUi)
+    {
+        for (Hooks.RenderableDrawListener renderableDrawListener : renderableDrawListeners)
+        {
+            if (!renderableDrawListener.draw(renderable, drawingUi))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

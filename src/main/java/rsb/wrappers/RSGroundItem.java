@@ -37,12 +37,6 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 								new RSGroundObjectModel(methods, tile.getGroundItems().get(i).getModel(), tile);
 					}
 				}
-				/*
-				Model model = tile.getGroundItems().get(0).getModel();
-				if (model != null) {
-					return new RSModel(methods, model);
-				}
-				*/
 			}
 		}
 		return null;

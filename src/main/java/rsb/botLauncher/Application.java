@@ -13,6 +13,8 @@ import rsb.plugin.Botplugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Slf4j
 public class Application {
@@ -33,12 +35,11 @@ public class Application {
 		OptionSet options = parser.parse(args);
 		programArgs = args;
 
-		checkForCacheAndLoad();
-
 		if (!options.has("bot") || options.has("bot-runelite") || options.has("runelite")) {
 			if (options.has("bot-runelite") && !options.has("runelite")) {
 				RuneLite bot = new RuneLite();
 				bot.launch(parser, optionSpecs, options);
+				checkForCacheAndLoad();
 				addBot(bot);
 			} else {
 				String[] nonBotArgs = new String[args.length];
@@ -71,19 +72,18 @@ public class Application {
 		String itemCacheLocation = GlobalConfiguration.Paths.getItemsCacheDirectory();
 		String npcCacheLocation = GlobalConfiguration.Paths.getNPCsCacheDirectory();
 		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
-
-
-		String[] itemArgs = {"--cache", gameCacheLocation,
-				"--items", itemCacheLocation};
-		String[] objectArgs = {"--cache", gameCacheLocation,
-				"--objects", objectCacheLocation};
-		String[] npcArgs = {"--cache", gameCacheLocation,
-				"--npcs", npcCacheLocation};
-		String[] spriteArgs = {"--cache", gameCacheLocation,
-				"--sprites", spriteCacheLocation};
-
 		//TODO Some sort of better validation here
+		//Add a version check
 		if (!new File(itemCacheLocation).exists() && new File(itemCacheLocation).getTotalSpace() < 100) {
+			String[] itemArgs = {"--cache", gameCacheLocation,
+					"--items", itemCacheLocation};
+			String[] objectArgs = {"--cache", gameCacheLocation,
+					"--objects", objectCacheLocation};
+			String[] npcArgs = {"--cache", gameCacheLocation,
+					"--npcs", npcCacheLocation};
+			String[] spriteArgs = {"--cache", gameCacheLocation,
+					"--sprites", spriteCacheLocation};
+
 			net.runelite.cache.Cache.main(itemArgs);
 			net.runelite.cache.Cache.main(objectArgs);
 			net.runelite.cache.Cache.main(npcArgs);

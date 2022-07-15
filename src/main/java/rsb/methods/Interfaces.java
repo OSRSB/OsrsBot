@@ -7,7 +7,8 @@ import rsb.internal.globval.WidgetIndices;
 import rsb.wrappers.RSWidget;
 
 import java.awt.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Provides access to interfaces.
@@ -89,10 +90,10 @@ public class Interfaces extends MethodProvider {
 	 *         otherwise null.
 	 */
 	public RSWidget getContinueComponent() {
-		Widget widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_TEXT.getPackedId());
+		Widget widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getPackedId());
 		if (widget != null && !widget.isHidden())
 		{
-			return new RSWidget(methods, GlobalWidgetInfo.DIALOG_NPC_TEXT.getGroupId(),  GlobalWidgetInfo.DIALOG_NPC_TEXT.getChildId());
+			return new RSWidget(methods, GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getGroupId(),  GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getChildId());
 		}
 		return null;
 	}
@@ -146,6 +147,30 @@ public class Interfaces extends MethodProvider {
 			for (RSWidget c : inter.getComponents()) {
 				if (c.getText().toLowerCase().contains(option)) {
 					return c.doClick();
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Clicks the dialogue option that contains the desired string.
+	 *
+	 * @param inter  The interface of the dialogue menu.
+	 * @param options The text we want to click.
+	 * @return <code>true</code> if the option was clicked; otherwise <code>false</code>
+	 *         .
+	 */
+	public boolean clickDialogueOption(final RSWidget inter, String ... options) {
+		// This is superfluous but it just makes life a little easier
+		// so you don't have to look up the component.
+		// Just grab the interface and the text you want to click.
+		if (inter.isValid()) {
+			for (RSWidget c : inter.getComponents()) {
+				for (String option : options) {
+					if (c.getText().toLowerCase().contains(option.toLowerCase())) {
+						return c.doClick();
+					}
 				}
 			}
 		}

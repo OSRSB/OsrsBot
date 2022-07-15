@@ -231,14 +231,14 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof ItemLayer) {
-				//model = new RSModel(methods, ((GameObject) obj).getRenderable().getModel());
+				return null;
 			} else if (obj instanceof GameObject) {
 				model =  (Model) ((GameObject) obj).getRenderable();
 				if (model != null && model.getVerticesX() != null)
 					return new RSObjectModel(methods, model, (GameObject) obj);
 			}
-		} catch (AbstractMethodError ignored) {
-			log.debug("Error", ignored);
+		} catch (AbstractMethodError e) {
+			log.debug("Error", e);
 		}
 		return null;
 	}
