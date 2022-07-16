@@ -1,0 +1,136 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'com.github.OSRSB'
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://repo.runelite.net"
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+static def getRuneLiteVersion() {
+    URL url = new URL("http://repo.runelite.net/net/runelite/client/")
+    URLConnection urlConnection = url.openConnection()
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+            urlConnection.getInputStream()))
+    String latestName = null
+    String inputLine
+    while ((inputLine = bufferedReader.readLine()) != null) {
+        inputLine = inputLine.trim().replaceAll(" +", " ")
+        if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
+            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
+            String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
+            if (!name.contains("SNAPSHOT") && removeName != "") {
+                if (compareSemanticVersion(latestName, name)) {
+                    latestName = name
+                }
+            }
+        }
+    }
+    bufferedReader.close()
+    return latestName
+}
+
+static def compareSemanticVersion(String s1, String s2) {
+    if (s1 != null && s2 != null) {
+        while (true) {
+            if (s1.indexOf('.') != -1 && s2.indexOf('.') != -1) {
+                if (s1.substring(0, s1.indexOf('.')) == s2.substring(0, s2.indexOf('.'))) {
+                    s1 = s1.substring(s1.indexOf('.') + 1)
+                    s2 = s2.substring(s2.indexOf('.') + 1)
+                }
+                else {
+                    if (s1.indexOf('.') != -1) {
+                        s1 = s1.substring(0, s1.indexOf('.'))
+                    }
+                    if (s2.indexOf('.') != -1) {
+                        s2 = s2.substring(0, s2.indexOf('.'))
+                    }
+                    return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
+                }
+            }
+            else {
+                if (s1.indexOf('.') != -1) {
+                    s1 = s1.substring(0, s1.indexOf('.'))
+                }
+                if (s2.indexOf('.') != -1) {
+                    s2 = s2.substring(0, s2.indexOf('.'))
+                }
+                return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
+            }
+        }
+    }
+    return s1 == null && s2 != null
+}
+
+dependencies {
+    implementation group: 'net.runelite', name: 'client', version: runeLiteVersion
+    implementation group: 'net.runelite', name: 'cache', version: runeLiteVersion
+    implementation 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+    testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion, {
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+    }
+
+    implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
+    implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
+    implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources"]
+        }
+    }
+}
+
+project.configurations.implementation.setCanBeResolved(true)
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.implementation.collect { it.getName() }.join(' '),
+                'Main-Class': 'rsb.botLauncher.Application'
+        )
+
+    }
+    from{
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it: zipTree(it)}
+    }
+
+
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    destinationDirectory.set(file("$rootDir"))
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
