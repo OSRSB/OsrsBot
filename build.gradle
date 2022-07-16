@@ -1,12 +1,23 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
+
+group = 'com.github.OSRSB'
 
 repositories {
     mavenLocal()
     maven { url 'https://repo.runelite.net' }
     maven { url 'https://jitpack.io' }
     mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
 def runeLiteVersion = getRuneLiteVersion()
@@ -25,7 +36,7 @@ static def getRuneLiteVersion() {
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
             if (!name.contains("SNAPSHOT") && removeName != "") {
                 if (compareSemanticVersion(latestName, name)) {
-                    latestName = name;
+                    latestName = name
                 }
             }
         }
