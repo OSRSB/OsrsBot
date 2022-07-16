@@ -5,7 +5,7 @@ plugins {
 repositories {
     mavenLocal()
     maven { url 'https://repo.runelite.net' }
-    maven { url 'jitpack.io' }
+    maven { url 'https://jitpack.io' }
     mavenCentral()
 }
 
@@ -78,6 +78,7 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
 
+    runtimeOnly 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'
     implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
     implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
@@ -92,17 +93,15 @@ sourceSets {
 }
 
 project.configurations.implementation.setCanBeResolved(true)
-
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.implementation.collect { it.getName() }.join(' '),
                 'Main-Class': 'net.runelite.rsb.botLauncher.Application'
         )
 
     }
     from{
-        configurations.runtimeClasspath.collect {it.isDirectory() ? it: zipTree(it)}
+        configurations.implementation.collect {it.isDirectory() ? it: zipTree(it)}
     }
 
     exclude 'META-INF/*.RSA'

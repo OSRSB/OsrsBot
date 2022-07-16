@@ -31,6 +31,7 @@ import java.util.concurrent.Executors;
 
 @Singleton
 @Slf4j
+@SuppressWarnings("removal")
 public class BotLite extends RuneLite implements BotLiteInterface {
     private String account;
     private MethodContext methods;
