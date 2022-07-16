@@ -16,7 +16,7 @@ public class Timer {
 	private long end;
 	private final long start;
 	private final long period;
-	private static ExecutorService executor = Executors.newSingleThreadExecutor();
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
 	/**
 	 * Instantiates a new Timer with a given time

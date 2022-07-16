@@ -1,19 +1,26 @@
 package net.runelite.rsb.internal;
 
 import com.github.joonasvali.naturalmouse.api.MouseMotionFactory;
+import com.github.joonasvali.naturalmouse.api.MouseMotionObserver;
 import com.github.joonasvali.naturalmouse.support.*;
 import com.github.joonasvali.naturalmouse.util.FactoryTemplates;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.internal.naturalmouse.RSBSystemCalls;
+import net.runelite.rsb.util.Timer;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.BooleanSupplier;
 
 /**
  * @author BenLand100
  */
 @Slf4j
 public class MouseHandler {
+
+	ExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 	/**
 	 * The default mouse speed. This is the delay in ms between actual mouse
 	 * moves. Lower is faster.
@@ -337,21 +344,37 @@ public class MouseHandler {
 		}
 	}
 
-	public void moveMouse(final int x, final int y) {
-		// Todo - don't use a thread with killing and actually fix https://osrsbot.org/t/mouse-did-not-end-up-on-target-pixel-compilation/35/3
-		Thread moveMouseThread = new Thread(() -> {
-			try {
-				motionFactory.move(x, y);
-			} catch (InterruptedException e) {
-				log.debug("Mouse move failed to execute properly.", e);
+	public void moveMouse(final int x, final int y)  {
+		Object lock = new Object();
+		Runnable moveMouseThread = () -> {
+			synchronized (lock) {
+				try {
+					final int[] oX = {-1};
+					final int[] oY = {-1};
+					MouseMotionObserver observer = new MouseMotionObserver() {
+						@Override
+						public void observe(int xPos, int yPos) {
+							oX[0] = xPos;
+							oY[0] = yPos;
+						}
+					};
+					motionFactory.build(x, y).move(observer);
+					while (Timer.waitCondition(() -> oX[0] == -1, 500));
+					lock.notify();
+				} catch (InterruptedException e) {
+					motionFactory.setMouseInfo(() -> new Point(inputManager.getX(), inputManager.getY()));
+					lock.notify();
+					log.debug("Mouse move failed to execute properly.", e);
+				}
 			}
-		});
-		moveMouseThread.start();
-		// kill the thread after 5 seconds
-		try {
-			moveMouseThread.join(5000);
-		} catch (InterruptedException e) {
-			log.debug("Mouse move thread failed to join properly.", e);
+		};
+		synchronized (lock) {
+			try {
+				executorService.submit(moveMouseThread);
+				lock.wait();
+			} catch (InterruptedException e) {
+				log.debug("Thread was interrupted", e);
+			}
 		}
 	}
 }
