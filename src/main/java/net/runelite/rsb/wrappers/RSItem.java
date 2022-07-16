@@ -3,12 +3,18 @@ package net.runelite.rsb.wrappers;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.TileItem;
+import net.runelite.cache.definitions.ItemDefinition;
+import net.runelite.cache.definitions.ObjectDefinition;
+import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.methods.Web;
+import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.subwrap.RSMenuNode;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -18,32 +24,38 @@ import java.util.function.Predicate;
  * wrap a component.
  */
 @Slf4j
-public class RSItem extends MethodProvider implements Clickable07 {
+public class RSItem extends MethodProvider implements Clickable07, CacheProvider<ItemDefinition>  {
+
 	private final int id;
 	private final int stackSize;
+	private final ItemDefinition def;
 	private RSWidget component;
 	private RSWidgetItem item;
 	private static Field groundActionMethod;
+
 
 	public RSItem(final MethodContext ctx, final RSWidgetItem item) {
 		super(ctx);
 		this.id = item.getItemId();
 		this.stackSize = item.getStackSize();
 		this.item = item;
+		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
 	}
 
 	public RSItem(final MethodContext ctx, final TileItem item) {
 		super(ctx);
-		id = item.getId();
-		stackSize = item.getQuantity();
+		this.id = item.getId();
+		this.stackSize = item.getQuantity();
+		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
 		//This is only used for ground objects and thus does not need component declared
 	}
 
 	public RSItem(final MethodContext ctx, final RSWidget item) {
 		super(ctx);
-		id = item.getItemId();
-		stackSize = item.getStackSize();
-		component = item;
+		this.id = item.getItemId();
+		this.stackSize = item.getStackSize();
+		this.component = item;
+		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
 	}
 
 	/**
@@ -51,8 +63,8 @@ public class RSItem extends MethodProvider implements Clickable07 {
 	 *
 	 * @return The RSItemDef; or <code>null</code> if unavailable.
 	 */
-	public ItemComposition getDefinition() {
-		return methods.client.getItemDefinition(id);
+	public ItemDefinition getDefinition() {
+		return def;
 	}
 
 	/**
@@ -129,7 +141,7 @@ public class RSItem extends MethodProvider implements Clickable07 {
 		if (component != null && component.getName() != null) {
 			return component.getName();
 		} else {
-			ItemComposition definition = getDefinition();
+			ItemDefinition definition = getDefinition();
 			if (definition != null) {
 				return definition.getName();
 			}
@@ -145,47 +157,26 @@ public class RSItem extends MethodProvider implements Clickable07 {
 		if (id < 0 && stackSize < 0) {
 			return null;
 		}
-		ItemComposition definition = getDefinition();
+		ItemDefinition definition = getDefinition();
 		if (definition != null) {
-			return definition.getInventoryActions();
+			return getDefinition().getInterfaceOptions();
 		}
 		return null;
 	}
 
+	/**
+	 * Provides a list of ground actions for the given item.
+	 * @return The list of ground actions for the item
+	 */
 	public String[] getGroundActions() {
 		if (id < 0 && stackSize < 0) {
 			return new String[]{""};
 		}
-		if (getDefinition() != null) {
-			if (groundActionMethod == null) {
-				setGroundActionsMethod();
-			}
-			try {
-				return (String[]) groundActionMethod.get(methods.client.getItemDefinition(id));
-			} catch (IllegalAccessException e) {
-				log.debug("Failed to get getGroundActions or getInventoryActions", e);
-			}
+		ItemDefinition definition = getDefinition();
+		if (definition != null) {
+			return getDefinition().getOptions();
 		}
 		return null;
-	}
-
-	private void setGroundActionsMethod() {
-		String[] actions;
-		for (Field field : methods.client.getItemDefinition(id).getClass().getDeclaredFields()) {
-			System.out.println(field.getType().getTypeName());
-			if (field.getType().getTypeName().equals("java.lang.String[]")) {
-				System.out.println("TEST");
-				field.setAccessible(true);
-				try {
-					actions = (String[]) field.get(this.getDefinition());
-					if (!Arrays.equals(actions, getInventoryActions())) {
-						groundActionMethod = field;
-					}
-				} catch (IllegalAccessException e) {
-					log.debug("Failed to invoke getGroundActions or getInventoryActions", e);
-				}
-			}
-		}
 	}
 
 	/**

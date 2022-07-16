@@ -2,6 +2,7 @@ package net.runelite.rsb.wrappers;
 
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetItem;
+import net.runelite.client.eventbus.Subscribe;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
@@ -16,14 +17,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     private final int parentId;
     private final Widget widget;
     private final Widget parentWidget;
-
-    public RSWidget(final MethodContext ctx, final int parentId, final int id) {
-        super(ctx);
-        this.id = id;
-        this.widget = ctx.client.getWidget(GlobalWidgetInfo.TO_GROUP(parentId), GlobalWidgetInfo.TO_CHILD(id));
-        this.parentId = parentId;
-        this.parentWidget = widget.getParent();
-    }
 
     public RSWidget(final MethodContext ctx, final Widget widget) {
         super(ctx);
@@ -45,10 +38,12 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return widget != null;
     }
 
+    @Subscribe
     public boolean isVisible() {
         return isValid() && !widget.isHidden();
     }
 
+    @Subscribe
     public boolean isSelfVisible() {return isValid() && !widget.isSelfHidden();}
 
     /**
@@ -272,6 +267,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @param idx The child index
      * @return The child component, or null
      */
+    @Subscribe
     public RSWidget getComponent(int idx) {
         return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.TO_GROUP(this.getId()), idx));
     }
@@ -403,8 +399,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return the parentID or -1 if none
      */
     public int getParentId() {
-        final Widget inter = this.widget;
-        if (inter == null) {
+        if (this.parentWidget == null) {
             return -1;
         }
         return parentId;
@@ -415,7 +410,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return  the parent widget for this RSWidget object
      */
     public RSWidget getParent() {
-        return new RSWidget(methods, parentWidget.getParentId(), parentId);
+        return new RSWidget(methods, parentWidget);
     }
 
     /**
@@ -489,7 +484,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     }
 
     public int getHorizontalScrollPosition() {
-        final Widget childInterface =this.widget;
+        final Widget childInterface = this.widget;
         if (childInterface != null) {
             return childInterface.getScrollX();
         }

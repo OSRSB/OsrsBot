@@ -6,6 +6,7 @@ package net.runelite.rsb.botLauncher;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.internal.globval.GlobalConfiguration;
+import net.runelite.rsb.wrappers.common.CacheProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,6 +90,9 @@ public class Application {
 				new File(spriteCacheLocation).mkdir();
 				net.runelite.cache.Cache.main(spriteArgs);
 			}
+		}
+		else {
+			CacheProvider.fillFileCache();
 		}
 	}
 

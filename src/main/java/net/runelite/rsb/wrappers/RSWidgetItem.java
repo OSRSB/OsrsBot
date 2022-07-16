@@ -10,8 +10,8 @@ import java.awt.*;
 
 public class RSWidgetItem extends MethodProvider {
 
-    private WidgetItem item;
-    private Widget parent;
+    private final WidgetItem item;
+    private final Widget parent;
 
     RSWidgetItem(MethodContext ctx, WidgetItem item) {
         super(ctx);

@@ -4,9 +4,8 @@ plugins {
 
 repositories {
     mavenLocal()
-    maven {
-        url = 'https://repo.runelite.net'
-    }
+    maven { url 'https://repo.runelite.net' }
+    maven { url 'jitpack.io' }
     mavenCentral()
 }
 
@@ -105,7 +104,6 @@ jar {
     from{
         configurations.runtimeClasspath.collect {it.isDirectory() ? it: zipTree(it)}
     }
-
 
     exclude 'META-INF/*.RSA'
     exclude 'META-INF/*.SF'
