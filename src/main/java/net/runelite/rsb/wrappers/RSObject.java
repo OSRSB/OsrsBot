@@ -1,7 +1,5 @@
 package net.runelite.rsb.wrappers;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import com.google.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -9,16 +7,14 @@ import net.runelite.api.Point;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.cache.definitions.ObjectDefinition;
 import net.runelite.client.callback.ClientThread;
-import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.subwrap.WalkerTile;
 
-import java.io.*;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
@@ -27,14 +23,13 @@ import java.util.HashMap;
  * RSObject can represent any {@link Type types} game object
  */
 @Slf4j
-public class RSObject extends MethodProvider implements Clickable07, Positionable {
-	private static HashMap<Integer, ObjectDefinition> objectDefinitionCache;
-	private static HashMap<Integer, File> objectFileCache;
+public class RSObject extends MethodProvider implements Clickable07, Positionable, CacheProvider<ObjectDefinition>   {
+
 	private final TileObject obj;
 	private final Type type;
 	private final int plane;
-	private final int id;
 	private final ObjectDefinition def;
+	private final int id;
 
 	/**
 	 * Creates a new RSObject with the following parameters:
@@ -51,67 +46,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		this.type = type;
 		this.plane = plane;
 		this.id = (obj != null) ? obj.getId() : -1;
-		this.def = (id != -1) ? createObjectDefinition(id) : null;
-	}
-
-	/**
-	 * Fills the runtime file cache with all the files in the cache directory.
-	 */
-	private void fillFileCache() {
-		File dir = new File(GlobalConfiguration.Paths.getObjectsCacheDirectory());
-		File[] directoryListing = dir.listFiles();
-		objectFileCache = new HashMap<>();
-		objectDefinitionCache = new HashMap<>();
-		for (File file : directoryListing) {
-			if (file.getName().contains(".json")) {
-				objectFileCache.put(Integer.parseInt(file.getName().replace(".json", "")), file);
-			}
-		}
-	}
-
-	/**
-	 * Adds the object definition to the runtime cache.
-	 * @param id	The id of the object definition to add
-	 */
-	private void addDefinitionToLoadedCache(int id) {
-		try {
-			ObjectDefinition def = readFileAndGenerateDefinition(objectFileCache.get(id));
-			if (def != null && def.getId() != -1) {
-				objectDefinitionCache.put(def.getId(), def);
-			}
-		} catch (IOException e) {
-			log.debug("Failed to load object definition", e);
-		}
-	}
-
-	/**
-	 * Reads the passed file and generates an object definition from it.
-	 * @param file	The file to read
-	 * @return	The object definition generated from the file
-	 * @throws FileNotFoundException	If the file is not found
-	 */
-	public static ObjectDefinition readFileAndGenerateDefinition(File file) throws FileNotFoundException {
-		if (file != null) {
-			Gson gson = new Gson();
-			JsonReader reader = new JsonReader(new FileReader(file));
-			return gson.fromJson(reader, ObjectDefinition.class);
-		}
-		return null;
-	}
-
-	/**
-	 * Creates a new ObjectDefinition from the passed id.
-	 * @param id	The id of the object definition to create
-	 * @return	The object definition generated from the id
-	 */
-	private ObjectDefinition createObjectDefinition(int id) {
-		if (objectFileCache == null || objectFileCache.isEmpty()) {
-			fillFileCache();
-		}
-		if (!objectDefinitionCache.containsKey(id)) {
-			addDefinitionToLoadedCache(id);
-		}
-		return (objectDefinitionCache != null) ? objectDefinitionCache.get(id) : null;
+		this.def = (id != -1) ? (ObjectDefinition) createDefinition(id) : null;
 	}
 
 	/**
@@ -157,31 +92,12 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	}
 
 	/**
-	 * Gets the client thread provider from the clientUI to allow passing runnables to it
-	 */
-	public void setClientThreadProvider() {
-		for (Field field : methods.runeLite.clientUI.getClass().getDeclaredFields()) {
-			if (field.getName().equals("clientThreadProvider")) {
-				try {
-					field.setAccessible(true);
-					methods.clientThreadProvider = (Provider<ClientThread>) field.get(methods.runeLite.clientUI);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	/**
 	 * Gets the ID of this object.
 	 *
 	 * @return The ID.
 	 */
 	public int getID() {
-		if (obj != null) {
-			return obj.getId();
-		}
-		return -1;
+		return id;
 	}
 
 	/**

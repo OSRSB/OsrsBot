@@ -198,8 +198,6 @@ public class MethodContext {
 
 	public final BotLite runeLite;
 
-	public Provider<ClientThread> clientThreadProvider = null;
-
 	public final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
 	/**************************************/

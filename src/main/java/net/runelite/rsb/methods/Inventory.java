@@ -1,6 +1,7 @@
 package net.runelite.rsb.methods;
 
 import net.runelite.api.ItemComposition;
+import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.WidgetIndices;
@@ -150,9 +151,9 @@ public class Inventory extends MethodProvider {
 	public boolean itemHasAction(final RSItem item, final String action) {
 		// Used to determine if an item is droppable/destroyable
 		if (item == null) { return false; }
-		ItemComposition itemDef = item.getDefinition();
+		ItemDefinition itemDef = item.getDefinition();
 		if (itemDef != null) {
-			for (String a : itemDef.getInventoryActions()) {
+			for (String a : itemDef.getInterfaceOptions()) {
 				if (a != null && a.equalsIgnoreCase(action)) {
 					return true;
 				}
@@ -737,7 +738,7 @@ public class Inventory extends MethodProvider {
 		RSItem[] items = getItems();
 		int slot = -1;
 		for (RSItem item : items) {
-			ItemComposition def = item.getDefinition();
+			ItemDefinition def = item.getDefinition();
 			if (def != null && def.getName().contains(name)) {
 				slot = item.getID();
 				break;
