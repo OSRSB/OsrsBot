@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ObjectID;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.rsb.internal.globval.*;
 import net.runelite.rsb.internal.wrappers.Filter;
 import net.runelite.rsb.wrappers.*;
@@ -351,10 +352,10 @@ public class Bank extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget bankInterface = getInterface();
-		if ((bankInterface == null) || (bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER) == null)) {
+		if ((bankInterface == null) || (bankInterface.getComponent(WidgetInfo.BANK_ITEM_CONTAINER.getId()) == null)) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = bankInterface.getComponent(WidgetIndices.Bank.ITEMS_DYNAMIC_CONTAINER).getComponents();
+		RSWidget[] components = bankInterface.getComponent(WidgetInfo.BANK_ITEM_CONTAINER.getId()).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; ++i) {
 			items[i] = new RSItem(methods, components[i]);

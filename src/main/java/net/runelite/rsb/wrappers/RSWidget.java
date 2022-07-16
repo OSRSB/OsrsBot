@@ -40,7 +40,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
 
     @Subscribe
     public boolean isVisible() {
-        return isValid() && !widget.isHidden();
+        return isValid() && (widget.isIf3() || (isSelfVisible() && !widget.isHidden()));
     }
 
     @Subscribe
@@ -182,8 +182,9 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      *
      * @return The components or RSWidget[0] if null
      */
+    @Subscribe
     public RSWidget[] getComponents() {
-        if (widget == null) {
+        if (!isVisible()) {
             return null;
         }
         ArrayList<RSWidget> components = new ArrayList<>();
@@ -215,14 +216,16 @@ public class RSWidget extends MethodProvider implements Clickable07 {
                 }
             }
         }
-        children = widget.getNestedChildren();
-        if (children != null) {
-            childComponents = convertToRSWidget(children);
-            if (childComponents != null) {
-                for (RSWidget component : childComponents) {
-                    RSWidget[] childNode = component.getComponents();
-                    if (childNode != null) {
-                        components.addAll(Arrays.asList(childNode));
+        if (widget.isIf3()) {
+            children = widget.getNestedChildren();
+            if (children != null) {
+                childComponents = convertToRSWidget(children);
+                if (childComponents != null) {
+                    for (RSWidget component : childComponents) {
+                        RSWidget[] childNode = component.getComponents();
+                        if (childNode != null) {
+                            components.addAll(Arrays.asList(childNode));
+                        }
                     }
                 }
             }
@@ -239,22 +242,6 @@ public class RSWidget extends MethodProvider implements Clickable07 {
             components[i] = new RSWidget(methods, widgets[i]);
         }
         return components;
-    }
-
-    public RSWidgetItem[] getWidgetItems() {
-        if (widget.getWidgetItems() != null) {
-            WidgetItem[] widgetItems = widget.getWidgetItems().toArray(new WidgetItem[]{});
-            RSWidgetItem[] items = new RSWidgetItem[widgetItems.length];
-            for (int i = 0; i < items.length; i++) {
-                items[i] = new RSWidgetItem(methods, widgetItems[i]);
-            }
-            return items;
-        }
-        return null;
-    }
-
-    public RSWidgetItem getWidgetItem(int idx) {
-        return new RSWidgetItem(methods, widget.getWidgetItem(idx));
     }
 
     public RSWidget getDynamicComponent(int idx) {
@@ -357,6 +344,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      *
      * @return the sprite ID or -1 if null
      */
+    @Subscribe
     public int getSpriteId() {
         final Widget inter = this.widget;
         if (inter != null) {

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * Represents an item (with an id and stack size). May or may not
@@ -143,7 +144,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		} else {
 			ItemDefinition definition = getDefinition();
 			if (definition != null) {
-				return definition.getName();
+				return definition.getName().replaceAll("<.*?>", "");
 			}
 		}
 		return null;
