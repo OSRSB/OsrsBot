@@ -37,7 +37,7 @@ quality of life improvements directly contradictory to the original goal outline
 creation of Old School RuneScape. Sure, games evolve, but when you have a plugin that tells you
 exactly where to click during a quest then your claims to taking steps to prevent or reduce the ease
 of botting are misplaced. Removing the deobfuscator months after it was publicly available and forked
-led to the creation of OpenOSRS which hosted all the even shadier plugins that even RuneLite didn't
+led to the creation of OpenOSRS which hosted all the even shadier net.runelite.client.plugins that even RuneLite didn't
 approve.
 
 ###### How RuneLite is used
