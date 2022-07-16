@@ -1,28 +1,15 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
-
-group = 'com.github.OSRSB'
 
 repositories {
     mavenLocal()
-    maven {
-        url "https://repo.runelite.net"
-    }
-    maven {
-        url "https://jitpack.io"
-    }
+    maven { url 'https://repo.runelite.net' }
+    maven { url 'https://jitpack.io' }
     mavenCentral()
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
-}
+def runeLiteVersion = getRuneLiteVersion()
 
 static def getRuneLiteVersion() {
     URL url = new URL("http://repo.runelite.net/net/runelite/client/")
@@ -38,7 +25,7 @@ static def getRuneLiteVersion() {
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
             if (!name.contains("SNAPSHOT") && removeName != "") {
                 if (compareSemanticVersion(latestName, name)) {
-                    latestName = name
+                    latestName = name;
                 }
             }
         }
@@ -91,6 +78,7 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
 
+    runtimeOnly 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'
     implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
     implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
@@ -101,26 +89,20 @@ sourceSets {
         java {
             srcDirs= ["src/main/java"]
         }
-        resources {
-            srcDirs= ["src/main/resources"]
-        }
     }
 }
 
 project.configurations.implementation.setCanBeResolved(true)
-
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.implementation.collect { it.getName() }.join(' '),
-                'Main-Class': 'rsb.botLauncher.Application'
+                'Main-Class': 'net.runelite.rsb.botLauncher.Application'
         )
 
     }
     from{
-        configurations.runtimeClasspath.collect {it.isDirectory() ? it: zipTree(it)}
+        configurations.implementation.collect {it.isDirectory() ? it: zipTree(it)}
     }
-
 
     exclude 'META-INF/*.RSA'
     exclude 'META-INF/*.SF'
