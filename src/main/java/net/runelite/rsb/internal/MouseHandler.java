@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BooleanSupplier;
 
 /**
@@ -344,37 +345,11 @@ public class MouseHandler {
 		}
 	}
 
-	public void moveMouse(final int x, final int y)  {
-		Object lock = new Object();
-		Runnable moveMouseThread = () -> {
-			synchronized (lock) {
-				try {
-					final int[] oX = {-1};
-					final int[] oY = {-1};
-					MouseMotionObserver observer = new MouseMotionObserver() {
-						@Override
-						public void observe(int xPos, int yPos) {
-							oX[0] = xPos;
-							oY[0] = yPos;
-						}
-					};
-					motionFactory.build(x, y).move(observer);
-					while (Timer.waitCondition(() -> oX[0] == -1, 500));
-					lock.notify();
-				} catch (InterruptedException e) {
-					motionFactory.setMouseInfo(() -> new Point(inputManager.getX(), inputManager.getY()));
-					lock.notify();
-					log.debug("Mouse move failed to execute properly.", e);
-				}
-			}
-		};
-		synchronized (lock) {
-			try {
-				executorService.submit(moveMouseThread);
-				lock.wait();
-			} catch (InterruptedException e) {
-				log.debug("Thread was interrupted", e);
-			}
+	public void moveMouse(final int x, final int y) {
+		try {
+			motionFactory.move(x, y);
+		} catch (InterruptedException e) {
+			log.debug("Mouse move failed to execute properly.", e);
 		}
 	}
 }
