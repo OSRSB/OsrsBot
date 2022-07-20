@@ -352,10 +352,10 @@ public class Bank extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		RSWidget bankInterface = getInterface();
-		if ((bankInterface == null) || (bankInterface.getComponent(WidgetInfo.BANK_ITEM_CONTAINER.getId()) == null)) {
+		if ((bankInterface == null) || (methods.interfaces.getComponent(WidgetInfo.BANK_ITEM_CONTAINER) == null)) {
 			return new RSItem[0];
 		}
-		RSWidget[] components = bankInterface.getComponent(WidgetInfo.BANK_ITEM_CONTAINER.getId()).getComponents();
+		RSWidget[] components = methods.interfaces.getComponent(WidgetInfo.BANK_ITEM_CONTAINER).getComponents();
 		RSItem[] items = new RSItem[components.length];
 		for (int i = 0; i < items.length; ++i) {
 			items[i] = new RSItem(methods, components[i]);
@@ -662,7 +662,6 @@ public class Bank extends MethodProvider {
 			return false;
 		}
 		int invCount = methods.inventory.getCount(true);
-		//item.doClick(count == 1 ? true : false);
 		String defaultAction = "Withdraw-" + count;
 		String action = null;
 		switch (count) {
@@ -670,6 +669,7 @@ public class Bank extends MethodProvider {
 				action = "Withdraw-All";
 				break;
 			case 1:
+				action = defaultAction;
 				break;
 			case 5:
 				action = defaultAction;
@@ -805,12 +805,8 @@ public class Bank extends MethodProvider {
 		RSItem[] items = getItems();
 		if (items != null) {
 			for (final RSItem item : items) {
-				if (item.getName().toLowerCase().equals(name.toLowerCase())) {
-					return item.getID();
-				}
-			}
-			for (final RSItem item : items) {
-				if (item.getName().toLowerCase().contains(name.toLowerCase())) {
+				if (item.getName().equalsIgnoreCase(name) ||
+				item.getName().toLowerCase().contains(name.toLowerCase())) {
 					return item.getID();
 				}
 			}
