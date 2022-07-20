@@ -151,6 +151,10 @@ public class InputManager {
 				final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_ENTERED, System.currentTimeMillis(),
 						0, x, y, 0, false);
 				bot.getMethodContext().virtualMouse.sendEvent(me);
+			} else {
+				final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_MOVED, System.currentTimeMillis(),
+						0, x, y, 0, false);
+				bot.getMethodContext().virtualMouse.sendEvent(me);
 			}
 		} else if (!isOnCanvas(x, y)) {
 			final MouseEvent me = new MouseEvent(getTarget(), MouseEvent.MOUSE_EXITED, System.currentTimeMillis(), 0, x,
