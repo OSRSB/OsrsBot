@@ -1,23 +1,12 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
-
-group = 'com.github.OSRSB'
 
 repositories {
     mavenLocal()
     maven { url 'https://repo.runelite.net' }
     maven { url 'https://jitpack.io' }
     mavenCentral()
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
 }
 
 def runeLiteVersion = getRuneLiteVersion()
@@ -36,7 +25,7 @@ static def getRuneLiteVersion() {
             String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
             if (!name.contains("SNAPSHOT") && removeName != "") {
                 if (compareSemanticVersion(latestName, name)) {
-                    latestName = name
+                    latestName = name;
                 }
             }
         }
@@ -80,8 +69,8 @@ static def compareSemanticVersion(String s1, String s2) {
 dependencies {
     implementation group: 'net.runelite', name: 'client', version: runeLiteVersion
     implementation group: 'net.runelite', name: 'cache', version: runeLiteVersion
-    implementation 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.slf4j:slf4j-simple:1.7.36'
@@ -89,7 +78,7 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
 
-    runtimeOnly 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'
+    runtimeClasspath 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'
     implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
     implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
@@ -105,12 +94,7 @@ sourceSets {
 
 project.configurations.implementation.setCanBeResolved(true)
 jar {
-    manifest {
-        attributes(
-                'Main-Class': 'net.runelite.rsb.botLauncher.Application'
-        )
-
-    }
+    manifest.attributes('Main-Class': 'net.runelite.rsb.botLauncher.Application')
     from{
         configurations.implementation.collect {it.isDirectory() ? it: zipTree(it)}
     }
@@ -126,4 +110,13 @@ jar {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+task botRun(type: JavaExec) {
+    group = "Execution"
+    description = "Runs the main method within RSB"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.main.compileClasspath
+    getMainClass() set "net.runelite.rsb.botLauncher.Application"
+    jvmArgs "-debug"
+    args "--bot-runelite --developer-mode".split(" ")
 }
