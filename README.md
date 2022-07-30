@@ -16,7 +16,6 @@ If you are interested in writing scripts go to the [script template](https://git
 * If you ask nicely and with **meaningful details** about your problem you may get some help.
 
 ## Community
-* [Forums](https://osrsbot.org/) - Ask questions, find guides, make requests
 * [Discord](https://discord.gg/CGBXNrHREP)
 
 ### What is OSRSBot?
