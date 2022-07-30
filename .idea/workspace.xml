@@ -10,8 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Finalize dn">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/internal/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/internal/MouseHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -496,7 +494,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659144119210</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Finalize dn">
+      <created>1659144191305</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1659144191305</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Finalize dn">
+      <created>1659144197227</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1659144197227</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
