@@ -9,13 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Added .idea back to .gitignore to prevent future tampering">
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/BaseClientWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/BaseClientWrapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +140,7 @@
       <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.OsrsBot [headlessBotRun]">
+  <component name="RunManager" selected="Gradle.OsrsBot [botRun]">
     <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
       <setting name="bbPath" value="" />
@@ -486,7 +481,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659153071905</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config">
+      <created>1659154569922</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1659154569922</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -503,7 +505,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated Gradle to support and use JDK 17. &#10;&#10;No longer three years out of date!&#10;Added a duplication strategy to exclude if collisions do occur&#10;Changed the compile methods in the gradle.build to implementation (the manner they are suppose to be done now)" />
     <MESSAGE value="Javadocs Update&#10;&#10;Replaced all instances of the tt tag with code&#10;Updated all Javadocs" />
     <MESSAGE value="Javadocs Update&#10;&#10;Resolved Conflicts in Combat.java" />
     <MESSAGE value="Revised build files to be Kotlin" />
@@ -528,7 +529,8 @@
     <MESSAGE value="Finalize dn" />
     <MESSAGE value="Remove forums mention" />
     <MESSAGE value="Added .idea back to .gitignore to prevent future tampering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added .idea back to .gitignore to prevent future tampering" />
+    <MESSAGE value="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
