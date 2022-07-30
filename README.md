@@ -12,16 +12,8 @@
 
 ___
 
-## ⚠️ This project is WIP ⚠️
-
-If you are interested in botting go to the [script template](https://github.com/OSRSB/script-template)
-* Please don't DM developers asking for help, neither spam discord channels or you may get banned!
-* If you ask nicely and with **meaningfull details** about your problem you may get some help.
-
-As such it is required that every user which wants to run this bot has at least minimal knowledge of:
-* How to use IntelliJ IDEA.
-* How to work with Gradle tasks (edit tasks, comment lines out, update references etc.). 
-* How to adjust [Script-Template](https://github.com/OSRSB/script-template) to reflect possible breaking changes in API.
+If you are interested in writing scripts go to the [script template](https://github.com/OSRSB/script-template)
+* If you ask nicely and with **meaningful details** about your problem you may get some help.
 
 ## Community
 * [Forums](https://osrsbot.org/) - Ask questions, find guides, make requests
@@ -37,7 +29,7 @@ quality of life improvements directly contradictory to the original goal outline
 creation of Old School RuneScape. Sure, games evolve, but when you have a plugin that tells you
 exactly where to click during a quest then your claims to taking steps to prevent or reduce the ease
 of botting are misplaced. Removing the deobfuscator months after it was publicly available and forked
-led to the creation of OpenOSRS which hosted all the even shadier net.runelite.client.plugins that even RuneLite didn't
+led to the creation of OpenOSRS which hosted all the even shadier plugins that even RuneLite didn't
 approve.
 
 ###### How RuneLite is used
@@ -94,7 +86,6 @@ If you do plan on operating within the API some quick wiki pages
 to look over are:
 
 1. [Setting up the project](https://github.com/OSRSB/RSB/wiki/Setting-up-the-project)
-
 2. [Developing a script in the API environment](https://github.com/OSRSB/RSB/wiki/Developing-a-script-in-the-API-environment)
 3. [Script Creation and Logic](https://github.com/OSRSB/RSB/wiki/Creating-a-script)
 #### Running the API
@@ -102,9 +93,6 @@ To run you'll need to modify your program arguments to the following depending o
 
 --bot-runelite
 This runs the API, it uses the RuneLite interface
-
---runelite
-This runs the API in RuneLite stock form. It has no additions from RSB and behaves normally.
 
 --ea
 This enables assertions, it should never be used with bot mode.
