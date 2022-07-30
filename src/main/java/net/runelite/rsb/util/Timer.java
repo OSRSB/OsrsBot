@@ -135,6 +135,30 @@ public class Timer {
 	}
 
 	/**
+	 * Waits on a condition and provides a means to update notify another thread using the lock object.
+	 * The lock is notified when the timeout is exceeded, but otherwise this simply returns the state of
+	 * the condition.
+	 * @param lock				the lock object to notify
+	 * @param condition			the boolean conditional to check for
+	 * @param timeout			the time limit for waiting for the condition check to return true
+	 * @return					<code>true</code> if the task was executed; otherwise <code>false</code>
+	 */
+	public synchronized static void waitUntil(Object lock, BooleanSupplier condition, long timeout) {
+		long start = System.currentTimeMillis();
+		long end = start + timeout;
+		executor.submit(() -> {
+			synchronized (lock) {
+				while (!condition.getAsBoolean()) {
+					if (System.currentTimeMillis() > end) {
+						lock.notify();
+						return;
+					}
+				}
+			}
+		});
+	}
+
+	/**
 	 * Converts milliseconds to a String in the format
 	 * hh:mm:ss.
 	 *

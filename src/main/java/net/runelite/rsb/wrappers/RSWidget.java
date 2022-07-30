@@ -184,7 +184,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      */
     @Subscribe
     public RSWidget[] getComponents() {
-        if (!isVisible()) {
+        if (!isValid()) {
             return null;
         }
         ArrayList<RSWidget> components = new ArrayList<>();
@@ -216,16 +216,14 @@ public class RSWidget extends MethodProvider implements Clickable07 {
                 }
             }
         }
-        if (widget.isIf3()) {
-            children = widget.getNestedChildren();
-            if (children != null) {
-                childComponents = convertToRSWidget(children);
-                if (childComponents != null) {
-                    for (RSWidget component : childComponents) {
-                        RSWidget[] childNode = component.getComponents();
-                        if (childNode != null) {
-                            components.addAll(Arrays.asList(childNode));
-                        }
+        children = widget.getNestedChildren();
+        if (children != null) {
+            childComponents = convertToRSWidget(children);
+            if (childComponents != null) {
+                for (RSWidget component : childComponents) {
+                    RSWidget[] childNode = component.getComponents();
+                    if (childNode != null) {
+                        components.addAll(Arrays.asList(childNode));
                     }
                 }
             }
