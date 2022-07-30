@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config">
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix workspace">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -488,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659154569922</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Fix workspace">
+      <created>1659154669528</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1659154669528</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -505,7 +512,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Javadocs Update&#10;&#10;Replaced all instances of the tt tag with code&#10;Updated all Javadocs" />
     <MESSAGE value="Javadocs Update&#10;&#10;Resolved Conflicts in Combat.java" />
     <MESSAGE value="Revised build files to be Kotlin" />
     <MESSAGE value="Project Language Level 16" />
@@ -530,7 +536,8 @@
     <MESSAGE value="Remove forums mention" />
     <MESSAGE value="Added .idea back to .gitignore to prevent future tampering" />
     <MESSAGE value="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes a few errors spammed in chat and the .idea gitignore and add headless run config" />
+    <MESSAGE value="Fix workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix workspace" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
