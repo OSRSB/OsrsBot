@@ -122,7 +122,7 @@
       <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.OsrsBot [botRun]">
     <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
       <setting name="bbPath" value="" />
@@ -159,6 +159,10 @@
       <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Gradle.OsrsBot [botRun]" />
+      <item itemvalue="Gradle.OsrsBot [headlessBotRun]" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
