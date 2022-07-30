@@ -120,3 +120,12 @@ task botRun(type: JavaExec) {
     jvmArgs "-debug"
     args "--bot-runelite --developer-mode".split(" ")
 }
+
+task headlessBotRun(type: JavaExec) {
+    group = "Execution"
+    description = "Runs the main method within RSB"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.main.compileClasspath
+    getMainClass() set "net.runelite.rsb.botLauncher.Application"
+    jvmArgs "-debug"
+    args "--bot-runelite --developer-mode --headless".split(" ")
+}

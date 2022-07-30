@@ -285,7 +285,7 @@ public class Walking extends MethodProvider {
 		}
 		getCollisionField().setAccessible(true);
 		try {
-			flags = ((CollisionData[]) getCollisionField().get(methods.client))[plane].getFlags();
+			flags = ((CollisionData[]) getCollisionField().get(methods.client.wrappedClient))[plane].getFlags();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
@@ -296,7 +296,7 @@ public class Walking extends MethodProvider {
 	 * Sets the reflective field to access for CollisionMaps
 	 */
 	private void setCollisionField() {
-		for (Field field : methods.client.getClass().getDeclaredFields()) {
+		for (Field field : methods.client.wrappedClient.getClass().getDeclaredFields()) {
 			//Checks if the field type is an array and if the name is shorter than 5 characters
 			if (field.getType().getTypeName().contains("[]") && field.getType().getTypeName().length() < 5) {
 				if (field.getModifiers() == 8) {
@@ -327,7 +327,7 @@ public class Walking extends MethodProvider {
 	public String getObType(Field field) {
 		String typeName = null;
 		try {
-			typeName = ((CollisionData[]) field.get(methods.client)).getClass().getTypeName();
+			typeName = ((CollisionData[]) field.get(methods.client.wrappedClient)).getClass().getTypeName();
 		} catch (IllegalAccessException | ClassCastException e) {
 			//This will cause a number of class cast exceptions while searching for a match
 			//This is a byproduct of using reflection and attempting to create an algorithm
