@@ -9,14 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Some test changes for Widget&#10;Bank and Inventory updated to be now correct&#10;Fixed a bug with withdraw where values of one didn't work">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/OSRSBot.iml" beforeDir="false" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Finalize dn">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/internal/MouseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/internal/MouseHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,39 +173,7 @@
       <recent name="C:\Users\gigia\IdeaProjects\RSB\src\main\java\rsb\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.OsrsBot [botRun]">
-    <configuration name="Bot Run" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="net.runelite.rsb.botLauncher.Application" />
-      <module name="OsrsBot.main" />
-      <option name="PROGRAM_PARAMETERS" value="--bot-runelite --developer-mode" />
-      <option name="VM_PARAMETERS" value="-debug" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="rsb.botLauncher.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RuneLite Run" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="rsb.botLauncher.Application" />
-      <module name="RSBBB.main" />
-      <option name="PROGRAM_PARAMETERS" value="--runelite --developer-mode" />
-      <option name="VM_PARAMETERS" value="-debug -ea" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="rsb.botLauncher.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
       <setting name="bbPath" value="" />
@@ -248,90 +210,6 @@
       <setting name="focusEditor" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="OsrsBot [botRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="botRun" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="OsrsBot [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="OsrsBot [shadedJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="shadedJar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="TestRSB [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -341,20 +219,9 @@
       <option name="AUTO_RESTART" value="false" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Application.RuneLite Run" />
-      <item itemvalue="Application.Bot Run" />
-      <item itemvalue="Gradle.TestRSB [jar]" />
-      <item itemvalue="Gradle.OsrsBot [clean]" />
-      <item itemvalue="Gradle.OsrsBot [shadedJar]" />
-      <item itemvalue="Gradle.OsrsBot [botRun]" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.OsrsBot [botRun]" />
-        <item itemvalue="Gradle.OsrsBot [clean]" />
-        <item itemvalue="Gradle.TestRSB [jar]" />
-        <item itemvalue="Gradle.OsrsBot [shadedJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -622,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658282078582</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Finalize dn">
+      <created>1659144119210</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1659144119210</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -640,7 +514,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Removed legacy code, updated non-functional UI aspects to look significantly better, improved security functionality for the password/pin display as well as fixed a bug causing them to display if they were filled. Fixed a bug that required a client relaunch due to the model of the combobox for Account store not being updated. Revised README.md." />
     <MESSAGE value="Revised RSObject to better document and fix getDef (this is totally not the first time I've written those words)&#10;&#10;The general use case by most plugins appears to be similar, so we're going to revert to that use case. If issues appear we'll need to see what thread exactly is making that call I suppose." />
     <MESSAGE value="Revised RSObject to better document and fix getDef (this is totally not the first time I've written those words)&#10;Revised a number of classes to remove Javadoc errors and improved commenting on classes such as RSTile &#10;The general use case by most plugins appears to be similar, so we're going to revert to that use case. If issues appear we'll need to see what thread exactly is making that call I suppose." />
     <MESSAGE value="Updated Gradle to support and use JDK 17. &#10;&#10;No longer three years out of date!&#10;Added a duplication strategy to exclude if collisions do occur&#10;Changed the compile methods in the gradle.build to implementation (the manner they are suppose to be done now)" />
@@ -665,7 +538,8 @@
     <MESSAGE value="Rephrased a todo and moved code to a more correct location in the cache loader" />
     <MESSAGE value="Some test changes for Widget&#10;Bank and Inventory updated to be accurate" />
     <MESSAGE value="Some test changes for Widget&#10;Bank and Inventory updated to be now correct&#10;Fixed a bug with withdraw where values of one didn't work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some test changes for Widget&#10;Bank and Inventory updated to be now correct&#10;Fixed a bug with withdraw where values of one didn't work" />
+    <MESSAGE value="Finalize dn" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalize dn" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
