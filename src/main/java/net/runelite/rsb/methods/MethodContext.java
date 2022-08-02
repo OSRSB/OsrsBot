@@ -1,6 +1,5 @@
 package net.runelite.rsb.methods;
 
-import com.google.inject.Provider;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.api.Client;
@@ -8,6 +7,7 @@ import net.runelite.rsb.internal.input.VirtualKeyboard;
 import net.runelite.rsb.internal.input.VirtualMouse;
 import net.runelite.rsb.internal.InputManager;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.rsb.wrappers.client_wrapper.RSClient;
 import net.runelite.rsb.wrappers.subwrap.ChooseOption;
 import net.runelite.rsb.wrappers.subwrap.NPCChat;
 
@@ -194,7 +194,7 @@ public class MethodContext {
 	/**
 	 * The client
 	 */
-	public final Client client;
+	public final RSClient client;
 
 	public final BotLite runeLite;
 
@@ -212,7 +212,7 @@ public class MethodContext {
 	 */
 	public MethodContext(BotLite runeLite) {
 		this.runeLite = runeLite;
-		this.client = runeLite.getInjector().getInstance(Client.class);
+		this.client = new RSClient(runeLite.getInjector().getInstance(Client.class), runeLite.getInjector().getInstance(ClientThread.class));
 		this.inputManager = runeLite.getInputManager();
 	}
 }
