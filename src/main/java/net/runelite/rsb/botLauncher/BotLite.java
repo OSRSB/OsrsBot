@@ -300,6 +300,11 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         }
     }
 
+    public void forceLaunch(String[] args) throws Exception {
+        launch(args);
+        setMethodContext();
+    }
+
     public BotLite() throws Exception {
         im = new InputManager(this);
         Executors.newSingleThreadScheduledExecutor().submit(() -> {
@@ -317,13 +322,7 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         paintEvent = new PaintEvent();
         textPaintEvent = new TextPaintEvent();
         listeners = new TreeMap<>();
-        // Botplugin botplugin = new Botplugin(injector);
-        // pluginManager.add(botplugin);
-        setMethodContext();
-
         eventManager.start();
-
-
     }
 
     public void runScript(String account, String scriptName) {

@@ -12,25 +12,26 @@ public class CLIHandler {
      * The switch case provides an easy-to-read implementation in which commands are available for usage.
      */
     public static void handleCLI() {
+        Scanner input = new Scanner(System.in);
         new Thread(() -> {
-            Scanner input = new Scanner(System.in);
             while(input.hasNext()) {
                 String[] command = input.nextLine().split(" ");
                 System.out.println(Arrays.toString(command));
                 switch (command[0].toLowerCase()) {
-                    case "runScript":
+                    case "runscript":
                         BotLiteInterface botInterface = Application.getBots()[Integer.parseInt(command[1])];
                         botInterface.runScript(command[2], command[3]);
                         break;
-                    case "addBot":
+                    case "addbot":
                         addBot(true);
                         break;
-                    case "checkState":
+                    case "checkstate":
                         for (BotLiteInterface botInstance : bots) {
                             System.out.println(botInstance.getClass().getClassLoader());
                         }
                         break;
                     default:
+                        System.out.println("Invalid command");
                         break;
                 }
             }
