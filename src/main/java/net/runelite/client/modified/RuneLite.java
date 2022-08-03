@@ -135,7 +135,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * @param args      The args for the program (plus any extras added on)
      * @throws Exception Any exception the client or RuneLite might throw
      */
-    public static void launch(String[] args) throws Exception {
+    public void launch(String[] args) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
         OptionParser parser = new OptionParser();
         ArgumentAcceptingOptionSpec<?>[] optionSpecs = handleParsing(parser);
