@@ -79,8 +79,6 @@ public class Application {
 
 	public static void setBot(int index) {
 		BotLiteInterface bot = getBots()[index];
-
-
 	}
 
 	/**
@@ -112,16 +110,14 @@ public class Application {
 		else preParser.remove("--headless");
 
 		BotClassLoader loader = new BotClassLoader("BotLoader" + bots.length);
-		// Class<?> c;
+		Class<?> c;
 		try {
-			// c = loader.loadClass("net.runelite.client.modified.RuneLite");
-			// bot = (BotLiteInterface) c.getConstructor().newInstance();
-			BotLite.launch(preParser.asArgs());
+			c = loader.loadClass("net.runelite.rsb.botLauncher.BotLite");
+			bot = (BotLiteInterface) c.getConstructor().newInstance();
+			bot.forceLaunch(preParser.asArgs());
 			BotLiteInterface[] update = new BotLiteInterface[bots.length + 1];
-			for (int i = 0; i < bots.length; i++) {
-				update[i] = bots[i];
-			}
-			update[bots.length] = BotLite.getInjector().getInstance(BotLite.class);
+			System.arraycopy(bots, 0, update, 0, bots.length);
+			update[bots.length] = bot;
 			bots = update;
 		} catch (Exception e) {
 			log.error("Error while starting bot", e);
