@@ -300,21 +300,8 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         }
     }
 
-    public void forceLaunch(String[] args) throws Exception {
-        launch(args);
-        setMethodContext();
-    }
-
     public BotLite() throws Exception {
         im = new InputManager(this);
-        Executors.newSingleThreadScheduledExecutor().submit(() -> {
-            while(this.getClient() == null){}
-            if (getPanelSize() != null) {
-                final Dimension size = getPanelSize();
-                backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-                image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-            }
-        });
         psh = new PassiveScriptHandler(this);
         eventManager = new EventManager();
         sh = new ScriptHandler(this);
@@ -323,11 +310,20 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         textPaintEvent = new TextPaintEvent();
         listeners = new TreeMap<>();
         eventManager.start();
+        Executors.newSingleThreadScheduledExecutor().submit(() -> {
+            while(this.getClient() == null){}
+            setMethodContext();
+            sh.init();
+            if (getPanelSize() != null) {
+                final Dimension size = getPanelSize();
+                backBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+                image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+            }
+        });
     }
 
     public void runScript(String account, String scriptName) {
         getInjectorInstance().setAccount(account);
-        System.out.println(getInjectorInstance().getAccountName());
         ScriptSelector ss = new ScriptSelector(getInjectorInstance());
         ss.load();
         ScriptDefinition def = ss.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(scriptName)).findFirst().get();
@@ -336,6 +332,10 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void stopScript() {
+        sh.stopScript();
     }
 
 }
