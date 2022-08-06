@@ -2,6 +2,7 @@ package net.runelite.rsb.botLauncher;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
 
 import static net.runelite.rsb.botLauncher.Application.*;
 
@@ -15,19 +16,34 @@ public class CLIHandler {
         Scanner input = new Scanner(System.in);
         new Thread(() -> {
             while(input.hasNext()) {
+                BotLiteInterface botInterface;
                 String[] command = input.nextLine().split(" ");
                 System.out.println(Arrays.toString(command));
                 switch (command[0].toLowerCase()) {
                     case "runscript":
-                        BotLiteInterface botInterface = Application.getBots()[Integer.parseInt(command[1])];
+                        botInterface = Application.getBots()[Integer.parseInt(command[1])];
                         botInterface.runScript(command[2], command[3]);
                         break;
+                    case "stopscript":
+                        botInterface = Application.getBots()[Integer.parseInt(command[1])];
+                        botInterface.stopScript();
+                        break;
                     case "addbot":
-                        addBot(true);
+                        addBot(false);
                         break;
                     case "checkstate":
                         for (BotLiteInterface botInstance : bots) {
+                            System.out.println(Application.class.getClassLoader());
                             System.out.println(botInstance.getClass().getClassLoader());
+                            /*
+                            Set<Thread> threadSet
+                                    = Thread.getAllStackTraces().keySet();
+                            // iterating over the threads to get the names of
+                            // all the active threads
+                            for (Thread x : threadSet) {
+                                System.out.println(x.getName());
+                            }
+                             */
                         }
                         break;
                     default:

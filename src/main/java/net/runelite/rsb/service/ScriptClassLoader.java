@@ -5,16 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.net.URLClassLoader;
 
 /**
  * @author GigiaJ
  */
-class ScriptClassLoader extends ClassLoader {
+class ScriptClassLoader extends URLClassLoader {
 
 	private final URL base;
 
 	public ScriptClassLoader(URL url) {
+		super(new URL[]{url}, ScriptClassLoader.class.getClassLoader());
 		this.base = url;
 	}
 

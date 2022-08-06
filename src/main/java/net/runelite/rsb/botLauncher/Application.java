@@ -7,14 +7,10 @@ package net.runelite.rsb.botLauncher;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.wrappers.common.CacheProvider;
-import org.apache.commons.compress.archivers.sevenz.CLI;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @Slf4j
 public class Application {
@@ -104,24 +100,28 @@ public class Application {
 	 * @param headless To run the bot headless or not
 	 */
 	public static void addBot(boolean headless) {
-		BotLiteInterface bot;
+		BotLiteInterface bot = null;
 
-		if (headless) preParser.add("--headless");
-		else preParser.remove("--headless");
-
-		BotClassLoader loader = new BotClassLoader("BotLoader" + bots.length);
-		Class<?> c;
 		try {
-			c = loader.loadClass("net.runelite.rsb.botLauncher.BotLite");
-			bot = (BotLiteInterface) c.getConstructor().newInstance();
-			bot.forceLaunch(preParser.asArgs());
-			BotLiteInterface[] update = new BotLiteInterface[bots.length + 1];
-			System.arraycopy(bots, 0, update, 0, bots.length);
-			update[bots.length] = bot;
-			bots = update;
+			if (headless) {
+				preParser.add("--headless");
+				BotClassLoader loader = new BotClassLoader("BotLoader" + bots.length + 1);
+				Class<?> c;
+				c = loader.loadClass("net.runelite.rsb.botLauncher.BotLite");
+				bot = (BotLiteInterface) c.getConstructor().newInstance();
+			} else {
+				preParser.remove("--headless");
+				bot = new BotLite();
+			}
+			bot.launch(preParser.asArgs());
 		} catch (Exception e) {
 			log.error("Error while starting bot", e);
 		}
+
+		BotLiteInterface[] update = new BotLiteInterface[bots.length + 1];
+		System.arraycopy(bots, 0, update, 0, bots.length);
+		update[bots.length] = bot;
+		bots = update;
 	}
 
 	/**
