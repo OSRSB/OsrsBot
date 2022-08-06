@@ -173,12 +173,10 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 		scripts.clear();
 		File testFile = new File(GlobalConfiguration.Paths.getScriptsSourcesDirectory());
 		FileScriptSource test = new FileScriptSource(testFile);
-		test.list().forEach(System.out::println);
 		deleteTemporaryFiles();
 		scripts.addAll(SRC_BUNDLED.list());
 		scripts.addAll(SRC_PRECOMPILED.list());
 		scripts.addAll(SRC_SOURCES.list());
-		scripts.forEach(System.out::println);
 		//generateTestScripts();
 		//scripts.addAll(SRC_TEST.list());
 		if (search != null)
