@@ -2,6 +2,7 @@ package net.runelite.rsb.wrappers.client_wrapper;
 
 import lombok.SneakyThrows;
 import net.runelite.api.*;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.callback.ClientThread;
@@ -144,6 +145,23 @@ public class RSClient extends BaseClientWrapper {
     @Nullable
     public Widget getSelectedWidget() {
         return convertResult(super.getSelectedWidget());
+    }
+
+    @Nullable
+    @Override
+    public LocalPoint getLocalDestinationLocation() { // tested, causes freezes without runOnClientThread
+        return runOnClientThread(super::getLocalDestinationLocation);
+    }
+
+    @Override
+    public Player getLocalPlayer() { // tested, causes freezes without runOnClientThread
+        return runOnClientThread(super::getLocalPlayer);
+    }
+
+    @Nullable
+    @Override
+    public CollisionData[] getCollisionMaps() { // tested, causes freezes without runOnClientThread
+        return runOnClientThread(super::getCollisionMaps);
     }
 
     private class WidgetWrapper extends BaseWidgetWrapper {
