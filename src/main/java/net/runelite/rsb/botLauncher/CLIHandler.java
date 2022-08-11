@@ -29,21 +29,11 @@ public class CLIHandler {
                         botInterface.stopScript();
                         break;
                     case "addbot":
-                        addBot(false);
+                        addBot(true);
                         break;
                     case "checkstate":
                         for (BotLiteInterface botInstance : bots) {
-                            System.out.println(Application.class.getClassLoader());
                             System.out.println(botInstance.getClass().getClassLoader());
-                            /*
-                            Set<Thread> threadSet
-                                    = Thread.getAllStackTraces().keySet();
-                            // iterating over the threads to get the names of
-                            // all the active threads
-                            for (Thread x : threadSet) {
-                                System.out.println(x.getName());
-                            }
-                             */
                         }
                         break;
                     default:
