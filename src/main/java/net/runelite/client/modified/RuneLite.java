@@ -346,6 +346,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
         // Start client session
         clientSessionManager.start();
         eventBus.register(clientSessionManager);
+        clientUI.init();
 
         // Register event listeners
         eventBus.register(clientUI);
