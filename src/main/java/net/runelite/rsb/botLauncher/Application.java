@@ -40,7 +40,7 @@ public class Application {
 	 * Checks if the cache exists and if it does, loads it
 	 * if not it creates a new cache and saves it
 	 *
-	 * @throws IOException
+	 * @throws IOException If the file isn't found or is inaccessible then an IOException has occurred.
 	 */
 	private static void checkForCacheAndLoad() throws IOException {
 		String gameCacheLocation = GlobalConfiguration.Paths.getRuneLiteGameCacheDirectory();
