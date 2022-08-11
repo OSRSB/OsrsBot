@@ -23,7 +23,6 @@ public class Walking extends MethodProvider {
 	private RSPath lastPath;
 	private RSTile lastDestination;
 	private RSTile lastStep;
-	private Field  collisionField = null;
 
 	/**
 	 * Creates a new path based on a provided array of tile waypoints.
@@ -56,7 +55,7 @@ public class Walking extends MethodProvider {
 	 * @return <code>true</code> if local; otherwise <code>false</code>.
 	 */
 	public boolean isLocal(final RSTile tile) {
-		int[][] flags = getCollisionFlags(methods.game.getPlane());
+		int[][] flags = methods.client.getCollisionMaps()[methods.game.getPlane()].getFlags();
 		int x = tile.getWorldLocation().getX() - methods.game.getBaseX();
 		int y = tile.getWorldLocation().getY() - methods.game.getBaseY();
 		return (flags != null && x >= 0 && y >= 0 && x < flags.length && y < flags.length);
@@ -270,52 +269,6 @@ public class Walking extends MethodProvider {
 
 		return (methods.client.getLocalDestinationLocation() != null) ? new RSTile(methods.client.getLocalDestinationLocation().getX(),
 				methods.client.getLocalDestinationLocation().getY(), methods.client.getPlane()) : null;
-	}
-
-	/**
-	 * Gets the collision flags for a given floor level in the loaded region.
-	 *
-	 * @param plane The floor level (0, 1, 2 or 3).
-	 * @return the collision flags.
-	 */
-	public int[][] getCollisionFlags(final int plane) {
-		int[][] flags = null;
-		if (getCollisionField() == null) {
-			setCollisionField();
-		}
-		getCollisionField().setAccessible(true);
-		try {
-			flags = ((CollisionData[]) getCollisionField().get(methods.client.wrappedClient))[plane].getFlags();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return flags;
-	}
-
-	/**
-	 * Sets the reflective field to access for CollisionMaps
-	 */
-	private void setCollisionField() {
-		for (Field field : methods.client.wrappedClient.getClass().getDeclaredFields()) {
-			//Checks if the field type is an array and if the name is shorter than 5 characters
-			if (field.getType().getTypeName().contains("[]") && field.getType().getTypeName().length() < 5) {
-				if (field.getModifiers() == 8) {
-					field.setAccessible(true);
-					String obType = getObType(field);
-					if (obType != null) {
-						this.collisionField = field;
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Gets the field for CollisionMaps
-	 * @return
-	 */
-	private Field getCollisionField() {
-		return this.collisionField;
 	}
 
 	/**

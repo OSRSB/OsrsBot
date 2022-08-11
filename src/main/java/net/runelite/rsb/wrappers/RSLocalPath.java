@@ -49,7 +49,7 @@ public class RSLocalPath extends RSPath {
 	 */
 	public RSTile getNext() {
 		if (!methods.game.getMapBase().equals(base)) {
-			int[][] flags = methods.walking.getCollisionFlags(methods.game.getPlane());
+			int[][] flags = methods.client.getCollisionMaps()[methods.game.getPlane()].getFlags();
 			if (flags != null) {
 				base = methods.game.getMapBase();
 				RSTile start = methods.players.getMyPlayer().getLocation();
@@ -143,7 +143,7 @@ public class RSLocalPath extends RSPath {
 
 		// load client data
 		int plane = methods.game.getPlane();
-		flags = methods.walking.getCollisionFlags(plane);
+		flags = methods.client.getCollisionMaps()[plane].getFlags();
 
 		// loaded region only
 		if (flags == null || curr_x < 0 || curr_y < 0 || curr_x >= flags.length || curr_y >= flags.length) {
