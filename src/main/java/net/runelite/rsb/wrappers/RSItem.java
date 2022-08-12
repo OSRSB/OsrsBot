@@ -40,15 +40,15 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		this.id = item.getItemId();
 		this.stackSize = item.getStackSize();
 		this.item = item;
-		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
+		this.def = this.getDefinition(id);
 	}
 
 	public RSItem(final MethodContext ctx, final TileItem item) {
 		super(ctx);
 		this.id = item.getId();
 		this.stackSize = item.getQuantity();
-		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
-		//This is only used for ground objects and thus does not need component declared
+		this.def = this.getDefinition(id);
+		// This is only used for ground objects and thus does not need component declared
 	}
 
 	public RSItem(final MethodContext ctx, final RSWidget item) {
@@ -56,7 +56,25 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		this.id = item.getItemId();
 		this.stackSize = item.getStackSize();
 		this.component = item;
-		this.def = (id != -1) ? (ItemDefinition) createDefinition(id) : null;
+		this.def = this.getDefinition(id);
+	}
+
+	private ItemDefinition getDefinition(int id) {
+		if (id == -1) {
+			return null;
+		}
+
+		ItemDefinition def = (ItemDefinition) createDefinition(id);
+		if (def.notedTemplate != -1 && def.notedID != -1) {
+			// assume def is a noted version, we need to link it
+			ItemDefinition template = (ItemDefinition) createDefinition(def.notedTemplate);
+			ItemDefinition unNoted = (ItemDefinition) createDefinition(def.notedID);
+			if (template != null && unNoted != null) {
+				def.linkNote(template, unNoted);
+			}
+		}
+
+		return def;
 	}
 
 	/**
