@@ -4,10 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BotClassLoader extends ClassLoader {
 
@@ -57,7 +54,7 @@ public class BotClassLoader extends ClassLoader {
             Class<?> loaded = realParent.findLoaded(name);
             if( loaded != null )
                 return realParent.findClass(name);
-            if (name.contains("java.")) {
+            if (name.startsWith("java.")) {
                 return ClassLoader.getPlatformClassLoader().loadClass(name);
             }
             try {

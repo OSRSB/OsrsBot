@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="headlessBotRun" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="17" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="net.runelite.rsb.botLauncher.Application" />
+    <module name="OSRSBot.main" />
+    <option name="PROGRAM_PARAMETERS" value="--bot-runelite --headless --developer-mode" />
+    <option name="VM_PARAMETERS" value="-debug" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

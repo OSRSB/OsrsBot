@@ -57,10 +57,9 @@ public class FileScriptSource implements ScriptSource {
 
 
 	public Script load(ScriptDefinition def) throws ServiceException {
-		if (!(def instanceof FileScriptDefinition)) {
+		if (!(def instanceof FileScriptDefinition fsd)) {
 			throw new IllegalArgumentException("Invalid definition!");
 		}
-		FileScriptDefinition fsd = (FileScriptDefinition) def;
 		try {
 			return fsd.clazz.asSubclass(Script.class).newInstance();
 		} catch (Exception ex) {
@@ -84,15 +83,11 @@ public class FileScriptSource implements ScriptSource {
 		if (file.isDirectory()) {
 			if (!file.getName().startsWith(".")) {
 				for (File f : file.listFiles()) {
-					System.out.println("TEST1");
-					System.out.println(file.toURI());
 					load(loader, scripts, f, prefix + file.getName() + ".");
 				}
 			}
 		} else {
 			String name = prefix + file.getName();
-			System.out.println("TEST2");
-			System.out.println(file.toURI());
 			String ext = ".class";
 			if (name.endsWith(ext) && !name.startsWith(".") && !name.contains("!") && !name.contains("$")) {
 				name = name.substring(0, name.length() - ext.length());
