@@ -216,15 +216,13 @@ public class BotLite extends RuneLite implements BotLiteInterface {
      * @return  If the account existed already
      */
     public boolean setAccount(final String name) {
-        boolean exist = false;
-        for (String s : AccountManager.getAccountNames()) {
-            if (s.toLowerCase().equals(name.toLowerCase())) {
-                exist = true;
+        if (name != null) {
+            for (String s : AccountManager.getAccountNames()) {
+                if (s.toLowerCase().equals(name.toLowerCase())) {
+                    account = name;
+                    return true;
+                }
             }
-        }
-        if (exist) {
-            account = name;
-            return true;
         }
         account = null;
         return false;
