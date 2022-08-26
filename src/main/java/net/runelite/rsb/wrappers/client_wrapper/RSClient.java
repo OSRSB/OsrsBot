@@ -154,6 +154,11 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public int getSceneMaxPlane() {
+        return 0;
+    }
+
+    @Override
     public Player getLocalPlayer() { // tested, causes freezes without runOnClientThread
         return runOnClientThread(super::getLocalPlayer);
     }
