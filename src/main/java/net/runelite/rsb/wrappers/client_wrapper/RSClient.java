@@ -126,6 +126,11 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public int getVarpValue(VarPlayer varPlayer) {
+        return convertResult(super.getVarpValue(varPlayer));
+    }
+
+    @Override
     public Widget getScriptActiveWidget() {
         return convertResult(super.getScriptActiveWidget());
     }
@@ -147,6 +152,16 @@ public class RSClient extends BaseClientWrapper {
         return convertResult(super.getSelectedWidget());
     }
 
+    @Override
+    public void setIdleTimeout(int ticks) {
+        super.setIdleTimeout(ticks);
+    }
+
+    @Override
+    public int getIdleTimeout() {
+        return convertResult(super.getIdleTimeout());
+    }
+
     @Nullable
     @Override
     public LocalPoint getLocalDestinationLocation() { // tested, causes freezes without runOnClientThread
@@ -155,7 +170,7 @@ public class RSClient extends BaseClientWrapper {
 
     @Override
     public int getSceneMaxPlane() {
-        return 0;
+        return super.getSceneMaxPlane();
     }
 
     @Override

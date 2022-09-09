@@ -253,6 +253,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public int getSceneMaxPlane() {
+        return wrappedClient.getSceneMaxPlane();
+    }
+
+    @Override
     public Player getLocalPlayer() {
         return wrappedClient.getLocalPlayer();
     }
@@ -523,11 +528,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getServerVar(VarPlayer varPlayer) {
-        return wrappedClient.getServerVar(varPlayer);
-    }
-
-    @Override
     @Deprecated
     public int getVar(int varbit) {
         return wrappedClient.getVar(varbit);
@@ -541,6 +541,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public int getServerVarbitValue(int varbit) {
         return wrappedClient.getServerVarbitValue(varbit);
+    }
+
+    @Override
+    public int getVarpValue(VarPlayer varPlayer) {
+        return wrappedClient.getVarpValue(varPlayer);
     }
 
     @Override
@@ -1480,5 +1485,14 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void resizeCanvas() {
         wrappedClient.resizeCanvas();
+    }
+    @Override
+    public int getIdleTimeout() {
+        return wrappedClient.getIdleTimeout();
+    }
+
+    @Override
+    public void setIdleTimeout(int ticks) {
+        wrappedClient.setIdleTimeout(ticks);
     }
 }
