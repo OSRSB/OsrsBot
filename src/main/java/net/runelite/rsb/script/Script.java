@@ -244,7 +244,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 			try {
 				while (running) {
 					if (!paused) {
-						if (AccountManager.isTakingBreaks(account.getName())) {
+						if (account.getName() != null && AccountManager.isTakingBreaks(account.getName())) {
 							BreakHandler h = ctx.runeLite.getBreakHandler();
 							if (h.isBreaking()) {
 								if (System.currentTimeMillis() - lastNotice > 600000) {
