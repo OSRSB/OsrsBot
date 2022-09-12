@@ -40,7 +40,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
 
     @Subscribe
     public boolean isVisible() {
-        return isValid() && (widget.isIf3() || (isSelfVisible() && !widget.isHidden()));
+        return isValid() && (isSelfVisible() && !widget.isHidden());
     }
 
     @Subscribe
