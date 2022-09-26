@@ -9,25 +9,24 @@ repositories {
     mavenCentral()
 }
 
-def runeLiteVersion = getRuneLiteVersion()
+def runeLiteVersion = "1.8.33.3"
+def repoLiteVersion = getRuneLiteVersion()
+if (repoLiteVersion != runeLiteVersion) {
+    println("Warning - client out of date, comment out exception to ignore")
+    throw new Exception("Out of date (server: "+repoLiteVersion+ " local: " + runeLiteVersion+")")
+}
 
 static def getRuneLiteVersion() {
-    URL url = new URL("http://repo.runelite.net/net/runelite/client/")
+    URL url = new URL("http://repo.runelite.net/net/runelite/client/maven-metadata.xml")
     URLConnection urlConnection = url.openConnection()
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
             urlConnection.getInputStream()))
     String latestName = null
     String inputLine
     while ((inputLine = bufferedReader.readLine()) != null) {
-        inputLine = inputLine.trim().replaceAll(" +", " ")
-        if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
-            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
-            String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
-            if (!name.contains("SNAPSHOT") && removeName != "") {
-                if (compareSemanticVersion(latestName, name)) {
-                    latestName = name;
-                }
-            }
+        inputLine = inputLine.trim()
+        if (inputLine.contains("<release>")) {
+            latestName = inputLine.replace("<release>", "").replace("</release>", "")
         }
     }
     bufferedReader.close()

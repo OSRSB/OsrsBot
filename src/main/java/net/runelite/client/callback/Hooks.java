@@ -562,4 +562,9 @@ public class Hooks implements Callbacks
         }
         return true;
     }
+
+    @Override
+    public void error(String message, Throwable reason) {
+        log.error(message, reason);
+    }
 }
