@@ -33,38 +33,6 @@ static def getRuneLiteVersion() {
     return latestName
 }
 
-static def compareSemanticVersion(String s1, String s2) {
-    if (s1 != null && s2 != null) {
-        while (true) {
-            if (s1.indexOf('.') != -1 && s2.indexOf('.') != -1) {
-                if (s1.substring(0, s1.indexOf('.')) == s2.substring(0, s2.indexOf('.'))) {
-                    s1 = s1.substring(s1.indexOf('.') + 1)
-                    s2 = s2.substring(s2.indexOf('.') + 1)
-                }
-                else {
-                    if (s1.indexOf('.') != -1) {
-                        s1 = s1.substring(0, s1.indexOf('.'))
-                    }
-                    if (s2.indexOf('.') != -1) {
-                        s2 = s2.substring(0, s2.indexOf('.'))
-                    }
-                    return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
-                }
-            }
-            else {
-                if (s1.indexOf('.') != -1) {
-                    s1 = s1.substring(0, s1.indexOf('.'))
-                }
-                if (s2.indexOf('.') != -1) {
-                    s2 = s2.substring(0, s2.indexOf('.'))
-                }
-                return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
-            }
-        }
-    }
-    return s1 == null && s2 != null
-}
-
 dependencies {
     implementation group: 'org.clojure', name: 'clojure', version: '1.9.0'
     implementation group: 'org.clojure', name: 'tools.nrepl', version: '0.2.12'
