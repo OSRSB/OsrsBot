@@ -17,9 +17,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Supplier;
 
+import com.google.inject.util.Providers;
 import net.runelite.api.Client;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.client.RuntimeConfig;
+import net.runelite.client.TelemetryClient;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
@@ -116,6 +118,7 @@ public class BotModule extends AbstractModule {
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
             bind(Callbacks.class).to(Hooks.class);
+            bind(TelemetryClient.class).toProvider(Providers.of(null));
 
             bind(EventBus.class)
                     .toInstance(new EventBus());
