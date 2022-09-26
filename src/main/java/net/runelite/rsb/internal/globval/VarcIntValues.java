@@ -58,6 +58,7 @@ public enum VarcIntValues {
     TAB_SETTINGS(11),
     TAB_EMOTES(12),
     TAB_MUSIC(13),
+    TAB_NOT_SELECTED(-1),
     // Bank Worn Items
     BANK_WORN_ITEMS_SHOWN(1),
     BANK_WORN_ITEMS_HIDDEN(0);
