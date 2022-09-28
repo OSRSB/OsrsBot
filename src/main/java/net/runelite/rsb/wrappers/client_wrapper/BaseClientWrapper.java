@@ -1027,7 +1027,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public HintArrowType getHintArrowType() {
+    public int getHintArrowType() {
         return wrappedClient.getHintArrowType();
     }
 
@@ -1048,6 +1048,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
 
     @Override
     public void setHintArrow(NPC npc) {
+        wrappedClient.setHintArrow(npc);
+    }
+
+    @Override
+    public void setHintArrow(LocalPoint npc) {
         wrappedClient.setHintArrow(npc);
     }
 

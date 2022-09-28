@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  */
 public class Inventory extends MethodProvider {
 
-	private final int EMPTY_SLOT_ITEM_ID = 6512;
+	public static final int EMPTY_SLOT_ITEM_ID = 6512;
 
 	Inventory(MethodContext ctx) {
 		super(ctx);
