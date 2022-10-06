@@ -9,11 +9,14 @@ repositories {
     mavenCentral()
 }
 
-def runeLiteVersion = "1.8.34"
-def repoLiteVersion = getRuneLiteVersion()
-if (repoLiteVersion != runeLiteVersion) {
-    println("Warning - client out of date, comment out exception to ignore")
-    throw new Exception("Out of date (server: "+repoLiteVersion+ " local: " + runeLiteVersion+")")
+def runeLiteVersion = "1.9.0"
+def enableServerCheck = true
+if (enableServerCheck) {
+    def repoLiteVersion = getRuneLiteVersion()
+    if (repoLiteVersion != runeLiteVersion) {
+        println("Warning - client out of date, comment out exception to ignore")
+        throw new Exception("Out of date (server: " + repoLiteVersion + " local: " + runeLiteVersion + ")")
+    }
 }
 
 static def getRuneLiteVersion() {

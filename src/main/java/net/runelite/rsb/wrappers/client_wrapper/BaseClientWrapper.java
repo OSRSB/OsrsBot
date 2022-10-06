@@ -1497,6 +1497,26 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public boolean isMinimapZoom() {
+        return wrappedClient.isMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(boolean minimapZoom) {
+        wrappedClient.setMinimapZoom(minimapZoom);
+    }
+
+    @Override
+    public double getMinimapZoom() {
+        return wrappedClient.getMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(double zoom) {
+        wrappedClient.setMinimapZoom(zoom);
+    }
+
+    @Override
     public void setIdleTimeout(int ticks) {
         wrappedClient.setIdleTimeout(ticks);
     }

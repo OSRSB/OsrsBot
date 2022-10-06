@@ -65,7 +65,7 @@ public class NPCs extends MethodProvider {
      * current region.
      */
     public RSNPC getNearest(final Predicate<RSNPC> filter) {
-        int min = 20;
+        int min = 9999;
         RSNPC closest = null;
         NPC[] npcs = getNPCs();
         for (NPC npc : npcs) {

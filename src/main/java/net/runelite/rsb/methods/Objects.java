@@ -91,7 +91,6 @@ public class Objects extends MethodProvider {
                             cur = o;
                             dist = distTmp;
                         }
-                        break;
                     }
                 }
             }
