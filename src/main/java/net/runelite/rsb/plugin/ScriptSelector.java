@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
@@ -254,15 +255,25 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	/**
 	 * Sets the action to occur when the reload button is pressed.
 	 */
+	private AtomicBoolean reloading = new AtomicBoolean(false);
 	public boolean buttonReloadActionPerformed() {
-
-		stopAction();
-		accounts = getAccounts();
-		//
-		//Make a search area
-		getSearch();
-		//Reload the scripts
-		load();
+		if (reloading.getAndSet(true)) {
+			try {
+				ScriptHandler sh = bot.getScriptHandler();
+				sh.stopAllScripts();
+				accounts = getAccounts();
+				//
+				//Make a search area
+				getSearch();
+				//Reload the scripts
+				load();
+			} catch (Exception ex) {
+				//("exception reloading " + ex);
+			}
+			reloading.set(false);
+		} else {
+			return false;
+		}
 		//buttonStart = scriptSelector.getSubmit();
 		return true;
 
