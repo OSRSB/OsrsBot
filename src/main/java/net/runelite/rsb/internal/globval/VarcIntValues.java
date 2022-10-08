@@ -43,6 +43,9 @@ public enum VarcIntValues {
     // Report Ignore Player State
     REPORT_IGNORE_PLAYER_CHECKED(1),
     REPORT_IGNORE_PLAYER_UNCHECKED(0),
+    // Bank Worn Items
+    BANK_WORN_ITEMS_SHOWN(1),
+    BANK_WORN_ITEMS_HIDDEN(0),
     // Interface Tabs
     TAB_COMBAT_OPTIONS(0),
     TAB_SKILLS(1),
@@ -58,10 +61,8 @@ public enum VarcIntValues {
     TAB_SETTINGS(11),
     TAB_EMOTES(12),
     TAB_MUSIC(13),
-    TAB_NOT_SELECTED(-1),
-    // Bank Worn Items
-    BANK_WORN_ITEMS_SHOWN(1),
-    BANK_WORN_ITEMS_HIDDEN(0);
+    TAB_NOT_SELECTED(-1)
+    ;
 
     // cache values on load
     private static final Map<Object, Object> hashMap = new HashMap<>();
