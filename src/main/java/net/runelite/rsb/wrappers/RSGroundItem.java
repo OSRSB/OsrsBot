@@ -1,11 +1,15 @@
 package net.runelite.rsb.wrappers;
 
 import net.runelite.api.Tile;
+import net.runelite.api.TileItem;
+import net.runelite.rsb.methods.GroundItems;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+
+import java.util.List;
 
 /**
  * Represents an item on a tile.
@@ -28,15 +32,11 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	public RSModel getModel() {
 		Tile tile = location.getTile(methods);
 		if (tile != null) {
-			if (!tile.getGroundItems().isEmpty()) {
-				//if (obj != null) {
-				for (int i = 0; i < tile.getGroundItems().size(); i++) {
-					if (!tile.getGroundItems().isEmpty()) {
-						return (tile.getItemLayer().getTop() != null) ?
-								new RSGroundObjectModel(methods, tile.getItemLayer().getTop().getModel(), tile) :
-								new RSGroundObjectModel(methods, tile.getGroundItems().get(i).getModel(), tile);
-					}
-				}
+			List<TileItem> groundItems = tile.getGroundItems();
+			if (groundItems != null && !groundItems.isEmpty()) {
+				return (tile.getItemLayer().getTop() != null) ?
+						new RSGroundObjectModel(methods, tile.getItemLayer().getTop().getModel(), tile) :
+						new RSGroundObjectModel(methods, groundItems.get(0).getModel(), tile);
 			}
 		}
 		return null;

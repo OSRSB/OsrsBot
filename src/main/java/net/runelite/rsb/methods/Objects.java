@@ -22,7 +22,7 @@ public class Objects extends MethodProvider {
      * A filter that accepts all matches.
      */
     public static final Predicate<RSObject> ALL_FILTER = new Predicate<>() {
-        public boolean test(RSObject npc) {
+        public boolean test(RSObject object) {
             return true;
         }
     };
@@ -61,6 +61,28 @@ public class Objects extends MethodProvider {
         return objects.toArray(new RSObject[objects.size()]);
     }
 
+    public RSObject[] getAllNear(int maxDistance, final String... names) {
+        return getAll(o -> {
+            for (String name : names) {
+                if (o.getName().equals(name) && methods.players.getMyPlayer().getLocation().distanceTo(o.getLocation()) < maxDistance) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
+    public RSObject[] getAll(final String... names) {
+        return getAll(o -> {
+            for (String name : names) {
+                if (o.getName().equals(name)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
     /**
      * Returns the <code>RSObject</code> that is nearest out of all objects that are
      * accepted by the provided Filter.
@@ -72,7 +94,7 @@ public class Objects extends MethodProvider {
      */
     public RSObject getNearest(final Predicate<RSObject> filter) {
         RSObject cur = null;
-        double dist = -1;
+        double dist = Double.MAX_VALUE;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 Set<RSObject> objects = getAtLocal(x, y, -1);
@@ -84,10 +106,7 @@ public class Objects extends MethodProvider {
                         double distTmp = methods.calc.distanceBetween(
                                 methods.players.getMyPlayer().getLocation(),
                                 o.getLocation());
-                        if (cur == null) {
-                            dist = distTmp;
-                            cur = o;
-                        } else if (distTmp < dist) {
+                        if (distTmp < dist) {
                             cur = o;
                             dist = distTmp;
                         }
