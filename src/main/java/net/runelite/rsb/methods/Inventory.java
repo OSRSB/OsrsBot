@@ -779,6 +779,7 @@ public class Inventory extends MethodProvider {
 	 * @param ids The IDs of the item to find.
 	 * @return The first <code>RSItem</code> for the given IDs; otherwise null.
 	 */
+
 	public RSItem getItem(final int... ids) {
 		RSItem[] items = getItems();
 		for (RSItem item : items) {
@@ -815,6 +816,14 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return filterItems;
+	}
+
+	public RSItem getRandomItem(final int... ids) {
+		RSItem[] items = getItems(ids);
+		if (items.length == 0) {
+			return null;
+		}
+		return items[random(0, items.length)];
 	}
 
 	/**

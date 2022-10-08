@@ -9,9 +9,25 @@ import net.runelite.api.Point;
 public class Mouse extends MethodProvider {
 
 	private int mouseSpeed = MouseHandler.DEFAULT_MOUSE_SPEED;
+	private int minReaction = 50;
+	private int maxReaction = 350;
 
 	Mouse(final MethodContext ctx) {
 		super(ctx);
+	}
+
+	/**
+	 * Configure reaction speed
+	 * @param min min mouse 'reaction' speed, -1 will be ignored
+	 * @param max max mouse 'reaction' speed, -1 will be ignored
+	 */
+	public void setReactionSpeed(int min, int max) {
+		if (max != -1) {
+			minReaction = min;
+		}
+		if (max != -1) {
+			maxReaction = max;
+		}
 	}
 
 
@@ -142,7 +158,7 @@ public class Mouse extends MethodProvider {
 	                               final int moveAfterDist) {
 		methods.inputManager.clickMouse(leftClick);
 		if (moveAfterDist > 0) {
-			sleep(random(50, 350));
+			sleep(random(minReaction, maxReaction));
 			Point pos = getLocation();
 			move(pos.getX() - moveAfterDist, pos.getY() - moveAfterDist,
 					moveAfterDist * 2, moveAfterDist * 2);
@@ -173,7 +189,7 @@ public class Mouse extends MethodProvider {
 	public synchronized void click(final int x, final int y, final int randX,
 	                               final int randY, final boolean leftClick) {
 		move(x, y, randX, randY);
-		sleep(random(50, 350));
+		sleep(random(minReaction, maxReaction));
 		click(leftClick, MouseHandler.DEFAULT_MAX_MOVE_AFTER);
 	}
 
@@ -192,7 +208,7 @@ public class Mouse extends MethodProvider {
 	public synchronized void click(final int x, final int y, final int randX,
 	                               final int randY, final boolean leftClick, final int moveAfterDist) {
 		move(x, y, randX, randY);
-		sleep(random(50, 350));
+		sleep(random(minReaction, maxReaction));
 		click(leftClick, moveAfterDist);
 	}
 

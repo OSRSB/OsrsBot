@@ -444,14 +444,14 @@ public class Bank extends MethodProvider {
 			/* Find the closest one, others are set to null. Remember distance and tile. */
 			int lowestDist = Integer.MAX_VALUE;
 			RSTile tile = null;
-			if (bankBooth != null) {
-				tile = bankBooth.getLocation();
-				lowestDist = methods.calc.distanceTo(tile);
-			}
 			if (banker != null && methods.calc.distanceTo(banker) < lowestDist) {
 				tile = banker.getLocation();
 				lowestDist = methods.calc.distanceTo(tile);
 				bankBooth = null;
+			}
+			if (bankBooth != null) {
+				tile = bankBooth.getLocation();
+				lowestDist = methods.calc.distanceTo(tile);
 			}
 			if (bankChest != null && methods.calc.distanceTo(bankChest) < lowestDist) {
 				tile = bankChest.getLocation();
