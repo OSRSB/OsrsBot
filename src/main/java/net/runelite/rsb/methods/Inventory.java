@@ -1,6 +1,5 @@
 package net.runelite.rsb.methods;
 
-import net.runelite.api.ItemComposition;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
@@ -702,7 +701,7 @@ public class Inventory extends MethodProvider {
 				}
 			}
 		}
-		return items.toArray(new RSItem[items.size()]);
+		return items.toArray(new RSItem[0]);
 	}
 
 	/**
