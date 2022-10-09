@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
@@ -257,7 +258,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 */
 	private AtomicBoolean reloading = new AtomicBoolean(false);
 	public boolean buttonReloadActionPerformed() {
-		if (reloading.getAndSet(true)) {
+		if (!reloading.getAndSet(true)) {
 			try {
 				ScriptHandler sh = bot.getScriptHandler();
 				sh.stopAllScripts();
@@ -269,14 +270,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 				load();
 			} catch (Exception ex) {
 				//("exception reloading " + ex);
+			} finally {
+				reloading.set(false);
 			}
-			reloading.set(false);
-		} else {
-			return false;
 		}
 		//buttonStart = scriptSelector.getSubmit();
 		return true;
-
 	}
 
 	/**
