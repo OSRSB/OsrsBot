@@ -329,6 +329,26 @@ public class Bank extends MethodProvider {
 	}
 
 	/**
+	 * Gets the first item matching any of the provided IDs in the bank.
+	 *
+	 * @param id IDs of the item to get.
+	 * @return The component of the item; otherwise null.
+	 */
+	public RSItem getItem(final int... id) {
+		final RSItem[] items = getItems();
+		if (items != null) {
+			for (final RSItem item : items) {
+				for (int id2 : id) {
+					if (item.getID() == id2) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the point on the screen for a given item. Numbered left to right then top to bottom.
 	 *
 	 * @param slot The index of the item.
