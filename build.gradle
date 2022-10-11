@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-def runeLiteVersion = "1.9.0"
+def runeLiteVersion = "1.9.1"
 def enableServerCheck = true
 if (enableServerCheck) {
     def repoLiteVersion = getRuneLiteVersion()
