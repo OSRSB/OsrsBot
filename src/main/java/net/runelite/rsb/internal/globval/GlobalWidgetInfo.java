@@ -187,7 +187,7 @@ public enum GlobalWidgetInfo {
     MINIMAP_QUICK_PRAYER_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_CONTAINER),
     MINIMAP_QUICK_PRAYER_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_LABEL),
     MINIMAP_QUICK_PRAYER_ORB_SPRITE(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_SPRITE),
-    MINIMAP_RUN_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.RUN_ORB_CONTAINER),
+    MINIMAP_RUN_ORB(WidgetInfo.MINIMAP_TOGGLE_RUN_ORB.getGroupId(), WidgetInfo.MINIMAP_TOGGLE_RUN_ORB.getChildId()),
     MINIMAP_RUN_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.RUN_ORB_LABEL),
     MINIMAP_SPEC_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.SPEC_ORB_CONTAINER),
     MINIMAP_SPEC_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.SPEC_ORB_LABEL),
