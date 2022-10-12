@@ -14,15 +14,14 @@ repositories {
         }
     }
 }
-}
 
-def runeLiteVersion = "1.9.1"
-def enableServerCheck = true
-if (enableServerCheck) {
-    def repoLiteVersion = getRuneLiteVersion()
-    if (repoLiteVersion != runeLiteVersion) {
-        println("Warning - client out of date, comment out exception to ignore")
-        throw new Exception("Out of date (server: " + repoLiteVersion + " local: " + runeLiteVersion + ")")
+def runeLiteVersion = getRuneLiteVersion()
+def supportedCheck = false
+if (supportedCheck) {
+    def lastSupportedVersion = "1.9.1"
+    if (runeLiteVersion != lastSupportedVersion) {
+        println("Warning - client has been updated")
+        throw new Exception("Out of date (last supported: " + lastSupportedVersion + " current client: " + runeLiteVersion + ")")
     }
 }
 
