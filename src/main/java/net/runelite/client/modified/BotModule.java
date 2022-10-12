@@ -52,6 +52,7 @@ public class BotModule extends AbstractModule {
     private final boolean safeMode;
     private final File sessionfile;
     private final File config;
+    private boolean disableTelemetry = false;
 
 
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
@@ -118,7 +119,6 @@ public class BotModule extends AbstractModule {
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
             bind(Callbacks.class).to(Hooks.class);
-            bind(TelemetryClient.class).toProvider(Providers.of(null));
 
             bind(EventBus.class)
                     .toInstance(new EventBus());
@@ -193,5 +193,15 @@ public class BotModule extends AbstractModule {
     {
         final String prop = System.getProperty("runelite.ws.url");
         return HttpUrl.get(Strings.isNullOrEmpty(prop) ? s : prop);
+    }
+
+    @Provides
+    @javax.inject.Singleton
+    TelemetryClient provideTelemetry(
+            OkHttpClient okHttpClient,
+            Gson gson,
+            @javax.inject.Named("runelite.api.base") HttpUrl apiBase)
+    {
+        return disableTelemetry ? null : new TelemetryClient(okHttpClient, gson, apiBase);
     }
 }
