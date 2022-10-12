@@ -4,9 +4,16 @@ plugins {
 
 repositories {
     mavenLocal()
-    maven { url 'https://repo.runelite.net' }
     maven { url 'https://jitpack.io' }
     mavenCentral()
+    maven {
+        url 'https://repo.runelite.net'
+        content {
+            // only download packages for group net.runelite*
+            includeGroupByRegex "net\\.runelite.*"
+        }
+    }
+}
 }
 
 def runeLiteVersion = "1.9.1"
