@@ -817,14 +817,6 @@ public class Inventory extends MethodProvider {
 		return filterItems;
 	}
 
-	public RSItem getRandomItem(final int... ids) {
-		RSItem[] items = getItems(ids);
-		if (items.length == 0) {
-			return null;
-		}
-		return items[random(0, items.length)];
-	}
-
 	/**
 	 * Gets the count of all the items in the inventory without any of the
 	 * provided IDs. This ignores stack sizes.
