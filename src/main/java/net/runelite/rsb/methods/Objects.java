@@ -61,17 +61,13 @@ public class Objects extends MethodProvider {
         return objects.toArray(new RSObject[objects.size()]);
     }
 
-    public RSObject[] getAllNear(int maxDistance, final String... names) {
-        return getAll(o -> {
-            for (String name : names) {
-                if (o.getName().equals(name) && methods.players.getMyPlayer().getLocation().distanceTo(o.getLocation()) < maxDistance) {
-                    return true;
-                }
-            }
-            return false;
-        });
-    }
-
+    /**
+     * Returns all the named <code>RSObject</code>s in the local region.
+     *
+     * @param names Names of objects accepted.
+     * @return An <code>RSObject[]</code> of all the accepted objects in the loaded
+     * region.
+     */
     public RSObject[] getAll(final String... names) {
         return getAll(o -> {
             for (String name : names) {
