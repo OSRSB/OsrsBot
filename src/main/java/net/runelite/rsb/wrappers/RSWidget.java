@@ -246,6 +246,15 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return new RSWidget(methods, widget.getChild(idx));
     }
 
+    public RSWidget getDynamicTextComponent(String text) {
+        for (Widget w : widget.getDynamicChildren()) {
+            if (w.getText().equalsIgnoreCase(text)) {
+                return new RSWidget(methods, w);
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the child component at a given index
      *
