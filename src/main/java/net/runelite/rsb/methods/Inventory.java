@@ -10,10 +10,7 @@ import net.runelite.rsb.wrappers.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -107,7 +104,7 @@ public class Inventory extends MethodProvider {
 	 * @param leftToRight <code>true</code> to drop items from left to right.
 	 * @param items       The item IDs to drop
 	 */
-	public void dropAllExcept(final boolean leftToRight, final int... items) {
+	public void dropAllExcept(final boolean leftToRight, final Integer... items) {
 		RSTile startLocation = methods.players.getMyPlayer().getLocation();
 		boolean found_droppable = true;
 		while (found_droppable && getCountExcept(items) != 0) {
@@ -222,9 +219,9 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param items The item IDs to drop.
 	 * @return <code>true</code> at all times.
-	 * @see #dropAllExcept(boolean, int...)
+	 * @see #dropAllExcept(boolean, Integer...)
 	 */
-	public boolean dropAllExcept(final int... items) {
+	public boolean dropAllExcept(final Integer... items) {
 		dropAllExcept(false, items);
 		return true;
 	}
@@ -235,7 +232,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param names The item names to drop.
 	 * @return <code>true</code> at all times.
-	 * @see #dropAllExcept(boolean, int...)
+	 * @see #dropAllExcept(boolean, Integer...)
 	 */
 	public boolean dropAllExcept(final String... names) {
 		return dropAllExcept(getItemIDs(names));
@@ -272,8 +269,8 @@ public class Inventory extends MethodProvider {
 	 * @param itemID The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains an item with the ID
 	 *         provided; otherwise <code>false</code>.
-	 * @see #containsOneOf(int...)
-	 * @see #containsAll(int...)
+	 * @see #containsOneOf(Integer...)
+	 * @see #containsAll(Integer...)
 	 */
 	public boolean contains(final int itemID) {
 		return getItem(itemID) != null;
@@ -285,8 +282,8 @@ public class Inventory extends MethodProvider {
 	 * @param name The name you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains an item with the name
 	 *         provided; otherwise <code>false</code>.
-	 * @see #containsOneOf(int...)
-	 * @see #containsAll(int...)
+	 * @see #containsOneOf(Integer...)
+	 * @see #containsAll(Integer...)
 	 */
 	public boolean contains(final String name) {
 		return contains(getItemID(name));
@@ -299,9 +296,9 @@ public class Inventory extends MethodProvider {
 	 * @param itemID The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains at least one of all of
 	 *         the item IDs provided; otherwise <code>false</code>.
-	 * @see #containsOneOf(int...)
+	 * @see #containsOneOf(Integer...)
 	 */
-	public boolean containsAll(final int... itemID) {
+	public boolean containsAll(final Integer... itemID) {
 		for (int i : itemID) {
 			if (getItem(i) == null) {
 				return false;
@@ -317,7 +314,7 @@ public class Inventory extends MethodProvider {
 	 * @param names The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains at least one of all of
 	 *         the item IDs provided; otherwise <code>false</code>.
-	 * @see #containsOneOf(int...)
+	 * @see #containsOneOf(Integer...)
 	 */
 	public boolean containsAll(final String... names) {
 		if (!(getItemIDs(names).length == names.length)) return false;
@@ -331,9 +328,9 @@ public class Inventory extends MethodProvider {
 	 * @param itemID The item ID to check for.
 	 * @return <code>true</code> if inventory contains one of the specified items;
 	 *         otherwise <code>false</code>.
-	 * @see #containsAll(int...)
+	 * @see #containsAll(Integer...)
 	 */
-	public boolean containsOneOf(final int... itemID) {
+	public boolean containsOneOf(final Integer... itemID) {
 		RSItem[] items = getItems();
 		for (RSItem item : items) {
 			for (int i : itemID) {
@@ -352,7 +349,7 @@ public class Inventory extends MethodProvider {
 	 * @param names The item names to check for.
 	 * @return <code>true</code> if inventory contains one of the specified items;
 	 *         otherwise <code>false</code>.
-	 * @see #containsAll(int...)
+	 * @see #containsAll(Integer...)
 	 */
 	public boolean containsOneOf(final String... names) {
 		return containsOneOf(getItemIDs(names));
@@ -691,7 +688,7 @@ public class Inventory extends MethodProvider {
 	 * @param ids Valid IDs.
 	 * @return <code>RSItem</code> array of the matching inventory items.
 	 */
-	public RSItem[] getItems(final int... ids) {
+	public RSItem[] getItems(final Integer... ids) {
 		LinkedList<RSItem> items = new LinkedList<>();
 		for (RSItem item : getItems()) {
 			for (int i : ids) {
@@ -757,7 +754,7 @@ public class Inventory extends MethodProvider {
 	 * @param names The names of the item IDs you wish to find.
 	 * @return The IDs of the items or null if not in inventory.
 	 */
-	public int[] getItemIDs(final String[] names) {
+	public Integer[] getItemIDs(final String[] names) {
 		ArrayList<Integer> itemIDs = new ArrayList<>();
 		for (String name : names) {
 			int itemID = getItemID(name);
@@ -765,7 +762,7 @@ public class Inventory extends MethodProvider {
 				itemIDs.add(itemID);
 			}
 		}
-		int[] arr = new int[itemIDs.size()];
+		Integer[] arr = new Integer[itemIDs.size()];
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = itemIDs.get(i);
 		}
@@ -778,8 +775,7 @@ public class Inventory extends MethodProvider {
 	 * @param ids The IDs of the item to find.
 	 * @return The first <code>RSItem</code> for the given IDs; otherwise null.
 	 */
-
-	public RSItem getItem(final int... ids) {
+	public RSItem getItem(final Integer... ids) {
 		RSItem[] items = getItems();
 		for (RSItem item : items) {
 			for (int id : ids) {
@@ -824,7 +820,7 @@ public class Inventory extends MethodProvider {
 	 * @param ids The item IDs to exclude.
 	 * @return The count.
 	 */
-	public int getCountExcept(final int... ids) {
+	public int getCountExcept(final Integer... ids) {
 		return getCountExcept(false, ids);
 	}
 
@@ -848,7 +844,7 @@ public class Inventory extends MethodProvider {
 	 * @param ids           The item IDs to exclude.
 	 * @return The count.
 	 */
-	public int getCountExcept(final boolean includeStacks, final int... ids) {
+	public int getCountExcept(final boolean includeStacks, final Integer... ids) {
 		RSItem[] items = getItems();
 		int count = 0;
 		for (RSItem i : items) {
@@ -889,7 +885,7 @@ public class Inventory extends MethodProvider {
 	 * @param itemIDs the item IDs to include
 	 * @return The count.
 	 */
-	public int getCount(final int... itemIDs) {
+	public int getCount(final Integer... itemIDs) {
 		return getCount(false, itemIDs);
 	}
 
@@ -913,7 +909,7 @@ public class Inventory extends MethodProvider {
 	 * @param itemIDs       the item IDs to include
 	 * @return The count.
 	 */
-	public int getCount(final boolean includeStacks, final int... itemIDs) {
+	public int getCount(final boolean includeStacks, final Integer... itemIDs) {
 		int total = 0;
 		for (RSItem item : getItems()) {
 			if (item == null) {
@@ -971,5 +967,9 @@ public class Inventory extends MethodProvider {
 			}
 		}
 		return count;
+	}
+
+	public boolean hasItem(int itemId) {
+		return getCount(itemId) > 0;
 	}
 }
