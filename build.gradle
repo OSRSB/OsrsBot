@@ -15,10 +15,10 @@ repositories {
     }
 }
 
+def lastSupportedVersion = "1.9.3"
 def runeLiteVersion = getRuneLiteVersion()
 def supportedCheck = false
 if (supportedCheck) {
-    def lastSupportedVersion = "1.9.2"
     if (runeLiteVersion != lastSupportedVersion) {
         println("Warning - client has been updated")
         throw new Exception("Out of date (last supported: " + lastSupportedVersion + " current client: " + runeLiteVersion + ")")
