@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class RSItem extends MethodProvider implements Clickable07, CacheProvider<ItemDefinition>  {
 
+	public static final int INVALID = -1;
 	private final int id;
 	private final int stackSize;
 	private final ItemDefinition def;
@@ -60,12 +61,12 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	}
 
 	private ItemDefinition getDefinition(int id) {
-		if (id == -1) {
+		if (id == INVALID) {
 			return null;
 		}
 
 		ItemDefinition def = (ItemDefinition) createDefinition(id);
-		if (def.notedTemplate != -1 && def.notedID != -1) {
+		if (def != null && def.notedTemplate != -1 && def.notedID != -1) {
 			// assume def is a noted version, we need to link it
 			ItemDefinition template = (ItemDefinition) createDefinition(def.notedTemplate);
 			ItemDefinition unNoted = (ItemDefinition) createDefinition(def.notedID);
@@ -147,7 +148,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 * @return <code>true</code> if there is a visible wrapped item
 	 */
 	public boolean isItemValid() {
-		return item.isValid();
+		return id != INVALID && item.isValid();
 	}
 
 	/**
@@ -225,7 +226,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 
 	public boolean doAction(Predicate<RSMenuNode> predicate) {
 		component.doClick(false);
-		for (RSMenuNode menuNode : Web.methods.chooseOption.getMenuNodes()) {
+		for (RSMenuNode menuNode : methods.chooseOption.getMenuNodes()) {
 			if (predicate.test(menuNode)) {
 				return (component != null)
 						? component.doAction(menuNode.getAction(), menuNode.getTarget())
