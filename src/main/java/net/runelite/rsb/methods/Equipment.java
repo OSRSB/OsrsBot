@@ -23,8 +23,12 @@ public class Equipment extends MethodProvider {
 	 * @return the equipment interface
 	 */
 	public RSWidget getInterface() {
+		return getInterface(true);
+	}
+
+	private RSWidget getInterface(boolean update) {
 		// Tab needs to be open for it to update its content -.-
-		if (methods.game.getCurrentTab() != InterfaceTab.EQUIPMENT) {
+		if (update && methods.game.getCurrentTab() != InterfaceTab.EQUIPMENT) {
 			if (methods.bank.isOpen()) {
 				methods.bank.close();
 			}
@@ -40,10 +44,11 @@ public class Equipment extends MethodProvider {
 	 * @return An array containing all equipped items
 	 */
 	public RSItem[] getItems() {
-		RSWidget[] equip = getInterface().getComponents();
+		getInterface(true);
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			items[i] = new RSItem(methods, equip[i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER].getDynamicComponent(1));
+			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER).getDynamicComponent(1);
+			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
 	}
@@ -54,12 +59,12 @@ public class Equipment extends MethodProvider {
 	 * @return The items equipped as seen when the equipment tab was last
 	 *         opened.
 	 */
-	public RSItem[] getCachedItems() {
-		RSWidget equipment = getInterface();
-		RSWidget[] components = equipment.getComponents();
+	private RSItem[] getCachedItems() {
+		RSWidget[] equipment = getInterface(false).getComponents();
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			items[i] = new RSItem(methods, components[i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER].getDynamicComponent(1));
+			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER].getDynamicComponent(1);
+			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
 	}
