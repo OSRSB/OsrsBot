@@ -183,6 +183,11 @@ public class Interfaces extends MethodProvider {
 		return false;
 	}
 
+	private static final int CUTSCENE_VARBIT = 542;
+	public boolean isCutsceneActive() {
+		return methods.client.getVarbitValue(CUTSCENE_VARBIT) > 0;
+	}
+
 	/**
 	 * Lazily returns an active dialog widget (player chat options, npc chat, player chat, object chat)
 	 *
