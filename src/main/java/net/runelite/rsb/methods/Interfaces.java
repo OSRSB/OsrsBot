@@ -184,6 +184,32 @@ public class Interfaces extends MethodProvider {
 	}
 
 	/**
+	 * Lazily returns an active dialog widget (player chat options, npc chat, player chat, object chat)
+	 *
+	 * @return RSWidget or null if no dialog active
+	 *         .
+	 */
+	public RSWidget getDialogWidget() {
+		RSWidget widget = getComponent(WidgetInfo.DIALOG_OPTION_OPTIONS);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_NPC_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_PLAYER_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_SPRITE_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		return null;
+	}
+
+	/**
 	 * Scrolls to the component
 	 *
 	 * @param component   component to scroll to
