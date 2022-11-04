@@ -1833,7 +1833,7 @@ public class WidgetIndices {
      */
     public static class GrandExchange {
         public static final int GROUP_INDEX = 465;
-        public static final int PARENT_CONTAINER = 0;
+        public static final int PARENT_CONTAINER = GROUP_INDEX;
         public static final int CONTAINER = 1;
         public static final int DYNAMIC_CONTAINER = 2; // Contains stone borders close button 0-11
         public static final int BUTTON_HISTORY_DYNAMIC_CONTAINER = 3; // Contains sprites, label 0-9

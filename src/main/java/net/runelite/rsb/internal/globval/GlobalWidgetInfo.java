@@ -162,7 +162,8 @@ public enum GlobalWidgetInfo {
      * [GRAND EXCHANGE]
      */
     GRAND_EXCHANGE_SEARCH_INPUT(CHATBOX_FULL_INPUT),
-    GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
+    //GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
+    GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, 25),
     GRAND_EXCHANGE_INTERFACE_LAYOUT(WidgetIndices.GrandExchange.GROUP_INDEX,WidgetIndices.GrandExchange.DYNAMIC_CONTAINER ),
     GRAND_EXCHANGE_TITLE(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER),
     GRAND_EXCHANGE_COLLECTION_AREA(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.OFFER_STATUS_COLLECTION_AREA_DYNAMIC_CONTAINER),
