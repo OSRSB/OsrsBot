@@ -130,29 +130,26 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		try {
 			Model model;
 			if (obj instanceof WallObject) {
-				model = (Model) ((WallObject) obj).getRenderable1();
+				model = toModel(((WallObject) obj).getRenderable1());
 				if (model != null && model.getVerticesX() != null)
 					if (((WallObject) obj).getRenderable2() != null)
-					return new RSWallObjectModel(methods, model, (Model) ((WallObject) obj).getRenderable2(), obj);
+						return new RSWallObjectModel(methods, model, toModel(((WallObject) obj).getRenderable2()), obj);
 					else {
 						return new RSWallObjectModel(methods, model, obj);
 					}
 				return new RSWallObjectModel(methods, null, obj);
 			} else if (obj instanceof GroundObject) {
-				Renderable renderable = ((DecorativeObject) obj).getRenderable();
-				model = renderable instanceof Model ? (Model)renderable : renderable.getModel();
+				model = toModel(((DecorativeObject) obj).getRenderable());
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof DecorativeObject) {
-				Renderable renderable = ((DecorativeObject) obj).getRenderable();
-				model = renderable instanceof Model ? (Model)renderable : renderable.getModel();
+				model = toModel(((DecorativeObject) obj).getRenderable());
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof ItemLayer) {
 				return null;
 			} else if (obj instanceof GameObject) {
-				Renderable renderable = ((GameObject) obj).getRenderable();
-				model = renderable instanceof Model ? (Model)renderable : renderable.getModel();
+				model = toModel(((GameObject) obj).getRenderable());
 				if (model != null && model.getVerticesX() != null)
 					return new RSObjectModel(methods, model, (GameObject) obj);
 			}
@@ -160,6 +157,15 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 			log.debug("Error", e);
 		}
 		return null;
+	}
+	private Model toModel(Renderable r) {
+		if (r instanceof Model) {
+			return (Model)r;
+		} else if (r != null) {
+			return r.getModel();
+		} else {
+			return null;
+		}
 	}
 
 	/**
