@@ -1027,7 +1027,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public HintArrowType getHintArrowType() {
+    public int getHintArrowType() {
         return wrappedClient.getHintArrowType();
     }
 
@@ -1048,6 +1048,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
 
     @Override
     public void setHintArrow(NPC npc) {
+        wrappedClient.setHintArrow(npc);
+    }
+
+    @Override
+    public void setHintArrow(LocalPoint npc) {
         wrappedClient.setHintArrow(npc);
     }
 
@@ -1489,6 +1494,26 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public int getIdleTimeout() {
         return wrappedClient.getIdleTimeout();
+    }
+
+    @Override
+    public boolean isMinimapZoom() {
+        return wrappedClient.isMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(boolean minimapZoom) {
+        wrappedClient.setMinimapZoom(minimapZoom);
+    }
+
+    @Override
+    public double getMinimapZoom() {
+        return wrappedClient.getMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(double zoom) {
+        wrappedClient.setMinimapZoom(zoom);
     }
 
     @Override

@@ -93,6 +93,8 @@ public class VarbitIndices {
     public static final int TOGGLE_BANK_DEPOSIT_WORN_ITEMS = 5364;
     public static final int FAIRY_RING_LAST_DESTINATION = 5374;
     public static final int MOTHERLODE_MINE_SACK = 5558;
+    public static final int NEW_PLAYER_NAME_STATUS = 5605; // 1 is 'unavailable' or 'not checked', 2 is 'checking', 4 is 'available', 5 is 'accept'
+    public static final int NAME_SELECTED_STATUS = 5607; // 0 is 'name not selected' 1 is 'name set'. changing to 1 usually clears 437 and 436 too
     public static final int WILDNERESS_ZONE = 5963;
     public static final int CHATBOX_INTERFACE_SIZE = 5983; // Note: manipulates the size of Widget 162.559
     /**
@@ -117,9 +119,11 @@ public class VarbitIndices {
      * Note: 0 = not started, 1 = started, 8 = finished
      */
     public static final int QUEST_X_MARKS_THE_SPOT = 8063;
+    public static final int REQUEST_PLAYER_MODEL_SELECTION = 8119; // 0 is 'do nothing' 1 is 'show selection'
     public static final int PVP_SPEC_ORB = 8121;
     public static final int TAB_QUEST_LIST_SUBTAB_INDEX = 8168;
     public static final int TOGGLE_BANK_DEPOSIT_INVENTORY = 8352;
+    public static final int BACKGROUND_TICK_INDEX = 8354; // auto-incrementing digit that increases every 100 ticks
     public static final int TAB_SETTINGS_SUBTAB_INDEX = 9683;
     public static final int TAB_ACC_MANAGEMENT_SUBTAB_INDEX = 10060;
     public static final int TOGGLE_BANK_INVENTORY_OPTIONS = 10079;

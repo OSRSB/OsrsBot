@@ -240,7 +240,7 @@ public class Bank extends MethodProvider {
 	 * @param items The array of items.
 	 * @return The sum of the stacks of the items.
 	 */
-	public int getCount(final int... items) {
+	public int getCount(final Integer... items) {
 		int itemCount = 0;
 		final RSItem[] inventoryArray = getItems();
 		for (RSItem item : inventoryArray) {
@@ -329,6 +329,26 @@ public class Bank extends MethodProvider {
 	}
 
 	/**
+	 * Gets the first item matching any of the provided IDs in the bank.
+	 *
+	 * @param id IDs of the item to get.
+	 * @return The component of the item; otherwise null.
+	 */
+	public RSItem getItem(final Integer... id) {
+		final RSItem[] items = getItems();
+		if (items != null) {
+			for (final RSItem item : items) {
+				for (int id2 : id) {
+					if (item.getID() == id2) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the point on the screen for a given item. Numbered left to right then top to bottom.
 	 *
 	 * @param slot The index of the item.
@@ -401,7 +421,12 @@ public class Bank extends MethodProvider {
 		}
 	}
 
-	public Object getNearest() {
+	public static class NearestBank {
+		public RSObject entityBank;
+		public RSNPC teller;
+		public int distance;
+	};
+	public NearestBank getNearest() {
 		RSObject bankBooth = methods.objects.getNearest(BANK_BOOTHS);
 		RSNPC banker = methods.npcs.getNearest(new ReachableBankerFilter());
 		RSObject bankChest = methods.objects.getNearest(BANK_CHESTS);
@@ -421,7 +446,14 @@ public class Bank extends MethodProvider {
 			bankBooth = null;
 			banker = null;
 		}
-		return (bankChest == null) ? (banker == null) ? bankBooth : banker : bankChest;
+		NearestBank bank = new NearestBank();
+		bank.distance = lowestDist;
+		if (banker != null) {
+			bank.teller = banker;
+		} else {
+			bank.entityBank = (bankChest == null) ? bankBooth : bankChest;
+		}
+		return bank;
 	}
 
 	/**

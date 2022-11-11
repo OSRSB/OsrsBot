@@ -265,8 +265,8 @@ public class Methods {
 	 * @see #sleep(int)
 	 * @see #random(int, int)
 	 */
-	public static void sleep(int minSleep, int maxSleep) {
-		sleep(random(minSleep, maxSleep));
+	public static boolean sleep(int minSleep, int maxSleep) {
+		return sleep(random(minSleep, maxSleep));
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class Methods {
 	 *
 	 * @param toSleep The time to sleep in milliseconds.
 	 */
-	public static void sleep(int toSleep) {
+	public static boolean sleep(int toSleep) {
 		try {
 			long start = System.currentTimeMillis();
 			Thread.sleep(toSleep);
@@ -286,7 +286,9 @@ public class Methods {
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	/**

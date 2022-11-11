@@ -63,12 +63,8 @@ public class GrandExchange extends MethodProvider {
 		try {
 			int slotComponent = mapSlotToSlotIndex(slot);
 			if (isOpen()) {
-				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
-						.getDynamicComponent(WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty")) {
-					return true;
-				} else {
-					return false;
-				}
+				return methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
+						.getDynamicComponent(WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty");
 			} else {
 				return false;
 			}
@@ -166,7 +162,8 @@ public class GrandExchange extends MethodProvider {
 		if (!checkSlotIsEmpty(slot) && !checkSlotLocked(slot)) {
 			if (slot != 0) {
 				int slotComponent = mapSlotToSlotIndex(slot);
-				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent).containsAction(
+				RSWidget cmp = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
+				if (cmp.getActions() != null && cmp.containsAction(
 						"Abort Offer")) {
 					return false;
 				} else {
@@ -484,7 +481,7 @@ public class GrandExchange extends MethodProvider {
 					methods.keyboard.sendText(name, true);
 				}
 				sleep(random(80,600));
-				createOffer(quantity, priceChange);
+				return createOffer(quantity, priceChange);
 			}
 		}
 		return false;
@@ -607,13 +604,13 @@ public class GrandExchange extends MethodProvider {
 				sleep(random(20,300));
 				items.doAction("Offer");
 				sleep(random(200, 400));
-				createOffer(quantity, priceChange);
+				return createOffer(quantity, priceChange);
 			}
 		}
 		return false;
 	}
 
-	private int mapSlotToSlotIndex(int slot) {
+	public int mapSlotToSlotIndex(int slot) {
 		return switch (slot) {
 			case 0 -> WidgetIndices.GrandExchange.FIRST_SLOT_DYNAMIC_CONTAINER;
 			case 1 -> WidgetIndices.GrandExchange.SECOND_SLOT_DYNAMIC_CONTAINER;

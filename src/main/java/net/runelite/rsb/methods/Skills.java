@@ -91,6 +91,9 @@ public class Skills extends MethodProvider {
 	public int getRealLevel(final int index) {
 		return Skills.getLevelAt(getCurrentExp(index));
 	}
+	public int getRealLevel(final Skill skill) {
+		return Skills.getLevelAt(getCurrentExp(skill.ordinal()));
+	}
 
 	/**
 	 * Gets the percentage to the next level in a given skill.

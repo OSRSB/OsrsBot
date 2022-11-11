@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.CollisionData;
 import net.runelite.api.Point;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.VarpIndices;
 import net.runelite.rsb.internal.globval.VarpValues;
@@ -266,9 +267,10 @@ public class Walking extends MethodProvider {
 	 * @return The current destination tile, or null.
 	 */
 	public RSTile getDestination() {
+		LocalPoint a = methods.client.getLocalDestinationLocation();
 
-		return (methods.client.getLocalDestinationLocation() != null) ? new RSTile(methods.client.getLocalDestinationLocation().getX(),
-				methods.client.getLocalDestinationLocation().getY(), methods.client.getPlane()) : null;
+		return (a != null) ? new RSTile(a.getX(),
+				a.getY(), methods.client.getPlane()) : null;
 	}
 
 	/**

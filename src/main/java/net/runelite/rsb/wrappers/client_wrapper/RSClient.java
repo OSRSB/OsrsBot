@@ -141,6 +141,11 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public void setHintArrow(LocalPoint point) {
+        super.setHintArrow(point);
+    }
+
+    @Override
     @Deprecated
     public Widget getIf1DraggedWidget() {
         return convertResult(super.getIf1DraggedWidget());

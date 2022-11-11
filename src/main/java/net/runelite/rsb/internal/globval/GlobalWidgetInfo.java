@@ -162,7 +162,8 @@ public enum GlobalWidgetInfo {
      * [GRAND EXCHANGE]
      */
     GRAND_EXCHANGE_SEARCH_INPUT(CHATBOX_FULL_INPUT),
-    GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
+    //GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
+    GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, 25),
     GRAND_EXCHANGE_INTERFACE_LAYOUT(WidgetIndices.GrandExchange.GROUP_INDEX,WidgetIndices.GrandExchange.DYNAMIC_CONTAINER ),
     GRAND_EXCHANGE_TITLE(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER),
     GRAND_EXCHANGE_COLLECTION_AREA(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.OFFER_STATUS_COLLECTION_AREA_DYNAMIC_CONTAINER),
@@ -187,7 +188,7 @@ public enum GlobalWidgetInfo {
     MINIMAP_QUICK_PRAYER_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_CONTAINER),
     MINIMAP_QUICK_PRAYER_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_LABEL),
     MINIMAP_QUICK_PRAYER_ORB_SPRITE(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.QUICK_PRAYER_ORB_SPRITE),
-    MINIMAP_RUN_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.RUN_ORB_CONTAINER),
+    MINIMAP_RUN_ORB(WidgetInfo.MINIMAP_TOGGLE_RUN_ORB.getGroupId(), WidgetInfo.MINIMAP_TOGGLE_RUN_ORB.getChildId()),
     MINIMAP_RUN_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.RUN_ORB_LABEL),
     MINIMAP_SPEC_ORB(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.SPEC_ORB_CONTAINER),
     MINIMAP_SPEC_ORB_TEXT(WidgetIndices.Minimap.GROUP_INDEX, WidgetIndices.Minimap.SPEC_ORB_LABEL),

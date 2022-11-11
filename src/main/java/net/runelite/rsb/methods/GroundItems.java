@@ -130,17 +130,15 @@ public class GroundItems extends MethodProvider {
 	 *         the array of IDs provided; or null if no matching ground items
 	 *         were found.
 	 */
-	public RSGroundItem getNearest(final int... ids) {
-		return getNearest(new Filter<>() {
-			public boolean test(RSGroundItem item) {
-				int iid = item.getItem().getID();
-				for (int id : ids) {
-					if (id == iid) {
-						return true;
-					}
+	public RSGroundItem getNearest(final Integer... ids) {
+		return getNearest(item -> {
+			int iid = item.getItem().getID();
+			for (int id : ids) {
+				if (id == iid) {
+					return true;
 				}
-				return false;
 			}
+			return false;
 		});
 	}
 

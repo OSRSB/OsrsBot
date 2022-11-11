@@ -17,9 +17,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Supplier;
 
+import com.google.inject.util.Providers;
 import net.runelite.api.Client;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.client.RuntimeConfig;
+import net.runelite.client.TelemetryClient;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
@@ -50,6 +52,7 @@ public class BotModule extends AbstractModule {
     private final boolean safeMode;
     private final File sessionfile;
     private final File config;
+    private boolean disableTelemetry = false;
 
 
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
@@ -190,5 +193,15 @@ public class BotModule extends AbstractModule {
     {
         final String prop = System.getProperty("runelite.ws.url");
         return HttpUrl.get(Strings.isNullOrEmpty(prop) ? s : prop);
+    }
+
+    @Provides
+    @javax.inject.Singleton
+    TelemetryClient provideTelemetry(
+            OkHttpClient okHttpClient,
+            Gson gson,
+            @javax.inject.Named("runelite.api.base") HttpUrl apiBase)
+    {
+        return disableTelemetry ? null : new TelemetryClient(okHttpClient, gson, apiBase);
     }
 }
