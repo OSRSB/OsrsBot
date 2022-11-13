@@ -139,7 +139,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 					}
 				return new RSWallObjectModel(methods, null, obj);
 			} else if (obj instanceof GroundObject) {
-				model = toModel(((DecorativeObject) obj).getRenderable());
+				model = toModel(((GroundObject) obj).getRenderable());
 				if (model != null && model.getVerticesX() != null)
 					return new RSGroundObjectModel(methods, model, new RSTile(obj.getWorldLocation()).getTile(methods));
 			} else if (obj instanceof DecorativeObject) {
