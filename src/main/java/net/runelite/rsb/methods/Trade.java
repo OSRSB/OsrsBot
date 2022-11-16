@@ -216,7 +216,7 @@ public class Trade extends MethodProvider {
 	 *  ElevenGolden has 10 free inventory slots.
 	 * @return The number of free slots.
 	 */
-	private int getFreeSlots() {
+	public int getFreeSlots() {
 		if (inTradeMain()) {
 			String text = methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_PARTNER_FREE_SLOTS).getText();
 			//
