@@ -190,7 +190,7 @@ public class Bank extends MethodProvider {
 	 * @param items The items not to deposit.
 	 * @return true on success.
 	 */
-	public boolean depositAllExcept(int... items) {
+	public boolean depositAllExcept(final int... items) {
 		if (isOpen() || isDepositOpen()) {
 			boolean deposit = true;
 			int invCount = isOpen() ? methods.inventory.getCount(true) : getBoxCount();
@@ -240,7 +240,7 @@ public class Bank extends MethodProvider {
 	 * @param items The array of items.
 	 * @return The sum of the stacks of the items.
 	 */
-	public int getCount(final Integer... items) {
+	public int getCount(final int... items) {
 		int itemCount = 0;
 		final RSItem[] inventoryArray = getItems();
 		for (RSItem item : inventoryArray) {
@@ -334,7 +334,7 @@ public class Bank extends MethodProvider {
 	 * @param id IDs of the item to get.
 	 * @return The component of the item; otherwise null.
 	 */
-	public RSItem getItem(final Integer... id) {
+	public RSItem getItem(final int... id) {
 		final RSItem[] items = getItems();
 		if (items != null) {
 			for (final RSItem item : items) {
@@ -738,7 +738,7 @@ public class Bank extends MethodProvider {
 	 * @param ids the item IDs to include
 	 * @return The count.
 	 */
-	public int getBoxCount(int... ids) {
+	public int getBoxCount(final int... ids) {
 		if (!isDepositOpen()) {
 			return -1;
 		}

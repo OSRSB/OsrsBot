@@ -130,7 +130,7 @@ public class GroundItems extends MethodProvider {
 	 *         the array of IDs provided; or null if no matching ground items
 	 *         were found.
 	 */
-	public RSGroundItem getNearest(final Integer... ids) {
+	public RSGroundItem getNearest(final int... ids) {
 		return getNearest(item -> {
 			int iid = item.getItem().getID();
 			for (int id : ids) {

@@ -134,7 +134,7 @@ public class Equipment extends MethodProvider {
 	 *         <code>false</code>.
 	 * @see #getItems()
 	 */
-	public boolean containsAll(int... items) {
+	public boolean containsAll(final int... items) {
 		RSItem[] equips = getItems();
 		int count = 0;
 		for (int item : items) {
@@ -155,7 +155,7 @@ public class Equipment extends MethodProvider {
 	 * @return <code>true</code> if the player has one (or more) of the given items
 	 *         equipped; otherwise <code>false</code>.
 	 */
-	public boolean containsOneOf(int... items) {
+	public boolean containsOneOf(final int... items) {
 		for (RSItem item : getItems()) {
 			for (int id : items) {
 				if (item.getID() == id) {
