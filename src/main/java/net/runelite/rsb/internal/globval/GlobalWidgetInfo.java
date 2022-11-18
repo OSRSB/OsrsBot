@@ -121,17 +121,17 @@ public enum GlobalWidgetInfo {
      * [EQUIPMENT] Widget Info
      */
     EQUIPMENT_ITEMS_CONTAINER(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.PARENT_CONTAINER),
-    EQUIPMENT_HEAD(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER),
-    EQUIPMENT_BACK(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BACK_DYNAMIC_CONTAINER),
-    EQUIPMENT_NECK(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.NECK_DYNAMIC_CONTAINER),
+    EQUIPMENT_HELMET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER),
+    EQUIPMENT_CAPE(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.CAPE_DYNAMIC_CONTAINER),
+    EQUIPMENT_AMULET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.AMULET_DYNAMIC_CONTAINER),
     EQUIPMENT_WEAPON(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.WEAPON_DYNAMIC_CONTAINER),
-    EQUIPMENT_BODY(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.CHEST_DYNAMIC_CONTAINER),
+    EQUIPMENT_BODY(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BODY_DYNAMIC_CONTAINER),
     EQUIPMENT_SHIELD(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.SHIELD_DYNAMIC_CONTAINER),
     EQUIPMENT_LEGS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.LEGS_DYNAMIC_CONTAINER),
-    EQUIPMENT_HANDS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HANDS_DYNAMIC_CONTAINER),
-    EQUIPMENT_FEET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.FEET_DYNAMIC_CONTAINER),
+    EQUIPMENT_GLOVES(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.GLOVES_DYNAMIC_CONTAINER),
+    EQUIPMENT_BOOTS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BOOTS_DYNAMIC_CONTAINER),
     EQUIPMENT_RING(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.RING_DYNAMIC_CONTAINER),
-    EQUIPMENT_AMMO(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.AMMUNITION_DYNAMIC_CONTAINER),
+    EQUIPMENT_AMMO(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.AMMO_DYNAMIC_CONTAINER),
     // [EQUIPMENT]
 
     /**

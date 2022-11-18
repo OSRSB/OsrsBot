@@ -47,7 +47,7 @@ public class Equipment extends MethodProvider {
 		getInterface(true);
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER).getDynamicComponent(1);
+			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
 			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
@@ -63,7 +63,7 @@ public class Equipment extends MethodProvider {
 		RSWidget[] equipment = getInterface(false).getComponents();
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER].getDynamicComponent(1);
+			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER].getDynamicComponent(1);
 			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
