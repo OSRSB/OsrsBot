@@ -177,8 +177,8 @@ public class WidgetIndices {
         public static final int WORN_EQUIPMENT_DEFENCE_MAGIC_BONUS_LABEL = 99;
         public static final int WORN_EQUIPMENT_DEFENCE_RANGE_BONUS_LABEL = 100;
         public static final int WORN_EQUIPMENT_OTHER_BONUSES_TITLE_LABEL = 101;
-        public static final int WORN_EQUIPMENT_MELEE_STRENGHT_BONUS_LABEL = 102;
-        public static final int WORN_EQUIPMENT_RANGED_STRENGHT_BONUS_LABEL = 103;
+        public static final int WORN_EQUIPMENT_MELEE_STRENGTH_BONUS_LABEL = 102;
+        public static final int WORN_EQUIPMENT_RANGED_STRENGTH_BONUS_LABEL = 103;
         public static final int WORN_EQUIPMENT_MAGIC_DAMAGE_BONUS_LABEL = 104;
         public static final int WORN_EQUIPMENT_PRAYER_BONUS_LABEL = 105;
         public static final int WORN_EQUIPMENT_TARGET_SPECIFIC_TITLE_LABEL = 106;
