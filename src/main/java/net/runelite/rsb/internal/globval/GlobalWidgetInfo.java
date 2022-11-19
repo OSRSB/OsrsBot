@@ -53,6 +53,7 @@ public enum GlobalWidgetInfo {
     CONTACT_NPC_BARBARIAN_GUARD(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.BARBARIAN_GUARD_CONTAINER),
     CONTACT_NPC_RANDOM(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.RANDOM_CONTAINER),
     CONTACT_NPC_AMY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.AMY_CONTAINER),
+    CONTACT_NPC_SCROLLBAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SCROLLBAR_DYNAMIC_CONTAINER),
 
     /**
      * [CHAT] Widget Info
