@@ -655,6 +655,7 @@ public class WidgetIndices {
      */
     public static class ResizableClassicViewport {
         public static final int GROUP_INDEX = 161;
+        public static final int DIALOG_WINDOW_CONTAINER = 16;
         public static final int MINIMAP_CONTAINER = 21;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_ONE_CONTAINER = 22;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_TWO_CONTAINER = 23;
@@ -789,7 +790,7 @@ public class WidgetIndices {
      */
     public static class ResizableModernViewport {
         public static final int GROUP_INDEX = 164;
-        // 0 - 13 gap
+        // 0 - 14 gap
         public static final int ENTIRE_VIEWPORT_CONTAINER = 14;
         public static final int INNER_VIEWPORT_PARENT_CONTAINER = 15;
         public static final int DIALOG_WINDOW_CONTAINER = 16;
@@ -1930,6 +1931,7 @@ public class WidgetIndices {
         public static final int MINIMAP_AREA_SPRITE = 22;
         public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 23;
         public static final int MINIMAP_ORBS_CONTAINER = 24;
+        public static final int DIALOG_WINDOW_CONTAINER = 40;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;
         public static final int TAB_CHAT_CHANNEL_SPRITE = 46;

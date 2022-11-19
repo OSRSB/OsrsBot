@@ -10,6 +10,11 @@ import net.runelite.api.widgets.WidgetInfo;
  */
 public enum GlobalWidgetInfo {
     /**
+     * [CONTACT NPC] Widget Info
+     */
+    DARK_MAGE(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DARK_MAGE_ABYSS_CONTAINER),
+
+    /**
      * [DIALOG DESTROY ITEM] Widget Info
      */
     DIALOG_DESTROY_ITEM(WidgetIndices.DialogDestroyItem.GROUP_INDEX, WidgetIndices.DialogDestroyItem.PARENT_DYNAMIC_CONTAINER),
@@ -200,6 +205,7 @@ public enum GlobalWidgetInfo {
     /**
      * [RESIZABLE CLASSIC VIEWPORT] Widget Info
      */
+    RESIZABLE_CLASSIC_DIALOG_WINDOW(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.DIALOG_WINDOW_CONTAINER),
     RESIZABLE_CLASSIC_MINIMAP(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_CONTAINER),
     RESIZABLE_CLASSIC_COMPASS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE),
     RESIZABLE_CLASSIC_CHAT_CHANNEL(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
@@ -221,6 +227,7 @@ public enum GlobalWidgetInfo {
     /**
      * [RESIZABLE MODERN VIEWPORT] Widget Info
      */
+    RESIZABLE_MODERN_DIALOG_WINDOW(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.DIALOG_WINDOW_CONTAINER),
     RESIZABLE_MODERN_MINIMAP(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_CONTAINER),
     RESIZABLE_MODERN_COMPASS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE),
     RESIZABLE_MODERN_CHAT_CHANNEL(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_CHAT_CHANNEL_SPRITE),
@@ -242,6 +249,7 @@ public enum GlobalWidgetInfo {
     /**
      * [FIXED CLASSIC VIEWPORT] Widget Info
      */
+    FIXED_CLASSIC_DIALOG_WINDOW(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.DIALOG_WINDOW_CONTAINER),
     FIXED_CLASSIC_MINIMAP(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_CONTAINER),
     FIXED_CLASSIC_COMPASS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_COMPASS_SPRITE),
     FIXED_CLASSIC_CHAT_CHANNEL(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
