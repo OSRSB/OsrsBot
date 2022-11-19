@@ -10,11 +10,6 @@ import net.runelite.api.widgets.WidgetInfo;
  */
 public enum GlobalWidgetInfo {
     /**
-     * [CONTACT NPC] Widget Info
-     */
-    DARK_MAGE(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DARK_MAGE_ABYSS_CONTAINER),
-
-    /**
      * [DIALOG DESTROY ITEM] Widget Info
      */
     DIALOG_DESTROY_ITEM(WidgetIndices.DialogDestroyItem.GROUP_INDEX, WidgetIndices.DialogDestroyItem.PARENT_DYNAMIC_CONTAINER),
@@ -32,6 +27,32 @@ public enum GlobalWidgetInfo {
      */
     QUICK_PRAYER_PRAYERS(WidgetIndices.QuickPrayers.GROUP_INDEX, WidgetIndices.QuickPrayers.PRAYERS_DYNAMIC_CONTAINER),
     // [QUICK PRAYER]
+
+    /**
+     * [CONTACT NPC] Widget Info
+     */
+    CONTACT_NPC_HONEST_JIMMY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.HONEST_JIMMY_CONTAINER),
+    CONTACT_NPC_BERT_THE_SANDMAN(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.BERT_THE_SANDMAN_CONTAINER),
+    CONTACT_NPC_ADVISOR_GHRIM(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.ADVISOR_GHRIM_CONTAINER),
+    CONTACT_NPC_DARK_MAGE_ABYSS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DARK_MAGE_ABYSS_CONTAINER),
+    CONTACT_NPC_LANTHUS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.LANTHUS_CONTAINER),
+    CONTACT_NPC_SPRIA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SPRIA_CONTAINER),
+    CONTACT_NPC_TURAEL(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.TURAEL_CONTAINER),
+    CONTACT_NPC_MAZCHNA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.MAZCHNA_CONTAINER),
+    CONTACT_NPC_VANNAKA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.VANNAKA_CONTAINER),
+    CONTACT_NPC_CHAELDAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CHAELDAR_CONTAINER),
+    CONTACT_NPC_NIEVE(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.NIEVE_CONTAINER),
+    CONTACT_NPC_DURADEL(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DURADEL_CONTAINER),
+    CONTACT_NPC_KONAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.KONAR_CONTAINER),
+    CONTACT_NPC_KRYSTILIA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.KRYSTILIA_CONTAINER),
+    CONTACT_NPC_MURPHY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.MURPHY_CONTAINER),
+    CONTACT_NPC_CYRISUS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CYRISUS_CONTAINER),
+    CONTACT_NPC_SMOGGY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SMOGGY_CONTAINER),
+    CONTACT_NPC_CAPTAIN_GINEA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CAPTAIN_GINEA_CONTAINER),
+    CONTACT_NPC_WATSON(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.WATSON_CONTAINER),
+    CONTACT_NPC_BARBARIAN_GUARD(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.BARBARIAN_GUARD_CONTAINER),
+    CONTACT_NPC_RANDOM(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.RANDOM_CONTAINER),
+    CONTACT_NPC_AMY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.AMY_CONTAINER),
 
     /**
      * [CHAT] Widget Info
