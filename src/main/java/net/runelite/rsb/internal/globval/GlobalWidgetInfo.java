@@ -73,6 +73,11 @@ public enum GlobalWidgetInfo {
     DIALOG_DYNAMIC_CONTAINER(WidgetIndices.DialogOptions.GROUP_INDEX, WidgetIndices.DialogOptions.DYNAMIC_CONTAINER),
 
     /**
+     * [DIALOG PLAYER]
+     */
+    DIALOG_PLAYER_CONTINUE(WidgetIndices.DialogPlayer.GROUP_INDEX, WidgetIndices.DialogPlayer.OPTION_CONTINUE_LABEL),
+
+    /**
      * [LOGOUT] Widget Info
      */
     LOGOUT_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_LOGOUT_CONTAINER),
