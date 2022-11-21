@@ -28,7 +28,25 @@ public class NPCChat extends Interfaces {
         }
     }
 
+    public boolean containsOption(String option){
+        try {
+            return Arrays.stream(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents()).anyMatch(o->o.getText().contains(option));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean selectOption(String option, boolean wait) {
+
+        final RSWidget iface = getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER);
+        if(iface.getComponents()!=null){
+            for (RSWidget component : iface.getComponents()) {
+                if(component.getText().contains(option)){
+                    return component.doClick();
+                }
+            }
+        }
+
         return false;
     }
 }
