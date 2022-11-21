@@ -5,7 +5,8 @@ import net.runelite.rsb.methods.Interfaces;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.wrappers.RSWidget;
 
-import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class NPCChat extends Interfaces {
     public NPCChat(MethodContext ctx) {
@@ -20,33 +21,53 @@ public class NPCChat extends Interfaces {
         return "";
     }
 
+    /**
+     * Attempts to find all menu options from the current npc chat dialog
+     * @return array of menu options, null otherwise
+     */
     public String[] getOptions() {
         try {
-            return Arrays.stream(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents()).map(RSWidget::getText).toArray(String[]::new);
-        } catch (Exception e) {
+            return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                          .map(RSWidget::getText)
+                          .filter(Predicate.not(String::isEmpty))
+                          .toArray(String[]::new);
+        } catch (Exception ignored) {
             return null;
         }
     }
 
+    /**
+     * Determines a {@code string} is found in npc chat dialog menu
+     * @param option the menu option to search for
+     * @return true if found, false otherwise
+     */
     public boolean containsOption(String option){
         try {
-            return Arrays.stream(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents()).anyMatch(o->o.getText().contains(option));
-        } catch (Exception e) {
+            return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                         .map(RSWidget::getText)
+                         .anyMatch(menuString -> menuString.contains(option));
+        } catch (Exception ignored) {
             return false;
         }
     }
 
+    /**
+     * Clicks npc chat dialog menu option (if found)
+     * @param option the menu option to click
+     * @param wait not implemented. yet.
+     * @return true if successful, false otherwise
+     */
     public boolean selectOption(String option, boolean wait) {
 
-        final RSWidget iface = getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER);
-        if(iface.getComponents()!=null){
-            for (RSWidget component : iface.getComponents()) {
-                if(component.getText().contains(option)){
-                    return component.doClick();
-                }
-            }
+        try{
+            Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                  .filter(widget -> widget.getText().contains(option))
+                  .findFirst()
+                  .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
+            return true;
         }
-
-        return false;
+        catch(Exception ignored){
+            return false;
+        }
     }
 }
