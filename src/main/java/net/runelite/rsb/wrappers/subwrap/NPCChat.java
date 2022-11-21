@@ -23,14 +23,15 @@ public class NPCChat extends Interfaces {
 
     /**
      * Attempts to find all menu options from the current npc chat dialog
+     *
      * @return array of menu options, null otherwise
      */
     public String[] getOptions() {
         try {
             return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
-                          .map(RSWidget::getText)
-                          .filter(Predicate.not(String::isEmpty))
-                          .toArray(String[]::new);
+                    .map(RSWidget::getText)
+                    .filter(Predicate.not(String::isEmpty))
+                    .toArray(String[]::new);
         } catch (Exception ignored) {
             return null;
         }
@@ -38,14 +39,15 @@ public class NPCChat extends Interfaces {
 
     /**
      * Determines a {@code string} is found in npc chat dialog menu
+     *
      * @param option the menu option to search for
      * @return true if found, false otherwise
      */
-    public boolean containsOption(String option){
+    public boolean containsOption(String option) {
         try {
             return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
-                         .map(RSWidget::getText)
-                         .anyMatch(menuString -> menuString.contains(option));
+                    .map(RSWidget::getText)
+                    .anyMatch(menuString -> menuString.contains(option));
         } catch (Exception ignored) {
             return false;
         }
@@ -53,20 +55,20 @@ public class NPCChat extends Interfaces {
 
     /**
      * Clicks npc chat dialog menu option (if found)
+     *
      * @param option the menu option to click
-     * @param wait not implemented. yet.
+     * @param wait   not implemented. yet.
      * @return true if successful, false otherwise
      */
     public boolean selectOption(String option, boolean wait) {
 
-        try{
+        try {
             Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
-                  .filter(widget -> widget.getText().contains(option))
-                  .findFirst()
-                  .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
+                    .filter(widget -> widget.getText().contains(option))
+                    .findFirst()
+                    .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
             return true;
-        }
-        catch(Exception ignored){
+        } catch (Exception ignored) {
             return false;
         }
     }
