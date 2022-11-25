@@ -351,7 +351,7 @@ public class Mouse extends MethodProvider {
 		if (x != -1 || y != -1) {
 			methods.inputManager.moveMouse(speed, x, y, randX, randY);
 			if (afterOffset > 0) {
-				sleep(random(60, 300));
+				sleep(random(minReaction, maxReaction));
 				Point pos = getLocation();
 				move(pos.getX() - afterOffset, pos.getY() - afterOffset, afterOffset * 2,
 						afterOffset * 2);
@@ -486,7 +486,7 @@ public class Mouse extends MethodProvider {
 			return -1;
 		}
 		if (random(0, 2) == 0) {
-			return p.getX() - random(0, p.getX() < maxDistance ? p.getX() : maxDistance);
+			return p.getX() - random(0, Math.min(p.getX(), maxDistance));
 		} else {
 			int dist = methods.game.getWidth() - p.getX();
 			return p.getX()
@@ -506,7 +506,7 @@ public class Mouse extends MethodProvider {
 			return -1;
 		}
 		if (random(0, 2) == 0) {
-			return p.getY() - random(0, p.getY() < maxDistance ? p.getY() : maxDistance);
+			return p.getY() - random(0, Math.min(p.getY(), maxDistance));
 		} else {
 			int dist = methods.game.getHeight() - p.getY();
 			return p.getY()
