@@ -139,7 +139,6 @@ public enum GlobalWidgetInfo {
     BANK_EQUIPMENT_RING(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_RING_DYNAMIC_CONTAINER),
     BANK_EQUIPMENT_AMMO(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.WORN_EQUIPMENT_AMMO_DYNAMIC_CONTAINER),
     BANK_EQUIPMENT_BUTTON(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_WORN_EQUIPMENT_DYNAMIC_CONTAINER),
-
     // [BANK WORN ITEMS]
 
     /**
@@ -203,6 +202,11 @@ public enum GlobalWidgetInfo {
     TRADE_SECOND_SCREEN_PARTNER_OFFER_ITEM_LIST(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.MY_PARTNER_OFFER_ITEM_LIST_DYNAMIC_CONTAINER),
     TRADE_SECOND_SCREEN_PARTNER_NAME(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.NAME_OF_TRADE_PARTNER_LABEL),
     // [TRADE]
+
+    /**
+     * [PLAYER INVENTORY DURING TRADE] Widget Info
+     */
+    TRADE_SCREEN_PLAYER_INVENTORY(WidgetIndices.PlayerTradeInventory.GROUP_INDEX, WidgetIndices.PlayerTradeInventory.ITEMS_CONTAINER),
 
     /**
      * [STORE] Widget Info

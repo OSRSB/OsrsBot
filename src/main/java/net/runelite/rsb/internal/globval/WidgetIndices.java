@@ -1563,6 +1563,14 @@ public class WidgetIndices {
     }
 
     /**
+     *  Describes the player's inventory widget when the trade screen is open
+     */
+    public static class PlayerTradeInventory {
+        public static final int GROUP_INDEX = 336;
+        public static final int ITEMS_CONTAINER = 0; // contains 0 - 28 (yes: 0 through 28)
+    }
+
+    /**
      * Describes a concrete poll details widget
      * Last reviewed: 9/4/2022 11:17 pm UTC+1
      */
