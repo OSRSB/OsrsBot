@@ -1310,15 +1310,15 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         return wrappedClient.getIf1DraggedItemIndex();
     }
 
-    @Override
-    public boolean getSpellSelected() {
-        return wrappedClient.getSpellSelected();
-    }
-
-    @Override
-    public void setSpellSelected(boolean selected) {
-        wrappedClient.setSpellSelected(selected);
-    }
+//    @Override
+//    public boolean getSpellSelected() {
+//        return wrappedClient.getSpellSelected();
+//    }
+//
+//    @Override
+//    public void setSpellSelected(boolean selected) {
+//        wrappedClient.setSpellSelected(selected);
+//    }
 
     @Override
     public int getSelectedItem() {

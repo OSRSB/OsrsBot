@@ -209,6 +209,9 @@ public class Hooks implements Callbacks
     }
 
     @Override
+    public void tickEnd() {}
+
+    @Override
     public void frame()
     {
         eventBus.post(BEFORE_RENDER);
@@ -312,7 +315,6 @@ public class Hooks implements Callbacks
     {
         keyManager.processKeyTyped(keyEvent);
     }
-
 
     @Override
     public void draw(MainBufferProvider mainBufferProvider, Graphics graphics, int x, int y)

@@ -152,10 +152,16 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public boolean isWidgetSelected() {return false;}
+
+    @Override
     @Nullable
     public Widget getSelectedWidget() {
         return convertResult(super.getSelectedWidget());
     }
+
+    @Override
+    public void setWidgetSelected(boolean selected) {}
 
     @Override
     public void setIdleTimeout(int ticks) {
@@ -165,6 +171,16 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public int getIdleTimeout() {
         return convertResult(super.getIdleTimeout());
+    }
+
+    @Override
+    public void setMinimapTileDrawer(TileFunction drawTile) {
+
+    }
+
+    @Override
+    public Rasterizer getRasterizer() {
+        return null;
     }
 
     @Nullable
