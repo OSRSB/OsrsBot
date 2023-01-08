@@ -414,7 +414,7 @@ public class RSModel extends MethodProvider {
 		{
 			// dynamic models don't get stored when they render where this normally happens
 			model.calculateBoundsCylinder();
-			model.calculateExtreme(0);
+			model.getAABB(0);
 			ex = ab.getExtremeX();
 		}
 
