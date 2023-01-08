@@ -1274,6 +1274,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public Rasterizer getRasterizer() {
+        return wrappedClient.getRasterizer();
+    }
+
+    @Override
     public int getRasterizer3D_clipMidX2() {
         return wrappedClient.getRasterizer3D_clipMidX2();
     }
@@ -1514,6 +1519,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void setMinimapZoom(double zoom) {
         wrappedClient.setMinimapZoom(zoom);
+    }
+
+    public void setMinimapTileDrawer(TileFunction drawTile){
+        wrappedClient.setMinimapTileDrawer(drawTile);
     }
 
     @Override
