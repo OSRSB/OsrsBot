@@ -21,11 +21,7 @@ import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Skill;
-import net.runelite.api.events.BeforeRender;
-import net.runelite.api.events.FakeXpDrop;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.ScriptCallbackEvent;
+import net.runelite.api.events.*;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetItem;
@@ -206,6 +202,13 @@ public class Hooks implements Callbacks
         {
             log.warn("error during main loop tasks", ex);
         }
+    }
+
+    @Override
+    public void tickEnd()
+    {
+        clientThread.invokeTickEnd();
+        eventBus.post(new PostClientTick());
     }
 
     @Override
