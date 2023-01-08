@@ -1,6 +1,7 @@
 package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.AABB;
 import net.runelite.api.Model;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
@@ -407,21 +408,22 @@ public class RSModel extends MethodProvider {
 	}
 
 	public Polygon getConvexHull() {
-		int ex = model.getExtremeX();
+		AABB ab = model.getAABB(0);
+		int ex = ab.getExtremeX();
 		if (ex == -1)
 		{
 			// dynamic models don't get stored when they render where this normally happens
 			model.calculateBoundsCylinder();
 			model.calculateExtreme(0);
-			ex = model.getExtremeX();
+			ex = ab.getExtremeX();
 		}
 
-		int x1 = model.getCenterX();
-		int y1 = model.getCenterZ();
-		int z1 = model.getCenterY();
+		int x1 = ab.getCenterX();
+		int y1 = ab.getCenterZ();
+		int z1 = ab.getCenterY();
 
-		int ey = model.getExtremeZ();
-		int ez = model.getExtremeY();
+		int ey = ab.getExtremeZ();
+		int ez = ab.getExtremeY();
 
 		int x2 = x1 + ex;
 		int y2 = y1 + ey;
