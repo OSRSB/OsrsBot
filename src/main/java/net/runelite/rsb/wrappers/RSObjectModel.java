@@ -28,6 +28,6 @@ class RSObjectModel extends RSModel {
 
     @Override
     public int getOrientation() {
-        return object.getOrientation().getAngle();
+        return object.getOrientation();
     }
 }
