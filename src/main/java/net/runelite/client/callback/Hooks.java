@@ -24,7 +24,10 @@ import net.runelite.api.Skill;
 import net.runelite.api.events.*;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
+import net.runelite.api.worldmap.WorldMap;
+import net.runelite.api.worldmap.WorldMapRenderer;
 import net.runelite.client.Notifier;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
@@ -41,7 +44,6 @@ import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.client.modified.RuneLite;
-import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 
 /**
  * This class contains field required for mixins and runelite hooks to work.
@@ -227,26 +229,25 @@ public class Hooks implements Callbacks
      */
     private void checkWorldMap()
     {
-        Widget widget = client.getWidget(GlobalWidgetInfo.WORLD_MAP_VIEW.getPackedId());
+        Widget worldMapWidget = client.getWidget(WidgetInfo.WORLD_MAP_VIEW);
 
-        if (widget != null)
+        if (worldMapWidget != null)
         {
             return;
         }
 
-        RenderOverview renderOverview = client.getRenderOverview();
-
-        if (renderOverview == null)
+        WorldMap worldMap = client.getWorldMap();
+        if (worldMap == null)
         {
             return;
         }
 
-        WorldMapManager manager = renderOverview.getWorldMapManager();
+        WorldMapRenderer manager = worldMap.getWorldMapRenderer();
 
         if (manager != null && manager.isLoaded())
         {
             log.debug("World map was closed, reinitializing");
-            renderOverview.initializeWorldMap(renderOverview.getWorldMapData());
+            worldMap.initializeWorldMap(worldMap.getWorldMapData());
         }
     }
 
@@ -456,11 +457,8 @@ public class Hooks implements Callbacks
     @Subscribe
     public void onGameStateChanged(GameStateChanged gameStateChanged)
     {
-        switch (gameStateChanged.getGameState())
-        {
-            case LOGGING_IN:
-            case HOPPING:
-                ignoreNextNpcUpdate = true;
+        switch (gameStateChanged.getGameState()) {
+            case LOGGING_IN, HOPPING -> ignoreNextNpcUpdate = true;
         }
     }
 

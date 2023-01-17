@@ -11,6 +11,7 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.worldmap.MapElementConfig;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -473,6 +474,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getMapAngle() {
         return wrappedClient.getMapAngle();
     }
@@ -523,6 +525,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getVar(VarPlayer varPlayer) {
         return wrappedClient.getVar(varPlayer);
     }
@@ -674,9 +677,8 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         return wrappedClient.getDBTableField(rowID, column, tupleIndex, fieldIndex);
     }
 
-    @Override
-    public MapElementConfig[] getMapElementConfigs() {
-        return wrappedClient.getMapElementConfigs();
+    public MapElementConfig getMapElementConfig(int id) {
+        return wrappedClient.getMapElementConfig(id);
     }
 
     @Override
@@ -942,11 +944,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public RenderOverview getRenderOverview() {
-        return wrappedClient.getRenderOverview();
-    }
-
-    @Override
     public boolean isStretchedEnabled() {
         return wrappedClient.isStretchedEnabled();
     }
@@ -1107,6 +1104,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getItemPressedDuration() {
         return wrappedClient.getItemPressedDuration();
     }
@@ -1326,11 +1324,13 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getSelectedItem() {
         return wrappedClient.getSelectedItem();
     }
 
     @Override
+    @Deprecated
     public int getSelectedItemIndex() {
         return wrappedClient.getSelectedItemIndex();
     }
