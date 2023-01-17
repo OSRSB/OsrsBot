@@ -12,6 +12,7 @@ import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.worldmap.MapElementConfig;
+import net.runelite.api.worldmap.WorldMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -184,9 +185,14 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public int getCameraPitchTarget() {return wrappedClient.getCameraPitchTarget(); }
+    @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
     }
+
+    @Override
+    public int getCameraYawTarget() {return wrappedClient.getCameraYawTarget(); }
 
     @Override
     public int getWorld() {
@@ -888,6 +894,9 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void setCameraPitchTarget(int cameraPitchTarget) { wrappedClient.setCameraPitchTarget(cameraPitchTarget); }
+
+    @Override
     public String[] getStringStack() {
         return wrappedClient.getStringStack();
     }
@@ -1521,6 +1530,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         wrappedClient.setMinimapZoom(zoom);
     }
 
+    @Override
     public void setMinimapTileDrawer(TileFunction drawTile){
         wrappedClient.setMinimapTileDrawer(drawTile);
     }
@@ -1528,5 +1538,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void setIdleTimeout(int ticks) {
         wrappedClient.setIdleTimeout(ticks);
+    }
+
+    @Override
+    public WorldMap getWorldMap() {
+        return wrappedClient.getWorldMap();
     }
 }
