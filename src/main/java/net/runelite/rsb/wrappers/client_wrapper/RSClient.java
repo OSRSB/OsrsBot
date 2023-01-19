@@ -148,26 +148,8 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
-    public int getCameraYawTarget() {
-        return 0;
-    }
-
-    @Override
-    public int getCameraPitchTarget() {
-        return 0;
-    }
-
-    @Override
-    public void setCameraPitchTarget(int cameraPitchTarget) {}
-
-    @Override
     @Deprecated
     public RenderOverview getRenderOverview() {
-        return null;
-    }
-
-    @Override
-    public WorldMap getWorldMap() {
         return null;
     }
 

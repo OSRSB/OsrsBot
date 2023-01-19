@@ -192,7 +192,9 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getCameraYawTarget() {return wrappedClient.getCameraYawTarget(); }
+    public int getCameraYawTarget() {
+        return wrappedClient.getCameraYawTarget();
+    }
 
     @Override
     public int getWorld() {
@@ -894,7 +896,9 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setCameraPitchTarget(int cameraPitchTarget) { wrappedClient.setCameraPitchTarget(cameraPitchTarget); }
+    public void setCameraPitchTarget(int cameraPitchTarget) {
+        wrappedClient.setCameraPitchTarget(cameraPitchTarget);
+    }
 
     @Override
     public String[] getStringStack() {
