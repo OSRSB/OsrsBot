@@ -5,6 +5,8 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.worldmap.MapElementConfig;
+import net.runelite.api.worldmap.WorldMap;
 import net.runelite.client.callback.ClientThread;
 
 import javax.annotation.Nullable;
@@ -131,6 +133,11 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public MapElementConfig getMapElementConfig(int id) {
+        return convertResult(super.getMapElementConfig(id));
+    }
+
+    @Override
     public Widget getScriptActiveWidget() {
         return convertResult(super.getScriptActiveWidget());
     }
@@ -138,6 +145,12 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public Widget getScriptDotWidget() {
         return convertResult(super.getScriptDotWidget());
+    }
+
+    @Override
+    @Deprecated
+    public RenderOverview getRenderOverview() {
+        return null;
     }
 
     @Override

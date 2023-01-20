@@ -408,21 +408,22 @@ public class RSModel extends MethodProvider {
 	}
 
 	public Polygon getConvexHull() {
-		AABB aabb = model.getAABB(0);
-		int ex = aabb.getExtremeX();
+		AABB ab = model.getAABB(0);
+		int ex = ab.getExtremeX();
 		if (ex == -1)
 		{
 			// dynamic models don't get stored when they render where this normally happens
 			model.calculateBoundsCylinder();
-			ex = aabb.getExtremeX();
+			model.getAABB(0);
+			ex = ab.getExtremeX();
 		}
 
-		int x1 = aabb.getCenterX();
-		int y1 = aabb.getCenterZ();
-		int z1 = aabb.getCenterY();
+		int x1 = ab.getCenterX();
+		int y1 = ab.getCenterZ();
+		int z1 = ab.getCenterY();
 
-		int ey = aabb.getExtremeZ();
-		int ez = aabb.getExtremeY();
+		int ey = ab.getExtremeZ();
+		int ez = ab.getExtremeY();
 
 		int x2 = x1 + ex;
 		int y2 = y1 + ey;
