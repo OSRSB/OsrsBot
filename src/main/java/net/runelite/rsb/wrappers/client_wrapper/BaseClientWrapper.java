@@ -185,7 +185,9 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getCameraPitchTarget() {return wrappedClient.getCameraPitchTarget(); }
+    public int getCameraPitchTarget() {
+        return wrappedClient.getCameraPitchTarget();
+    }
     @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
