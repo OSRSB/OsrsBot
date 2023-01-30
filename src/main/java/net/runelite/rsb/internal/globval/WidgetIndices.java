@@ -151,17 +151,17 @@ public class WidgetIndices {
         public static final int WORN_EQUIPMENT_RIGHT_VERTICAL_LINE_SPRITE = 73;
         public static final int WORN_EQUIPMENT_MAIN_HORIZONTAL_LINE_SPRITE = 74;
         public static final int WORN_EQUIPMENT_TOP_HORIZONTAL_LINE_SPRITE = 75;
-        public static final int WORN_EQUIPMENT_HEAD_DYNAMIC_CONTAINER = 76;
+        public static final int WORN_EQUIPMENT_HELMET_DYNAMIC_CONTAINER = 76;
         public static final int WORN_EQUIPMENT_CAPE_DYNAMIC_CONTAINER = 77;
         public static final int WORN_EQUIPMENT_AMULET_DYNAMIC_CONTAINER = 78;
         public static final int WORN_EQUIPMENT_WEAPON_DYNAMIC_CONTAINER = 79;
-        public static final int WORN_EQUIPMENT_CHEST_DYNAMIC_CONTAINER = 80;
+        public static final int WORN_EQUIPMENT_BODY_DYNAMIC_CONTAINER = 80;
         public static final int WORN_EQUIPMENT_SHIELD_DYNAMIC_CONTAINER = 81;
         public static final int WORN_EQUIPMENT_LEGS_DYNAMIC_CONTAINER = 82;
         public static final int WORN_EQUIPMENT_GLOVES_DYNAMIC_CONTAINER = 83;
-        public static final int WORN_EQUIPMENT_SHOES_DYNAMIC_CONTAINER = 84;
+        public static final int WORN_EQUIPMENT_BOOTS_DYNAMIC_CONTAINER = 84;
         public static final int WORN_EQUIPMENT_RING_DYNAMIC_CONTAINER = 85;
-        public static final int WORN_EQUIPMENT_ARROWS_DYNAMIC_CONTAINER = 86;
+        public static final int WORN_EQUIPMENT_AMMO_DYNAMIC_CONTAINER = 86;
         public static final int WORN_EQUIPMENT_TEXT_CONTAINER = 87;
         public static final int WORN_EQUIPMENT_UNKNOWN_LABEL = 88;
         public static final int WORN_EQUIPMENT_ATTACK_BONUS_TITLE_LABEL = 89;
@@ -177,8 +177,8 @@ public class WidgetIndices {
         public static final int WORN_EQUIPMENT_DEFENCE_MAGIC_BONUS_LABEL = 99;
         public static final int WORN_EQUIPMENT_DEFENCE_RANGE_BONUS_LABEL = 100;
         public static final int WORN_EQUIPMENT_OTHER_BONUSES_TITLE_LABEL = 101;
-        public static final int WORN_EQUIPMENT_MELEE_STRENGHT_BONUS_LABEL = 102;
-        public static final int WORN_EQUIPMENT_RANGED_STRENGHT_BONUS_LABEL = 103;
+        public static final int WORN_EQUIPMENT_MELEE_STRENGTH_BONUS_LABEL = 102;
+        public static final int WORN_EQUIPMENT_RANGED_STRENGTH_BONUS_LABEL = 103;
         public static final int WORN_EQUIPMENT_MAGIC_DAMAGE_BONUS_LABEL = 104;
         public static final int WORN_EQUIPMENT_PRAYER_BONUS_LABEL = 105;
         public static final int WORN_EQUIPMENT_TARGET_SPECIFIC_TITLE_LABEL = 106;
@@ -655,6 +655,7 @@ public class WidgetIndices {
      */
     public static class ResizableClassicViewport {
         public static final int GROUP_INDEX = 161;
+        public static final int DIALOG_WINDOW_CONTAINER = 16;
         public static final int MINIMAP_CONTAINER = 21;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_ONE_CONTAINER = 22;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_TWO_CONTAINER = 23;
@@ -789,7 +790,7 @@ public class WidgetIndices {
      */
     public static class ResizableModernViewport {
         public static final int GROUP_INDEX = 164;
-        // 0 - 13 gap
+        // 0 - 14 gap
         public static final int ENTIRE_VIEWPORT_CONTAINER = 14;
         public static final int INNER_VIEWPORT_PARENT_CONTAINER = 15;
         public static final int DIALOG_WINDOW_CONTAINER = 16;
@@ -1562,6 +1563,14 @@ public class WidgetIndices {
     }
 
     /**
+     *  Describes the player's inventory widget when the trade screen is open
+     */
+    public static class PlayerTradeInventory {
+        public static final int GROUP_INDEX = 336;
+        public static final int ITEMS_CONTAINER = 0; // contains 0 - 28 (yes: 0 through 28)
+    }
+
+    /**
      * Describes a concrete poll details widget
      * Last reviewed: 9/4/2022 11:17 pm UTC+1
      */
@@ -1658,17 +1667,17 @@ public class WidgetIndices {
         public static final int MIDDLE_HORIZONTAL_STRAIGHT_LINE_SPRITE = 12;
         public static final int TOP_HORIZONTAL_STRAIGHT_LINE_SPRITE = 13;
         // 14
-        public static final int HEAD_DYNAMIC_CONTAINER = 15;  // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int BACK_DYNAMIC_CONTAINER = 16;  // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int NECK_DYNAMIC_CONTAINER = 17; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int HELMET_DYNAMIC_CONTAINER = 15;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int CAPE_DYNAMIC_CONTAINER = 16;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int AMULET_DYNAMIC_CONTAINER = 17; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int WEAPON_DYNAMIC_CONTAINER = 18; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int CHEST_DYNAMIC_CONTAINER = 19; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int BODY_DYNAMIC_CONTAINER = 19; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int SHIELD_DYNAMIC_CONTAINER = 20; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int LEGS_DYNAMIC_CONTAINER = 21; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int HANDS_DYNAMIC_CONTAINER = 22; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int FEET_DYNAMIC_CONTAINER = 23; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int GLOVES_DYNAMIC_CONTAINER = 22; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int BOOTS_DYNAMIC_CONTAINER = 23; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int RING_DYNAMIC_CONTAINER = 24; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int AMMUNITION_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int AMMO_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int UNKNOWN1_CONTAINER = 26;
         public static final int UNKNOWN2_CONTAINER = 27;
     }
@@ -1930,6 +1939,7 @@ public class WidgetIndices {
         public static final int MINIMAP_AREA_SPRITE = 22;
         public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 23;
         public static final int MINIMAP_ORBS_CONTAINER = 24;
+        public static final int DIALOG_WINDOW_CONTAINER = 40;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;
         public static final int TAB_CHAT_CHANNEL_SPRITE = 46;

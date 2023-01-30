@@ -29,7 +29,7 @@ public class SkillTracker {
 	public long start;
 	public boolean started;
 
-	public SkillTracker(BotLite bot, int... skills) {
+	public SkillTracker(BotLite bot, final int... skills) {
 		this.bot = bot;
 		context = bot.getMethodContext();
 		firstIndex = 0;

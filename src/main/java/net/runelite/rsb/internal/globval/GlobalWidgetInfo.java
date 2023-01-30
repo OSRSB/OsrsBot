@@ -29,6 +29,33 @@ public enum GlobalWidgetInfo {
     // [QUICK PRAYER]
 
     /**
+     * [CONTACT NPC] Widget Info
+     */
+    CONTACT_NPC_HONEST_JIMMY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.HONEST_JIMMY_CONTAINER),
+    CONTACT_NPC_BERT_THE_SANDMAN(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.BERT_THE_SANDMAN_CONTAINER),
+    CONTACT_NPC_ADVISOR_GHRIM(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.ADVISOR_GHRIM_CONTAINER),
+    CONTACT_NPC_DARK_MAGE_ABYSS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DARK_MAGE_ABYSS_CONTAINER),
+    CONTACT_NPC_LANTHUS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.LANTHUS_CONTAINER),
+    CONTACT_NPC_SPRIA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SPRIA_CONTAINER),
+    CONTACT_NPC_TURAEL(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.TURAEL_CONTAINER),
+    CONTACT_NPC_MAZCHNA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.MAZCHNA_CONTAINER),
+    CONTACT_NPC_VANNAKA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.VANNAKA_CONTAINER),
+    CONTACT_NPC_CHAELDAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CHAELDAR_CONTAINER),
+    CONTACT_NPC_NIEVE(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.NIEVE_CONTAINER),
+    CONTACT_NPC_DURADEL(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.DURADEL_CONTAINER),
+    CONTACT_NPC_KONAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.KONAR_CONTAINER),
+    CONTACT_NPC_KRYSTILIA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.KRYSTILIA_CONTAINER),
+    CONTACT_NPC_MURPHY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.MURPHY_CONTAINER),
+    CONTACT_NPC_CYRISUS(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CYRISUS_CONTAINER),
+    CONTACT_NPC_SMOGGY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SMOGGY_CONTAINER),
+    CONTACT_NPC_CAPTAIN_GINEA(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.CAPTAIN_GINEA_CONTAINER),
+    CONTACT_NPC_WATSON(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.WATSON_CONTAINER),
+    CONTACT_NPC_BARBARIAN_GUARD(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.BARBARIAN_GUARD_CONTAINER),
+    CONTACT_NPC_RANDOM(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.RANDOM_CONTAINER),
+    CONTACT_NPC_AMY(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.AMY_CONTAINER),
+    CONTACT_NPC_SCROLLBAR(WidgetIndices.ContactNpc.GROUP_INDEX, WidgetIndices.ContactNpc.SCROLLBAR_DYNAMIC_CONTAINER),
+
+    /**
      * [CHAT] Widget Info
      */
     CHATBOX_MESSAGES(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.MESSAGES_CONTAINER),
@@ -42,6 +69,13 @@ public enum GlobalWidgetInfo {
     DIALOG_NPC_CONTINUE(WidgetIndices.DialogNPC.GROUP_INDEX, WidgetIndices.DialogNPC.DIALOG_CONTINUE_LABEL),
     // [DIALOG NPC]
     DIALOG_OPTION(WidgetIndices.DialogOptions.GROUP_INDEX, WidgetIndices.DialogOptions.CONTAINER),
+    // CONTAINER FOR NPC DIALOG OPTIONS
+    DIALOG_DYNAMIC_CONTAINER(WidgetIndices.DialogOptions.GROUP_INDEX, WidgetIndices.DialogOptions.DYNAMIC_CONTAINER),
+
+    /**
+     * [DIALOG PLAYER]
+     */
+    DIALOG_PLAYER_CONTINUE(WidgetIndices.DialogPlayer.GROUP_INDEX, WidgetIndices.DialogPlayer.OPTION_CONTINUE_LABEL),
 
     /**
      * [LOGOUT] Widget Info
@@ -90,6 +124,24 @@ public enum GlobalWidgetInfo {
     // [BANK]
 
     /**
+     * [BANK WORN ITEMS] Widget Info
+     */
+    BANK_EQUIPMENT_ITEMS_CONTAINER(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.WORN_EQUIPMENT_CONTAINER),
+    BANK_EQUIPMENT_HELMET(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_HELMET_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_CAPE(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_CAPE_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_AMULET(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_AMULET_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_WEAPON(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_WEAPON_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_BODY(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_BODY_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_SHIELD(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_SHIELD_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_LEGS(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_LEGS_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_GLOVES(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_GLOVES_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_BOOTS(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_BOOTS_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_RING(WidgetIndices.Bank.GROUP_INDEX,  WidgetIndices.Bank.WORN_EQUIPMENT_RING_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_AMMO(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.WORN_EQUIPMENT_AMMO_DYNAMIC_CONTAINER),
+    BANK_EQUIPMENT_BUTTON(WidgetIndices.Bank.GROUP_INDEX, WidgetIndices.Bank.BUTTON_WORN_EQUIPMENT_DYNAMIC_CONTAINER),
+    // [BANK WORN ITEMS]
+
+    /**
      * [BANK INVENTORY ITEMS] Widget Info
      */
     BANK_INVENTORY_ITEMS_CONTAINER(WidgetIndices.BankInventoryItems.GROUP_INDEX, WidgetIndices.BankInventoryItems.ITEMS_DYNAMIC_CONTAINER),
@@ -121,17 +173,17 @@ public enum GlobalWidgetInfo {
      * [EQUIPMENT] Widget Info
      */
     EQUIPMENT_ITEMS_CONTAINER(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.PARENT_CONTAINER),
-    EQUIPMENT_HEAD(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER),
-    EQUIPMENT_BACK(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BACK_DYNAMIC_CONTAINER),
-    EQUIPMENT_NECK(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.NECK_DYNAMIC_CONTAINER),
+    EQUIPMENT_HELMET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER),
+    EQUIPMENT_CAPE(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.CAPE_DYNAMIC_CONTAINER),
+    EQUIPMENT_AMULET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.AMULET_DYNAMIC_CONTAINER),
     EQUIPMENT_WEAPON(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.WEAPON_DYNAMIC_CONTAINER),
-    EQUIPMENT_BODY(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.CHEST_DYNAMIC_CONTAINER),
+    EQUIPMENT_BODY(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BODY_DYNAMIC_CONTAINER),
     EQUIPMENT_SHIELD(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.SHIELD_DYNAMIC_CONTAINER),
     EQUIPMENT_LEGS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.LEGS_DYNAMIC_CONTAINER),
-    EQUIPMENT_HANDS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.HANDS_DYNAMIC_CONTAINER),
-    EQUIPMENT_FEET(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.FEET_DYNAMIC_CONTAINER),
+    EQUIPMENT_GLOVES(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.GLOVES_DYNAMIC_CONTAINER),
+    EQUIPMENT_BOOTS(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.BOOTS_DYNAMIC_CONTAINER),
     EQUIPMENT_RING(WidgetIndices.WornEquipmentTab.GROUP_INDEX,  WidgetIndices.WornEquipmentTab.RING_DYNAMIC_CONTAINER),
-    EQUIPMENT_AMMO(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.AMMUNITION_DYNAMIC_CONTAINER),
+    EQUIPMENT_AMMO(WidgetIndices.WornEquipmentTab.GROUP_INDEX, WidgetIndices.WornEquipmentTab.AMMO_DYNAMIC_CONTAINER),
     // [EQUIPMENT]
 
     /**
@@ -150,6 +202,11 @@ public enum GlobalWidgetInfo {
     TRADE_SECOND_SCREEN_PARTNER_OFFER_ITEM_LIST(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.MY_PARTNER_OFFER_ITEM_LIST_DYNAMIC_CONTAINER),
     TRADE_SECOND_SCREEN_PARTNER_NAME(WidgetIndices.TradeSecondScreen.GROUP_INDEX, WidgetIndices.TradeSecondScreen.NAME_OF_TRADE_PARTNER_LABEL),
     // [TRADE]
+
+    /**
+     * [PLAYER INVENTORY DURING TRADE] Widget Info
+     */
+    TRADE_SCREEN_PLAYER_INVENTORY(WidgetIndices.PlayerTradeInventory.GROUP_INDEX, WidgetIndices.PlayerTradeInventory.ITEMS_CONTAINER),
 
     /**
      * [STORE] Widget Info
@@ -200,6 +257,7 @@ public enum GlobalWidgetInfo {
     /**
      * [RESIZABLE CLASSIC VIEWPORT] Widget Info
      */
+    RESIZABLE_CLASSIC_DIALOG_WINDOW(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.DIALOG_WINDOW_CONTAINER),
     RESIZABLE_CLASSIC_MINIMAP(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_CONTAINER),
     RESIZABLE_CLASSIC_COMPASS(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.MINIMAP_COMPASS_SPRITE),
     RESIZABLE_CLASSIC_CHAT_CHANNEL(WidgetIndices.ResizableClassicViewport.GROUP_INDEX, WidgetIndices.ResizableClassicViewport.TAB_CHAT_CHANNEL_SPRITE),
@@ -221,6 +279,7 @@ public enum GlobalWidgetInfo {
     /**
      * [RESIZABLE MODERN VIEWPORT] Widget Info
      */
+    RESIZABLE_MODERN_DIALOG_WINDOW(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.DIALOG_WINDOW_CONTAINER),
     RESIZABLE_MODERN_MINIMAP(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_CONTAINER),
     RESIZABLE_MODERN_COMPASS(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE),
     RESIZABLE_MODERN_CHAT_CHANNEL(WidgetIndices.ResizableModernViewport.GROUP_INDEX, WidgetIndices.ResizableModernViewport.TAB_CHAT_CHANNEL_SPRITE),
@@ -242,6 +301,7 @@ public enum GlobalWidgetInfo {
     /**
      * [FIXED CLASSIC VIEWPORT] Widget Info
      */
+    FIXED_CLASSIC_DIALOG_WINDOW(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.DIALOG_WINDOW_CONTAINER),
     FIXED_CLASSIC_MINIMAP(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_CONTAINER),
     FIXED_CLASSIC_COMPASS(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.MINIMAP_COMPASS_SPRITE),
     FIXED_CLASSIC_CHAT_CHANNEL(WidgetIndices.FixedClassicViewport.GROUP_INDEX, WidgetIndices.FixedClassicViewport.TAB_CHAT_CHANNEL_SPRITE),

@@ -47,7 +47,7 @@ public class Equipment extends MethodProvider {
 		getInterface(true);
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER).getDynamicComponent(1);
+			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
 			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
@@ -63,7 +63,7 @@ public class Equipment extends MethodProvider {
 		RSWidget[] equipment = getInterface(false).getComponents();
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HEAD_DYNAMIC_CONTAINER].getDynamicComponent(1);
+			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER].getDynamicComponent(1);
 			items[i] = new RSItem(methods, slotItem);
 		}
 		return items;
@@ -134,7 +134,7 @@ public class Equipment extends MethodProvider {
 	 *         <code>false</code>.
 	 * @see #getItems()
 	 */
-	public boolean containsAll(int... items) {
+	public boolean containsAll(final int... items) {
 		RSItem[] equips = getItems();
 		int count = 0;
 		for (int item : items) {
@@ -155,7 +155,7 @@ public class Equipment extends MethodProvider {
 	 * @return <code>true</code> if the player has one (or more) of the given items
 	 *         equipped; otherwise <code>false</code>.
 	 */
-	public boolean containsOneOf(int... items) {
+	public boolean containsOneOf(final int... items) {
 		for (RSItem item : getItems()) {
 			for (int id : items) {
 				if (item.getID() == id) {

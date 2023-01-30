@@ -91,11 +91,11 @@ public class GameGUI extends MethodProvider {
 		Widget minimapOnResizableModern = methods.client.getWidget(
 				WidgetIndices.ResizableModernViewport.GROUP_INDEX,
 				WidgetIndices.ResizableModernViewport.MINIMAP_COMPASS_SPRITE);
-		if (minimapOnFixedClassic != null)
+		if (minimapOnFixedClassic != null && !minimapOnFixedClassic.isHidden())
 			return ViewportLayout.FIXED_CLASSIC;
-		else if (minimapOnResizableClassic != null)
+		else if (minimapOnResizableClassic != null && !minimapOnResizableClassic.isHidden())
 			return ViewportLayout.RESIZABLE_CLASSIC;
-		else if (minimapOnResizableModern != null)
+		else if (minimapOnResizableModern != null && !minimapOnResizableModern.isHidden())
 			return ViewportLayout.RESIZABLE_MODERN;
 		return null;
 	}

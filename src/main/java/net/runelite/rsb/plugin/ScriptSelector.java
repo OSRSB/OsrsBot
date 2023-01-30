@@ -393,7 +393,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 
 
-	private void setColumnWidths(JTable table, int... widths) {
+	private void setColumnWidths(JTable table, final int... widths) {
 		for (int i = 0; i < widths.length; ++i) {
 			table.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
 			table.getColumnModel().getColumn(i).setMinWidth(widths[i]);

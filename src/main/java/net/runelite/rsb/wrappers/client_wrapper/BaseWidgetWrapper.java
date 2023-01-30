@@ -735,7 +735,7 @@ public abstract class BaseWidgetWrapper implements Widget {
     }
 
     @Override
-    public void setVarTransmitTrigger(int... trigger) {
+    public void setVarTransmitTrigger(final int... trigger) {
         wrappedWidget.setVarTransmitTrigger(trigger);
     }
 
