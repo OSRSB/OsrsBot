@@ -5,6 +5,8 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.worldmap.MapElementConfig;
+import net.runelite.api.worldmap.WorldMap;
 import net.runelite.client.callback.ClientThread;
 
 import javax.annotation.Nullable;
@@ -131,6 +133,11 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public MapElementConfig getMapElementConfig(int id) {
+        return convertResult(super.getMapElementConfig(id));
+    }
+
+    @Override
     public Widget getScriptActiveWidget() {
         return convertResult(super.getScriptActiveWidget());
     }
@@ -138,6 +145,12 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public Widget getScriptDotWidget() {
         return convertResult(super.getScriptDotWidget());
+    }
+
+    @Override
+    @Deprecated
+    public RenderOverview getRenderOverview() {
+        return null;
     }
 
     @Override
@@ -152,10 +165,16 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public boolean isWidgetSelected() {return false;}
+
+    @Override
     @Nullable
     public Widget getSelectedWidget() {
         return convertResult(super.getSelectedWidget());
     }
+
+    @Override
+    public void setWidgetSelected(boolean selected) {}
 
     @Override
     public void setIdleTimeout(int ticks) {
@@ -165,6 +184,16 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public int getIdleTimeout() {
         return convertResult(super.getIdleTimeout());
+    }
+
+    @Override
+    public void setMinimapTileDrawer(TileFunction drawTile) {
+
+    }
+
+    @Override
+    public Rasterizer getRasterizer() {
+        return null;
     }
 
     @Nullable

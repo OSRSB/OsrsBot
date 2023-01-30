@@ -11,6 +11,8 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.worldmap.MapElementConfig;
+import net.runelite.api.worldmap.WorldMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -183,8 +185,17 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public int getCameraPitchTarget() {
+        return wrappedClient.getCameraPitchTarget();
+    }
+    @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
+    }
+
+    @Override
+    public int getCameraYawTarget() {
+        return wrappedClient.getCameraYawTarget();
     }
 
     @Override
@@ -473,6 +484,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getMapAngle() {
         return wrappedClient.getMapAngle();
     }
@@ -523,6 +535,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getVar(VarPlayer varPlayer) {
         return wrappedClient.getVar(varPlayer);
     }
@@ -674,9 +687,8 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         return wrappedClient.getDBTableField(rowID, column, tupleIndex, fieldIndex);
     }
 
-    @Override
-    public MapElementConfig[] getMapElementConfigs() {
-        return wrappedClient.getMapElementConfigs();
+    public MapElementConfig getMapElementConfig(int id) {
+        return wrappedClient.getMapElementConfig(id);
     }
 
     @Override
@@ -886,6 +898,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void setCameraPitchTarget(int cameraPitchTarget) {
+        wrappedClient.setCameraPitchTarget(cameraPitchTarget);
+    }
+
+    @Override
     public String[] getStringStack() {
         return wrappedClient.getStringStack();
     }
@@ -939,11 +956,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void setInvertPitch(boolean invertPitch) {
         wrappedClient.setInvertPitch(invertPitch);
-    }
-
-    @Override
-    public RenderOverview getRenderOverview() {
-        return wrappedClient.getRenderOverview();
     }
 
     @Override
@@ -1107,6 +1119,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getItemPressedDuration() {
         return wrappedClient.getItemPressedDuration();
     }
@@ -1274,6 +1287,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public Rasterizer getRasterizer() {
+        return wrappedClient.getRasterizer();
+    }
+
+    @Override
     public int getRasterizer3D_clipMidX2() {
         return wrappedClient.getRasterizer3D_clipMidX2();
     }
@@ -1311,21 +1329,23 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public boolean getSpellSelected() {
-        return wrappedClient.getSpellSelected();
+    public boolean isWidgetSelected() {
+        return wrappedClient.isWidgetSelected();
     }
 
     @Override
-    public void setSpellSelected(boolean selected) {
-        wrappedClient.setSpellSelected(selected);
+    public void setWidgetSelected(boolean selected) {
+        wrappedClient.setWidgetSelected(selected);
     }
 
     @Override
+    @Deprecated
     public int getSelectedItem() {
         return wrappedClient.getSelectedItem();
     }
 
     @Override
+    @Deprecated
     public int getSelectedItemIndex() {
         return wrappedClient.getSelectedItemIndex();
     }
@@ -1517,7 +1537,17 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void setMinimapTileDrawer(TileFunction drawTile){
+        wrappedClient.setMinimapTileDrawer(drawTile);
+    }
+
+    @Override
     public void setIdleTimeout(int ticks) {
         wrappedClient.setIdleTimeout(ticks);
+    }
+
+    @Override
+    public WorldMap getWorldMap() {
+        return wrappedClient.getWorldMap();
     }
 }

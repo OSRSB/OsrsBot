@@ -15,7 +15,7 @@ repositories {
     }
 }
 
-def lastSupportedVersion = "1.9.3"
+def lastSupportedVersion = "1.9.7"
 def runeLiteVersion = getRuneLiteVersion()
 def supportedCheck = false
 if (supportedCheck) {
