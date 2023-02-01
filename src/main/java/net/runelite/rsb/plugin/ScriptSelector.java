@@ -352,6 +352,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 			sh.stopScript(id);
 			//}
 		}
+		buttonStart.setEnabled(table.getSelectedRow() != -1);
 	}
 
 	/**
