@@ -169,9 +169,7 @@ public class Combat extends MethodProvider {
 		}
 		// In Clan Wars the level is 0
 		if (levelText.equals("--")) return 0;
-		return (widget.isValid() && widget.isVisible())
-				? Integer.parseInt(levelText)
-				: 0;
+		return Integer.parseInt(levelText);
 	}
 
 	/**
