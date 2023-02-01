@@ -162,8 +162,15 @@ public class Combat extends MethodProvider {
 	 */
 	public int getWildernessLevel() {
 		RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.PVP_WILDERNESS_LEVEL);
+		if (!widget.isValid() || !widget.isVisible()) return 0;
+		String levelText = widget.getText().replace("Level: ", "").trim();
+		if (levelText.contains("<")) {
+			levelText = levelText.substring(0, levelText.indexOf("<"));
+		}
+		// In Clan Wars the level is 0
+		if (levelText.equals("--")) return 0;
 		return (widget.isValid() && widget.isVisible())
-				? Integer.parseInt(widget.getText().replace("Level: ", "").trim())
+				? Integer.parseInt(levelText)
 				: 0;
 	}
 
