@@ -244,6 +244,15 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
+	 * Clicks without any delay before clicking for times when accuracy is required
+	 *
+	 * @param leftClick     <code>true</code> to left-click, <code>false</code>to right-click.
+	 */
+	public synchronized void clickImmediately(boolean leftClick) {
+		click(leftClick, MouseHandler.DEFAULT_MAX_MOVE_AFTER);
+	}
+
+	/**
 	 * Moves the mouse slightly depending on where it currently is and clicks.
 	 */
 	public void clickSlightly() {

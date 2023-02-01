@@ -4,6 +4,7 @@ import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.*;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 /**
@@ -111,6 +112,7 @@ public class Store extends MethodProvider {
 	 * @return <code>RSWidget</code> for the item at the given index; otherwise
 	 *         null.
 	 */
+	@Nullable
 	public RSItem getItemAt(final int index) {
 		final RSItem[] items = getItems();
 		if (items != null) {
