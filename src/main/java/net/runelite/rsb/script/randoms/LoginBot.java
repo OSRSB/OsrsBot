@@ -65,6 +65,10 @@ public class LoginBot extends Random {
                     case 2:
                         switch (ctx.client.getCurrentLoginField()) {
                             case 0 -> {
+                                if (this.isUsernameFilled()) {
+                                    ctx.keyboard.sendKey('\n');
+                                    return random(1000, 5000);
+                                }
                                 ctx.keyboard.sendText(account.getName().toLowerCase().trim(), true);
                                 return random(1000, 5000);
                             }

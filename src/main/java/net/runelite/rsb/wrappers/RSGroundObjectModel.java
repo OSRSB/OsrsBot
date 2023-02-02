@@ -1,5 +1,6 @@
 package net.runelite.rsb.wrappers;
 
+import net.runelite.api.ItemLayer;
 import net.runelite.api.Model;
 import net.runelite.api.Tile;
 import net.runelite.rsb.methods.MethodContext;
@@ -23,5 +24,11 @@ public class RSGroundObjectModel extends RSModel {
     @Override
     protected int getLocalY() {
         return tile.getLocalLocation().getY();
+    }
+
+    @Override
+    protected int getLocalZ() {
+        ItemLayer itemLayer = this.tile.getItemLayer();
+        return itemLayer.getZ() - itemLayer.getHeight();
     }
 }

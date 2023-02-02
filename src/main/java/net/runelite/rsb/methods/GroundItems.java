@@ -6,6 +6,7 @@ import net.runelite.rsb.wrappers.RSGroundItem;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSTile;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,7 @@ public class GroundItems extends MethodProvider {
 	 * @return The nearest item that is accepted by the provided Filter; or
 	 *         null.
 	 */
+	@Nullable
 	public RSGroundItem getNearest(Filter<RSGroundItem> filter) {
 		int dist = 9999999;
 		int pX = methods.players.getMyPlayer().getLocation().getWorldLocation().getX();
@@ -105,7 +107,7 @@ public class GroundItems extends MethodProvider {
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
-				if (items != null)
+				if (items == null) continue;
 				for (RSGroundItem item : items) {
 					if (item.getItem() == null) {
 						continue;
@@ -130,6 +132,7 @@ public class GroundItems extends MethodProvider {
 	 *         the array of IDs provided; or null if no matching ground items
 	 *         were found.
 	 */
+	@Nullable
 	public RSGroundItem getNearest(final int... ids) {
 		return getNearest(item -> {
 			int iid = item.getItem().getID();

@@ -68,6 +68,10 @@ public class RSModel extends MethodProvider {
 		return -1;
 	}
 
+	protected int getLocalZ() {
+		return Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane());
+	}
+
 	protected void update(){}
 
 	/**
@@ -299,9 +303,7 @@ public class RSModel extends MethodProvider {
 		int localX = getLocalX();
 		int localY = getLocalY();
 
-		final int tileHeight = Perspective.getTileHeight(methods.client, new LocalPoint(localX, localY), methods.client.getPlane());
-
-		Perspective.modelToCanvas(methods.client, count, localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
+		Perspective.modelToCanvas(methods.client, count, localX, localY, getLocalZ(), getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
 		ArrayList polys = new ArrayList(model.getFaceCount());
 
 		int[] trianglesX = model.getFaceIndices1();
@@ -449,7 +451,7 @@ public class RSModel extends MethodProvider {
 		int[] x2d = new int[8];
 		int[] y2d = new int[8];
 
-		Perspective.modelToCanvas(methods.client, 8, getLocalX(), getLocalY(), Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane()), getOrientation(), xa, ya, za, x2d, y2d);
+		Perspective.modelToCanvas(methods.client, 8, getLocalX(), getLocalY(), getLocalZ(), getOrientation(), xa, ya, za, x2d, y2d);
 		SimplePolygon simplePolygon = Jarvis.convexHull(x2d, y2d);
 		return new Polygon(simplePolygon.getX(), simplePolygon.getY(), simplePolygon.size());
 	}

@@ -104,7 +104,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      */
     public boolean doAction(final String action, final String option) {
         RSModel model = this.getModel();
-        return model != null && this.isValid() && this.getModel().doAction(action, option);
+        return model != null && this.isValid() && model.doAction(action, option);
     }
 
     public RSModel getModel() {

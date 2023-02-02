@@ -6,6 +6,7 @@ import net.runelite.rsb.wrappers.RSObject;
 import net.runelite.rsb.wrappers.RSTile;
 import net.runelite.rsb.wrappers.subwrap.WalkerTile;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -88,6 +89,7 @@ public class Objects extends MethodProvider {
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
+    @Nullable
     public RSObject getNearest(final Predicate<RSObject> filter) {
         RSObject cur = null;
         double dist = Double.MAX_VALUE;
@@ -123,6 +125,7 @@ public class Objects extends MethodProvider {
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
+    @Nullable
     public RSObject getNearest(final int distance, final Predicate<RSObject> filter) {
         RSObject cur = null;
         double dist = -1;
@@ -164,6 +167,7 @@ public class Objects extends MethodProvider {
      * the provided IDs; or null if there are no matching objects in the
      * current region.
      */
+    @Nullable
     public RSObject getNearest(final int... ids) {
         return getNearest(o -> {
             for (int id : ids) {
@@ -184,6 +188,7 @@ public class Objects extends MethodProvider {
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
+    @Nullable
     public RSObject getNearest(final String... names) {
         return getNearest(o -> {
             ObjectDefinition def = o.getDef();
@@ -208,6 +213,7 @@ public class Objects extends MethodProvider {
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
+    @Nullable
     public RSObject findNearest(final int distance, final String... names) {
         return getNearest(distance, o -> {
             ObjectDefinition def = o.getDef();
@@ -228,6 +234,7 @@ public class Objects extends MethodProvider {
      * @param t The tile on which to search.
      * @return The top RSObject on the provided tile; or null if none found.
      */
+    @Nullable
     public RSObject getTopAt(final RSTile t) {
         return getTopAt(t, -1);
     }
@@ -241,6 +248,7 @@ public class Objects extends MethodProvider {
      * @return The top RSObject on the provided tile matching the specified
      * flags; or null if none found.
      */
+    @Nullable
     public RSObject getTopAt(final RSTile t, int mask) {
         RSObject[] objects = getAt(t, mask);
         return objects.length > 0 ? objects[0] : null;

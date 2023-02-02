@@ -46,6 +46,10 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     @Subscribe
     public boolean isSelfVisible() {return isValid() && !widget.isSelfHidden();}
 
+    public boolean hasListener() {
+        return widget.hasListener();
+    }
+
     /**
      * Performs the given action on this RSInterfaceChild if it is
      * showing (valid).
