@@ -2,10 +2,12 @@ package net.runelite.rsb.wrappers.client_wrapper;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
+import net.runelite.api.annotations.Varp;
 import net.runelite.api.clan.ClanChannel;
 import net.runelite.api.clan.ClanSettings;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.dbtable.DBRowConfig;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
@@ -536,12 +538,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
 
     @Override
     @Deprecated
-    public int getVar(VarPlayer varPlayer) {
-        return wrappedClient.getVar(varPlayer);
-    }
-
-    @Override
-    @Deprecated
     public int getVar(int varbit) {
         return wrappedClient.getVar(varbit);
     }
@@ -557,12 +553,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getVarpValue(VarPlayer varPlayer) {
-        return wrappedClient.getVarpValue(varPlayer);
-    }
-
-    @Override
-    public int getVarpValue(int varpId) {
+    public int getVarpValue(@Varp int varpId) {
         return wrappedClient.getVarpValue(varpId);
     }
 
@@ -685,6 +676,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public Object getDBTableField(int rowID, int column, int tupleIndex, int fieldIndex) {
         return wrappedClient.getDBTableField(rowID, column, tupleIndex, fieldIndex);
+    }
+
+    @Override
+    public DBRowConfig getDBRowConfig(int rowID) {
+        return wrappedClient.getDBRowConfig(rowID);
     }
 
     public MapElementConfig getMapElementConfig(int id) {
@@ -1117,13 +1113,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public boolean isInInstancedRegion() {
         return wrappedClient.isInInstancedRegion();
     }
-
-    @Override
-    @Deprecated
-    public int getItemPressedDuration() {
-        return wrappedClient.getItemPressedDuration();
-    }
-
     @Override
     @Nullable
     public CollisionData[] getCollisionMaps() {
@@ -1315,19 +1304,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public void checkClickbox(Model model, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash) {
         wrappedClient.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
     }
-
-    @Override
-    @Deprecated
-    public Widget getIf1DraggedWidget() {
-        return wrappedClient.getIf1DraggedWidget();
-    }
-
-    @Override
-    @Deprecated
-    public int getIf1DraggedItemIndex() {
-        return wrappedClient.getIf1DraggedItemIndex();
-    }
-
     @Override
     public boolean isWidgetSelected() {
         return wrappedClient.isWidgetSelected();
@@ -1337,19 +1313,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public void setWidgetSelected(boolean selected) {
         wrappedClient.setWidgetSelected(selected);
     }
-
-    @Override
-    @Deprecated
-    public int getSelectedItem() {
-        return wrappedClient.getSelectedItem();
-    }
-
-    @Override
-    @Deprecated
-    public int getSelectedItemIndex() {
-        return wrappedClient.getSelectedItemIndex();
-    }
-
     @Override
     @Nullable
     public Widget getSelectedWidget() {

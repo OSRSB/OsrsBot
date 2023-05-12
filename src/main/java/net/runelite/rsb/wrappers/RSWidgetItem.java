@@ -144,15 +144,6 @@ public class RSWidgetItem extends MethodProvider {
     }
 
     /**
-     * Gets the item's index in the parent widget
-     *
-     * @return item index
-     */
-    public int getItemIndex() {
-        return item.getIndex();
-    }
-
-    /**
      * Gets the stack size of the item
      *
      * @return the stack size
