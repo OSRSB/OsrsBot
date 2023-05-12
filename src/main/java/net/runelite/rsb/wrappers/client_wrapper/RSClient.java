@@ -6,7 +6,6 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.worldmap.MapElementConfig;
-import net.runelite.api.worldmap.WorldMap;
 import net.runelite.client.callback.ClientThread;
 
 import javax.annotation.Nullable;
@@ -126,12 +125,6 @@ public class RSClient extends BaseClientWrapper {
     public Widget getWidget(int packedID) { // tested, no need to runOnClientThread
         return convertResult(super.getWidget(packedID));
     }
-
-    @Override
-    public int getVarpValue(VarPlayer varPlayer) {
-        return convertResult(super.getVarpValue(varPlayer));
-    }
-
     @Override
     public MapElementConfig getMapElementConfig(int id) {
         return convertResult(super.getMapElementConfig(id));
@@ -157,13 +150,6 @@ public class RSClient extends BaseClientWrapper {
     public void setHintArrow(LocalPoint point) {
         super.setHintArrow(point);
     }
-
-    @Override
-    @Deprecated
-    public Widget getIf1DraggedWidget() {
-        return convertResult(super.getIf1DraggedWidget());
-    }
-
     @Override
     public boolean isWidgetSelected() {return false;}
 
