@@ -31,6 +31,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.config.RuneLiteConfig;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.game.NPCManager;
 import net.runelite.client.menus.MenuManager;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.task.Scheduler;
@@ -41,7 +42,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 import javax.annotation.Nullable;
-
 
 @SuppressWarnings("removal")
 public class BotModule extends AbstractModule {
@@ -115,6 +115,7 @@ public class BotModule extends AbstractModule {
             bind(MenuManager.class);
             bind(ChatMessageManager.class);
             bind(ItemManager.class);
+            bind(NPCManager.class);
             bind(Scheduler.class);
             bind(PluginManager.class);
             bind(SessionManager.class);
@@ -123,7 +124,6 @@ public class BotModule extends AbstractModule {
             bind(String.class).annotatedWith(Names.named("profile")).toProvider(Providers.of(profile));
             bindConstant().annotatedWith(Names.named("insecureWriteCredentials")).to(insecureWriteCredentials);
             bind(File.class).annotatedWith(Names.named("runeLiteDir")).toInstance(RuneLite.RUNELITE_DIR);
-
 
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
