@@ -46,4 +46,63 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
         return (Set)getRequest().request().stream().collect(Collectors.toSet());
     }
 
+/ * Result Functions */ 
+
+    public QueryResult<T> reverse() {
+        return results().reverse();
+    }
+
+    public T random() {
+        return results().random();
+    }
+
+    public QueryResult<T> shuffle() {
+        return results().shuffle();
+    }
+
+    public boolean contains(Object a) {
+        return results().contains(a);
+    }
+
+    public int size() {
+        return results().size();
+    }
+
+    public QueryResult<T> limit(int i, int j) {
+        return results().limit(i,j);
+    }
+
+    public QueryResult<T> limit(int i) {
+        return results().limit(i);
+    }
+
+    public Object[] toArray() {
+        return results().toArray();
+    }
+
+    public List<T> toList() {
+        return results().toList();
+    }
+
+    public boolean containsAll(Collection<?> collection) {
+        return results()..containsAll(collection);
+    }
+
+    public QueryResult<T> sort(Comparator<? super T> comparator) {
+        return results().sort();
+    }
+
+    public T first() {
+        return results.first();
+    }
+
+
+    public boolean isEmpty() {
+        return results().isEmpty();
+    }
+
+    public T last() {
+        return results().last();
+    }
+
 }

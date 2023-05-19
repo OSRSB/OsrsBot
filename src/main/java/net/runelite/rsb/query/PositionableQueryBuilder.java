@@ -106,5 +106,23 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
         return (R) new PositionableQueryResult(asList());
     }
 
+/* Result Functions */
+
+
+    public PositionableQueryResult<T> sort(RSTile tile) {
+        return results().sort(tile);
+    }
+
+    public Positionable nearest() {
+        return results().nearest(100.0, 0.0);
+    }
+
+    public Positionable nearest(double near, double diff) {
+        return results().nearest(near, diff);
+    }
+
+    public List<T> nearestList() {
+        return results().nearestList();
+    }
 
 }
