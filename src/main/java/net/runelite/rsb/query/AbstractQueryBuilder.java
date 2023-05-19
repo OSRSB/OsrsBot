@@ -93,9 +93,8 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public T first() {
-        return results.first();
+        return results().first();
     }
-
 
     public boolean isEmpty() {
         return results().isEmpty();
