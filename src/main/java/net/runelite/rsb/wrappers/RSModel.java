@@ -410,10 +410,10 @@ public class RSModel extends MethodProvider {
 		int centerX = (max_x + min_x) / 2;
 		int centerY = (max_y + min_y) / 2;
 
-		int deltaX = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
-		int deltaY = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
+		int x = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
+		int y = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
 
-		return new Point(centerX + deltaX, centerY + deltaY);
+		return new Point(x, y);
 	}
 
 	protected Point getPointInRange(int start, int end) {
