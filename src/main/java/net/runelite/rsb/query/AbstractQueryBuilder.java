@@ -85,7 +85,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public boolean containsAll(Collection<?> collection) {
-        return results()..containsAll(collection);
+        return results().containsAll(collection);
     }
 
     public QueryResult<T> sort(Comparator<? super T> comparator) {
