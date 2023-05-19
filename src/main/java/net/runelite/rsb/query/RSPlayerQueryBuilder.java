@@ -24,7 +24,7 @@ public class RSPlayerQueryBuilder extends PositionableQueryBuilder<RSPlayer, RSP
     public RSPlayerQueryBuilder inCombat() {
         return filter(player -> player.isInCombat());
     }
-    public RSPlayerQueryBuilder noInCombat() {
+    public RSPlayerQueryBuilder notInCombat() {
         return filter(player -> !player.isInCombat());
     }
 

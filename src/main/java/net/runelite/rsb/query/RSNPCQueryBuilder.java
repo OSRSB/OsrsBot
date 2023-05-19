@@ -18,7 +18,7 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     public RSNPCQueryBuilder inCombat() {
         return filter(npc -> npc.isInCombat());
     }
-    public RSNPCQueryBuilder noInCombat() {
+    public RSNPCQueryBuilder notInCombat() {
         return filter(npc -> !npc.isInCombat());
     }
 
