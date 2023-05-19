@@ -84,7 +84,7 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
                 && npc.getInteracting().equals(methods.players.getMyPlayer().getAccessor());
     }
 
-    NpcDefinition getDef() {
+    public NpcDefinition getDef() {
         return this.def;
     }
 
