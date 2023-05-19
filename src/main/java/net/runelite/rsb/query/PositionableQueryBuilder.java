@@ -103,7 +103,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
     }
 
     public R results() {
-        return (R) new QueryResult(asList());
+        return (R) new PositionableQueryResult(asList());
     }
 
 
