@@ -1178,6 +1178,18 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes a dialog widget that appears in some quest?
+     * I think when talking to aggie the witch
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class DialogUnknown {
+        public static final int GROUP_INDEX = 229;
+        // TODO: not sure what the element are. Guessing 0.
+        public static final int CONTAINER = 0;
+    }
+
+    /**
      * Describes npc dialog widgets
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
@@ -1190,6 +1202,20 @@ public class WidgetIndices {
         public static final int DIALOG_TITLE_LABEL = 4;
         public static final int DIALOG_CONTINUE_LABEL = 5;
         public static final int DIALOG_TEXT_LABEL = 6;
+    }
+
+    /**
+     * Describes level up widgets
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class LevelUp {
+        public static final int GROUP_INDEX = 233;
+        // TODO: not sure what 0 is
+        public static final int CONTAINER = 0;
+        public static final int SKILL = 1;
+        public static final int LEVEL = 2;
+        public static final int CONTINUE = 3;
     }
 
     /**

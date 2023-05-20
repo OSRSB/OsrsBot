@@ -5,10 +5,12 @@ import net.runelite.rsb.methods.Interfaces;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.wrappers.RSWidget;
 
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class NPCChat extends Interfaces {
+
     public NPCChat(MethodContext ctx) {
         super(ctx);
     }
@@ -21,6 +23,38 @@ public class NPCChat extends Interfaces {
         return "";
     }
 
+    private static final GlobalWidgetInfo[] widgetInfos = {
+            GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER,
+            GlobalWidgetInfo.DIALOG_NPC_CONTINUE,
+            GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE,
+            GlobalWidgetInfo.DIALOG_QUEST_CONTINUE,
+            GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE,
+            GlobalWidgetInfo.DIALOG_UNKNOWN_CONTAINER
+    };
+    public Stream<RSWidget> getStream() {
+        Stream<RSWidget> stream = Stream.empty();
+        for (GlobalWidgetInfo info : widgetInfos) {
+            if (getComponent(info) != null && getComponent(info).getId() != -1){
+                if (info == GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER) {
+                    RSWidget[] widgets = getComponent(info).getComponents();
+                    stream = Stream.concat(stream, Stream.of(widgets));
+                }
+                else {
+                    stream = Stream.concat(stream, Stream.of(getComponent(info)));
+                }
+            }
+        }
+        return stream;
+    }
+
+    public boolean isOpen() {
+        return canContinue() || getOptions().length > 0 || getStream().anyMatch(widget -> widget.isVisible());
+    }
+
+    public boolean isLoading() {
+        return getStream().anyMatch(widget -> widget.containsText("Please wait..") && widget.isVisible());
+    }
+
     /**
      * Attempts to find all menu options from the current npc chat dialog
      *
@@ -28,7 +62,7 @@ public class NPCChat extends Interfaces {
      */
     public String[] getOptions() {
         try {
-            return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+            return getStream()
                     .map(RSWidget::getText)
                     .filter(Predicate.not(String::isEmpty))
                     .toArray(String[]::new);
@@ -45,7 +79,7 @@ public class NPCChat extends Interfaces {
      */
     public boolean containsOption(String option) {
         try {
-            return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+            return getStream()
                     .map(RSWidget::getText)
                     .anyMatch(menuString -> menuString.contains(option));
         } catch (Exception ignored) {
@@ -63,7 +97,7 @@ public class NPCChat extends Interfaces {
     public boolean selectOption(String option, boolean wait) {
 
         try {
-            Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+            getStream()
                     .filter(widget -> widget.getText().contains(option))
                     .findFirst()
                     .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
@@ -71,5 +105,20 @@ public class NPCChat extends Interfaces {
         } catch (Exception ignored) {
             return false;
         }
+    }
+    public boolean canContinue() {
+        try {
+
+            return  getStream()
+                    .map(RSWidget::getText)
+                    .anyMatch(menuString -> menuString.contains("Click here to continue"));
+        } catch (Exception ignored) {
+            System.out.println(ignored);
+            return false;
+        }
+    }
+    public boolean selectContinue() {
+        methods.keyboard.sendText(" ", false);
+        return true;
     }
 }

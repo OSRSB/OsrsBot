@@ -78,6 +78,21 @@ public enum GlobalWidgetInfo {
     DIALOG_PLAYER_CONTINUE(WidgetIndices.DialogPlayer.GROUP_INDEX, WidgetIndices.DialogPlayer.OPTION_CONTINUE_LABEL),
 
     /**
+     * [Dialog] Quest
+     */
+    DIALOG_QUEST_CONTINUE(WidgetIndices.Dialog.GROUP_INDEX, WidgetIndices.Dialog.TEXT_LABEL),
+
+    /**
+     * [LevelUp] Dialog
+     */
+    DIALOG_LEVEL_UP_CONTINUE(WidgetIndices.LevelUp.GROUP_INDEX, WidgetIndices.LevelUp.CONTINUE),
+
+    /**
+     * [DialogUnknown]
+     */
+    DIALOG_UNKNOWN_CONTAINER(WidgetIndices.DialogUnknown.GROUP_INDEX, WidgetIndices.DialogUnknown.CONTAINER),
+
+    /**
      * [LOGOUT] Widget Info
      */
     LOGOUT_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_LOGOUT_CONTAINER),
