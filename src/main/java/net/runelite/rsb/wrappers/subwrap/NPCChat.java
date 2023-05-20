@@ -107,15 +107,9 @@ public class NPCChat extends Interfaces {
         }
     }
     public boolean canContinue() {
-        try {
-
-            return  getStream()
-                    .map(RSWidget::getText)
-                    .anyMatch(menuString -> menuString.contains("Click here to continue"));
-        } catch (Exception ignored) {
-            System.out.println(ignored);
-            return false;
-        }
+        return  getStream()
+                .map(RSWidget::getText)
+                .anyMatch(menuString -> menuString.contains("Click here to continue"));
     }
     public boolean selectContinue() {
         methods.keyboard.sendText(" ", false);
