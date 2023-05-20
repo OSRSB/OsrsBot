@@ -24,18 +24,25 @@ public class NPCChat extends Interfaces {
     }
 
     public boolean isLoading() {
-        // TODO: This is probably the wrong component.
         try {
-            return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_OPTION))
-                    .map(RSWidget::getText)
-                    .anyMatch(str -> str.contains("Please wait.."));
+            if (canContinue()) {
+                return getContinueComponent().getText().contains("Please wait...");
+            }
+            else if (hasOptions()) {
+                return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                        .map(RSWidget::getText)
+                        .anyMatch(str -> str.contains("Please wait..."));
+            }
+            else {
+                return false;
+            }
         } catch (Exception ignored) {
             return false;
         }
     }
 
     public boolean isOpen() {
-        return canContinue() || hasOptions() || isLoading();
+        return canContinue() || hasOptions();
     }
 
     /**
