@@ -5,7 +5,10 @@ import net.runelite.rsb.query.request.PositionableQueryRequest;
 import net.runelite.rsb.query.result.PositionableQueryResult;
 import net.runelite.rsb.query.result.QueryResult;
 import net.runelite.rsb.wrappers.RSArea;
+import net.runelite.rsb.wrappers.RSTile;
 import net.runelite.rsb.wrappers.common.Positionable;
+
+import java.util.List;
 
 import static net.runelite.rsb.methods.MethodProvider.methods;
 

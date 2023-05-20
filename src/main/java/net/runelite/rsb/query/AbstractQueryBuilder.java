@@ -3,6 +3,8 @@ package net.runelite.rsb.query;
 import net.runelite.rsb.query.request.QueryRequest;
 import net.runelite.rsb.query.result.QueryResult;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -46,7 +48,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
         return (Set)getRequest().request().stream().collect(Collectors.toSet());
     }
 
-/ * Result Functions */ 
+/* Result Functions */
 
     public QueryResult<T> reverse() {
         return results().reverse();
@@ -89,7 +91,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public QueryResult<T> sort(Comparator<? super T> comparator) {
-        return results().sort();
+        return results().sort(comparator);
     }
 
     public T first() {
