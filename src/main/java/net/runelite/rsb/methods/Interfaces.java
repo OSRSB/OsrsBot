@@ -93,6 +93,18 @@ public class Interfaces extends MethodProvider {
         return cont != null && cont.isValid() && cont.doClick(true);
     }
 
+    public boolean clickContinue(boolean hotKey) {
+        RSWidget cont = getContinueComponent();
+        if (cont != null && cont.isValid()) {
+            if (!hotKey) {
+                return cont.doClick(true);
+            } else {
+                methods.keyboard.sendText(" ", false);
+            }
+        }
+            return false;
+    }
+
     /**
      * Gets the click here to continue widget
      *
@@ -109,6 +121,16 @@ public class Interfaces extends MethodProvider {
             widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getPackedId());
             if (widget != null && !widget.isHidden())
                 return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getChildId()));
         }
         return null;
     }
