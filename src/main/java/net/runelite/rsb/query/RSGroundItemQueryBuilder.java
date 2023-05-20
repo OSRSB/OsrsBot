@@ -48,6 +48,14 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
                 .noneMatch(string -> string.equals(groundItem.getItem().getName())));
     }
 
+    public RSGroundItemQueryBuilder id(int... arrayOfInt) {
+        return filter(groundItem -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == groundItem.getItem().getID()));
+    }
+    public RSGroundItemQueryBuilder modelId(int... arrayOfInt) {
+        return filter(groundItem -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == groundItem.getModel().getModel().getSceneId()));
+    }
     public RSGroundItemQueryBuilder stackSize(int minimum) {
         return filter(groundItem -> (groundItem.getItem().getStackSize() >= minimum));
     }

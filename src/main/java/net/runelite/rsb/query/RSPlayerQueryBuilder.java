@@ -75,6 +75,11 @@ public class RSPlayerQueryBuilder extends PositionableQueryBuilder<RSPlayer, RSP
                 .noneMatch(string -> string.equals(player.getName())));
     }
 
+    public RSPlayerQueryBuilder modelId(int... arrayOfInt) {
+        return filter(player -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == player.getModel().getModel().getSceneId()));
+    }
+
     public RSPlayerQueryRequest createRequest() {
         return new RSPlayerQueryRequest();
     }

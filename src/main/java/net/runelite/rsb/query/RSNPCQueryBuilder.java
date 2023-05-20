@@ -68,6 +68,14 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
         return filter(npc -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(npc.getName())));
     }
+    public RSNPCQueryBuilder id(int... arrayOfInt) {
+        return filter(npc -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == npc.getID()));
+    }
+    public RSNPCQueryBuilder modelId(int... arrayOfInt) {
+        return filter(npc -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == npc.getModel().getModel().getSceneId()));
+    }
 
     public RSNPCQueryBuilder actions(String... arrayOfString) {
         return filter(npc -> Arrays.stream(npc.getDef().getActions())

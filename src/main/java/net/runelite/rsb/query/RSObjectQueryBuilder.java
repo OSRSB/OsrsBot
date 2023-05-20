@@ -31,6 +31,14 @@ public class RSObjectQueryBuilder extends PositionableQueryBuilder<RSObject, RSO
                 .noneMatch(string -> string.equals(object.getName())));
     }
 
+    public RSObjectQueryBuilder id(int... arrayOfInt) {
+        return filter(object -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == object.getID()));
+    }
+    public RSObjectQueryBuilder modelId(int... arrayOfInt) {
+        return filter(object -> Arrays.stream(arrayOfInt)
+                .anyMatch(i -> i == object.getModel().getModel().getSceneId()));
+    }
     public RSObjectQueryBuilder actions(String... arrayOfString) {
         return filter(object -> Arrays.stream(object.getDef().getActions())
                 .anyMatch(objectString -> Arrays.stream(arrayOfString)
