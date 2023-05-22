@@ -48,8 +48,7 @@ public class InputManager {
 			return; // Can't click off the canvas
 		}
 		pressMouse(getX(), getY(), left);
-		double d = StdRandom.gaussianMixture(20, 200, new double[]{77.91123349, 94.5349676, 66.9923331}, new double[]{6.97112259468, 9.62174530374, 11.1421200303}, new double[]{0.5292791, 0.20231952, 0.26840138});
-		sleepNoException((long)d);
+		sleepNoException(random(50, 100));
 		releaseMouse(getX(), getY(), left);
 	}
 
