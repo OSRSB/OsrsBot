@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.api.Client;
 import net.runelite.rsb.internal.input.Canvas;
+import net.runelite.rsb.internal.input.VirtualMouse;
 
 import java.applet.Applet;
 import java.awt.event.*;
@@ -225,6 +226,13 @@ public class InputManager {
 		}
 		windMouse(x, y);
 		//windMouse(speed, thisX, thisY, random(x, x + randomX), random(y, y + randomY));
+	}
+
+	public void moveMouseWheel(int i) {
+		VirtualMouse virtualMouse = bot.getMethodContext().virtualMouse;
+		final MouseWheelEvent me = new MouseWheelEvent(getTarget(), MouseEvent.MOUSE_WHEEL, System.currentTimeMillis(), 0, virtualMouse.getClientX(),
+				virtualMouse.getClientY(), 0, false, MouseWheelEvent.WHEEL_UNIT_SCROLL, 0, i);
+		bot.getMethodContext().virtualMouse.sendEvent(me);
 	}
 
 	public void pressKey(final char ch) {
