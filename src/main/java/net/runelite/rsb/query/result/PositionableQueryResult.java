@@ -21,11 +21,11 @@ public class PositionableQueryResult<T extends Positionable> extends QueryResult
         return this;
     }
 
-    public Positionable nearest() {
+    public T nearest() {
         return nearest(100.0, 0.0);
     }
 
-    public Positionable nearest(double near, double diff) {
+    public T nearest(double near, double diff) {
         shuffle();
         double oldDistance = Double.MAX_VALUE;
         Positionable oldPositionable = null;
@@ -48,7 +48,7 @@ public class PositionableQueryResult<T extends Positionable> extends QueryResult
             }
         }
 
-        return oldPositionable;
+        return (T)oldPositionable;
     }
 
     public List<T> nearestList() {
