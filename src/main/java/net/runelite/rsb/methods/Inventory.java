@@ -6,6 +6,8 @@ import net.runelite.client.ui.DrawManager;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
+import net.runelite.rsb.query.RSGroundItemQueryBuilder;
+import net.runelite.rsb.query.RSInventoryItemQueryBuilder;
 import net.runelite.rsb.wrappers.*;
 
 import java.awt.*;
@@ -26,6 +28,10 @@ public class Inventory extends MethodProvider {
 
 	Inventory(MethodContext ctx) {
 		super(ctx);
+	}
+
+	public RSInventoryItemQueryBuilder query() {
+		return new RSInventoryItemQueryBuilder();
 	}
 
 	/**
