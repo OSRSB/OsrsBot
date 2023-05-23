@@ -78,9 +78,14 @@ public enum GlobalWidgetInfo {
     DIALOG_PLAYER_CONTINUE(WidgetIndices.DialogPlayer.GROUP_INDEX, WidgetIndices.DialogPlayer.OPTION_CONTINUE_LABEL),
 
     /**
-     * [Dialog] Quest
+     * [Dialog] Continue
      */
-    DIALOG_QUEST_CONTINUE(WidgetIndices.Dialog.GROUP_INDEX, WidgetIndices.Dialog.TEXT_LABEL),
+    DIALOG_CONTINUE(WidgetIndices.Dialog.GROUP_INDEX, WidgetIndices.Dialog.TEXT_LABEL),
+
+    /**
+     * [Dialog] Quest Continue
+     */
+    DIALOG_QUEST_CONTINUE(WidgetIndices.DialogQuest.GROUP_INDEX, WidgetIndices.DialogQuest.CONTINUE_TEXT),
 
     /**
      * [LevelUp] Dialog

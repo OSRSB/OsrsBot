@@ -71,6 +71,14 @@ public class WidgetIndices {
         // 21
     }
 
+    public static class DialogQuest {
+        public static final int GROUP_INDEX = 11;
+        public static final int LEFT_ICON = 1;
+        public static final int TEXT = 1;
+        public static final int RIGHT_ICON = 3;
+        public static final int CONTINUE_TEXT = 4;
+    }
+
     /**
      * Describes bank widgets
      * Last reviewed: 7/4/2022 1:57 am UTC+1

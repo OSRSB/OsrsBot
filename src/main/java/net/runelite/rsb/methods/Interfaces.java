@@ -123,14 +123,19 @@ public class Interfaces extends MethodProvider {
                 return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getChildId()));
         }
         if (widget == null) {
-            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getPackedId());
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getPackedId());
             if (widget != null && !widget.isHidden())
-                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_CONTINUE.getChildId()));
         }
         if (widget == null) {
             widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getPackedId());
             if (widget != null && !widget.isHidden())
                 return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
         }
         return null;
     }
