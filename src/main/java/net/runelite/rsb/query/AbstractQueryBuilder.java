@@ -22,7 +22,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public R results() {
-        return (R) new QueryResult(asList());
+        return (R) new QueryResult(asList().stream().filter(this::accepts).toList());
     }
 
     public boolean accepts(Object a) {

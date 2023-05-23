@@ -106,7 +106,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
     }
 
     public R results() {
-        return (R) new PositionableQueryResult(asList());
+        return (R) new PositionableQueryResult(asList().stream().filter(this::accepts).toList());
     }
 
 /* Result Functions */
