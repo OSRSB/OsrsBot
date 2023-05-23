@@ -81,7 +81,24 @@ public enum GlobalWidgetInfo {
      * [LOGOUT] Widget Info
      */
     LOGOUT_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_LOGOUT_CONTAINER),
+
+    /**
+     * [LOGOUT] World Switch Button
+     */
+    WORLD_SWITCH_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_WORLD_SWITCHER_LABEL),
     // [LOGOUT]
+
+    /**
+     * [WORLD SWITCH] World Dynamic Container
+     */
+    WORLD_SWITCH_DYNAMIC_CONTAINER(WidgetIndices.WorldSwitcher.GROUP_INDEX, WidgetIndices.WorldSwitcher.INNER_FRAME_WORLD_LIST_DYNAMIC_CONTAINER),
+
+    /**
+     * [WORLD SWITCH] Scroll Bar
+     */
+    WORLD_SWITCH_SCROLL_BAR(WidgetIndices.WorldSwitcher.GROUP_INDEX, WidgetIndices.WorldSwitcher.INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER),
+
+    // [WORLD SWITCH]
 
     /**
      * [WILDERNESS] Widget Info

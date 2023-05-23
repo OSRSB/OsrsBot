@@ -522,19 +522,43 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return -1;
     }
 
+     /**
+     * Gets whether this widget is in a scrollable area
+     * @return true if widget is in a scrollable area
+     */
+
     public boolean isInScrollableArea() {
         //Check if we have a parent
         if (this.getParentId() == -1) {
             return false;
         }
         //Find scrollable area
-        RSWidget scrollableArea = this.getParent();
+        RSWidget scrollableArea = this;
         while ((scrollableArea.getScrollableContentHeight() == 0) && (scrollableArea.getParentId() != -1)) {
             scrollableArea = scrollableArea.getParent();
         }
         //Return if we are in a scrollable area
         return (scrollableArea.getScrollableContentHeight() != 0);
     }
+
+     /**
+     * Gets whether this widget is visible in its scrollable area
+     * @return true if widget is visible in its scrollable area
+     */
+     public boolean isVisibleInScrollableArea() {
+        //Check if we have a parent
+        if (this.getParentId() == -1) {
+            return true;
+        }
+        //Find scrollable area
+        RSWidget scrollableArea = this;
+        while ((scrollableArea.getScrollableContentHeight() == 0) && (scrollableArea.getParentId() != -1)) {
+            scrollableArea = scrollableArea.getParent();
+        }
+        //Return true if we are in a scrollable area
+        return getRelativeY() + getHeight() / 2 > scrollableArea.getVerticalScrollPosition() &&
+                getRelativeY() - getHeight() / 2 < scrollableArea.getVerticalScrollPosition() + scrollableArea.getHeight();
+        }
 
     /**
      * Gets the selected action name of this component
