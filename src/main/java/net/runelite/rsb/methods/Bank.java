@@ -426,7 +426,7 @@ public class Bank extends MethodProvider {
 		final RSItem[] items = getItems();
 		if (items != null) {
 			for (final RSItem item : items) {
-				if (item.getName().equals(name)) {
+				if (item.getName().contains(name) && item.getComponent().getName().equals(name)) {
 					return item;
 				}
 			}
@@ -445,7 +445,7 @@ public class Bank extends MethodProvider {
 		if (items != null) {
 			for (final RSItem item : items) {
 				for (String name2 : names) {
-					if (item.getName().equals(name2)) {
+					if (item.getName().contains(name2)  && item.getComponent().getName().equals(name2)) {
 						return item;
 					}
 				}
