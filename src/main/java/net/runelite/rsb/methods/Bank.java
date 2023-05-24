@@ -170,6 +170,74 @@ public class Bank extends MethodProvider {
 	}
 
 	/**
+	 * If bank is open, deposits specified amount of an item into the bank.
+	 * Supports deposit boxes.
+	 *
+	 * @param name The name of the item.
+	 * @param number The amount to deposit. 0 deposits All. 1,5,10 deposit
+	 *               corresponding amount while other numbers deposit X.
+	 * @return <code>true</code> if successful; otherwise <code>false</code>.
+	 */
+	public boolean deposit(String name, int number) {
+		if (isOpen() || isDepositOpen()) {
+			if (number < 0) {
+				throw new IllegalArgumentException("number < 0 (" + number + ")");
+			}
+			RSWidget item = null;
+			int itemCount = 0;
+			int invCount = isOpen() ? methods.inventory.getCount(true) : getBoxCount();
+			if (!isOpen()) {
+				boolean match = false;
+				for (int i = 0; i < 28; i++) {
+					RSWidget comp = methods.interfaces.getComponent(GlobalWidgetInfo.DEPOSIT_ITEMS_CONTAINER).getDynamicComponent(i);
+					if (comp.getName().equals(name)) {
+						itemCount += comp.getStackSize();
+						if (!match) {
+							item = comp;
+							match = true;
+						}
+					}
+					if (itemCount > 1) {
+						break;
+					}
+				}
+			} else {
+				RSItem rsItem = methods.inventory.getItem(name);
+				if (rsItem != null) {
+					item = rsItem.getComponent();
+				}
+				itemCount = methods.inventory.getCount(true, name);
+			}
+			if (item == null) {
+				return true;
+			}
+			switch (number) {
+				case 0:
+					item.doAction(itemCount > 1 ? "Deposit-All" : "Deposit-1");
+					break;
+				case 1:
+					item.doClick();
+					break;
+				case 5:
+					item.doAction("Deposit-" + number);
+					break;
+				default:
+					if (!item.doAction("Deposit-" + number)) {
+						if (item.doAction("Deposit-X")) {
+							sleep(random(1000, 1300));
+							methods.inputManager.sendKeys(String.valueOf(number), true);
+						}
+					}
+					break;
+			}
+			sleep(300);
+			int cInvCount = isOpen() ? methods.inventory.getCount(true) : getBoxCount();
+			return cInvCount < invCount || cInvCount == 0;
+		}
+		return false;
+	}
+
+	/**
 	 * Deposits all items in methods.inventory. Supports deposit boxes.
 	 *
 	 * @return <code>true</code> on success.
@@ -340,6 +408,44 @@ public class Bank extends MethodProvider {
 			for (final RSItem item : items) {
 				for (int id2 : id) {
 					if (item.getID() == id2) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the first item with the provided ID in the bank.
+	 *
+	 * @param name Name of the item to get.
+	 * @return The component of the item; otherwise null.
+	 */
+	public RSItem getItem(final String name) {
+		final RSItem[] items = getItems();
+		if (items != null) {
+			for (final RSItem item : items) {
+				if (item.getName().equals(name)) {
+					return item;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the first item matching any of the provided IDs in the bank.
+	 *
+	 * @param names Names of the item to get.
+	 * @return The component of the item; otherwise null.
+	 */
+	public RSItem getItem(final String... names) {
+		final RSItem[] items = getItems();
+		if (items != null) {
+			for (final RSItem item : items) {
+				for (String name2 : names) {
+					if (item.getName().equals(name2)) {
 						return item;
 					}
 				}
@@ -682,6 +788,70 @@ public class Bank extends MethodProvider {
 			throw new IllegalArgumentException("count (" + count + ") < 0");
 		}
 		RSItem rsi = getItem(itemID);
+		if (rsi == null) { return false; }
+		RSWidget item = rsi.getComponent();
+		if (item == null) { return false; }
+		while (item.getRelativeX() == 0 && methods.bank.getCurrentTab() != 0) {
+			if (getTab(0).doClick()) {
+				sleep(random(800, 1300));
+			}
+		}
+		if (!methods.interfaces.scrollTo(item, methods.interfaces.getComponent(GlobalWidgetInfo.BANK_SCROLLBAR))) {
+			return false;
+		}
+		int invCount = methods.inventory.getCount(true);
+		String defaultAction = "Withdraw-" + count;
+		String action = null;
+		switch (count) {
+			case 0:
+				action = "Withdraw-All";
+				break;
+			case 1:
+				action = defaultAction;
+				break;
+			case 5:
+				action = defaultAction;
+				break;
+			case 10:
+				action = defaultAction;
+				break;
+			default:
+				int i = -1;
+				try {
+					i = Integer.parseInt(item.getActions()[4].toLowerCase().trim().replaceAll("\\D", ""));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (i == count) {
+					action = defaultAction;
+				}
+				else if (item.doAction("Withdraw-X")) {
+					sleep(random(1000, 1300));
+					methods.keyboard.sendText(String.valueOf(count), true);
+				}
+		}
+		if (action != null && item.doAction(action)) {
+			sleep(random(1000, 1300));
+		}
+		int newInvCount = methods.inventory.getCount(true);
+		return newInvCount > invCount || newInvCount == 28;
+	}
+
+
+	/**
+	 * Tries to withdraw an item.
+	 * 0 is All. 1,5,10 use Withdraw 1,5,10 while other numbers Withdraw X.
+	 *
+	 * @param name The name of the item.
+	 * @param count  The number to withdraw.
+	 * @return <code>true</code> on success.
+	 */
+	public boolean withdraw(final String name, final int count) {
+		if (!isOpen()) { return false; }
+		if (count < 0) {
+			throw new IllegalArgumentException("count (" + count + ") < 0");
+		}
+		RSItem rsi = getItem(name);
 		if (rsi == null) { return false; }
 		RSWidget item = rsi.getComponent();
 		if (item == null) { return false; }
