@@ -547,7 +547,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      */
      public boolean isVisibleInScrollableArea() {
         //Check if we have a parent
-        if (this.getParentId() == -1) {
+        if (this.getParentId() == -1 || !isInScrollableArea()) {
             return true;
         }
         //Find scrollable area

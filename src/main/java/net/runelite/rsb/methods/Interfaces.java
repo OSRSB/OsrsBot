@@ -248,7 +248,7 @@ public class Interfaces extends MethodProvider {
             return false;
         }
 
-        if (scrollBar.getComponents().length != 6) {
+        if (scrollBar.getComponents().length != 6 || component.isVisibleInScrollableArea()) {
             return true; // no scrollbar, so probably not scrollable
         }
 
