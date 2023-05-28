@@ -13,6 +13,6 @@ public class RSInventoryItemQueryRequest extends QueryRequest<RSItem> {
     }
 
     public List request() {
-        return Arrays.asList(methods.inventory.getCachedItems());
+        return Arrays.asList(methods.inventory.getItems());
     }
 }

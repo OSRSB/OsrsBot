@@ -14,12 +14,12 @@ public class RSObjectQueryBuilder extends PositionableQueryBuilder<RSObject, RSO
 
     public RSObjectQueryBuilder named(String... arrayOfString) {
         return filter(object -> Arrays.stream(arrayOfString)
-                .anyMatch(string -> object.getName().toLowerCase().contains(string.toLowerCase())));
+                .anyMatch(string -> object.getName().contains(string)));
     }
 
     public RSObjectQueryBuilder notNamed(String... arrayOfString) {
         return filter(object -> Arrays.stream(arrayOfString)
-                .noneMatch(string -> object.getName().toLowerCase().contains(string.toLowerCase())));
+                .noneMatch(string -> object.getName().contains(string)));
     }
 
     public RSObjectQueryBuilder namedExact(String... arrayOfString) {
@@ -41,11 +41,13 @@ public class RSObjectQueryBuilder extends PositionableQueryBuilder<RSObject, RSO
     }
     public RSObjectQueryBuilder actions(String... arrayOfString) {
         return filter(object -> Arrays.stream(object.getDef().getActions())
+                .filter((x) -> x != null)
                 .anyMatch(objectString -> Arrays.stream(arrayOfString)
-                        .anyMatch(inputString -> objectString.toLowerCase().contains(inputString.toLowerCase()))));
+                        .anyMatch(inputString -> objectString.contains(inputString))));
     }
     public RSObjectQueryBuilder actionsExact(String... arrayOfString) {
         return filter(object -> Arrays.stream(object.getDef().getActions())
+                .filter((x) -> x != null)
                 .anyMatch(objectString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> objectString.equals(inputString))));
     }

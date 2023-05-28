@@ -116,12 +116,12 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
         return results().sort(tile);
     }
 
-    public Positionable nearest() {
-        return results().nearest(100.0, 0.0);
+    public T nearest() {
+        return (T)results().nearest(100.0, 0.0);
     }
 
-    public Positionable nearest(double near, double diff) {
-        return results().nearest(near, diff);
+    public T nearest(double near, double diff) {
+        return (T)results().nearest(near, diff);
     }
 
     public List<T> nearestList() {
