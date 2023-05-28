@@ -32,9 +32,6 @@ public class NPCChat extends Interfaces {
                         .map(RSWidget::getText)
                         .anyMatch(str -> str.contains("Please wait..."));
             }
-            else if (isCutsceneActive()) {
-                return true;
-            }
             else {
                 return false;
             }
@@ -44,7 +41,7 @@ public class NPCChat extends Interfaces {
     }
 
     public boolean isOpen() {
-        return canContinue() || hasOptions();
+        return canContinue() || hasOptions() || isLoading() || isCutsceneActive();
     }
 
     /**

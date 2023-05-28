@@ -137,6 +137,11 @@ public class Interfaces extends MethodProvider {
             if (widget != null && !widget.isHidden())
                 return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
         }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getChildId()));
+        }
         return null;
     }
 

@@ -1187,14 +1187,16 @@ public class WidgetIndices {
 
     /**
      * Describes a dialog widget that appears in some quest?
+     * Got one that says Before starting this quest be aware that one or more of your skill levels are lower than recommended
      * I think when talking to aggie the witch
      * Last reviewed:
      * TODO: review
      */
     public static class DialogUnknown {
         public static final int GROUP_INDEX = 229;
-        // TODO: not sure what the element are. Guessing 0.
         public static final int CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int CONTINUE = 2;
     }
 
     /**

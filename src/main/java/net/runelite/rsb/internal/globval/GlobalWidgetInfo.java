@@ -95,7 +95,7 @@ public enum GlobalWidgetInfo {
     /**
      * [DialogUnknown]
      */
-    DIALOG_UNKNOWN_CONTAINER(WidgetIndices.DialogUnknown.GROUP_INDEX, WidgetIndices.DialogUnknown.CONTAINER),
+    DIALOG_UNKNOWN_CONTINUE(WidgetIndices.DialogUnknown.GROUP_INDEX, WidgetIndices.DialogUnknown.CONTINUE),
 
     /**
      * [LOGOUT] Widget Info
