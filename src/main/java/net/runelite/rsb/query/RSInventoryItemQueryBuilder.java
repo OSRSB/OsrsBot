@@ -29,26 +29,31 @@ public class RSInventoryItemQueryBuilder extends AbstractQueryBuilder<RSItem, ne
             return filter(item -> item.getDefinition().notedID == item.getID());
         }
 
+        public net.runelite.rsb.query.RSInventoryItemQueryBuilder namedContains(String... arrayOfString) {
+            if (arrayOfString == null) return this;
+            return filter(item -> Arrays.stream(arrayOfString)
+                    .anyMatch(string -> item.getName().contains(string)));
+        }
+
+        public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamedContains(String... arrayOfString) {
+            if (arrayOfString == null) return this;
+            return filter(item -> Arrays.stream(arrayOfString)
+                    .noneMatch(string -> item.getName().contains(string)));
+        }
+
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder named(String... arrayOfString) {
-            return filter(item -> Arrays.stream(arrayOfString)
-                    .anyMatch(string -> item.getName().toLowerCase().contains(string.toLowerCase())));
-        }
-
-        public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamed(String... arrayOfString) {
-            return filter(item -> Arrays.stream(arrayOfString)
-                    .noneMatch(string -> item.getName().toLowerCase().contains(string.toLowerCase())));
-        }
-
-        public net.runelite.rsb.query.RSInventoryItemQueryBuilder namedExact(String... arrayOfString) {
+            if (arrayOfString == null) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .anyMatch(string -> string.equals(item.getName())));
         }
-        public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamedExact(String... arrayOfString) {
+        public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamed(String... arrayOfString) {
+            if (arrayOfString == null) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .noneMatch(string -> string.equals(item.getName())));
         }
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder id(int... arrayOfInt) {
+            if (arrayOfInt == null) return this;
             return filter(item -> Arrays.stream(arrayOfInt)
                     .anyMatch(i -> i == item.getID()));
         }
@@ -59,13 +64,17 @@ public class RSInventoryItemQueryBuilder extends AbstractQueryBuilder<RSItem, ne
             return filter(item -> (item.getItem().getStackSize() >= minimum && item.getItem().getStackSize() <= maximum));
         }
 
-        public net.runelite.rsb.query.RSInventoryItemQueryBuilder actions(String... arrayOfString) {
+        public net.runelite.rsb.query.RSInventoryItemQueryBuilder actionsContains(String... arrayOfString) {
+            if (arrayOfString == null) return this;
             return filter(item -> Arrays.stream(item.getDefinition().options)
+                    .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)
-                            .anyMatch(inputString -> itemString.toLowerCase().contains(inputString.toLowerCase()))));
+                            .anyMatch(inputString -> itemString.contains(inputString))));
         }
-        public net.runelite.rsb.query.RSInventoryItemQueryBuilder actionsExact(String... arrayOfString) {
+        public net.runelite.rsb.query.RSInventoryItemQueryBuilder actions(String... arrayOfString) {
+            if (arrayOfString == null) return this;
             return filter(item -> Arrays.stream(item.getDefinition().options)
+                    .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)
                             .anyMatch(inputString -> itemString.equals(inputString))));
         }

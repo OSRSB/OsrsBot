@@ -56,26 +56,31 @@ public class RSPlayerQueryBuilder extends PositionableQueryBuilder<RSPlayer, RSP
                 .noneMatch(animation -> animation == player.getAnimation()));
     }
 
+    public RSPlayerQueryBuilder namedContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
+        return filter(player -> Arrays.stream(arrayOfString)
+                .anyMatch(string -> player.getName().contains(string)));
+    }
+
+    public RSPlayerQueryBuilder notNamedContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
+        return filter(player -> Arrays.stream(arrayOfString)
+                .noneMatch(string -> player.getName().contains(string)));
+    }
+
     public RSPlayerQueryBuilder named(String... arrayOfString) {
-        return filter(player -> Arrays.stream(arrayOfString)
-                .anyMatch(string -> player.getName().toLowerCase().contains(string.toLowerCase())));
-    }
-
-    public RSPlayerQueryBuilder notNamed(String... arrayOfString) {
-        return filter(player -> Arrays.stream(arrayOfString)
-                .noneMatch(string -> player.getName().toLowerCase().contains(string.toLowerCase())));
-    }
-
-    public RSPlayerQueryBuilder namedExact(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(player.getName())));
     }
-    public RSPlayerQueryBuilder notNamedExact(String... arrayOfString) {
+    public RSPlayerQueryBuilder notNamed(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(player.getName())));
     }
 
     public RSPlayerQueryBuilder modelId(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(player -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == player.getModel().getModel().getSceneId()));
     }

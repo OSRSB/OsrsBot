@@ -29,30 +29,36 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
         return filter(groundItem -> groundItem.getItem().getDefinition().notedID == groundItem.getItem().getID());
     }
 
+    public RSGroundItemQueryBuilder namedContain(String... arrayOfString) {
+        if (arrayOfString == null) return this;
+        return filter(groundItem -> Arrays.stream(arrayOfString)
+                .anyMatch(string -> groundItem.getItem().getName().contains(string)));
+    }
+
+    public RSGroundItemQueryBuilder notNamedContain(String... arrayOfString) {
+        if (arrayOfString == null) return this;
+        return filter(groundItem -> Arrays.stream(arrayOfString)
+                .noneMatch(string -> groundItem.getItem().getName().contains(string)));
+    }
+
     public RSGroundItemQueryBuilder named(String... arrayOfString) {
-        return filter(groundItem -> Arrays.stream(arrayOfString)
-                .anyMatch(string -> groundItem.getItem().getName().toLowerCase().contains(string.toLowerCase())));
-    }
-
-    public RSGroundItemQueryBuilder notNamed(String... arrayOfString) {
-        return filter(groundItem -> Arrays.stream(arrayOfString)
-                .noneMatch(string -> groundItem.getItem().getName().toLowerCase().contains(string.toLowerCase())));
-    }
-
-    public RSGroundItemQueryBuilder namedExact(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(groundItem.getItem().getName())));
     }
-    public RSGroundItemQueryBuilder notNamedExact(String... arrayOfString) {
+    public RSGroundItemQueryBuilder notNamed(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(groundItem.getItem().getName())));
     }
 
     public RSGroundItemQueryBuilder id(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(groundItem -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == groundItem.getItem().getID()));
     }
     public RSGroundItemQueryBuilder modelId(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(groundItem -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == groundItem.getModel().getModel().getSceneId()));
     }
@@ -63,13 +69,17 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
         return filter(groundItem -> (groundItem.getItem().getStackSize() >= minimum && groundItem.getItem().getStackSize() <= maximum));
     }
 
-    public RSGroundItemQueryBuilder actions(String... arrayOfString) {
+    public RSGroundItemQueryBuilder actionsContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
+                .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)
-                        .anyMatch(inputString -> itemString.toLowerCase().contains(inputString.toLowerCase()))));
+                        .anyMatch(inputString -> itemString.contains(inputString))));
     }
-    public RSGroundItemQueryBuilder actionsExact(String... arrayOfString) {
+    public RSGroundItemQueryBuilder actions(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
+                .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> itemString.equals(inputString))));
     }

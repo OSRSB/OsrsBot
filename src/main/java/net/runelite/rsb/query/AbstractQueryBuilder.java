@@ -22,7 +22,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public R results() {
-        return (R) new QueryResult(asList().stream().filter(this::accepts).toList());
+        return (R) new QueryResult(results().stream().filter(this::accepts).toList());
     }
 
     public boolean accepts(Object a) {
@@ -30,7 +30,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public List<T> asList() {
-        return getRequest().request();
+        return results().toList();
     }
 
     protected RQ getRequest() {
@@ -45,7 +45,7 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public Set<T> asSet() {
-        return (Set)getRequest().request().stream().collect(Collectors.toSet());
+        return (Set)results().stream().collect(Collectors.toSet());
     }
 
 /* Result Functions */

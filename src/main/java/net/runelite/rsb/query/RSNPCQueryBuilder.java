@@ -41,50 +41,62 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     }
 
     public RSNPCQueryBuilder animation(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(npc -> Arrays.stream(arrayOfInt)
                 .anyMatch(animation -> animation == npc.getAnimation()));
     }
 
     public RSNPCQueryBuilder notAnimation(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(npc -> Arrays.stream(arrayOfInt)
                 .noneMatch(animation -> animation == npc.getAnimation()));
     }
 
-    public RSNPCQueryBuilder named(String... arrayOfString) {
+    public RSNPCQueryBuilder namedContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> npc.getName().toLowerCase().contains(string.toLowerCase())));
     }
 
-    public RSNPCQueryBuilder notNamed(String... arrayOfString) {
+    public RSNPCQueryBuilder notNamedContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> npc.getName().toLowerCase().contains(string.toLowerCase())));
     }
 
-    public RSNPCQueryBuilder namedExact(String... arrayOfString) {
+    public RSNPCQueryBuilder named(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(npc.getName())));
     }
-    public RSNPCQueryBuilder notNamedExact(String... arrayOfString) {
+    public RSNPCQueryBuilder notNamed(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(npc.getName())));
     }
     public RSNPCQueryBuilder id(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(npc -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == npc.getID()));
     }
     public RSNPCQueryBuilder modelId(int... arrayOfInt) {
+        if (arrayOfInt == null) return this;
         return filter(npc -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == npc.getModel().getModel().getSceneId()));
     }
 
-    public RSNPCQueryBuilder actions(String... arrayOfString) {
+    public RSNPCQueryBuilder actionsContains(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(npc.getDef().getActions())
+                .filter((x) -> x != null)
                 .anyMatch(actionString -> Arrays.stream(arrayOfString)
-                        .anyMatch(inputString -> actionString.toLowerCase().contains(inputString.toLowerCase()))));
+                        .anyMatch(inputString -> actionString.contains(inputString))));
     }
 
-    public RSNPCQueryBuilder actionsExact(String... arrayOfString) {
+    public RSNPCQueryBuilder actions(String... arrayOfString) {
+        if (arrayOfString == null) return this;
         return filter(npc -> Arrays.stream(npc.getDef().getActions())
+                .filter((x) -> x != null)
                 .anyMatch(actionString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> actionString.equals(inputString))));
     }
