@@ -30,24 +30,24 @@ public class RSInventoryItemQueryBuilder extends AbstractQueryBuilder<RSItem, ne
         }
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder namedContains(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .anyMatch(string -> item.getName().contains(string)));
         }
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamedContains(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .noneMatch(string -> item.getName().contains(string)));
         }
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder named(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .anyMatch(string -> string.equals(item.getName())));
         }
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder notNamed(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(arrayOfString)
                     .noneMatch(string -> string.equals(item.getName())));
         }
@@ -65,14 +65,14 @@ public class RSInventoryItemQueryBuilder extends AbstractQueryBuilder<RSItem, ne
         }
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder actionsContains(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(item.getDefinition().options)
                     .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)
                             .anyMatch(inputString -> itemString.contains(inputString))));
         }
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder actions(String... arrayOfString) {
-            if (arrayOfString == null) return this;
+            if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
             return filter(item -> Arrays.stream(item.getDefinition().options)
                     .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)

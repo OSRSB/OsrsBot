@@ -57,30 +57,30 @@ public class RSPlayerQueryBuilder extends PositionableQueryBuilder<RSPlayer, RSP
     }
 
     public RSPlayerQueryBuilder namedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> player.getName().contains(string)));
     }
 
     public RSPlayerQueryBuilder notNamedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> player.getName().contains(string)));
     }
 
     public RSPlayerQueryBuilder named(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(player.getName())));
     }
     public RSPlayerQueryBuilder notNamed(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(player -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(player.getName())));
     }
 
     public RSPlayerQueryBuilder modelId(int... arrayOfInt) {
-        if (arrayOfInt == null) return this;
+        if (arrayOfInt == null ) return this;
         return filter(player -> Arrays.stream(arrayOfInt)
                 .anyMatch(i -> i == player.getModel().getModel().getSceneId()));
     }

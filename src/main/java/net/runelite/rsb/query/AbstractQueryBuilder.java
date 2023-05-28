@@ -18,19 +18,19 @@ public abstract class AbstractQueryBuilder<T, Q extends AbstractQueryBuilder<T, 
     }
 
     public R request() {
-        return (R) new QueryResult(asList());
+        return (R) new QueryResult(request.request());
     }
 
     public R results() {
-        return (R) new QueryResult(results().stream().filter(this::accepts).toList());
+        return (R) new QueryResult(requestAsList().stream().filter(this::accepts).collect(Collectors.toList()));
     }
 
     public boolean accepts(Object a) {
         return getRequest().accepts(a);
     }
 
-    public List<T> asList() {
-        return results().toList();
+    public List<T> requestAsList() {
+        return request().toList();
     }
 
     protected RQ getRequest() {

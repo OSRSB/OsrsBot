@@ -13,24 +13,24 @@ public class RSObjectQueryBuilder extends PositionableQueryBuilder<RSObject, RSO
     }
 
     public RSObjectQueryBuilder namedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> object.getName().contains(string)));
     }
 
     public RSObjectQueryBuilder notNamedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> object.getName().contains(string)));
     }
 
     public RSObjectQueryBuilder named(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(object.getName())));
     }
     public RSObjectQueryBuilder notNamed(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(object.getName())));
     }
@@ -46,14 +46,14 @@ public class RSObjectQueryBuilder extends PositionableQueryBuilder<RSObject, RSO
                 .anyMatch(i -> i == object.getModel().getModel().getSceneId()));
     }
     public RSObjectQueryBuilder actionsContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(object.getDef().getActions())
                 .filter((x) -> x != null)
                 .anyMatch(objectString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> objectString.contains(inputString))));
     }
     public RSObjectQueryBuilder actions(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(object -> Arrays.stream(object.getDef().getActions())
                 .filter((x) -> x != null)
                 .anyMatch(objectString -> Arrays.stream(arrayOfString)

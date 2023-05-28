@@ -29,25 +29,25 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
         return filter(groundItem -> groundItem.getItem().getDefinition().notedID == groundItem.getItem().getID());
     }
 
-    public RSGroundItemQueryBuilder namedContain(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+    public RSGroundItemQueryBuilder namedContains(String... arrayOfString) {
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> groundItem.getItem().getName().contains(string)));
     }
 
-    public RSGroundItemQueryBuilder notNamedContain(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+    public RSGroundItemQueryBuilder notNamedContains(String... arrayOfString) {
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> groundItem.getItem().getName().contains(string)));
     }
 
     public RSGroundItemQueryBuilder named(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(groundItem.getItem().getName())));
     }
     public RSGroundItemQueryBuilder notNamed(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(groundItem.getItem().getName())));
     }
@@ -70,14 +70,14 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
     }
 
     public RSGroundItemQueryBuilder actionsContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
                 .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> itemString.contains(inputString))));
     }
     public RSGroundItemQueryBuilder actions(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
                 .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)

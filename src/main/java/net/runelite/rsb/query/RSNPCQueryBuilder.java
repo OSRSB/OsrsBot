@@ -53,24 +53,24 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     }
 
     public RSNPCQueryBuilder namedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> npc.getName().toLowerCase().contains(string.toLowerCase())));
     }
 
     public RSNPCQueryBuilder notNamedContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> npc.getName().toLowerCase().contains(string.toLowerCase())));
     }
 
     public RSNPCQueryBuilder named(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .anyMatch(string -> string.equals(npc.getName())));
     }
     public RSNPCQueryBuilder notNamed(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(npc -> Arrays.stream(arrayOfString)
                 .noneMatch(string -> string.equals(npc.getName())));
     }
@@ -86,7 +86,7 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     }
 
     public RSNPCQueryBuilder actionsContains(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
         return filter(npc -> Arrays.stream(npc.getDef().getActions())
                 .filter((x) -> x != null)
                 .anyMatch(actionString -> Arrays.stream(arrayOfString)
@@ -94,7 +94,8 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     }
 
     public RSNPCQueryBuilder actions(String... arrayOfString) {
-        if (arrayOfString == null) return this;
+        if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
+        System.out.println("ARRAYOFSTRING: " + arrayOfString[0]);
         return filter(npc -> Arrays.stream(npc.getDef().getActions())
                 .filter((x) -> x != null)
                 .anyMatch(actionString -> Arrays.stream(arrayOfString)

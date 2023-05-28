@@ -8,7 +8,9 @@ import net.runelite.rsb.wrappers.RSArea;
 import net.runelite.rsb.wrappers.RSTile;
 import net.runelite.rsb.wrappers.common.Positionable;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static net.runelite.rsb.methods.MethodProvider.methods;
 
@@ -46,6 +48,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
     }
 
     public final Q within(RSArea... areas) {
+        if (areas == null || Arrays.stream(areas).allMatch((x) -> x == null)) return (Q)this;
         getRequest().within(areas);
         return filter(positionable -> {
             for (RSArea area : areas) {
@@ -57,6 +60,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
         });
     }
     public final Q notWithin(RSArea... areas) {
+        if (areas == null || Arrays.stream(areas).allMatch((x) -> x == null)) return (Q)this;
         getRequest().notWithin(areas);
         return filter(positionable -> {
             for (RSArea area : areas) {
@@ -70,6 +74,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
 
 
     public final Q located(Positionable... positionables) {
+        if (positionables == null || Arrays.stream(positionables).allMatch((x) -> x == null)) return (Q)this;
         getRequest().located(positionables);
         return filter(location -> {
             for (Positionable positionable : positionables) {
@@ -82,6 +87,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
     }
 
     public final Q notLocated(Positionable... positionables) {
+        if (positionables == null || Arrays.stream(positionables).allMatch((x) -> x == null)) return (Q)this;
         getRequest().notLocated(positionables);
         return filter(location -> {
             for (Positionable positionable : positionables) {
@@ -106,7 +112,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
     }
 
     public R results() {
-        return (R) new PositionableQueryResult(asList().stream().filter(this::accepts).toList());
+        return (R) new PositionableQueryResult(requestAsList().stream().filter(this::accepts).collect(Collectors.toList()));
     }
 
 /* Result Functions */
