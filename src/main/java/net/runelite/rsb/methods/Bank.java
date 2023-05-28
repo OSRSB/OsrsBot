@@ -158,6 +158,7 @@ public class Bank extends MethodProvider {
 						if (item.doAction("Deposit-X")) {
 							sleep(random(1000, 1300));
 							methods.inputManager.sendKeys(String.valueOf(number), true);
+							sleep(random(1000, 1300));
 						}
 					}
 					break;
@@ -226,6 +227,7 @@ public class Bank extends MethodProvider {
 						if (item.doAction("Deposit-X")) {
 							sleep(random(1000, 1300));
 							methods.inputManager.sendKeys(String.valueOf(number), true);
+							sleep(random(1000, 1300));
 						}
 					}
 					break;
@@ -828,6 +830,7 @@ public class Bank extends MethodProvider {
 				else if (item.doAction("Withdraw-X")) {
 					sleep(random(1000, 1300));
 					methods.keyboard.sendText(String.valueOf(count), true);
+					sleep(random(1000, 1300));
 				}
 		}
 		if (action != null && item.doAction(action)) {
@@ -892,6 +895,7 @@ public class Bank extends MethodProvider {
 				else if (item.doAction("Withdraw-X")) {
 					sleep(random(1000, 1300));
 					methods.keyboard.sendText(String.valueOf(count), true);
+					sleep(random(1000, 1300));
 				}
 		}
 		if (action != null && item.doAction(action)) {
