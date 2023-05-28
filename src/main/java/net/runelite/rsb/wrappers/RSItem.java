@@ -159,7 +159,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 */
 	public String getName() {
 		if (component != null && component.getName() != null) {
-			return component.getName();
+			return component.getName().replaceAll("<.*?>", "");
 		} else {
 			ItemDefinition definition = getDefinition();
 			if (definition != null) {
