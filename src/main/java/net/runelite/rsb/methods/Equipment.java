@@ -70,7 +70,7 @@ public class Equipment extends MethodProvider {
 		if (container == null) {
 			return null;
 		}
-		Item cachedItem = container.getItem(index + 1);
+		Item cachedItem = container.getItem(index);
 		RSWidget widget = getInterface().getComponent(index);
 		return cachedItem == null ? null : new RSItem(methods, widget, cachedItem);
 	}
