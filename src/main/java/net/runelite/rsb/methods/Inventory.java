@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
+import net.runelite.api.ItemContainer;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
@@ -691,7 +692,11 @@ public class Inventory extends MethodProvider {
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget comp = invInterface.getDynamicComponent(index);
-		Item cachedItem = methods.client.getItemContainer(InventoryID.INVENTORY).getItem(index + 1);
+		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
+		if (container == null) {
+			return null;
+		}
+		Item cachedItem = container.getItem(index + 1);
 		return 0 <= index && index < 28 && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
 	}
 
@@ -704,7 +709,11 @@ public class Inventory extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget[] invItems = invInterface.getComponents();
-		Item[] cachedItems = methods.client.getItemContainer(InventoryID.INVENTORY).getItems();
+		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
+		if (container == null) {
+			return null;
+		}
+		Item[] cachedItems = container.getItems();
 		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
