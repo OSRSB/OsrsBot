@@ -709,12 +709,12 @@ public class Inventory extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget[] invItems = invInterface.getComponents();
+		RSItem[] items = new RSItem[invItems.length];
 		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
 		if (container == null) {
-			return new RSItem[]{};
+			return items;
 		}
 		Item[] cachedItems = container.getItems();
-		RSItem[] items = new RSItem[invItems.length];
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
 				items[i] = new RSItem (methods, invItems[i], cachedItems[i]);
