@@ -68,7 +68,7 @@ public class Equipment extends MethodProvider {
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
 		ItemContainer container = methods.client.getItemContainer(InventoryID.EQUIPMENT);
 		if (container == null) {
-			return null;
+			return new RSItem[]{};
 		}
 		Item[] cachedItems = container.getItems();
 		for (int i = 0; i < cachedItems.length; i++) {
