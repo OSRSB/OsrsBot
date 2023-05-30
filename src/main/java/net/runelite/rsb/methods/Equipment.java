@@ -1,5 +1,7 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.api.InventoryID;
+import net.runelite.api.Item;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
 import net.runelite.rsb.wrappers.RSItem;
@@ -22,20 +24,16 @@ public class Equipment extends MethodProvider {
 	 *
 	 * @return the equipment interface
 	 */
-	public RSWidget getInterface() {
-		return getInterface(true);
+	private RSWidget getInterface() {
+		return methods.interfaces.get(WidgetIndices.WornEquipmentTab.GROUP_INDEX);
 	}
 
-	private RSWidget getInterface(boolean update) {
-		// Tab needs to be open for it to update its content -.-
-		if (update && methods.game.getCurrentTab() != InterfaceTab.EQUIPMENT) {
-			if (methods.bank.isOpen()) {
-				methods.bank.close();
-			}
-			methods.game.openTab(InterfaceTab.EQUIPMENT);
-			sleep(random(900, 1500));
-		}
-		return methods.interfaces.get(WidgetIndices.WornEquipmentTab.GROUP_INDEX);
+	public boolean isOpen() {
+		return methods.game.getCurrentTab() == InterfaceTab.EQUIPMENT;
+	}
+
+	public boolean open() {
+		return methods.game.openTab(InterfaceTab.EQUIPMENT);
 	}
 
 	/**
@@ -44,27 +42,12 @@ public class Equipment extends MethodProvider {
 	 * @return An array containing all equipped items
 	 */
 	public RSItem[] getItems() {
-		getInterface(true);
+		getInterface();
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
+		Item[] cachedItems = methods.client.getItemContainer(InventoryID.EQUIPMENT).getItems();
 		for (int i = 0; i < items.length; i++) {
 			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
-			items[i] = new RSItem(methods, slotItem);
-		}
-		return items;
-	}
-
-	/**
-	 * Gets the cached equipment array (i.e. does not open the interface).
-	 *
-	 * @return The items equipped as seen when the equipment tab was last
-	 *         opened.
-	 */
-	private RSItem[] getCachedItems() {
-		RSWidget[] equipment = getInterface(false).getComponents();
-		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
-		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = equipment[i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER].getDynamicComponent(1);
-			items[i] = new RSItem(methods, slotItem);
+			items[i] = new RSItem(methods, slotItem, cachedItems[i]);
 		}
 		return items;
 	}
@@ -76,7 +59,7 @@ public class Equipment extends MethodProvider {
 	 * @return The equipped item.
 	 */
 	public RSItem getItem(int index) {
-		return new RSItem(methods, getInterface().getComponent(index));
+		return new RSItem(methods, getInterface().getComponent(index), methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index));
 	}
 
 
