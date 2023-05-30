@@ -721,7 +721,7 @@ public class Inventory extends MethodProvider {
 				items.add(new RSItem (methods, invItems[i], cachedItems[i]));
 			}
 		}
-		return (RSItem[]) items.toArray();
+		return items.toArray(new RSItem[0]);
 	}
 
 	/**
