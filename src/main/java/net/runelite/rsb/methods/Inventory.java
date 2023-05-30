@@ -1,5 +1,7 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.api.InventoryID;
+import net.runelite.api.Item;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
@@ -36,15 +38,12 @@ public class Inventory extends MethodProvider {
 	public Map.Entry<String, RSWidget> getInterface() {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		HashMap<String, RSWidget> widgets = new HashMap<>();
-		switch (methods.gui.getViewportLayout()) {
-			case FIXED_CLASSIC -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.FIXED_VIEWPORT_INVENTORY_CONTAINER));
-			case RESIZABLE_MODERN -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INVENTORY_CONTAINER));
-			case RESIZABLE_CLASSIC -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.RESIZABLE_VIEWPORT_INVENTORY_CONTAINER));
-		}
+
 		widgets.put(BANK, methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER)); //Bug #137 - Bank has its own inventory container
 		widgets.put(STORE, methods.interfaces.getComponent(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
+		widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.INVENTORY));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
@@ -83,7 +82,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean destroyItem(final int itemID) {
 		RSItem item = getItem(itemID);
-		if (!itemHasAction(item, "Destroy")) {
+		if (!itemHasAction(item, "Destroy") || !open()) {
 			return false;
 		}
 		while (item != null) {
@@ -377,6 +376,16 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Checks whether or not your inventory is empty.
+	 *
+	 * @return <code>true</code> if your inventory contains 28 items; otherwise
+	 *         <code>false</code>.
+	 */
+	public boolean isEmpty() {
+		return getCount() == 0;
+	}
+
+	/**
 	 * Checks whether or not an inventory item is selected.
 	 *
 	 * @return <code>true</code> if an item in your inventory is selected; otherwise
@@ -420,7 +429,7 @@ public class Inventory extends MethodProvider {
 		if (selItem != null && selItem.getID() == itemID) {
 			return true;
 		}
-		if (!item.doAction("Use")) { return false; }
+		if (open() && !item.doAction("Use")) { return false; }
 		/*
 		for (int c = 0; c < 5 && getSelectedItem() == null; c++) {
 			sleep(random(40, 60));
@@ -546,6 +555,9 @@ public class Inventory extends MethodProvider {
 	 * @return The index of current selected item, or -1 if none is selected.
 	 */
 	public int getSelectedItemIndex() {
+		if (!isOpen()) {
+			return -1;
+		}
 		RSWidget invInterface = getInterface().getValue();
 			RSWidget[] comps = invInterface.getComponents();
 			for (int i = 0; i < Math.min(28, comps.length); ++i) {
@@ -564,6 +576,9 @@ public class Inventory extends MethodProvider {
 	 * @return the index of the item selected; otherwise -1
 	 */
 	public int checkIsSelected(RSWidgetItem[] comps) {
+		if (!isOpen()) {
+			return -1;
+		}
 		class Selector {
 			int selected = -1;
 			public void setSelected(int selection) {
@@ -606,6 +621,9 @@ public class Inventory extends MethodProvider {
 	 * @return the index of the item selected; otherwise -1
 	 */
 	public int getSelected(Image img, RSWidgetItem[] comps) {
+		if (!isOpen()) {
+			return -1;
+		}
 		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = im.getGraphics();
 		graphics.drawImage(img, 0, 0, null);
@@ -672,8 +690,9 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
-		RSWidget comp = invInterface.getComponent(index);
-		return 0 <= index && index < 28 && comp.getId() != EMPTY_SLOT_ITEM_ID ? new RSItem(methods, comp) : null;
+		RSWidget comp = invInterface.getDynamicComponent(index);
+		Item cachedItem = methods.client.getItemContainer(InventoryID.INVENTORY).getItem(index);
+		return 0 <= index && index < 28 && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
 	}
 
 	/**
@@ -685,10 +704,12 @@ public class Inventory extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget[] invItems = invInterface.getComponents();
+		Item[] cachedItems = methods.client.getItemContainer(InventoryID.INVENTORY).getItems();
 		RSItem[] items = new RSItem[invItems.length];
-		for (int i = 0; i < invItems.length; i++) {
-			if (invItems[i].getId() != EMPTY_SLOT_ITEM_ID)
-				items[i] = new RSItem(methods, invItems[i]);
+		for (int i = 0; i < cachedItems.length; i++) {
+			if (cachedItems[i].getId() != -1) {
+				items[i] = new RSItem (methods, invItems[i], cachedItems[i]);
+			}
 		}
 		return items;
 	}
@@ -720,24 +741,6 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem[] getItems(final String... names) {
 		return getItems(getItemIDs(names));
-	}
-
-	/**
-	 * Gets all the items in the inventory. If the tab is not currently open, it
-	 * does not open it and returns the last known array of items in the tab.
-	 *
-	 * @return <code>RSItem</code> array of the cached inventory items or new
-	 *         <code>RSItem[0]</code>.
-	 */
-	public RSItem[] getCachedItems() {
-		RSWidget invInterface = getInterface().getValue();
-		if (invInterface == null) return null;
-		RSWidget[] invItems = invInterface.getComponents();
-		RSItem[] items = new RSItem[invItems.length];
-		for (int i = 0; i < invItems.length; i++) {
-			items[i] = new RSItem(methods, invItems[i]);
-		}
-		return items;
 	}
 
 	/**
@@ -807,7 +810,6 @@ public class Inventory extends MethodProvider {
 	public RSItem getItem(final String... names) {
 		return getItem(getItemIDs(names));
 	}
-
 	public RSItem[] find(final Predicate<RSItem> filter) {
 		RSItem[] rsItems = getItems();
 		RSItem[] filterItems = new RSItem[]{};

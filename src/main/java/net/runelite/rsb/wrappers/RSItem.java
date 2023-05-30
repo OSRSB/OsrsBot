@@ -1,6 +1,7 @@
 package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.TileItem;
 import net.runelite.cache.definitions.ItemDefinition;
@@ -57,6 +58,14 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		this.id = item.getItemId();
 		this.stackSize = item.getStackSize();
 		this.component = item;
+		this.def = this.getDefinition(id);
+	}
+
+	public RSItem(final MethodContext ctx, final RSWidget widget, final Item item) {
+		super(ctx);
+		this.id = item.getId();
+		this.stackSize = item.getQuantity();
+		this.component = widget;
 		this.def = this.getDefinition(id);
 	}
 
