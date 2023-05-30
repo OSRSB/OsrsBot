@@ -49,7 +49,7 @@ public class Equipment extends MethodProvider {
 		if (container == null) {
 			return null;
 		}
-		Item[] cachedItems = methods.client.getItemContainer(InventoryID.EQUIPMENT).getItems();
+		Item[] cachedItems = container.getItems();
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
 				RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
@@ -70,7 +70,7 @@ public class Equipment extends MethodProvider {
 		if (container == null) {
 			return null;
 		}
-		Item cachedItem = methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index + 1);
+		Item cachedItem = container.getItem(index + 1);
 		RSWidget widget = getInterface().getComponent(index);
 		return cachedItem == null ? null : new RSItem(methods, widget, cachedItem);
 	}
