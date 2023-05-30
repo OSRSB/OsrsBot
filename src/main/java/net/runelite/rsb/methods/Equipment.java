@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
+import net.runelite.api.ItemContainer;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
 import net.runelite.rsb.wrappers.RSItem;
@@ -44,10 +45,16 @@ public class Equipment extends MethodProvider {
 	public RSItem[] getItems() {
 		getInterface();
 		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
+		ItemContainer container = methods.client.getItemContainer(InventoryID.EQUIPMENT);
+		if (container == null) {
+			return null;
+		}
 		Item[] cachedItems = methods.client.getItemContainer(InventoryID.EQUIPMENT).getItems();
-		for (int i = 0; i < items.length; i++) {
-			RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
-			items[i] = new RSItem(methods, slotItem, cachedItems[i]);
+		for (int i = 0; i < cachedItems.length; i++) {
+			if (cachedItems[i].getId() != -1) {
+				RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, i + WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER).getDynamicComponent(1);
+				items[i] = new RSItem(methods, slotItem, cachedItems[i]);
+			}
 		}
 		return items;
 	}
@@ -59,7 +66,13 @@ public class Equipment extends MethodProvider {
 	 * @return The equipped item.
 	 */
 	public RSItem getItem(int index) {
-		return new RSItem(methods, getInterface().getComponent(index), methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index + 1));
+		ItemContainer container = methods.client.getItemContainer(InventoryID.EQUIPMENT);
+		if (container == null) {
+			return null;
+		}
+		Item cachedItem = methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index + 1);
+		RSWidget widget = getInterface().getComponent(index);
+		return cachedItem == null ? null : new RSItem(methods, widget, cachedItem);
 	}
 
 
