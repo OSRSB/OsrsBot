@@ -9,6 +9,8 @@ import net.runelite.rsb.internal.globval.enums.InterfaceTab;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSWidget;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -65,7 +67,7 @@ public class Equipment extends MethodProvider {
 	 */
 	public RSItem[] getItems() {
 		getInterface();
-		RSItem[] items = new RSItem[EQUIPMENT_ITEM_SLOTS];
+		List<RSItem> items = new ArrayList<RSItem>();
 		ItemContainer container = methods.client.getItemContainer(InventoryID.EQUIPMENT);
 		if (container == null) {
 			return new RSItem[]{};
@@ -74,10 +76,10 @@ public class Equipment extends MethodProvider {
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
 				RSWidget slotItem = methods.interfaces.getComponent(WidgetIndices.WornEquipmentTab.GROUP_INDEX, runeliteIndexToWidgetChildIndex.get(i)).getDynamicComponent(1);
-				items[i] = new RSItem(methods, slotItem, cachedItems[i]);
+				items.add(new RSItem(methods, slotItem, cachedItems[i]));
 			}
 		}
-		return items;
+		return (RSItem[]) items.toArray();
 	}
 
 	/**
