@@ -698,7 +698,7 @@ public class Inventory extends MethodProvider {
 			return null;
 		}
 		Item cachedItem = container.getItem(index);
-		return 0 <= index && index < 28 && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
+		return 0 <= index && index < 28 && cachedItem != null && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
 	}
 
 	/**
