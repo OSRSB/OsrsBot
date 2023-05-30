@@ -79,7 +79,7 @@ public class Equipment extends MethodProvider {
 				items.add(new RSItem(methods, slotItem, cachedItems[i]));
 			}
 		}
-		return (RSItem[]) items.toArray();
+		return items.toArray(new RSItem[0]);
 	}
 
 	/**
