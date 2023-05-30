@@ -691,7 +691,7 @@ public class Inventory extends MethodProvider {
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget comp = invInterface.getDynamicComponent(index);
-		Item cachedItem = methods.client.getItemContainer(InventoryID.INVENTORY).getItem(index);
+		Item cachedItem = methods.client.getItemContainer(InventoryID.INVENTORY).getItem(index + 1);
 		return 0 <= index && index < 28 && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
 	}
 
