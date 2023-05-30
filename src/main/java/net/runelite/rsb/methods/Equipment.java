@@ -59,7 +59,7 @@ public class Equipment extends MethodProvider {
 	 * @return The equipped item.
 	 */
 	public RSItem getItem(int index) {
-		return new RSItem(methods, getInterface().getComponent(index), methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index));
+		return new RSItem(methods, getInterface().getComponent(index), methods.client.getItemContainer(InventoryID.EQUIPMENT).getItem(index + 1));
 	}
 
 
