@@ -14,6 +14,7 @@ import net.runelite.rsb.wrappers.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -711,16 +712,16 @@ public class Inventory extends MethodProvider {
 		RSWidget[] invItems = invInterface.getComponents();
 		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
 		if (container == null) {
-			return null;
+			return new RSItem[]{};
 		}
 		Item[] cachedItems = container.getItems();
-		RSItem[] items = new RSItem[invItems.length];
+		List<RSItem> items = new ArrayList<RSItem>();
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
-				items[i] = new RSItem (methods, invItems[i], cachedItems[i]);
+				items.add(new RSItem (methods, invItems[i], cachedItems[i]));
 			}
 		}
-		return items;
+		return (RSItem[]) items.toArray();
 	}
 
 	/**
