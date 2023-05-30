@@ -711,7 +711,7 @@ public class Inventory extends MethodProvider {
 		RSWidget[] invItems = invInterface.getComponents();
 		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
 		if (container == null) {
-			return null;
+			return new RSItem[]{};
 		}
 		Item[] cachedItems = container.getItems();
 		RSItem[] items = new RSItem[invItems.length];
