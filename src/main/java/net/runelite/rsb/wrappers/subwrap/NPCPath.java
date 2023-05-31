@@ -9,9 +9,11 @@ import net.runelite.rsb.wrappers.RSTile;
 import net.runelite.rsb.wrappers.common.Positionable;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class NPCPath extends MethodProvider {
     public RSNPC npc;
@@ -42,8 +44,8 @@ public class NPCPath extends MethodProvider {
         this.npc = npc;
     }
 
-    public boolean hasLineOfSight(RSTile start, RSTile end) {
-        RSTile closestTile = null;
+    public RSTile getNearestTile(RSTile start, RSTile end) {
+        RSTile nearestTile = null;
         double minDistance = Float.POSITIVE_INFINITY;
         for (int i = 0; i < npc.getAccessor().getWorldArea().getWidth(); i++) {
             for (int j = 0; j < npc.getAccessor().getWorldArea().getHeight(); j++) {
@@ -51,11 +53,18 @@ public class NPCPath extends MethodProvider {
                 double distance = offsetTile(start, Pair.of(i,j)).getLocation().distanceToDouble(end);
                 if (minDistance > distance) {
                     minDistance = distance;
-                    closestTile = tile;
+                    nearestTile = tile;
                 }
             }
         }
-        return end.getTile(methods).hasLineOfSightTo(closestTile.getTile(methods));
+        return nearestTile;
+    }
+
+    public RSTile getNearestTile(Positionable end) {
+        return getNearestTile(npc.getLocation(), end.getLocation());
+    }
+    public boolean hasLineOfSight(RSTile start, RSTile end) {
+        return end.getTile(methods).hasLineOfSightTo(getNearestTile(start, end).getTile(methods));
     }
     public boolean hasLineOfSight(Positionable end) {
         return hasLineOfSight(npc.getLocation(), end.getLocation());
@@ -64,26 +73,49 @@ public class NPCPath extends MethodProvider {
         return hasLineOfSight(npc.getLocation(), end);
     }
 
-    public boolean isSafeSpotted(RSTile start, RSTile end) {
-        RSTile[] path = getPath(start, end);
-        RSTile lastTile = path[path.length - 1];
-        for (int i = 0; i < npc.getAccessor().getWorldArea().getWidth(); i++) {
-            for (int j = 0; j < npc.getAccessor().getWorldArea().getHeight(); j++) {
-                int manhattanDistance = Math.abs(offsetTile(lastTile, Pair.of(i, j)).getWorldLocation().getX() - end.getWorldLocation().getX()) +
-                        Math.abs(offsetTile(lastTile, Pair.of(i, j)).getWorldLocation().getY() - end.getWorldLocation().getY());
-                if (manhattanDistance <= 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    public boolean isSafeSpotted(Positionable end) {
-        return isSafeSpotted(npc.getLocation(), end.getLocation());
+    public RSTile getNearestSafespotWithLOS(Positionable end, int limit) {
+        return getNearestSafespot(end, limit, (x) -> hasLineOfSight(x));
     }
 
-    public boolean isSafeSpotted(RSTile end) {
-        return isSafeSpotted(npc.getLocation(), end);
+    public RSTile getNearestSafespot(Positionable end, int limit, Predicate<RSTile> predicate){
+        int[][] flags = methods.client.getCollisionMaps()[methods.game.getPlane()].getFlags();
+        WalkerTile center = end.getLocation();
+        int i = center.getX(), j = center.getY();
+        // Snake iterator; iterates from center outward in concentric squares
+        RSTile current = new RSTile(i , j, center.getPlane());
+        if (isSafeSpotted(current) && predicate.test(current)) return current;
+        for (int layer = 1; layer <= limit; layer++, j--, i--) {
+            while (i < center.getX() + layer)
+                if (isSafeSpotted(current = new RSTile(++i , j, center.getPlane())) && predicate.test(current) &&
+                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                        return current;
+            while (j < center.getY() + layer)
+                if (isSafeSpotted(current = new RSTile(i , ++j, center.getPlane())) && predicate.test(current) &&
+                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                        return current;
+            while (i > center.getX() - layer)
+                if (isSafeSpotted(current = new RSTile(--i , j, center.getPlane())) && predicate.test(current) &&
+                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                        return current;
+            while (j > center.getY() - layer)
+                if (isSafeSpotted(current = new RSTile(i , --j, center.getPlane())) && predicate.test(current) &&
+                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                        return current;
+        }
+        return null;
+    }
+    public RSTile getNearestSafespot(Positionable end, int limit) {
+        return getNearestSafespot(end, limit, (x) -> true);
+    }
+
+    public boolean isSafeSpotted(RSTile start, RSTile end) {
+        RSTile[] path = getPath(start, end);
+        RSTile nearestTile = getNearestTile(path[path.length - 1], end);
+        return nearestTile.getLocation().distanceToDouble(end) > 1.1;
+    }
+
+    public boolean isSafeSpotted(Positionable end) {
+        return isSafeSpotted(npc.getLocation(), end.getLocation());
     }
 
     public RSTile[] getPath(RSTile start, RSTile end) {
@@ -101,10 +133,6 @@ public class NPCPath extends MethodProvider {
 
     public RSTile[] getPath(Positionable end) {
         return getPath(npc.getLocation(), end.getLocation());
-    }
-
-    public RSTile[] getPath(RSTile end) {
-        return getPath(npc.getLocation(), end);
     }
 
     public RSTile offsetTile(RSTile tile, Pair<Integer, Integer> offset) {
