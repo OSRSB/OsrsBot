@@ -54,6 +54,17 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
         return -1;
     }
 
+    public int getMaximumHP() {
+        return methods.runeLite.getNPCManager().getHealth(getID());
+    }
+
+    public int getCurrentHP() {
+        double healthRatio = getAccessor().getHealthRatio();
+        double healthScale = getAccessor().getHealthScale();
+        int maximumHealth = getMaximumHP();
+        if (healthRatio == -1 || maximumHealth == -1) return -1;
+        return isInCombat() ? (int)(healthRatio / healthScale * maximumHealth) : maximumHealth;
+    }
     @Override
     public String getName() {
         NpcDefinition def = getDef();
@@ -91,4 +102,5 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
     public RSTile getPosition() {
         return getLocation();
     }
+
 }
