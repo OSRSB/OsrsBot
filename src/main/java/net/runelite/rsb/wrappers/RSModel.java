@@ -11,6 +11,7 @@ import net.runelite.api.model.Jarvis;
 import net.runelite.rsb.internal.wrappers.Filter;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.util.StdRandom;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class RSModel extends MethodProvider {
 	 * @param p A point on the screen
 	 * @return true of the point is within the bounds of the model
 	 */
-	private boolean contains(Point p) {
+	public boolean contains(Point p) {
 		if (this == null) {
 			return false;
 		}
@@ -123,7 +124,7 @@ public class RSModel extends MethodProvider {
 	public boolean doClick(boolean leftClick) {
 		try {
 			for (int i = 0; i < 10; i++) {
-				methods.mouse.move(getPoint());
+				methods.mouse.move(getPointNearCenter());
 				if (this.contains(methods.mouse.getLocation())) {
 					methods.mouse.click(leftClick);
 					return true;
@@ -145,11 +146,12 @@ public class RSModel extends MethodProvider {
 	public boolean doAction(String action, String... target) {
 		try {
 			for (int i = 0; i < 10; i++) {
-				methods.mouse.move(getPoint());
-				if (this.contains(methods.mouse.getLocation())) {
-					if (methods.menu.doAction(action, target)) {
-						return true;
-					}
+				if (!this.contains(methods.mouse.getLocation())) {
+					methods.mouse.move(getPointNearCenter());
+					methods.mouse.move(getPointNearCenter());
+				}
+				if (methods.menu.doAction(action, target)) {
+					return true;
 				}
 			}
 		} catch (Exception ignored) {
@@ -217,7 +219,7 @@ public class RSModel extends MethodProvider {
 				maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
 			}
 			for (int x = minX; x < maxX; x++) {
-			for (int y = minY; y < maxY; y++) {
+				for (int y = minY; y < maxY; y++) {
 					points.add(new Point(x, y));
 				}
 			}
@@ -230,7 +232,7 @@ public class RSModel extends MethodProvider {
 				points.add(index++, new Point(poly.xpoints[i], poly.ypoints[i]));
 			}
 		}
-		return (Point[]) points.toArray();
+		return points.toArray(new Point[0]);
 	}
 
 	/**
@@ -259,7 +261,7 @@ public class RSModel extends MethodProvider {
 					maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
 				}
 				for (int x = minX; x < maxX; x++) {
-			for (int y = minY; y < maxY; y++) {
+					for (int y = minY; y < maxY; y++) {
 						Point firstPoint = new Point(x, y);
 						if (methods.calc.pointOnScreen(firstPoint)) {
 							return firstPoint;
@@ -338,7 +340,7 @@ public class RSModel extends MethodProvider {
 	 * Moves the mouse onto the RSModel.
 	 */
 	public void hover() {
-		methods.mouse.move(getPoint());
+		methods.mouse.move(getPointNearCenter());
 	}
 
 	/**
@@ -359,6 +361,59 @@ public class RSModel extends MethodProvider {
 					&& Arrays.equals(zPoints, m.zPoints);
 		}
 		return false;
+	}
+
+	public Point getCenterPoint() {
+		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
+
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
+		return new Point((max_x + min_x) / 2, (max_y + min_y) / 2);
+	}
+
+	public Point getPointNearCenter() {
+		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
+
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
+
+		int centerX = (max_x + min_x) / 2;
+		int centerY = (max_y + min_y) / 2;
+
+		int x = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
+		int y = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
+
+		return new Point(x, y);
 	}
 
 	protected Point getPointInRange(int start, int end) {
