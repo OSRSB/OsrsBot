@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.google.common.math.DoubleMath;
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
+
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.binder.ConstantBindingBuilder;
@@ -54,6 +55,8 @@ public class BotModule extends AbstractModule {
     private final File config;
     private boolean disableTelemetry = false;
 
+    private final String profile = "default";
+    private final boolean insecureWriteCredentials = false;
 
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
         this.okHttpClient = okHttpClient;
@@ -115,6 +118,12 @@ public class BotModule extends AbstractModule {
             bind(Scheduler.class);
             bind(PluginManager.class);
             bind(SessionManager.class);
+
+
+            bind(String.class).annotatedWith(Names.named("profile")).toProvider(Providers.of(profile));
+            bindConstant().annotatedWith(Names.named("insecureWriteCredentials")).to(insecureWriteCredentials);
+            bind(File.class).annotatedWith(Names.named("runeLiteDir")).toInstance(RuneLite.RUNELITE_DIR);
+
 
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
