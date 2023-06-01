@@ -137,7 +137,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         double healthRatio = getAccessor().getHealthRatio();
         double healthScale = getAccessor().getHealthScale();
         if (healthRatio == -1) return -1;
-        return isInCombat() ? (int)(healthRatio / healthScale * 100) : 100;
+        return (int)(healthRatio / healthScale * 100);
     }
 
     public WalkerTile getLocation() {
