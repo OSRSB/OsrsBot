@@ -66,14 +66,14 @@ public class RSInventoryItemQueryBuilder extends AbstractQueryBuilder<RSItem, ne
 
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder actionsContains(String... arrayOfString) {
             if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
-            return filter(item -> Arrays.stream(item.getDefinition().options)
+            return filter(item -> Arrays.stream(item.getDefinition().interfaceOptions)
                     .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)
                             .anyMatch(inputString -> itemString.contains(inputString))));
         }
         public net.runelite.rsb.query.RSInventoryItemQueryBuilder actions(String... arrayOfString) {
             if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
-            return filter(item -> Arrays.stream(item.getDefinition().options)
+            return filter(item -> Arrays.stream(item.getDefinition().interfaceOptions)
                     .filter((x) -> x != null)
                     .anyMatch(itemString -> Arrays.stream(arrayOfString)
                             .anyMatch(inputString -> itemString.equals(inputString))));
