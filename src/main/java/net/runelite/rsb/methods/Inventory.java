@@ -65,7 +65,7 @@ public class Inventory extends MethodProvider {
 	}
 
 	public boolean isOpen() {
-		return isOpen(getInterface().getValue());
+		return methods.game.getCurrentTab() == InterfaceTab.INVENTORY;
 	}
 
 	public boolean open() {
