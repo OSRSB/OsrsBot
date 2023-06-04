@@ -205,6 +205,13 @@ public class BotModule extends AbstractModule {
     }
 
     @Provides
+    @Named("runelite.pluginhub.url")
+    HttpUrl providePluginHubBase(@Named("runelite.pluginhub.url") String s)
+    {
+        return HttpUrl.get(System.getProperty("runelite.pluginhub.url", s));
+    }
+
+    @Provides
     @javax.inject.Singleton
     TelemetryClient provideTelemetry(
             OkHttpClient okHttpClient,
