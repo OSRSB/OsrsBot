@@ -479,14 +479,21 @@ public class Inventory extends MethodProvider {
 	/**
 	 * Uses an item on an object.
 	 *
-	 * @param itemID The item ID to use on the object.
-	 * @param object The RSObject you want the item to be used on.
+	 * @param itemID  The item ID to use on the object.
+	 * @param object  The RSObject you want the item to be used on.
+	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the "use" action had been used on both the
 	 *         RSItem and RSObject; otherwise <code>false</code>.
 	 */
-	public boolean useItem(final int itemID, final RSObject object) {
-		RSItem item = getItem(itemID);
+	public boolean useItem(final int itemID, final RSObject object, final boolean... getLast) {
+		RSItem item;
+		if(getLast[0]){
+			item = getLastItem(itemID);
+		}else{
+			item = getItem(itemID);
+		}
 		return item != null && useItem(item, object);
+
 	}
 
 	/**
@@ -795,6 +802,25 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getItem(final String... names) {
 		return getItem(getItemIDs(names));
+	}
+
+	/**
+	 * Gets the last item in the inventory with any of the provided IDs.
+	 *
+	 * @param ids The IDs of the items to find.
+	 * @return The last <code>RSItem</code> for the given IDs; otherwise null.
+	 */
+	public RSItem getLastItem(final int... ids) {
+		RSItem[] items = getItems();
+		for (int i = items.length - 1; i >= 0; i--) {
+			RSItem item = items[i];
+			for (int id : ids) {
+				if (item.getID() == id) {
+					return item;
+				}
+			}
+		}
+		return null;
 	}
 
 	public RSItem[] find(final Predicate<RSItem> filter) {
