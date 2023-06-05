@@ -487,13 +487,12 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean useItem(final int itemID, final RSObject object, final boolean... getLast) {
 		RSItem item;
-		if(getLast[0]){
+		if (getLast != null && getLast.length > 0 && getLast[0]) {
 			item = getLastItem(itemID);
-		}else{
+		} else {
 			item = getItem(itemID);
 		}
 		return item != null && useItem(item, object);
-
 	}
 
 	/**
