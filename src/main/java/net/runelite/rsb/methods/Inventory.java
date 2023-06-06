@@ -99,6 +99,30 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Retrieves the inventory grid as a 2D array.
+	 *
+	 * @return 2D array representing the inventory grid. Each element contains the item ID at the corresponding slot,
+	 *         or -1 if the slot is empty.
+	 */
+	public int[][] getItemGrid() {
+		int[][] inventory = new int[7][4];
+		RSItem[] items = getItems();
+
+		for (int i = 0; i < items.length; i++) {
+			int column = i % 4;
+			int row = i / 4;
+
+			if (items[i] != null) {
+				inventory[row][column] = items[i].getID();
+			} else {
+				inventory[row][column] = -1; // Empty slot
+			}
+		}
+
+		return inventory;
+	}
+
+	/**
 	 * Drops all items with the same specified id.
 	 *
 	 * @param leftToRight <code>true</code> to drop items from left to right.
@@ -106,24 +130,27 @@ public class Inventory extends MethodProvider {
 	 */
 	public void dropAllExcept(final boolean leftToRight, final int... items) {
 		RSTile startLocation = methods.players.getMyPlayer().getLocation();
-		boolean found_droppable = true;
-		while (found_droppable && getCountExcept(items) != 0) {
+		boolean foundDroppable = true;
+		while (foundDroppable && getCountExcept(items) != 0) {
 			if (methods.calc.distanceTo(startLocation) > 100) {
 				break;
 			}
-			found_droppable = false;
-			for (int j = 0; j < 28; j++) {
-				int c = leftToRight ? j % 4 : j / 7;
-				int r = leftToRight ? j / 4 : j % 7;
-				RSItem curItem = getItems()[c + r * 4];
-				int id;
-				if (curItem != null && (id = curItem.getID()) != -1 && id != EMPTY_SLOT_ITEM_ID) {
-					boolean isInItems = false;
-					for (int i : items) {
-						isInItems |= (i == id);
-					}
-					if (!isInItems) {
-						found_droppable |= dropItem(c, r);
+			foundDroppable = false;
+			int[][] inventory = getItemGrid();
+			int maxIndex = Math.min(28, inventory.length * 4); // Use the minimum of inventory length and 28
+			for (int index = 0; index < maxIndex; index++) {
+				int c = leftToRight ? index % 4 : index / 7;
+				int r = leftToRight ? index / 4 : index % 7;
+				if (c >= 0 && c < 4 && r >= 0 && r < 7) {
+					int id = inventory[r][c];
+					if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
+						boolean isInItems = false;
+						for (int i : items) {
+							isInItems |= (i == id);
+						}
+						if (!isInItems) {
+							foundDroppable |= dropItem(c, r);
+						}
 					}
 				}
 			}
