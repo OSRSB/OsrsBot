@@ -274,20 +274,18 @@ public class Inventory extends MethodProvider {
 	 *         <code>false</code> if not (e.g., if item is undroppable)
 	 */
 	public boolean dropItem(final int col, final int row) {
-		if (methods.interfaces.canContinue()) {
-			methods.interfaces.clickContinue();
-			sleep(random(800, 1300));
-		}
-		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY
-				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
-				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
-			methods.game.openTab(InterfaceTab.INVENTORY);
-		}
-		if (col < 0 || col > 3 || row < 0 || row > 6) {
+		if (col < 0 || col >= 4 || row < 0 || row >= 7) {
 			return false;
 		}
-		RSItem item = getItems()[col + row * 4];
-		return item != null && item.getID() != -1 && item.getID() != EMPTY_SLOT_ITEM_ID && item.doAction("Drop");
+		int index = col + row * 4;
+		RSItem[] items = getItems();
+		if (index >= 0 && index < items.length) {
+			RSItem item = items[index];
+			if (item != null && item.getID() != -1 && item.getID() != EMPTY_SLOT_ITEM_ID) {
+				return item.doAction("Drop");
+			}
+		}
+		return false;
 	}
 
 	/**
