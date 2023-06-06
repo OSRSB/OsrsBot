@@ -440,12 +440,20 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param itemID   The first item ID to use.
 	 * @param targetID The item ID you want the first parameter to be used on.
+	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the first item has been "used" on the other;
 	 *         otherwise <code>false</code>.
 	 */
-	public boolean useItem(final int itemID, final int targetID) {
-		RSItem item = getItem(itemID);
-		RSItem target = getItem(targetID);
+	public boolean useItem(final int itemID, final int targetID, final boolean... getLast) {
+		RSItem item;
+		RSItem target;
+		if (getLast != null && getLast.length > 0 && getLast[0]) {
+			item = getLastItem(itemID);
+			target = getLastItem(targetID);
+		}else{
+			item = getItem(itemID);
+			target = getItem(targetID);
+		}
 		return item != null && target != null && useItem(item, target);
 	}
 
