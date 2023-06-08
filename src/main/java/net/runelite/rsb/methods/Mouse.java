@@ -424,6 +424,15 @@ public class Mouse extends MethodProvider {
 	}
 
 	/**
+	 * Scrolls the mouse wheel by i amount of clicks
+	 *
+	 * @param i The number of clicks. Positive is scroll down, negative is scroll up.
+	 */
+	public void scroll(int i) {
+		methods.inputManager.moveMouseWheel(i);
+	}
+
+	/**
 	 * Hops mouse to the specified coordinate.
 	 *
 	 * @param x The x coordinate.
