@@ -345,6 +345,18 @@ public class RSTile implements Clickable07, Positionable {
     }
 
     /**
+     * Changes the underlying tile
+     * @param tile
+     * @return
+     */
+    public RSTile translate(RSTile tile) {
+        this.x = this.x + tile.x;
+        this.y = this.y + tile.y;
+        this.plane = this.plane + tile.plane;
+        return this;
+    }
+
+    /**
      * Returns a new tile offset from original
      * @param x
      * @param y
@@ -363,6 +375,15 @@ public class RSTile implements Clickable07, Positionable {
      */
     public RSTile offset(int x, int y, int plane) {
         return new RSTile(this.x + x, this.y + y, this.plane + plane);
+    }
+
+    /**
+     * Returns a new tile offset from original
+     * @param tile
+     * @return
+     */
+    public RSTile offset(RSTile tile) {
+        return new RSTile(this.x + tile.x, this.y + tile.y, this.plane + tile.plane);
     }
 
     public int getWorldX() {
