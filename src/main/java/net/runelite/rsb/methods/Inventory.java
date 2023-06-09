@@ -63,6 +63,17 @@ public class Inventory extends MethodProvider {
 		return (widget.isValid() && widget.isVisible());
 	}
 
+	public boolean isOpen() {
+		return methods.game.getCurrentTab() == InterfaceTab.INVENTORY;
+	}
+
+	public boolean open() {
+		if (!isOpen()) {
+			return methods.game.openTab(InterfaceTab.INVENTORY);
+		}
+		return true;
+	}
+
 	/**
 	 * Destroys any inventory items with the given ID.
 	 *
