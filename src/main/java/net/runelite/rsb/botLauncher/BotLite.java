@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MainBufferProvider;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.game.NPCManager;
 import net.runelite.client.modified.RuneLite;
 import net.runelite.rsb.event.EventManager;
 import net.runelite.rsb.event.events.PaintEvent;
@@ -102,6 +103,8 @@ public class BotLite extends RuneLite implements BotLiteInterface {
     public Applet getApplet() {return applet = injector.getInstance(Applet.class);}
 
     public ItemManager getItemManager() { return injector.getInstance(ItemManager.class);}
+
+    public NPCManager getNPCManager() { return injector.getInstance(NPCManager.class);}
 
     public MethodContext getMethodContext() {
         return methods;

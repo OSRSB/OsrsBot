@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class NPCChat extends Interfaces {
+
     public NPCChat(MethodContext ctx) {
         super(ctx);
     }
@@ -19,6 +20,28 @@ public class NPCChat extends Interfaces {
 
     public String getName() {
         return "";
+    }
+
+    public boolean isLoading() {
+        try {
+            if (canContinue()) {
+                return getContinueComponent().getText().contains("Please wait...");
+            }
+            else if (hasOptions()) {
+                return Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                        .map(RSWidget::getText)
+                        .anyMatch(str -> str.contains("Please wait..."));
+            }
+            else {
+                return false;
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public boolean isOpen() {
+        return canContinue() || hasOptions() || isLoading() || isCutsceneActive();
     }
 
     /**
@@ -35,6 +58,11 @@ public class NPCChat extends Interfaces {
         } catch (Exception ignored) {
             return null;
         }
+    }
+
+    public boolean hasOptions() {
+        String[] options = getOptions();
+        return options != null && options.length > 0;
     }
 
     /**
@@ -57,19 +85,42 @@ public class NPCChat extends Interfaces {
      * Clicks npc chat dialog menu option (if found)
      *
      * @param option the menu option to click
+     * @param hotKey presses the option number on keyboard
+     * @param wait   not implemented. yet.
+     * @return true if successful, false otherwise
+     */
+    public boolean selectOption(String option, boolean hotKey, boolean wait) {
+        try {
+            if (hotKey) {
+                RSWidget[] widgets = getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents();
+                for (int i = 1; i < widgets.length; i++) {
+                    if (widgets[i].containsText(option)) {
+                        methods.keyboard.sendText(String.valueOf(i), false);
+                        return true;
+                    }
+                }
+            }
+            else {
+                Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                        .filter(widget -> widget.getText().contains(option))
+                        .findFirst()
+                        .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
+                return true;
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Clicks npc chat dialog menu option (if found)
+     *
+     * @param option the menu option to click
      * @param wait   not implemented. yet.
      * @return true if successful, false otherwise
      */
     public boolean selectOption(String option, boolean wait) {
-
-        try {
-            Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
-                    .filter(widget -> widget.getText().contains(option))
-                    .findFirst()
-                    .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
+        return selectOption(option, false, wait);
     }
 }

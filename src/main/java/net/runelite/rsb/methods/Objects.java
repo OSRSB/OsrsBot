@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.cache.definitions.ObjectDefinition;
+import net.runelite.rsb.query.RSObjectQueryBuilder;
 import net.runelite.rsb.wrappers.RSObject;
 import net.runelite.rsb.wrappers.RSTile;
 import net.runelite.rsb.wrappers.subwrap.WalkerTile;
@@ -27,6 +28,10 @@ public class Objects extends MethodProvider {
             return true;
         }
     };
+
+    public RSObjectQueryBuilder query() {
+        return new RSObjectQueryBuilder();
+    }
 
     /**
      * Returns all the <code>RSObject</code>s in the local region.

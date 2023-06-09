@@ -108,11 +108,8 @@ public class VirtualMouse {
     }
 
     public MouseWheelEvent mouseWheelMoved(MouseWheelEvent e) {
-        try {
-            mouseWheelMoved(e);
-        } catch (AbstractMethodError ame) {
-            // it might not be implemented!
-        }
+        // TODO: record this event in Virtual Mouse
+        // Might not really even be necessary
         return e;
     }
 
@@ -142,12 +139,7 @@ public class VirtualMouse {
                 clientPressed = false;
                 mouseReleased(e);
             } else if (e.getID() == MouseEvent.MOUSE_WHEEL) {
-                try {
-                    mouseWheelMoved((MouseWheelEvent) e);
-                } catch (AbstractMethodError ignored) {
-                    log.debug("Mouse event might not be implemented", ignored);
-                    // !
-                }
+                mouseWheelMoved((MouseWheelEvent) e);
             } else {
                 throw new InternalError(e.toString());
             }

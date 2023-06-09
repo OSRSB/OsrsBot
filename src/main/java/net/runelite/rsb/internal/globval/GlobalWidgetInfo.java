@@ -78,10 +78,47 @@ public enum GlobalWidgetInfo {
     DIALOG_PLAYER_CONTINUE(WidgetIndices.DialogPlayer.GROUP_INDEX, WidgetIndices.DialogPlayer.OPTION_CONTINUE_LABEL),
 
     /**
+     * [Dialog] Continue
+     */
+    DIALOG_CONTINUE(WidgetIndices.Dialog.GROUP_INDEX, WidgetIndices.Dialog.TEXT_LABEL),
+
+    /**
+     * [Dialog] Quest Continue
+     */
+    DIALOG_QUEST_CONTINUE(WidgetIndices.DialogQuest.GROUP_INDEX, WidgetIndices.DialogQuest.CONTINUE_TEXT),
+
+    /**
+     * [LevelUp] Dialog
+     */
+    DIALOG_LEVEL_UP_CONTINUE(WidgetIndices.LevelUp.GROUP_INDEX, WidgetIndices.LevelUp.CONTINUE),
+
+    /**
+     * [DialogUnknown]
+     */
+    DIALOG_UNKNOWN_CONTINUE(WidgetIndices.DialogUnknown.GROUP_INDEX, WidgetIndices.DialogUnknown.CONTINUE),
+
+    /**
      * [LOGOUT] Widget Info
      */
     LOGOUT_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_LOGOUT_CONTAINER),
+
+    /**
+     * [LOGOUT] World Switch Button
+     */
+    WORLD_SWITCH_BUTTON(WidgetIndices.Logout.GROUP_INDEX, WidgetIndices.Logout.BUTTON_WORLD_SWITCHER_LABEL),
     // [LOGOUT]
+
+    /**
+     * [WORLD SWITCH] World Dynamic Container
+     */
+    WORLD_SWITCH_DYNAMIC_CONTAINER(WidgetIndices.WorldSwitcher.GROUP_INDEX, WidgetIndices.WorldSwitcher.INNER_FRAME_WORLD_LIST_DYNAMIC_CONTAINER),
+
+    /**
+     * [WORLD SWITCH] Scroll Bar
+     */
+    WORLD_SWITCH_SCROLL_BAR(WidgetIndices.WorldSwitcher.GROUP_INDEX, WidgetIndices.WorldSwitcher.INNER_FRAME_SCROLLBAR_DYNAMIC_CONTAINER),
+
+    // [WORLD SWITCH]
 
     /**
      * [WILDERNESS] Widget Info
@@ -220,6 +257,7 @@ public enum GlobalWidgetInfo {
      */
     GRAND_EXCHANGE_SEARCH_INPUT(CHATBOX_FULL_INPUT),
     //GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.CONTAINER),
+    GRAND_EXCHANGE_SEARCH_DYNAMIC_CONTAINER(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.GE_SEARCH_RESULTS),
     GRAND_EXCHANGE_OFFER_WINDOW(WidgetIndices.GrandExchange.GROUP_INDEX, 25),
     GRAND_EXCHANGE_INTERFACE_LAYOUT(WidgetIndices.GrandExchange.GROUP_INDEX,WidgetIndices.GrandExchange.DYNAMIC_CONTAINER ),
     GRAND_EXCHANGE_TITLE(WidgetIndices.GrandExchange.GROUP_INDEX, WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER),
