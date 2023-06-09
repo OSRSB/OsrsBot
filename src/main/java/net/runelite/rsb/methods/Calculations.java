@@ -193,36 +193,25 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * Returns the diagonal distance to a given RSCharacter.
+	 * Returns the diagonal distance to a given Positionable.
 	 *
-	 * @param c The destination character.
-	 * @return Distance to <code>RSCharacter</code>.
-	 * @see #distanceTo(RSTile)
+	 * @param positionable The destination tile.
+	 * @return Distance to <code>Positionable</code>.
 	 */
-	public int distanceTo(RSCharacter c) {
-		return c == null ? -1 : distanceTo(c.getLocation());
+	public int distanceTo(Positionable positionable) {
+		return positionable == null ? -1 : (int) distanceBetween(methods.players.getMyPlayer().getLocation(), positionable.getLocation());
 	}
 
 	/**
-	 * Returns the diagonal distance to a given RSObject.
+	 * Returns the diagonal distance to a given x,y,z coordinate.
 	 *
-	 * @param o The destination object.
-	 * @return Distance to <code>RSObject</code>.
-	 * @see #distanceTo(RSTile)
+	 * @param x The destination x coordinate.
+	 * @param y The destination x coordinate.
+	 * @param z The destination x coordinate.
+	 * @return Distance to new RSTile(x,y,z).
 	 */
-
-	public int distanceTo(RSObject o) {
-		return o == null ? -1 : distanceTo(o.getLocation());
-	}
-
-	/**
-	 * Returns the diagonal distance to a given RSTile.
-	 *
-	 * @param t The destination tile.
-	 * @return Distance to <code>RSTile</code>.
-	 */
-	public int distanceTo(RSTile t) {
-		return t == null ? -1 : (int) distanceBetween(methods.players.getMyPlayer().getLocation(), t);
+	public int distanceTo(int x, int y, int z) {
+		return (int) distanceBetween(methods.players.getMyPlayer().getLocation(), new RSTile(x,y,z));
 	}
 
 	/**
