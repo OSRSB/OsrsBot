@@ -22,6 +22,8 @@ public class RandomEvents extends MethodProvider {
     public void solveGenieLamp(Skill skillToLevel) {
         RSItem genieLamp = methods.inventory.getFirstWithAction("Rub");
         if (genieLamp != null) {
+            methods.inventory.open();
+            sleep(300);
             genieLamp.doAction("Rub");
             BooleanSupplier genieLampNotNull = () -> methods.client.getWidget(
                     WidgetIndices.GenieLampWindow.GROUP_INDEX,
