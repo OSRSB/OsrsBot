@@ -81,6 +81,24 @@ public class Inventory extends MethodProvider {
 		return true;
 	}
 
+	public boolean moveItem(RSItem item, int target) {
+		if (item != null) {
+			if (item.doHover()) {
+				int id = item.getID();
+				RSWidget invInterface = getInterface().getValue();
+				RSWidget comp = invInterface.getDynamicComponent(target);
+				methods.mouse.drag((int)comp.getCenter().getX(), (int)comp.getCenter().getY());
+				sleepUntil(() -> getItemAt(target) != null && getItemAt(target).getID() == id, 1000);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean moveItem(int index, int target) {
+		return moveItem(getItemAt(index), target);
+	}
+
 	/**
 	 * Destroys any inventory items with the given ID.
 	 *
