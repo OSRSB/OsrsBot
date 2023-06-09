@@ -93,6 +93,18 @@ public class Interfaces extends MethodProvider {
         return cont != null && cont.isValid() && cont.doClick(true);
     }
 
+    public boolean clickContinue(boolean hotKey) {
+        RSWidget cont = getContinueComponent();
+        if (cont != null && cont.isValid()) {
+            if (!hotKey) {
+                return cont.doClick(true);
+            } else {
+                methods.keyboard.sendText(" ", false);
+            }
+        }
+            return false;
+    }
+
     /**
      * Gets the click here to continue widget
      *
@@ -109,6 +121,26 @@ public class Interfaces extends MethodProvider {
             widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getPackedId());
             if (widget != null && !widget.isHidden())
                 return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
+        }
+        if (widget == null) {
+            widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getPackedId());
+            if (widget != null && !widget.isHidden())
+                return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getChildId()));
         }
         return null;
     }
@@ -248,7 +280,7 @@ public class Interfaces extends MethodProvider {
             return false;
         }
 
-        if (scrollBar.getComponents().length != 6) {
+        if (scrollBar.getComponents().length != 6 || component.isVisibleInScrollableArea()) {
             return true; // no scrollbar, so probably not scrollable
         }
 
@@ -256,7 +288,7 @@ public class Interfaces extends MethodProvider {
         RSWidget scrollableArea = component;
         while ((scrollableArea.getScrollableContentHeight() == 0)
                 && (scrollableArea.getParentId() != -1)) {
-            scrollableArea = getComponent(scrollableArea.getParentId(), 0);
+            scrollableArea = scrollableArea.getParent();
         }
 
         // Check scrollable area
@@ -269,28 +301,22 @@ public class Interfaces extends MethodProvider {
 
         // Get scrollable area height
         int areaY = scrollableArea.getAbsoluteY();
-        int areaHeight = scrollableArea.getRealHeight();
+        int areaHeight = scrollableArea.getHeight();
 
-        // Check if the component is already visible
-        if ((component.getAbsoluteY() >= areaY)
-                && (component.getAbsoluteY() <= areaY + areaHeight
-                - component.getRealHeight())) {
+        if (component.isVisibleInScrollableArea()) {
             return true;
         }
 
         // Calculate scroll bar position to click
-        RSWidget scrollBarArea = scrollBar.getComponent(0);
+        RSWidget scrollBarArea = scrollBar.getDynamicComponent(0);
+
         int contentHeight = scrollableArea.getScrollableContentHeight();
 
-        int pos = (int) ((float) scrollBarArea.getRealHeight() / contentHeight * (component
-                .getRelativeY() + random(-areaHeight / 2, areaHeight / 2
-                - component.getRealHeight())));
-        if (pos < 0) // inner
-        {
-            pos = 0;
-        } else if (pos >= scrollBarArea.getRealHeight()) {
-            pos = scrollBarArea.getRealHeight() - 1; // outer
-        }
+        // scrollBarArea.getHeight() is returning -1. I think because it's a dynamic component?
+        int pos = (int) (((scrollBarArea.getBounds().getHeight()) / (double)contentHeight) *
+                (component.getRelativeY() + random(-areaHeight / 3, areaHeight / 3)));
+
+        pos = Math.min((int)scrollBarArea.getBounds().getHeight() - 1, Math.max(1, pos));
 
         // Click on the scrollbar
         methods.mouse.click(
@@ -299,22 +325,9 @@ public class Interfaces extends MethodProvider {
                 scrollBarArea.getAbsoluteY() + pos, true);
 
         // Wait a bit
-        sleep(random(200, 400));
+        sleep(random(100, 200));
 
-        // Scroll to it if we missed it
-        while (component.getAbsoluteY() < areaY
-                || component.getAbsoluteY() > (areaY + areaHeight - component
-                .getRealHeight())) {
-            boolean scrollUp = component.getAbsoluteY() < areaY;
-            scrollBar.getComponent(scrollUp ? 4 : 5).doAction("");
-
-            sleep(random(100, 200));
-        }
-
-        // Return whether or not the component is visible now.
-        return (component.getAbsoluteY() >= areaY)
-                && (component.getAbsoluteY() <= areaY + areaHeight
-                - component.getRealHeight());
+        return component.isVisibleInScrollableArea();
     }
 
     /**

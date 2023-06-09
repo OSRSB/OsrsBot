@@ -282,6 +282,27 @@ public final class StdRandom {
     }
 
     /**
+     * Returns a random real number from a Gaussian Mixture distribution with means &mus,;
+     * standard deviations &sigmas and probabilities for selecting each distribution &probabilites;.
+     *
+     * @param  min the minimum range
+     * @param  max the maximum range
+     * @param  mus list of the means for each gaussian
+     * @param  sigmas list of the standard deviations for each gaussian
+     * @param  probabilities list of the probabilities of selecting each gaussian
+     * @return a real number distributed according to the Gaussian Mixture distribution
+     *         with means {@code mus}, standard deviations {@code sigmas} and probabilities of selecting each gaussian {@code probabilities}
+     */
+    public static double gaussianMixture(double min, double max, double[] mus, double[] sigmas, double[] probabilities) {
+        if (mus == null || sigmas == null || probabilities == null || mus.length != sigmas.length || sigmas.length != probabilities.length) {
+            throw new IllegalArgumentException("mus, sigmas, or ratios not valid");
+        }
+        int i = discrete(probabilities);
+
+        return gaussian(min, max, mus[i], sigmas[i]);
+    }
+
+    /**
      * Returns a random integer from a geometric distribution with success
      * probability <em>p</em>.
      * The integer represents the number of independent trials

@@ -6,6 +6,9 @@ import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSWidget;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * Obtains information on tradeable items from the Grand Exchange website and
  * Grand Exchange ingame interaction.
@@ -64,7 +67,7 @@ public class GrandExchange extends MethodProvider {
 			int slotComponent = mapSlotToSlotIndex(slot);
 			if (isOpen()) {
 				return methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
-						.getDynamicComponent(WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty");
+						.getDynamicComponent(WidgetIndices.GrandExchange.OFFER_STATUS_ITEM_DESCRIPTION_LABEL).containsText("Empty");
 			} else {
 				return false;
 			}
@@ -80,17 +83,17 @@ public class GrandExchange extends MethodProvider {
 	 * @return <code>True</code> if the user is a member else <code>false</code> for slots 4-8
 	 */
 	public boolean checkSlotLocked(int slot) {
-			int slotComponent = mapSlotToSlotIndex(slot);
-			if (isOpen()) {
-				RSWidget geWidget = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
-				boolean isBuyHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.BUY_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
-				boolean isSellHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.SELL_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
-				//Obviously both can't be hovered at the same time so it must be locked
-				if (isBuyHovered && isSellHovered) {
-					return true;
-				}
+		int slotComponent = mapSlotToSlotIndex(slot);
+		if (isOpen()) {
+			RSWidget geWidget = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
+			boolean isBuyHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.BUY_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
+			boolean isSellHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.SELL_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
+			//Obviously both can't be hovered at the same time so it must be locked
+			if (isBuyHovered && isSellHovered) {
+				return true;
 			}
-			return false;
+		}
+		return false;
 	}
 
 	/**
@@ -192,6 +195,25 @@ public class GrandExchange extends MethodProvider {
 		collectFromSlot(geWidget, collectAs);
 		collectAs += "s";
 		collectFromSlot(geWidget, collectAs);
+	}
+
+	/**
+	 * A method to collect all items to inventory or the bank
+	 *
+	 * @param toBank whether the item should be collect to the bank
+	 */
+	public void collectAll(boolean toBank) {
+		String collectAs = "Collect";
+		if (!toBank) {
+			collectAs += " to inventory";
+		}
+		else {
+			collectAs += " to bank";
+		}
+		RSWidget geWidget = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_TITLE);
+		geWidget = geWidget.getDynamicComponent(0);
+		geWidget.doAction(collectAs);
+		sleep(random(400, 900));
 	}
 
 	/**
@@ -345,84 +367,70 @@ public class GrandExchange extends MethodProvider {
 	}
 
 	/**
+	 * Returns the number of clicks required to set an offer quantity with the +1, +10, +100, +1000 buttons
+	 * @param quantity the quantity you would like to offer
+	 * @return the number of clicks to set that quantity or Integer.MAX_VALUE if not possible
+	 */
+	public int getNumberClick(int quantity) {
+		// Clicking +1 when you open an offer window makes quantity 2 but +10 makes quantity 10 not 11
+		if (quantity < 10) {
+			return quantity - 1;
+		}
+		if (quantity >= 10000) {
+			return Integer.MAX_VALUE;
+		}
+		int requiredClicks = 0;
+		for (int i = 3; i >= 0; i--) {
+			int subtract = nth(quantity, i);
+			if (subtract != 0) {
+				requiredClicks += nth(quantity, i);
+				continue;
+			}
+		}
+		return requiredClicks;
+	}
+
+	/**
 	 * Sets the quantity of items in the offer interface randomizing how it goes about doing so too
 	 *
 	 * @param quantity the quantity to list
 	 */
 	public void setQuantity(int quantity) {
-		//Dynamic child of offer window
-		final int OFFER_1 = 45;
-		final int OFFER_10 = 46;
-		final int OFFER_100 = 47;
-		final int OFFER_1000_OR_ALL_BUTTON = 48;
+		// OFFER_1 = 45, OFFER_10 = 46, OFFER_100 = 47, OFFER_1000 = 48
+		final int[] offerButtons = {45, 46, 47, 48};
 		final int OFFER_ENTER_AMOUNT = 49;
+
 		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
-		if (quantity == 1) {
-			return;
-		}
+
 		/*
 		Picks a random number to decide how many clicks to allow for (to throw off pattern detection)
 		Then proceeds to check the quantity against it to decide whether to click the buttons or to simply
 		Type in our amount.
 		 */
-		int randomMax = random(3,6);
-		double limit = Math.log(randomMax) % 1;
-		double logQuantity = (Math.log(quantity) % 1);
-		if (logQuantity < limit) {
-			switch ((int) (Math.log(quantity) - logQuantity)) {
-				case (0):
-					for (int i = 0; i < quantity; i++) {
-						offerWindow.getDynamicComponent(OFFER_1).doClick();
-						sleep(random(20, 50));
-						}
-					break;
-				case(1):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						for (int i = 0; i < quantity / 10; i++) {
-							offerWindow.getDynamicComponent(OFFER_10).doClick();
+
+		int randomClicks = random(3,6);
+		int requiredClicks = getNumberClick(quantity);
+
+		if (requiredClicks > randomClicks) {
+			offerWindow.getDynamicComponent(OFFER_ENTER_AMOUNT).doClick();
+			sleep(random(20,100));
+			RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
+			if (chatbox.isValid() && chatbox.isVisible()) {
+				methods.keyboard.sendText(String.valueOf(quantity), true);
+			}
+		}
+		else {
+			for (int i = 0; i < requiredClicks; i++) {
+				for (int j = 3; j >= 0; j--) {
+					int mostSignificantDecimal = nth(quantity, j);
+					if (mostSignificantDecimal != 0) {
+						// j now represents the power of the most significant decimal
+						if (offerWindow.getDynamicComponent(offerButtons[j]).doClick()) {
 							sleep(random(20, 50));
-						}
-						break;
-					}
-				case(2):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						//IE is not 122,133,144 ect
-						if (nth(quantity, 2) == 0) {
-							for (int i = 0; i < quantity / 100; i++) {
-								offerWindow.getDynamicComponent(OFFER_100).doClick();
-								sleep(random(20, 50));
-							}
 							break;
 						}
 					}
-				case(3):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						//IE is not 122,133,144 ect
-						if (nth(quantity, 2) == 0) {
-							//IE is not 1222,1333,1444 ect
-							if (nth(quantity, 3) == 0) {
-								RSWidget button = offerWindow.getDynamicComponent(OFFER_1000_OR_ALL_BUTTON);
-								if (button.getText() != "All") {
-									for (int i = 0; i < quantity / 1000; i++) {
-										button.doClick();
-										sleep(random(20, 50));
-									}
-									break;
-								}
-							}
-						}
-					}
-				default:
-					offerWindow.getDynamicComponent(OFFER_ENTER_AMOUNT).doClick();
-					sleep(random(20,100));
-					RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
-					if (chatbox.isValid() && chatbox.isVisible()) {
-						methods.keyboard.sendText(String.valueOf(quantity), true);
-					}
-					break;
+				}
 			}
 		}
 	}
@@ -478,10 +486,21 @@ public class GrandExchange extends MethodProvider {
 				sleep(random(200,400));
 				RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
 				if (chatbox.isValid() && chatbox.isVisible()) {
-					methods.keyboard.sendText(name, true);
+					methods.keyboard.sendText(name, false);
+					sleep(2000);
+					RSWidget[] items = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_DYNAMIC_CONTAINER).getComponents();
+					Optional<RSWidget> widgetOptional = Arrays.stream(items).filter((x) -> Menu.stripFormatting(x.getName()).equals(name)).findFirst();
+					if (widgetOptional.isPresent()) {
+						if (widgetOptional.get().doAction("Select") ) {
+							sleep(2000);
+						};
+					}
 				}
 				sleep(random(80,600));
-				return createOffer(quantity, priceChange);
+				if (Arrays.stream(methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW).getComponents())
+						.anyMatch((x) -> x.getText().equals(name))) {
+					return createOffer(quantity, priceChange);
+				}
 			}
 		}
 		return false;
@@ -612,14 +631,14 @@ public class GrandExchange extends MethodProvider {
 
 	public int mapSlotToSlotIndex(int slot) {
 		return switch (slot) {
-			case 0 -> WidgetIndices.GrandExchange.FIRST_SLOT_DYNAMIC_CONTAINER;
-			case 1 -> WidgetIndices.GrandExchange.SECOND_SLOT_DYNAMIC_CONTAINER;
-			case 2 -> WidgetIndices.GrandExchange.THIRD_SLOT_DYNAMIC_CONTAINER;
-			case 3 -> WidgetIndices.GrandExchange.FOURTH_SLOT_DYNAMIC_CONTAINER;
-			case 4 -> WidgetIndices.GrandExchange.FIFTH_SLOT_DYNAMIC_CONTAINER;
-			case 5 -> WidgetIndices.GrandExchange.SIXTH_SLOT_DYNAMIC_CONTAINER;
-			case 6 -> WidgetIndices.GrandExchange.SEVENTH_SLOT_DYNAMIC_CONTAINER;
-			case 7 -> WidgetIndices.GrandExchange.EIGHT_SLOT_DYNAMIC_CONTAINER;
+			case 1 -> WidgetIndices.GrandExchange.FIRST_SLOT_DYNAMIC_CONTAINER;
+			case 2 -> WidgetIndices.GrandExchange.SECOND_SLOT_DYNAMIC_CONTAINER;
+			case 3 -> WidgetIndices.GrandExchange.THIRD_SLOT_DYNAMIC_CONTAINER;
+			case 4 -> WidgetIndices.GrandExchange.FOURTH_SLOT_DYNAMIC_CONTAINER;
+			case 5 -> WidgetIndices.GrandExchange.FIFTH_SLOT_DYNAMIC_CONTAINER;
+			case 6 -> WidgetIndices.GrandExchange.SIXTH_SLOT_DYNAMIC_CONTAINER;
+			case 7 -> WidgetIndices.GrandExchange.SEVENTH_SLOT_DYNAMIC_CONTAINER;
+			case 8 -> WidgetIndices.GrandExchange.EIGHT_SLOT_DYNAMIC_CONTAINER;
 			default -> -1;
 		};
 	}

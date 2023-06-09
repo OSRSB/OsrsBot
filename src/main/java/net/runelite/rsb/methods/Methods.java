@@ -5,6 +5,7 @@ import net.runelite.rsb.wrappers.subwrap.ChooseOption;
 import net.runelite.rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
+import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -291,6 +292,40 @@ public class Methods {
 		return true;
 	}
 
+	/**
+	 * Pauses execution for a random amount of time between two values or when supplier returns true.
+	 *
+	 * @param minSleep The minimum time to sleep.
+	 * @param maxSleep The maximum time to sleep.
+	 * @param stopCondition a function which returns true when sleep should be aborted
+	 * @see #sleep(int)
+	 * @see #random(int, int)
+	 */
+	public static boolean sleep(int minSleep, int maxSleep, BooleanSupplier stopCondition) {
+		return sleep(random(minSleep, maxSleep), stopCondition);
+	}
+
+	/**
+	 * Pauses execution for a given number of milliseconds or when supplier returns true.
+	 *
+	 * @param toSleep The time to sleep in milliseconds.
+	 * @param stopCondition a function which returns true when sleep should be aborted
+	 */
+	public static boolean sleep(int toSleep, BooleanSupplier stopCondition) {
+		long start = System.currentTimeMillis();
+		try {
+			while (start + toSleep > System.currentTimeMillis()) {
+				if (stopCondition.getAsBoolean()) {
+					return true;
+				}
+				Thread.sleep(random.nextLong(15, 55));
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 	/**
 	 * Prints to the RSBot log.
 	 *

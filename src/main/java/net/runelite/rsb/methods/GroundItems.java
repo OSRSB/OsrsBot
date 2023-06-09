@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.rsb.internal.wrappers.Filter;
+import net.runelite.rsb.query.RSGroundItemQueryBuilder;
 import net.runelite.rsb.wrappers.RSGroundItem;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSTile;
@@ -26,6 +27,10 @@ public class GroundItems extends MethodProvider {
 
 	GroundItems(final MethodContext ctx) {
 		super(ctx);
+	}
+
+	public RSGroundItemQueryBuilder query() {
+		return new RSGroundItemQueryBuilder();
 	}
 
 	/**

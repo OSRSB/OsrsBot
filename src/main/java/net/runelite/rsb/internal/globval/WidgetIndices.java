@@ -71,6 +71,14 @@ public class WidgetIndices {
         // 21
     }
 
+    public static class DialogQuest {
+        public static final int GROUP_INDEX = 11;
+        public static final int LEFT_ICON = 1;
+        public static final int TEXT = 1;
+        public static final int RIGHT_ICON = 3;
+        public static final int CONTINUE_TEXT = 4;
+    }
+
     /**
      * Describes bank widgets
      * Last reviewed: 7/4/2022 1:57 am UTC+1
@@ -1178,6 +1186,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes a dialog widget that appears in some quest?
+     * Got one that says Before starting this quest be aware that one or more of your skill levels are lower than recommended
+     * I think when talking to aggie the witch
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class DialogUnknown {
+        public static final int GROUP_INDEX = 229;
+        public static final int CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int CONTINUE = 2;
+    }
+
+    /**
      * Describes npc dialog widgets
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
@@ -1190,6 +1212,20 @@ public class WidgetIndices {
         public static final int DIALOG_TITLE_LABEL = 4;
         public static final int DIALOG_CONTINUE_LABEL = 5;
         public static final int DIALOG_TEXT_LABEL = 6;
+    }
+
+    /**
+     * Describes level up widgets
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class LevelUp {
+        public static final int GROUP_INDEX = 233;
+        // TODO: not sure what 0 is
+        public static final int CONTAINER = 0;
+        public static final int SKILL = 1;
+        public static final int LEVEL = 2;
+        public static final int CONTINUE = 3;
     }
 
     /**

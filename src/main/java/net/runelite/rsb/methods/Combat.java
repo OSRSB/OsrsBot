@@ -49,6 +49,9 @@ public class Combat extends MethodProvider {
 			if (!methods.inventory.contains(food)) {
 				continue;
 			}
+			if (!methods.inventory.open()) {
+				return false;
+			}
 			if (methods.inventory.getItem(food).doAction("Eat")) {
 				for (int i = 0; i < 100; i++) {
 					sleep(random(100, 300));
@@ -75,6 +78,9 @@ public class Combat extends MethodProvider {
 		int firstPercent = getHealth();
 		RSItem[] edibleItems = methods.inventory.getAllWithAction("Eat");
 		if (edibleItems == null || edibleItems.length == 0) {
+			return false;
+		}
+		if (!methods.inventory.open()) {
 			return false;
 		}
 		for (RSItem edibleItem : edibleItems) {
