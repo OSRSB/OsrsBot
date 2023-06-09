@@ -6,7 +6,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Point;
 import net.runelite.rsb.wrappers.*;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.awt.*;
 
@@ -162,7 +162,7 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		WalkerTile walkerTile = new WalkerTile(tile).toLocalTile();
+		RSTile walkerTile = new RSTile(tile).toLocalTile();
 		return Perspective.localToCanvas(methods.client, new LocalPoint(walkerTile.getX(), walkerTile.getY()), methods.client.getPlane(), height);
 	}
 

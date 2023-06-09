@@ -1,6 +1,6 @@
 package net.runelite.rsb.wrappers.common;
 
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 /**
  * An interface for position related information regarding sub-classes
@@ -18,7 +18,7 @@ public interface Positionable {
      * Gets the tile position of the entity as provided by the client
      * @return the tile position of the entity if it exists, else null
      */
-    WalkerTile getLocation();
+    RSTile getLocation();
 
     /**
      * Turns the camera to face the entity

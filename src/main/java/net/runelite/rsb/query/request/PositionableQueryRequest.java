@@ -2,7 +2,7 @@ package net.runelite.rsb.query.request;
 
 import net.runelite.rsb.wrappers.RSArea;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public abstract class PositionableQueryRequest<T extends Positionable> extends Q
     }
 
     public boolean accepts(Positionable positionable) {
-        WalkerTile tile = positionable.getLocation();
+        RSTile tile = positionable.getLocation();
         return accepts(tile.getX(), tile.getY(), tile.getPlane()) && super.accepts(positionable);
     }
 }
