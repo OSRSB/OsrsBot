@@ -44,18 +44,8 @@ public class NPCPath extends MethodProvider {
         this.npc = npc;
     }
 
-    public boolean hasLineOfSight(RSTile start, RSTile end) {
-        return end.getTile(methods).hasLineOfSightTo(npc.getNearestTile(start, end).getTile(methods));
-    }
-    public boolean hasLineOfSight(Positionable end) {
-        return hasLineOfSight(npc.getLocation(), end.getLocation());
-    }
-    public boolean hasLineOfSight(RSTile end) {
-        return hasLineOfSight(npc.getLocation(), end);
-    }
-
     public RSTile getNearestSafespotWithLOS(Positionable end, int limit) {
-        return getNearestSafespot(end, limit, (x) -> hasLineOfSight(x));
+        return getNearestSafespot(end, limit, (x) -> npc.hasLineOfSight(x));
     }
 
     public RSTile getNearestSafespot(Positionable end, int limit, Predicate<RSTile> predicate){
