@@ -114,13 +114,13 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
         return getAccessor().getWorldArea().getHeight();
     }
 
-    public RSTile getNearestTile(Positionable start, Positionable end) {
+    public RSTile getNearestTile(Positionable npc, Positionable from) {
         RSTile nearestTile = null;
         double minDistance = Float.POSITIVE_INFINITY;
         for (int i = 0; i < getWidth(); i++) {
             for (int j = 0; j < getHeight(); j++) {
-                RSTile tile = start.getLocation().offset(i,j);
-                double distance = start.getLocation().offset(i,j).distanceToDouble(end);
+                RSTile tile = npc.getLocation().offset(i,j);
+                double distance = npc.getLocation().offset(i,j).distanceToDouble(from);
                 if (minDistance > distance) {
                     minDistance = distance;
                     nearestTile = tile;
@@ -130,11 +130,25 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
         return nearestTile;
     }
 
-    public RSTile getNearestTile(Positionable end) {
-        return getNearestTile(getLocation(), end.getLocation());
+    public RSTile getNearestTile(Positionable from) {
+        return getNearestTile(getLocation(), from.getLocation());
     }
 
     public RSTile getNearestTile() {
         return getNearestTile(getLocation(), methods.players.getMyPlayer());
+    }
+
+    /**
+     * Line of sight of NPCS is calculated from the player to the npc regardless of who is attacking
+     * This is the opposite of PvP where each player calculates their own LOS
+     * @param from
+     * @return
+     */
+    public boolean hasLineOfSight(Positionable from) {
+        return methods.calc.hasLineOfSight(getNearestTile(from), from.getLocation());
+    }
+
+    public boolean hasLineOfSight() {
+        return methods.calc.hasLineOfSight(getNearestTile(methods.players.getMyPlayer()), methods.players.getMyPlayer().getLocation());
     }
 }
