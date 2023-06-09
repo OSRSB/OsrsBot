@@ -44,27 +44,8 @@ public class NPCPath extends MethodProvider {
         this.npc = npc;
     }
 
-    public RSTile getNearestTile(RSTile start, RSTile end) {
-        RSTile nearestTile = null;
-        double minDistance = Float.POSITIVE_INFINITY;
-        for (int i = 0; i < npc.getAccessor().getWorldArea().getWidth(); i++) {
-            for (int j = 0; j < npc.getAccessor().getWorldArea().getHeight(); j++) {
-                RSTile tile = offsetTile(start, Pair.of(i,j));
-                double distance = offsetTile(start, Pair.of(i,j)).distanceToDouble(end);
-                if (minDistance > distance) {
-                    minDistance = distance;
-                    nearestTile = tile;
-                }
-            }
-        }
-        return nearestTile;
-    }
-
-    public RSTile getNearestTile(Positionable end) {
-        return getNearestTile(npc.getLocation(), end.getLocation());
-    }
     public boolean hasLineOfSight(RSTile start, RSTile end) {
-        return end.getTile(methods).hasLineOfSightTo(getNearestTile(start, end).getTile(methods));
+        return end.getTile(methods).hasLineOfSightTo(npc.getNearestTile(start, end).getTile(methods));
     }
     public boolean hasLineOfSight(Positionable end) {
         return hasLineOfSight(npc.getLocation(), end.getLocation());
@@ -87,19 +68,19 @@ public class NPCPath extends MethodProvider {
         for (int layer = 1; layer <= limit; layer++, j--, i--) {
             while (i < center.getX() + layer)
                 if (isSafeSpotted(current = new RSTile(++i , j, center.getPlane())) && predicate.test(current) &&
-                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                    ((flags[current.getSceneX()][current.getSceneY()] & RSLocalPath.BLOCKED) == 0))
                         return current;
             while (j < center.getY() + layer)
                 if (isSafeSpotted(current = new RSTile(i , ++j, center.getPlane())) && predicate.test(current) &&
-                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                    ((flags[current.getSceneX()][current.getSceneY()] & RSLocalPath.BLOCKED) == 0))
                         return current;
             while (i > center.getX() - layer)
                 if (isSafeSpotted(current = new RSTile(--i , j, center.getPlane())) && predicate.test(current) &&
-                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                    ((flags[current.getSceneX()][current.getSceneY()] & RSLocalPath.BLOCKED) == 0))
                         return current;
             while (j > center.getY() - layer)
                 if (isSafeSpotted(current = new RSTile(i , --j, center.getPlane())) && predicate.test(current) &&
-                    ((flags[current.getLocalLocation(methods).getSceneX()][current.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) == 0))
+                    ((flags[current.getSceneX()][current.getSceneY()] & RSLocalPath.BLOCKED) == 0))
                         return current;
         }
         return null;
@@ -110,7 +91,7 @@ public class NPCPath extends MethodProvider {
 
     public boolean isSafeSpotted(RSTile start, RSTile end) {
         RSTile[] path = getPath(start, end);
-        RSTile nearestTile = getNearestTile(path[path.length - 1], end);
+        RSTile nearestTile = npc.getNearestTile(path[path.length - 1], end);
         return nearestTile.getLocation().distanceToDouble(end) > 1.1;
     }
 
@@ -121,7 +102,7 @@ public class NPCPath extends MethodProvider {
     public RSTile[] getPath(RSTile start, RSTile end) {
         List<RSTile> returnList = new ArrayList<>();
         returnList.add(start);
-        while (start.getWorldLocation().getX() != end.getWorldLocation().getX() || start.getWorldLocation().getY() != end.getWorldLocation().getY()) {
+        while (start.getX() != end.getX() || start.getY() != end.getY()) {
             start = getNextTile(start , end);
             if (start.getWorldLocation().getX() == -1) {
                 break;
@@ -135,17 +116,6 @@ public class NPCPath extends MethodProvider {
         return getPath(npc.getLocation(), end.getLocation());
     }
 
-    public RSTile offsetTile(RSTile tile, Pair<Integer, Integer> offset) {
-        return new RSTile(tile.getWorldLocation().getX() + offset.getKey(),
-                tile.getWorldLocation().getY() + offset.getValue(),
-                tile.getWorldLocation().getPlane());
-    }
-
-    public RSTile offsetTile(RSTile tile, RSTile tile2) {
-        return new RSTile(tile.getWorldLocation().getX() + tile2.getWorldLocation().getX(),
-                tile.getWorldLocation().getY() + tile2.getWorldLocation().getY(),
-                tile.getWorldLocation().getPlane() + tile2.getWorldLocation().getPlane());
-    }
 
     public RSTile getNextTile(RSTile start, RSTile end) {
         WorldArea area = npc.getAccessor().getWorldArea();
@@ -153,28 +123,30 @@ public class NPCPath extends MethodProvider {
 
         // directionMask is all possible directions NPC wants to move
         int directionMask = toDirectionMap.get(Pair.of(
-                Integer.compare(end.getWorldLocation().getX(), start.getWorldLocation().getX()),
-                Integer.compare(end.getWorldLocation().getY(), start.getWorldLocation().getY())));
+                Integer.compare(end.getX(), start.getX()),
+                Integer.compare(end.getY(), start.getY())));
 
         // check collisions so that directionMask becomes all directions NPC can move
-        for (int i = 0; i < npc.getAccessor().getWorldArea().getWidth(); i++) {
-            for (int j = 0; j < npc.getAccessor().getWorldArea().getHeight(); j++) {
+        for (int i = 0; i < npc.getWidth(); i++) {
+            for (int j = 0; j < npc.getHeight(); j++) {
                 int blockedDirectionMask = 0;
                 // for each tile around point set blockedDirectionMask to that tiles direction if that direction is blocked
                 for (Map.Entry<Integer, Pair<Integer, Integer>> entry : fromDirectionMap.entrySet()) {
-                    RSTile blockedTile = offsetTile(offsetTile(start, Pair.of(i, j)), entry.getValue());
-                    if ((flags[blockedTile.getLocalLocation(methods).getSceneX()][blockedTile.getLocalLocation(methods).getSceneY()] & RSLocalPath.BLOCKED) != 0) {
+                    RSTile blockedTile = start.offset(i + entry.getValue().getKey(), j + entry.getValue().getValue());
+                    if ((flags[blockedTile.getSceneX()][blockedTile.getSceneY()] & RSLocalPath.BLOCKED) != 0) {
                         blockedDirectionMask = blockedDirectionMask | entry.getKey();
                     }
                 }
                 directionMask = directionMask &
-                        ~(directionMask & flags[offsetTile(start, Pair.of(i, j)).getLocalLocation(methods).getSceneX()]
-                                [offsetTile(start, Pair.of(i, j)).getLocalLocation(methods).getSceneY()]) &
+                        ~(directionMask & flags[start.offset(i,j).getSceneX()]
+                                [start.offset(i,j).getSceneY()]) &
                         ~blockedDirectionMask;
             }
         }
         // Filter directionMask to prefer diagonal then horizontal then vertical movements
-        if ((directionMask & diagonalDirections) != 0 && (directionMask & horizontalDirections) != 0 && (directionMask & verticalDirections) != 0) {
+        if ((directionMask & diagonalDirections) != 0 &&
+                (directionMask & horizontalDirections) != 0 &&
+                (directionMask & verticalDirections) != 0) {
             directionMask = directionMask & diagonalDirections;
         }
         else if ((directionMask & horizontalDirections) != 0){
@@ -189,6 +161,6 @@ public class NPCPath extends MethodProvider {
 
         // return a new tile from directionMask
         Pair<Integer, Integer> pair = fromDirectionMap.get(directionMask);
-        return offsetTile(start, pair);
+        return start.offset(pair.getKey(), pair.getValue());
     }
 }
