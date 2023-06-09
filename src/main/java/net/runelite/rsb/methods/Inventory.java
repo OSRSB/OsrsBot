@@ -1026,4 +1026,36 @@ public class Inventory extends MethodProvider {
 	public boolean hasItem(int itemId) {
 		return getCount(itemId) > 0;
 	}
+	
+	/**
+	 * Drops an item with the specified ID from the inventory.
+	 *
+	 * @param itemId The ID of the item to drop.
+	 * @return <code>true</code> if the item was dropped successfully, <code>false</code> otherwise.
+	 */
+	public boolean dropItem(int itemId) {
+		RSItem[] items = getItems();
+		for (RSItem item : items) {
+			if (item != null && item.getID() == itemId) {
+				return item.doAction("Drop");
+			}
+		}
+		return false; // Item not found
+	}
+
+	/**
+	 * Drops an item with the specified name from the inventory.
+	 *
+	 * @param itemName The name of the item to drop.
+	 * @return <code>true</code> if the item was dropped successfully, <code>false</code> otherwise.
+	 */
+	public boolean dropItem(String itemName) {
+		RSItem[] items = getItems();
+		for (RSItem item : items) {
+			if (item != null && item.getName().equalsIgnoreCase(itemName)) {
+				return item.doAction("Drop");
+			}
+		}
+		return false; // Item not found
+	}
 }
