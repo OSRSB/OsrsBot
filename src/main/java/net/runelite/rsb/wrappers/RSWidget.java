@@ -329,7 +329,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     public String getName() {
         final Widget component = this.widget;
         if (component != null) {
-            return component.getName();
+            return component.getName().replaceAll("<.*?>", "");
         }
         return "";
     }
