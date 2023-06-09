@@ -1,16 +1,22 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.api.InventoryID;
+import net.runelite.api.Item;
+import net.runelite.api.ItemContainer;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
+import net.runelite.rsb.query.RSGroundItemQueryBuilder;
+import net.runelite.rsb.query.RSInventoryItemQueryBuilder;
 import net.runelite.rsb.wrappers.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -28,6 +34,10 @@ public class Inventory extends MethodProvider {
 		super(ctx);
 	}
 
+	public RSInventoryItemQueryBuilder query() {
+		return new RSInventoryItemQueryBuilder();
+	}
+
 	/**
 	 * Gets the inventory interface.
 	 *
@@ -36,15 +46,12 @@ public class Inventory extends MethodProvider {
 	public Map.Entry<String, RSWidget> getInterface() {
 		final String INVENTORY = "inventory", BANK = "bank", STORE = "store", GRAND_EXCHANGE = "grandexchange", TRADE = "trade";
 		HashMap<String, RSWidget> widgets = new HashMap<>();
-		switch (methods.gui.getViewportLayout()) {
-			case FIXED_CLASSIC -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.FIXED_VIEWPORT_INVENTORY_CONTAINER));
-			case RESIZABLE_MODERN -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INVENTORY_CONTAINER));
-			case RESIZABLE_CLASSIC -> widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.RESIZABLE_VIEWPORT_INVENTORY_CONTAINER));
-		}
+
 		widgets.put(BANK, methods.interfaces.getComponent(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER)); //Bug #137 - Bank has its own inventory container
 		widgets.put(STORE, methods.interfaces.getComponent(WidgetInfo.SHOP_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(GRAND_EXCHANGE, methods.interfaces.getComponent(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER));
 		widgets.put(TRADE, methods.interfaces.getComponent(GlobalWidgetInfo.TRADE_MAIN_SCREEN_WINDOW_CONTAINER));
+		widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.INVENTORY));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
 			if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
@@ -63,6 +70,35 @@ public class Inventory extends MethodProvider {
 		return (widget.isValid() && widget.isVisible());
 	}
 
+	public boolean isOpen() {
+		return methods.game.getCurrentTab() == InterfaceTab.INVENTORY;
+	}
+
+	public boolean open() {
+		if (!isOpen()) {
+			return methods.game.openTab(InterfaceTab.INVENTORY);
+		}
+		return true;
+	}
+
+	public boolean moveItem(RSItem item, int target) {
+		if (item != null) {
+			if (item.doHover()) {
+				int id = item.getID();
+				RSWidget invInterface = getInterface().getValue();
+				RSWidget comp = invInterface.getDynamicComponent(target);
+				methods.mouse.drag((int)comp.getCenter().getX(), (int)comp.getCenter().getY());
+				sleepUntil(() -> getItemAt(target) != null && getItemAt(target).getID() == id, 1000);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean moveItem(int index, int target) {
+		return moveItem(getItemAt(index), target);
+	}
+
 	/**
 	 * Destroys any inventory items with the given ID.
 	 *
@@ -72,7 +108,7 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean destroyItem(final int itemID) {
 		RSItem item = getItem(itemID);
-		if (!itemHasAction(item, "Destroy")) {
+		if (!itemHasAction(item, "Destroy") || !open()) {
 			return false;
 		}
 		while (item != null) {
@@ -99,6 +135,30 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Retrieves the inventory grid as a 2D array.
+	 *
+	 * @return 2D array representing the inventory grid. Each element contains the item ID at the corresponding slot,
+	 *         or -1 if the slot is empty.
+	 */
+	public int[][] getItemGrid() {
+		int[][] inventory = new int[7][4];
+		RSItem[] items = getItems();
+
+		for (int i = 0; i < items.length; i++) {
+			int column = i % 4;
+			int row = i / 4;
+
+			if (items[i] != null) {
+				inventory[row][column] = items[i].getID();
+			} else {
+				inventory[row][column] = -1; // Empty slot
+			}
+		}
+
+		return inventory;
+	}
+
+	/**
 	 * Drops all items with the same specified id.
 	 *
 	 * @param leftToRight <code>true</code> to drop items from left to right.
@@ -106,24 +166,27 @@ public class Inventory extends MethodProvider {
 	 */
 	public void dropAllExcept(final boolean leftToRight, final int... items) {
 		RSTile startLocation = methods.players.getMyPlayer().getLocation();
-		boolean found_droppable = true;
-		while (found_droppable && getCountExcept(items) != 0) {
+		boolean foundDroppable = true;
+		while (foundDroppable && getCountExcept(items) != 0) {
 			if (methods.calc.distanceTo(startLocation) > 100) {
 				break;
 			}
-			found_droppable = false;
-			for (int j = 0; j < 28; j++) {
-				int c = leftToRight ? j % 4 : j / 7;
-				int r = leftToRight ? j / 4 : j % 7;
-				RSItem curItem = getItems()[c + r * 4];
-				int id;
-				if (curItem != null && (id = curItem.getID()) != -1 && id != EMPTY_SLOT_ITEM_ID) {
-					boolean isInItems = false;
-					for (int i : items) {
-						isInItems |= (i == id);
-					}
-					if (!isInItems) {
-						found_droppable |= dropItem(c, r);
+			foundDroppable = false;
+			int[][] inventory = getItemGrid();
+			int maxIndex = Math.min(28, inventory.length * 4); // Use the minimum of inventory length and 28
+			for (int index = 0; index < maxIndex; index++) {
+				int c = leftToRight ? index % 4 : index / 7;
+				int r = leftToRight ? index / 4 : index % 7;
+				if (c >= 0 && c < 4 && r >= 0 && r < 7) {
+					int id = inventory[r][c];
+					if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
+						boolean isInItems = false;
+						for (int i : items) {
+							isInItems |= (i == id);
+						}
+						if (!isInItems) {
+							foundDroppable |= dropItem(c, r);
+						}
 					}
 				}
 			}
@@ -247,20 +310,18 @@ public class Inventory extends MethodProvider {
 	 *         <code>false</code> if not (e.g., if item is undroppable)
 	 */
 	public boolean dropItem(final int col, final int row) {
-		if (methods.interfaces.canContinue()) {
-			methods.interfaces.clickContinue();
-			sleep(random(800, 1300));
-		}
-		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY
-				&& !methods.interfaces.get(WidgetIndices.Bank.GROUP_INDEX).isValid()
-				&& !methods.interfaces.get(WidgetIndices.Store.GROUP_INDEX).isValid()) {
-			methods.game.openTab(InterfaceTab.INVENTORY);
-		}
-		if (col < 0 || col > 3 || row < 0 || row > 6) {
+		if (col < 0 || col >= 4 || row < 0 || row >= 7) {
 			return false;
 		}
-		RSItem item = getItems()[col + row * 4];
-		return item != null && item.getID() != -1 && item.getID() != EMPTY_SLOT_ITEM_ID && item.doAction("Drop");
+		int index = col + row * 4;
+		RSItem[] items = getItems();
+		if (index >= 0 && index < items.length) {
+			RSItem item = items[index];
+			if (item != null && item.getID() != -1 && item.getID() != EMPTY_SLOT_ITEM_ID) {
+				return item.doAction("Drop");
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -366,6 +427,16 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Checks whether or not your inventory is empty.
+	 *
+	 * @return <code>true</code> if your inventory contains 28 items; otherwise
+	 *         <code>false</code>.
+	 */
+	public boolean isEmpty() {
+		return getCount() == 0;
+	}
+
+	/**
 	 * Checks whether or not an inventory item is selected.
 	 *
 	 * @return <code>true</code> if an item in your inventory is selected; otherwise
@@ -409,7 +480,7 @@ public class Inventory extends MethodProvider {
 		if (selItem != null && selItem.getID() == itemID) {
 			return true;
 		}
-		if (!item.doAction("Use")) { return false; }
+		if (open() && !item.doAction("Use")) { return false; }
 		/*
 		for (int c = 0; c < 5 && getSelectedItem() == null; c++) {
 			sleep(random(40, 60));
@@ -497,7 +568,7 @@ public class Inventory extends MethodProvider {
 		RSItem item;
 		if (getLast != null && getLast.length > 0 && getLast[0]) {
 			item = getLastItem(itemID);
-		} else {
+		}else{
 			item = getItem(itemID);
 		}
 		return item != null && useItem(item, object);
@@ -549,12 +620,15 @@ public class Inventory extends MethodProvider {
 	 * @return The index of current selected item, or -1 if none is selected.
 	 */
 	public int getSelectedItemIndex() {
+		if (!isOpen()) {
+			return -1;
+		}
 		RSWidget invInterface = getInterface().getValue();
-			RSWidget[] comps = invInterface.getComponents();
-			for (int i = 0; i < Math.min(28, comps.length); ++i) {
-				if (comps[i].getBorderThickness() == 2) {
-					return i;
-				}
+		RSWidget[] comps = invInterface.getComponents();
+		for (int i = 0; i < Math.min(28, comps.length); ++i) {
+			if (comps[i].getBorderThickness() == 2) {
+				return i;
+			}
 		}
 		return -1;
 	}
@@ -567,6 +641,9 @@ public class Inventory extends MethodProvider {
 	 * @return the index of the item selected; otherwise -1
 	 */
 	public int checkIsSelected(RSWidgetItem[] comps) {
+		if (!isOpen()) {
+			return -1;
+		}
 		class Selector {
 			int selected = -1;
 			public void setSelected(int selection) {
@@ -595,7 +672,7 @@ public class Inventory extends MethodProvider {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
- 		}
+		}
 		return selector.getSelected();
 	}
 
@@ -609,6 +686,9 @@ public class Inventory extends MethodProvider {
 	 * @return the index of the item selected; otherwise -1
 	 */
 	public int getSelected(Image img, RSWidgetItem[] comps) {
+		if (!isOpen()) {
+			return -1;
+		}
 		BufferedImage im = new BufferedImage(methods.client.getCanvasWidth(), methods.client.getCanvasHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = im.getGraphics();
 		graphics.drawImage(img, 0, 0, null);
@@ -675,8 +755,13 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem getItemAt(final int index) {
 		RSWidget invInterface = getInterface().getValue();
-		RSWidget comp = invInterface.getComponent(index);
-		return 0 <= index && index < 28 && comp.getId() != EMPTY_SLOT_ITEM_ID ? new RSItem(methods, comp) : null;
+		RSWidget comp = invInterface.getDynamicComponent(index);
+		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
+		if (container == null) {
+			return null;
+		}
+		Item cachedItem = container.getItem(index);
+		return 0 <= index && index < 28 && cachedItem != null && cachedItem.getId() != -1 ? new RSItem(methods, comp, cachedItem) : null;
 	}
 
 	/**
@@ -688,12 +773,18 @@ public class Inventory extends MethodProvider {
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
 		RSWidget[] invItems = invInterface.getComponents();
-		RSItem[] items = new RSItem[invItems.length];
-		for (int i = 0; i < invItems.length; i++) {
-			if (invItems[i].getId() != EMPTY_SLOT_ITEM_ID)
-				items[i] = new RSItem(methods, invItems[i]);
+		ItemContainer container = methods.client.getItemContainer(InventoryID.INVENTORY);
+		if (container == null) {
+			return new RSItem[]{};
 		}
-		return items;
+		Item[] cachedItems = container.getItems();
+		List<RSItem> items = new ArrayList<RSItem>();
+		for (int i = 0; i < cachedItems.length; i++) {
+			if (cachedItems[i].getId() != -1) {
+				items.add(new RSItem (methods, invItems[i], cachedItems[i]));
+			}
+		}
+		return items.toArray(new RSItem[0]);
 	}
 
 	/**
@@ -723,24 +814,6 @@ public class Inventory extends MethodProvider {
 	 */
 	public RSItem[] getItems(final String... names) {
 		return getItems(getItemIDs(names));
-	}
-
-	/**
-	 * Gets all the items in the inventory. If the tab is not currently open, it
-	 * does not open it and returns the last known array of items in the tab.
-	 *
-	 * @return <code>RSItem</code> array of the cached inventory items or new
-	 *         <code>RSItem[0]</code>.
-	 */
-	public RSItem[] getCachedItems() {
-		RSWidget invInterface = getInterface().getValue();
-		if (invInterface == null) return null;
-		RSWidget[] invItems = invInterface.getComponents();
-		RSItem[] items = new RSItem[invItems.length];
-		for (int i = 0; i < invItems.length; i++) {
-			items[i] = new RSItem(methods, invItems[i]);
-		}
-		return items;
 	}
 
 	/**
@@ -1004,5 +1077,37 @@ public class Inventory extends MethodProvider {
 
 	public boolean hasItem(int itemId) {
 		return getCount(itemId) > 0;
+	}
+
+	/**
+	 * Drops an item with the specified ID from the inventory.
+	 *
+	 * @param itemId The ID of the item to drop.
+	 * @return <code>true</code> if the item was dropped successfully, <code>false</code> otherwise.
+	 */
+	public boolean dropItem(int itemId) {
+		RSItem[] items = getItems();
+		for (RSItem item : items) {
+			if (item != null && item.getID() == itemId) {
+				return item.doAction("Drop");
+			}
+		}
+		return false; // Item not found
+	}
+
+	/**
+	 * Drops an item with the specified name from the inventory.
+	 *
+	 * @param itemName The name of the item to drop.
+	 * @return <code>true</code> if the item was dropped successfully, <code>false</code> otherwise.
+	 */
+	public boolean dropItem(String itemName) {
+		RSItem[] items = getItems();
+		for (RSItem item : items) {
+			if (item != null && item.getName().equalsIgnoreCase(itemName)) {
+				return item.doAction("Drop");
+			}
+		}
+		return false; // Item not found
 	}
 }
