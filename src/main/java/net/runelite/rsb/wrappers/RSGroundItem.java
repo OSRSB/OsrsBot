@@ -7,7 +7,7 @@ import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.util.List;
 
@@ -72,8 +72,8 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 		return groundItem;
 	}
 
-	public WalkerTile getLocation() {
-		return new WalkerTile(location);
+	public RSTile getLocation() {
+		return new RSTile(location);
 	}
 
 	public boolean isOnScreen() {
