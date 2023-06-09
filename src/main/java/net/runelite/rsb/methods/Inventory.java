@@ -587,6 +587,25 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
+	 * Gets the last item in the inventory with any of the provided IDs.
+	 *
+	 * @param ids The IDs of the items to find.
+	 * @return The last <code>RSItem</code> for the given IDs; otherwise null.
+	 */
+	public RSItem getLastItem(final int... ids) {
+		RSItem[] items = getItems();
+		for (int i = items.length - 1; i >= 0; i--) {
+			RSItem item = items[i];
+			for (int id : ids) {
+				if (item.getID() == id) {
+					return item;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Randomizes a point.
 	 *
 	 * @param inventoryPoint The inventory point to be randomized.
@@ -883,26 +902,6 @@ public class Inventory extends MethodProvider {
 	public RSItem getItem(final String... names) {
 		return getItem(getItemIDs(names));
 	}
-
-	/**
-	 * Gets the last item in the inventory with any of the provided IDs.
-	 *
-	 * @param ids The IDs of the items to find.
-	 * @return The last <code>RSItem</code> for the given IDs; otherwise null.
-	 */
-	public RSItem getLastItem(final int... ids) {
-		RSItem[] items = getItems();
-		for (int i = items.length - 1; i >= 0; i--) {
-			RSItem item = items[i];
-			for (int id : ids) {
-				if (item.getID() == id) {
-					return item;
-				}
-			}
-		}
-		return null;
-	}
-
 	public RSItem[] find(final Predicate<RSItem> filter) {
 		RSItem[] rsItems = getItems();
 		RSItem[] filterItems = new RSItem[]{};
