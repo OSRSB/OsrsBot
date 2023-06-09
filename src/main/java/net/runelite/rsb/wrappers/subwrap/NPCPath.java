@@ -50,7 +50,7 @@ public class NPCPath extends MethodProvider {
         for (int i = 0; i < npc.getAccessor().getWorldArea().getWidth(); i++) {
             for (int j = 0; j < npc.getAccessor().getWorldArea().getHeight(); j++) {
                 RSTile tile = offsetTile(start, Pair.of(i,j));
-                double distance = offsetTile(start, Pair.of(i,j)).getLocation().distanceToDouble(end);
+                double distance = offsetTile(start, Pair.of(i,j)).distanceToDouble(end);
                 if (minDistance > distance) {
                     minDistance = distance;
                     nearestTile = tile;
@@ -79,7 +79,7 @@ public class NPCPath extends MethodProvider {
 
     public RSTile getNearestSafespot(Positionable end, int limit, Predicate<RSTile> predicate){
         int[][] flags = methods.client.getCollisionMaps()[methods.game.getPlane()].getFlags();
-        WalkerTile center = end.getLocation();
+        RSTile center = end.getLocation();
         int i = center.getX(), j = center.getY();
         // Snake iterator; iterates from center outward in concentric squares
         RSTile current = new RSTile(i , j, center.getPlane());
