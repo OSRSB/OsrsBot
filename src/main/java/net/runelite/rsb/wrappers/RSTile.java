@@ -115,6 +115,10 @@ public class RSTile implements Clickable07, Positionable {
         return this.getTile(ctx).getLocalLocation();
     }
 
+    public LocalPoint getLocalLocation() {
+        return this.getTile(ctx).getLocalLocation();
+    }
+
     /**
      * Gets the WorldPoint (with world x y values) for this RSTile
      * @return  the WorldPoint values for this RSTile
