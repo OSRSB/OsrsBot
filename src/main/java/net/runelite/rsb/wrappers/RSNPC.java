@@ -3,11 +3,14 @@ package net.runelite.rsb.wrappers;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.runelite.api.*;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.cache.definitions.NpcDefinition;
 import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.Positionable;
 
+import javax.swing.text.Position;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -103,4 +106,35 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
         return getLocation();
     }
 
+    public int getWidth() {
+        return getAccessor().getWorldArea().getWidth();
+    }
+
+    public int getHeight() {
+        return getAccessor().getWorldArea().getHeight();
+    }
+
+    public RSTile getNearestTile(Positionable start, Positionable end) {
+        RSTile nearestTile = null;
+        double minDistance = Float.POSITIVE_INFINITY;
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                RSTile tile = start.getLocation().offset(i,j);
+                double distance = start.getLocation().offset(i,j).distanceToDouble(end);
+                if (minDistance > distance) {
+                    minDistance = distance;
+                    nearestTile = tile;
+                }
+            }
+        }
+        return nearestTile;
+    }
+
+    public RSTile getNearestTile(Positionable end) {
+        return getNearestTile(getLocation(), end.getLocation());
+    }
+
+    public RSTile getNearestTile() {
+        return getNearestTile(getLocation(), methods.players.getMyPlayer());
+    }
 }

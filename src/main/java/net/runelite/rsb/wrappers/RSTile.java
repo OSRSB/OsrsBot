@@ -319,9 +319,85 @@ public class RSTile implements Clickable07, Positionable {
         return ctx.calc.distanceBetween(this.toWorldTile(), positionable.getLocation());
     }
 
+    /**
+     * Changes the underlying tile
+     * @param x
+     * @param y
+     * @return
+     */
     public RSTile translate(int x, int y) {
         this.x = this.x + x;
         this.y = this.y + y;
         return this;
+    }
+    /**
+     * Changes the underlying tile
+     * @param x
+     * @param y
+     * @param plane
+     * @return
+     */
+    public RSTile translate(int x, int y, int plane) {
+        this.x = this.x + x;
+        this.y = this.y + y;
+        this.plane = this.plane + plane;
+        return this;
+    }
+
+    /**
+     * Changes the underlying tile
+     * @param tile
+     * @return
+     */
+    public RSTile translate(RSTile tile) {
+        this.x = this.x + tile.x;
+        this.y = this.y + tile.y;
+        this.plane = this.plane + tile.plane;
+        return this;
+    }
+
+    /**
+     * Returns a new tile offset from original
+     * @param x
+     * @param y
+     * @return
+     */
+    public RSTile offset(int x, int y) {
+        return new RSTile(this.x + x, this.y + y, this.plane);
+    }
+
+    /**
+     * Returns a new tile offset from original
+     * @param x
+     * @param y
+     * @param plane
+     * @return
+     */
+    public RSTile offset(int x, int y, int plane) {
+        return new RSTile(this.x + x, this.y + y, this.plane + plane);
+    }
+
+    /**
+     * Returns a new tile offset from original
+     * @param tile
+     * @return
+     */
+    public RSTile offset(RSTile tile) {
+        return new RSTile(this.x + tile.x, this.y + tile.y, this.plane + tile.plane);
+    }
+
+    public int getWorldX() {
+        return getWorldLocation().getX();
+    }
+
+    public int getWorldY() {
+        return getWorldLocation().getY();
+    }
+
+    public int getSceneX() {
+        return getLocation().getSceneX();
+    }
+    public int getSceneY() {
+        return getLocation().getSceneY();
     }
 }
