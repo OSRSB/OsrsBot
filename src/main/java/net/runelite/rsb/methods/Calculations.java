@@ -483,6 +483,13 @@ public class Calculations extends MethodProvider {
 		return new java.awt.Point(point.getX(), point.getY());
 	}
 
+	public boolean hasLineOfSight(RSTile start, RSTile end) {
+		return start.getTile(methods).hasLineOfSightTo(end.getTile(methods));
+	}
+	public boolean hasLineOfSight(RSTile end) {
+		return methods.players.getMyPlayer().getLocation().getTile(methods).hasLineOfSightTo(end.getTile(methods));
+	}
+
 	static class Render {
 		float absoluteX1 = 0, absoluteX2 = 0;
 		float absoluteY1 = 0, absoluteY2 = 0;
