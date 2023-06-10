@@ -54,12 +54,7 @@ public class Inventory extends MethodProvider {
 		widgets.put(INVENTORY, methods.interfaces.getComponent(WidgetInfo.INVENTORY));
 
 		for (Map.Entry<String, RSWidget> entry : widgets.entrySet()) {
-			if (entry.getKey().equals(INVENTORY) && methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
-				methods.game.openTab(InterfaceTab.INVENTORY);
-				sleep(random(50, 100));
-				return entry;
-			}
-			if (isOpen(entry.getValue())) {
+			if (isOpen(entry.getValue()) || entry.getKey().equals(INVENTORY)) {
 				return entry;
 			}
 		}
