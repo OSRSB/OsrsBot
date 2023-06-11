@@ -511,12 +511,20 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param itemID   The first item ID to use.
 	 * @param targetID The item ID you want the first parameter to be used on.
+	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the first item has been "used" on the other;
 	 *         otherwise <code>false</code>.
 	 */
-	public boolean useItem(final int itemID, final int targetID) {
-		RSItem item = getItem(itemID);
-		RSItem target = getItem(targetID);
+	public boolean useItem(final int itemID, final int targetID, final boolean... getLast) {
+		RSItem item;
+		RSItem target;
+		if (getLast != null && getLast.length > 0 && getLast[0]) {
+			item = getLastItem(itemID);
+			target = getLastItem(targetID);
+		}else{
+			item = getItem(itemID);
+			target = getItem(targetID);
+		}
 		return item != null && target != null && useItem(item, target);
 	}
 
@@ -550,13 +558,19 @@ public class Inventory extends MethodProvider {
 	/**
 	 * Uses an item on an object.
 	 *
-	 * @param itemID The item ID to use on the object.
-	 * @param object The RSObject you want the item to be used on.
+	 * @param itemID  The item ID to use on the object.
+	 * @param object  The RSObject you want the item to be used on.
+	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the "use" action had been used on both the
 	 *         RSItem and RSObject; otherwise <code>false</code>.
 	 */
-	public boolean useItem(final int itemID, final RSObject object) {
-		RSItem item = getItem(itemID);
+	public boolean useItem(final int itemID, final RSObject object, final boolean... getLast) {
+		RSItem item;
+		if (getLast != null && getLast.length > 0 && getLast[0]) {
+			item = getLastItem(itemID);
+		}else{
+			item = getItem(itemID);
+		}
 		return item != null && useItem(item, object);
 	}
 
@@ -570,6 +584,25 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean useItem(final String name, final RSObject object) {
 		return useItem(getItemID(name), object);
+	}
+
+	/**
+	 * Gets the last item in the inventory with any of the provided IDs.
+	 *
+	 * @param ids The IDs of the items to find.
+	 * @return The last <code>RSItem</code> for the given IDs; otherwise null.
+	 */
+	public RSItem getLastItem(final int... ids) {
+		RSItem[] items = getItems();
+		for (int i = items.length - 1; i >= 0; i--) {
+			RSItem item = items[i];
+			for (int id : ids) {
+				if (item.getID() == id) {
+					return item;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -610,11 +643,11 @@ public class Inventory extends MethodProvider {
 			return -1;
 		}
 		RSWidget invInterface = getInterface().getValue();
-			RSWidget[] comps = invInterface.getComponents();
-			for (int i = 0; i < Math.min(28, comps.length); ++i) {
-				if (comps[i].getBorderThickness() == 2) {
-					return i;
-				}
+		RSWidget[] comps = invInterface.getComponents();
+		for (int i = 0; i < Math.min(28, comps.length); ++i) {
+			if (comps[i].getBorderThickness() == 2) {
+				return i;
+			}
 		}
 		return -1;
 	}
@@ -658,7 +691,7 @@ public class Inventory extends MethodProvider {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
- 		}
+		}
 		return selector.getSelected();
 	}
 
@@ -1044,7 +1077,7 @@ public class Inventory extends MethodProvider {
 	public boolean hasItem(int itemId) {
 		return getCount(itemId) > 0;
 	}
-	
+
 	/**
 	 * Drops an item with the specified ID from the inventory.
 	 *
