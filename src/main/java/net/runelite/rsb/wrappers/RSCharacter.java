@@ -10,7 +10,7 @@ import net.runelite.rsb.util.OutputObjectComparer;
 import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -140,10 +140,10 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         return (int)(healthRatio / healthScale * 100);
     }
 
-    public WalkerTile getLocation() {
+    public RSTile getLocation() {
         Actor actor = getAccessor();
         if (actor == null) { return null; }
-        return new WalkerTile(actor.getWorldLocation());
+        return new RSTile(actor.getWorldLocation());
     }
 
     public String getMessage() {

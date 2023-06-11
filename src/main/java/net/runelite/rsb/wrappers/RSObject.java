@@ -12,7 +12,7 @@ import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.lang.reflect.Field;
 
@@ -56,8 +56,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return The central RSTile.
 	 * @see #getArea()
 	 */
-	public WalkerTile getLocation() {
-		return new WalkerTile(obj.getWorldLocation().getX(), obj.getWorldLocation().getY(), obj.getWorldLocation().getPlane());
+	public RSTile getLocation() {
+		return new RSTile(obj.getWorldLocation().getX(), obj.getWorldLocation().getY(), obj.getWorldLocation().getPlane());
 	}
 
 	/**

@@ -5,7 +5,7 @@ import net.runelite.cache.definitions.ObjectDefinition;
 import net.runelite.rsb.query.RSObjectQueryBuilder;
 import net.runelite.rsb.wrappers.RSObject;
 import net.runelite.rsb.wrappers.RSTile;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
@@ -136,7 +136,7 @@ public class Objects extends MethodProvider {
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
-                int distanceToCheck = methods.calc.distanceTo(new WalkerTile(x, y, methods.client.getPlane(), WalkerTile.TYPES.SCENE).toWorldTile());
+                int distanceToCheck = methods.calc.distanceTo(new RSTile(x, y, methods.client.getPlane(), RSTile.TYPES.SCENE).toWorldTile());
                 if (distanceToCheck < distance) {
                     Set<RSObject> objects = getAtLocal(x, y, -1);
                     for (RSObject o : objects) {
