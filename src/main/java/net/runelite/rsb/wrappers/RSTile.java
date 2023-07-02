@@ -289,7 +289,7 @@ public class RSTile implements Clickable07, Positionable {
             }
             tile.x = tile.x >>> Perspective.LOCAL_COORD_BITS;
             tile.y = tile.y >>> Perspective.LOCAL_COORD_BITS;
-            type = TYPES.SCENE;
+            tile.type = TYPES.SCENE;
         }
         return tile;
     }
