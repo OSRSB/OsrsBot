@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.CollisionData;
 import net.runelite.api.Point;
+import net.runelite.api.Varbits;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.VarpIndices;
@@ -182,15 +183,15 @@ public class Walking extends MethodProvider {
 	/**
 	 * Turns run on or off using the game GUI controls.
 	 *
-     * @param enable <code>true</code> to enable run, <code>false</code> to disable it.
-     * @return	if run was attempted to be enabled <code>true</code>; otherwise <code>false</code>
-     */
+	 * @param enable <code>true</code> to enable run, <code>false</code> to disable it.
+	 * @return	if run was attempted to be enabled <code>true</code>; otherwise <code>false</code>
+	 */
 	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_RUN_ORB).doClick();
 		}
-        return false;
-    }
+		return false;
+	}
 
 	/**
 	 * Generates a path from the player's current location to a destination
@@ -261,6 +262,37 @@ public class Walking extends MethodProvider {
 	}
 
 	/**
+	 * Returns the player's current run energy value in percentage.
+	 *
+	 * @return The player's current run energy in percentage.
+	 */
+	public int getEnergyPercentage() {
+		return methods.client.getEnergy() / 100;
+	}
+
+	/**
+	 * Returns the player's weight.
+	 *
+	 * @return The player's weight.
+	 */
+
+	public int getWeight() {
+		return methods.client.getWeight();
+	}
+
+
+	/**
+	 * Returns whether the player has the slowed depletion active.
+	 * <p>
+	 * This could be the stamina potion effect or the explorer ring effect.
+	 *
+	 * @return <code>true</code> if the player has the slowed depletion active; otherwise <code>false</code>.
+	 */
+	public boolean hasDepletionActive() {
+		return methods.client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) == 1;
+	}
+
+	/**
 	 * Gets the destination tile (where the flag is on the minimap). If there is
 	 * no destination currently, null will be returned.
 	 *
@@ -303,7 +335,7 @@ public class Walking extends MethodProvider {
 	@Deprecated
 	public RSTile randomizeTile(RSTile tile,
 								int maxXDeviation,
-	                            int maxYDeviation) {
+								int maxYDeviation) {
 		return randomize(tile, maxXDeviation, maxYDeviation);
 	}
 
@@ -482,7 +514,7 @@ public class Walking extends MethodProvider {
 	 */
 	@Deprecated
 	public RSTile[] randomizePath(RSTile[] path, int maxXDeviation,
-	                              int maxYDeviation) {
+								  int maxYDeviation) {
 		RSTile[] rez = new RSTile[path.length];
 		for (int i = 0; i < path.length; i++) {
 			rez[i] = randomize(path[i], maxXDeviation, maxYDeviation);

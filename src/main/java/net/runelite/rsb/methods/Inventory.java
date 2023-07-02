@@ -7,19 +7,18 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
-import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
-import net.runelite.rsb.query.RSGroundItemQueryBuilder;
 import net.runelite.rsb.query.RSInventoryItemQueryBuilder;
 import net.runelite.rsb.wrappers.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Inventory related operations.
@@ -1104,4 +1103,30 @@ public class Inventory extends MethodProvider {
 		}
 		return false; // Item not found
 	}
+
+	/**
+	 * Retrieves a list of items that contain the given input name.
+	 *
+	 * @param inputName the name to search for
+	 * @return a list of items containing the input name
+	 */
+	public List<RSItem> getItemsContainingName(String inputName) {
+		return Arrays.stream(getItems())
+				.filter(item -> item != null && item.getName().contains(inputName))
+				.collect(Collectors.toList());
+	}
+
+	/**
+	 * Retrieves the first item that contains the given input name.
+	 *
+	 * @param inputName the name to search for
+	 * @return the first item containing the input name, or null if no match is found
+	 */
+	public RSItem getFirstItemContainingName(String inputName) {
+		return Arrays.stream(getItems())
+				.filter(item -> item != null && item.getName().contains(inputName))
+				.findFirst()
+				.orElse(null);
+	}
+
 }
