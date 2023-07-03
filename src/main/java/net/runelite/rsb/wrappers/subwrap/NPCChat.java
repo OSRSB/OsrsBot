@@ -116,6 +116,38 @@ public class NPCChat extends Interfaces {
     /**
      * Clicks npc chat dialog menu option (if found)
      *
+     * @param option the index of the menu option to click
+     * @param hotKey      presses the option number on keyboard
+     * @param wait        not implemented. yet.
+     * @return true if successful, false otherwise
+     */
+    public boolean selectOption(int option, boolean hotKey, boolean wait) {
+        try {
+            if (hotKey) {
+                RSWidget[] widgets = getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents();
+                if (option >= 0 && option < widgets.length) {
+                    methods.keyboard.sendText(String.valueOf((option == 0) ? 1 : option), false);
+                    return true;
+                }
+            } else {
+                Stream.of(getComponent(GlobalWidgetInfo.DIALOG_DYNAMIC_CONTAINER).getComponents())
+                        .filter(widget -> {
+                            String optionText = getOptions()[option == 0 ? 1 : option];
+                            return option < getOptions().length && widget.getText().contains(optionText);
+                        })
+                        .findFirst()
+                        .ifPresentOrElse(RSWidget::doClick, IllegalArgumentException::new);
+                return true;
+            }
+        } catch (Exception ignored) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Clicks npc chat dialog menu option (if found)
+     *
      * @param option the menu option to click
      * @param wait   not implemented. yet.
      * @return true if successful, false otherwise
