@@ -15,8 +15,6 @@ public class RSPlayer extends RSCharacter {
 
 	private final SoftReference<Player> p;
 
-	private RSTile previous_tile;
-
 	public RSPlayer(final MethodContext ctx, final Player p) {
 		super(ctx);
 		this.p = new SoftReference<>(p);
@@ -45,10 +43,9 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
-	public boolean isMoving() {
-		boolean isMoving = previous_tile != null && !getLocation().equals(previous_tile);
-		previous_tile = getLocation();
-		return isLocalPlayerMoving() || isMoving;
+	public boolean hasMoved() {
+		var poseAnimation = getAccessor().getPoseAnimation();
+		return poseAnimation == getAnimation() || poseAnimation == getAccessor().getRunAnimation() || poseAnimation == getAccessor().getWalkAnimation();
 	}
 
 	@Override
