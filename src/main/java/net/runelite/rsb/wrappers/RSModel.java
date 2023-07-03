@@ -107,9 +107,11 @@ public class RSModel extends MethodProvider {
 				}
 			}
 		}
-		for (Polygon poly : triangles) {
-			if (poly.contains(new java.awt.Point(p.getX(), p.getY()))) {
-				return true;
+		else {
+			for (Polygon poly : triangles) {
+				if (poly.contains(new java.awt.Point(p.getX(), p.getY()))) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -145,7 +147,7 @@ public class RSModel extends MethodProvider {
 	 */
 	public boolean doAction(String action, String... target) {
 		try {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 3; i++) {
 				if (!this.contains(methods.mouse.getLocation())) {
 					methods.mouse.move(getPointNearCenter());
 					methods.mouse.move(getPointNearCenter());
@@ -293,7 +295,7 @@ public class RSModel extends MethodProvider {
 	 * @return The on screen triangles of this model.
 	 */
 	public Polygon[] getTriangles() {
-		final int NO_MODEL = 2;
+		final int NO_MODEL = 1;
 		if (model == null) {
 			return null;
 		}
@@ -367,19 +369,30 @@ public class RSModel extends MethodProvider {
 		Polygon[] triangles = this.getTriangles();
 		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
 
-		for (Polygon triangle : triangles) {
-			for (int i = 0; i < triangle.npoints; ++i) {
-				if (triangle.xpoints[i] < min_x) {
-					min_x = triangle.xpoints[i];
-				}
-				if (triangle.xpoints[i] > max_x) {
-					max_x = triangle.xpoints[i];
-				}
-				if (triangle.ypoints[i] < min_y) {
-					min_y = triangle.ypoints[i];
-				}
-				if (triangle.ypoints[i] > max_y) {
-					max_y = triangle.ypoints[i];
+		if (triangles == null) {
+			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
+			for (int i = 0; i < tilePoly.xpoints.length; i++) {
+				min_x = (min_x > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : min_x;
+				max_x = (max_x < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : max_x;
+				min_y = (min_y > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : min_y;
+				max_y = (max_y < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : max_y;
+			}
+		}
+		else {
+			for (Polygon triangle : triangles) {
+				for (int i = 0; i < triangle.npoints; ++i) {
+					if (triangle.xpoints[i] < min_x) {
+						min_x = triangle.xpoints[i];
+					}
+					if (triangle.xpoints[i] > max_x) {
+						max_x = triangle.xpoints[i];
+					}
+					if (triangle.ypoints[i] < min_y) {
+						min_y = triangle.ypoints[i];
+					}
+					if (triangle.ypoints[i] > max_y) {
+						max_y = triangle.ypoints[i];
+					}
 				}
 			}
 		}
@@ -390,19 +403,30 @@ public class RSModel extends MethodProvider {
 		Polygon[] triangles = this.getTriangles();
 		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
 
-		for (Polygon triangle : triangles) {
-			for (int i = 0; i < triangle.npoints; ++i) {
-				if (triangle.xpoints[i] < min_x) {
-					min_x = triangle.xpoints[i];
-				}
-				if (triangle.xpoints[i] > max_x) {
-					max_x = triangle.xpoints[i];
-				}
-				if (triangle.ypoints[i] < min_y) {
-					min_y = triangle.ypoints[i];
-				}
-				if (triangle.ypoints[i] > max_y) {
-					max_y = triangle.ypoints[i];
+		if (triangles == null) {
+			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
+			for (int i = 0; i < tilePoly.xpoints.length; i++) {
+				min_x = (min_x > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : min_x;
+				max_x = (max_x < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : max_x;
+				min_y = (min_y > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : min_y;
+				max_y = (max_y < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : max_y;
+			}
+		}
+		else {
+			for (Polygon triangle : triangles) {
+				for (int i = 0; i < triangle.npoints; ++i) {
+					if (triangle.xpoints[i] < min_x) {
+						min_x = triangle.xpoints[i];
+					}
+					if (triangle.xpoints[i] > max_x) {
+						max_x = triangle.xpoints[i];
+					}
+					if (triangle.ypoints[i] < min_y) {
+						min_y = triangle.ypoints[i];
+					}
+					if (triangle.ypoints[i] > max_y) {
+						max_y = triangle.ypoints[i];
+					}
 				}
 			}
 		}
