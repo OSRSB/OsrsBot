@@ -78,7 +78,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
         getRequest().located(positionables);
         return filter(location -> {
             for (Positionable positionable : positionables) {
-                if (location.getLocation().distanceTo(positionable) < 2) {
+                if (location.getLocation().distanceTo(positionable) < 1) {
                     return true;
                 }
             }
@@ -91,7 +91,7 @@ public abstract class PositionableQueryBuilder<T extends Positionable, Q extends
         getRequest().notLocated(positionables);
         return filter(location -> {
             for (Positionable positionable : positionables) {
-                if (location.getLocation().distanceTo(positionable) < 2) {
+                if (location.getLocation().distanceTo(positionable) < 1) {
                     return false;
                 }
             }
