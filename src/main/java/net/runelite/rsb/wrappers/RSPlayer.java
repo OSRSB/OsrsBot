@@ -45,7 +45,7 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
-	public boolean isMoving() {
+	public boolean hasMoved() {
 		boolean isMoving = previous_tile != null && !getLocation().equals(previous_tile);
 		previous_tile = getLocation();
 		return isLocalPlayerMoving() || isMoving;
