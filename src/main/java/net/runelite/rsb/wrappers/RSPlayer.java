@@ -46,7 +46,9 @@ public class RSPlayer extends RSCharacter {
 	public boolean isMoving() {
 		var poseAnimation = getAccessor().getPoseAnimation();
 		return isLocalPlayerMoving()
-				|| poseAnimation == getAnimation()
+				|| poseAnimation == getAccessor().getWalkRotate180()
+				|| poseAnimation == getAccessor().getWalkRotateLeft()
+				|| poseAnimation == getAccessor().getWalkRotateRight()
 				|| poseAnimation == getAccessor().getRunAnimation()
 				|| poseAnimation == getAccessor().getWalkAnimation();
 	}
