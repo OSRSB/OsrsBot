@@ -43,7 +43,7 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
-	public boolean hasMoved() {
+	public boolean isMoving() {
 		var poseAnimation = getAccessor().getPoseAnimation();
 		return poseAnimation == getAnimation() || poseAnimation == getAccessor().getRunAnimation() || poseAnimation == getAccessor().getWalkAnimation();
 	}
