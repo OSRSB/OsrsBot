@@ -15,7 +15,7 @@ public class RSPlayer extends RSCharacter {
 
 	private final SoftReference<Player> p;
 
-	private RSTile previous_tile;
+	private RSTile previousTile;
 
 	public RSPlayer(final MethodContext ctx, final Player p) {
 		super(ctx);
@@ -45,9 +45,9 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
-	public boolean isMoving() {
-		boolean isMoving = previous_tile != null && !getLocation().equals(previous_tile);
-		previous_tile = getLocation();
+	public boolean hasMoved() {
+		boolean isMoving = previousTile != null && !getLocation().equals(previousTile);
+		previousTile = getLocation();
 		return isLocalPlayerMoving() || isMoving;
 	}
 
