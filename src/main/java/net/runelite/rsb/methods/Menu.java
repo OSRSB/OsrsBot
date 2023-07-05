@@ -309,12 +309,6 @@ public class Menu extends MethodProvider {
         String[] actions = getActions();
         String[] targets = getTargets();
 
-        System.out.println(action);
-        System.out.println(Arrays.toString(target));
-        System.out.println(Arrays.toString(actions));
-        System.out.println(Arrays.toString(targets));
-        System.out.println();
-
         /* Throw exception if lengths unequal? */
         if (action != null) {
             for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
