@@ -199,7 +199,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 *         		 desired action
 	 */
 	public boolean doAction(final String action) {
-		return doAction(action, null);
+		return doAction(action, getName());
 	}
 
 	/**

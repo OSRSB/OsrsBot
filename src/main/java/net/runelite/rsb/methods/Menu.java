@@ -7,6 +7,7 @@ import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.client.ui.FontManager;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -314,7 +315,9 @@ public class Menu extends MethodProvider {
             for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
                 if (actions[i].toLowerCase().contains(action)) {
                     lastIndex = checkTargetMatch(target, targets, i);
-                    return lastIndex;
+                    if (lastIndex != -1) {
+                        return lastIndex;
+                    }
                 }
             }
         }

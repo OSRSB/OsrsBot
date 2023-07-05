@@ -66,7 +66,7 @@ public class RSPlayer extends RSCharacter {
 
 	@Override
 	public boolean doAction(final String action) {
-		return doAction(action, null);
+		return doAction(action, getName());
 	}
 
 	@Override
