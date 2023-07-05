@@ -188,7 +188,9 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		}
 		ItemDefinition definition = getDefinition();
 		if (definition != null) {
-			return getDefinition().getInterfaceOptions();
+			String[] result = {null, null, null, null, null, "Use", "Examine"};
+			System.arraycopy(getDefinition().getInterfaceOptions(), 0, result, 0, 5);
+			return result;
 		}
 		return null;
 	}

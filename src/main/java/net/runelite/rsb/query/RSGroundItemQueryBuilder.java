@@ -71,14 +71,14 @@ public class RSGroundItemQueryBuilder extends PositionableQueryBuilder<RSGroundI
 
     public RSGroundItemQueryBuilder actionsContains(String... arrayOfString) {
         if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
-        return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
+        return filter(groundItem -> Arrays.stream(groundItem.getItem().getGroundActions())
                 .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> itemString.contains(inputString))));
     }
     public RSGroundItemQueryBuilder actions(String... arrayOfString) {
         if (arrayOfString == null || Arrays.stream(arrayOfString).allMatch((x) -> x == null || x.equals(""))) return this;
-        return filter(groundItem -> Arrays.stream(groundItem.getItem().getDefinition().options)
+        return filter(groundItem -> Arrays.stream(groundItem.getItem().getGroundActions())
                 .filter((x) -> x != null)
                 .anyMatch(itemString -> Arrays.stream(arrayOfString)
                         .anyMatch(inputString -> itemString.equals(inputString))));
