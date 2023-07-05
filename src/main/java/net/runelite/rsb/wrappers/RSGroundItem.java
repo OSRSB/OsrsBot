@@ -49,7 +49,7 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action) {
-		return doAction(action, null);
+		return doAction(action, groundItem.getName());
 	}
 
 	/**

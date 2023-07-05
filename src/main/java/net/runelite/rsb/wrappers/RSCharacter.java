@@ -92,7 +92,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return <code>true</code> if the option was found; otherwise <code>false</code>.
      */
     public boolean doAction(final String action) {
-        return doAction(action, null);
+        return doAction(action, getName());
     }
 
     /**
