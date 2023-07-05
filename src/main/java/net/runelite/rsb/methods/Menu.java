@@ -92,7 +92,7 @@ public class Menu extends MethodProvider {
         ItemDefinition itemDef = item.getDefinition();
         if (itemDef != null) {
             for (String a : itemDef.getInterfaceOptions()) {
-                if (a.equalsIgnoreCase(action)) {
+                if (a.equals(action)) {
                     return true;
                 }
             }
@@ -267,7 +267,7 @@ public class Menu extends MethodProvider {
         String[] targets = new String[entries.length];
         for (int i = 0; i < entries.length; i++) {
             if (entries[i] != null) {
-                targets[i] = entries[i].getTarget();
+                targets[i] = entries[i].getTarget().replaceAll("<.*?>", "");
             }
             else {
                 targets[i] = "";
@@ -284,9 +284,8 @@ public class Menu extends MethodProvider {
      */
     public int getIndex(String action) {
         MenuEntry[] entries = getEntries();
-        action = action.toLowerCase();
         for (int i = 0; i < entries.length; i++) {
-            if (entries[i].getOption().toLowerCase().contains(action)) {
+            if (entries[i].getOption().contains(action)) {
                 lastIndex = i;
                 return i;
             }
@@ -307,13 +306,19 @@ public class Menu extends MethodProvider {
         if (target == null) {
             return getIndex(action);
         }
-        action = action.toLowerCase();
         String[] actions = getActions();
         String[] targets = getTargets();
+
+        System.out.println(action);
+        System.out.println(Arrays.toString(target));
+        System.out.println(Arrays.toString(actions));
+        System.out.println(Arrays.toString(targets));
+        System.out.println();
+
         /* Throw exception if lengths unequal? */
         if (action != null) {
             for (int i = 0; i < Math.min(actions.length, targets.length); i++) {
-                if (actions[i].toLowerCase().contains(action)) {
+                if (actions[i].contains(action)) {
                     lastIndex = checkTargetMatch(target, targets, i);
                     if (lastIndex != -1) {
                         return lastIndex;
@@ -341,7 +346,7 @@ public class Menu extends MethodProvider {
         boolean targetMatch = false;
         if (target[0] != null) {
             for (String targetPart : target) {
-                if (targets[index].toLowerCase().contains(targetPart.toLowerCase())) {
+                if (targets[index].contains(targetPart)) {
                     targetMatch = true;
                 } else {
                     targetMatch = false;
