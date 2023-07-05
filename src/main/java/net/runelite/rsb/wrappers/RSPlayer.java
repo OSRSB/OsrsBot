@@ -51,7 +51,7 @@ public class RSPlayer extends RSCharacter {
 				|| poseAnimation == getAccessor().getWalkRotateRight()
 				|| poseAnimation == getAccessor().getRunAnimation()
 				|| poseAnimation == getAccessor().getWalkAnimation();
-	}
+  }
 
 	@Override
 	public String getName() {

@@ -117,7 +117,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 */
 	public String getName() {
 		ObjectDefinition objectDef = getDef();
-		return objectDef != null ? objectDef.getName() : "";
+		return objectDef != null ? objectDef.getName().replaceAll("<.*?>", "") : "";
 	}
 
 	/**
