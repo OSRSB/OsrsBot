@@ -15,8 +15,6 @@ public class RSPlayer extends RSCharacter {
 
 	private final SoftReference<Player> p;
 
-	private RSTile previousTile;
-
 	public RSPlayer(final MethodContext ctx, final Player p) {
 		super(ctx);
 		this.p = new SoftReference<>(p);
@@ -45,11 +43,15 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
-	public boolean hasMoved() {
-		boolean isMoving = previousTile != null && !getLocation().equals(previousTile);
-		previousTile = getLocation();
-		return isLocalPlayerMoving() || isMoving;
-	}
+	public boolean isMoving() {
+		var poseAnimation = getAccessor().getPoseAnimation();
+		return isLocalPlayerMoving()
+				|| poseAnimation == getAccessor().getWalkRotate180()
+				|| poseAnimation == getAccessor().getWalkRotateLeft()
+				|| poseAnimation == getAccessor().getWalkRotateRight()
+				|| poseAnimation == getAccessor().getRunAnimation()
+				|| poseAnimation == getAccessor().getWalkAnimation();
+  }
 
 	@Override
 	public String getName() {
