@@ -69,23 +69,18 @@ public enum Rune
 
     private boolean isStaffEquipped()
     {
-        /*
-        return Equipment.contains(x -> x.getName() != null
-                && x.getName().toLowerCase().contains("staff")
-                && Arrays.stream(runeNames).anyMatch(n -> x.getName().toLowerCase().contains(n.toLowerCase())));
-        */
-        return false;
+        return !methods.equipment.query()
+                .namedContains("staff")
+                .namedContains(runeNames)
+                .isEmpty();
     }
 
     private boolean isTomeEquipped()
     {
-        /*
-        return Equipment.contains(x -> x.getName() != null
-                && x.getName().startsWith("Tome of")
-                && !x.getName().endsWith("(empty")
-                && Arrays.stream(runeNames).anyMatch(n -> x.getName().toLowerCase().contains(n.toLowerCase())));
-         */
-        return false; // TODO:
+        return !methods.equipment.query()
+                .namedContains("Tome of")
+                .namedContains(runeNames)
+                .isEmpty();
     }
 
     @Slf4j
