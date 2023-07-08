@@ -17,7 +17,7 @@ public class Skills extends MethodProvider {
 	}
 
 	public static Skill getSkill(final int index) {
-		if (index > 0 && index < Skill.values().length)
+		if (index >= 0 && index < Skill.values().length)
 			return Skill.values()[index];
 		return null;
 	}
