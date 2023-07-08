@@ -387,17 +387,29 @@ public class RSTile implements Clickable07, Positionable {
     }
 
     public int getWorldX() {
-        return getWorldLocation().getX();
+        if (type == TYPES.WORLD) {
+            return x;
+        }
+        return toWorldTile().x;
     }
 
     public int getWorldY() {
-        return getWorldLocation().getY();
+        if (type == TYPES.WORLD) {
+            return y;
+        }
+        return toWorldTile().y;
     }
 
     public int getSceneX() {
-        return getLocation().getSceneX();
+        if (type == TYPES.SCENE) {
+            return x;
+        }
+        return toSceneTile().x;
     }
     public int getSceneY() {
-        return getLocation().getSceneY();
+        if (type == TYPES.SCENE) {
+            return y;
+        }
+        return toSceneTile().y;
     }
 }
