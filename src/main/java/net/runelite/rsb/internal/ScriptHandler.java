@@ -1,6 +1,8 @@
 package net.runelite.rsb.internal;
 
 import net.runelite.rsb.botLauncher.BotLite;
+import net.runelite.rsb.internal.input.MouseInputBlocker;
+import net.runelite.rsb.internal.input.MouseMotionBlocker;
 import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -10,22 +12,24 @@ import java.util.*;
 
 public class ScriptHandler {
 
-	private final ArrayList<net.runelite.rsb.script.Random> randoms = new ArrayList<>();
-	private final HashMap<Integer, Script> scripts = new HashMap<>();
-	private final HashMap<Integer, Thread> scriptThreads = new HashMap<>();
+    private final ArrayList<net.runelite.rsb.script.Random> randoms = new ArrayList<>();
+    private final HashMap<Integer, Script> scripts = new HashMap<>();
+    private final HashMap<Integer, Thread> scriptThreads = new HashMap<>();
 
-	private final Set<ScriptListener> listeners = Collections.synchronizedSet(new HashSet<>());
+    private final Set<ScriptListener> listeners = Collections.synchronizedSet(new HashSet<>());
 
-	private final BotLite bot;
+    private final BotLite bot;
 
-	public ScriptHandler(BotLite bot) {
-		this.bot = bot;
-	}
+    private MouseInputBlocker mouseInputBlocker;
+    private MouseMotionBlocker mouseMotionBlocker;
 
-	public void init() {
-		try {
+    public ScriptHandler(BotLite bot) {
+        this.bot = bot;
+    }
 
-			randoms.add(new LoginBot());
+    public void init() {
+        try {
+            randoms.add(new LoginBot());
 			/*
 			randoms.add(new BankPins());
 			randoms.add(new BeehiveSolver());
@@ -54,161 +58,164 @@ public class ScriptHandler {
 			randoms.add(new SystemUpdate());
 
 			 */
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		for (net.runelite.rsb.script.Random r : randoms) {
-			r.init(bot.getMethodContext());
-		}
-	}
 
-	public void addScriptListener(ScriptListener l) {
-		listeners.add(l);
-	}
+            listeners.add(new MouseInputBlocker(bot));
+            listeners.add(new MouseMotionBlocker(bot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (net.runelite.rsb.script.Random r : randoms) {
+            r.init(bot.getMethodContext());
+        }
+    }
 
-	public void removeScriptListener(ScriptListener l) {
-		listeners.remove(l);
-	}
+    public void addScriptListener(ScriptListener l) {
+        listeners.add(l);
+    }
 
-	private void addScriptToPool(Script ss, Thread t) {
-		for (int off = 0; off < scripts.size(); ++off) {
-			if (!scripts.containsKey(off)) {
-				scripts.put(off, ss);
-				ss.setID(off);
-				scriptThreads.put(off, t);
-				return;
-			}
-		}
-		ss.setID(scripts.size());
-		scripts.put(scripts.size(), ss);
-		scriptThreads.put(scriptThreads.size(), t);
-	}
+    public void removeScriptListener(ScriptListener l) {
+        listeners.remove(l);
+    }
 
-	public BotLite getBot() {
-		return bot;
-	}
+    private void addScriptToPool(Script ss, Thread t) {
+        for (int off = 0; off < scripts.size(); ++off) {
+            if (!scripts.containsKey(off)) {
+                scripts.put(off, ss);
+                ss.setID(off);
+                scriptThreads.put(off, t);
+                return;
+            }
+        }
+        ss.setID(scripts.size());
+        scripts.put(scripts.size(), ss);
+        scriptThreads.put(scriptThreads.size(), t);
+    }
 
-	public Collection<net.runelite.rsb.script.Random> getRandoms() {
-		return randoms;
-	}
+    public BotLite getBot() {
+        return bot;
+    }
 
-	public Map<Integer, Script> getRunningScripts() {
-		return Collections.unmodifiableMap(scripts);
-	}
+    public Collection<net.runelite.rsb.script.Random> getRandoms() {
+        return randoms;
+    }
 
-	public void pauseScript(int id) {
-		Script s = scripts.get(id);
-		s.setPaused(!s.isPaused());
-		if (s.isPaused()) {
-			for (ScriptListener l : listeners) {
-				l.scriptPaused(this, s);
-			}
-		} else {
-			for (ScriptListener l : listeners) {
-				l.scriptResumed(this, s);
-			}
-		}
-	}
+    public Map<Integer, Script> getRunningScripts() {
+        return Collections.unmodifiableMap(scripts);
+    }
 
-	public void stopScript(int id) {
-		Script script = scripts.get(id);
-		if (script != null) {
-			script.deactivate(id);
-			scripts.remove(id);
-			scriptThreads.remove(id);
-			for (ScriptListener l : listeners) {
-				l.scriptStopped(this, script);
-			}
-		}
-	}
+    public void pauseScript(int id) {
+        Script s = scripts.get(id);
+        s.setPaused(!s.isPaused());
+        if (s.isPaused()) {
+            for (ScriptListener l : listeners) {
+                l.scriptPaused(this, s);
+            }
+        } else {
+            for (ScriptListener l : listeners) {
+                l.scriptResumed(this, s);
+            }
+        }
+    }
 
-	public boolean onBreak(int id) {
-		Script script = scripts.get(id);
-		return script != null && script.onBreakStart();
-	}
+    public void stopScript(int id) {
+        Script script = scripts.get(id);
+        if (script != null) {
+            script.deactivate(id);
+            scripts.remove(id);
+            scriptThreads.remove(id);
+            for (ScriptListener l : listeners) {
+                l.scriptStopped(this, script);
+            }
+        }
+    }
 
-	public void onBreakConclude(int id) {
-		Script script = scripts.get(id);
-		if (script != null) {
-			script.onBreakFinish();
-		}
-	}
+    public boolean onBreak(int id) {
+        Script script = scripts.get(id);
+        return script != null && script.onBreakStart();
+    }
 
-	public void runScript(Script script) {
-		script.init(bot.getMethodContext());
-		for (ScriptListener l : listeners) {
-			l.scriptStarted(this, script);
-		}
-		ScriptManifest prop = script.getClass().getAnnotation(ScriptManifest.class);
-		Thread t = new Thread(script, "Script-" + prop.name());
-		addScriptToPool(script, t);
-		t.start();
-	}
+    public void onBreakConclude(int id) {
+        Script script = scripts.get(id);
+        if (script != null) {
+            script.onBreakFinish();
+        }
+    }
 
-	public void stopAllScripts() {
-		Set<Integer> theSet = scripts.keySet();
-		int[] arr = new int[theSet.size()];
-		int c = 0;
-		for (int i : theSet) {
-			arr[c] = i;
-			c++;
-		}
-		for (int id : arr) {
-			stopScript(id);
-		}
-	}
+    public void runScript(Script script) {
+        script.init(bot.getMethodContext());
+        for (ScriptListener l : listeners) {
+            l.scriptStarted(this, script);
+        }
+        ScriptManifest prop = script.getClass().getAnnotation(ScriptManifest.class);
+        Thread t = new Thread(script, "Script-" + prop.name());
+        addScriptToPool(script, t);
+        t.start();
+    }
 
-	public void stopScript() {
-		Thread curThread = Thread.currentThread();
-		for (int i = 0; i < scripts.size(); i++) {
-			Script script = scripts.get(i);
-			if (script != null && script.isRunning()) {
-				if (scriptThreads.get(i) == curThread) {
-					stopScript(i);
-				}
-			}
-		}
-		if (curThread == null) {
-			throw new ThreadDeath();
-		}
-	}
+    public void stopAllScripts() {
+        Set<Integer> theSet = scripts.keySet();
+        int[] arr = new int[theSet.size()];
+        int c = 0;
+        for (int i : theSet) {
+            arr[c] = i;
+            c++;
+        }
+        for (int id : arr) {
+            stopScript(id);
+        }
+    }
 
-	public boolean onBreak() {
-		Thread curThread = Thread.currentThread();
-		for (int i = 0; i < scripts.size(); i++) {
-			Script script = scripts.get(i);
-			if (script != null && script.isRunning()) {
-				if (scriptThreads.get(i) == curThread) {
-					return onBreak(i);
-				}
-			}
-		}
-		if (curThread == null) {
-			throw new ThreadDeath();
-		}
-		return false;
-	}
+    public void stopScript() {
+        Thread curThread = Thread.currentThread();
+        for (int i = 0; i < scripts.size(); i++) {
+            Script script = scripts.get(i);
+            if (script != null && script.isRunning()) {
+                if (scriptThreads.get(i) == curThread) {
+                    stopScript(i);
+                }
+            }
+        }
+        if (curThread == null) {
+            throw new ThreadDeath();
+        }
+    }
 
-	public void onBreakResume() {
-		Thread curThread = Thread.currentThread();
-		for (int i = 0; i < scripts.size(); i++) {
-			Script script = scripts.get(i);
-			if (script != null && script.isRunning()) {
-				if (scriptThreads.get(i) == curThread) {
-					onBreakConclude(i);
-					return;
-				}
-			}
-		}
-		if (curThread == null) {
-			throw new ThreadDeath();
-		}
-	}
+    public boolean onBreak() {
+        Thread curThread = Thread.currentThread();
+        for (int i = 0; i < scripts.size(); i++) {
+            Script script = scripts.get(i);
+            if (script != null && script.isRunning()) {
+                if (scriptThreads.get(i) == curThread) {
+                    return onBreak(i);
+                }
+            }
+        }
+        if (curThread == null) {
+            throw new ThreadDeath();
+        }
+        return false;
+    }
 
-	public void updateInput(BotLite bot, int mask) {
-		for (ScriptListener l : listeners) {
-			l.inputChanged(bot, mask);
-		}
-	}
+    public void onBreakResume() {
+        Thread curThread = Thread.currentThread();
+        for (int i = 0; i < scripts.size(); i++) {
+            Script script = scripts.get(i);
+            if (script != null && script.isRunning()) {
+                if (scriptThreads.get(i) == curThread) {
+                    onBreakConclude(i);
+                    return;
+                }
+            }
+        }
+        if (curThread == null) {
+            throw new ThreadDeath();
+        }
+    }
+
+    public void updateInput(BotLite bot, int mask) {
+        for (ScriptListener l : listeners) {
+            l.inputChanged(bot, mask);
+        }
+    }
 
 }
