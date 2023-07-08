@@ -129,7 +129,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	public final void delegateTo(Script script) {
 		script.init(ctx);
 		ctx.runeLite.getEventManager().addListener(script);
-		ctx.runeLite.eventBus.register(this);
+		ctx.runeLite.eventBus.register(script);
 		delegates.add(script);
 	}
 
