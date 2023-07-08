@@ -15,6 +15,7 @@ public interface Spell
 
     boolean canCast();
 
+    public int getBaseHit();
 
     public class RuneRequirement
     {
