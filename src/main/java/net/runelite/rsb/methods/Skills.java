@@ -92,7 +92,7 @@ public class Skills extends MethodProvider {
 		return Skills.getLevelAt(getCurrentExp(index));
 	}
 	public int getRealLevel(final Skill skill) {
-		return Skills.getLevelAt(getCurrentExp(skill.ordinal()));
+		return Skills.getLevelAt(skill.ordinal());
 	}
 
 	/**
