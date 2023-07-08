@@ -77,7 +77,10 @@ public class Skills extends MethodProvider {
 	 * @return The current level of the given Skill.
 	 */
 	public int getCurrentLevel(final int index) {
-		return methods.client.getRealSkillLevel(getSkill(index));
+		return getCurrentLevel(getSkill(index));
+	}
+	public int getCurrentLevel(final Skill skill) {
+		return methods.client.getBoostedSkillLevel(skill);
 	}
 
 	/**
@@ -89,10 +92,10 @@ public class Skills extends MethodProvider {
 	 * @see #getRealLevel(int)
 	 */
 	public int getRealLevel(final int index) {
-		return Skills.getLevelAt(getCurrentExp(index));
+		return getRealLevel(getSkill(index));
 	}
 	public int getRealLevel(final Skill skill) {
-		return Skills.getLevelAt(skill.ordinal());
+		return methods.client.getRealSkillLevel(skill);
 	}
 
 	/**
