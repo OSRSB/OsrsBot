@@ -333,8 +333,9 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 */
 	public void buttonStopActionPerformed(ActionEvent e) {
 		//Sets the value back to Pause
-		if (buttonPause.getText().equals("Resume the active script")) {
-			buttonPause.setText("Pause the active script");
+		if (buttonPause.getToolTipText().equals("Resume the active script")) {
+			buttonPause.setToolTipText("Pause the active script");
+			buttonPause.setIcon(iconPause);
 		}
 		stopAction();
 
