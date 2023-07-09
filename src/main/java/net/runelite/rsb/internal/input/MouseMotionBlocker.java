@@ -11,68 +11,68 @@ import java.util.Arrays;
 
 public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
 
-    private final BotLite bot;
-    private MouseMotionListener[] mouseMotionListeners;
+	private final BotLite bot;
+	private MouseMotionListener[] mouseMotionListeners;
 
-    public MouseMotionBlocker(BotLite bot) {
-        this.bot = bot;
-    }
+	public MouseMotionBlocker(BotLite bot) {
+		this.bot = bot;
+	}
 
-    private void blockInput() {
-        if(bot.client == null) return;
-        java.awt.Canvas c = bot.client.getCanvas();
-        mouseMotionListeners = c.getMouseMotionListeners();
-        Arrays.stream(mouseMotionListeners).forEach(c::removeMouseMotionListener);
-        c.addMouseMotionListener(this);
-    }
+	private void blockInput() {
+		if (bot.client == null) return;
+		java.awt.Canvas c = bot.client.getCanvas();
+		mouseMotionListeners = c.getMouseMotionListeners();
+		Arrays.stream(mouseMotionListeners).forEach(c::removeMouseMotionListener);
+		c.addMouseMotionListener(this);
+	}
 
-    private void unblockInput() {
-        if(bot.client == null) return;
-        java.awt.Canvas c = bot.client.getCanvas();
-        c.removeMouseMotionListener(this);
-        Arrays.stream(mouseMotionListeners).forEach(c::addMouseMotionListener);
-    }
+	private void unblockInput() {
+		if (bot.client == null) return;
+		java.awt.Canvas c = bot.client.getCanvas();
+		c.removeMouseMotionListener(this);
+		Arrays.stream(mouseMotionListeners).forEach(c::addMouseMotionListener);
+	}
 
-    @Override
-    public void scriptStarted(ScriptHandler handler, Script script) {
-        blockInput();
-    }
+	@Override
+	public void scriptStarted(ScriptHandler handler, Script script) {
+		blockInput();
+	}
 
-    @Override
-    public void scriptStopped(ScriptHandler handler, Script script) {
-        unblockInput();
-    }
+	@Override
+	public void scriptStopped(ScriptHandler handler, Script script) {
+		unblockInput();
+	}
 
-    @Override
-    public void scriptResumed(ScriptHandler handler, Script script) {
-        blockInput();
-    }
+	@Override
+	public void scriptResumed(ScriptHandler handler, Script script) {
+		blockInput();
+	}
 
-    @Override
-    public void scriptPaused(ScriptHandler handler, Script script) {
-        unblockInput();
-    }
+	@Override
+	public void scriptPaused(ScriptHandler handler, Script script) {
+		unblockInput();
+	}
 
-    @Override
-    public void inputChanged(BotLite bot, int mask) {
-        
-    }
+	@Override
+	public void inputChanged(BotLite bot, int mask) {
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if (!e.getSource().getClass().getName().equals("client")) e.consume();
-        for (MouseMotionListener l : mouseMotionListeners) {
-            if (e.isConsumed()) break;
-            l.mouseDragged(e);
-        }
-    }
+	}
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        if (!e.getSource().getClass().getName().equals("client")) e.consume();
-        for (MouseMotionListener l : mouseMotionListeners) {
-            if (e.isConsumed()) break;
-            l.mouseMoved(e);
-        }
-    }
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if (!e.getSource().getClass().getName().equals("client")) e.consume();
+		for (MouseMotionListener l : mouseMotionListeners) {
+			if (e.isConsumed()) break;
+			l.mouseDragged(e);
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		if (!e.getSource().getClass().getName().equals("client")) e.consume();
+		for (MouseMotionListener l : mouseMotionListeners) {
+			if (e.isConsumed()) break;
+			l.mouseMoved(e);
+		}
+	}
 }
