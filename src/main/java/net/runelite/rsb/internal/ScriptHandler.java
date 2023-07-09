@@ -60,7 +60,6 @@ public class ScriptHandler {
 			randoms.add(new SystemUpdate());
 
 			 */
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -144,7 +143,6 @@ public class ScriptHandler {
 	public void runScript(Script script) {
 		script.init(bot.getMethodContext());
 		for (ScriptListener l : listeners) {
-			System.out.println(l.getClass().getName());
 			l.scriptStarted(this, script);
 		}
 		ScriptManifest prop = script.getClass().getAnnotation(ScriptManifest.class);
