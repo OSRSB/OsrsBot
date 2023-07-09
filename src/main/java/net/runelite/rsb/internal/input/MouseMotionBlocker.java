@@ -19,14 +19,16 @@ public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
     }
 
     private void blockInput() {
-        Canvas c = bot.getCanvas();
+        if(bot.client == null) return;
+        java.awt.Canvas c = bot.client.getCanvas();
         mouseMotionListeners = c.getMouseMotionListeners();
         Arrays.stream(mouseMotionListeners).forEach(c::removeMouseMotionListener);
         c.addMouseMotionListener(this);
     }
 
     private void unblockInput() {
-        Canvas c = bot.getCanvas();
+        if(bot.client == null) return;
+        java.awt.Canvas c = bot.client.getCanvas();
         c.removeMouseMotionListener(this);
         Arrays.stream(mouseMotionListeners).forEach(c::addMouseMotionListener);
     }

@@ -19,14 +19,16 @@ public class MouseInputBlocker implements MouseListener, ScriptListener {
     }
 
     private void blockInput() {
-        Canvas c = bot.getCanvas();
+        if(bot.client == null) return;
+        java.awt.Canvas c = bot.client.getCanvas();
         mouseListeners = c.getMouseListeners();
         Arrays.stream(mouseListeners).forEach(c::removeMouseListener);
         c.addMouseListener(this);
     }
 
     private void unblockInput() {
-        Canvas c = bot.getCanvas();
+        if(bot.client == null) return;
+        java.awt.Canvas c = bot.client.getCanvas();
         c.removeMouseListener(this);
         Arrays.stream(mouseListeners).forEach(c::addMouseListener);
     }
@@ -53,7 +55,7 @@ public class MouseInputBlocker implements MouseListener, ScriptListener {
 
     @Override
     public void inputChanged(BotLite bot, int mask) {
-        
+
     }
 
     @Override
@@ -100,6 +102,5 @@ public class MouseInputBlocker implements MouseListener, ScriptListener {
             l.mouseExited(e);
         }
     }
-
 
 }
