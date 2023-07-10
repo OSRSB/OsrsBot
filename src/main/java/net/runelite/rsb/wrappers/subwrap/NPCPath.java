@@ -89,11 +89,11 @@ public class NPCPath extends MethodProvider {
         for (RSNPC npc : npcs) {
             RSTile[] path = getPath(npc, npc.getLocation(), end.getLocation());
             RSTile nearestTile = npc.getNearestTile(path[path.length - 1], end);
-            if (nearestTile.getLocation().distanceToDouble(end) > 1.1) {
-                return true;
+            if (nearestTile.getLocation().distanceToDouble(end) < 1.1) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     static public RSTile[] getPath(RSNPC npc, RSTile start, RSTile end) {
