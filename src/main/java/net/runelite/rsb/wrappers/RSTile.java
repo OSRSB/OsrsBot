@@ -287,8 +287,9 @@ public class RSTile implements Clickable07, Positionable {
             if (tile.type == TYPES.WORLD) {
                 tile.toLocalTile();
             }
-            tile.x = tile.x >>> Perspective.LOCAL_COORD_BITS;
-            tile.y = tile.y >>> Perspective.LOCAL_COORD_BITS;
+            LocalPoint point = LocalPoint.fromWorld(ctx.client, x, y);
+            tile.x = point.getSceneX();
+            tile.y = point.getSceneY();
             tile.type = TYPES.SCENE;
         }
         return tile;
