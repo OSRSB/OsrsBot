@@ -273,8 +273,7 @@ public class RSModel extends MethodProvider {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof RSModel) {
-			RSModel m = (RSModel) o;
+		if (o instanceof RSModel m) {
 			return Arrays.equals(indices1, m.indices1)
 					&& Arrays.equals(xPoints, m.xPoints)
 					&& Arrays.equals(yPoints, m.yPoints)
@@ -337,17 +336,16 @@ public class RSModel extends MethodProvider {
 		int locY = getLocalY();
 		int height = methods.calc.tileHeight(locX, locY);
 		Polygon[] triangles = this.getTriangles();
-
-		for (int i = start; i < end; i++) {
-			if (i < triangles.length) {
-				//TODO this is not working. This will not loop, it will return the first xpoint
-				for (int n = 0; n < triangles[i].npoints; n++) {
-					return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
-				}
-			}
-		}
-		return null;
+		ArrayList<Point> points = new ArrayList<>();
+		for (int i = start; i < end && i < triangles.length; i++)
+			for (int n = 0; n < triangles[i].npoints; n++)
+				points.add(new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]));
+		if (points.isEmpty()) return null;
+		// Return a random point from the list
+		int randomIndex = StdRandom.uniform(points.size());
+		return points.get(randomIndex);
 	}
+
 
 	public int getOrientation() {
 		return 0;
