@@ -172,17 +172,14 @@ public class Inventory extends MethodProvider {
 			for (int index = 0; index < maxIndex; index++) {
 				int c = leftToRight ? index % 4 : index / 7;
 				int r = leftToRight ? index / 4 : index % 7;
-				//TODO this is always true. Who is the author?
-				if (c >= 0 && c < 4 && r >= 0 && r < 7) {
-					int id = inventory[r][c];
-					if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
-						boolean isInItems = false;
-						for (int i : items) {
-							isInItems |= (i == id);
-						}
-						if (!isInItems) {
-							foundDroppable |= dropItem(c, r);
-						}
+				int id = inventory[r][c];
+				if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
+					boolean isInItems = false;
+					for (int i : items) {
+						isInItems |= (i == id);
+					}
+					if (!isInItems) {
+						foundDroppable |= dropItem(c, r);
 					}
 				}
 			}
