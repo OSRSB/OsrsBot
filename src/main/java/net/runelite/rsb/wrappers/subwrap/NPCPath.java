@@ -50,8 +50,8 @@ public class NPCPath extends MethodProvider {
         return this;
     }
 
-    public RSTile getNearestSafespotWithLOS(Positionable end, int limit) {
-        return getNearestSafespot(end, limit, (x) -> Arrays.stream(npcs).anyMatch((npc) -> npc.hasLineOfSight(x)));
+    public RSTile getNearestSafespotWithLOS(Positionable end, int limit, int weaponRange) {
+        return getNearestSafespot(end, limit, (x) -> Arrays.stream(npcs).anyMatch((npc) -> npc.hasLineOfSight(x) && x.distanceTo(npc) <= weaponRange));
     }
 
     public RSTile getNearestSafespot(Positionable end, int limit, Predicate<RSTile> predicate){
