@@ -21,7 +21,7 @@ public class Environment extends MethodProvider {
 
 	/**
 	 * Controls the available means of user input when user input is disabled.
-	 *
+	 * <p>
 	 * Disable all: <code>setUserInput(0);</code>
 	 * Enable keyboard only:
 	 * <code>setUserInput(Environment.INPUT_KEYBOARD);</code>
@@ -64,7 +64,7 @@ public class Environment extends MethodProvider {
 	 */
 	public boolean enableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
-			if (random.getClass().getAnnotation(ScriptManifest.class).name().toLowerCase().equals(name.toLowerCase())) {
+			if (random.getClass().getAnnotation(ScriptManifest.class).name().equalsIgnoreCase(name)) {
 				if (!random.isEnabled()) {
 					random.setEnabled(true);
 				}
@@ -83,7 +83,7 @@ public class Environment extends MethodProvider {
 	 */
 	public boolean disableRandom(String name) {
 		for (final Random random : methods.runeLite.getScriptHandler().getRandoms()) {
-			if (random.getClass().getAnnotation(ScriptManifest.class).name().toLowerCase().equals(name.toLowerCase())) {
+			if (random.getClass().getAnnotation(ScriptManifest.class).name().equalsIgnoreCase(name)) {
 				if (random.isEnabled()) {
 					random.setEnabled(false);
 				}

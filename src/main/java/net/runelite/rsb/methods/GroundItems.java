@@ -15,7 +15,7 @@ import java.util.List;
  * Provides access to ground items.
  */
 public class GroundItems extends MethodProvider {
-	
+
 	//This will hold the maximum number of tiles away the client can render
 	private static final int MAX_RENDER_RANGE = 25;
 
@@ -81,14 +81,14 @@ public class GroundItems extends MethodProvider {
 			for (int y = minY; y < maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
- 				for (RSGroundItem item : items) {
- 					if (item.getItem() == null) {
- 						continue;
+					for (RSGroundItem item : items) {
+						if (item.getItem() == null) {
+							continue;
+						}
+						if (filter.test(item)) {
+							temp.add(item);
+						}
 					}
-					if (filter.test(item)) {
-						temp.add(item);
-					}
-				}
 			}
 		}
 		return temp.toArray(new RSGroundItem[temp.size()]);
@@ -99,7 +99,7 @@ public class GroundItems extends MethodProvider {
 	 *
 	 * @param filter Filters out unwanted matches.
 	 * @return The nearest item that is accepted by the provided Filter; or
-	 *         null.
+	 * null.
 	 */
 	@Nullable
 	public RSGroundItem getNearest(Filter<RSGroundItem> filter) {
@@ -134,8 +134,8 @@ public class GroundItems extends MethodProvider {
 	 *
 	 * @param ids The IDs to look for.
 	 * @return RSItemTile of the nearest item with the an ID that matches any in
-	 *         the array of IDs provided; or null if no matching ground items
-	 *         were found.
+	 * the array of IDs provided; or null if no matching ground items
+	 * were found.
 	 */
 	@Nullable
 	public RSGroundItem getNearest(final int... ids) {
