@@ -73,7 +73,7 @@ public class RSModel extends MethodProvider {
 
 	/**
 	 * @param p A point on the screen
-	 * @return true of the point is within the bounds of the model
+	 * @return true if the point is within the bounds of the model
 	 */
 	public boolean contains(Point p) {
 		Polygon[] triangles = getTriangles();
@@ -93,8 +93,13 @@ public class RSModel extends MethodProvider {
 	 */
 	public boolean doClick(boolean leftClick) {
 		try {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 5; i++) {
 				methods.mouse.move(getPointNearCenter());
+				if (this.contains(methods.mouse.getLocation())) {
+					methods.mouse.click(leftClick);
+					return true;
+				}
+				methods.mouse.move(getRandomPolygon());
 				if (this.contains(methods.mouse.getLocation())) {
 					methods.mouse.click(leftClick);
 					return true;
@@ -118,7 +123,9 @@ public class RSModel extends MethodProvider {
 			for (int i = 0; i < 3; i++) {
 				if (!this.contains(methods.mouse.getLocation())) {
 					methods.mouse.move(getPointNearCenter());
-					methods.mouse.move(getPointNearCenter());
+				}
+				if (!this.contains(methods.mouse.getLocation())) {
+					methods.mouse.move(getRandomPolygon());
 				}
 				if (methods.menu.doAction(action, target)) {
 					return true;
@@ -209,7 +216,7 @@ public class RSModel extends MethodProvider {
 	/**
 	 * Returns an array of triangles containing the screen points of this model.
 	 *
-	 * @return The on screen triangles of this model.
+	 * @return The on-screen triangles of this model.
 	 */
 	public Polygon[] getTriangles() {
 		final int NO_MODEL = 1;
@@ -261,6 +268,9 @@ public class RSModel extends MethodProvider {
 	 */
 	public void hover() {
 		methods.mouse.move(getPointNearCenter());
+		if (!this.contains(methods.mouse.getLocation())) {
+			methods.mouse.move(getRandomPolygon());
+		}
 	}
 
 	/**
@@ -313,7 +323,7 @@ public class RSModel extends MethodProvider {
 	 *
 	 * @return a random point that collides with the polygons of this model.
 	 */
-	public Point getPointNearCenter() {
+	public Point getRandomPolygon() {
 		Polygon[] triangles = this.getTriangles();
 
 		// pick a random triangle
@@ -327,6 +337,36 @@ public class RSModel extends MethodProvider {
 		// generate a point within the triangle using the barycentric coordinates
 		int x = (int) ((1 - Math.sqrt(r1)) * triangle.xpoints[0] + (Math.sqrt(r1) * (1 - r2)) * triangle.xpoints[1] + (Math.sqrt(r1) * r2) * triangle.xpoints[2]);
 		int y = (int) ((1 - Math.sqrt(r1)) * triangle.ypoints[0] + (Math.sqrt(r1) * (1 - r2)) * triangle.ypoints[1] + (Math.sqrt(r1) * r2) * triangle.ypoints[2]);
+
+		return new Point(x, y);
+	}
+
+	public Point getPointNearCenter() {
+		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
+
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
+
+		int centerX = (max_x + min_x) / 2;
+		int centerY = (max_y + min_y) / 2;
+
+		int x = (int) StdRandom.gaussian(min_x, max_x, centerX, (double) (max_x - min_x) / 3);
+		int y = (int) StdRandom.gaussian(min_y, max_y, centerY, (double) (max_y - min_y) / 3);
 
 		return new Point(x, y);
 	}
