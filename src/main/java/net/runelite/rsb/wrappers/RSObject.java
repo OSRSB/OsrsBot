@@ -2,6 +2,7 @@ package net.runelite.rsb.wrappers;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Point;
 import net.runelite.api.*;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.cache.definitions.ObjectDefinition;
@@ -11,6 +12,10 @@ import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.Random;
+
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
  * acts as a factory for the RSModel of the RSObject (refer to getModel for better explanation)
@@ -19,6 +24,8 @@ import net.runelite.rsb.wrappers.common.Positionable;
  */
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable, CacheProvider<ObjectDefinition> {
+
+	private static final Random random = new Random();
 
 	private final TileObject obj;
 	private final Type type;
@@ -231,7 +238,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	}
 
 	/**
-	 * Left-clicks this object.
+	 * Left-clicks this object. It tries 3 times to move the mouse onto the object.
+	 * Use {@link #doClick(boolean, int)} to specify number of attempts.
 	 *
 	 * @return <code>true</code> if clicked otherwise <code>false</code>
 	 */
@@ -239,13 +247,41 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		return doClick(true);
 	}
 
+
 	/**
-	 * Clicks this object.
+	 * Clicks this object. It tries 3 times to move the mouse onto the object.
+	 * Use {@link #doClick(boolean, int)} to specify number of attempts.
 	 *
 	 * @param leftClick <code>true</code> to left-click; <code>false</code> to right-click.
 	 * @return <code>true</code> if clicked otherwise <code>false</code>
 	 */
 	public boolean doClick(boolean leftClick) {
+		return doClick(leftClick, 3);
+	}
+
+	/**
+	 * Clicks this object.
+	 *
+	 * @param leftClick <code>true</code> to left-click; <code>false</code> to right-click.
+	 * @param attempts  number of mouse move attempts to get the mouse on the object.
+	 *                  Set this higher if it is very important to successfully click.
+	 * @return <code>true</code> if clicked otherwise <code>false</code>
+	 */
+	public boolean doClick(boolean leftClick, int attempts) {
+		//attempt to find center of clickbox and check if on screen
+		for (int i = 0; i < attempts; i++) {
+			Point pointNearCenter = getRandomPointNearCenter();
+			if (pointNearCenter == null) break;
+			if (methods.calc.pointOnScreen(pointNearCenter)) {
+				methods.mouse.move(pointNearCenter);
+				if (isPointInClickBox(pointNearCenter)) {
+					methods.mouse.click(pointNearCenter, leftClick);
+					return true;
+				}
+			}
+		}
+
+		// if no clickbox present or the middle of the clickbox is not onscreen try the model
 		RSModel model = this.getModel();
 		if (model != null) {
 			return model.doClick(leftClick);
@@ -265,8 +301,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 					}
 				}
 			}
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -275,6 +311,12 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return true if the object was hovered over (or attempted to) otherwise false
 	 */
 	public boolean doHover() {
+		Point middlePoint = getRandomPointNearCenter();
+		if (middlePoint != null && methods.calc.pointOnScreen(middlePoint)) {
+			methods.mouse.move(middlePoint);
+			return true;
+		}
+
 		RSModel model = getModel();
 		if (model != null) {
 			model.hover();
@@ -324,15 +366,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return <code>true</code> if the object is capable of being interacted with otherwise <code>false</code>
 	 */
 	public boolean isClickable() {
-		if (obj == null) {
-			return false;
-		}
-		RSModel model = getModel();
-		if (model == null) {
-			return false;
-		}
-		return true;
-		//return model.getModel().isClickable();
+		return obj != null && getModel() != null;
 	}
 
 	/**
@@ -342,6 +376,40 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 */
 	public TileObject getObj() {
 		return obj;
+	}
+
+	private boolean isPointInClickBox(Point p) {
+		Shape clickBox = getObj().getClickbox();
+		return clickBox != null && clickBox.contains(p.getX(), p.getY());
+	}
+
+	private Point getRandomPointNearCenter() {
+		Shape clickBox = getObj().getClickbox();
+		if (clickBox == null) return null;
+
+		Rectangle2D bounds = clickBox.getBounds2D();
+
+		// compute the width and height
+		double width = bounds.getWidth();
+		double height = bounds.getHeight();
+
+		// compute the middle point
+		double midX = bounds.getCenterX();
+		double midY = bounds.getCenterY();
+
+		// get a point in 25% range around the middle point
+		double minX = midX - width * 0.25 / 2;
+		double maxX = midX + width * 0.25 / 2;
+		double minY = midY - height * 0.25 / 2;
+		double maxY = midY + height * 0.25 / 2;
+		for (int i = 0; i < 5; i++) {
+			double x = minX + (maxX - minX) * random.nextDouble();
+			double y = minY + (maxY - minY) * random.nextDouble();
+
+			java.awt.Point point = new java.awt.Point((int) x, (int) y);
+			if (clickBox.contains(point)) return new Point(point.x, point.y);
+		}
+		return null;
 	}
 
 	/**
