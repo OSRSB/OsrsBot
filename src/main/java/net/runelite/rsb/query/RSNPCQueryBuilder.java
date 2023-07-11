@@ -30,14 +30,14 @@ public class RSNPCQueryBuilder extends PositionableQueryBuilder<RSNPC, RSNPCQuer
     }
 
     public RSNPCQueryBuilder interactingWith(Actor actor) {
-        return filter(npc -> npc.getInteracting().equals(actor));
+        return filter(npc -> actor.equals(npc.getInteracting()));
     }
 
     public RSNPCQueryBuilder interactingWithMe() {
-        return filter(npc -> npc.getInteracting().equals(methods.players.getMyPlayer().getAccessor()));
+        return filter(npc -> methods.players.getMyPlayer().getAccessor().equals(npc.getInteracting()));
     }
     public RSNPCQueryBuilder notInteractingWithMe() {
-        return filter(npc -> !npc.getInteracting().equals(methods.players.getMyPlayer().getAccessor()));
+        return filter(npc -> !methods.players.getMyPlayer().getAccessor().equals(npc.getInteracting()));
     }
 
     public RSNPCQueryBuilder animation(int... arrayOfInt) {
