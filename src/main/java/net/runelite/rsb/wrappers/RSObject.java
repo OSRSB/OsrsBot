@@ -1,21 +1,15 @@
 package net.runelite.rsb.wrappers;
 
-import com.google.inject.Provider;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.Point;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.cache.definitions.ObjectDefinition;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.wrappers.common.CacheProvider;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.RSTile;
-
-import java.lang.reflect.Field;
 
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
@@ -199,7 +193,9 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @param action the object action
 	 * @return <code>true</code> if the action is prevent, <code>false</code> if the object does not contain the
 	 * desired action
+	 * @deprecated this may be wrong as the object definitions can be incorrect. Use with caution
 	 */
+	@Deprecated
 	public boolean hasAction(@NonNull final String action) {
 		for (final String a : getDef().getActions()) {
 			if (action.equalsIgnoreCase(a)) return true;
