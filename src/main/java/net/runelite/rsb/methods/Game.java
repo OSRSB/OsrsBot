@@ -289,7 +289,7 @@ public class Game extends MethodProvider {
 	}
 
 	/**
-	 * Determines whether or not the welcome screen is open.
+	 * Determines whether the welcome screen is open.
 	 *
 	 * @return <code>true</code> if the client is showing the welcome screen;
 	 * otherwise <code>false</code>.

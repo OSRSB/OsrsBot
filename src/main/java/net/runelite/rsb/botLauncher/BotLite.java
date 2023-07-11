@@ -57,27 +57,27 @@ public class BotLite extends RuneLite implements BotLiteInterface {
     public volatile int inputFlags = Environment.INPUT_KEYBOARD | Environment.INPUT_MOUSE;
 
     /**
-     * Whether or not user input is allowed despite a script's preference.
+     * whether user input is allowed despite a script's preference.
      */
     public volatile boolean overrideInput = false;
 
     /**
-     * Whether or not all anti-randoms are enabled.
+     * whether all anti-randoms are enabled.
      */
     public volatile boolean disableRandoms = false;
 
     /**
-     * Whether or not the login screen anti-random is enabled.
+     * whether the login screen anti-random is enabled.
      */
     public volatile boolean disableAutoLogin = false;
 
     /**
-     * Whether or not rendering is enabled.
+     * whether rendering is enabled.
      */
     public volatile boolean disableRendering = false;
 
     /**
-     * Whether or not the canvas is enabled.
+     * whether the canvas is enabled.
      */
     public volatile boolean disableCanvas = false;
 

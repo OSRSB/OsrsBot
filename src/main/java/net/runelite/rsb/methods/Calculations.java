@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Point;
-import net.runelite.rsb.wrappers.*;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
 
@@ -262,7 +261,7 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * checks whether or not a given RSTile is reachable.
+	 * checks whether a given RSTile is reachable.
 	 *
 	 * @param dest     The <code>RSTile</code> to check.
 	 * @param isObject True if an instance of <code>RSObject</code>.
@@ -389,7 +388,7 @@ public class Calculations extends MethodProvider {
 		int step_ptr = 0;
 		path_x[path_ptr] = startX;
 		path_y[path_ptr++] = startY;
-		final byte blocks[][] = methods.client.getTileSettings()[methods.game.getPlane()];
+		final byte[][] blocks = methods.client.getTileSettings()[methods.game.getPlane()];
 		final int pathLength = path_x.length;
 		boolean foundPath = false;
 		while (step_ptr != path_ptr) {
