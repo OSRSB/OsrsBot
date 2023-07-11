@@ -21,18 +21,18 @@ import java.util.stream.Stream;
  */
 public class Equipment extends MethodProvider {
 	private static final int EQUIPMENT_ITEM_SLOTS = 11;
-	static final Map<Integer, Integer> runeliteIndexToWidgetChildIndex = Stream.of(new Integer[][] {
-			{ EquipmentInventorySlot.HEAD.getSlotIdx(), WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.CAPE.getSlotIdx(), WidgetIndices.WornEquipmentTab.CAPE_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.AMULET.getSlotIdx(), WidgetIndices.WornEquipmentTab.AMULET_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.WEAPON.getSlotIdx(), WidgetIndices.WornEquipmentTab.WEAPON_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.BODY.getSlotIdx(), WidgetIndices.WornEquipmentTab.BODY_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.SHIELD.getSlotIdx(), WidgetIndices.WornEquipmentTab.SHIELD_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.LEGS.getSlotIdx(), WidgetIndices.WornEquipmentTab.LEGS_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.GLOVES.getSlotIdx(), WidgetIndices.WornEquipmentTab.GLOVES_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.BOOTS.getSlotIdx(), WidgetIndices.WornEquipmentTab.BOOTS_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.RING.getSlotIdx(), WidgetIndices.WornEquipmentTab.RING_DYNAMIC_CONTAINER },
-			{ EquipmentInventorySlot.AMMO.getSlotIdx(), WidgetIndices.WornEquipmentTab.AMMO_DYNAMIC_CONTAINER }
+	static final Map<Integer, Integer> runeliteIndexToWidgetChildIndex = Stream.of(new Integer[][]{
+			{EquipmentInventorySlot.HEAD.getSlotIdx(), WidgetIndices.WornEquipmentTab.HELMET_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.CAPE.getSlotIdx(), WidgetIndices.WornEquipmentTab.CAPE_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.AMULET.getSlotIdx(), WidgetIndices.WornEquipmentTab.AMULET_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.WEAPON.getSlotIdx(), WidgetIndices.WornEquipmentTab.WEAPON_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.BODY.getSlotIdx(), WidgetIndices.WornEquipmentTab.BODY_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.SHIELD.getSlotIdx(), WidgetIndices.WornEquipmentTab.SHIELD_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.LEGS.getSlotIdx(), WidgetIndices.WornEquipmentTab.LEGS_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.GLOVES.getSlotIdx(), WidgetIndices.WornEquipmentTab.GLOVES_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.BOOTS.getSlotIdx(), WidgetIndices.WornEquipmentTab.BOOTS_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.RING.getSlotIdx(), WidgetIndices.WornEquipmentTab.RING_DYNAMIC_CONTAINER},
+			{EquipmentInventorySlot.AMMO.getSlotIdx(), WidgetIndices.WornEquipmentTab.AMMO_DYNAMIC_CONTAINER}
 	}).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
 	Equipment(final MethodContext ctx) {
@@ -116,7 +116,7 @@ public class Equipment extends MethodProvider {
 				continue;
 			}
 			if (filter.test(item)) {
-				RSItem[] addItems = new RSItem[filterItems.length+1];
+				RSItem[] addItems = new RSItem[filterItems.length + 1];
 				addItems[filterItems.length] = item;
 				filterItems = addItems;
 			}
@@ -159,7 +159,7 @@ public class Equipment extends MethodProvider {
 	 * @param items The item ID to check for. Same as the equipment/item id in the
 	 *              inventory.
 	 * @return <code>true</code> if specified item is currently equipped; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #getItems()
 	 */
 	public boolean containsAll(final int... items) {
@@ -181,7 +181,7 @@ public class Equipment extends MethodProvider {
 	 *
 	 * @param items The IDs of items to check for.
 	 * @return <code>true</code> if the player has one (or more) of the given items
-	 *         equipped; otherwise <code>false</code>.
+	 * equipped; otherwise <code>false</code>.
 	 */
 	public boolean containsOneOf(final int... items) {
 		for (RSItem item : getItems()) {

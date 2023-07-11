@@ -48,7 +48,7 @@ public class Prayer extends MethodProvider {
 	 * @param prayer   The prayer to activate.
 	 * @param activate <code>true</code> to activate; <code>false</code> to deactivate.
 	 * @return <code>true</code> if the interface was clicked; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean activatePrayer(final Prayers prayer, final boolean activate) {
 		if (isPrayerOn(prayer) == activate) {
@@ -65,13 +65,13 @@ public class Prayer extends MethodProvider {
 		return activatePrayer(prayer, true);
 	}
 
-		/**
-         * Activates/deactivates quick prayers via interfaces.
-         *
-         * @param activate <code>true</code> to activate; <code>false</code> to deactivate.
-         * @return <code>true</code> if the interface was clicked; otherwise
-         *         <code>false</code>.
-         */
+	/**
+	 * Activates/deactivates quick prayers via interfaces.
+	 *
+	 * @param activate <code>true</code> to activate; <code>false</code> to deactivate.
+	 * @return <code>true</code> if the interface was clicked; otherwise
+	 * <code>false</code>.
+	 */
 	public boolean activateQuickPrayer(final boolean activate) {
 		if (isQuickPrayerOn() == activate) {
 			return true;
@@ -84,14 +84,13 @@ public class Prayer extends MethodProvider {
 		return activateQuickPrayer(true);
 	}
 
-		/**
-         * Sets up the quick prayers for the user
-         *
-         * @param unsetPrevious whether or not the previous quick prayers should be unset
-         * @param prayers the prayers to activate with quick prayers
-         *
-         * @return <code>True</code> unless unable to access the interface
-         */
+	/**
+	 * Sets up the quick prayers for the user
+	 *
+	 * @param unsetPrevious whether the previous quick prayers should be unset
+	 * @param prayers       the prayers to activate with quick prayers
+	 * @return <code>True</code> unless unable to access the interface
+	 */
 	public boolean setQuickPrayers(boolean unsetPrevious, Prayers... prayers) {
 		final int SET_PRAYER_SPRITE = 181;
 		methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_QUICK_PRAYER_ORB).doAction("Setup");

@@ -115,7 +115,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	}
 
 	/**
-	 * Returns whether or not this item has an available definition.
+	 * Returns whether this item has an available definition.
 	 *
 	 * @return <code>true</code> if an item definition is available;
 	 *         otherwise <code>false</code>.
@@ -143,7 +143,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	}
 
 	/**
-	 * Checks whether or not a valid component is being wrapped.
+	 * Checks whether a valid component is being wrapped.
 	 *
 	 * @return <code>true</code> if there is a visible wrapped component.
 	 */

@@ -518,7 +518,8 @@ public class Bank extends MethodProvider {
 			for (int banker : BANKERS) {
 				if (banker == id) {
 					for (Point unreachableBanker : UNREACHABLE_BANKERS) {
-						if (unreachableBanker.equals(location)) {
+						//TODO Point is not comparable with RSTile. Is there a convert function somewhere?
+						if (unreachableBanker.getLocation().equals(location)) {
 							return false;
 						}
 					}
