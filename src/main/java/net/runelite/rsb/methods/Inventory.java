@@ -671,7 +671,7 @@ public class Inventory extends MethodProvider {
 		Consumer<Image> imageCallback = (img) ->
 		{ // This callback is on the game thread, move to executor thread
 			{
-				methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(() -> {
+				RuneLite.getInjector().getInstance(ScheduledExecutorService.class).submit(() -> {
 					selector.setSelected(getSelected(img, comps));
 					synchronized (selector) {
 						selector.notify();
@@ -792,7 +792,7 @@ public class Inventory extends MethodProvider {
 			return new RSItem[]{};
 		}
 		Item[] cachedItems = container.getItems();
-		List<RSItem> items = new ArrayList<RSItem>();
+		List<RSItem> items = new ArrayList<>();
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
 				items.add(new RSItem(methods, invItems[i], cachedItems[i]));
