@@ -94,15 +94,21 @@ public class RSModel extends MethodProvider {
 	public boolean doClick(boolean leftClick) {
 		try {
 			for (int i = 0; i < 5; i++) {
-				methods.mouse.move(getPointNearCenter());
-				if (this.contains(methods.mouse.getLocation())) {
-					methods.mouse.click(leftClick);
-					return true;
+				Point nearCenter = getPointNearCenter();
+				if (methods.calc.pointOnScreen(nearCenter)) {
+					methods.mouse.move(getPointNearCenter());
+					if (this.contains(methods.mouse.getLocation())) {
+						methods.mouse.click(leftClick);
+						return true;
+					}
 				}
-				methods.mouse.move(getRandomPolygon());
-				if (this.contains(methods.mouse.getLocation())) {
-					methods.mouse.click(leftClick);
-					return true;
+				Point randomPolygon = getRandomPolygon();
+				if (methods.calc.pointOnScreen(randomPolygon)) {
+					methods.mouse.move(randomPolygon);
+					if (this.contains(methods.mouse.getLocation())) {
+						methods.mouse.click(leftClick);
+						return true;
+					}
 				}
 			}
 		} catch (Exception ignored) {
