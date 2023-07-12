@@ -18,7 +18,12 @@ public class MouseMotionBlocker implements MouseMotionListener {
 		this.bot = bot;
 	}
 
-	private void blockInput() {
+	public void setInput(boolean enabled) {
+		if (enabled) unblockInput();
+		else blockInput();
+	}
+
+	public void blockInput() {
 		if (bot.client == null) return;
 		java.awt.Canvas c = bot.client.getCanvas();
 		mouseMotionListeners = c.getMouseMotionListeners();
@@ -26,7 +31,7 @@ public class MouseMotionBlocker implements MouseMotionListener {
 		c.addMouseMotionListener(this);
 	}
 
-	private void unblockInput() {
+	public void unblockInput() {
 		if (bot.client == null) return;
 		java.awt.Canvas c = bot.client.getCanvas();
 		c.removeMouseMotionListener(this);

@@ -26,6 +26,9 @@ public class DebugSettingsListener implements ScriptListener {
 
     public DebugSettingsListener(BotLite bot) {
         this.bot = bot;
+        mouseInputBlocker = new MouseInputBlocker(bot);
+        mouseMotionBlocker = new MouseMotionBlocker(bot);
+        disableDebugs();
     }
 
     public void enableDebugs() {
@@ -38,13 +41,11 @@ public class DebugSettingsListener implements ScriptListener {
         if (drawMouseTrail == null && scriptHandler.isDrawMouseTrail()) {
             eventManager.addListener(drawMouseTrail = new DrawMouseTrail(bot));
         }
-        if (mouseInputBlocker != null && scriptHandler.isEnableMouse()) {
-            eventManager.removeListener(mouseInputBlocker);
-            mouseInputBlocker = null;
+        if (mouseInputBlocker != null) {
+            mouseInputBlocker.setInput(scriptHandler.isEnableMouse());
         }
-        if (mouseMotionBlocker != null && scriptHandler.isEnableMouse()) {
-            eventManager.removeListener(mouseMotionBlocker);
-            mouseMotionBlocker = null;
+        if (mouseMotionBlocker != null) {
+            mouseMotionBlocker.setInput(scriptHandler.isEnableMouse());
         }
         if (drawBoundaries == null && scriptHandler.isDrawBoundaries()) {
             eventManager.addListener(drawBoundaries = new DrawBoundaries(bot));
@@ -73,6 +74,7 @@ public class DebugSettingsListener implements ScriptListener {
     }
 
     public void disableDebugs() {
+        ScriptHandler scriptHandler = bot.getScriptHandler();
         EventManager eventManager = bot.getEventManager();
 
         if (drawMouse != null) {
@@ -83,11 +85,11 @@ public class DebugSettingsListener implements ScriptListener {
             eventManager.removeListener(drawBoundaries);
             drawBoundaries = null;
         }
-        if (mouseInputBlocker == null) {
-            eventManager.addListener(mouseInputBlocker = new MouseInputBlocker(bot));
+        if (mouseInputBlocker != null) {
+            mouseInputBlocker.setInput(scriptHandler.isEnableMouse());
         }
-        if (mouseMotionBlocker == null) {
-            eventManager.addListener(mouseMotionBlocker = new MouseMotionBlocker(bot));
+        if (mouseMotionBlocker != null) {
+            mouseMotionBlocker.setInput(scriptHandler.isEnableMouse());
         }
         if (drawGround != null) {
             eventManager.removeListener(drawGround);
