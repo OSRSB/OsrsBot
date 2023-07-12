@@ -1015,7 +1015,8 @@ public class WidgetIndices {
         public static final int INNER_FRAME_CONTAINER = 1;
         // 2
         public static final int SPELLS_CONTAINER = 3;
-        // 4
+
+        public static final int KOUREND_HOME_TELEPORT_SPRITE = 4;
         public static final int CATHERBY_HOME_TELEPORT_SPRITE = 5; // on Leagues
         public static final int LUMBRIDGE_HOME_TELEPORT_SPRITE = 6;
         public static final int WIND_STRIKE_SPRITE = 7;
@@ -1159,11 +1160,54 @@ public class WidgetIndices {
         public static final int SPIN_FLAX_SPRITE = 143;
         public static final int OURANIA_TELEPORT_SPRITE = 144;
         //  Arceeus book
-        public static final int ARCEEUS_HOME_TELEPORT_SPRITE = 145;
-        public static final int BASIC_REANIMATION = 146;
-        // TODO: arceeus spells 147 - 188
-        public static final int RESSURECT_GREATER_ZOMBIE = 189;
-        // 190 - 191
+
+        public static final int ARCEUUS_HOME_TELEPORT_SPRITE = 145;
+        public static final int BASIC_REANIMATION_SPRITE = 146;
+        public static final int ARCEUUS_LIBRARY_TELEPORT_SPRITE = 147;
+        public static final int ADEPT_REANIMATION_SPRITE = 148;
+        public static final int EXPERT_REANIMATION_SPRITE = 149;
+        public static final int MASTER_REANIMATION_SPRITE = 150;
+        public static final int DRAYNOR_MANOR_TELEPORT_SPRITE = 151;
+        public static final int MIND_ALTAR_TELEPORT_SPRITE = 153;
+        public static final int RESPAWN_TELEPORT_SPRITE = 154;
+        public static final int SALVE_GRAVEYARD_TELEPORT_SPRITE = 155;
+        public static final int FENKENSTRAINS_CASTLE_TELEPORT_SPRITE = 156;
+        public static final int WEST_ARDOUGNE_TELEPORT_SPRITE = 157;
+        public static final int HARMONY_ISLAND_TELEPORT_SPRITE = 158;
+        public static final int CEMETERY_TELEPORT_SPRITE = 159;
+        public static final int RESURRECT_CROPS_SPRITE = 160;
+        public static final int BARROWS_TELEPORT_SPRITE = 161;
+        public static final int APE_ATOLL_TELEPORT_ARCEUUS_SPRITE = 162;
+        public static final int BATTLEFRONT_TELEPORT_SPRITE = 163;
+        public static final int INFERIOR_DEMONBANE_SPRITE = 164;
+        public static final int SUPERIOR_DEMONBANE_SPRITE = 165;
+        public static final int DARK_DEMONBANE_SPRITE = 166;
+        public static final int MARK_OF_DARKNESS_SPRITE = 167;
+        public static final int GHOSTLY_GRASP_SPRITE = 168;
+        public static final int SKELETAL_GRASP_SPRITE = 169;
+        public static final int UNDEAD_GRASP_SPRITE = 170;
+        public static final int WARD_OF_ARCEUUS_SPRITE = 171;
+        public static final int LESSER_CORRUPTION_SPRITE = 172;
+        public static final int GREATER_CORRUPTION_SPRITE = 173;
+        public static final int DEMONIC_OFFERING_SPRITE = 174;
+        public static final int SINISTER_OFFERING_SPRITE = 175;
+        public static final int DEGRIME_SPRITE = 176;
+        public static final int SHADOW_VEIL_SPRITE = 177;
+        public static final int VILE_VIGOUR_SPRITE = 178;
+        public static final int DARK_LURE_SPRITE = 179;
+        public static final int DEATH_CHARGE_SPRITE = 180;
+        public static final int RESURRECT_LESSER_GHOST_SPRITE = 181;
+        public static final int RESURRECT_LESSER_SKELETON_SPRITE = 182;
+        public static final int RESURRECT_LESSER_ZOMBIE_SPRITE = 183;
+        public static final int RESURRECT_SUPERIOR_GHOST_SPRITE = 184;
+        public static final int RESURRECT_SUPERIOR_SKELETON_SPRITE = 185;
+        public static final int RESURRECT_SUPERIOR_ZOMBIE_SPRITE = 186;
+        public static final int RESURRECT_GREATER_GHOST_SPRITE = 187;
+        public static final int RESURRECT_GREATER_SKELETON_SPRITE = 188;
+        public static final int RESURRECT_GREATER_ZOMBIE_SPRITE = 189;
+
+        public static final int TOOLTIP = 190;
+        // 191
         public static final int SPELL_FILTERS_DYNAMIC_CONTAINER = 192;
         public static final int SPELL_FILTERS_FRAME_SPRITE = 193;
         public static final int SPELL_FILTERS_TITLE_LABEL = 194;
