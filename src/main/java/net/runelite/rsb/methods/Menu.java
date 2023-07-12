@@ -51,6 +51,12 @@ public class Menu extends MethodProvider {
      */
     public boolean doAction(final String action, final String... target) {
         int idx = getIndex(action, target);
+        // Some objects with dynamic menus take a bit to update. Try any door with open and close.
+        if (idx == -1) {
+            sleep(100);
+            idx = getIndex(action, target);
+        }
+
         if (!isOpen()) {
             if (idx == -1) {
                 return false;

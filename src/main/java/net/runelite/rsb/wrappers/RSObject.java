@@ -216,7 +216,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		if (getClickBox().doAction(action, option)) {
 			return true;
 		}
-		return methods.tiles.doAction(getLocation(), action, option);
+		return false;
+		//return methods.tiles.doAction(getLocation(), action, option);
 	}
 
 	/**
