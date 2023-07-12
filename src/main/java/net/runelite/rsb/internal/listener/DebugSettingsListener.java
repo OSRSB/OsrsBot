@@ -85,10 +85,10 @@ public class DebugSettingsListener implements ScriptListener {
             drawBoundaries = null;
         }
         if (mouseInputBlocker != null) {
-            mouseInputBlocker.setInput(!scriptHandler.isEnableMouse());
+            mouseInputBlocker.setInput(true);
         }
         if (mouseMotionBlocker != null) {
-            mouseMotionBlocker.setInput(!scriptHandler.isEnableMouse());
+            mouseMotionBlocker.setInput(true);
         }
         if (drawGround != null) {
             eventManager.removeListener(drawGround);
