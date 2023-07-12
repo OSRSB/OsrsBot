@@ -129,6 +129,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	public final void delegateTo(Script script) {
 		script.init(ctx);
 		ctx.runeLite.getEventManager().addListener(script);
+		ctx.runeLite.eventBus.register(script);
 		delegates.add(script);
 	}
 
@@ -240,6 +241,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 		if (start) {
 			running = true;
 			ctx.runeLite.getEventManager().addListener(this);
+			ctx.runeLite.eventBus.register(this);
 			log.info("Script started.");
 			try {
 				while (running) {
@@ -309,9 +311,11 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 		mouse.moveOffScreen();
 		for (Script s : delegates) {
 			ctx.runeLite.getEventManager().removeListener(s);
+			ctx.runeLite.eventBus.unregister(s);
 		}
 		delegates.clear();
 		ctx.runeLite.getEventManager().removeListener(this);
+		ctx.runeLite.eventBus.unregister(this);
 		ctx.runeLite.getScriptHandler().stopScript(id);
 		id = -1;
 	}
@@ -351,10 +355,14 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	private void unblockEvents() {
 		for (Script s : delegates) {
 			ctx.runeLite.getEventManager().removeListener(s);
+			ctx.runeLite.eventBus.unregister(s);
 			ctx.runeLite.getEventManager().addListener(s);
+			ctx.runeLite.eventBus.register(s);
 		}
 		ctx.runeLite.getEventManager().removeListener(this);
+		ctx.runeLite.eventBus.unregister(this);
 		ctx.runeLite.getEventManager().addListener(this);
+		ctx.runeLite.eventBus.register(this);
 	}
 
 	public BotLite getBot() {

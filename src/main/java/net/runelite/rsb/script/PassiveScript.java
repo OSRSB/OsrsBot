@@ -43,6 +43,7 @@ public abstract class PassiveScript extends Methods implements EventListener, Ru
 	public final void run() {
 		name = getClass().getAnnotation(PassiveScriptManifest.class).name();
 		ctx.runeLite.getEventManager().addListener(this);
+		ctx.runeLite.eventBus.register(this);
 		running = true;
 		try {
 			while (running) {
@@ -64,6 +65,7 @@ public abstract class PassiveScript extends Methods implements EventListener, Ru
 		} catch (Exception ignored) {
 		}
 		ctx.runeLite.getEventManager().removeListener(this);
+		ctx.runeLite.eventBus.unregister(this);
 		running = false;
 	}
 
