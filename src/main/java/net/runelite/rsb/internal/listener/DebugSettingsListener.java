@@ -13,6 +13,10 @@ public class DebugSettingsListener implements ScriptListener {
     DrawMouseTrail drawMouseTrail = null;
     DrawBoundaries drawBoundaries = null;
     DrawGround drawGround = null;
+    DrawInventory drawInventory = null;
+    DrawNPCs drawNPCs = null;
+    DrawObjects drawObjects = null;
+    DrawPlayers drawPlayers = null;
     DrawSettings drawSettings = null;
     DrawWeb drawWeb = null;
 
@@ -35,6 +39,18 @@ public class DebugSettingsListener implements ScriptListener {
         }
         if (drawGround == null && scriptHandler.isDrawGround()) {
             eventManager.addListener(drawGround = new DrawGround(bot));
+        }
+        if (drawInventory == null && scriptHandler.isDrawInventory()) {
+            eventManager.addListener(drawInventory = new DrawInventory(bot));
+        }
+        if (drawNPCs == null && scriptHandler.isDrawNPCs()) {
+            eventManager.addListener(drawNPCs = new DrawNPCs(bot));
+        }
+        if (drawObjects == null && scriptHandler.isDrawObjects()) {
+            eventManager.addListener(drawObjects = new DrawObjects(bot));
+        }
+        if (drawPlayers == null && scriptHandler.isDrawPlayers()) {
+            eventManager.addListener(drawPlayers = new DrawPlayers(bot));
         }
         if (drawSettings == null && scriptHandler.isDrawSettings()) {
             eventManager.addListener(drawSettings = new DrawSettings(bot));
@@ -59,6 +75,22 @@ public class DebugSettingsListener implements ScriptListener {
         if (drawGround != null) {
             eventManager.removeListener(drawGround);
             drawGround = null;
+        }
+        if (drawInventory != null) {
+            eventManager.removeListener(drawInventory);
+            drawInventory = null;
+        }
+        if (drawNPCs != null) {
+            eventManager.removeListener(drawNPCs);
+            drawNPCs = null;
+        }
+        if (drawObjects != null) {
+            eventManager.removeListener(drawObjects);
+            drawObjects = null;
+        }
+        if (drawPlayers != null) {
+            eventManager.removeListener(drawPlayers);
+            drawPlayers = null;
         }
         if (drawSettings != null) {
             eventManager.removeListener(drawSettings);

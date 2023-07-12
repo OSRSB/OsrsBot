@@ -38,6 +38,18 @@ public class ScriptHandler {
 	private boolean drawGround = false;
 	@Setter
 	@Getter
+	private boolean drawInventory = false;
+	@Setter
+	@Getter
+	private boolean drawNPCs = false;
+	@Setter
+	@Getter
+	private boolean drawObjects = false;
+	@Setter
+	@Getter
+	private boolean drawPlayers = false;
+	@Setter
+	@Getter
 	private boolean drawSettings = false;
 	@Setter
 	@Getter
