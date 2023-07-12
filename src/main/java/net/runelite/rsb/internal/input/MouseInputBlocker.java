@@ -1,5 +1,6 @@
 package net.runelite.rsb.internal.input;
 
+import lombok.Getter;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.internal.ScriptHandler;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -13,12 +14,17 @@ public class MouseInputBlocker implements MouseListener {
 	private final BotLite bot;
 	private MouseListener[] mouseListeners;
 
+	@Getter
+	boolean enableInput = true;
+
 	public MouseInputBlocker(BotLite bot) {
 		this.bot = bot;
 	}
 
-	public void setInput(boolean enabled) {
-		if (enabled) unblockInput();
+	public void setInput(boolean enableInput) {
+		if (this.enableInput == enableInput) return;
+		this.enableInput = enableInput;
+		if (this.enableInput) unblockInput();
 		else blockInput();
 	}
 

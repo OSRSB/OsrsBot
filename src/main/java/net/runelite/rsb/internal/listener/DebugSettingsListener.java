@@ -65,6 +65,13 @@ public class DebugSettingsListener implements ScriptListener {
         if (drawMouseTrailListener == null && drawMouseTrail) {
             eventManager.addListener(drawMouseTrailListener = new DrawMouseTrail(bot));
         }
+
+        if (mouseInputBlockerListener != null) {
+            mouseInputBlockerListener.setInput(enableMouse);
+        }
+        if (mouseMotionBlockerListener != null) {
+            mouseMotionBlockerListener.setInput(enableMouse);
+        }
     }
 
     public void disableDebugs() {
@@ -79,24 +86,29 @@ public class DebugSettingsListener implements ScriptListener {
             eventManager.removeListener(drawBoundariesListener);
             drawBoundariesListener = null;
         }
+
+        if (mouseInputBlockerListener != null) {
+            mouseInputBlockerListener.setInput(true);
+        }
+        if (mouseMotionBlockerListener != null) {
+            mouseMotionBlockerListener.setInput(true);
+        }
     }
 
     public void updateDebugs() {
+        updateDebugs(false);
+    }
+
+    public void updateDebugs(boolean scriptStarting) {
         ScriptHandler scriptHandler = bot.getScriptHandler();
         EventManager eventManager = bot.getEventManager();
 
-        if (bot.getScriptHandler().hasScriptsRunning()) {
+        if (bot.getScriptHandler().hasScriptsRunning() || scriptStarting) {
             enableDebugs();
         } else {
             disableDebugs();
         }
 
-        if (mouseInputBlockerListener != null) {
-            mouseInputBlockerListener.setInput(enableMouse);
-        }
-        if (mouseMotionBlockerListener != null) {
-            mouseMotionBlockerListener.setInput(enableMouse);
-        }
         if (drawBoundariesListener == null && drawBoundaries) {
             eventManager.addListener(drawBoundariesListener = new DrawBoundaries(bot));
         }
@@ -156,7 +168,7 @@ public class DebugSettingsListener implements ScriptListener {
     }
     @Override
     public void scriptStarted(ScriptHandler handler, Script script) {
-        updateDebugs();
+        updateDebugs(true);
     }
 
     @Override
@@ -166,7 +178,7 @@ public class DebugSettingsListener implements ScriptListener {
 
     @Override
     public void scriptResumed(ScriptHandler handler, Script script) {
-        updateDebugs();
+        updateDebugs(true);
     }
 
     @Override
