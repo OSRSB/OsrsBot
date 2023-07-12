@@ -36,14 +36,14 @@ public class RSPlayerQueryBuilder extends PositionableQueryBuilder<RSPlayer, RSP
     }
 
     public RSPlayerQueryBuilder interactingWith(Actor actor) {
-        return filter(player -> player.getInteracting().equals(actor));
+        return filter(player -> actor.equals(player.getInteracting()));
     }
 
     public RSPlayerQueryBuilder interactingWithMe() {
-        return filter(player -> player.getInteracting().equals(methods.players.getMyPlayer().getAccessor()));
+        return filter(player -> methods.players.getMyPlayer().getAccessor().equals(player.getInteracting()));
     }
     public RSPlayerQueryBuilder notInteractingWithMe() {
-        return filter(player -> !player.getInteracting().equals(methods.players.getMyPlayer().getAccessor()));
+        return filter(player -> !methods.players.getMyPlayer().getAccessor().equals(player.getInteracting()));
     }
 
     public RSPlayerQueryBuilder animation(int... arrayOfInt) {

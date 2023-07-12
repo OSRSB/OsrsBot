@@ -243,7 +243,7 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         if (client.getCanvas() == null) {
             return null;
         }
-        if (canvas == null) {
+        if (canvas == null || !canvas.isValid()) {
             canvas = new Canvas(client.getCanvas());
             return canvas;
         }
