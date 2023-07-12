@@ -1,5 +1,7 @@
 package net.runelite.rsb.internal.listener;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.event.EventManager;
 import net.runelite.rsb.event.impl.*;
@@ -11,64 +13,57 @@ import net.runelite.rsb.script.Script;
 public class DebugSettingsListener implements ScriptListener {
     BotLite bot;
 
-    DrawMouse drawMouse = null;
-    DrawMouseTrail drawMouseTrail = null;
-    MouseInputBlocker mouseInputBlocker = null;
-    MouseMotionBlocker mouseMotionBlocker = null;
-    DrawBoundaries drawBoundaries = null;
-    DrawGround drawGround = null;
-    DrawInventory drawInventory = null;
-    DrawNPCs drawNPCs = null;
-    DrawObjects drawObjects = null;
-    DrawPlayers drawPlayers = null;
-    DrawSettings drawSettings = null;
-    DrawWeb drawWeb = null;
+    DrawMouse drawMouseListener = null;
+    DrawMouseTrail drawMouseTrailListener = null;
+    MouseInputBlocker mouseInputBlockerListener = null;
+    MouseMotionBlocker mouseMotionBlockerListener = null;
+    DrawBoundaries drawBoundariesListener = null;
+    DrawGround drawGroundListener = null;
+    DrawInventory drawInventoryListener = null;
+    DrawNPCs drawNPCsListener = null;
+    DrawObjects drawObjectsListener = null;
+    DrawPlayers drawPlayersListener = null;
+    DrawSettings drawSettingsListener = null;
+    DrawWeb drawWebListener = null;
+
+    @Getter
+    private boolean drawMouse = false;
+    @Getter
+    private boolean drawMouseTrail = false;
+    @Getter
+    private boolean enableMouse = false;
+    @Getter
+    private boolean drawBoundaries = false;
+    @Getter
+    private boolean drawGround = false;
+    @Getter
+    private boolean drawInventory = false;
+    @Getter
+    private boolean drawNPCs = false;
+    @Getter
+    private boolean drawObjects = false;
+    @Getter
+    private boolean drawPlayers = false;
+    @Getter
+    private boolean drawSettings = false;
+    @Getter
+    private boolean drawWeb = false;
 
     public DebugSettingsListener(BotLite bot) {
         this.bot = bot;
-        mouseInputBlocker = new MouseInputBlocker(bot);
-        mouseMotionBlocker = new MouseMotionBlocker(bot);
+        mouseInputBlockerListener = new MouseInputBlocker(bot);
+        mouseMotionBlockerListener = new MouseMotionBlocker(bot);
     }
 
     public void enableDebugs() {
         ScriptHandler scriptHandler = bot.getScriptHandler();
         EventManager eventManager = bot.getEventManager();
 
-        if (drawMouse == null && scriptHandler.isDrawMouse()) {
-            eventManager.addListener(drawMouse = new DrawMouse(bot));
+        if (drawMouseListener == null && drawMouse) {
+            eventManager.addListener(drawMouseListener = new DrawMouse(bot));
         }
-        if (drawMouseTrail == null && scriptHandler.isDrawMouseTrail()) {
-            eventManager.addListener(drawMouseTrail = new DrawMouseTrail(bot));
-        }
-        if (mouseInputBlocker != null) {
-            mouseInputBlocker.setInput(scriptHandler.isEnableMouse());
-        }
-        if (mouseMotionBlocker != null) {
-            mouseMotionBlocker.setInput(scriptHandler.isEnableMouse());
-        }
-        if (drawBoundaries == null && scriptHandler.isDrawBoundaries()) {
-            eventManager.addListener(drawBoundaries = new DrawBoundaries(bot));
-        }
-        if (drawGround == null && scriptHandler.isDrawGround()) {
-            eventManager.addListener(drawGround = new DrawGround(bot));
-        }
-        if (drawInventory == null && scriptHandler.isDrawInventory()) {
-            eventManager.addListener(drawInventory = new DrawInventory(bot));
-        }
-        if (drawNPCs == null && scriptHandler.isDrawNPCs()) {
-            eventManager.addListener(drawNPCs = new DrawNPCs(bot));
-        }
-        if (drawObjects == null && scriptHandler.isDrawObjects()) {
-            eventManager.addListener(drawObjects = new DrawObjects(bot));
-        }
-        if (drawPlayers == null && scriptHandler.isDrawPlayers()) {
-            eventManager.addListener(drawPlayers = new DrawPlayers(bot));
-        }
-        if (drawSettings == null && scriptHandler.isDrawSettings()) {
-            eventManager.addListener(drawSettings = new DrawSettings(bot));
-        }
-        if (drawWeb == null && scriptHandler.isDrawWeb()) {
-            eventManager.addListener(drawWeb = new DrawWeb(bot));
+        if (drawMouseTrailListener == null && drawMouseTrail) {
+            eventManager.addListener(drawMouseTrailListener = new DrawMouseTrail(bot));
         }
     }
 
@@ -76,75 +71,166 @@ public class DebugSettingsListener implements ScriptListener {
         ScriptHandler scriptHandler = bot.getScriptHandler();
         EventManager eventManager = bot.getEventManager();
 
-        if (drawMouse != null) {
-            eventManager.removeListener(drawMouse);
-            drawMouse = null;
+        if (drawMouseListener != null) {
+            eventManager.removeListener(drawMouseListener);
+            drawMouseListener = null;
         }
-        if (drawBoundaries != null) {
-            eventManager.removeListener(drawBoundaries);
-            drawBoundaries = null;
+        if (drawBoundariesListener != null) {
+            eventManager.removeListener(drawBoundariesListener);
+            drawBoundariesListener = null;
         }
-        if (mouseInputBlocker != null) {
-            mouseInputBlocker.setInput(true);
+    }
+
+    public void updateDebugs() {
+        ScriptHandler scriptHandler = bot.getScriptHandler();
+        EventManager eventManager = bot.getEventManager();
+
+        if (bot.getScriptHandler().hasScriptsRunning()) {
+            enableDebugs();
+        } else {
+            disableDebugs();
         }
-        if (mouseMotionBlocker != null) {
-            mouseMotionBlocker.setInput(true);
+
+        if (mouseInputBlockerListener != null) {
+            mouseInputBlockerListener.setInput(enableMouse);
         }
-        if (drawGround != null) {
-            eventManager.removeListener(drawGround);
-            drawGround = null;
+        if (mouseMotionBlockerListener != null) {
+            mouseMotionBlockerListener.setInput(enableMouse);
         }
-        if (drawInventory != null) {
-            eventManager.removeListener(drawInventory);
-            drawInventory = null;
+        if (drawBoundariesListener == null && drawBoundaries) {
+            eventManager.addListener(drawBoundariesListener = new DrawBoundaries(bot));
         }
-        if (drawNPCs != null) {
-            eventManager.removeListener(drawNPCs);
-            drawNPCs = null;
+        if (drawBoundariesListener != null && !drawBoundaries) {
+            eventManager.removeListener(drawBoundariesListener);
+            drawBoundariesListener = null;
         }
-        if (drawObjects != null) {
-            eventManager.removeListener(drawObjects);
-            drawObjects = null;
+        if (drawGroundListener == null && drawGround) {
+            eventManager.addListener(drawGroundListener = new DrawGround(bot));
         }
-        if (drawPlayers != null) {
-            eventManager.removeListener(drawPlayers);
-            drawPlayers = null;
+        if (drawGroundListener != null && !drawGround) {
+            eventManager.removeListener(drawGroundListener);
+            drawGroundListener = null;
         }
-        if (drawSettings != null) {
-            eventManager.removeListener(drawSettings);
-            drawSettings = null;
+        if (drawInventoryListener == null && drawInventory) {
+            eventManager.addListener(drawInventoryListener = new DrawInventory(bot));
         }
-        if (drawWeb != null) {
-            eventManager.removeListener(drawWeb);
-            drawWeb = null;
+        if (drawInventoryListener != null && !drawInventory) {
+            eventManager.removeListener(drawInventoryListener);
+            drawInventoryListener = null;
+        }
+        if (drawNPCsListener == null && drawNPCs) {
+            eventManager.addListener(drawNPCsListener = new DrawNPCs(bot));
+        }
+        if (drawNPCsListener != null && !drawNPCs) {
+            eventManager.removeListener(drawNPCsListener);
+            drawNPCsListener = null;
+        }
+        if (drawObjectsListener == null && drawObjects) {
+            eventManager.addListener(drawObjectsListener = new DrawObjects(bot));
+        }
+        if (drawObjectsListener != null && !drawObjects) {
+            eventManager.removeListener(drawObjectsListener);
+            drawObjectsListener = null;
+        }
+        if (drawPlayersListener == null && drawPlayers) {
+            eventManager.addListener(drawPlayersListener = new DrawPlayers(bot));
+        }
+        if (drawPlayersListener != null && !drawPlayers) {
+            eventManager.removeListener(drawPlayersListener);
+            drawPlayersListener = null;
+        }
+        if (drawSettingsListener == null && drawSettings) {
+            eventManager.addListener(drawSettingsListener = new DrawSettings(bot));
+        }
+        if (drawSettingsListener != null && !drawSettings) {
+            eventManager.removeListener(drawSettingsListener);
+            drawSettingsListener = null;
+        }
+        if (drawWebListener == null && drawWeb) {
+            eventManager.addListener(drawWebListener = new DrawWeb(bot));
+        }
+        if (drawWebListener != null && !drawWeb) {
+            eventManager.removeListener(drawWebListener);
+            drawWebListener = null;
         }
     }
     @Override
     public void scriptStarted(ScriptHandler handler, Script script) {
-        enableDebugs();
+        updateDebugs();
     }
 
     @Override
     public void scriptStopped(ScriptHandler handler, Script script) {
-        if (!bot.getScriptHandler().hasScriptsRunning()) {
-            disableDebugs();
-        }
+        updateDebugs();
     }
 
     @Override
     public void scriptResumed(ScriptHandler handler, Script script) {
-        enableDebugs();
+        updateDebugs();
     }
 
     @Override
     public void scriptPaused(ScriptHandler handler, Script script) {
-        if (!bot.getScriptHandler().hasScriptsRunning()) {
-            disableDebugs();
-        }
+        updateDebugs();
     }
 
     @Override
     public void inputChanged(BotLite bot, int mask) {
 
+    }
+
+    public void setDrawMouse(boolean drawMouse) {
+        this.drawMouse = drawMouse;
+        updateDebugs();
+    }
+
+    public void setDrawMouseTrail(boolean drawMouseTrail) {
+        this.drawMouseTrail = drawMouseTrail;
+        updateDebugs();
+    }
+
+    public void setEnableMouse(boolean enableMouse) {
+        this.enableMouse = enableMouse;
+        updateDebugs();
+    }
+
+    public void setDrawBoundaries(boolean drawBoundaries) {
+        this.drawBoundaries = drawBoundaries;
+        updateDebugs();
+    }
+
+    public void setDrawGround(boolean drawGround) {
+        this.drawGround = drawGround;
+        updateDebugs();
+    }
+
+    public void setDrawInventory(boolean drawInventory) {
+        this.drawInventory = drawInventory;
+        updateDebugs();
+    }
+
+    public void setDrawNPCs(boolean drawNPCs) {
+        this.drawNPCs = drawNPCs;
+        updateDebugs();
+    }
+
+    public void setDrawObjects(boolean drawObjects) {
+        this.drawObjects = drawObjects;
+        updateDebugs();
+    }
+
+    public void setDrawPlayers(boolean drawPlayers) {
+        this.drawPlayers = drawPlayers;
+        updateDebugs();
+    }
+
+    public void setDrawSettings(boolean drawSettings) {
+        this.drawSettings = drawSettings;
+        updateDebugs();
+    }
+
+    public void setDrawWeb(boolean drawWeb) {
+        this.drawWeb = drawWeb;
+        updateDebugs();
     }
 }

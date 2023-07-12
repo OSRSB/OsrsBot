@@ -1,5 +1,6 @@
 package net.runelite.rsb.internal;
 
+import clojure.lang.IFn;
 import lombok.Getter;
 import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
@@ -22,43 +23,13 @@ public class ScriptHandler {
 
 	private final BotLite bot;
 
-	@Setter
 	@Getter
-	private boolean drawMouse = false;
-	@Setter
-	@Getter
-	private boolean drawMouseTrail = false;
-	@Setter
-	@Getter
-	private boolean enableMouse = false;
-	@Setter
-	@Getter
-	private boolean drawBoundaries = false;
-	@Setter
-	@Getter
-	private boolean drawGround = false;
-	@Setter
-	@Getter
-	private boolean drawInventory = false;
-	@Setter
-	@Getter
-	private boolean drawNPCs = false;
-	@Setter
-	@Getter
-	private boolean drawObjects = false;
-	@Setter
-	@Getter
-	private boolean drawPlayers = false;
-	@Setter
-	@Getter
-	private boolean drawSettings = false;
-	@Setter
-	@Getter
-	private boolean drawWeb = false;
+	DebugSettingsListener debugSettingsListener;
 
 	public ScriptHandler(BotLite bot) {
 		this.bot = bot;
-		addScriptListener(new DebugSettingsListener(bot));
+		debugSettingsListener = new DebugSettingsListener(bot);
+		addScriptListener(debugSettingsListener);
 	}
 
 	public void init() {
