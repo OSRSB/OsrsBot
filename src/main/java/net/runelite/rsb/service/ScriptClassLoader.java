@@ -1,8 +1,13 @@
 package net.runelite.rsb.service;
 
+import lombok.Getter;
+import lombok.Setter;
+import net.runelite.client.util.ReflectUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.invoke.MethodHandles;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -10,13 +15,15 @@ import java.net.URLClassLoader;
 /**
  * @author GigiaJ
  */
-class ScriptClassLoader extends URLClassLoader {
+class ScriptClassLoader extends URLClassLoader implements ReflectUtil.PrivateLookupableClassLoader{
 
 	private final URL base;
 
 	public ScriptClassLoader(URL url) {
 		super(new URL[]{url}, ScriptClassLoader.class.getClassLoader());
 		this.base = url;
+
+		ReflectUtil.installLookupHelper(this);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -60,4 +67,15 @@ class ScriptClassLoader extends URLClassLoader {
 			return null;
 		}
 	}
+
+
+	@Getter
+	@Setter
+	private MethodHandles.Lookup lookup;
+
+	@Override
+	public Class<?> defineClass0(String name, byte[] b, int off, int len) throws ClassFormatError {
+		return super.defineClass(name, b, off, len);
+	}
+
 }
