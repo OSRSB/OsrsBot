@@ -10,6 +10,7 @@ public class DebugSettingsListener implements ScriptListener {
     BotLite bot;
 
     DrawMouse drawMouse = null;
+    DrawMouseTrail drawMouseTrail = null;
     DrawBoundaries drawBoundaries = null;
     DrawGround drawGround = null;
     DrawSettings drawSettings = null;
@@ -25,6 +26,9 @@ public class DebugSettingsListener implements ScriptListener {
 
         if (drawMouse == null && scriptHandler.isDrawMouse()) {
             eventManager.addListener(drawMouse = new DrawMouse(bot));
+        }
+        if (drawMouseTrail == null && scriptHandler.isDrawMouseTrail()) {
+            eventManager.addListener(drawMouseTrail = new DrawMouseTrail(bot));
         }
         if (drawBoundaries == null && scriptHandler.isDrawBoundaries()) {
             eventManager.addListener(drawBoundaries = new DrawBoundaries(bot));
