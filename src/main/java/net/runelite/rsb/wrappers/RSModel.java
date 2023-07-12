@@ -315,19 +315,31 @@ public class RSModel extends MethodProvider {
 	 */
 	public Point getPointNearCenter() {
 		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
 
-		// pick a random triangle
-		int randomIndex = StdRandom.uniform(triangles.length);
-		Polygon triangle = triangles[randomIndex];
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
 
-		// pick random barycentric coordinates
-		double r1 = StdRandom.uniform();
-		double r2 = StdRandom.uniform();
-
-		// generate a point within the triangle using the barycentric coordinates
-		int x = (int) ((1 - Math.sqrt(r1)) * triangle.xpoints[0] + (Math.sqrt(r1) * (1 - r2)) * triangle.xpoints[1] + (Math.sqrt(r1) * r2) * triangle.xpoints[2]);
-		int y = (int) ((1 - Math.sqrt(r1)) * triangle.ypoints[0] + (Math.sqrt(r1) * (1 - r2)) * triangle.ypoints[1] + (Math.sqrt(r1) * r2) * triangle.ypoints[2]);
-
+		int centerX = (max_x + min_x) / 2;
+		int centerY = (max_y + min_y) / 2;
+		
+		int x = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
+		int y = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
+		
 		return new Point(x, y);
 	}
 
