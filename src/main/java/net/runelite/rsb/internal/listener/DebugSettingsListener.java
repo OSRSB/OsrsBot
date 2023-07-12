@@ -28,7 +28,6 @@ public class DebugSettingsListener implements ScriptListener {
         this.bot = bot;
         mouseInputBlocker = new MouseInputBlocker(bot);
         mouseMotionBlocker = new MouseMotionBlocker(bot);
-        disableDebugs();
     }
 
     public void enableDebugs() {
@@ -86,10 +85,10 @@ public class DebugSettingsListener implements ScriptListener {
             drawBoundaries = null;
         }
         if (mouseInputBlocker != null) {
-            mouseInputBlocker.setInput(scriptHandler.isEnableMouse());
+            mouseInputBlocker.setInput(!scriptHandler.isEnableMouse());
         }
         if (mouseMotionBlocker != null) {
-            mouseMotionBlocker.setInput(scriptHandler.isEnableMouse());
+            mouseMotionBlocker.setInput(!scriptHandler.isEnableMouse());
         }
         if (drawGround != null) {
             eventManager.removeListener(drawGround);
