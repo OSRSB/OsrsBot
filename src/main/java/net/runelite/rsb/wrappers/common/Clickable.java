@@ -1,5 +1,7 @@
 package net.runelite.rsb.wrappers.common;
 
+import java.awt.*;
+
 public interface Clickable {
     boolean doAction(String action);
 
@@ -10,4 +12,8 @@ public interface Clickable {
     boolean doClick(boolean leftClick);
 
     boolean doHover();
+
+    Shape getClickShape();
+
+    ClickBox getClickBox();
 }

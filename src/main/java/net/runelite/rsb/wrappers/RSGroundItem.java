@@ -5,10 +5,12 @@ import net.runelite.api.TileItem;
 import net.runelite.rsb.methods.GroundItems;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -60,9 +62,8 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action, final String option) {
-		RSModel model = getModel();
-		if (model != null) {
-			return model.doAction(action, option);
+		if (getClickBox().doAction(action, option)) {
+			return true;
 		}
 		return methods.tiles.doAction(getLocation(), random(0.45, 0.55), random(0.45, 0.55), 0,
 				action, option);
@@ -97,30 +98,15 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 	}
 
 	public boolean doHover() {
-		RSModel model = getModel();
-		if (model == null) {
-			return false;
-		}
-		this.getModel().hover();
-		return true;
+		return getClickBox().doHover();
 	}
 
 	public boolean doClick() {
-		RSModel model = getModel();
-		if (model == null) {
-			return false;
-		}
-		this.getModel().doClick(true);
-		return true;
+		return doClick(true);
 	}
 
 	public boolean doClick(boolean leftClick) {
-		RSModel model = getModel();
-		if (model == null) {
-			return false;
-		}
-		this.getModel().doClick(leftClick);
-		return true;
+		return getClickBox().doClick(leftClick);
 	}
 
 	public boolean isClickable() {
@@ -129,5 +115,12 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 			return false;
 		}
 		return model.getModel().isClickable();
+	}
+
+	public Shape getClickShape() {
+		return getLocation().getClickShape();
+	}
+	public ClickBox getClickBox() {
+		return new ClickBox(this);
 	}
 }

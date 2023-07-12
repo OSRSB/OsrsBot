@@ -2,13 +2,17 @@ package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.Web;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
+
+import java.awt.*;
 
 /**
  * A class to assign coordinates and game-levels to tile objects for internal use
@@ -231,6 +235,13 @@ public class RSTile implements Clickable07, Positionable {
             return true;
         }
         return false;
+    }
+
+    public Shape getClickShape() {
+        return ctx.calc.getTileBoundsPoly(this.toWorldTile(), 0);
+    }
+    public ClickBox getClickBox() {
+        return new ClickBox(this);
     }
 
     @Override

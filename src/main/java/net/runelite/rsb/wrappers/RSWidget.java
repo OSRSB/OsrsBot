@@ -6,6 +6,7 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 
 import java.awt.*;
@@ -70,22 +71,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
-        if (!isValid()) {
-            return false;
-        }
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (!rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            int min_x = rect.x + 1, min_y = rect.y + 1;
-            int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-            methods.mouse.move(random(min_x, max_x, rect.width / 3),
-                    random(min_y, max_y, rect.height / 3));
-            sleep(random(40, 80));
-        }
-        return methods.menu.doAction(action, option);
+        return getClickBox().doAction(action, option);
     }
 
     /**
@@ -105,24 +91,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick(boolean leftClick) {
-        if (!isValid()) {
-            return false;
-        }
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            methods.mouse.click(true);
-            return true;
-        }
-
-        int min_x = rect.x + 1, min_y = rect.y + 1;
-        int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-        methods.mouse.click(random(min_x, max_x, rect.width / 3),
-                random(min_y, max_y, rect.height / 3), leftClick);
-        return true;
+        return getClickBox().doClick(leftClick);
     }
 
     /**
@@ -132,26 +101,15 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the mouse was moved; otherwise <code>false</code>.
      */
     public boolean doHover() {
-        if (!isValid()) {
-            return false;
-        }
-
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            return false;
-        }
-
-        int min_x = rect.x + 1, min_y = rect.y + 1;
-        int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-        methods.mouse.move(random(min_x, max_x, rect.width / 3),
-                random(min_y, max_y, rect.height / 3));
-        return true;
+        return getClickBox().doHover();
     }
 
+    public Shape getClickShape() {
+        return widget.getBounds();
+    }
+    public ClickBox getClickBox() {
+        return new ClickBox(this);
+    }
     /**
      * Gets the absolute x position of the child, calculated from
      * the beginning of the game screen
