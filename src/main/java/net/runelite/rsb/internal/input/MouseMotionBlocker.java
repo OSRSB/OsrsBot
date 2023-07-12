@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.Arrays;
 
-public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
+public class MouseMotionBlocker implements MouseMotionListener {
 
 	private final BotLite bot;
 	private MouseMotionListener[] mouseMotionListeners;
@@ -31,31 +31,6 @@ public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
 		java.awt.Canvas c = bot.client.getCanvas();
 		c.removeMouseMotionListener(this);
 		Arrays.stream(mouseMotionListeners).forEach(c::addMouseMotionListener);
-	}
-
-	@Override
-	public void scriptStarted(ScriptHandler handler, Script script) {
-		blockInput();
-	}
-
-	@Override
-	public void scriptStopped(ScriptHandler handler, Script script) {
-		unblockInput();
-	}
-
-	@Override
-	public void scriptResumed(ScriptHandler handler, Script script) {
-		blockInput();
-	}
-
-	@Override
-	public void scriptPaused(ScriptHandler handler, Script script) {
-		unblockInput();
-	}
-
-	@Override
-	public void inputChanged(BotLite bot, int mask) {
-
 	}
 
 	@Override

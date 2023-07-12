@@ -4,6 +4,8 @@ import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.event.EventManager;
 import net.runelite.rsb.event.impl.*;
 import net.runelite.rsb.internal.ScriptHandler;
+import net.runelite.rsb.internal.input.MouseInputBlocker;
+import net.runelite.rsb.internal.input.MouseMotionBlocker;
 import net.runelite.rsb.script.Script;
 
 public class DebugSettingsListener implements ScriptListener {
@@ -11,6 +13,8 @@ public class DebugSettingsListener implements ScriptListener {
 
     DrawMouse drawMouse = null;
     DrawMouseTrail drawMouseTrail = null;
+    MouseInputBlocker mouseInputBlocker = null;
+    MouseMotionBlocker mouseMotionBlocker = null;
     DrawBoundaries drawBoundaries = null;
     DrawGround drawGround = null;
     DrawInventory drawInventory = null;
@@ -33,6 +37,14 @@ public class DebugSettingsListener implements ScriptListener {
         }
         if (drawMouseTrail == null && scriptHandler.isDrawMouseTrail()) {
             eventManager.addListener(drawMouseTrail = new DrawMouseTrail(bot));
+        }
+        if (mouseInputBlocker != null && scriptHandler.isEnableMouse()) {
+            eventManager.removeListener(mouseInputBlocker);
+            mouseInputBlocker = null;
+        }
+        if (mouseMotionBlocker != null && scriptHandler.isEnableMouse()) {
+            eventManager.removeListener(mouseMotionBlocker);
+            mouseMotionBlocker = null;
         }
         if (drawBoundaries == null && scriptHandler.isDrawBoundaries()) {
             eventManager.addListener(drawBoundaries = new DrawBoundaries(bot));
@@ -61,7 +73,6 @@ public class DebugSettingsListener implements ScriptListener {
     }
 
     public void disableDebugs() {
-        System.out.println("DebugSettingsListener.disableDebugs");
         EventManager eventManager = bot.getEventManager();
 
         if (drawMouse != null) {
@@ -71,6 +82,12 @@ public class DebugSettingsListener implements ScriptListener {
         if (drawBoundaries != null) {
             eventManager.removeListener(drawBoundaries);
             drawBoundaries = null;
+        }
+        if (mouseInputBlocker == null) {
+            eventManager.addListener(mouseInputBlocker = new MouseInputBlocker(bot));
+        }
+        if (mouseMotionBlocker == null) {
+            eventManager.addListener(mouseMotionBlocker = new MouseMotionBlocker(bot));
         }
         if (drawGround != null) {
             eventManager.removeListener(drawGround);
