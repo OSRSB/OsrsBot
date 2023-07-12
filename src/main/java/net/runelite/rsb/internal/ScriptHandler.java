@@ -30,6 +30,18 @@ public class ScriptHandler {
 	@Setter
 	@Getter
 	private boolean enableMouse = false;
+	@Setter
+	@Getter
+	private boolean drawBoundaries = false;
+	@Setter
+	@Getter
+	private boolean drawGround = false;
+	@Setter
+	@Getter
+	private boolean drawSettings = false;
+	@Setter
+	@Getter
+	private boolean drawWeb = false;
 
 	public ScriptHandler(BotLite bot) {
 		this.bot = bot;
