@@ -79,20 +79,23 @@ public class Skills extends MethodProvider {
 	public int getCurrentLevel(final int index) {
 		return methods.client.getRealSkillLevel(getSkill(index));
 	}
+	public int getCurrentLevel(final Skill skill) {
+		return getCurrentLevel(skill.ordinal());
+	}
 
-	/**
-	 * Gets the player's current level in a skill based on their experience in
-	 * that skill.
-	 *
-	 * @param index The index of the skill.
-	 * @return The real level of the skill.
-	 * @see #getRealLevel(int)
-	 */
+		/**
+         * Gets the player's current level in a skill based on their experience in
+         * that skill.
+         *
+         * @param index The index of the skill.
+         * @return The real level of the skill.
+         * @see #getRealLevel(int)
+         */
 	public int getRealLevel(final int index) {
 		return Skills.getLevelAt(getCurrentExp(index));
 	}
 	public int getRealLevel(final Skill skill) {
-		return Skills.getLevelAt(getCurrentExp(skill.ordinal()));
+		return getRealLevel(getCurrentExp(skill.ordinal()));
 	}
 
 	/**

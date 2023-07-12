@@ -608,53 +608,51 @@ public class WidgetIndices {
      */
     public static class Minimap {
         public static final int GROUP_INDEX = 160;
-        public static final int XP_ORB_SPRITE = 1; // Interactions: "Hide", "Setup"
-        public static final int HEALTH_ORB_PARENT_CONTAINER = 2;
-        public static final int HEALTH_ORB_PARENT_SPRITE = 3;
-        public static final int HEALTH_ORB_CONTAINER = 4; // Interactions: "Cure"
-        public static final int HEALTH_ORB_LABEL = 5;
-        public static final int HEALTH_ORB_SPRITE = 6;
-        // 7 - 8 gap
-        public static final int HEALTH_ORB_ENERGY_CONSUMED_CONTAINER = 9;
-        public static final int HEALTH_ORB_ENERGY_CONSUMED_SPRITE = 10;
-        public static final int HEALTH_ORB_ICON_CONTAINER = 11;
-        public static final int HEALTH_ORB_ICON_SPRITE = 12;
-        public static final int QUICK_PRAYER_ORB_PARENT_CONTAINER = 13;
-        public static final int QUICK_PRAYER_ORB_PARENT_SPRITE = 14;
-        public static final int QUICK_PRAYER_ORB_CONTAINER = 15; // Interactions: "Activate", "Setup"
-        public static final int QUICK_PRAYER_ORB_LABEL = 16;
-        public static final int QUICK_PRAYER_ORB_SPRITE = 17;
-        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_CONTAINER = 18;
-        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_SPRITE = 19;
-        public static final int QUICK_PRAYER_ORB_ICON_SPRITE = 20;
-        public static final int RUN_ORB_PARENT_CONTAINER = 21;
-        public static final int RUN_ORB_PARENT_SPRITE = 22;
-        public static final int RUN_ORB_CONTAINER = 23; // Interactions: "Toggle"
-        public static final int RUN_ORB_LABEL = 24;
-        public static final int RUN_ORB_SPRITE = 25;
-        public static final int RUN_ORB_ENERGY_CONSUMED_CONTAINER = 26;
-        public static final int RUN_ORB_ENERGY_CONSUMED_SPRITE = 27;
-        public static final int RUN_ORB_ICON_SPRITE = 28;
-        public static final int SPEC_ORB_PARENT_CONTAINER = 29;
-        public static final int SPEC_ORB_PARENT_SPRITE = 30;
-        public static final int SPEC_ORB_CONTAINER = 31; // Interactions: "Use"
-        public static final int SPEC_ORB_LABEL = 32;
-        public static final int SPEC_ORB_ICON_SPRITE = 33;
-        public static final int SPEC_ORB_ENERGY_CONSUMED_CONTAINER = 34;
-        public static final int SPEC_ORB_ENERGY_CONSUMED_SPRITE = 35;
-        public static final int SPEC_ORB_RECHARGE_CONTAINER = 36; // NOTE: unclear
-        public static final int SPEC_ORB_SPRITE = 37;
-        public static final int BOND_ORB_PARENT_CONTAINER = 38;
-        public static final int BOND_ORB_PARENT_SPRITE = 39;
-        public static final int BOND_ORB_ICON_SPRITE = 40;
-        public static final int BOND_ORB_CONTAINER = 41; // Interactions: "Open Store", "Bond Pouch"
-        public static final int BOND_ORB_SPRITE = 42;
-        public static final int WORLDMAP_ORB_CONTAINER = 43;
-        public static final int WIKI_BANNER_PARENT_CONTAINER = 44;
-        public static final int WIKI_BANNER_CONTAINER = 45; // Interactions: ... 10 unknown
-        public static final int WIKI_BANNER_SPRITE = 46;
-        public static final int WORLDMAP_ORB_PARENT_SPRITE = 47;
-        public static final int WORLDMAP_ORB_SPRITE = 48; // Interactions: "Floating World Map", "Fullscreen World Map"
+        public static final int XP_ORB_SPRITE = 5; // Interactions: "Hide", "Setup"
+        public static final int HEALTH_ORB_PARENT_CONTAINER = 6;
+        public static final int HEALTH_ORB_CONTAINER = 7; // Interactions: "Cure"
+        public static final int HEALTH_ORB_LABEL = 9;
+        public static final int HEALTH_ORB_SPRITE = 10;
+        public static final int HEALTH_ORB_ENERGY_CONSUMED_CONTAINER = 13;
+        public static final int HEALTH_ORB_ENERGY_CONSUMED_SPRITE = 14;
+        public static final int HEALTH_ORB_ICON_CONTAINER = 15;
+        public static final int HEALTH_ORB_ICON_SPRITE = 16;
+        public static final int QUICK_PRAYER_ORB_PARENT_CONTAINER = 17;
+        public static final int QUICK_PRAYER_ORB_PARENT_SPRITE = 18;
+        public static final int QUICK_PRAYER_ORB_CONTAINER = 19; // Interactions: "Activate", "Setup"
+        public static final int QUICK_PRAYER_ORB_LABEL = 20;
+        public static final int QUICK_PRAYER_ORB_SPRITE = 21;
+        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_CONTAINER = 22;
+        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_SPRITE = 23;
+        public static final int QUICK_PRAYER_ORB_ICON_SPRITE = 24;
+        public static final int RUN_ORB_PARENT_CONTAINER = 25;
+        public static final int RUN_ORB_PARENT_SPRITE = 26;
+        public static final int RUN_ORB_CONTAINER = 27; // Interactions: "Toggle"
+        public static final int RUN_ORB_LABEL = 28;
+        public static final int RUN_ORB_SPRITE = 29;
+        public static final int RUN_ORB_ENERGY_CONSUMED_CONTAINER = 30;
+        public static final int RUN_ORB_ENERGY_CONSUMED_SPRITE = 31;
+        public static final int RUN_ORB_ICON_SPRITE = 32;
+        public static final int SPEC_ORB_PARENT_CONTAINER = 33;
+        public static final int SPEC_ORB_PARENT_SPRITE = 34;
+        public static final int SPEC_ORB_CONTAINER = 35; // Interactions: "Use"
+        public static final int SPEC_ORB_LABEL = 36;
+        public static final int SPEC_ORB_ICON_SPRITE = 37;
+        public static final int SPEC_ORB_ENERGY_CONSUMED_CONTAINER = 38;
+        public static final int SPEC_ORB_ENERGY_CONSUMED_SPRITE = 39;
+        public static final int SPEC_ORB_RECHARGE_CONTAINER = 40; // NOTE: unclear
+        public static final int SPEC_ORB_SPRITE = 41;
+        public static final int BOND_ORB_PARENT_CONTAINER = 42;
+        public static final int BOND_ORB_PARENT_SPRITE = 43;
+        public static final int BOND_ORB_ICON_SPRITE = 44;
+        public static final int BOND_ORB_CONTAINER = 45; // Interactions: "Open Store", "Bond Pouch"
+        public static final int BOND_ORB_SPRITE = 46;
+        public static final int WORLDMAP_ORB_CONTAINER = 48;
+        public static final int WIKI_BANNER_PARENT_CONTAINER = 47;
+        public static final int WIKI_BANNER_CONTAINER = 1; // Interactions: ... 10 unknown
+        public static final int WIKI_BANNER_SPRITE = 2;
+        public static final int WORLDMAP_ORB_PARENT_SPRITE = 52;
+        public static final int WORLDMAP_ORB_SPRITE = 53; // Interactions: "Floating World Map", "Fullscreen World Map"
     }
 
     /**
@@ -1017,7 +1015,8 @@ public class WidgetIndices {
         public static final int INNER_FRAME_CONTAINER = 1;
         // 2
         public static final int SPELLS_CONTAINER = 3;
-        // 4
+
+        public static final int KOUREND_HOME_TELEPORT_SPRITE = 4;
         public static final int CATHERBY_HOME_TELEPORT_SPRITE = 5; // on Leagues
         public static final int LUMBRIDGE_HOME_TELEPORT_SPRITE = 6;
         public static final int WIND_STRIKE_SPRITE = 7;
@@ -1161,11 +1160,54 @@ public class WidgetIndices {
         public static final int SPIN_FLAX_SPRITE = 143;
         public static final int OURANIA_TELEPORT_SPRITE = 144;
         //  Arceeus book
-        public static final int ARCEEUS_HOME_TELEPORT_SPRITE = 145;
-        public static final int BASIC_REANIMATION = 146;
-        // TODO: arceeus spells 147 - 188
-        public static final int RESSURECT_GREATER_ZOMBIE = 189;
-        // 190 - 191
+
+        public static final int ARCEUUS_HOME_TELEPORT_SPRITE = 145;
+        public static final int BASIC_REANIMATION_SPRITE = 146;
+        public static final int ARCEUUS_LIBRARY_TELEPORT_SPRITE = 147;
+        public static final int ADEPT_REANIMATION_SPRITE = 148;
+        public static final int EXPERT_REANIMATION_SPRITE = 149;
+        public static final int MASTER_REANIMATION_SPRITE = 150;
+        public static final int DRAYNOR_MANOR_TELEPORT_SPRITE = 151;
+        public static final int MIND_ALTAR_TELEPORT_SPRITE = 153;
+        public static final int RESPAWN_TELEPORT_SPRITE = 154;
+        public static final int SALVE_GRAVEYARD_TELEPORT_SPRITE = 155;
+        public static final int FENKENSTRAINS_CASTLE_TELEPORT_SPRITE = 156;
+        public static final int WEST_ARDOUGNE_TELEPORT_SPRITE = 157;
+        public static final int HARMONY_ISLAND_TELEPORT_SPRITE = 158;
+        public static final int CEMETERY_TELEPORT_SPRITE = 159;
+        public static final int RESURRECT_CROPS_SPRITE = 160;
+        public static final int BARROWS_TELEPORT_SPRITE = 161;
+        public static final int APE_ATOLL_TELEPORT_ARCEUUS_SPRITE = 162;
+        public static final int BATTLEFRONT_TELEPORT_SPRITE = 163;
+        public static final int INFERIOR_DEMONBANE_SPRITE = 164;
+        public static final int SUPERIOR_DEMONBANE_SPRITE = 165;
+        public static final int DARK_DEMONBANE_SPRITE = 166;
+        public static final int MARK_OF_DARKNESS_SPRITE = 167;
+        public static final int GHOSTLY_GRASP_SPRITE = 168;
+        public static final int SKELETAL_GRASP_SPRITE = 169;
+        public static final int UNDEAD_GRASP_SPRITE = 170;
+        public static final int WARD_OF_ARCEUUS_SPRITE = 171;
+        public static final int LESSER_CORRUPTION_SPRITE = 172;
+        public static final int GREATER_CORRUPTION_SPRITE = 173;
+        public static final int DEMONIC_OFFERING_SPRITE = 174;
+        public static final int SINISTER_OFFERING_SPRITE = 175;
+        public static final int DEGRIME_SPRITE = 176;
+        public static final int SHADOW_VEIL_SPRITE = 177;
+        public static final int VILE_VIGOUR_SPRITE = 178;
+        public static final int DARK_LURE_SPRITE = 179;
+        public static final int DEATH_CHARGE_SPRITE = 180;
+        public static final int RESURRECT_LESSER_GHOST_SPRITE = 181;
+        public static final int RESURRECT_LESSER_SKELETON_SPRITE = 182;
+        public static final int RESURRECT_LESSER_ZOMBIE_SPRITE = 183;
+        public static final int RESURRECT_SUPERIOR_GHOST_SPRITE = 184;
+        public static final int RESURRECT_SUPERIOR_SKELETON_SPRITE = 185;
+        public static final int RESURRECT_SUPERIOR_ZOMBIE_SPRITE = 186;
+        public static final int RESURRECT_GREATER_GHOST_SPRITE = 187;
+        public static final int RESURRECT_GREATER_SKELETON_SPRITE = 188;
+        public static final int RESURRECT_GREATER_ZOMBIE_SPRITE = 189;
+
+        public static final int TOOLTIP = 190;
+        // 191
         public static final int SPELL_FILTERS_DYNAMIC_CONTAINER = 192;
         public static final int SPELL_FILTERS_FRAME_SPRITE = 193;
         public static final int SPELL_FILTERS_TITLE_LABEL = 194;
@@ -1916,36 +1958,36 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_DYNAMIC_CONTAINER = 2;
         // 3
         public static final int PRAYERS_CONTAINER = 4;
-        public static final int THICK_SKIN = 5;
-        public static final int BURST_OF_STRENGTH = 6;
-        public static final int CLARITY_OF_THOUGHT = 7;
-        public static final int ROCK_SKIN = 8;
-        public static final int SUPERHUMAN_STRENGTH = 9;
-        public static final int IMPROVED_REFLEXES = 10;
-        public static final int RAPID_RESTORE = 11;
-        public static final int RAPID_HEAL = 12;
-        public static final int PROTECT_ITEM = 13;
-        public static final int STEEL_SKIN = 14;
-        public static final int ULTIMATE_STRENGTH = 15;
-        public static final int INCREDIBLE_REFLEXES = 16;
-        public static final int PROTECT_FROM_MAGIC = 17;
-        public static final int PROTECT_FROM_MISSILES = 18;
-        public static final int PROTECT_FROM_MELEE = 19;
-        public static final int RETRIBUTION = 20;
-        public static final int REDEMPTION = 21;
-        public static final int SMITE = 22;
-        public static final int SHARP_EYE = 23;
-        public static final int MYSTIC_WILL = 24;
-        public static final int HAWK_EYE = 25;
-        public static final int MYSTIC_LORE = 26;
-        public static final int EAGLE_EYE = 27;
-        public static final int MYSTIC_MIGHT = 28;
-        public static final int CHIVALRY = 29;
-        public static final int PIETY = 30;
-        public static final int RIGOUR = 31;
-        public static final int AUGURY = 32;
-        public static final int PRESERVE = 33;
-        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 34;
+        public static final int THICK_SKIN = 9;
+        public static final int BURST_OF_STRENGTH = 10;
+        public static final int CLARITY_OF_THOUGHT = 11;
+        public static final int ROCK_SKIN = 12;
+        public static final int SUPERHUMAN_STRENGTH = 13;
+        public static final int IMPROVED_REFLEXES = 14;
+        public static final int RAPID_RESTORE = 15;
+        public static final int RAPID_HEAL = 16;
+        public static final int PROTECT_ITEM = 17;
+        public static final int STEEL_SKIN = 18;
+        public static final int ULTIMATE_STRENGTH = 19;
+        public static final int INCREDIBLE_REFLEXES = 20;
+        public static final int PROTECT_FROM_MAGIC = 21;
+        public static final int PROTECT_FROM_MISSILES = 22;
+        public static final int PROTECT_FROM_MELEE = 23;
+        public static final int RETRIBUTION = 24;
+        public static final int REDEMPTION = 25;
+        public static final int SMITE = 26;
+        public static final int SHARP_EYE = 27;
+        public static final int HAWK_EYE = 28;
+        public static final int EAGLE_EYE = 29;
+        public static final int MYSTIC_WILL = 30;
+        public static final int MYSTIC_LORE = 31;
+        public static final int MYSTIC_MIGHT = 32;
+        public static final int RIGOUR = 33;
+        public static final int CHIVALRY = 34;
+        public static final int PIETY = 35;
+        public static final int AUGURY = 36;
+        public static final int PRESERVE = 37;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 38;
     }
 
     /**
