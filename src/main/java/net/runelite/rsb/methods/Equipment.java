@@ -6,6 +6,7 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
+import net.runelite.rsb.query.RSEquipmentItemQueryBuilder;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSWidget;
 
@@ -39,6 +40,10 @@ public class Equipment extends MethodProvider {
 		super(ctx);
 	}
 
+
+	public RSEquipmentItemQueryBuilder query() {
+		return new RSEquipmentItemQueryBuilder();
+	}
 	/**
 	 * Gets the equipment interface.
 	 *
