@@ -1,6 +1,9 @@
 package net.runelite.rsb.internal;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
+import net.runelite.rsb.internal.listener.DebugSettingsListener;
 import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -18,8 +21,19 @@ public class ScriptHandler {
 
 	private final BotLite bot;
 
+	@Setter
+	@Getter
+	private boolean drawMouse = false;
+	@Setter
+	@Getter
+	private boolean drawMouseTrail = false;
+	@Setter
+	@Getter
+	private boolean enableMouse = false;
+
 	public ScriptHandler(BotLite bot) {
 		this.bot = bot;
+		addScriptListener(new DebugSettingsListener(bot));
 	}
 
 	public void init() {
@@ -209,6 +223,15 @@ public class ScriptHandler {
 		for (ScriptListener l : listeners) {
 			l.inputChanged(bot, mask);
 		}
+	}
+
+	public boolean hasScriptsRunning() {
+		for (Script s : scripts.values()) {
+			if (s.isRunning()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
