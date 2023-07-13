@@ -1,5 +1,6 @@
 package net.runelite.rsb.internal.listener;
 
+import ch.qos.logback.classic.Level;
 import lombok.Getter;
 import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
@@ -48,6 +49,9 @@ public class DebugSettingsListener implements ScriptListener {
     private boolean drawSettings = false;
     @Getter
     private boolean drawWeb = false;
+    @Getter
+    Level logLevel = Level.INFO;
+    private ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
 
     public DebugSettingsListener(BotLite bot) {
         this.bot = bot;
@@ -102,6 +106,10 @@ public class DebugSettingsListener implements ScriptListener {
     public void updateDebugs(boolean scriptStarting) {
         ScriptHandler scriptHandler = bot.getScriptHandler();
         EventManager eventManager = bot.getEventManager();
+
+        if (root.getLevel() != logLevel) {
+            root.setLevel(logLevel);
+        }
 
         if (bot.getScriptHandler().hasScriptsRunning() || scriptStarting) {
             enableDebugs();
@@ -243,6 +251,11 @@ public class DebugSettingsListener implements ScriptListener {
 
     public void setDrawWeb(boolean drawWeb) {
         this.drawWeb = drawWeb;
+        updateDebugs();
+    }
+
+    public void setLogLevel(Level logLevel) {
+        this.logLevel = logLevel;
         updateDebugs();
     }
 }
