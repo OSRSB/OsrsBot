@@ -22,21 +22,25 @@ public class DrawNPCs implements PaintListener {
 
 		final FontMetrics metrics = render.getFontMetrics();
 		for (RSNPC npc : ctx.npcs.getAll()) {
-			final Point location = ctx.calc.tileToScreen(npc.getLocation(), npc.getHeight());
+			//final Point location = ctx.calc.tileToScreen(npc.getLocation(), npc.getHeight());
 			//Point location = npc.getScreenLocation();
+			final Point location = npc.getClickBox().getCenterPoint();
 			if (location == null || !ctx.calc.pointOnScreen(location)) {
 				continue;
 			}
 			render.setColor(Color.RED);
-			render.fillRect((int) location.getX() - 1, (int) location.getY() - 1, 2, 2);
-			String s = "" + npc.getID();
+			((Graphics2D)render).draw(npc.getClickShape());
+			//render.fillRect((int) location.getX() - 1, (int) location.getY() - 1, 2, 2);
+			String name = npc.getName() + "";
+			String id = npc.getID() + "";
 			render.setColor(npc.isInCombat() ? Color.red :/* npc.isMoving() ? Color.green :*/ Color.WHITE);
-			render.drawString(s, location.getX() - metrics.stringWidth(s) / 2, location.getY() - metrics.getHeight() / 2);
+			render.drawString(name, location.getX() - metrics.stringWidth(name) / 2, location.getY() - metrics.getHeight() / 2);
+			render.drawString(id, location.getX() - metrics.stringWidth(id) / 2, location.getY() + metrics.getHeight() - metrics.getHeight() / 2);
 			// int x = element.getX();
 			// x -= ((int)(x >> 7)) << 7;
 			if (npc.getAnimation() != -1 || npc.getGraphic() != -1) {
-				s = "(A: " + npc.getAnimation() + " | G: " + npc.getGraphic() + " | L: " + npc.getLevel() +")";
-				render.drawString(s, location.getX() - metrics.stringWidth(s) / 2, location.getY() - metrics.getHeight() * 3 / 2);
+				id = "(A: " + npc.getAnimation() + " | G: " + npc.getGraphic() + " | L: " + npc.getLevel() +")";
+				render.drawString(id, location.getX() - metrics.stringWidth(id) / 2, location.getY()  + (2 * metrics.getHeight()) - metrics.getHeight() / 2);
 			}
 			// s = "" + element.isMoving();
 			// render.drawString(s, location.x - metrics.stringWidth(s) / 2,
