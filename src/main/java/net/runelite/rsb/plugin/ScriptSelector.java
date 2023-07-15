@@ -58,6 +58,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	public JComboBox accounts;
 	public MaterialTab buttonStart;
 	public MaterialTab buttonPause;
+	public Icon iconPause;
 	public MaterialTab buttonStop;
 	public MaterialTab buttonReload;
 
@@ -69,23 +70,22 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 
 	/**
 	 * Creates a script selector for the given bot instance
-	 * @param bot	the bot instance
+	 *
+	 * @param bot the bot instance
 	 */
 	public ScriptSelector(BotLite bot) {
-		super((Frame.getFrames().length > 0) ? Frame.getFrames()[0] : null, "Script Selector", false);
-		this.bot = bot;
-		this.scripts = new ArrayList<>();
-		this.tmpFileNames = new ArrayList<>();
-		this.model = new ScriptTableModel(this.scripts);
+		this(null, bot);
 	}
 
 	/**
 	 * Creates a script selector for the given bot instance
+	 *
 	 * @param frame the frame to bind this to
-	 * @param bot	the bot instance
+	 * @param bot   the bot instance
 	 */
 	public ScriptSelector(Frame frame, BotLite bot) {
-		super(frame, "Script Selector", true);
+		super(frame != null ? frame : (Frame.getFrames().length > 0) ? Frame.getFrames()[0] : null,
+				"Script Selector", frame != null);
 		this.bot = bot;
 		this.scripts = new ArrayList<>();
 		this.tmpFileNames = new ArrayList<>();
@@ -99,11 +99,10 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 * (This even occurs if you tried to take the compiled file and placed it in the folder)
 	 * In order to allow our testsScript package to be used it must be worked around so we reconstruct our file in a temporary
 	 * file which will be cleaned up on the next start up.
-	 *
+	 * <p>
 	 * So by copying the data of our files to temporary files they can be passed through a buffered reader and scanned for
 	 * removing the package declaration and replacing the class name in the file so it can be compiled
 	 * Then using jaxax.Compiler it is compiled and is created as a temporary file in memory (could cause memory issues)
-	 *
 	 */
 	private void generateTestScripts() {
 		File testScriptDir = new File(TEST_PATH);
@@ -190,10 +189,10 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	/**
 	 * Generates and returns the script table
 	 *
-	 * @param icon 		The icon for the script
-	 * @param name 		The name of the script
-	 * @param version   The version of the script
-	 * @param desc		The description of the script
+	 * @param icon    The icon for the script
+	 * @param name    The name of the script
+	 * @param version The version of the script
+	 * @param desc    The description of the script
 	 * @return script table
 	 */
 	public JTable getTable(int icon, int name, int version, int desc) {
@@ -257,6 +256,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 * Sets the action to occur when the reload button is pressed.
 	 */
 	private AtomicBoolean reloading = new AtomicBoolean(false);
+
 	public boolean buttonReloadActionPerformed() {
 		if (!reloading.getAndSet(true)) {
 			try {
@@ -281,11 +281,12 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	/**
 	 * Sets the action to occur when the start button is pressed.
 	 *
-	 * @param e		the action event
+	 * @param e the action event
 	 */
 	public void buttonStartActionPerformed(ActionEvent e) {
 		startAction();
 		buttonStart.setEnabled(false);
+		buttonPause.setEnabled(true);
 	}
 
 	/**
@@ -305,7 +306,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	/**
 	 * Sets the action to occur when the pause button is pressed.
 	 *
-	 * @param e		the action event
+	 * @param e the action event
 	 */
 	public void buttonPauseActionPerformed(ActionEvent e) {
 		ScriptHandler sh = bot.getScriptHandler();
@@ -314,11 +315,13 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 			int id = running.keySet().iterator().next();
 			sh.pauseScript(id);
 			//Swaps the displayed text
-			if (buttonPause.getText().equals("Pause")) {
-				buttonPause.setText("Play");
-			}
-			else {
-				buttonPause.setText("Pause");
+			if (buttonPause.getToolTipText().equals("Pause the active script")) {
+				buttonPause.setToolTipText("Resume the active script");
+				if (iconPause == null) iconPause = buttonPause.getIcon();
+				buttonPause.setIcon(buttonStart.getIcon());
+			} else {
+				buttonPause.setToolTipText("Pause the active script");
+				buttonPause.setIcon(iconPause);
 			}
 		}
 	}
@@ -326,12 +329,13 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	/**
 	 * Sets the action to occur when the stop button is pressed.
 	 *
-	 * @param e		the action event
+	 * @param e the action event
 	 */
 	public void buttonStopActionPerformed(ActionEvent e) {
 		//Sets the value back to Pause
-		if (buttonPause.getText().equals("Play")) {
-			buttonPause.setText("Pause");
+		if (buttonPause.getToolTipText().equals("Resume the active script")) {
+			buttonPause.setToolTipText("Pause the active script");
+			buttonPause.setIcon(iconPause);
 		}
 		stopAction();
 
@@ -353,6 +357,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 			//}
 		}
 		buttonStart.setEnabled(table.getSelectedRow() != -1);
+		buttonPause.setEnabled(false);
 	}
 
 	/**
@@ -383,15 +388,13 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 	 *
 	 * @return account combo box
 	 */
-	public JComboBox<?> getAccounts(){
+	public JComboBox<?> getAccounts() {
 		accounts = new JComboBox(AccountManager.getAccountNames());
 		accounts.setMaximumRowCount(100);
 		accounts.setMinimumSize(new Dimension(200, 20));
 		accounts.setPreferredSize(new Dimension(200, 20));
 		return accounts;
 	}
-
-
 
 
 	private void setColumnWidths(JTable table, final int... widths) {
