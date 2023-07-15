@@ -27,15 +27,12 @@ public class ClickBox implements Clickable07, PaintListener {
 
     @Override
     public boolean doAction(String action, String option) {
-        Point point = getRandomPoint();
-        if (point != null && isClickable()) {
-            for (int i = 0; i < 3; i++) {
-                if (!contains(methods.mouse.getLocation())) {
-                    doHover();
-                }
-                if (methods.menu.doAction(action, option)) {
-                    return true;
-                }
+        for (int i = 0; i < 3; i++) {
+            if (!contains(methods.mouse.getLocation())) {
+                doHover();
+            }
+            if (methods.menu.doAction(action, option)) {
+                return true;
             }
         }
         return false;
@@ -48,16 +45,13 @@ public class ClickBox implements Clickable07, PaintListener {
 
     @Override
     public boolean doClick(boolean leftClick) {
-        Point point = getRandomPoint();
-        if (point != null && isClickable()) {
-            for (int i = 0; i < 3; i++) {
-                if (!contains(methods.mouse.getLocation())) {
-                    doHover();
-                }
-                if (contains(methods.mouse.getLocation())) {
-                    methods.mouse.click(leftClick);
-                    return true;
-                }
+        for (int i = 0; i < 3; i++) {
+            if (!contains(methods.mouse.getLocation())) {
+                doHover();
+            }
+            if (contains(methods.mouse.getLocation())) {
+                methods.mouse.click(leftClick);
+                return true;
             }
         }
         return false;
