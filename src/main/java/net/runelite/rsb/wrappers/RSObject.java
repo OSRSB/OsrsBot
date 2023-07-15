@@ -10,10 +10,12 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
 
+import java.awt.*;
 import java.lang.reflect.Field;
 
 /**
@@ -211,11 +213,11 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 *         		 desired action
 	 */
 	public boolean doAction(final String action, final String option) {
-		RSModel model = this.getModel();
-		if (model != null) {
-			return model.doAction(action, option);
+		if (getClickBox().doAction(action, option)) {
+			return true;
 		}
-		return methods.tiles.doAction(getLocation(), action, option);
+		return false;
+		//return methods.tiles.doAction(getLocation(), action, option);
 	}
 
 	/**
@@ -234,9 +236,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return <code>true</code> if clicked otherwise <code>false</code>
 	 */
 	public boolean doClick(boolean leftClick) {
-		RSModel model = this.getModel();
-		if (model != null) {
-			return model.doClick(leftClick);
+		if (getClickBox().doClick(leftClick)) {
+			return true;
 		} else {
 			Point p = methods.calc.tileToScreen(getLocation());
 			if (methods.calc.pointOnScreen(p)) {
@@ -262,9 +263,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * @return true if the object was hovered over (or attempted to) otherwise false
 	 */
 	public boolean doHover() {
-		RSModel model = getModel();
-		if (model != null) {
-			model.hover();
+		if (getClickBox().doHover()) {
 			return true;
 		} else {
 			Point p = methods.calc.tileToScreen(getLocation());
@@ -274,6 +273,14 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 			}
 		}
 		return false;
+	}
+
+	public Shape getClickShape() {
+		return getObj().getClickbox();
+	}
+
+	public ClickBox getClickBox() {
+		return new ClickBox(this);
 	}
 
 	@Override
