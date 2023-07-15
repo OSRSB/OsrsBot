@@ -94,7 +94,7 @@ public class RSTile implements Clickable07, Positionable {
     }
 
     public RSTile(int x, int y, int plane, TYPES type) {
-        this(x,y);
+        this(x,y, plane);
         this.ctx = Web.methods;
         this.type = type;
     }
@@ -258,6 +258,7 @@ public class RSTile implements Clickable07, Positionable {
         if (tile.type == TYPES.SCENE) {
             tile.x = ctx.client.getBaseX() + x;
             tile.y = ctx.client.getBaseY() + y;
+            tile.plane = ctx.client.getPlane();
             //WorldPoint.fromScene(ctx.client, x, y, plane);
         }
         tile.type = TYPES.WORLD;
@@ -287,8 +288,9 @@ public class RSTile implements Clickable07, Positionable {
             if (tile.type == TYPES.WORLD) {
                 tile.toLocalTile();
             }
-            tile.x = tile.x >>> Perspective.LOCAL_COORD_BITS;
-            tile.y = tile.y >>> Perspective.LOCAL_COORD_BITS;
+            LocalPoint point = LocalPoint.fromWorld(ctx.client, x, y);
+            tile.x = point.getSceneX();
+            tile.y = point.getSceneY();
             tile.type = TYPES.SCENE;
         }
         return tile;
