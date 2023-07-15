@@ -33,6 +33,8 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	private final ObjectDefinition def;
 	private final int id;
 
+	private final ClickBox clickBox = new ClickBox(this);
+
 	/**
 	 * Creates a new RSObject with the following parameters:
 	 * @param ctx	The context in which the object exists (the singleton RuneLite)
@@ -280,7 +282,7 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	}
 
 	public ClickBox getClickBox() {
-		return new ClickBox(this);
+		return clickBox;
 	}
 
 	@Override

@@ -19,6 +19,8 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     private final Widget widget;
     private final Widget parentWidget;
 
+    private final ClickBox clickBox = new ClickBox(this);
+
     public RSWidget(final MethodContext ctx, final Widget widget) {
         super(ctx);
         if (widget != null) {
@@ -108,7 +110,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return widget.getBounds();
     }
     public ClickBox getClickBox() {
-        return new ClickBox(this);
+        return clickBox;
     }
     /**
      * Gets the absolute x position of the child, calculated from
