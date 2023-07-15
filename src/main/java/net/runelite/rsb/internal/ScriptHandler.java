@@ -1,6 +1,8 @@
 package net.runelite.rsb.internal;
 
 import net.runelite.rsb.botLauncher.BotLite;
+import net.runelite.rsb.internal.input.MouseInputBlocker;
+import net.runelite.rsb.internal.input.MouseMotionBlocker;
 import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -18,13 +20,17 @@ public class ScriptHandler {
 
 	private final BotLite bot;
 
+	private MouseInputBlocker mouseInputBlocker;
+	private MouseMotionBlocker mouseMotionBlocker;
+
 	public ScriptHandler(BotLite bot) {
 		this.bot = bot;
+		listeners.add(new MouseInputBlocker(bot));
+		listeners.add(new MouseMotionBlocker(bot));
 	}
 
 	public void init() {
 		try {
-
 			randoms.add(new LoginBot());
 			/*
 			randoms.add(new BankPins());
