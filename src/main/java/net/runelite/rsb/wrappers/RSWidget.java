@@ -645,7 +645,9 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if found
      */
     public boolean containsAction(final String phrase) {
+        if(getActions() == null) return false;
         for (final String action : getActions()) {
+            if(action == null) continue;
             if (action.toLowerCase().contains(phrase.toLowerCase())) {
                 return true;
             }

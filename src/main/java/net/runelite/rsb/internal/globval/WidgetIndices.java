@@ -531,7 +531,7 @@ public class WidgetIndices {
 
     /**
      * Describes settings tab
-     * Last reviewed: 10/3/2022 3:09 am UTC+1
+     * Last reviewed: 10/6/2023 10:07 pm UTC+1
      */
     public static class Settings {
         public static final int GROUP_INDEX = 116;
@@ -539,39 +539,37 @@ public class WidgetIndices {
         public static final int TOP_BAR_CONTAINER = 1;
         public static final int TITLE_LABEL = 2;
         public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; //0-7 thick border sprites
-        public static final int INNER_FRAME_INNER_CONTAINER = 4;
-        public static final int PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
-        public static final int PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
-        public static final int NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
-        public static final int BOTTOM_BAR_CONTAINER = 8;
-        // gap 9 - 71
-        public static final int TAB_ACCEPT_AID_DYNAMIC_CONTAINER = 72; // 0-1 tab sprite, icon sprite
-        public static final int TAB_TOGGLE_RUN_DYNAMIC_CONTAINER = 73; // 0-2 tab sprite, icon sprite, label percentage
-        public static final int TAB_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 74; // 0-1 tab sprite, icon sprite
-        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 75; // 0-9 sprites of button
-        public static final int TAB_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 76; // 0-1 tab sprite, icon sprite
-        // gap 77 - 85
-        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 86;
-        // gap 87 - 101
-        public static final int TOP_BAR_FIRST_SEPARATOR_LINE = 102;
-        public static final int TOP_BAR_SECOND_SEPARATOR_LINE = 103;
-        public static final int TOP_BAR_THIRD_SEPARATOR_LINE = 104;
-        public static final int TOP_BAR_FOURTH_SEPARATOR_LINE = 105;
-        public static final int TAB_CONTROLS_SETTINGS_CONTAINER = 106;
-        public static final int TAB_CONTROLS_SETTINGS_LEFT_SIDE_SPRITE = 107;
-        public static final int TAB_CONTROLS_SETTINGS_MID_SIDE_SPRITE = 108;
-        public static final int TAB_CONTROLS_SETTINGS_RIGHT_SIDE_SPRITE = 109;
-        public static final int TAB_CONTROLS_SETTINGS_ICON_SPRITE = 110;
-        public static final int TAB_TAB_AUDIO_SETTINGS_CONTAINER = 111;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_CONTAINER = 112;
-        public static final int TAB_TAB_AUDIO_SETTINGS_LEFT_SIDE_SPRITE = 113;
-        public static final int TAB_TAB_AUDIO_SETTINGS_MID_SIDE_SPRITE = 114;
-        public static final int TAB_TAB_AUDIO_SETTINGS_RIGHT_SIDE_SPRITE = 115;
-        public static final int TAB_TAB_AUDIO_SETTINGS_ICON_SPRITE = 116;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_LEFT_SIDE_SPRITE = 117;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
+        public static final int TAB_CONTROLS_INNER_FRAME_INNER_CONTAINER = 4;
+        public static final int TAB_CONTROLS_PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
+        public static final int TAB_CONTROLS_PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
+        public static final int TAB_CONTROLS_NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
+        public static final int TAB_CONTROLS_BOTTOM_BAR_CONTAINER = 8;
+        public static final int TAB_AUDIO_INNER_CONTAINER = 9;
+        public static final int TAB_DISPLAY_INNER_CONTAINER = 10;
+        // gap 11 - 26
+        public static final int TAB_DISPLAY_LAYOUT_DYNAMIC_CONTAINER = 27; // 1-5
+        // 28
+        public static final int TAB_CONTROLS_ACCEPT_AID_DYNAMIC_CONTAINER = 29; // 0-1 tab sprite, icon sprite
+        public static final int TAB_CONTROLS_TOGGLE_RUN_DYNAMIC_CONTAINER = 30; // 0-2 tab sprite, icon sprite, label percentage
+        public static final int TAB_CONTROLS_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 31; // 0-1 tab sprite, icon sprite
+        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 32; // 0-9 sprites of button
+        public static final int TAB_CONTROLS_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 33; // 0-1 tab sprite, icon sprite
+        // gap 34 - 43
+        public static final int TAB_DISPLAY_ZOOM_TOGGLE_RESET = 44;
+        // gap 45 - 57
+        public static final int TAB_DISPLAY_ZOOM_SLIDER = 58; //  zoom: relativeX; out: 0; default: 48; in 96
+        // gap 59 - 62
+        public static final int TAB_CONTROLS_TAB_BUTTON = 63;
+        // gap 64 - 67
+        public static final int TAB_AUDIO_SETTINGS_TAB_BUTTON = 68;
+        public static final int TAB_DISPLAY_SETTINGS_TAB_BUTTON = 69;
+        // gap 70 - 92
+        public static final int TAB_MUSIC_TOGGLE_MUSIC = 93;
+        // gap 94 - 107
+        public static final int TAB_MUSIC_TOGGLE_SOUND_EFFECTS = 107;
+        // gap 108 - 121
+        public static final int TAB_MUSIC_TOGGLE_AREA_SOUND = 122;
+
     }
 
     /**
@@ -1686,12 +1684,13 @@ public class WidgetIndices {
         public static final int WELCOME_MSG_SPRITE = 61;
         public static final int WELCOME_MSG_TITLE_LABEL = 62;
         public static final int WELCOME_MSG_TEXT_LABEL = 63;
-        // 64 - 73 gap
+        // 64 - 72 gap
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_CONTAINER = 73;
         public static final int BUTTON_MEMBERSHIP_SPRITE = 74;
         // 75
         public static final int BUTTON_MEMBERSHIP_ICON_SPRITE = 76;
         public static final int BUTTON_MEMBERSHIP_TEXT_LABEL = 77;
-        public static final int BUTTON_CLICK_HERE_TO_PLAY_CONTAINER = 78;
+        // 78
         public static final int BUTTON_MEMBERSHIP_CONTAINER = 79;
         public static final int BUTTON_CLICK_HERE_TO_PLAY_SPRITE = 80;
         public static final int BUTTON_BANK_PIN_CONTAINER = 81;
