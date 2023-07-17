@@ -107,7 +107,10 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     }
 
     public Shape getClickShape() {
-        return widget.getBounds();
+        if (widget != null) {
+            return widget.getBounds();
+        }
+        return null;
     }
     public ClickBox getClickBox() {
         return clickBox;
