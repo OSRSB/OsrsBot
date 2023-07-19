@@ -466,6 +466,21 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public boolean isMenuScrollable() {
+        return wrappedClient.isMenuScrollable();
+    }
+
+    @Override
+    public int getMenuScroll() {
+        return wrappedClient.getMenuScroll();
+    }
+
+    @Override
+    public void setMenuScroll(int scroll) {
+        wrappedClient.setMenuScroll(scroll);
+    }
+
+    @Override
     public int getMenuX() {
         return wrappedClient.getMenuX();
     }
@@ -796,15 +811,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         wrappedClient.setMusicVolume(volume);
     }
 
-    @Override
-    public boolean isPlayingJingle() {
-        return wrappedClient.isPlayingJingle();
-    }
-
-    @Override
-    public int getMusicCurrentTrackId() {
-        return wrappedClient.getMusicCurrentTrackId();
-    }
 
     @Override
     public void playSoundEffect(int id) {
