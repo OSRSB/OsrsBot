@@ -58,6 +58,7 @@ public class BotModule extends AbstractModule {
     private final String profile = "default";
     private final boolean insecureWriteCredentials = false;
 
+
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
@@ -124,6 +125,7 @@ public class BotModule extends AbstractModule {
             bind(String.class).annotatedWith(Names.named("profile")).toProvider(Providers.of(profile));
             bindConstant().annotatedWith(Names.named("insecureWriteCredentials")).to(insecureWriteCredentials);
             bind(File.class).annotatedWith(Names.named("runeLiteDir")).toInstance(RuneLite.RUNELITE_DIR);
+            bindConstant().annotatedWith(Names.named("noupdate")).to(noupdate);
 
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
