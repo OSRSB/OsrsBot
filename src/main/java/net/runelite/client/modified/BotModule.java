@@ -57,6 +57,7 @@ public class BotModule extends AbstractModule {
 
     private final String profile = "default";
     private final boolean insecureWriteCredentials = false;
+    private final boolean noupdate = false;
 
 
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
