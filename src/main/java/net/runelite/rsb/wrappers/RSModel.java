@@ -30,11 +30,7 @@ public class RSModel extends MethodProvider {
 	 * @return The vertex point index based model filter.
 	 */
 	public static Filter<RSModel> newVertexFilter(final int[] vertex_a) {
-		return new Filter<>() {
-			public boolean test(RSModel m) {
-				return Arrays.equals(m.indices1, vertex_a);
-			}
-		};
+		return m -> Arrays.equals(m.indices1, vertex_a);
 	}
 
 	protected Model model;
@@ -55,8 +51,7 @@ public class RSModel extends MethodProvider {
 			indices1 = model.getFaceIndices1();
 			indices2 = model.getFaceIndices2();
 			indices3 = model.getFaceIndices3();
-		}
-		else {
+		} else {
 			this.model = null;
 		}
 	}
@@ -73,16 +68,14 @@ public class RSModel extends MethodProvider {
 		return Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane());
 	}
 
-	protected void update(){}
+	protected void update() {
+	}
 
 	/**
 	 * @param p A point on the screen
 	 * @return true of the point is within the bounds of the model
 	 */
 	public boolean contains(Point p) {
-		if (this == null) {
-			return false;
-		}
 		Polygon[] triangles = getTriangles();
 		for (Polygon poly : triangles) {
 			if (poly.contains(new java.awt.Point(p.getX(), p.getY()))) {
@@ -95,7 +88,7 @@ public class RSModel extends MethodProvider {
 	/**
 	 * Clicks the RSModel.
 	 *
-	 * @param leftClick if true it left clicks.
+	 * @param leftClick if true it left-clicks.
 	 * @return true if clicked.
 	 */
 	public boolean doClick(boolean leftClick) {
@@ -172,12 +165,9 @@ public class RSModel extends MethodProvider {
 	 * Returns all the screen points.
 	 *
 	 * @return All the points that are on the screen, if the model is not on the
-	 *         screen it will return null.
+	 * screen it will return null.
 	 */
 	public Point[] getPoints() {
-		if (this == null) {
-			return null;
-		}
 		Polygon[] polys = getTriangles();
 		ArrayList<Point> points = new ArrayList<>();
 
@@ -194,7 +184,7 @@ public class RSModel extends MethodProvider {
 	 * Gets a point on a model that is on screen.
 	 *
 	 * @return First point that it finds on screen else a random point on screen
-	 *         of an object.
+	 * of an object.
 	 */
 	public Point getPointOnScreen() {
 		ArrayList<Point> list = new ArrayList<>();
@@ -236,13 +226,13 @@ public class RSModel extends MethodProvider {
 		int localY = getLocalY();
 
 		Perspective.modelToCanvas(methods.client, count, localX, localY, getLocalZ(), getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
-		ArrayList polys = new ArrayList(model.getFaceCount());
+		ArrayList<Polygon> polys = new ArrayList<>(model.getFaceCount());
 
 		int[] trianglesX = model.getFaceIndices1();
 		int[] trianglesY = model.getFaceIndices2();
 		int[] trianglesZ = model.getFaceIndices3();
 
-		double averageTriangleLength = (trianglesX.length + trianglesY.length + trianglesZ.length) / 3;
+		double averageTriangleLength = (double) (trianglesX.length + trianglesY.length + trianglesZ.length) / 3;
 
 		for (int triangle = 0; triangle < count; ++triangle) {
 			if (averageTriangleLength <= NO_MODEL) {
@@ -263,7 +253,7 @@ public class RSModel extends MethodProvider {
 
 			polys.add(new Polygon(xx, yy, 3));
 		}
-		return (Polygon[]) polys.toArray(new Polygon[0]);
+		return polys.toArray(new Polygon[0]);
 	}
 
 	/**
@@ -275,16 +265,15 @@ public class RSModel extends MethodProvider {
 
 	/**
 	 * Returns true if the provided object is an RSModel with the same x, y and
-	 * z points as this model. This method compares all of the values in the
+	 * z points as this model. This method compares all the values in the
 	 * three vertex arrays.
 	 *
 	 * @return <code>true</code> if the provided object is a model with the same
-	 *         points as this.
+	 * points as this.
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof RSModel) {
-			RSModel m = (RSModel) o;
+		if (o instanceof RSModel m) {
 			return Arrays.equals(indices1, m.indices1)
 					&& Arrays.equals(xPoints, m.xPoints)
 					&& Arrays.equals(yPoints, m.yPoints)
@@ -316,6 +305,14 @@ public class RSModel extends MethodProvider {
 		return new Point((max_x + min_x) / 2, (max_y + min_y) / 2);
 	}
 
+	/**
+	 * This function first chooses a random triangle from the model polygons.
+	 * Then it generates two random numbers between 0 and 1.
+	 * These numbers are used as barycentric coordinates to generate
+	 * a point that is guaranteed to be within the chosen triangle.
+	 *
+	 * @return a random point that collides with the polygons of this model.
+	 */
 	public Point getPointNearCenter() {
 		Polygon[] triangles = this.getTriangles();
 		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
@@ -339,10 +336,10 @@ public class RSModel extends MethodProvider {
 
 		int centerX = (max_x + min_x) / 2;
 		int centerY = (max_y + min_y) / 2;
-
+		
 		int x = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
 		int y = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
-
+		
 		return new Point(x, y);
 	}
 
@@ -351,16 +348,16 @@ public class RSModel extends MethodProvider {
 		int locY = getLocalY();
 		int height = methods.calc.tileHeight(locX, locY);
 		Polygon[] triangles = this.getTriangles();
-
-		for (int i = start; i < end; i++) {
-			if (i < triangles.length) {
-				for (int n = 0; n < triangles[i].npoints; n++) {
-					return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
-				}
-			}
-		}
-		return null;
+		ArrayList<Point> points = new ArrayList<>();
+		for (int i = start; i < end && i < triangles.length; i++)
+			for (int n = 0; n < triangles[i].npoints; n++)
+				points.add(new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]));
+		if (points.isEmpty()) return null;
+		// Return a random point from the list
+		int randomIndex = StdRandom.uniform(points.size());
+		return points.get(randomIndex);
 	}
+
 
 	public int getOrientation() {
 		return 0;
@@ -381,8 +378,7 @@ public class RSModel extends MethodProvider {
 	public Polygon getConvexHull() {
 		AABB ab = model.getAABB(0);
 		int ex = ab.getExtremeX();
-		if (ex == -1)
-		{
+		if (ex == -1) {
 			// dynamic models don't get stored when they render where this normally happens
 			model.calculateBoundsCylinder();
 			model.getAABB(0);
