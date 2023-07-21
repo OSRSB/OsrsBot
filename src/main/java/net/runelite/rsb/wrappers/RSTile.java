@@ -2,13 +2,17 @@ package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
+import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.Web;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
+
+import java.awt.*;
 
 /**
  * A class to assign coordinates and game-levels to tile objects for internal use
@@ -94,7 +98,7 @@ public class RSTile implements Clickable07, Positionable {
     }
 
     public RSTile(int x, int y, int plane, TYPES type) {
-        this(x,y);
+        this(x,y, plane);
         this.ctx = Web.methods;
         this.type = type;
     }
@@ -233,6 +237,13 @@ public class RSTile implements Clickable07, Positionable {
         return false;
     }
 
+    public Shape getClickShape() {
+        return ctx.calc.getTileBoundsPoly(this.toWorldTile(), 0);
+    }
+    public ClickBox getClickBox() {
+        return new ClickBox(this);
+    }
+
     @Override
     public boolean turnTo() {
         if (isClickable()) {
@@ -258,6 +269,7 @@ public class RSTile implements Clickable07, Positionable {
         if (tile.type == TYPES.SCENE) {
             tile.x = ctx.client.getBaseX() + x;
             tile.y = ctx.client.getBaseY() + y;
+            tile.plane = ctx.client.getPlane();
             //WorldPoint.fromScene(ctx.client, x, y, plane);
         }
         tile.type = TYPES.WORLD;
@@ -287,8 +299,9 @@ public class RSTile implements Clickable07, Positionable {
             if (tile.type == TYPES.WORLD) {
                 tile.toLocalTile();
             }
-            tile.x = tile.x >>> Perspective.LOCAL_COORD_BITS;
-            tile.y = tile.y >>> Perspective.LOCAL_COORD_BITS;
+            LocalPoint point = LocalPoint.fromWorld(ctx.client, x, y);
+            tile.x = point.getSceneX();
+            tile.y = point.getSceneY();
             tile.type = TYPES.SCENE;
         }
         return tile;

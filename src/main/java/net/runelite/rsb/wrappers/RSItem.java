@@ -11,9 +11,11 @@ import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.methods.Web;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.subwrap.RSMenuNode;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -232,7 +234,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 *         successfully; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action, final String option) {
-		return (component != null) ? component.doAction(action, option) : item.doAction(action, option);
+		return getClickBox().doAction(action, option);
 	}
 
 	public boolean doAction(Predicate<RSMenuNode> predicate) {
@@ -250,24 +252,33 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	/**
 	 * Clicks the component wrapped by this RSItem if possible.
 	 *
-	 * @param left <code>true</code> if the component should be
-	 *             left-click; <code>false</code> if it should be right-clicked.
+	 * @param leftClick <code>true</code> if the component should be
+	 *             left-clicked; <code>false</code> if it should be right-clicked.
 	 * @return <code>true</code> if the component was clicked
 	 *         successfully; otherwise <code>false</code>.
 	 */
-	public boolean doClick(boolean left) {
-		return (component != null) ? component.doClick(left) : item.doClick(left);
+	public boolean doClick(boolean leftClick) {
+		return getClickBox().doClick(leftClick);
 	}
 
 	public boolean doClick() {
-		return (component != null) ? component.doClick(true) : item.doClick(true);
+		return doClick(true);
 	}
 
 	public boolean doHover() {
-		return (component != null) && component.doHover();
+		return getClickBox().doHover();
 	}
 
 	public boolean isClickable() {
 		return component.isValid() && component.isVisible() && component.isSelfVisible();
+	}
+
+	public Shape getClickShape() {
+		return (component != null) ? component.getClickShape() : item.getClickShape();
+	}
+
+	@Override
+	public ClickBox getClickBox() {
+		return new ClickBox(this);
 	}
 }

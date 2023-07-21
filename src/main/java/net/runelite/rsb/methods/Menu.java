@@ -40,41 +40,48 @@ public class Menu extends MethodProvider {
 		return doAction(action, (String[]) null);
 	}
 
-	/**
-	 * Clicks the menu target. Will left-click if the menu item is the first,
-	 * otherwise open menu and click the target.
-	 *
-	 * @param action The action (or action substring) to click.
-	 * @param target The target (or target substring) of the action to click.
-	 * @return <code>true</code> if the menu item was clicked; otherwise
-	 * <code>false</code>.
-	 */
-	public boolean doAction(final String action, final String... target) {
-		int idx = getIndex(action, target);
-		if (!isOpen()) {
-			if (idx == -1) {
-				return false;
-			}
-			if (idx > MAX_DISPLAYABLE_ENTRIES) {
-				return false;
-			}
-			if (idx == 0) {
-				methods.mouse.click(true);
-				return true;
-			}
-			methods.mouse.click(false);
-			sleep(random(50, 90));
-			idx = getIndex(action, target);
-			return clickIndex(idx);
-		} else if (idx == -1) {
-			while (isOpen()) {
-				methods.mouse.moveRandomly(750);
-				sleep(random(100, 500));
-			}
-			return false;
-		}
-		return clickIndex(idx);
-	}
+    /**
+     * Clicks the menu target. Will left-click if the menu item is the first,
+     * otherwise open menu and click the target.
+     *
+     * @param action The action (or action substring) to click.
+     * @param target The target (or target substring) of the action to click.
+     * @return <code>true</code> if the menu item was clicked; otherwise
+     * <code>false</code>.
+     */
+    public boolean doAction(final String action, final String... target) {
+        int idx = getIndex(action, target);
+        // Some objects with dynamic menus take a bit to update. Try any door with open and close.
+        if (idx == -1) {
+            sleep(100);
+            idx = getIndex(action, target);
+        }
+
+        if (!isOpen()) {
+            if (idx == -1) {
+                return false;
+            }
+            if (idx > MAX_DISPLAYABLE_ENTRIES) {
+                return false;
+            }
+            if (idx == 0) {
+                methods.mouse.click(true);
+                return true;
+            }
+            methods.mouse.click(false);
+            sleep(random(50,90));
+            idx = getIndex(action, target);
+            return clickIndex(idx);
+        } else if (idx == -1) {
+            while (isOpen()) {
+                methods.mouse.moveRandomly(750);
+                sleep(random(100, 500));
+            }
+            return false;
+        }
+        return clickIndex(idx);
+    }
+
 
 	/**
 	 * Determines if the item contains the desired action.
