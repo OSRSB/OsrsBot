@@ -110,7 +110,7 @@ public class Store extends MethodProvider {
 	 * @param index The index of the component based off of the components in the
 	 *              Store interface.
 	 * @return <code>RSWidget</code> for the item at the given index; otherwise
-	 *         null.
+	 * null.
 	 */
 	@Nullable
 	public RSItem getItemAt(final int index) {
@@ -149,7 +149,7 @@ public class Store extends MethodProvider {
 	 * Gets all the items in the store inventory.
 	 *
 	 * @return An <code>RSWidget</code> array representing all of the components
-	 *         in the stores <code>RSWidget</code>.
+	 * in the stores <code>RSWidget</code>.
 	 */
 	public RSItem[] getItems() {
 		RSWidget storeInterface = getInterface();
@@ -173,10 +173,10 @@ public class Store extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether or not the store interface is open.
+	 * Returns whether the store interface is open.
 	 *
 	 * @return <code>true</code> if the store interface is open, otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean isOpen() {
 		return getInterface().isValid();
