@@ -1,5 +1,6 @@
 package net.runelite.rsb.internal.input;
 
+import lombok.Getter;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.internal.ScriptHandler;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -9,16 +10,26 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.Arrays;
 
-public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
+public class MouseMotionBlocker implements MouseMotionListener {
 
 	private final BotLite bot;
 	private MouseMotionListener[] mouseMotionListeners;
+
+	@Getter
+	private boolean enableInput = true;
 
 	public MouseMotionBlocker(BotLite bot) {
 		this.bot = bot;
 	}
 
-	private void blockInput() {
+	public void setInput(boolean enableInput) {
+		if (this.enableInput == enableInput) return;
+		this.enableInput = enableInput;
+		if (enableInput) unblockInput();
+		else blockInput();
+	}
+
+	public void blockInput() {
 		if (bot.client == null) return;
 		java.awt.Canvas c = bot.client.getCanvas();
 		mouseMotionListeners = c.getMouseMotionListeners();
@@ -26,36 +37,11 @@ public class MouseMotionBlocker implements MouseMotionListener, ScriptListener {
 		c.addMouseMotionListener(this);
 	}
 
-	private void unblockInput() {
+	public void unblockInput() {
 		if (bot.client == null) return;
 		java.awt.Canvas c = bot.client.getCanvas();
 		c.removeMouseMotionListener(this);
 		Arrays.stream(mouseMotionListeners).forEach(c::addMouseMotionListener);
-	}
-
-	@Override
-	public void scriptStarted(ScriptHandler handler, Script script) {
-		blockInput();
-	}
-
-	@Override
-	public void scriptStopped(ScriptHandler handler, Script script) {
-		unblockInput();
-	}
-
-	@Override
-	public void scriptResumed(ScriptHandler handler, Script script) {
-		blockInput();
-	}
-
-	@Override
-	public void scriptPaused(ScriptHandler handler, Script script) {
-		unblockInput();
-	}
-
-	@Override
-	public void inputChanged(BotLite bot, int mask) {
-
 	}
 
 	@Override
