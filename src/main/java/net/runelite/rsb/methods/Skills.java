@@ -82,9 +82,6 @@ public class Skills extends MethodProvider {
 	public int getCurrentLevel(final Skill skill) {
 		return methods.client.getBoostedSkillLevel(skill);
 	}
-	public int getCurrentLevel(final Skill skill) {
-		return getCurrentLevel(skill.ordinal());
-	}
 
 		/**
          * Gets the player's current level in a skill based on their experience in

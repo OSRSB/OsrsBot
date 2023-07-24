@@ -26,7 +26,6 @@ public class Game extends MethodProvider {
 
 	/**
 	 * Different Types of Chat Modes
-	 *
 	 */
 	public enum ChatMode {
 		VIEW, ON, FRIENDS, OFF, HIDE, AUTOCHAT, STANDARD, CLEAR, SWITCH
@@ -38,7 +37,7 @@ public class Game extends MethodProvider {
 	 * @param chatOption one of CHAT_OPTION_
 	 * @param mode       one of ChatMode
 	 * @return <code>true</code> if item was clicked correctly; otherwise
-	 *         <code>false</code>
+	 * <code>false</code>
 	 */
 	public boolean setChatOption(int chatOption, ChatMode mode) {
 		mouseChatButton(chatOption, false);
@@ -52,12 +51,12 @@ public class Game extends MethodProvider {
 	 */
 	public String getLastMessage() {
 		RSWidget messages = methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_MESSAGES);
-			if (!messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText().isEmpty()) {
-				if (messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).isVisible()
-						&& !messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText().isEmpty())
-					return messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText();
-				return messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText();
-			}
+		if (!messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText().isEmpty()) {
+			if (messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).isVisible()
+					&& !messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText().isEmpty())
+				return messages.getDynamicComponent(WidgetIndices.ChatBox.LAST_MESSAGE_LABEL).getText();
+			return messages.getDynamicComponent(WidgetIndices.ChatBox.FIRST_MESSAGE_LABEL).getText();
+		}
 		return "";
 	}
 
@@ -66,7 +65,7 @@ public class Game extends MethodProvider {
 	 *
 	 * @param tab The tab to open.
 	 * @return <code>true</code> if tab successfully selected; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #openTab(InterfaceTab tab, boolean functionKey)
 	 */
 	public boolean openTab(InterfaceTab tab) {
@@ -77,20 +76,20 @@ public class Game extends MethodProvider {
 	 * Opens the specified tab at the specified index.
 	 *
 	 * @param interfaceTab The tab to open
-	 * @param useHotkey If wanting to use hotkeys to switch.
+	 * @param useHotkey    If wanting to use hotkeys to switch.
 	 * @return <code>true</code> if tab successfully selected; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean openTab(InterfaceTab interfaceTab, boolean useHotkey) {
-		if (interfaceTab == getCurrentTab()) { return true; }
+		if (interfaceTab == getCurrentTab()) return true;
 		if (useHotkey) {
-			if (interfaceTab.getHotkey() == 0) { return false; } // no hotkey for specified tab
+			if (interfaceTab.getHotkey() == 0) return false; // no hotkey for specified tab
 			methods.keyboard.pressKey((char) interfaceTab.getHotkey());
 			sleep(random(80, 200));
 			methods.keyboard.releaseKey((char) interfaceTab.getHotkey());
 		} else {
 			net.runelite.api.widgets.Widget tabWidget = methods.gui.getTab(interfaceTab);
-			if (tabWidget == null) { return false; }
+			if (tabWidget == null) return false;
 			methods.interfaces.getComponent(
 					GlobalWidgetInfo.TO_GROUP(tabWidget.getParent().getId()),
 					GlobalWidgetInfo.TO_CHILD(tabWidget.getId())).doClick();
@@ -156,7 +155,7 @@ public class Game extends MethodProvider {
 
 	/**
 	 * Gets the current run energy.
-	 *
+	 * <p>
 	 * Deprecated : use walking.getEnergy()
 	 *
 	 * @return An <code>int</code> representation of the players current energy.
@@ -171,15 +170,14 @@ public class Game extends MethodProvider {
 	 * ImprovedRewardsBox
 	 *
 	 * @return True if player is in a random
-	 * TODO: this feels broken
 	 */
 	public Boolean inRandom() {
 		for (Random random : methods.runeLite.getScriptHandler().getRandoms()) {
-			if (random.getClass().equals(new LoginBot())) {
-					//|| random.getClass().equals(new BankPins())
-					//|| random.getClass().equals(new TeleotherCloser())
-					//|| random.getClass().equals(new CloseAllInterface())
-					//|| random.getClass().equals(new ImprovedRewardsBox())) {
+			if (random.getClass().equals(LoginBot.class)) {
+				//|| random.getClass().equals(BankPins.class)
+				//|| random.getClass().equals(TeleotherCloser.class)
+				//|| random.getClass().equals(CloseAllInterface.class)
+				//|| random.getClass().equals(ImprovedRewardsBox.class)) {
 				continue;
 			} else {
 				if (random.activateCondition()) {
@@ -194,7 +192,7 @@ public class Game extends MethodProvider {
 	 * Returns the valid chat component.
 	 *
 	 * @return <code>RSWidgetChild</code> of the current valid talk interface;
-	 *         otherwise null.
+	 * otherwise null.
 	 */
 	public RSWidget getTalkInterface() {
 		for (RSWidget component : methods.interfaces.getComponent(GlobalWidgetInfo.CHATBOX_FULL_INPUT).getComponents()) {
@@ -205,15 +203,17 @@ public class Game extends MethodProvider {
 	}
 
 	/**
-	 * TODO: This is non-functional
-	 * @return	-1 as the method is non-functional
+	 * @deprecated  This is non-functional
+	 *
+	 * @return    -1 as the method is non-functional
 	 */
+	@Deprecated
 	public int getCrosshairState() {
 		return -1;
 	}
 
 	/**
-	 * Checks whether or not the logout tab is selected.
+	 * Checks whether the logout tab is selected.
 	 *
 	 * @return <code>true</code> if on the logout tab.
 	 */
@@ -269,7 +269,7 @@ public class Game extends MethodProvider {
 
 
 	/**
-	 * Determines whether or not the client is currently logged in to an
+	 * Determines whether the client is currently logged in to an
 	 * account.
 	 *
 	 * @return <code>true</code> if logged in; otherwise <code>false</code>.
@@ -279,20 +279,20 @@ public class Game extends MethodProvider {
 	}
 
 	/**
-	 * Determines whether or not the client is showing the login screen.
+	 * Determines whether the client is showing the login screen.
 	 *
 	 * @return <code>true</code> if the client is showing the login screen;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 */
 	public boolean isLoginScreen() {
 		return methods.client.getLocalPlayer() == null;
 	}
 
 	/**
-	 * Determines whether or not the welcome screen is open.
+	 * Determines whether the welcome screen is open.
 	 *
 	 * @return <code>true</code> if the client is showing the welcome screen;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 */
 	public boolean isWelcomeScreen() {
 		return methods.interfaces.getComponent(GlobalWidgetInfo.LOGIN_MOTW_TEXT)
@@ -309,7 +309,7 @@ public class Game extends MethodProvider {
 	}
 
 	/**
-	 * Gets the plane we are currently on. Typically 0 (ground level), but will
+	 * Gets the plane we are currently on. Typically, 0 (ground level), but will
 	 * increase when going up ladders. You cannot be on a negative plane. Most
 	 * dungeons/basements are on plane 0 elsewhere on the world map.
 	 *
@@ -377,8 +377,8 @@ public class Game extends MethodProvider {
 	/**
 	 * Gets a color corresponding to x and y co ordinates from the current game screen.
 	 *
-	 * @param x: The x co ordinate at which to get the color.
-	 * @param y: The y co ordinate at which to get the color.
+	 * @param x: The x co-ordinate at which to get the color.
+	 * @param y: The y co-ordinate at which to get the color.
 	 * @return Color
 	 * @see java.awt.color
 	 */

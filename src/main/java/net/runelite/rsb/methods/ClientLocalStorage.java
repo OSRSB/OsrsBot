@@ -13,7 +13,7 @@ public class ClientLocalStorage extends MethodProvider {
 	 * Gets the values of loaded VarPlayer as integer array.
 	 *
 	 * @return An <code>int</code> array representing all loaded VarPlayer values;
-	 *         otherwise <code>new int[0]</code>.
+	 * otherwise <code>new int[0]</code>.
 	 */
 	public int[] getLoadedVarpValues() {
 		int[] varpValuesArray = methods.client.getVarps();
@@ -28,7 +28,7 @@ public class ClientLocalStorage extends MethodProvider {
 	 *
 	 * @param varpIndex The VarPlayer index to return the value of.
 	 * @return <code>int</code> representing the value of the given VarPlayer index;
-	 *         otherwise <code>-1</code>.
+	 * otherwise <code>-1</code>.
 	 */
 	public int getVarpValueAt(final int varpIndex) {
 		int[] varpValuesArray = getLoadedVarpValues();

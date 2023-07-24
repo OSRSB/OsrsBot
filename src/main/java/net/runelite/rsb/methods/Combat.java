@@ -130,7 +130,7 @@ public class Combat extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether or not the auto-retaliate option is enabled.
+	 * Returns whether the auto-retaliate option is enabled.
 	 *
 	 * @return <code>true</code> if retaliate is enabled; otherwise <code>false</code>.
 	 */

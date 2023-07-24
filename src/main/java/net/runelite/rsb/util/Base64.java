@@ -592,7 +592,7 @@ public class Base64 {
 	}
 
 	/**
-	 * Returns whether or not the <code>octet</code> is in the current alphabet.
+	 * Returns whether the <code>octet</code> is in the current alphabet.
 	 * Does not allow whitespace or pad.
 	 *
 	 * @param octet The value to test
@@ -837,7 +837,7 @@ public class Base64 {
 	}
 
 	/**
-	 * Returns whether or not the <code>octet</code> is in the base 64 alphabet.
+	 * Returns whether the <code>octet</code> is in the base 64 alphabet.
 	 *
 	 * @param octet The value to test
 	 * @return <code>true</code> if the value is defined in the the base 64 alphabet, <code>false</code> otherwise.

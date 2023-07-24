@@ -82,7 +82,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	 * of milliseconds to sleep. This ensures that pausing and anti-randoms perform normally.
 	 *
 	 * @return The number of milliseconds that the manager should sleep before
-	 *         calling it again. Returning a negative number will deactivate the script.
+	 * calling it again. Returning a negative number will deactivate the script.
 	 */
 	public abstract int loop();
 
@@ -175,7 +175,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	}
 
 	/**
-	 * Returns whether or not this script is paused.
+	 * Returns whether this script is paused.
 	 *
 	 * @return <code>true</code> if paused; otherwise <code>false</code>.
 	 */
@@ -184,7 +184,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	}
 
 	/**
-	 * Returns whether or not this script has started and not stopped.
+	 * Returns whether this script has started and not stopped.
 	 *
 	 * @return <code>true</code> if running; otherwise <code>false</code>.
 	 */
@@ -193,7 +193,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 	}
 
 	/**
-	 * Returns whether or not the loop of this script is able to
+	 * Returns whether the loop of this script is able to
 	 * receive control (i.e. not paused, stopped or in random).
 	 *
 	 * @return <code>true</code> if active; otherwise <code>false</code>.
