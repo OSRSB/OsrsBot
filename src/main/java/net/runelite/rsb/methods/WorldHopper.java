@@ -1,12 +1,17 @@
 package net.runelite.rsb.methods;
 
 import net.runelite.api.GameState;
+import net.runelite.api.World;
 import net.runelite.api.WorldType;
+import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.client.callback.ClientThread;
+import net.runelite.http.api.worlds.WorldResult;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
 import net.runelite.rsb.wrappers.RSWidget;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -67,5 +72,35 @@ public class WorldHopper extends MethodProvider {
             }
         }
         return false;
+    }
+
+
+    public boolean hop(int worldID, boolean invoke) {
+        if (methods.client.getWorld() == worldID) {
+            return true;
+        }
+        if (!invoke) {
+            return hop(worldID);
+        }
+        WorldResult worldResult = methods.runeLite.worldServiceProvider.getWorlds();
+        // Don't try to hop if the world doesn't exist
+        Optional<World> world = Arrays.stream(methods.client.getWorldList()).filter((x) -> x.getId() == worldID).findFirst();
+        if (world.isPresent()) {
+            hop(world.get());
+            if (methods.game.getClientState() == GameState.LOGGED_IN && methods.client.getWorld() == worldID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void hop(World world) {
+        if (!isWorldMenuOpen()) {
+            methods.client.openWorldHopper();
+            sleepUntil(() -> isWorldMenuOpen(), 5000);
+        }
+        methods.client.hopToWorld(world);
+        sleepUntil(() -> methods.game.getClientState() == GameState.HOPPING, 2000);
+        sleepUntil(() -> methods.game.getClientState() == GameState.LOGGED_IN, 15000);
     }
 }
