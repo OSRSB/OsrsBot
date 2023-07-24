@@ -19,6 +19,7 @@ import java.util.List;
 public class RSGroundItem extends MethodProvider implements Clickable07, Positionable {
 	private final RSItem groundItem;
 	private final RSTile location;
+	private final ClickBox clickBox = new ClickBox(this);
 
 	public RSGroundItem(final MethodContext ctx, final RSTile location, final RSItem groundItem) {
 		super(ctx);
@@ -121,6 +122,6 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 		return getLocation().getClickShape();
 	}
 	public ClickBox getClickBox() {
-		return new ClickBox(this);
+		return clickBox;
 	}
 }

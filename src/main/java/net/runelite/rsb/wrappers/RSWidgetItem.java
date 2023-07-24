@@ -15,6 +15,8 @@ public class RSWidgetItem extends MethodProvider implements Clickable07 {
     private final WidgetItem item;
     private final Widget parent;
 
+    private final ClickBox clickBox = new ClickBox(this);
+
     RSWidgetItem(MethodContext ctx, WidgetItem item) {
         super(ctx);
         this.item = item;
@@ -87,7 +89,7 @@ public class RSWidgetItem extends MethodProvider implements Clickable07 {
 
     @Override
     public ClickBox getClickBox() {
-        return new ClickBox(this);
+        return clickBox;
     }
 
     /**

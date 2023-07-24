@@ -24,6 +24,8 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     private static int pathXIndex = -1;
     private static int pathYIndex = -1;
 
+    private final ClickBox clickBox = new ClickBox(this);
+
     public RSCharacter(MethodContext ctx) {
         super(ctx);
     }
@@ -300,14 +302,15 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         if (model == null) {
             return false;
         }
-        return model.getModel().isClickable();
+        return true;
+        //return model.getModel().isClickable();
     }
 
     public Shape getClickShape() {
         return getAccessor().getConvexHull();
     }
     public ClickBox getClickBox() {
-        return new ClickBox(this);
+        return clickBox;
     }
 
     public DIRECTION getDirectionFacing() {

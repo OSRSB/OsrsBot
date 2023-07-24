@@ -37,7 +37,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	private RSWidget component;
 	private RSWidgetItem item;
 	private static Field groundActionMethod;
-
+	private final ClickBox clickBox = new ClickBox(this);
 
 	public RSItem(final MethodContext ctx, final RSWidgetItem item) {
 		super(ctx);
@@ -279,6 +279,6 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 
 	@Override
 	public ClickBox getClickBox() {
-		return new ClickBox(this);
+		return clickBox;
 	}
 }
