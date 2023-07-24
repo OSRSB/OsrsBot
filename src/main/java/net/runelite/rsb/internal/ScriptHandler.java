@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.internal.listener.DebugSettingsListener;
-
 import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -30,6 +29,7 @@ public class ScriptHandler {
 		this.bot = bot;
 		debugSettingsListener = new DebugSettingsListener(bot);
 		addScriptListener(debugSettingsListener);
+
 	}
 
 	public void init() {

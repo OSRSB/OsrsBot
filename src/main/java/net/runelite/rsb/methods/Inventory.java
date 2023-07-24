@@ -5,6 +5,7 @@ import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.cache.definitions.ItemDefinition;
+import net.runelite.client.modified.RuneLite;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.enums.InterfaceTab;
@@ -81,7 +82,7 @@ public class Inventory extends MethodProvider {
 				int id = item.getID();
 				RSWidget invInterface = getInterface().getValue();
 				RSWidget comp = invInterface.getDynamicComponent(target);
-				methods.mouse.drag((int)comp.getCenter().getX(), (int)comp.getCenter().getY());
+				methods.mouse.drag((int) comp.getCenter().getX(), (int) comp.getCenter().getY());
 				sleepUntil(() -> getItemAt(target) != null && getItemAt(target).getID() == id, 1000);
 				return true;
 			}
@@ -98,7 +99,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param itemID The ID of items to destroy.
 	 * @return <code>true</code> if the items were destroyed; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean destroyItem(final int itemID) {
 		RSItem item = getItem(itemID);
@@ -122,7 +123,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param name The name of items to destroy.
 	 * @return <code>true</code> if the items were destroyed; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean destroyItem(final String name) {
 		return destroyItem(getItemID(name));
@@ -132,7 +133,7 @@ public class Inventory extends MethodProvider {
 	 * Retrieves the inventory grid as a 2D array.
 	 *
 	 * @return 2D array representing the inventory grid. Each element contains the item ID at the corresponding slot,
-	 *         or -1 if the slot is empty.
+	 * or -1 if the slot is empty.
 	 */
 	public int[][] getItemGrid() {
 		int[][] inventory = new int[7][4];
@@ -171,16 +172,14 @@ public class Inventory extends MethodProvider {
 			for (int index = 0; index < maxIndex; index++) {
 				int c = leftToRight ? index % 4 : index / 7;
 				int r = leftToRight ? index / 4 : index % 7;
-				if (c >= 0 && c < 4 && r >= 0 && r < 7) {
-					int id = inventory[r][c];
-					if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
-						boolean isInItems = false;
-						for (int i : items) {
-							isInItems |= (i == id);
-						}
-						if (!isInItems) {
-							foundDroppable |= dropItem(c, r);
-						}
+				int id = inventory[r][c];
+				if (id != -1 && id != EMPTY_SLOT_ITEM_ID) {
+					boolean isInItems = false;
+					for (int i : items) {
+						isInItems |= (i == id);
+					}
+					if (!isInItems) {
+						foundDroppable |= dropItem(c, r);
 					}
 				}
 			}
@@ -204,11 +203,11 @@ public class Inventory extends MethodProvider {
 	 * @param item   The item to check.
 	 * @param action The item menu action to check.
 	 * @return <code>true</code> if the item has the action; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean itemHasAction(final RSItem item, final String action) {
 		// Used to determine if an item is droppable/destroyable
-		if (item == null) { return false; }
+		if (item == null) return false;
 		ItemDefinition itemDef = item.getDefinition();
 		if (itemDef != null) {
 			for (String a : itemDef.getInterfaceOptions()) {
@@ -225,7 +224,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param action The item menu action to check.
 	 * @return <code>true</code> if any item has the action; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean containsItemWithAction(final String action) {
 		RSItem[] allInvItems = getItems();
@@ -301,7 +300,7 @@ public class Inventory extends MethodProvider {
 	 * @param col The column the item is in.
 	 * @param row The row the item is in.
 	 * @return <code>true</code> if we tried to drop the item,
-	 *         <code>false</code> if not (e.g., if item is undroppable)
+	 * <code>false</code> if not (e.g., if item is undroppable)
 	 */
 	public boolean dropItem(final int col, final int row) {
 		if (col < 0 || col >= 4 || row < 0 || row >= 7) {
@@ -319,11 +318,11 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains the provided item ID.
+	 * Checks whether your inventory contains the provided item ID.
 	 *
 	 * @param itemID The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains an item with the ID
-	 *         provided; otherwise <code>false</code>.
+	 * provided; otherwise <code>false</code>.
 	 * @see #containsOneOf(int...)
 	 * @see #containsAll(int...)
 	 */
@@ -332,11 +331,11 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains the provided item name.
+	 * Checks whether your inventory contains the provided item name.
 	 *
 	 * @param name The name you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains an item with the name
-	 *         provided; otherwise <code>false</code>.
+	 * provided; otherwise <code>false</code>.
 	 * @see #containsOneOf(int...)
 	 * @see #containsAll(int...)
 	 */
@@ -345,12 +344,12 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains all of the provided item
+	 * Checks whether your inventory contains all of the provided item
 	 * IDs.
 	 *
 	 * @param itemID The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains at least one of all of
-	 *         the item IDs provided; otherwise <code>false</code>.
+	 * the item IDs provided; otherwise <code>false</code>.
 	 * @see #containsOneOf(int...)
 	 */
 	public boolean containsAll(final int... itemID) {
@@ -363,12 +362,12 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains all of the provided item
+	 * Checks whether your inventory contains all of the provided item
 	 * IDs.
 	 *
 	 * @param names The item(s) you wish to evaluate.
 	 * @return <code>true</code> if your inventory contains at least one of all of
-	 *         the item IDs provided; otherwise <code>false</code>.
+	 * the item IDs provided; otherwise <code>false</code>.
 	 * @see #containsOneOf(int...)
 	 */
 	public boolean containsAll(final String... names) {
@@ -377,12 +376,12 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains at least one of the
+	 * Checks whether your inventory contains at least one of the
 	 * provided item IDs.
 	 *
 	 * @param itemID The item ID to check for.
 	 * @return <code>true</code> if inventory contains one of the specified items;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 * @see #containsAll(int...)
 	 */
 	public boolean containsOneOf(final int... itemID) {
@@ -398,12 +397,12 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory contains at least one of the
+	 * Checks whether your inventory contains at least one of the
 	 * provided item names.
 	 *
 	 * @param names The item names to check for.
 	 * @return <code>true</code> if inventory contains one of the specified items;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 * @see #containsAll(int...)
 	 */
 	public boolean containsOneOf(final String... names) {
@@ -411,30 +410,30 @@ public class Inventory extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not your inventory is full.
+	 * Checks whether your inventory is full.
 	 *
 	 * @return <code>true</code> if your inventory contains 28 items; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean isFull() {
 		return getCount() == 28;
 	}
 
 	/**
-	 * Checks whether or not your inventory is empty.
+	 * Checks whether your inventory is empty.
 	 *
 	 * @return <code>true</code> if your inventory contains 28 items; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean isEmpty() {
 		return getCount() == 0;
 	}
 
 	/**
-	 * Checks whether or not an inventory item is selected.
+	 * Checks whether an inventory item is selected.
 	 *
 	 * @return <code>true</code> if an item in your inventory is selected; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean isItemSelected() {
 		return getSelectedItemIndex() != -1;
@@ -469,12 +468,12 @@ public class Inventory extends MethodProvider {
 	 */
 	public boolean selectItem(RSItem item) {
 		final int itemID = item.getID();
-		if (itemID == -1 || itemID == EMPTY_SLOT_ITEM_ID) { return false; }
+		if (itemID == -1 || itemID == EMPTY_SLOT_ITEM_ID) return false;
 		RSItem selItem = getSelectedItem();
 		if (selItem != null && selItem.getID() == itemID) {
 			return true;
 		}
-		if (open() && !item.doAction("Use")) { return false; }
+		if (open() && !item.doAction("Use")) return false;
 		/*
 		for (int c = 0; c < 5 && getSelectedItem() == null; c++) {
 			sleep(random(40, 60));
@@ -491,7 +490,7 @@ public class Inventory extends MethodProvider {
 	 * @param item       The item to use on another item.
 	 * @param targetItem The item you want the first parameter to be used on.
 	 * @return <code>true</code> if the "use" action had been used on both items;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 */
 	public boolean useItem(final RSItem item, final RSItem targetItem) {
 		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
@@ -505,9 +504,9 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param itemID   The first item ID to use.
 	 * @param targetID The item ID you want the first parameter to be used on.
-	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
+	 * @param getLast  Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the first item has been "used" on the other;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 */
 	public boolean useItem(final int itemID, final int targetID, final boolean... getLast) {
 		RSItem item;
@@ -515,7 +514,7 @@ public class Inventory extends MethodProvider {
 		if (getLast != null && getLast.length > 0 && getLast[0]) {
 			item = getLastItem(itemID);
 			target = getLastItem(targetID);
-		}else{
+		} else {
 			item = getItem(itemID);
 			target = getItem(targetID);
 		}
@@ -525,10 +524,10 @@ public class Inventory extends MethodProvider {
 	/**
 	 * Uses two items together.
 	 *
-	 * @param name   The first item to use.
+	 * @param name       The first item to use.
 	 * @param targetName The item name you want the first parameter to be used on.
 	 * @return <code>true</code> if the first item has been "used" on the other;
-	 *         otherwise <code>false</code>.
+	 * otherwise <code>false</code>.
 	 */
 	public boolean useItem(final String name, final String targetName) {
 		return useItem(getItemID(name), getItemID(targetName));
@@ -540,7 +539,7 @@ public class Inventory extends MethodProvider {
 	 * @param item         The item to use on another item.
 	 * @param targetObject The RSObject you want the first parameter to be used on.
 	 * @return <code>true</code> if the "use" action had been used on both the
-	 *         RSItem and RSObject; otherwise <code>false</code>.
+	 * RSItem and RSObject; otherwise <code>false</code>.
 	 */
 	public boolean useItem(RSItem item, RSObject targetObject) {
 		if (methods.game.getCurrentTab() != InterfaceTab.INVENTORY) {
@@ -556,13 +555,13 @@ public class Inventory extends MethodProvider {
 	 * @param object  The RSObject you want the item to be used on.
 	 * @param getLast Optional: <code>true</code> get the last item in the inventory instead of the first one
 	 * @return <code>true</code> if the "use" action had been used on both the
-	 *         RSItem and RSObject; otherwise <code>false</code>.
+	 * RSItem and RSObject; otherwise <code>false</code>.
 	 */
 	public boolean useItem(final int itemID, final RSObject object, final boolean... getLast) {
 		RSItem item;
 		if (getLast != null && getLast.length > 0 && getLast[0]) {
 			item = getLastItem(itemID);
-		}else{
+		} else {
 			item = getItem(itemID);
 		}
 		return item != null && useItem(item, object);
@@ -571,10 +570,10 @@ public class Inventory extends MethodProvider {
 	/**
 	 * Uses an item on an object.
 	 *
-	 * @param name The item name to use on the object.
+	 * @param name   The item name to use on the object.
 	 * @param object The RSObject you want the item to be used on.
 	 * @return <code>true</code> if the "use" action had been used on both the
-	 *         RSItem and RSObject; otherwise <code>false</code>.
+	 * RSItem and RSObject; otherwise <code>false</code>.
 	 */
 	public boolean useItem(final String name, final RSObject object) {
 		return useItem(getItemID(name), object);
@@ -604,7 +603,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param inventoryPoint The inventory point to be randomized.
 	 * @return A randomized <code>Point</code> from the center of the given
-	 *         <code>Point</code>.
+	 * <code>Point</code>.
 	 */
 	public Point randomizeItemPoint(final Point inventoryPoint) {
 		return new Point(inventoryPoint.x + random(-10, 10), inventoryPoint.y
@@ -615,7 +614,7 @@ public class Inventory extends MethodProvider {
 	 * Gets the selected item name.
 	 *
 	 * @return The name of the current selected item, or null if none is
-	 *         selected.
+	 * selected.
 	 */
 	public String getSelectedItemName() {
 		RSWidget invInterface = getInterface().getValue();
@@ -659,9 +658,11 @@ public class Inventory extends MethodProvider {
 		}
 		class Selector {
 			int selected = -1;
+
 			public void setSelected(int selection) {
 				selected = selection;
 			}
+
 			public int getSelected() {
 				return selected;
 			}
@@ -670,7 +671,7 @@ public class Inventory extends MethodProvider {
 		Consumer<Image> imageCallback = (img) ->
 		{ // This callback is on the game thread, move to executor thread
 			{
-				methods.runeLite.getInjector().getInstance(ScheduledExecutorService.class).submit(()-> {
+				RuneLite.getInjector().getInstance(ScheduledExecutorService.class).submit(() -> {
 					selector.setSelected(getSelected(img, comps));
 					synchronized (selector) {
 						selector.notify();
@@ -678,7 +679,7 @@ public class Inventory extends MethodProvider {
 				});
 			}
 		};
-		methods.runeLite.getInjector().getInstance(DrawManager.class).requestNextFrameListener(imageCallback);
+		RuneLite.getInjector().getInstance(DrawManager.class).requestNextFrameListener(imageCallback);
 		synchronized (selector) {
 			try {
 				selector.wait();
@@ -694,7 +695,7 @@ public class Inventory extends MethodProvider {
 	 * which would indicate that the item is selected (No items use 255, 255, 255)
 	 * If it finds any the isSelected value is updated to true
 	 *
-	 * @param img the client image
+	 * @param img   the client image
 	 * @param comps the item to check for if it is selected
 	 * @return the index of the item selected; otherwise -1
 	 */
@@ -781,7 +782,7 @@ public class Inventory extends MethodProvider {
 	 * Gets all the items in the inventory.
 	 *
 	 * @return <code>RSItem</code> array of the current inventory items or new
-	 *         <code>RSItem[0]</code>.
+	 * <code>RSItem[0]</code>.
 	 */
 	public RSItem[] getItems() {
 		RSWidget invInterface = getInterface().getValue();
@@ -791,10 +792,10 @@ public class Inventory extends MethodProvider {
 			return new RSItem[]{};
 		}
 		Item[] cachedItems = container.getItems();
-		List<RSItem> items = new ArrayList<RSItem>();
+		List<RSItem> items = new ArrayList<>();
 		for (int i = 0; i < cachedItems.length; i++) {
 			if (cachedItems[i].getId() != -1) {
-				items.add(new RSItem (methods, invItems[i], cachedItems[i]));
+				items.add(new RSItem(methods, invItems[i], cachedItems[i]));
 			}
 		}
 		return items.toArray(new RSItem[0]);
@@ -896,6 +897,7 @@ public class Inventory extends MethodProvider {
 	public RSItem getItem(final String... names) {
 		return getItem(getItemIDs(names));
 	}
+
 	public RSItem[] find(final Predicate<RSItem> filter) {
 		RSItem[] rsItems = getItems();
 		RSItem[] filterItems = new RSItem[]{};
@@ -904,7 +906,7 @@ public class Inventory extends MethodProvider {
 				continue;
 			}
 			if (filter.test(item)) {
-				RSItem[] addItems = new RSItem[filterItems.length+1];
+				RSItem[] addItems = new RSItem[filterItems.length + 1];
 				addItems[filterItems.length] = item;
 				filterItems = addItems;
 			}
@@ -970,7 +972,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param includeStacks <code>true</code> to count the stack sizes of each item;
 	 *                      <code>false</code> to count a stack as a single item.
-	 * @param names           The item names to exclude.
+	 * @param names         The item names to exclude.
 	 * @return The count.
 	 */
 	public int getCountExcept(final boolean includeStacks, final String... names) {
@@ -1029,7 +1031,7 @@ public class Inventory extends MethodProvider {
 	 *
 	 * @param includeStacks <code>true</code> to count the stack sizes of each item;
 	 *                      <code>false</code> to count a stack as a single item.
-	 * @param names       the item names to include
+	 * @param names         the item names to include
 	 * @return The count.
 	 */
 	public int getCount(final boolean includeStacks, final String... names) {

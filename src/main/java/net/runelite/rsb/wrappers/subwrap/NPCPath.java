@@ -11,12 +11,13 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.text.Position;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
 public class NPCPath extends MethodProvider {
-    public RSNPC npc;
+    public RSNPC[] npcs;
     static final Map<Pair<Integer, Integer>, Integer> toDirectionMap = Map.of(
             Pair.of(0, 1), RSLocalPath.WALL_NORTH,
             Pair.of(0, -1), RSLocalPath.WALL_SOUTH,
@@ -39,13 +40,18 @@ public class NPCPath extends MethodProvider {
     static final int horizontalDirections = RSLocalPath.WALL_EAST | RSLocalPath.WALL_WEST;
     static final int verticalDirections = RSLocalPath.WALL_NORTH | RSLocalPath.WALL_SOUTH;
 
-    public NPCPath(MethodContext ctx, RSNPC npc) {
+    public NPCPath(MethodContext ctx, RSNPC... npcs) {
         super(ctx);
-        this.npc = npc;
+        this.npcs = npcs;
     }
 
-    public RSTile getNearestSafespotWithLOS(Positionable end, int limit) {
-        return getNearestSafespot(end, limit, (x) -> npc.hasLineOfSight(x));
+    public NPCPath setNPCS(RSNPC... npcs) {
+        this.npcs = npcs;
+        return this;
+    }
+
+    public RSTile getNearestSafespotWithLOS(Positionable end, int limit, int weaponRange) {
+        return getNearestSafespot(end, limit, (x) -> Arrays.stream(npcs).anyMatch((npc) -> npc.hasLineOfSight(x) && x.distanceTo(npc) <= weaponRange));
     }
 
     public RSTile getNearestSafespot(Positionable end, int limit, Predicate<RSTile> predicate){
@@ -79,21 +85,22 @@ public class NPCPath extends MethodProvider {
         return getNearestSafespot(end, limit, (x) -> true);
     }
 
-    public boolean isSafeSpotted(RSTile start, RSTile end) {
-        RSTile[] path = getPath(start, end);
-        RSTile nearestTile = npc.getNearestTile(path[path.length - 1], end);
-        return nearestTile.getLocation().distanceToDouble(end) > 1.1;
-    }
-
     public boolean isSafeSpotted(Positionable end) {
-        return isSafeSpotted(npc.getLocation(), end.getLocation());
+        for (RSNPC npc : npcs) {
+            RSTile[] path = getPath(npc, npc.getLocation(), end.getLocation());
+            RSTile nearestTile = npc.getNearestTile(path[path.length - 1], end);
+            if (nearestTile.getLocation().distanceToDouble(end) < 1.1) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public RSTile[] getPath(RSTile start, RSTile end) {
+    static public RSTile[] getPath(RSNPC npc, RSTile start, RSTile end) {
         List<RSTile> returnList = new ArrayList<>();
         returnList.add(start);
         while (start.getX() != end.getX() || start.getY() != end.getY()) {
-            start = getNextTile(start , end);
+            start = getNextTile(npc, start , end);
             if (start.getWorldLocation().getX() == -1) {
                 break;
             }
@@ -102,12 +109,12 @@ public class NPCPath extends MethodProvider {
         return returnList.toArray(new RSTile[0]);
     }
 
-    public RSTile[] getPath(Positionable end) {
-        return getPath(npc.getLocation(), end.getLocation());
+    static public RSTile[] getPath(RSNPC npc, Positionable end) {
+        return getPath(npc, npc.getLocation(), end.getLocation());
     }
 
 
-    public RSTile getNextTile(RSTile start, RSTile end) {
+    static public RSTile getNextTile(RSNPC npc, RSTile start, RSTile end) {
         WorldArea area = npc.getAccessor().getWorldArea();
         int[][] flags = methods.client.getCollisionMaps()[methods.game.getPlane()].getFlags();
 

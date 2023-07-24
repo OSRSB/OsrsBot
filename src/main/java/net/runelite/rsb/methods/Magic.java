@@ -23,41 +23,40 @@ import java.util.regex.Pattern;
  * Magic tab and spell related operations.
  *
  * @author Gigiaj
- *
  */
 public class Magic extends MethodProvider {
 
-    Magic(final MethodContext ctx) {
-        super(ctx);
-    }
+	Magic(final MethodContext ctx) {
+		super(ctx);
+	}
 
-    /**
-     * Checks whether or not a spell is selected.
-     *
-     * @return <code>true</code> if a spell is selected; otherwise <code>false</code>.
-     */
-    public boolean isSpellSelected() {
-        RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
-        for (RSWidget child : widget.getComponents()) {
-            if (child.isVisible() || child.isSelfVisible()) {
-                //Check api.widget to see what border is what or just validate that when one is selected
-                // what border type it has at the time
-                if (child.getBorderThickness() == 2) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	/**
+	 * Checks whether a spell is selected.
+	 *
+	 * @return <code>true</code> if a spell is selected; otherwise <code>false</code>.
+	 */
+	public boolean isSpellSelected() {
+		RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
+		for (RSWidget child : widget.getComponents()) {
+			if (child.isVisible() || child.isSelfVisible()) {
+				//Check api.widget to see what border is what or just validate that when one is selected
+				// what border type it has at the time
+				if (child.getBorderThickness() == 2) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    /**
-     * Determines whether a spell is currently set to autocast.
-     *
-     * @return <code>true</code> if autocasting; otherwise <code>false</code>.
-     */
-    public boolean isAutoCasting() {
-        return methods.combat.getFightMode() == VarpValues.COMBAT_STYLE_AUTOCAST.getValue();
-    }
+	/**
+	 * Determines whether a spell is currently set to autocast.
+	 *
+	 * @return <code>true</code> if autocasting; otherwise <code>false</code>.
+	 */
+	public boolean isAutoCasting() {
+		return methods.combat.getFightMode() == VarpValues.COMBAT_STYLE_AUTOCAST.getValue();
+	}
 
     /**
      * Clicks a specified spell, opens magic tab if not open and uses interface
@@ -156,20 +155,20 @@ public class Magic extends MethodProvider {
         return false;
     }
 
-    /**
-     * Gets the open magic book interface.
-     *
-     * @return The current magic RSWidget.
-     */
-    public RSWidget getInterface() {
-        RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
-        if (widget.isVisible()) {
-            return widget;
-        }
-        return null;
-    }
+	/**
+	 * Gets the open magic book interface.
+	 *
+	 * @return The current magic RSWidget.
+	 */
+	public RSWidget getInterface() {
+		RSWidget widget = methods.interfaces.getComponent(GlobalWidgetInfo.MAGIC_SPELL_LIST);
+		if (widget.isVisible()) {
+			return widget;
+		}
+		return null;
+	}
 
-    /**
+   /**
      * Gets the current spell book.
      *
      * @return The Book enum of your current spell book.
