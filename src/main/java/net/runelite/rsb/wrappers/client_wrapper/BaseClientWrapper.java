@@ -624,6 +624,9 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
+
+    @Override
     public HashTable<IntegerNode> getWidgetFlags() {
         return wrappedClient.getWidgetFlags();
     }
