@@ -150,6 +150,10 @@ public class Tiles extends MethodProvider {
 		return close;
 	}
 
+	public Tile getTile(MethodContext ctx, WorldPoint worldPoint) {
+		return getTile(ctx, worldPoint.getX(), worldPoint.getY(), worldPoint.getPlane());
+	}
+
 	public Tile getTile(MethodContext ctx, int x, int y, int plane) {
 		Client client = ctx.client;
 		int correctedX = x < Constants.SCENE_SIZE ? x + client.getBaseX() : x;
