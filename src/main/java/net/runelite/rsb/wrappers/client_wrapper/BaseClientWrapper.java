@@ -692,14 +692,18 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public Object getDBTableField(int rowID, int column, int tupleIndex, int fieldIndex) {
-        return wrappedClient.getDBTableField(rowID, column, tupleIndex, fieldIndex);
+    public Object[] getDBTableField(int rowID, int column, int tupleIndex) {
+        return wrappedClient.getDBTableField(rowID, column, tupleIndex);
     }
 
     @Override
     public DBRowConfig getDBRowConfig(int rowID) {
         return wrappedClient.getDBRowConfig(rowID);
     }
+
+    @Override
+    public List<Integer> getDBRowsByValue(int table, int column, int tupleIndex, Object value) { return wrappedClient.getDBRowsByValue(table, column, tupleIndex, value); }
+
 
     public MapElementConfig getMapElementConfig(int id) {
         return wrappedClient.getMapElementConfig(id);
