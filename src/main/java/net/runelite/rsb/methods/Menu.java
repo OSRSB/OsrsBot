@@ -274,7 +274,7 @@ public class Menu extends MethodProvider {
 		String[] targets = new String[entries.length];
 		for (int i = 0; i < entries.length; i++) {
 			if (entries[i] != null) {
-				targets[i] = entries[i].getTarget().replaceAll("<.*?>", "");
+				targets[i] = entries[i].getTarget().replaceAll("<.*?>", "").replaceAll("\\W", " ");
 			} else {
 				targets[i] = "";
 			}
