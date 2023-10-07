@@ -178,6 +178,16 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public WidgetNode openInterface(int componentId, int interfaceId, int modalMode) {
+        return convertResult(super.openInterface(componentId, interfaceId, modalMode));
+    }
+
+    @Override
+    public void setExpandedMapLoading(int chunks) {
+        super.setExpandedMapLoading(chunks);
+    }
+
+    @Override
     public Rasterizer getRasterizer() {
         return null;
     }
@@ -202,6 +212,14 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public CollisionData[] getCollisionMaps() { // tested, causes freezes without runOnClientThread
         return runOnClientThread(super::getCollisionMaps);
+    }
+
+    @Override
+    public void setGpuFlags(int gpuFlags) { super.setGpuFlags(gpuFlags); }
+
+    @Override
+    public int getExpandedMapLoading() {
+        return super.getExpandedMapLoading();
     }
 
     private class WidgetWrapper extends BaseWidgetWrapper {
@@ -480,5 +498,6 @@ public class RSClient extends BaseClientWrapper {
         public Widget setDragParent(Widget dragParent) {
             return convertResult(super.setDragParent(dragParent));
         }
+
     }
 }

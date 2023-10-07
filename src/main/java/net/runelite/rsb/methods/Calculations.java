@@ -6,6 +6,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Point;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
+import net.runelite.api.coords.WorldArea;
 
 import java.awt.*;
 
@@ -483,11 +484,17 @@ public class Calculations extends MethodProvider {
 	}
 
 	public boolean hasLineOfSight(RSTile start, RSTile end) {
-		return start.getTile(methods).hasLineOfSightTo(end.getTile(methods));
+		WorldArea startArea = start.getTile(methods).getWorldLocation().toWorldArea();
+		WorldArea endArea = end.getTile(methods).getWorldLocation().toWorldArea();
+		return startArea.hasLineOfSightTo(methods.client.wrappedClient, endArea);
 	}
 	public boolean hasLineOfSight(RSTile end) {
-		return methods.players.getMyPlayer().getLocation().getTile(methods).hasLineOfSightTo(end.getTile(methods));
+		WorldArea startArea = methods.players.getMyPlayer().getLocation().getTile(methods).getWorldLocation().toWorldArea();
+		WorldArea endArea = end.getTile(methods).getWorldLocation().toWorldArea();
+		return startArea.hasLineOfSightTo(methods.client.wrappedClient, endArea);
 	}
+
+
 
 	static class Render {
 		float absoluteX1 = 0, absoluteX2 = 0;

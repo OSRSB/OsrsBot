@@ -624,6 +624,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public WidgetNode openInterface(int componentId, int interfaceId, int modalMode) {
+        return wrappedClient.openInterface(componentId, interfaceId, modalMode);
+    }
+
+    @Override
     public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
 
     @Override
@@ -1244,8 +1249,8 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setGpu(boolean gpu) {
-        wrappedClient.setGpu(gpu);
+    public void setGpuFlags(int gpuFlags) {
+        wrappedClient.setGpuFlags(gpuFlags);
     }
 
     @Override
@@ -1284,9 +1289,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setRenderArea(boolean[][] renderArea) {
-        wrappedClient.setRenderArea(renderArea);
-    }
+    public void setExpandedMapLoading(int chunks) {
+        wrappedClient.setExpandedMapLoading(chunks);
+    };
+
+
 
     @Override
     public Rasterizer getRasterizer() {
@@ -1525,5 +1532,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public WorldMap getWorldMap() {
         return wrappedClient.getWorldMap();
+    }
+
+    @Override
+    public int getExpandedMapLoading() {
+        return wrappedClient.getExpandedMapLoading();
     }
 }

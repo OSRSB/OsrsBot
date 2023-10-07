@@ -44,6 +44,7 @@ import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.client.modified.RuneLite;
+import net.runelite.client.util.LinkBrowser;
 
 /**
  * This class contains field required for mixins and runelite hooks to work.
@@ -567,5 +568,11 @@ public class Hooks implements Callbacks
     @Override
     public void error(String message, Throwable reason) {
         log.error(message, reason);
+    }
+
+    @Override
+    public void openUrl(String url)
+    {
+        LinkBrowser.browse(url);
     }
 }
