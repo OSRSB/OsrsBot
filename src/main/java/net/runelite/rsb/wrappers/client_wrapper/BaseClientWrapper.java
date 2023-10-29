@@ -1244,8 +1244,8 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setGpu(boolean gpu) {
-        wrappedClient.setGpu(gpu);
+    public void setGpuFlags(int gpuflags) {
+        wrappedClient.setGpuFlags(gpuflags);
     }
 
     @Override
