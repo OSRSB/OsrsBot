@@ -13,6 +13,7 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.api.worldmap.WorldMap;
 
@@ -623,6 +624,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         wrappedClient.queueChangedVarp(varp);
     }
 
+    @Override
+    public WidgetNode openInterface(int componentId, int interfaceId, int modalNode){
+        return wrappedClient.openInterface(componentId, interfaceId, modalNode);
+    }
     @Override
     public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
 
