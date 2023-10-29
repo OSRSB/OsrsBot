@@ -1249,6 +1249,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public int getExpandedMapLoading(){
+        return wrappedClient.getExpandedMapLoading();
+    }
+
+    @Override
     public int get3dZoom() {
         return wrappedClient.get3dZoom();
     }
