@@ -1284,11 +1284,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setRenderArea(boolean[][] renderArea) {
-        wrappedClient.setRenderArea(renderArea);
-    }
-
-    @Override
     public Rasterizer getRasterizer() {
         return wrappedClient.getRasterizer();
     }
