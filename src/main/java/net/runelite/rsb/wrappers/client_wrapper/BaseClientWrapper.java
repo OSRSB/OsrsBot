@@ -171,20 +171,34 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public int getCameraX() {
         return wrappedClient.getCameraX();
     }
+    public double getCameraFpX() {
+        return wrappedClient.getCameraFpX();
+    }
 
     @Override
     public int getCameraY() {
         return wrappedClient.getCameraY();
     }
 
+    public double getCameraFpY() {
+        return wrappedClient.getCameraFpY();
+    }
     @Override
     public int getCameraZ() {
         return wrappedClient.getCameraZ();
     }
 
+    public double getCameraFpZ() {
+        return wrappedClient.getCameraFpZ();
+    }
+
     @Override
     public int getCameraPitch() {
         return wrappedClient.getCameraPitch();
+    }
+
+    public double getCameraFpPitch() {
+        return wrappedClient.getCameraFpPitch();
     }
 
     @Override
@@ -194,6 +208,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
+    }
+
+    @Override
+    public double getCameraFpYaw() {
+        return wrappedClient.getCameraFpYaw();
     }
 
     @Override
