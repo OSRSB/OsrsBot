@@ -1249,6 +1249,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void setExpandedMapLoading(int chunks){
+        wrappedClient.setExpandedMapLoading(chunks);
+    }
+    @Override
     public int getExpandedMapLoading(){
         return wrappedClient.getExpandedMapLoading();
     }
