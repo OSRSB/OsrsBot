@@ -4,6 +4,8 @@ import com.github.joonasvali.naturalmouse.api.MouseMotionFactory;
 import com.github.joonasvali.naturalmouse.api.MouseMotionObserver;
 import com.github.joonasvali.naturalmouse.support.*;
 import com.github.joonasvali.naturalmouse.util.FactoryTemplates;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.internal.naturalmouse.RSBSystemCalls;
 import net.runelite.rsb.util.Timer;
@@ -268,6 +270,8 @@ public class MouseHandler {
 
 	private final InputManager inputManager;
 	private MouseMotionNature nature;
+	@Getter
+	@Setter
 	private MouseMotionFactory motionFactory;
 
 	private final Random random = new Random();
