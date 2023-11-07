@@ -16,6 +16,7 @@ import java.awt.event.*;
 public class InputManager {
 
 	private final java.util.Random random = new java.util.Random();
+	@Getter
 	private final MouseHandler mouseHandler = new MouseHandler(this);
 	private final BotLite bot;
 	@Getter
