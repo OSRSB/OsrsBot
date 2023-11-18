@@ -1369,6 +1369,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public NodeCache getObjectCompositionCache() {
         return wrappedClient.getObjectCompositionCache();
     }
+    @Override
+    public NodeCache getAnimationCache() {
+        return wrappedClient.getAnimationCache();
+    }
 
     @Override
     public SpritePixels[] getCrossSprites() {
