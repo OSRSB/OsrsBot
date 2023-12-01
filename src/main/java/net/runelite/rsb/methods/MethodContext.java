@@ -205,6 +205,7 @@ public class MethodContext {
 	public final ChooseOption chooseOption = new ChooseOption(this);
 
 	public final NPCChat npcChat = new NPCChat(this);
+	public final Chat chat = new Chat(this);
 
 	/**
 	 * Creates a method context for this client
