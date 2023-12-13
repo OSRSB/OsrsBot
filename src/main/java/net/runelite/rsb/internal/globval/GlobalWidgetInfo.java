@@ -61,6 +61,7 @@ public enum GlobalWidgetInfo {
      */
     CHATBOX_MESSAGES(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.MESSAGES_CONTAINER),
     CHATBOX_FULL_INPUT(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.FULL_INPUT),
+    CHATBOX_MESSAGE_LINES(WidgetIndices.ChatBox.GROUP_INDEX, WidgetIndices.ChatBox.MESSAGE_LINES_CONTAINER),
     // [CHAT
 
     /**

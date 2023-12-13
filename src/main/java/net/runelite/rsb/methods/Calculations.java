@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Point;
+import net.runelite.api.coords.WorldArea;
 import net.runelite.rsb.wrappers.common.Positionable;
 import net.runelite.rsb.wrappers.RSTile;
 
@@ -482,11 +483,11 @@ public class Calculations extends MethodProvider {
 		return new java.awt.Point(point.getX(), point.getY());
 	}
 
-	public boolean hasLineOfSight(RSTile start, RSTile end) {
-		return start.getTile(methods).hasLineOfSightTo(end.getTile(methods));
+	public boolean hasLineOfSight(WorldArea start, WorldArea end) {
+		return start.hasLineOfSightTo(methods.client, end);
 	}
-	public boolean hasLineOfSight(RSTile end) {
-		return methods.players.getMyPlayer().getLocation().getTile(methods).hasLineOfSightTo(end.getTile(methods));
+	public boolean hasLineOfSight(WorldArea end) {
+		return methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea().hasLineOfSightTo(methods.client, end);
 	}
 
 	static class Render {

@@ -1,5 +1,6 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.*;
 import net.runelite.rsb.wrappers.subwrap.ChooseOption;
 import net.runelite.rsb.wrappers.subwrap.NPCChat;
@@ -143,7 +144,10 @@ public class Methods {
 	 *  The singleton of NPCChat
 	 */
 	protected NPCChat npcChat;
-
+	/**
+	 * The singleton of Chat
+	 */
+	protected Chat chat;
 	/**
 	 * For internal use only: initializes the method providers.
 	 *
@@ -181,6 +185,7 @@ public class Methods {
 		this.worldHopper = ctx.worldHopper;
 		this.chooseOption = ctx.chooseOption;
 		this.npcChat = ctx.npcChat;
+		this.chat = ctx.chat;
 	}
 
 	/**

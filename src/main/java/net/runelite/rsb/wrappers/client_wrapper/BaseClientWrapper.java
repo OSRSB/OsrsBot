@@ -13,6 +13,7 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.api.worldmap.WorldMap;
 
@@ -170,20 +171,34 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public int getCameraX() {
         return wrappedClient.getCameraX();
     }
+    public double getCameraFpX() {
+        return wrappedClient.getCameraFpX();
+    }
 
     @Override
     public int getCameraY() {
         return wrappedClient.getCameraY();
     }
 
+    public double getCameraFpY() {
+        return wrappedClient.getCameraFpY();
+    }
     @Override
     public int getCameraZ() {
         return wrappedClient.getCameraZ();
     }
 
+    public double getCameraFpZ() {
+        return wrappedClient.getCameraFpZ();
+    }
+
     @Override
     public int getCameraPitch() {
         return wrappedClient.getCameraPitch();
+    }
+
+    public double getCameraFpPitch() {
+        return wrappedClient.getCameraFpPitch();
     }
 
     @Override
@@ -193,6 +208,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
+    }
+
+    @Override
+    public double getCameraFpYaw() {
+        return wrappedClient.getCameraFpYaw();
     }
 
     @Override
@@ -623,6 +643,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         wrappedClient.queueChangedVarp(varp);
     }
 
+    @Override
+    public WidgetNode openInterface(int componentId, int interfaceId, int modalNode){
+        return wrappedClient.openInterface(componentId, interfaceId, modalNode);
+    }
     @Override
     public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
 
@@ -1244,8 +1268,17 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setGpu(boolean gpu) {
-        wrappedClient.setGpu(gpu);
+    public void setGpuFlags(int gpuflags) {
+        wrappedClient.setGpuFlags(gpuflags);
+    }
+
+    @Override
+    public void setExpandedMapLoading(int chunks){
+        wrappedClient.setExpandedMapLoading(chunks);
+    }
+    @Override
+    public int getExpandedMapLoading(){
+        return wrappedClient.getExpandedMapLoading();
     }
 
     @Override
@@ -1281,11 +1314,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public TextureProvider getTextureProvider() {
         return wrappedClient.getTextureProvider();
-    }
-
-    @Override
-    public void setRenderArea(boolean[][] renderArea) {
-        wrappedClient.setRenderArea(renderArea);
     }
 
     @Override
@@ -1340,6 +1368,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public NodeCache getObjectCompositionCache() {
         return wrappedClient.getObjectCompositionCache();
+    }
+    @Override
+    public NodeCache getAnimationCache() {
+        return wrappedClient.getAnimationCache();
     }
 
     @Override

@@ -52,7 +52,7 @@ import net.runelite.client.modified.RuneLite;
  */
 @Singleton
 @Slf4j
-public class Hooks implements Callbacks
+public  class Hooks implements Callbacks
 {
     private static final long CHECK = RSTimeUnit.GAME_TICKS.getDuration().toNanos(); // ns - how often to run checks
 
@@ -567,5 +567,10 @@ public class Hooks implements Callbacks
     @Override
     public void error(String message, Throwable reason) {
         log.error(message, reason);
+    }
+
+    @Override
+    public void openUrl(String url) {
+
     }
 }

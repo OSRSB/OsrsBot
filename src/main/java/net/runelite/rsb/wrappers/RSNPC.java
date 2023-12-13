@@ -145,10 +145,10 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
      * @return
      */
     public boolean hasLineOfSight(Positionable from) {
-        return methods.calc.hasLineOfSight(getNearestTile(from), from.getLocation());
+        return methods.calc.hasLineOfSight(getNearestTile(from).getWorldLocation().toWorldArea(), from.getLocation().getWorldLocation().toWorldArea());
     }
 
     public boolean hasLineOfSight() {
-        return methods.calc.hasLineOfSight(getNearestTile(methods.players.getMyPlayer()), methods.players.getMyPlayer().getLocation());
+        return methods.calc.hasLineOfSight(getNearestTile(methods.players.getMyPlayer()).getWorldLocation().toWorldArea(), methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea());
     }
 }
