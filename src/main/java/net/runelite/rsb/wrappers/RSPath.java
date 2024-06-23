@@ -34,7 +34,7 @@ public abstract class RSPath extends MethodProvider {
 	 *
 	 * @param options Walking style options.
 	 * @return <code>true</code> if this path is currently
-	 *         valid for the player; otherwise <code>false</code>.
+	 * valid for the player; otherwise <code>false</code>.
 	 */
 	public abstract boolean traverse(EnumSet<TraversalOption> options);
 
@@ -43,7 +43,7 @@ public abstract class RSPath extends MethodProvider {
 	 * Specifies only TraversalOption.SPACE_ACTIONS.
 	 *
 	 * @return <code>true</code> if this path is currently
-	 *         valid for the player; otherwise <code>false</code>.
+	 * valid for the player; otherwise <code>false</code>.
 	 * @see #traverse(EnumSet)
 	 */
 	public boolean traverse() {
@@ -53,13 +53,13 @@ public abstract class RSPath extends MethodProvider {
 	}
 
 	/**
-	 * Checks whether or not this path can be traversed
+	 * Checks whether this path can be traversed
 	 * by the player. This will be the case provided
 	 * that the player near to one of its vertices, but
 	 * not already standing on the end vertex.
 	 *
 	 * @return <code>true</code> if the player can walk
-	 *         along this path; otherwise <code>false</code>.
+	 * along this path; otherwise <code>false</code>.
 	 */
 	public abstract boolean isValid();
 

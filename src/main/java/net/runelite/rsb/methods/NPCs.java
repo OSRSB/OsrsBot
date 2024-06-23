@@ -1,6 +1,7 @@
 package net.runelite.rsb.methods;
 
 import net.runelite.api.NPC;
+import net.runelite.rsb.query.RSNPCQueryBuilder;
 import net.runelite.rsb.wrappers.RSNPC;
 
 import java.util.HashSet;
@@ -26,6 +27,10 @@ public class NPCs extends MethodProvider {
             return true;
         }
     };
+
+    public RSNPCQueryBuilder query() {
+        return new RSNPCQueryBuilder();
+    }
 
     /**
      * Returns an array of all loaded RSNPCs.

@@ -2,6 +2,7 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.Player;
 import net.runelite.rsb.internal.wrappers.Filter;
+import net.runelite.rsb.query.RSPlayerQueryBuilder;
 import net.runelite.rsb.wrappers.RSPlayer;
 
 import java.util.HashSet;
@@ -24,6 +25,10 @@ public class Players extends MethodProvider {
 			return true;
 		}
 	};
+
+	public RSPlayerQueryBuilder query() {
+		return new RSPlayerQueryBuilder();
+	}
 
 	/**
 	 * Returns an <code>RSPlayer</code> object representing the current player.

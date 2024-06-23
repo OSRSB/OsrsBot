@@ -5,6 +5,7 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.client.callback.ClientThread;
 
 import javax.annotation.Nullable;
@@ -124,10 +125,9 @@ public class RSClient extends BaseClientWrapper {
     public Widget getWidget(int packedID) { // tested, no need to runOnClientThread
         return convertResult(super.getWidget(packedID));
     }
-
     @Override
-    public int getVarpValue(VarPlayer varPlayer) {
-        return convertResult(super.getVarpValue(varPlayer));
+    public MapElementConfig getMapElementConfig(int id) {
+        return convertResult(super.getMapElementConfig(id));
     }
 
     @Override
@@ -142,15 +142,25 @@ public class RSClient extends BaseClientWrapper {
 
     @Override
     @Deprecated
-    public Widget getIf1DraggedWidget() {
-        return convertResult(super.getIf1DraggedWidget());
+    public RenderOverview getRenderOverview() {
+        return null;
     }
+
+    @Override
+    public void setHintArrow(LocalPoint point) {
+        super.setHintArrow(point);
+    }
+    @Override
+    public boolean isWidgetSelected() {return false;}
 
     @Override
     @Nullable
     public Widget getSelectedWidget() {
         return convertResult(super.getSelectedWidget());
     }
+
+    @Override
+    public void setWidgetSelected(boolean selected) {}
 
     @Override
     public void setIdleTimeout(int ticks) {
@@ -160,6 +170,16 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public int getIdleTimeout() {
         return convertResult(super.getIdleTimeout());
+    }
+
+    @Override
+    public void setMinimapTileDrawer(TileFunction drawTile) {
+
+    }
+
+    @Override
+    public Rasterizer getRasterizer() {
+        return null;
     }
 
     @Nullable

@@ -1,6 +1,10 @@
 package net.runelite.rsb.internal;
 
+import clojure.lang.IFn;
+import lombok.Getter;
+import lombok.Setter;
 import net.runelite.rsb.botLauncher.BotLite;
+import net.runelite.rsb.internal.listener.DebugSettingsListener;
 import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 import net.runelite.rsb.internal.listener.ScriptListener;
@@ -18,13 +22,18 @@ public class ScriptHandler {
 
 	private final BotLite bot;
 
+	@Getter
+	DebugSettingsListener debugSettingsListener;
+
 	public ScriptHandler(BotLite bot) {
 		this.bot = bot;
+		debugSettingsListener = new DebugSettingsListener(bot);
+		addScriptListener(debugSettingsListener);
+
 	}
 
 	public void init() {
 		try {
-
 			randoms.add(new LoginBot());
 			/*
 			randoms.add(new BankPins());
@@ -209,6 +218,15 @@ public class ScriptHandler {
 		for (ScriptListener l : listeners) {
 			l.inputChanged(bot, mask);
 		}
+	}
+
+	public boolean hasScriptsRunning() {
+		for (Script s : scripts.values()) {
+			if (s.isRunning()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

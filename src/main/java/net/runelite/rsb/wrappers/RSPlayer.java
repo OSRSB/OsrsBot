@@ -43,6 +43,16 @@ public class RSPlayer extends RSCharacter {
 		return false;
 	}
 
+	public boolean isMoving() {
+		var poseAnimation = getAccessor().getPoseAnimation();
+		return isLocalPlayerMoving()
+				|| poseAnimation == getAccessor().getWalkRotate180()
+				|| poseAnimation == getAccessor().getWalkRotateLeft()
+				|| poseAnimation == getAccessor().getWalkRotateRight()
+				|| poseAnimation == getAccessor().getRunAnimation()
+				|| poseAnimation == getAccessor().getWalkAnimation();
+  }
+
 	@Override
 	public String getName() {
 		return p.get().getName();
@@ -58,7 +68,7 @@ public class RSPlayer extends RSCharacter {
 
 	@Override
 	public boolean doAction(final String action) {
-		return doAction(action, null);
+		return doAction(action, getName());
 	}
 
 	@Override

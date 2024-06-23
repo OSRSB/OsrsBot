@@ -52,8 +52,9 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Gets a widget corresponding to the widget info
-	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
-	 * @return			The RSWidget for the WidgetInfo
+	 *
+	 * @param info The WidgetInfo for the corresponding RSWidget to retrieve
+	 * @return The RSWidget for the WidgetInfo
 	 */
 	@Subscribe
 	public RSWidget getComponent(WidgetInfo info) {
@@ -62,8 +63,9 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Gets a widget corresponding to the widget info
-	 * @param info		The WidgetInfo for the corresponding RSWidget to retrieve
-	 * @return			The RSWidget for the WidgetInfo
+	 *
+	 * @param info The WidgetInfo for the corresponding RSWidget to retrieve
+	 * @return The RSWidget for the WidgetInfo
 	 */
 	@Subscribe
 	public RSWidget getComponent(GlobalWidgetInfo info) {
@@ -72,8 +74,9 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Checks for the click here to continue widget
+	 *
 	 * @return <code>true</code> if continue component is valid; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean canContinue() {
 		return getContinueComponent() != null;
@@ -81,25 +84,63 @@ public class Interfaces extends MethodProvider {
 
 	/**
 	 * Clicks the click here to continue widget
+	 *
 	 * @return <code>true</code> if continue component was clicked; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean clickContinue() {
 		RSWidget cont = getContinueComponent();
 		return cont != null && cont.isValid() && cont.doClick(true);
 	}
 
+	public boolean clickContinue(boolean hotKey) {
+		RSWidget cont = getContinueComponent();
+		if (cont != null && cont.isValid()) {
+			if (!hotKey) {
+				return cont.doClick(true);
+			} else {
+				methods.keyboard.sendText(" ", false);
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Gets the click here to continue widget
+	 *
 	 * @return <code>RSWidget</code> containing "Click here to continue";
-	 *         otherwise null.
+	 * otherwise null.
 	 */
 	@Subscribe
 	public RSWidget getContinueComponent() {
 		Widget widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getPackedId());
-		if (widget != null && !widget.isHidden())
-		{
+		if (widget != null && !widget.isHidden()) {
 			return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_NPC_CONTINUE.getChildId()));
+		}
+		if (widget == null) {
+			widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getPackedId());
+			if (widget != null && !widget.isHidden())
+				return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_PLAYER_CONTINUE.getChildId()));
+		}
+		if (widget == null) {
+			widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getPackedId());
+			if (widget != null && !widget.isHidden())
+				return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_CONTINUE.getChildId()));
+		}
+		if (widget == null) {
+			widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getPackedId());
+			if (widget != null && !widget.isHidden())
+				return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_LEVEL_UP_CONTINUE.getChildId()));
+		}
+		if (widget == null) {
+			widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getPackedId());
+			if (widget != null && !widget.isHidden())
+				return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_QUEST_CONTINUE.getChildId()));
+		}
+		if (widget == null) {
+			widget = methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getPackedId());
+			if (widget != null && !widget.isHidden())
+				return new RSWidget(methods, methods.client.getWidget(GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getGroupId(), GlobalWidgetInfo.DIALOG_UNKNOWN_CONTINUE.getChildId()));
 		}
 		return null;
 	}
@@ -108,9 +149,8 @@ public class Interfaces extends MethodProvider {
 	 * Performs the given action on this RSWidgetChild if it is showing
 	 * (valid).
 	 *
-	 * @param c			The component widget to click
-	 * @param action 	The menu action to click.
-	 *
+	 * @param c      The component widget to click
+	 * @param action The menu action to click.
 	 * @return <code>true</code> if the action was clicked; otherwise <code>false</code>
 	 */
 	public boolean clickComponent(final RSWidget c, final String action) {
@@ -126,7 +166,7 @@ public class Interfaces extends MethodProvider {
 		Rectangle actual = new Rectangle(minX, minY, width, height);
 		// Check if the menu already contains the action otherwise reposition
 		// before clicking
-		if (actual.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))
+		if (actual.contains(new Point(methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))
 				&& methods.menu.contains(action)
 				&& methods.menu.doAction(action)) {
 			return true;
@@ -142,7 +182,7 @@ public class Interfaces extends MethodProvider {
 	 * @param inter  The interface of the dialogue menu.
 	 * @param option The text we want to click.
 	 * @return <code>true</code> if the option was clicked; otherwise <code>false</code>
-	 *         .
+	 * .
 	 */
 	public boolean clickDialogueOption(final RSWidget inter, String option) {
 		// This is superfluous but it just makes life a little easier
@@ -158,16 +198,16 @@ public class Interfaces extends MethodProvider {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Clicks the dialogue option that contains the desired string.
 	 *
-	 * @param inter  The interface of the dialogue menu.
+	 * @param inter   The interface of the dialogue menu.
 	 * @param options The text we want to click.
 	 * @return <code>true</code> if the option was clicked; otherwise <code>false</code>
-	 *         .
+	 * .
 	 */
-	public boolean clickDialogueOption(final RSWidget inter, String ... options) {
+	public boolean clickDialogueOption(final RSWidget inter, String... options) {
 		// This is superfluous but it just makes life a little easier
 		// so you don't have to look up the component.
 		// Just grab the interface and the text you want to click.
@@ -181,6 +221,38 @@ public class Interfaces extends MethodProvider {
 			}
 		}
 		return false;
+	}
+
+	private static final int CUTSCENE_VARBIT = 542;
+
+	public boolean isCutsceneActive() {
+		return methods.client.getVarbitValue(CUTSCENE_VARBIT) > 0;
+	}
+
+	/**
+	 * Lazily returns an active dialog widget (player chat options, npc chat, player chat, object chat)
+	 *
+	 * @return RSWidget or null if no dialog active
+	 * .
+	 */
+	public RSWidget getDialogWidget() {
+		RSWidget widget = getComponent(WidgetInfo.DIALOG_OPTION_OPTIONS);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_NPC_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_PLAYER_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		widget = getComponent(WidgetInfo.DIALOG_SPRITE_TEXT);
+		if (widget != null && widget.isValid()) {
+			return widget;
+		}
+		return null;
 	}
 
 	/**
@@ -208,7 +280,7 @@ public class Interfaces extends MethodProvider {
 			return false;
 		}
 
-		if (scrollBar.getComponents().length != 6) {
+		if (scrollBar.getComponents().length != 6 || component.isVisibleInScrollableArea()) {
 			return true; // no scrollbar, so probably not scrollable
 		}
 
@@ -216,7 +288,7 @@ public class Interfaces extends MethodProvider {
 		RSWidget scrollableArea = component;
 		while ((scrollableArea.getScrollableContentHeight() == 0)
 				&& (scrollableArea.getParentId() != -1)) {
-			scrollableArea = getComponent(scrollableArea.getParentId(), 0);
+			scrollableArea = scrollableArea.getParent();
 		}
 
 		// Check scrollable area
@@ -229,28 +301,22 @@ public class Interfaces extends MethodProvider {
 
 		// Get scrollable area height
 		int areaY = scrollableArea.getAbsoluteY();
-		int areaHeight = scrollableArea.getRealHeight();
+		int areaHeight = scrollableArea.getHeight();
 
-		// Check if the component is already visible
-		if ((component.getAbsoluteY() >= areaY)
-				&& (component.getAbsoluteY() <= areaY + areaHeight
-				- component.getRealHeight())) {
+		if (component.isVisibleInScrollableArea()) {
 			return true;
 		}
 
 		// Calculate scroll bar position to click
-		RSWidget scrollBarArea = scrollBar.getComponent(0);
+		RSWidget scrollBarArea = scrollBar.getDynamicComponent(0);
+
 		int contentHeight = scrollableArea.getScrollableContentHeight();
 
-		int pos = (int) ((float) scrollBarArea.getRealHeight() / contentHeight * (component
-				.getRelativeY() + random(-areaHeight / 2, areaHeight / 2
-				- component.getRealHeight())));
-		if (pos < 0) // inner
-		{
-			pos = 0;
-		} else if (pos >= scrollBarArea.getRealHeight()) {
-			pos = scrollBarArea.getRealHeight() - 1; // outer
-		}
+		// scrollBarArea.getHeight() is returning -1. I think because it's a dynamic component?
+		int pos = (int) (((scrollBarArea.getBounds().getHeight()) / (double) contentHeight) *
+				(component.getRelativeY() + random(-areaHeight / 3, areaHeight / 3)));
+
+		pos = Math.min((int) scrollBarArea.getBounds().getHeight() - 1, Math.max(1, pos));
 
 		// Click on the scrollbar
 		methods.mouse.click(
@@ -259,22 +325,9 @@ public class Interfaces extends MethodProvider {
 				scrollBarArea.getAbsoluteY() + pos, true);
 
 		// Wait a bit
-		sleep(random(200, 400));
+		sleep(random(100, 200));
 
-		// Scroll to it if we missed it
-		while (component.getAbsoluteY() < areaY
-				|| component.getAbsoluteY() > (areaY + areaHeight - component
-				.getRealHeight())) {
-			boolean scrollUp = component.getAbsoluteY() < areaY;
-			scrollBar.getComponent(scrollUp ? 4 : 5).doAction("");
-
-			sleep(random(100, 200));
-		}
-
-		// Return whether or not the component is visible now.
-		return (component.getAbsoluteY() >= areaY)
-				&& (component.getAbsoluteY() <= areaY + areaHeight
-				- component.getRealHeight());
+		return component.isVisibleInScrollableArea();
 	}
 
 	/**
@@ -286,10 +339,10 @@ public class Interfaces extends MethodProvider {
 	 * @return <code>true</code> if the interface was successfully closed/opened.
 	 */
 	public boolean waitFor(RSWidget iface, boolean valid, int timer) {
-		for (int w = 0; w < timer && iface.isValid() == valid ? true : false; w++) {
+		for (int w = 0; w < timer && iface.isValid() == valid; w++) {
 			sleep(1);
 		}
-		return iface.isValid() == valid ? true : false;
+		return iface.isValid() == valid;
 	}
 
 	public boolean isInterfaceSubstantiated(int index) {

@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.Point;
-import net.runelite.rsb.wrappers.*;
+import net.runelite.api.coords.WorldArea;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
 import java.awt.*;
 
@@ -162,7 +162,7 @@ public class Calculations extends MethodProvider {
 	 *         <code>new Point(-1, -1)</code>.
 	 */
 	public Point tileToScreen(final RSTile tile, final double dX, final double dY, final int height) {
-		WalkerTile walkerTile = new WalkerTile(tile).toLocalTile();
+		RSTile walkerTile = new RSTile(tile).toLocalTile();
 		return Perspective.localToCanvas(methods.client, new LocalPoint(walkerTile.getX(), walkerTile.getY()), methods.client.getPlane(), height);
 	}
 
@@ -193,36 +193,25 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * Returns the diagonal distance to a given RSCharacter.
+	 * Returns the diagonal distance to a given Positionable.
 	 *
-	 * @param c The destination character.
-	 * @return Distance to <code>RSCharacter</code>.
-	 * @see #distanceTo(RSTile)
+	 * @param positionable The destination tile.
+	 * @return Distance to <code>Positionable</code>.
 	 */
-	public int distanceTo(RSCharacter c) {
-		return c == null ? -1 : distanceTo(c.getLocation());
+	public int distanceTo(Positionable positionable) {
+		return positionable == null ? -1 : (int) distanceBetween(methods.players.getMyPlayer().getLocation(), positionable.getLocation());
 	}
 
 	/**
-	 * Returns the diagonal distance to a given RSObject.
+	 * Returns the diagonal distance to a given x,y,z coordinate.
 	 *
-	 * @param o The destination object.
-	 * @return Distance to <code>RSObject</code>.
-	 * @see #distanceTo(RSTile)
+	 * @param x The destination x coordinate.
+	 * @param y The destination x coordinate.
+	 * @param z The destination x coordinate.
+	 * @return Distance to new RSTile(x,y,z).
 	 */
-
-	public int distanceTo(RSObject o) {
-		return o == null ? -1 : distanceTo(o.getLocation());
-	}
-
-	/**
-	 * Returns the diagonal distance to a given RSTile.
-	 *
-	 * @param t The destination tile.
-	 * @return Distance to <code>RSTile</code>.
-	 */
-	public int distanceTo(RSTile t) {
-		return t == null ? -1 : (int) distanceBetween(methods.players.getMyPlayer().getLocation(), t);
+	public int distanceTo(int x, int y, int z) {
+		return (int) distanceBetween(methods.players.getMyPlayer().getLocation(), new RSTile(x,y,z));
 	}
 
 	/**
@@ -273,7 +262,7 @@ public class Calculations extends MethodProvider {
 	}
 
 	/**
-	 * checks whether or not a given RSTile is reachable.
+	 * checks whether a given RSTile is reachable.
 	 *
 	 * @param dest     The <code>RSTile</code> to check.
 	 * @param isObject True if an instance of <code>RSObject</code>.
@@ -400,7 +389,7 @@ public class Calculations extends MethodProvider {
 		int step_ptr = 0;
 		path_x[path_ptr] = startX;
 		path_y[path_ptr++] = startY;
-		final byte blocks[][] = methods.client.getTileSettings()[methods.game.getPlane()];
+		final byte[][] blocks = methods.client.getTileSettings()[methods.game.getPlane()];
 		final int pathLength = path_x.length;
 		boolean foundPath = false;
 		while (step_ptr != path_ptr) {
@@ -492,6 +481,13 @@ public class Calculations extends MethodProvider {
 
 	public static java.awt.Point convertRLPointToAWTPoint(Point point) {
 		return new java.awt.Point(point.getX(), point.getY());
+	}
+
+	public boolean hasLineOfSight(WorldArea start, WorldArea end) {
+		return start.hasLineOfSightTo(methods.client, end);
+	}
+	public boolean hasLineOfSight(WorldArea end) {
+		return methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea().hasLineOfSightTo(methods.client, end);
 	}
 
 	static class Render {

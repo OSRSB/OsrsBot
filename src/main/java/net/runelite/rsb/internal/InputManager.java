@@ -1,9 +1,12 @@
 package net.runelite.rsb.internal;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.api.Client;
 import net.runelite.rsb.internal.input.Canvas;
+import net.runelite.rsb.internal.input.VirtualMouse;
 
 import java.applet.Applet;
 import java.awt.event.*;
@@ -13,9 +16,21 @@ import java.awt.event.*;
 public class InputManager {
 
 	private final java.util.Random random = new java.util.Random();
+	@Getter
 	private final MouseHandler mouseHandler = new MouseHandler(this);
 	private final BotLite bot;
-
+	@Getter
+	@Setter
+	private int minMouseDown = 10;
+	@Getter
+	@Setter
+	private int maxMouseDown = 50;
+	@Getter
+	@Setter
+	private int minMouseDrag = 300;
+	@Getter
+	@Setter
+	private int maxMouseDrag = 300;
 	private byte dragLength = 0;
 
 	/**
@@ -46,7 +61,7 @@ public class InputManager {
 			return; // Can't click off the canvas
 		}
 		pressMouse(getX(), getY(), left);
-		sleepNoException(random(50, 100));
+		sleepNoException(random(minMouseDown, maxMouseDown));
 		releaseMouse(getX(), getY(), left);
 	}
 
@@ -58,9 +73,9 @@ public class InputManager {
 	 */
 	public void dragMouse(final int x, final int y) {
 		pressMouse(getX(), getY(), true);
-		sleepNoException(random(300, 500));
+		sleepNoException(random(minMouseDrag, maxMouseDrag));
 		windMouse(getX(), getY(), x, y);
-		sleepNoException(random(300, 500));
+		sleepNoException(random(minMouseDrag, maxMouseDrag));
 		releaseMouse(x, y, true);
 	}
 
@@ -225,6 +240,13 @@ public class InputManager {
 		}
 		windMouse(x, y);
 		//windMouse(speed, thisX, thisY, random(x, x + randomX), random(y, y + randomY));
+	}
+
+	public void moveMouseWheel(int i) {
+		VirtualMouse virtualMouse = bot.getMethodContext().virtualMouse;
+		final MouseWheelEvent me = new MouseWheelEvent(getTarget(), MouseEvent.MOUSE_WHEEL, System.currentTimeMillis(), 0, virtualMouse.getClientX(),
+				virtualMouse.getClientY(), 0, false, MouseWheelEvent.WHEEL_UNIT_SCROLL, 0, i);
+		bot.getMethodContext().virtualMouse.sendEvent(me);
 	}
 
 	public void pressKey(final char ch) {

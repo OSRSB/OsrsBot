@@ -30,7 +30,7 @@ public abstract class Random extends Methods implements PaintListener {
 //	private int currentIndex = 0;
 
 	/**
-	 * Detects whether or not this anti-random should
+	 * Detects whether this anti-random should
 	 * activate.
 	 *
 	 * @return <code>true</code> if the current script

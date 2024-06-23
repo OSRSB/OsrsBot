@@ -2,15 +2,20 @@ package net.runelite.rsb.wrappers.client_wrapper;
 
 import net.runelite.api.*;
 import net.runelite.api.Point;
+import net.runelite.api.annotations.Varp;
 import net.runelite.api.clan.ClanChannel;
 import net.runelite.api.clan.ClanSettings;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.dbtable.DBRowConfig;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetModalMode;
+import net.runelite.api.worldmap.MapElementConfig;
+import net.runelite.api.worldmap.WorldMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -166,15 +171,25 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public int getCameraX() {
         return wrappedClient.getCameraX();
     }
+    public double getCameraFpX() {
+        return wrappedClient.getCameraFpX();
+    }
 
     @Override
     public int getCameraY() {
         return wrappedClient.getCameraY();
     }
 
+    public double getCameraFpY() {
+        return wrappedClient.getCameraFpY();
+    }
     @Override
     public int getCameraZ() {
         return wrappedClient.getCameraZ();
+    }
+
+    public double getCameraFpZ() {
+        return wrappedClient.getCameraFpZ();
     }
 
     @Override
@@ -182,9 +197,27 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         return wrappedClient.getCameraPitch();
     }
 
+    public double getCameraFpPitch() {
+        return wrappedClient.getCameraFpPitch();
+    }
+
+    @Override
+    public int getCameraPitchTarget() {
+        return wrappedClient.getCameraPitchTarget();
+    }
     @Override
     public int getCameraYaw() {
         return wrappedClient.getCameraYaw();
+    }
+
+    @Override
+    public double getCameraFpYaw() {
+        return wrappedClient.getCameraFpYaw();
+    }
+
+    @Override
+    public int getCameraYawTarget() {
+        return wrappedClient.getCameraYawTarget();
     }
 
     @Override
@@ -453,6 +486,21 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public boolean isMenuScrollable() {
+        return wrappedClient.isMenuScrollable();
+    }
+
+    @Override
+    public int getMenuScroll() {
+        return wrappedClient.getMenuScroll();
+    }
+
+    @Override
+    public void setMenuScroll(int scroll) {
+        wrappedClient.setMenuScroll(scroll);
+    }
+
+    @Override
     public int getMenuX() {
         return wrappedClient.getMenuX();
     }
@@ -473,6 +521,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    @Deprecated
     public int getMapAngle() {
         return wrappedClient.getMapAngle();
     }
@@ -523,11 +572,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getVar(VarPlayer varPlayer) {
-        return wrappedClient.getVar(varPlayer);
-    }
-
-    @Override
     @Deprecated
     public int getVar(int varbit) {
         return wrappedClient.getVar(varbit);
@@ -544,12 +588,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getVarpValue(VarPlayer varPlayer) {
-        return wrappedClient.getVarpValue(varPlayer);
-    }
-
-    @Override
-    public int getVarpValue(int varpId) {
+    public int getVarpValue(@Varp int varpId) {
         return wrappedClient.getVarpValue(varpId);
     }
 
@@ -603,6 +642,13 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public void queueChangedVarp(int varp) {
         wrappedClient.queueChangedVarp(varp);
     }
+
+    @Override
+    public WidgetNode openInterface(int componentId, int interfaceId, int modalNode){
+        return wrappedClient.openInterface(componentId, interfaceId, modalNode);
+    }
+    @Override
+    public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
 
     @Override
     public HashTable<IntegerNode> getWidgetFlags() {
@@ -670,13 +716,21 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public Object getDBTableField(int rowID, int column, int tupleIndex, int fieldIndex) {
-        return wrappedClient.getDBTableField(rowID, column, tupleIndex, fieldIndex);
+    public Object[] getDBTableField(int rowID, int column, int tupleIndex) {
+        return wrappedClient.getDBTableField(rowID, column, tupleIndex);
     }
 
     @Override
-    public MapElementConfig[] getMapElementConfigs() {
-        return wrappedClient.getMapElementConfigs();
+    public DBRowConfig getDBRowConfig(int rowID) {
+        return wrappedClient.getDBRowConfig(rowID);
+    }
+
+    @Override
+    public List<Integer> getDBRowsByValue(int table, int column, int tupleIndex, Object value) { return wrappedClient.getDBRowsByValue(table, column, tupleIndex, value); }
+
+
+    public MapElementConfig getMapElementConfig(int id) {
+        return wrappedClient.getMapElementConfig(id);
     }
 
     @Override
@@ -788,15 +842,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         wrappedClient.setMusicVolume(volume);
     }
 
-    @Override
-    public boolean isPlayingJingle() {
-        return wrappedClient.isPlayingJingle();
-    }
-
-    @Override
-    public int getMusicCurrentTrackId() {
-        return wrappedClient.getMusicCurrentTrackId();
-    }
 
     @Override
     public void playSoundEffect(int id) {
@@ -886,6 +931,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public void setCameraPitchTarget(int cameraPitchTarget) {
+        wrappedClient.setCameraPitchTarget(cameraPitchTarget);
+    }
+
+    @Override
     public String[] getStringStack() {
         return wrappedClient.getStringStack();
     }
@@ -939,11 +989,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void setInvertPitch(boolean invertPitch) {
         wrappedClient.setInvertPitch(invertPitch);
-    }
-
-    @Override
-    public RenderOverview getRenderOverview() {
-        return wrappedClient.getRenderOverview();
     }
 
     @Override
@@ -1027,7 +1072,7 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public HintArrowType getHintArrowType() {
+    public int getHintArrowType() {
         return wrappedClient.getHintArrowType();
     }
 
@@ -1048,6 +1093,11 @@ public abstract class BaseClientWrapper extends Applet implements Client {
 
     @Override
     public void setHintArrow(NPC npc) {
+        wrappedClient.setHintArrow(npc);
+    }
+
+    @Override
+    public void setHintArrow(LocalPoint npc) {
         wrappedClient.setHintArrow(npc);
     }
 
@@ -1100,12 +1150,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public boolean isInInstancedRegion() {
         return wrappedClient.isInInstancedRegion();
     }
-
-    @Override
-    public int getItemPressedDuration() {
-        return wrappedClient.getItemPressedDuration();
-    }
-
     @Override
     @Nullable
     public CollisionData[] getCollisionMaps() {
@@ -1224,8 +1268,17 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setGpu(boolean gpu) {
-        wrappedClient.setGpu(gpu);
+    public void setGpuFlags(int gpuflags) {
+        wrappedClient.setGpuFlags(gpuflags);
+    }
+
+    @Override
+    public void setExpandedMapLoading(int chunks){
+        wrappedClient.setExpandedMapLoading(chunks);
+    }
+    @Override
+    public int getExpandedMapLoading(){
+        return wrappedClient.getExpandedMapLoading();
     }
 
     @Override
@@ -1264,8 +1317,8 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public void setRenderArea(boolean[][] renderArea) {
-        wrappedClient.setRenderArea(renderArea);
+    public Rasterizer getRasterizer() {
+        return wrappedClient.getRasterizer();
     }
 
     @Override
@@ -1292,39 +1345,15 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     public void checkClickbox(Model model, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash) {
         wrappedClient.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
     }
-
     @Override
-    @Deprecated
-    public Widget getIf1DraggedWidget() {
-        return wrappedClient.getIf1DraggedWidget();
+    public boolean isWidgetSelected() {
+        return wrappedClient.isWidgetSelected();
     }
 
     @Override
-    @Deprecated
-    public int getIf1DraggedItemIndex() {
-        return wrappedClient.getIf1DraggedItemIndex();
+    public void setWidgetSelected(boolean selected) {
+        wrappedClient.setWidgetSelected(selected);
     }
-
-    @Override
-    public boolean getSpellSelected() {
-        return wrappedClient.getSpellSelected();
-    }
-
-    @Override
-    public void setSpellSelected(boolean selected) {
-        wrappedClient.setSpellSelected(selected);
-    }
-
-    @Override
-    public int getSelectedItem() {
-        return wrappedClient.getSelectedItem();
-    }
-
-    @Override
-    public int getSelectedItemIndex() {
-        return wrappedClient.getSelectedItemIndex();
-    }
-
     @Override
     @Nullable
     public Widget getSelectedWidget() {
@@ -1339,6 +1368,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public NodeCache getObjectCompositionCache() {
         return wrappedClient.getObjectCompositionCache();
+    }
+    @Override
+    public NodeCache getAnimationCache() {
+        return wrappedClient.getAnimationCache();
     }
 
     @Override
@@ -1492,7 +1525,37 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
+    public boolean isMinimapZoom() {
+        return wrappedClient.isMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(boolean minimapZoom) {
+        wrappedClient.setMinimapZoom(minimapZoom);
+    }
+
+    @Override
+    public double getMinimapZoom() {
+        return wrappedClient.getMinimapZoom();
+    }
+
+    @Override
+    public void setMinimapZoom(double zoom) {
+        wrappedClient.setMinimapZoom(zoom);
+    }
+
+    @Override
+    public void setMinimapTileDrawer(TileFunction drawTile){
+        wrappedClient.setMinimapTileDrawer(drawTile);
+    }
+
+    @Override
     public void setIdleTimeout(int ticks) {
         wrappedClient.setIdleTimeout(ticks);
+    }
+
+    @Override
+    public WorldMap getWorldMap() {
+        return wrappedClient.getWorldMap();
     }
 }

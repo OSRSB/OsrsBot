@@ -9,7 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix workspace" />
+    <list default="true" id="9a934c9c-1df5-401c-be85-1862717f067b" name="Default Changelist" comment="Fix workspace">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/client/callback/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/client/callback/Hooks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/RSModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/RSModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/RSObjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/RSObjectModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/BaseClientWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/BaseClientWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/RSClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/runelite/rsb/wrappers/client_wrapper/RSClient.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -160,6 +168,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.headlessBotRun" />
       <item itemvalue="Gradle.OsrsBot [botRun]" />
       <item itemvalue="Gradle.OsrsBot [headlessBotRun]" />
     </list>

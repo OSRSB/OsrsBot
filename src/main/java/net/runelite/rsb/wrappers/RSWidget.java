@@ -6,6 +6,7 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 
 import java.awt.*;
@@ -17,6 +18,8 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     private final int parentId;
     private final Widget widget;
     private final Widget parentWidget;
+
+    private final ClickBox clickBox = new ClickBox(this);
 
     public RSWidget(final MethodContext ctx, final Widget widget) {
         super(ctx);
@@ -40,11 +43,15 @@ public class RSWidget extends MethodProvider implements Clickable07 {
 
     @Subscribe
     public boolean isVisible() {
-        return isValid() && (widget.isIf3() || (isSelfVisible() && !widget.isHidden()));
+        return isValid() && (isSelfVisible() && !widget.isHidden());
     }
 
     @Subscribe
     public boolean isSelfVisible() {return isValid() && !widget.isSelfHidden();}
+
+    public boolean hasListener() {
+        return widget.hasListener();
+    }
 
     /**
      * Performs the given action on this RSInterfaceChild if it is
@@ -66,22 +73,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the action was clicked; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
-        if (!isValid()) {
-            return false;
-        }
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (!rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            int min_x = rect.x + 1, min_y = rect.y + 1;
-            int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-            methods.mouse.move(random(min_x, max_x, rect.width / 3),
-                    random(min_y, max_y, rect.height / 3));
-            sleep(random(40, 80));
-        }
-        return methods.menu.doAction(action, option);
+        return getClickBox().doAction(action, option);
     }
 
     /**
@@ -101,24 +93,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the component was clicked.
      */
     public boolean doClick(boolean leftClick) {
-        if (!isValid()) {
-            return false;
-        }
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            methods.mouse.click(true);
-            return true;
-        }
-
-        int min_x = rect.x + 1, min_y = rect.y + 1;
-        int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-        methods.mouse.click(random(min_x, max_x, rect.width / 3),
-                random(min_y, max_y, rect.height / 3), leftClick);
-        return true;
+        return getClickBox().doClick(leftClick);
     }
 
     /**
@@ -128,26 +103,18 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if the mouse was moved; otherwise <code>false</code>.
      */
     public boolean doHover() {
-        if (!isValid()) {
-            return false;
-        }
-
-        Rectangle rect = getArea();
-        if (rect.x == -1 || rect.y == -1 || rect.width == -1 || rect.height == -1) {
-            return false;
-        }
-        if (rect.contains(new Point (methods.mouse.getLocation().getX(), methods.mouse.getLocation().getY()))) {
-            return false;
-        }
-
-        int min_x = rect.x + 1, min_y = rect.y + 1;
-        int max_x = min_x + rect.width - 2, max_y = min_y + rect.height - 2;
-
-        methods.mouse.move(random(min_x, max_x, rect.width / 3),
-                random(min_y, max_y, rect.height / 3));
-        return true;
+        return getClickBox().doHover();
     }
 
+    public Shape getClickShape() {
+        if (widget != null) {
+            return widget.getBounds();
+        }
+        return null;
+    }
+    public ClickBox getClickBox() {
+        return clickBox;
+    }
     /**
      * Gets the absolute x position of the child, calculated from
      * the beginning of the game screen
@@ -246,6 +213,15 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return new RSWidget(methods, widget.getChild(idx));
     }
 
+    public RSWidget getDynamicTextComponent(String text) {
+        for (Widget w : widget.getDynamicChildren()) {
+            if (w.getText().equalsIgnoreCase(text)) {
+                return new RSWidget(methods, w);
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the child component at a given index
      *
@@ -316,7 +292,7 @@ public class RSWidget extends MethodProvider implements Clickable07 {
     public String getName() {
         final Widget component = this.widget;
         if (component != null) {
-            return component.getName();
+            return component.getName().replaceAll("<.*?>", "");
         }
         return "";
     }
@@ -509,19 +485,43 @@ public class RSWidget extends MethodProvider implements Clickable07 {
         return -1;
     }
 
+     /**
+     * Gets whether this widget is in a scrollable area
+     * @return true if widget is in a scrollable area
+     */
+
     public boolean isInScrollableArea() {
         //Check if we have a parent
         if (this.getParentId() == -1) {
             return false;
         }
         //Find scrollable area
-        RSWidget scrollableArea = this.getParent();
+        RSWidget scrollableArea = this;
         while ((scrollableArea.getScrollableContentHeight() == 0) && (scrollableArea.getParentId() != -1)) {
             scrollableArea = scrollableArea.getParent();
         }
         //Return if we are in a scrollable area
         return (scrollableArea.getScrollableContentHeight() != 0);
     }
+
+     /**
+     * Gets whether this widget is visible in its scrollable area
+     * @return true if widget is visible in its scrollable area
+     */
+     public boolean isVisibleInScrollableArea() {
+        //Check if we have a parent
+        if (this.getParentId() == -1 || !isInScrollableArea()) {
+            return true;
+        }
+        //Find scrollable area
+        RSWidget scrollableArea = this;
+        while ((scrollableArea.getScrollableContentHeight() == 0) && (scrollableArea.getParentId() != -1)) {
+            scrollableArea = scrollableArea.getParent();
+        }
+        //Return true if we are in a scrollable area
+        return getRelativeY() + getHeight() / 2 > scrollableArea.getVerticalScrollPosition() &&
+                getRelativeY() - getHeight() / 2 < scrollableArea.getVerticalScrollPosition() + scrollableArea.getHeight();
+        }
 
     /**
      * Gets the selected action name of this component
@@ -608,7 +608,9 @@ public class RSWidget extends MethodProvider implements Clickable07 {
      * @return <code>true</code> if found
      */
     public boolean containsAction(final String phrase) {
+        if(getActions() == null) return false;
         for (final String action : getActions()) {
+            if(action == null) continue;
             if (action.toLowerCase().contains(phrase.toLowerCase())) {
                 return true;
             }

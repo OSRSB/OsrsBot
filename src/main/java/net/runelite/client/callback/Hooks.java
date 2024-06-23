@@ -21,14 +21,13 @@ import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Skill;
-import net.runelite.api.events.BeforeRender;
-import net.runelite.api.events.FakeXpDrop;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.ScriptCallbackEvent;
+import net.runelite.api.events.*;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
+import net.runelite.api.worldmap.WorldMap;
+import net.runelite.api.worldmap.WorldMapRenderer;
 import net.runelite.client.Notifier;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
@@ -45,7 +44,6 @@ import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.client.modified.RuneLite;
-import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 
 /**
  * This class contains field required for mixins and runelite hooks to work.
@@ -54,7 +52,7 @@ import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
  */
 @Singleton
 @Slf4j
-public class Hooks implements Callbacks
+public  class Hooks implements Callbacks
 {
     private static final long CHECK = RSTimeUnit.GAME_TICKS.getDuration().toNanos(); // ns - how often to run checks
 
@@ -209,6 +207,13 @@ public class Hooks implements Callbacks
     }
 
     @Override
+    public void tickEnd()
+    {
+        clientThread.invokeTickEnd();
+        eventBus.post(new PostClientTick());
+    }
+
+    @Override
     public void frame()
     {
         eventBus.post(BEFORE_RENDER);
@@ -224,26 +229,25 @@ public class Hooks implements Callbacks
      */
     private void checkWorldMap()
     {
-        Widget widget = client.getWidget(GlobalWidgetInfo.WORLD_MAP_VIEW.getPackedId());
+        Widget worldMapWidget = client.getWidget(WidgetInfo.WORLD_MAP_VIEW);
 
-        if (widget != null)
+        if (worldMapWidget != null)
         {
             return;
         }
 
-        RenderOverview renderOverview = client.getRenderOverview();
-
-        if (renderOverview == null)
+        WorldMap worldMap = client.getWorldMap();
+        if (worldMap == null)
         {
             return;
         }
 
-        WorldMapManager manager = renderOverview.getWorldMapManager();
+        WorldMapRenderer manager = worldMap.getWorldMapRenderer();
 
         if (manager != null && manager.isLoaded())
         {
             log.debug("World map was closed, reinitializing");
-            renderOverview.initializeWorldMap(renderOverview.getWorldMapData());
+            worldMap.initializeWorldMap(worldMap.getWorldMapData());
         }
     }
 
@@ -453,11 +457,8 @@ public class Hooks implements Callbacks
     @Subscribe
     public void onGameStateChanged(GameStateChanged gameStateChanged)
     {
-        switch (gameStateChanged.getGameState())
-        {
-            case LOGGING_IN:
-            case HOPPING:
-                ignoreNextNpcUpdate = true;
+        switch (gameStateChanged.getGameState()) {
+            case LOGGING_IN, HOPPING -> ignoreNextNpcUpdate = true;
         }
     }
 
@@ -561,5 +562,15 @@ public class Hooks implements Callbacks
             }
         }
         return true;
+    }
+
+    @Override
+    public void error(String message, Throwable reason) {
+        log.error(message, reason);
+    }
+
+    @Override
+    public void openUrl(String url) {
+
     }
 }

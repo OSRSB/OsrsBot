@@ -51,7 +51,8 @@ public class Application {
 		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
 		//TODO Some sort of better validation here
 		//Add a version check
-		if (!new File(itemCacheLocation).exists() && new File(itemCacheLocation).getTotalSpace() < 100) {
+
+		if ((!new File(itemCacheLocation).exists()) || new File(itemCacheLocation).getTotalSpace() < 100) {
 			String[] itemArgs = {"--cache", gameCacheLocation,
 					"--items", itemCacheLocation};
 			String[] objectArgs = {"--cache", gameCacheLocation,

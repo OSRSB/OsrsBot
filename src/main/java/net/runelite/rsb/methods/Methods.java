@@ -1,10 +1,12 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.*;
 import net.runelite.rsb.wrappers.subwrap.ChooseOption;
 import net.runelite.rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
+import java.util.function.BooleanSupplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -142,7 +144,10 @@ public class Methods {
 	 *  The singleton of NPCChat
 	 */
 	protected NPCChat npcChat;
-
+	/**
+	 * The singleton of Chat
+	 */
+	protected Chat chat;
 	/**
 	 * For internal use only: initializes the method providers.
 	 *
@@ -180,6 +185,7 @@ public class Methods {
 		this.worldHopper = ctx.worldHopper;
 		this.chooseOption = ctx.chooseOption;
 		this.npcChat = ctx.npcChat;
+		this.chat = ctx.chat;
 	}
 
 	/**
@@ -265,8 +271,8 @@ public class Methods {
 	 * @see #sleep(int)
 	 * @see #random(int, int)
 	 */
-	public static void sleep(int minSleep, int maxSleep) {
-		sleep(random(minSleep, maxSleep));
+	public static boolean sleep(int minSleep, int maxSleep) {
+		return sleep(random(minSleep, maxSleep));
 	}
 
 	/**
@@ -274,7 +280,7 @@ public class Methods {
 	 *
 	 * @param toSleep The time to sleep in milliseconds.
 	 */
-	public static void sleep(int toSleep) {
+	public static boolean sleep(int toSleep) {
 		try {
 			long start = System.currentTimeMillis();
 			Thread.sleep(toSleep);
@@ -286,9 +292,45 @@ public class Methods {
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
+	/**
+	 * Pauses execution for a random amount of time between two values or when supplier returns true.
+	 *
+	 * @param minSleep The minimum time to sleep.
+	 * @param maxSleep The maximum time to sleep.
+	 * @param stopCondition a function which returns true when sleep should be aborted
+	 * @see #sleep(int)
+	 * @see #random(int, int)
+	 */
+	public static boolean sleep(int minSleep, int maxSleep, BooleanSupplier stopCondition) {
+		return sleep(random(minSleep, maxSleep), stopCondition);
+	}
+
+	/**
+	 * Pauses execution for a given number of milliseconds or when supplier returns true.
+	 *
+	 * @param toSleep The time to sleep in milliseconds.
+	 * @param stopCondition a function which returns true when sleep should be aborted
+	 */
+	public static boolean sleep(int toSleep, BooleanSupplier stopCondition) {
+		long start = System.currentTimeMillis();
+		try {
+			while (start + toSleep > System.currentTimeMillis()) {
+				if (stopCondition.getAsBoolean()) {
+					return true;
+				}
+				Thread.sleep(random.nextLong(15, 55));
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 	/**
 	 * Prints to the RSBot log.
 	 *

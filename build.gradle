@@ -4,66 +4,42 @@ plugins {
 
 repositories {
     mavenLocal()
-    maven { url 'https://repo.runelite.net' }
     maven { url 'https://jitpack.io' }
     mavenCentral()
+    maven {
+        url 'https://repo.runelite.net'
+        content {
+            // only download packages for group net.runelite*
+            includeGroupByRegex "net\\.runelite.*"
+        }
+    }
 }
 
+def lastSupportedVersion = "1.10.17"
 def runeLiteVersion = getRuneLiteVersion()
+def supportedCheck = false
+if (supportedCheck) {
+    if (runeLiteVersion != lastSupportedVersion) {
+        println("Warning - client has been updated")
+        throw new Exception("Out of date (last supported: " + lastSupportedVersion + " current client: " + runeLiteVersion + ")")
+    }
+}
 
 static def getRuneLiteVersion() {
-    URL url = new URL("http://repo.runelite.net/net/runelite/client/")
+    URL url = new URL("http://repo.runelite.net/net/runelite/client/maven-metadata.xml")
     URLConnection urlConnection = url.openConnection()
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
             urlConnection.getInputStream()))
     String latestName = null
     String inputLine
     while ((inputLine = bufferedReader.readLine()) != null) {
-        inputLine = inputLine.trim().replaceAll(" +", " ")
-        if (inputLine.contains("/\">") && inputLine.contains("</a>")) {
-            String name = inputLine.substring(inputLine.indexOf("/\">") + 3, inputLine.indexOf("</a>") - 1)
-            String removeName = inputLine.substring(inputLine.indexOf("</a>") + 4)
-            if (!name.contains("SNAPSHOT") && removeName != "") {
-                if (compareSemanticVersion(latestName, name)) {
-                    latestName = name;
-                }
-            }
+        inputLine = inputLine.trim()
+        if (inputLine.contains("<release>")) {
+            latestName = inputLine.replace("<release>", "").replace("</release>", "")
         }
     }
     bufferedReader.close()
     return latestName
-}
-
-static def compareSemanticVersion(String s1, String s2) {
-    if (s1 != null && s2 != null) {
-        while (true) {
-            if (s1.indexOf('.') != -1 && s2.indexOf('.') != -1) {
-                if (s1.substring(0, s1.indexOf('.')) == s2.substring(0, s2.indexOf('.'))) {
-                    s1 = s1.substring(s1.indexOf('.') + 1)
-                    s2 = s2.substring(s2.indexOf('.') + 1)
-                }
-                else {
-                    if (s1.indexOf('.') != -1) {
-                        s1 = s1.substring(0, s1.indexOf('.'))
-                    }
-                    if (s2.indexOf('.') != -1) {
-                        s2 = s2.substring(0, s2.indexOf('.'))
-                    }
-                    return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
-                }
-            }
-            else {
-                if (s1.indexOf('.') != -1) {
-                    s1 = s1.substring(0, s1.indexOf('.'))
-                }
-                if (s2.indexOf('.') != -1) {
-                    s2 = s2.substring(0, s2.indexOf('.'))
-                }
-                return Integer.parseInt(s1).intValue() < Integer.parseInt(s2).intValue()
-            }
-        }
-    }
-    return s1 == null && s2 != null
 }
 
 dependencies {

@@ -6,6 +6,9 @@ import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSWidget;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * Obtains information on tradeable items from the Grand Exchange website and
  * Grand Exchange ingame interaction.
@@ -36,7 +39,7 @@ public class GrandExchange extends MethodProvider {
 	public boolean open() {
 		if (!isOpen()) {
 			//Makes sure we randomly choose which way we open the interface
-			boolean openClerk = random(0,10) > 3;
+			boolean openClerk = random(0, 10) > 3;
 			if (openClerk)
 				return methods.npcs.getNearest("Grand Exchange Clerk").doAction("Exchange");
 			else
@@ -63,12 +66,8 @@ public class GrandExchange extends MethodProvider {
 		try {
 			int slotComponent = mapSlotToSlotIndex(slot);
 			if (isOpen()) {
-				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
-						.getDynamicComponent(WidgetIndices.GrandExchange.TITLE_DYNAMIC_CONTAINER).containsText("Empty")) {
-					return true;
-				} else {
-					return false;
-				}
+				return methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent)
+						.getDynamicComponent(WidgetIndices.GrandExchange.OFFER_STATUS_ITEM_DESCRIPTION_LABEL).containsText("Empty");
 			} else {
 				return false;
 			}
@@ -84,17 +83,17 @@ public class GrandExchange extends MethodProvider {
 	 * @return <code>True</code> if the user is a member else <code>false</code> for slots 4-8
 	 */
 	public boolean checkSlotLocked(int slot) {
-			int slotComponent = mapSlotToSlotIndex(slot);
-			if (isOpen()) {
-				RSWidget geWidget = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
-				boolean isBuyHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.BUY_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
-				boolean isSellHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.SELL_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
-				//Obviously both can't be hovered at the same time so it must be locked
-				if (isBuyHovered && isSellHovered) {
-					return true;
-				}
+		int slotComponent = mapSlotToSlotIndex(slot);
+		if (isOpen()) {
+			RSWidget geWidget = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
+			boolean isBuyHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.BUY_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_BUY_HOVERED;
+			boolean isSellHovered = geWidget.getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.SELL_ICON_SPRITE).getSpriteId() == SpriteID.GE_MAKE_OFFER_SELL_HOVERED;
+			//Obviously both can't be hovered at the same time so it must be locked
+			if (isBuyHovered && isSellHovered) {
+				return true;
 			}
-			return false;
+		}
+		return false;
 	}
 
 	/**
@@ -102,7 +101,7 @@ public class GrandExchange extends MethodProvider {
 	 *
 	 * @param slot The slot to check
 	 * @return The item name as a string equal to the item being sold/brought
-	 *         Will return null if no items are being sold.
+	 * Will return null if no items are being sold.
 	 */
 	public String checkSlot(int slot) {
 		int slotComponent = mapSlotToSlotIndex(slot);
@@ -121,7 +120,7 @@ public class GrandExchange extends MethodProvider {
 	 *
 	 * @param name The name of the item to check for.
 	 * @return An int of the corresponding slot.
-	 *         0 = Not found.
+	 * 0 = Not found.
 	 */
 	public int findItem(String name) {
 		final int NUMBER_OF_SLOTS = 8;
@@ -144,7 +143,7 @@ public class GrandExchange extends MethodProvider {
 	 * Finds first empty slot.
 	 *
 	 * @return An int of the corresponding slot.
-	 *         0 = No empty slots.
+	 * 0 = No empty slots.
 	 */
 	public int freeSlot() {
 		final int NUMBER_OF_SLOTS = 8;
@@ -166,7 +165,8 @@ public class GrandExchange extends MethodProvider {
 		if (!checkSlotIsEmpty(slot) && !checkSlotLocked(slot)) {
 			if (slot != 0) {
 				int slotComponent = mapSlotToSlotIndex(slot);
-				if (methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent).containsAction(
+				RSWidget cmp = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER, slotComponent);
+				if (cmp.getActions() != null && cmp.containsAction(
 						"Abort Offer")) {
 					return false;
 				} else {
@@ -187,8 +187,7 @@ public class GrandExchange extends MethodProvider {
 		String collectAs = "Collect";
 		if (asNote) {
 			collectAs += "-note";
-		}
-		else {
+		} else {
 			collectAs += "-item";
 		}
 		RSWidget geWidget = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_COLLECTION_AREA);
@@ -198,10 +197,28 @@ public class GrandExchange extends MethodProvider {
 	}
 
 	/**
+	 * A method to collect all items to inventory or the bank
+	 *
+	 * @param toBank whether the item should be collect to the bank
+	 */
+	public void collectAll(boolean toBank) {
+		String collectAs = "Collect";
+		if (!toBank) {
+			collectAs += " to inventory";
+		} else {
+			collectAs += " to bank";
+		}
+		RSWidget geWidget = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_TITLE);
+		geWidget = geWidget.getDynamicComponent(0);
+		geWidget.doAction(collectAs);
+		sleep(random(400, 900));
+	}
+
+	/**
 	 * Internal-use. Collects attempts to collect from both slots if the widgets contain the action passed
 	 *
-	 * @param widget		The widget to check to collect from
-	 * @param collectAs		The string to check for in the widget
+	 * @param widget    The widget to check to collect from
+	 * @param collectAs The string to check for in the widget
 	 */
 	private void collectFromSlot(RSWidget widget, String collectAs) {
 		if (widget.getComponent(WidgetIndices.DynamicComponents.GrandExchangeCollectionArea.RIGHT_ITEM_SPRITE).containsAction(collectAs)) {
@@ -226,7 +243,7 @@ public class GrandExchange extends MethodProvider {
 	/**
 	 * Gets any item that is in the offer as the item and in the form designated
 	 *
-	 * @param slot An int for the corresponding slot, of which to check
+	 * @param slot   An int for the corresponding slot, of which to check
 	 * @param asNote whether the item should be withdrawn as a note
 	 */
 	public void collectItem(int slot, boolean asNote) {
@@ -236,7 +253,7 @@ public class GrandExchange extends MethodProvider {
 	/**
 	 * Gets any items that may be in the offer.
 	 *
-	 * @param slot An int for the corresponding slot, of which to check
+	 * @param slot   An int for the corresponding slot, of which to check
 	 * @param toBank whether the item should be sent to the bank
 	 * @param asNote whether the item should be withdrawn as a note
 	 */
@@ -261,8 +278,7 @@ public class GrandExchange extends MethodProvider {
 				if (geWidget.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER).isValid() &&
 						geWidget.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER).isVisible()) {
 					collect(asNote);
-				}
-				else {
+				} else {
 					collectItem(slot, false, asNote);
 				}
 			}
@@ -302,7 +318,7 @@ public class GrandExchange extends MethodProvider {
 	/**
 	 * Creates an offer based on the parameters given
 	 *
-	 * @param quantity the number of items to list for
+	 * @param quantity    the number of items to list for
 	 * @param priceChange the number of times to press the price per item +5% or -5% buttons
 	 * @return <code>true</code> if the offer was attempted to be made; otherwise <code>false</code>
 	 */
@@ -313,12 +329,11 @@ public class GrandExchange extends MethodProvider {
 		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
 
 		//Decides what order to do these in and gives an off number, so we are inconsistent in a weird manner
-		boolean randomlyInput = (random(0,10) < 4);
+		boolean randomlyInput = (random(0, 10) < 4);
 		if (randomlyInput) {
 			setPrice(priceChange);
 			setQuantity(quantity);
-		}
-		else {
+		} else {
 			setQuantity(quantity);
 			setPrice(priceChange);
 		}
@@ -348,84 +363,70 @@ public class GrandExchange extends MethodProvider {
 	}
 
 	/**
+	 * Returns the number of clicks required to set an offer quantity with the +1, +10, +100, +1000 buttons
+	 *
+	 * @param quantity the quantity you would like to offer
+	 * @return the number of clicks to set that quantity or Integer.MAX_VALUE if not possible
+	 */
+	public int getNumberClick(int quantity) {
+		// Clicking +1 when you open an offer window makes quantity 2 but +10 makes quantity 10 not 11
+		if (quantity < 10) {
+			return quantity - 1;
+		}
+		if (quantity >= 10000) {
+			return Integer.MAX_VALUE;
+		}
+		int requiredClicks = 0;
+		for (int i = 3; i >= 0; i--) {
+			int subtract = nth(quantity, i);
+			if (subtract != 0) {
+				requiredClicks += nth(quantity, i);
+				continue;
+			}
+		}
+		return requiredClicks;
+	}
+
+	/**
 	 * Sets the quantity of items in the offer interface randomizing how it goes about doing so too
 	 *
 	 * @param quantity the quantity to list
 	 */
 	public void setQuantity(int quantity) {
-		//Dynamic child of offer window
-		final int OFFER_1 = 45;
-		final int OFFER_10 = 46;
-		final int OFFER_100 = 47;
-		final int OFFER_1000_OR_ALL_BUTTON = 48;
+		// OFFER_1 = 45, OFFER_10 = 46, OFFER_100 = 47, OFFER_1000 = 48
+		final int[] offerButtons = {45, 46, 47, 48};
 		final int OFFER_ENTER_AMOUNT = 49;
+
 		RSWidget offerWindow = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW);
-		if (quantity == 1) {
-			return;
-		}
+
 		/*
 		Picks a random number to decide how many clicks to allow for (to throw off pattern detection)
 		Then proceeds to check the quantity against it to decide whether to click the buttons or to simply
 		Type in our amount.
 		 */
-		int randomMax = random(3,6);
-		double limit = Math.log(randomMax) % 1;
-		double logQuantity = (Math.log(quantity) % 1);
-		if (logQuantity < limit) {
-			switch ((int) (Math.log(quantity) - logQuantity)) {
-				case (0):
-					for (int i = 0; i < quantity; i++) {
-						offerWindow.getDynamicComponent(OFFER_1).doClick();
-						sleep(random(20, 50));
-						}
-					break;
-				case(1):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						for (int i = 0; i < quantity / 10; i++) {
-							offerWindow.getDynamicComponent(OFFER_10).doClick();
+
+		int randomClicks = random(3, 6);
+		int requiredClicks = getNumberClick(quantity);
+
+		if (requiredClicks > randomClicks) {
+			offerWindow.getDynamicComponent(OFFER_ENTER_AMOUNT).doClick();
+			sleep(random(20, 100));
+			RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
+			if (chatbox.isValid() && chatbox.isVisible()) {
+				methods.keyboard.sendText(String.valueOf(quantity), true);
+			}
+		} else {
+			for (int i = 0; i < requiredClicks; i++) {
+				for (int j = 3; j >= 0; j--) {
+					int mostSignificantDecimal = nth(quantity, j);
+					if (mostSignificantDecimal != 0) {
+						// j now represents the power of the most significant decimal
+						if (offerWindow.getDynamicComponent(offerButtons[j]).doClick()) {
 							sleep(random(20, 50));
-						}
-						break;
-					}
-				case(2):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						//IE is not 122,133,144 ect
-						if (nth(quantity, 2) == 0) {
-							for (int i = 0; i < quantity / 100; i++) {
-								offerWindow.getDynamicComponent(OFFER_100).doClick();
-								sleep(random(20, 50));
-							}
 							break;
 						}
 					}
-				case(3):
-					//IE is not 12,13,14 ect
-					if (nth(quantity, 1) == 0) {
-						//IE is not 122,133,144 ect
-						if (nth(quantity, 2) == 0) {
-							//IE is not 1222,1333,1444 ect
-							if (nth(quantity, 3) == 0) {
-								RSWidget button = offerWindow.getDynamicComponent(OFFER_1000_OR_ALL_BUTTON);
-								if (button.getText() != "All") {
-									for (int i = 0; i < quantity / 1000; i++) {
-										button.doClick();
-										sleep(random(20, 50));
-									}
-									break;
-								}
-							}
-						}
-					}
-				default:
-					offerWindow.getDynamicComponent(OFFER_ENTER_AMOUNT).doClick();
-					sleep(random(20,100));
-					RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
-					if (chatbox.isValid() && chatbox.isVisible()) {
-						methods.keyboard.sendText(String.valueOf(quantity), true);
-					}
-					break;
+				}
 			}
 		}
 	}
@@ -441,9 +442,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -453,9 +455,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -478,13 +481,25 @@ public class GrandExchange extends MethodProvider {
 				if (roundQuantity) {
 					quantity = (quantity * random(85, 120)) / 100;
 				}
-				sleep(random(200,400));
+				sleep(random(200, 400));
 				RSWidget chatbox = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_INPUT);
 				if (chatbox.isValid() && chatbox.isVisible()) {
-					methods.keyboard.sendText(name, true);
+					methods.keyboard.sendText(name, false);
+					sleep(2000);
+					RSWidget[] items = methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_SEARCH_DYNAMIC_CONTAINER).getComponents();
+					Optional<RSWidget> widgetOptional = Arrays.stream(items).filter((x) -> Menu.stripFormatting(x.getName()).equals(name)).findFirst();
+					if (widgetOptional.isPresent()) {
+						if (widgetOptional.get().doAction("Select")) {
+							sleep(2000);
+						}
+						;
+					}
 				}
-				sleep(random(80,600));
-				createOffer(quantity, priceChange);
+				sleep(random(80, 600));
+				if (Arrays.stream(methods.interfaces.getComponent(GlobalWidgetInfo.GRAND_EXCHANGE_OFFER_WINDOW).getComponents())
+						.anyMatch((x) -> x.getText().equals(name))) {
+					return createOffer(quantity, priceChange);
+				}
 			}
 		}
 		return false;
@@ -492,8 +507,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param name        the name of the item
+	 * @param quantity    the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -503,8 +519,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -514,9 +531,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -526,8 +544,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param id          the id of the item
+	 * @param quantity    the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -537,8 +556,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -548,9 +568,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Buys an item from the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -560,9 +581,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -572,9 +594,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -590,48 +613,48 @@ public class GrandExchange extends MethodProvider {
 			open();
 			sleep(random(50, 250));
 		}
-		boolean sellFromInventory = (random(0,10) > 4);
+		boolean sellFromInventory = (random(0, 10) > 4);
 		if (isOpen()) {
 			RSWidget sellButton = methods.interfaces.getComponent(WidgetIndices.GrandExchange.PARENT_CONTAINER,
 					mapSlotToSlotIndex(freeSlot())).getDynamicComponent(WidgetIndices.DynamicComponents.GrandExchangeSlot.SELL_ICON_SPRITE);
 			if (sellButton.isValid() && sellButton.isVisible() && (items.getComponent() != null && items.getComponent().isVisible())) {
 				if (sellFromInventory) {
 					items.doAction("Offer");
-				}
-				else {
+				} else {
 					sellButton.doAction("Create");
 				}
 				if (roundQuantity) {
 					quantity = (quantity * random(85, 120)) / 100;
 				}
-				sleep(random(20,300));
+				sleep(random(20, 300));
 				items.doAction("Offer");
 				sleep(random(200, 400));
-				createOffer(quantity, priceChange);
+				return createOffer(quantity, priceChange);
 			}
 		}
 		return false;
 	}
 
-	private int mapSlotToSlotIndex(int slot) {
+	public int mapSlotToSlotIndex(int slot) {
 		return switch (slot) {
-			case 0 -> WidgetIndices.GrandExchange.FIRST_SLOT_DYNAMIC_CONTAINER;
-			case 1 -> WidgetIndices.GrandExchange.SECOND_SLOT_DYNAMIC_CONTAINER;
-			case 2 -> WidgetIndices.GrandExchange.THIRD_SLOT_DYNAMIC_CONTAINER;
-			case 3 -> WidgetIndices.GrandExchange.FOURTH_SLOT_DYNAMIC_CONTAINER;
-			case 4 -> WidgetIndices.GrandExchange.FIFTH_SLOT_DYNAMIC_CONTAINER;
-			case 5 -> WidgetIndices.GrandExchange.SIXTH_SLOT_DYNAMIC_CONTAINER;
-			case 6 -> WidgetIndices.GrandExchange.SEVENTH_SLOT_DYNAMIC_CONTAINER;
-			case 7 -> WidgetIndices.GrandExchange.EIGHT_SLOT_DYNAMIC_CONTAINER;
+			case 1 -> WidgetIndices.GrandExchange.FIRST_SLOT_DYNAMIC_CONTAINER;
+			case 2 -> WidgetIndices.GrandExchange.SECOND_SLOT_DYNAMIC_CONTAINER;
+			case 3 -> WidgetIndices.GrandExchange.THIRD_SLOT_DYNAMIC_CONTAINER;
+			case 4 -> WidgetIndices.GrandExchange.FOURTH_SLOT_DYNAMIC_CONTAINER;
+			case 5 -> WidgetIndices.GrandExchange.FIFTH_SLOT_DYNAMIC_CONTAINER;
+			case 6 -> WidgetIndices.GrandExchange.SIXTH_SLOT_DYNAMIC_CONTAINER;
+			case 7 -> WidgetIndices.GrandExchange.SEVENTH_SLOT_DYNAMIC_CONTAINER;
+			case 8 -> WidgetIndices.GrandExchange.EIGHT_SLOT_DYNAMIC_CONTAINER;
 			default -> -1;
 		};
 	}
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -641,8 +664,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param name        the name of the item
+	 * @param quantity    the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -652,8 +676,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param name the name of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param name          the name of the item
+	 * @param quantity      the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -663,7 +688,8 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param name the name of the item
+	 *
+	 * @param name     the name of the item
 	 * @param quantity the number of items to buy
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -673,9 +699,10 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
-	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
+	 * @param priceChange   the number of times to press the price change buttons (-5% or +5%)
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -685,8 +712,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param id          the id of the item
+	 * @param quantity    the number of items to buy
 	 * @param priceChange the number of times to press the price change buttons (-5% or +5%)
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -696,8 +724,9 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param id the id of the item
-	 * @param quantity the number of items to buy
+	 *
+	 * @param id            the id of the item
+	 * @param quantity      the number of items to buy
 	 * @param roundQuantity decides whether we need exactly this amount or not
 	 * @return <code>True</code> unless we can't buy
 	 */
@@ -707,7 +736,8 @@ public class GrandExchange extends MethodProvider {
 
 	/**
 	 * Sells an item in the grand exchange
-	 * @param id the id of the item
+	 *
+	 * @param id       the id of the item
 	 * @param quantity the number of items to buy
 	 * @return <code>True</code> unless we can't buy
 	 */

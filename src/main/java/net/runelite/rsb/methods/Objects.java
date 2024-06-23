@@ -2,10 +2,12 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.cache.definitions.ObjectDefinition;
+import net.runelite.rsb.query.RSObjectQueryBuilder;
 import net.runelite.rsb.wrappers.RSObject;
 import net.runelite.rsb.wrappers.RSTile;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -22,10 +24,14 @@ public class Objects extends MethodProvider {
      * A filter that accepts all matches.
      */
     public static final Predicate<RSObject> ALL_FILTER = new Predicate<>() {
-        public boolean test(RSObject npc) {
+        public boolean test(RSObject object) {
             return true;
         }
     };
+
+    public RSObjectQueryBuilder query() {
+        return new RSObjectQueryBuilder();
+    }
 
     /**
      * Returns all the <code>RSObject</code>s in the local region.
@@ -62,6 +68,24 @@ public class Objects extends MethodProvider {
     }
 
     /**
+     * Returns all the named <code>RSObject</code>s in the local region.
+     *
+     * @param names Names of objects accepted.
+     * @return An <code>RSObject[]</code> of all the accepted objects in the loaded
+     * region.
+     */
+    public RSObject[] getAll(final String... names) {
+        return getAll(o -> {
+            for (String name : names) {
+                if (o.getName().equals(name)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
+    /**
      * Returns the <code>RSObject</code> that is nearest out of all objects that are
      * accepted by the provided Filter.
      *
@@ -70,9 +94,10 @@ public class Objects extends MethodProvider {
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
+    @Nullable
     public RSObject getNearest(final Predicate<RSObject> filter) {
         RSObject cur = null;
-        double dist = -1;
+        double dist = Double.MAX_VALUE;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
                 Set<RSObject> objects = getAtLocal(x, y, -1);
@@ -84,14 +109,10 @@ public class Objects extends MethodProvider {
                         double distTmp = methods.calc.distanceBetween(
                                 methods.players.getMyPlayer().getLocation(),
                                 o.getLocation());
-                        if (cur == null) {
-                            dist = distTmp;
-                            cur = o;
-                        } else if (distTmp < dist) {
+                        if (distTmp < dist) {
                             cur = o;
                             dist = distTmp;
                         }
-                        break;
                     }
                 }
             }
@@ -109,12 +130,13 @@ public class Objects extends MethodProvider {
      * accepted by the filter; or null if there are no matching objects
      * in the current region.
      */
+    @Nullable
     public RSObject getNearest(final int distance, final Predicate<RSObject> filter) {
         RSObject cur = null;
         double dist = -1;
         for (int x = 0; x < 104; x++) {
             for (int y = 0; y < 104; y++) {
-                int distanceToCheck = methods.calc.distanceTo(new WalkerTile(x, y, methods.client.getPlane(), WalkerTile.TYPES.SCENE).toWorldTile());
+                int distanceToCheck = methods.calc.distanceTo(new RSTile(x, y, methods.client.getPlane(), RSTile.TYPES.SCENE).toWorldTile());
                 if (distanceToCheck < distance) {
                     Set<RSObject> objects = getAtLocal(x, y, -1);
                     for (RSObject o : objects) {
@@ -150,6 +172,7 @@ public class Objects extends MethodProvider {
      * the provided IDs; or null if there are no matching objects in the
      * current region.
      */
+    @Nullable
     public RSObject getNearest(final int... ids) {
         return getNearest(o -> {
             for (int id : ids) {
@@ -170,6 +193,7 @@ public class Objects extends MethodProvider {
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
+    @Nullable
     public RSObject getNearest(final String... names) {
         return getNearest(o -> {
             ObjectDefinition def = o.getDef();
@@ -194,6 +218,7 @@ public class Objects extends MethodProvider {
      * the provided names; or null if there are no matching objects in
      * the current region.
      */
+    @Nullable
     public RSObject findNearest(final int distance, final String... names) {
         return getNearest(distance, o -> {
             ObjectDefinition def = o.getDef();
@@ -214,6 +239,7 @@ public class Objects extends MethodProvider {
      * @param t The tile on which to search.
      * @return The top RSObject on the provided tile; or null if none found.
      */
+    @Nullable
     public RSObject getTopAt(final RSTile t) {
         return getTopAt(t, -1);
     }
@@ -227,6 +253,7 @@ public class Objects extends MethodProvider {
      * @return The top RSObject on the provided tile matching the specified
      * flags; or null if none found.
      */
+    @Nullable
     public RSObject getTopAt(final RSTile t, int mask) {
         RSObject[] objects = getAt(t, mask);
         return objects.length > 0 ? objects[0] : null;

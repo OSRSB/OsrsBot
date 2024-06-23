@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MainBufferProvider;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.game.NPCManager;
 import net.runelite.client.modified.RuneLite;
 import net.runelite.rsb.event.EventManager;
 import net.runelite.rsb.event.events.PaintEvent;
@@ -56,27 +57,27 @@ public class BotLite extends RuneLite implements BotLiteInterface {
     public volatile int inputFlags = Environment.INPUT_KEYBOARD | Environment.INPUT_MOUSE;
 
     /**
-     * Whether or not user input is allowed despite a script's preference.
+     * whether user input is allowed despite a script's preference.
      */
     public volatile boolean overrideInput = false;
 
     /**
-     * Whether or not all anti-randoms are enabled.
+     * whether all anti-randoms are enabled.
      */
     public volatile boolean disableRandoms = false;
 
     /**
-     * Whether or not the login screen anti-random is enabled.
+     * whether the login screen anti-random is enabled.
      */
     public volatile boolean disableAutoLogin = false;
 
     /**
-     * Whether or not rendering is enabled.
+     * whether rendering is enabled.
      */
     public volatile boolean disableRendering = false;
 
     /**
-     * Whether or not the canvas is enabled.
+     * whether the canvas is enabled.
      */
     public volatile boolean disableCanvas = false;
 
@@ -102,6 +103,8 @@ public class BotLite extends RuneLite implements BotLiteInterface {
     public Applet getApplet() {return applet = injector.getInstance(Applet.class);}
 
     public ItemManager getItemManager() { return injector.getInstance(ItemManager.class);}
+
+    public NPCManager getNPCManager() { return injector.getInstance(NPCManager.class);}
 
     public MethodContext getMethodContext() {
         return methods;
@@ -240,7 +243,7 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         if (client.getCanvas() == null) {
             return null;
         }
-        if (canvas == null) {
+        if (canvas == null || !canvas.isValid()) {
             canvas = new Canvas(client.getCanvas());
             return canvas;
         }

@@ -46,6 +46,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.discord.DiscordService;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.externalplugins.ExternalPluginManager;
+import net.runelite.client.game.WorldService;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.rs.ClientLoader;
 import net.runelite.client.rs.ClientUpdateCheckMode;
@@ -116,6 +117,8 @@ public class RuneLite extends net.runelite.client.RuneLite {
     @Inject
     public Provider<WorldMapOverlay> worldMapOverlay;
 
+    @Inject
+    public WorldService worldServiceProvider;
 
     @Inject
     @Nullable

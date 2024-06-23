@@ -71,6 +71,14 @@ public class WidgetIndices {
         // 21
     }
 
+    public static class DialogQuest {
+        public static final int GROUP_INDEX = 11;
+        public static final int LEFT_ICON = 1;
+        public static final int TEXT = 1;
+        public static final int RIGHT_ICON = 3;
+        public static final int CONTINUE_TEXT = 4;
+    }
+
     /**
      * Describes bank widgets
      * Last reviewed: 7/4/2022 1:57 am UTC+1
@@ -151,17 +159,17 @@ public class WidgetIndices {
         public static final int WORN_EQUIPMENT_RIGHT_VERTICAL_LINE_SPRITE = 73;
         public static final int WORN_EQUIPMENT_MAIN_HORIZONTAL_LINE_SPRITE = 74;
         public static final int WORN_EQUIPMENT_TOP_HORIZONTAL_LINE_SPRITE = 75;
-        public static final int WORN_EQUIPMENT_HEAD_DYNAMIC_CONTAINER = 76;
+        public static final int WORN_EQUIPMENT_HELMET_DYNAMIC_CONTAINER = 76;
         public static final int WORN_EQUIPMENT_CAPE_DYNAMIC_CONTAINER = 77;
         public static final int WORN_EQUIPMENT_AMULET_DYNAMIC_CONTAINER = 78;
         public static final int WORN_EQUIPMENT_WEAPON_DYNAMIC_CONTAINER = 79;
-        public static final int WORN_EQUIPMENT_CHEST_DYNAMIC_CONTAINER = 80;
+        public static final int WORN_EQUIPMENT_BODY_DYNAMIC_CONTAINER = 80;
         public static final int WORN_EQUIPMENT_SHIELD_DYNAMIC_CONTAINER = 81;
         public static final int WORN_EQUIPMENT_LEGS_DYNAMIC_CONTAINER = 82;
         public static final int WORN_EQUIPMENT_GLOVES_DYNAMIC_CONTAINER = 83;
-        public static final int WORN_EQUIPMENT_SHOES_DYNAMIC_CONTAINER = 84;
+        public static final int WORN_EQUIPMENT_BOOTS_DYNAMIC_CONTAINER = 84;
         public static final int WORN_EQUIPMENT_RING_DYNAMIC_CONTAINER = 85;
-        public static final int WORN_EQUIPMENT_ARROWS_DYNAMIC_CONTAINER = 86;
+        public static final int WORN_EQUIPMENT_AMMO_DYNAMIC_CONTAINER = 86;
         public static final int WORN_EQUIPMENT_TEXT_CONTAINER = 87;
         public static final int WORN_EQUIPMENT_UNKNOWN_LABEL = 88;
         public static final int WORN_EQUIPMENT_ATTACK_BONUS_TITLE_LABEL = 89;
@@ -177,8 +185,8 @@ public class WidgetIndices {
         public static final int WORN_EQUIPMENT_DEFENCE_MAGIC_BONUS_LABEL = 99;
         public static final int WORN_EQUIPMENT_DEFENCE_RANGE_BONUS_LABEL = 100;
         public static final int WORN_EQUIPMENT_OTHER_BONUSES_TITLE_LABEL = 101;
-        public static final int WORN_EQUIPMENT_MELEE_STRENGHT_BONUS_LABEL = 102;
-        public static final int WORN_EQUIPMENT_RANGED_STRENGHT_BONUS_LABEL = 103;
+        public static final int WORN_EQUIPMENT_MELEE_STRENGTH_BONUS_LABEL = 102;
+        public static final int WORN_EQUIPMENT_RANGED_STRENGTH_BONUS_LABEL = 103;
         public static final int WORN_EQUIPMENT_MAGIC_DAMAGE_BONUS_LABEL = 104;
         public static final int WORN_EQUIPMENT_PRAYER_BONUS_LABEL = 105;
         public static final int WORN_EQUIPMENT_TARGET_SPECIFIC_TITLE_LABEL = 106;
@@ -523,7 +531,7 @@ public class WidgetIndices {
 
     /**
      * Describes settings tab
-     * Last reviewed: 10/3/2022 3:09 am UTC+1
+     * Last reviewed: 10/6/2023 10:07 pm UTC+1
      */
     public static class Settings {
         public static final int GROUP_INDEX = 116;
@@ -531,39 +539,37 @@ public class WidgetIndices {
         public static final int TOP_BAR_CONTAINER = 1;
         public static final int TITLE_LABEL = 2;
         public static final int INNER_FRAME_DYNAMIC_CONTAINER = 3; //0-7 thick border sprites
-        public static final int INNER_FRAME_INNER_CONTAINER = 4;
-        public static final int PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
-        public static final int PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
-        public static final int NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
-        public static final int BOTTOM_BAR_CONTAINER = 8;
-        // gap 9 - 71
-        public static final int TAB_ACCEPT_AID_DYNAMIC_CONTAINER = 72; // 0-1 tab sprite, icon sprite
-        public static final int TAB_TOGGLE_RUN_DYNAMIC_CONTAINER = 73; // 0-2 tab sprite, icon sprite, label percentage
-        public static final int TAB_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 74; // 0-1 tab sprite, icon sprite
-        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 75; // 0-9 sprites of button
-        public static final int TAB_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 76; // 0-1 tab sprite, icon sprite
-        // gap 77 - 85
-        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 86;
-        // gap 87 - 101
-        public static final int TOP_BAR_FIRST_SEPARATOR_LINE = 102;
-        public static final int TOP_BAR_SECOND_SEPARATOR_LINE = 103;
-        public static final int TOP_BAR_THIRD_SEPARATOR_LINE = 104;
-        public static final int TOP_BAR_FOURTH_SEPARATOR_LINE = 105;
-        public static final int TAB_CONTROLS_SETTINGS_CONTAINER = 106;
-        public static final int TAB_CONTROLS_SETTINGS_LEFT_SIDE_SPRITE = 107;
-        public static final int TAB_CONTROLS_SETTINGS_MID_SIDE_SPRITE = 108;
-        public static final int TAB_CONTROLS_SETTINGS_RIGHT_SIDE_SPRITE = 109;
-        public static final int TAB_CONTROLS_SETTINGS_ICON_SPRITE = 110;
-        public static final int TAB_TAB_AUDIO_SETTINGS_CONTAINER = 111;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_CONTAINER = 112;
-        public static final int TAB_TAB_AUDIO_SETTINGS_LEFT_SIDE_SPRITE = 113;
-        public static final int TAB_TAB_AUDIO_SETTINGS_MID_SIDE_SPRITE = 114;
-        public static final int TAB_TAB_AUDIO_SETTINGS_RIGHT_SIDE_SPRITE = 115;
-        public static final int TAB_TAB_AUDIO_SETTINGS_ICON_SPRITE = 116;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_LEFT_SIDE_SPRITE = 117;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_MID_SIDE_SPRITE = 118;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_RIGHT_SIDE_SPRITE = 119;
-        public static final int TAB_TAB_DISPLAY_SETTINGS_ICON_SPRITE = 120;
+        public static final int TAB_CONTROLS_INNER_FRAME_INNER_CONTAINER = 4;
+        public static final int TAB_CONTROLS_PK_SKULL_PREVENTION_DYNAMIC_CONTAINER = 5; // 0-1 label, checkbox
+        public static final int TAB_CONTROLS_PLAYER_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 6; // 0-5 dropdown, button, boxes, sprites
+        public static final int TAB_CONTROLS_NPC_ATTACK_OPTIONS_DYNAMIC_CONTAINER = 7; // 0-5 dropdown, button, boxes, sprites
+        public static final int TAB_CONTROLS_BOTTOM_BAR_CONTAINER = 8;
+        public static final int TAB_AUDIO_INNER_CONTAINER = 9;
+        public static final int TAB_DISPLAY_INNER_CONTAINER = 10;
+        // gap 11 - 26
+        public static final int TAB_DISPLAY_LAYOUT_DYNAMIC_CONTAINER = 27; // 1-5
+        // 28
+        public static final int TAB_CONTROLS_ACCEPT_AID_DYNAMIC_CONTAINER = 29; // 0-1 tab sprite, icon sprite
+        public static final int TAB_CONTROLS_TOGGLE_RUN_DYNAMIC_CONTAINER = 30; // 0-2 tab sprite, icon sprite, label percentage
+        public static final int TAB_CONTROLS_VIEW_HOUSE_OPTIONS_DYNAMIC_CONTAINER = 31; // 0-1 tab sprite, icon sprite
+        public static final int ALL_SETTINGS_DYNAMIC_CONTAINER = 32; // 0-9 sprites of button
+        public static final int TAB_CONTROLS_OPEN_BOUND_POUCH_DYNAMIC_CONTAINER = 33; // 0-1 tab sprite, icon sprite
+        // gap 34 - 43
+        public static final int TAB_DISPLAY_ZOOM_TOGGLE_RESET = 44;
+        // gap 45 - 57
+        public static final int TAB_DISPLAY_ZOOM_SLIDER = 58; //  zoom: relativeX; out: 0; default: 48; in 96
+        // gap 59 - 62
+        public static final int TAB_CONTROLS_TAB_BUTTON = 63;
+        // gap 64 - 67
+        public static final int TAB_AUDIO_SETTINGS_TAB_BUTTON = 68;
+        public static final int TAB_DISPLAY_SETTINGS_TAB_BUTTON = 69;
+        // gap 70 - 92
+        public static final int TAB_MUSIC_TOGGLE_MUSIC = 93;
+        // gap 94 - 107
+        public static final int TAB_MUSIC_TOGGLE_SOUND_EFFECTS = 107;
+        // gap 108 - 121
+        public static final int TAB_MUSIC_TOGGLE_AREA_SOUND = 122;
+
     }
 
     /**
@@ -600,53 +606,51 @@ public class WidgetIndices {
      */
     public static class Minimap {
         public static final int GROUP_INDEX = 160;
-        public static final int XP_ORB_SPRITE = 1; // Interactions: "Hide", "Setup"
-        public static final int HEALTH_ORB_PARENT_CONTAINER = 2;
-        public static final int HEALTH_ORB_PARENT_SPRITE = 3;
-        public static final int HEALTH_ORB_CONTAINER = 4; // Interactions: "Cure"
-        public static final int HEALTH_ORB_LABEL = 5;
-        public static final int HEALTH_ORB_SPRITE = 6;
-        // 7 - 8 gap
-        public static final int HEALTH_ORB_ENERGY_CONSUMED_CONTAINER = 9;
-        public static final int HEALTH_ORB_ENERGY_CONSUMED_SPRITE = 10;
-        public static final int HEALTH_ORB_ICON_CONTAINER = 11;
-        public static final int HEALTH_ORB_ICON_SPRITE = 12;
-        public static final int QUICK_PRAYER_ORB_PARENT_CONTAINER = 13;
-        public static final int QUICK_PRAYER_ORB_PARENT_SPRITE = 14;
-        public static final int QUICK_PRAYER_ORB_CONTAINER = 15; // Interactions: "Activate", "Setup"
-        public static final int QUICK_PRAYER_ORB_LABEL = 16;
-        public static final int QUICK_PRAYER_ORB_SPRITE = 17;
-        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_CONTAINER = 18;
-        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_SPRITE = 19;
-        public static final int QUICK_PRAYER_ORB_ICON_SPRITE = 20;
-        public static final int RUN_ORB_PARENT_CONTAINER = 21;
-        public static final int RUN_ORB_PARENT_SPRITE = 22;
-        public static final int RUN_ORB_CONTAINER = 23; // Interactions: "Toggle"
-        public static final int RUN_ORB_LABEL = 24;
-        public static final int RUN_ORB_SPRITE = 25;
-        public static final int RUN_ORB_ENERGY_CONSUMED_CONTAINER = 26;
-        public static final int RUN_ORB_ENERGY_CONSUMED_SPRITE = 27;
-        public static final int RUN_ORB_ICON_SPRITE = 28;
-        public static final int SPEC_ORB_PARENT_CONTAINER = 29;
-        public static final int SPEC_ORB_PARENT_SPRITE = 30;
-        public static final int SPEC_ORB_CONTAINER = 31; // Interactions: "Use"
-        public static final int SPEC_ORB_LABEL = 32;
-        public static final int SPEC_ORB_ICON_SPRITE = 33;
-        public static final int SPEC_ORB_ENERGY_CONSUMED_CONTAINER = 34;
-        public static final int SPEC_ORB_ENERGY_CONSUMED_SPRITE = 35;
-        public static final int SPEC_ORB_RECHARGE_CONTAINER = 36; // NOTE: unclear
-        public static final int SPEC_ORB_SPRITE = 37;
-        public static final int BOND_ORB_PARENT_CONTAINER = 38;
-        public static final int BOND_ORB_PARENT_SPRITE = 39;
-        public static final int BOND_ORB_ICON_SPRITE = 40;
-        public static final int BOND_ORB_CONTAINER = 41; // Interactions: "Open Store", "Bond Pouch"
-        public static final int BOND_ORB_SPRITE = 42;
-        public static final int WORLDMAP_ORB_CONTAINER = 43;
-        public static final int WIKI_BANNER_PARENT_CONTAINER = 44;
-        public static final int WIKI_BANNER_CONTAINER = 45; // Interactions: ... 10 unknown
-        public static final int WIKI_BANNER_SPRITE = 46;
-        public static final int WORLDMAP_ORB_PARENT_SPRITE = 47;
-        public static final int WORLDMAP_ORB_SPRITE = 48; // Interactions: "Floating World Map", "Fullscreen World Map"
+        public static final int XP_ORB_SPRITE = 5; // Interactions: "Hide", "Setup"
+        public static final int HEALTH_ORB_PARENT_CONTAINER = 6;
+        public static final int HEALTH_ORB_CONTAINER = 7; // Interactions: "Cure"
+        public static final int HEALTH_ORB_LABEL = 9;
+        public static final int HEALTH_ORB_SPRITE = 10;
+        public static final int HEALTH_ORB_ENERGY_CONSUMED_CONTAINER = 13;
+        public static final int HEALTH_ORB_ENERGY_CONSUMED_SPRITE = 14;
+        public static final int HEALTH_ORB_ICON_CONTAINER = 15;
+        public static final int HEALTH_ORB_ICON_SPRITE = 16;
+        public static final int QUICK_PRAYER_ORB_PARENT_CONTAINER = 17;
+        public static final int QUICK_PRAYER_ORB_PARENT_SPRITE = 18;
+        public static final int QUICK_PRAYER_ORB_CONTAINER = 19; // Interactions: "Activate", "Setup"
+        public static final int QUICK_PRAYER_ORB_LABEL = 20;
+        public static final int QUICK_PRAYER_ORB_SPRITE = 21;
+        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_CONTAINER = 22;
+        public static final int QUICK_PRAYER_ORB_ENERGY_CONSUMED_SPRITE = 23;
+        public static final int QUICK_PRAYER_ORB_ICON_SPRITE = 24;
+        public static final int RUN_ORB_PARENT_CONTAINER = 25;
+        public static final int RUN_ORB_PARENT_SPRITE = 26;
+        public static final int RUN_ORB_CONTAINER = 27; // Interactions: "Toggle"
+        public static final int RUN_ORB_LABEL = 28;
+        public static final int RUN_ORB_SPRITE = 29;
+        public static final int RUN_ORB_ENERGY_CONSUMED_CONTAINER = 30;
+        public static final int RUN_ORB_ENERGY_CONSUMED_SPRITE = 31;
+        public static final int RUN_ORB_ICON_SPRITE = 32;
+        public static final int SPEC_ORB_PARENT_CONTAINER = 33;
+        public static final int SPEC_ORB_PARENT_SPRITE = 34;
+        public static final int SPEC_ORB_CONTAINER = 35; // Interactions: "Use"
+        public static final int SPEC_ORB_LABEL = 36;
+        public static final int SPEC_ORB_ICON_SPRITE = 37;
+        public static final int SPEC_ORB_ENERGY_CONSUMED_CONTAINER = 38;
+        public static final int SPEC_ORB_ENERGY_CONSUMED_SPRITE = 39;
+        public static final int SPEC_ORB_RECHARGE_CONTAINER = 40; // NOTE: unclear
+        public static final int SPEC_ORB_SPRITE = 41;
+        public static final int BOND_ORB_PARENT_CONTAINER = 42;
+        public static final int BOND_ORB_PARENT_SPRITE = 43;
+        public static final int BOND_ORB_ICON_SPRITE = 44;
+        public static final int BOND_ORB_CONTAINER = 45; // Interactions: "Open Store", "Bond Pouch"
+        public static final int BOND_ORB_SPRITE = 46;
+        public static final int WORLDMAP_ORB_CONTAINER = 48;
+        public static final int WIKI_BANNER_PARENT_CONTAINER = 47;
+        public static final int WIKI_BANNER_CONTAINER = 1; // Interactions: ... 10 unknown
+        public static final int WIKI_BANNER_SPRITE = 2;
+        public static final int WORLDMAP_ORB_PARENT_SPRITE = 52;
+        public static final int WORLDMAP_ORB_SPRITE = 53; // Interactions: "Floating World Map", "Fullscreen World Map"
     }
 
     /**
@@ -655,6 +659,7 @@ public class WidgetIndices {
      */
     public static class ResizableClassicViewport {
         public static final int GROUP_INDEX = 161;
+        public static final int DIALOG_WINDOW_CONTAINER = 16;
         public static final int MINIMAP_CONTAINER = 21;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_ONE_CONTAINER = 22;
         public static final int MINIMAP_DRAW_AREA_SEGMENT_TWO_CONTAINER = 23;
@@ -789,7 +794,7 @@ public class WidgetIndices {
      */
     public static class ResizableModernViewport {
         public static final int GROUP_INDEX = 164;
-        // 0 - 13 gap
+        // 0 - 14 gap
         public static final int ENTIRE_VIEWPORT_CONTAINER = 14;
         public static final int INNER_VIEWPORT_PARENT_CONTAINER = 15;
         public static final int DIALOG_WINDOW_CONTAINER = 16;
@@ -1008,7 +1013,8 @@ public class WidgetIndices {
         public static final int INNER_FRAME_CONTAINER = 1;
         // 2
         public static final int SPELLS_CONTAINER = 3;
-        // 4
+
+        public static final int KOUREND_HOME_TELEPORT_SPRITE = 4;
         public static final int CATHERBY_HOME_TELEPORT_SPRITE = 5; // on Leagues
         public static final int LUMBRIDGE_HOME_TELEPORT_SPRITE = 6;
         public static final int WIND_STRIKE_SPRITE = 7;
@@ -1152,11 +1158,54 @@ public class WidgetIndices {
         public static final int SPIN_FLAX_SPRITE = 143;
         public static final int OURANIA_TELEPORT_SPRITE = 144;
         //  Arceeus book
-        public static final int ARCEEUS_HOME_TELEPORT_SPRITE = 145;
-        public static final int BASIC_REANIMATION = 146;
-        // TODO: arceeus spells 147 - 188
-        public static final int RESSURECT_GREATER_ZOMBIE = 189;
-        // 190 - 191
+
+        public static final int ARCEUUS_HOME_TELEPORT_SPRITE = 145;
+        public static final int BASIC_REANIMATION_SPRITE = 146;
+        public static final int ARCEUUS_LIBRARY_TELEPORT_SPRITE = 147;
+        public static final int ADEPT_REANIMATION_SPRITE = 148;
+        public static final int EXPERT_REANIMATION_SPRITE = 149;
+        public static final int MASTER_REANIMATION_SPRITE = 150;
+        public static final int DRAYNOR_MANOR_TELEPORT_SPRITE = 151;
+        public static final int MIND_ALTAR_TELEPORT_SPRITE = 153;
+        public static final int RESPAWN_TELEPORT_SPRITE = 154;
+        public static final int SALVE_GRAVEYARD_TELEPORT_SPRITE = 155;
+        public static final int FENKENSTRAINS_CASTLE_TELEPORT_SPRITE = 156;
+        public static final int WEST_ARDOUGNE_TELEPORT_SPRITE = 157;
+        public static final int HARMONY_ISLAND_TELEPORT_SPRITE = 158;
+        public static final int CEMETERY_TELEPORT_SPRITE = 159;
+        public static final int RESURRECT_CROPS_SPRITE = 160;
+        public static final int BARROWS_TELEPORT_SPRITE = 161;
+        public static final int APE_ATOLL_TELEPORT_ARCEUUS_SPRITE = 162;
+        public static final int BATTLEFRONT_TELEPORT_SPRITE = 163;
+        public static final int INFERIOR_DEMONBANE_SPRITE = 164;
+        public static final int SUPERIOR_DEMONBANE_SPRITE = 165;
+        public static final int DARK_DEMONBANE_SPRITE = 166;
+        public static final int MARK_OF_DARKNESS_SPRITE = 167;
+        public static final int GHOSTLY_GRASP_SPRITE = 168;
+        public static final int SKELETAL_GRASP_SPRITE = 169;
+        public static final int UNDEAD_GRASP_SPRITE = 170;
+        public static final int WARD_OF_ARCEUUS_SPRITE = 171;
+        public static final int LESSER_CORRUPTION_SPRITE = 172;
+        public static final int GREATER_CORRUPTION_SPRITE = 173;
+        public static final int DEMONIC_OFFERING_SPRITE = 174;
+        public static final int SINISTER_OFFERING_SPRITE = 175;
+        public static final int DEGRIME_SPRITE = 176;
+        public static final int SHADOW_VEIL_SPRITE = 177;
+        public static final int VILE_VIGOUR_SPRITE = 178;
+        public static final int DARK_LURE_SPRITE = 179;
+        public static final int DEATH_CHARGE_SPRITE = 180;
+        public static final int RESURRECT_LESSER_GHOST_SPRITE = 181;
+        public static final int RESURRECT_LESSER_SKELETON_SPRITE = 182;
+        public static final int RESURRECT_LESSER_ZOMBIE_SPRITE = 183;
+        public static final int RESURRECT_SUPERIOR_GHOST_SPRITE = 184;
+        public static final int RESURRECT_SUPERIOR_SKELETON_SPRITE = 185;
+        public static final int RESURRECT_SUPERIOR_ZOMBIE_SPRITE = 186;
+        public static final int RESURRECT_GREATER_GHOST_SPRITE = 187;
+        public static final int RESURRECT_GREATER_SKELETON_SPRITE = 188;
+        public static final int RESURRECT_GREATER_ZOMBIE_SPRITE = 189;
+
+        public static final int TOOLTIP = 190;
+        // 191
         public static final int SPELL_FILTERS_DYNAMIC_CONTAINER = 192;
         public static final int SPELL_FILTERS_FRAME_SPRITE = 193;
         public static final int SPELL_FILTERS_TITLE_LABEL = 194;
@@ -1177,6 +1226,20 @@ public class WidgetIndices {
     }
 
     /**
+     * Describes a dialog widget that appears in some quest?
+     * Got one that says Before starting this quest be aware that one or more of your skill levels are lower than recommended
+     * I think when talking to aggie the witch
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class DialogUnknown {
+        public static final int GROUP_INDEX = 229;
+        public static final int CONTAINER = 0;
+        public static final int TITLE_LABEL = 1;
+        public static final int CONTINUE = 2;
+    }
+
+    /**
      * Describes npc dialog widgets
      * Last reviewed: 19/3/2022 0:19 am UTC+1
      */
@@ -1189,6 +1252,20 @@ public class WidgetIndices {
         public static final int DIALOG_TITLE_LABEL = 4;
         public static final int DIALOG_CONTINUE_LABEL = 5;
         public static final int DIALOG_TEXT_LABEL = 6;
+    }
+
+    /**
+     * Describes level up widgets
+     * Last reviewed:
+     * TODO: review
+     */
+    public static class LevelUp {
+        public static final int GROUP_INDEX = 233;
+        // TODO: not sure what 0 is
+        public static final int CONTAINER = 0;
+        public static final int SKILL = 1;
+        public static final int LEVEL = 2;
+        public static final int CONTINUE = 3;
     }
 
     /**
@@ -1562,6 +1639,14 @@ public class WidgetIndices {
     }
 
     /**
+     *  Describes the player's inventory widget when the trade screen is open
+     */
+    public static class PlayerTradeInventory {
+        public static final int GROUP_INDEX = 336;
+        public static final int ITEMS_CONTAINER = 0; // contains 0 - 28 (yes: 0 through 28)
+    }
+
+    /**
      * Describes a concrete poll details widget
      * Last reviewed: 9/4/2022 11:17 pm UTC+1
      */
@@ -1599,12 +1684,13 @@ public class WidgetIndices {
         public static final int WELCOME_MSG_SPRITE = 61;
         public static final int WELCOME_MSG_TITLE_LABEL = 62;
         public static final int WELCOME_MSG_TEXT_LABEL = 63;
-        // 64 - 73 gap
+        // 64 - 72 gap
+        public static final int BUTTON_CLICK_HERE_TO_PLAY_CONTAINER = 73;
         public static final int BUTTON_MEMBERSHIP_SPRITE = 74;
         // 75
         public static final int BUTTON_MEMBERSHIP_ICON_SPRITE = 76;
         public static final int BUTTON_MEMBERSHIP_TEXT_LABEL = 77;
-        public static final int BUTTON_CLICK_HERE_TO_PLAY_CONTAINER = 78;
+        // 78
         public static final int BUTTON_MEMBERSHIP_CONTAINER = 79;
         public static final int BUTTON_CLICK_HERE_TO_PLAY_SPRITE = 80;
         public static final int BUTTON_BANK_PIN_CONTAINER = 81;
@@ -1658,17 +1744,17 @@ public class WidgetIndices {
         public static final int MIDDLE_HORIZONTAL_STRAIGHT_LINE_SPRITE = 12;
         public static final int TOP_HORIZONTAL_STRAIGHT_LINE_SPRITE = 13;
         // 14
-        public static final int HEAD_DYNAMIC_CONTAINER = 15;  // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int BACK_DYNAMIC_CONTAINER = 16;  // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int NECK_DYNAMIC_CONTAINER = 17; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int HELMET_DYNAMIC_CONTAINER = 15;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int CAPE_DYNAMIC_CONTAINER = 16;  // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int AMULET_DYNAMIC_CONTAINER = 17; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int WEAPON_DYNAMIC_CONTAINER = 18; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int CHEST_DYNAMIC_CONTAINER = 19; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int BODY_DYNAMIC_CONTAINER = 19; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int SHIELD_DYNAMIC_CONTAINER = 20; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int LEGS_DYNAMIC_CONTAINER = 21; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int HANDS_DYNAMIC_CONTAINER = 22; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int FEET_DYNAMIC_CONTAINER = 23; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int GLOVES_DYNAMIC_CONTAINER = 22; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int BOOTS_DYNAMIC_CONTAINER = 23; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int RING_DYNAMIC_CONTAINER = 24; // Contains slot[0] sprite and item[1] sprite which has itemID
-        public static final int AMMUNITION_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
+        public static final int AMMO_DYNAMIC_CONTAINER = 25; // Contains slot[0] sprite and item[1] sprite which has itemID
         public static final int UNKNOWN1_CONTAINER = 26;
         public static final int UNKNOWN2_CONTAINER = 27;
     }
@@ -1833,7 +1919,7 @@ public class WidgetIndices {
      */
     public static class GrandExchange {
         public static final int GROUP_INDEX = 465;
-        public static final int PARENT_CONTAINER = 0;
+        public static final int PARENT_CONTAINER = GROUP_INDEX;
         public static final int CONTAINER = 1;
         public static final int DYNAMIC_CONTAINER = 2; // Contains stone borders close button 0-11
         public static final int BUTTON_HISTORY_DYNAMIC_CONTAINER = 3; // Contains sprites, label 0-9
@@ -1871,36 +1957,36 @@ public class WidgetIndices {
         public static final int BOTTOM_BAR_DYNAMIC_CONTAINER = 2;
         // 3
         public static final int PRAYERS_CONTAINER = 4;
-        public static final int THICK_SKIN = 5;
-        public static final int BURST_OF_STRENGTH = 6;
-        public static final int CLARITY_OF_THOUGHT = 7;
-        public static final int ROCK_SKIN = 8;
-        public static final int SUPERHUMAN_STRENGTH = 9;
-        public static final int IMPROVED_REFLEXES = 10;
-        public static final int RAPID_RESTORE = 11;
-        public static final int RAPID_HEAL = 12;
-        public static final int PROTECT_ITEM = 13;
-        public static final int STEEL_SKIN = 14;
-        public static final int ULTIMATE_STRENGTH = 15;
-        public static final int INCREDIBLE_REFLEXES = 16;
-        public static final int PROTECT_FROM_MAGIC = 17;
-        public static final int PROTECT_FROM_MISSILES = 18;
-        public static final int PROTECT_FROM_MELEE = 19;
-        public static final int RETRIBUTION = 20;
-        public static final int REDEMPTION = 21;
-        public static final int SMITE = 22;
-        public static final int SHARP_EYE = 23;
-        public static final int MYSTIC_WILL = 24;
-        public static final int HAWK_EYE = 25;
-        public static final int MYSTIC_LORE = 26;
-        public static final int EAGLE_EYE = 27;
-        public static final int MYSTIC_MIGHT = 28;
-        public static final int CHIVALRY = 29;
-        public static final int PIETY = 30;
-        public static final int RIGOUR = 31;
-        public static final int AUGURY = 32;
-        public static final int PRESERVE = 33;
-        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 34;
+        public static final int THICK_SKIN = 9;
+        public static final int BURST_OF_STRENGTH = 10;
+        public static final int CLARITY_OF_THOUGHT = 11;
+        public static final int ROCK_SKIN = 12;
+        public static final int SUPERHUMAN_STRENGTH = 13;
+        public static final int IMPROVED_REFLEXES = 14;
+        public static final int RAPID_RESTORE = 15;
+        public static final int RAPID_HEAL = 16;
+        public static final int PROTECT_ITEM = 17;
+        public static final int STEEL_SKIN = 18;
+        public static final int ULTIMATE_STRENGTH = 19;
+        public static final int INCREDIBLE_REFLEXES = 20;
+        public static final int PROTECT_FROM_MAGIC = 21;
+        public static final int PROTECT_FROM_MISSILES = 22;
+        public static final int PROTECT_FROM_MELEE = 23;
+        public static final int RETRIBUTION = 24;
+        public static final int REDEMPTION = 25;
+        public static final int SMITE = 26;
+        public static final int SHARP_EYE = 27;
+        public static final int HAWK_EYE = 28;
+        public static final int EAGLE_EYE = 29;
+        public static final int MYSTIC_WILL = 30;
+        public static final int MYSTIC_LORE = 31;
+        public static final int MYSTIC_MIGHT = 32;
+        public static final int RIGOUR = 33;
+        public static final int CHIVALRY = 34;
+        public static final int PIETY = 35;
+        public static final int AUGURY = 36;
+        public static final int PRESERVE = 37;
+        public static final int MOUSEOVER_TOOLTIP_CONTAINER = 38;
     }
 
     /**
@@ -1930,6 +2016,7 @@ public class WidgetIndices {
         public static final int MINIMAP_AREA_SPRITE = 22;
         public static final int MINIMAP_COMPASS_DYNAMIC_CONTAINER = 23;
         public static final int MINIMAP_ORBS_CONTAINER = 24;
+        public static final int DIALOG_WINDOW_CONTAINER = 40;
         public static final int BOTTOM_BAR_SPRITE = 44;
         public static final int BOTTOM_BAR_CONTAINER = 45;
         public static final int TAB_CHAT_CHANNEL_SPRITE = 46;

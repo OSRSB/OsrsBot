@@ -9,9 +9,25 @@ import net.runelite.api.Point;
 public class Mouse extends MethodProvider {
 
 	private int mouseSpeed = MouseHandler.DEFAULT_MOUSE_SPEED;
+	private int minReaction = 50;
+	private int maxReaction = 350;
 
 	Mouse(final MethodContext ctx) {
 		super(ctx);
+	}
+
+	/**
+	 * Configure reaction speed
+	 * @param min min mouse 'reaction' speed, -1 will be ignored
+	 * @param max max mouse 'reaction' speed, -1 will be ignored
+	 */
+	public void setReactionSpeed(int min, int max) {
+		if (max != -1) {
+			minReaction = min;
+		}
+		if (max != -1) {
+			maxReaction = max;
+		}
 	}
 
 
@@ -142,7 +158,7 @@ public class Mouse extends MethodProvider {
 	                               final int moveAfterDist) {
 		methods.inputManager.clickMouse(leftClick);
 		if (moveAfterDist > 0) {
-			sleep(random(50, 350));
+			sleep(random(minReaction, maxReaction));
 			Point pos = getLocation();
 			move(pos.getX() - moveAfterDist, pos.getY() - moveAfterDist,
 					moveAfterDist * 2, moveAfterDist * 2);
@@ -173,7 +189,7 @@ public class Mouse extends MethodProvider {
 	public synchronized void click(final int x, final int y, final int randX,
 	                               final int randY, final boolean leftClick) {
 		move(x, y, randX, randY);
-		sleep(random(50, 350));
+		sleep(random(minReaction, maxReaction));
 		click(leftClick, MouseHandler.DEFAULT_MAX_MOVE_AFTER);
 	}
 
@@ -192,7 +208,7 @@ public class Mouse extends MethodProvider {
 	public synchronized void click(final int x, final int y, final int randX,
 	                               final int randY, final boolean leftClick, final int moveAfterDist) {
 		move(x, y, randX, randY);
-		sleep(random(50, 350));
+		sleep(random(minReaction, maxReaction));
 		click(leftClick, moveAfterDist);
 	}
 
@@ -225,6 +241,15 @@ public class Mouse extends MethodProvider {
 	public void click(final Point p, final int x, final int y,
 	                  final boolean leftClick, final int moveAfterDist) {
 		click(p.getX(), p.getY(), x, y, leftClick, moveAfterDist);
+	}
+
+	/**
+	 * Clicks without any delay before clicking for times when accuracy is required
+	 *
+	 * @param leftClick     <code>true</code> to left-click, <code>false</code>to right-click.
+	 */
+	public synchronized void clickImmediately(boolean leftClick) {
+		click(leftClick, MouseHandler.DEFAULT_MAX_MOVE_AFTER);
 	}
 
 	/**
@@ -335,7 +360,7 @@ public class Mouse extends MethodProvider {
 		if (x != -1 || y != -1) {
 			methods.inputManager.moveMouse(speed, x, y, randX, randY);
 			if (afterOffset > 0) {
-				sleep(random(60, 300));
+				sleep(random(minReaction, maxReaction));
 				Point pos = getLocation();
 				move(pos.getX() - afterOffset, pos.getY() - afterOffset, afterOffset * 2,
 						afterOffset * 2);
@@ -396,6 +421,15 @@ public class Mouse extends MethodProvider {
 	public void move(final Point p, final int randX, final int randY,
 	                 final int afterOffset) {
 		move(getSpeed(), p.getX(), p.getY(), randX, randY, afterOffset);
+	}
+
+	/**
+	 * Scrolls the mouse wheel by i amount of clicks
+	 *
+	 * @param i The number of clicks. Positive is scroll down, negative is scroll up.
+	 */
+	public void scroll(int i) {
+		methods.inputManager.moveMouseWheel(i);
 	}
 
 	/**
@@ -470,7 +504,7 @@ public class Mouse extends MethodProvider {
 			return -1;
 		}
 		if (random(0, 2) == 0) {
-			return p.getX() - random(0, p.getX() < maxDistance ? p.getX() : maxDistance);
+			return p.getX() - random(0, Math.min(p.getX(), maxDistance));
 		} else {
 			int dist = methods.game.getWidth() - p.getX();
 			return p.getX()
@@ -490,7 +524,7 @@ public class Mouse extends MethodProvider {
 			return -1;
 		}
 		if (random(0, 2) == 0) {
-			return p.getY() - random(0, p.getY() < maxDistance ? p.getY() : maxDistance);
+			return p.getY() - random(0, Math.min(p.getY(), maxDistance));
 		} else {
 			int dist = methods.game.getHeight() - p.getY();
 			return p.getY()

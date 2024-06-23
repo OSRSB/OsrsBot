@@ -2,6 +2,8 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.CollisionData;
 import net.runelite.api.Point;
+import net.runelite.api.Varbits;
+import net.runelite.api.coords.LocalPoint;
 import net.runelite.rsb.internal.globval.GlobalWidgetInfo;
 import net.runelite.rsb.internal.globval.VarpIndices;
 import net.runelite.rsb.internal.globval.VarpValues;
@@ -49,7 +51,7 @@ public class Walking extends MethodProvider {
 	}
 
 	/**
-	 * Determines whether or not a given tile is in the loaded map area.
+	 * Determines whether a given tile is in the loaded map area.
 	 *
 	 * @param tile The tile to check.
 	 * @return <code>true</code> if local; otherwise <code>false</code>.
@@ -66,7 +68,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param destination The destination tile.
 	 * @return <code>true</code> if the next tile was walked to; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	public boolean walkTo(final RSTile destination) {
 		if (destination.equals(lastDestination)
@@ -181,15 +183,15 @@ public class Walking extends MethodProvider {
 	/**
 	 * Turns run on or off using the game GUI controls.
 	 *
-     * @param enable <code>true</code> to enable run, <code>false</code> to disable it.
-     * @return	if run was attempted to be enabled <code>true</code>; otherwise <code>false</code>
-     */
+	 * @param enable <code>true</code> to enable run, <code>false</code> to disable it.
+	 * @return if run was attempted to be enabled <code>true</code>; otherwise <code>false</code>
+	 */
 	public boolean setRun(final boolean enable) {
 		if (isRunEnabled() != enable) {
 			return methods.interfaces.getComponent(GlobalWidgetInfo.MINIMAP_RUN_ORB).doClick();
 		}
-        return false;
-    }
+		return false;
+	}
 
 	/**
 	 * Generates a path from the player's current location to a destination
@@ -241,7 +243,7 @@ public class Walking extends MethodProvider {
 	}
 
 	/**
-	 * Returns whether or not run is enabled.
+	 * Returns whether run is enabled.
 	 *
 	 * @return <code>true</code> if run mode is enabled; otherwise <code>false</code>.
 	 */
@@ -260,20 +262,53 @@ public class Walking extends MethodProvider {
 	}
 
 	/**
+	 * Returns the player's current run energy value in percentage.
+	 *
+	 * @return The player's current run energy in percentage.
+	 */
+	public int getEnergyPercentage() {
+		return methods.client.getEnergy() / 100;
+	}
+
+	/**
+	 * Returns the player's weight.
+	 *
+	 * @return The player's weight.
+	 */
+
+	public int getWeight() {
+		return methods.client.getWeight();
+	}
+
+
+	/**
+	 * Returns whether the player has the slowed depletion active.
+	 * <p>
+	 * This could be the stamina potion effect or the explorer ring effect.
+	 *
+	 * @return <code>true</code> if the player has the slowed depletion active; otherwise <code>false</code>.
+	 */
+	public boolean hasDepletionActive() {
+		return methods.client.getVarbitValue(Varbits.RUN_SLOWED_DEPLETION_ACTIVE) == 1;
+	}
+
+	/**
 	 * Gets the destination tile (where the flag is on the minimap). If there is
 	 * no destination currently, null will be returned.
 	 *
 	 * @return The current destination tile, or null.
 	 */
 	public RSTile getDestination() {
+		LocalPoint a = methods.client.getLocalDestinationLocation();
 
-		return (methods.client.getLocalDestinationLocation() != null) ? new RSTile(methods.client.getLocalDestinationLocation().getX(),
-				methods.client.getLocalDestinationLocation().getY(), methods.client.getPlane()) : null;
+		return (a != null) ? new RSTile(a.getX(),
+				a.getY(), methods.client.getPlane()) : null;
 	}
 
 	/**
 	 * Checks the obfuscated field to determine if it is collisiondata or not. If it is, then the method will return
 	 * its obfuscated name.
+	 *
 	 * @param field The field from the client class to check
 	 * @return The obfuscated type name for CollisionData[]
 	 */
@@ -296,12 +331,12 @@ public class Walking extends MethodProvider {
 	 * @param maxXDeviation Max X distance from tile.getX().
 	 * @param maxYDeviation Max Y distance from tile.getY().
 	 * @return The randomized tile.
-	 *             .
+	 * .
 	 */
 	@Deprecated
 	public RSTile randomizeTile(RSTile tile,
 								int maxXDeviation,
-	                            int maxYDeviation) {
+								int maxYDeviation) {
 		return randomize(tile, maxXDeviation, maxYDeviation);
 	}
 
@@ -310,7 +345,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param path The path to walk along.
 	 * @return <code>true</code> if the next tile was reached; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int)
 	 */
 	@Deprecated
@@ -324,7 +359,7 @@ public class Walking extends MethodProvider {
 	 * @param path    The path to walk along.
 	 * @param maxDist See {@link #nextTile(RSTile[], int)}.
 	 * @return <code>true</code> if the next tile was reached; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int, int)
 	 */
 	@Deprecated
@@ -339,7 +374,7 @@ public class Walking extends MethodProvider {
 	 * @param randX The X value to randomize each tile in the path by.
 	 * @param randY The Y value to randomize each tile in the path by.
 	 * @return <code>true</code> if the next tile was reached; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #walkPathMM(RSTile[], int, int, int)
 	 */
 	@Deprecated
@@ -355,7 +390,7 @@ public class Walking extends MethodProvider {
 	 * @param randX   The X value to randomize each tile in the path by.
 	 * @param randY   The Y value to randomize each tile in the path by.
 	 * @return <code>true</code> if the next tile was reached; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 */
 	@Deprecated
 	public boolean walkPathMM(RSTile[] path, int maxDist, int randX, int randY) {
@@ -372,7 +407,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param path The path to walk along.
 	 * @return <code>true</code> if the next tile was reached; otherwise
-	 *         <code>false</code>.
+	 * <code>false</code>.
 	 * @see #walkPathOnScreen(RSTile[], int)
 	 */
 	@Deprecated
@@ -404,7 +439,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param other The <code>RSTile</code> path array to reverse.
 	 * @return The reverse <code>RSTile</code> path for the given <code>RSTile</code>
-	 *         path.
+	 * path.
 	 */
 	@Deprecated
 	public RSTile[] reversePath(RSTile[] other) {
@@ -420,7 +455,7 @@ public class Walking extends MethodProvider {
 	 *
 	 * @param path The path.
 	 * @return The next <code>RSTile</code> to walk to on the provided path; or
-	 *         <code>null</code> if far from path or at destination.
+	 * <code>null</code> if far from path or at destination.
 	 * @see #nextTile(RSTile[], int)
 	 */
 	@Deprecated
@@ -437,7 +472,7 @@ public class Walking extends MethodProvider {
 	 *                 returned rather than the next tile, skipping one. This
 	 *                 interlacing aids continuous walking.
 	 * @return The next <code>RSTile</code> to walk to on the provided path; or
-	 *         <code>null</code> if far from path or at destination.
+	 * <code>null</code> if far from path or at destination.
 	 */
 	@Deprecated
 	public RSTile nextTile(RSTile path[], int skipDist) {
@@ -480,7 +515,7 @@ public class Walking extends MethodProvider {
 	 */
 	@Deprecated
 	public RSTile[] randomizePath(RSTile[] path, int maxXDeviation,
-	                              int maxYDeviation) {
+								  int maxYDeviation) {
 		RSTile[] rez = new RSTile[path.length];
 		for (int i = 0; i < path.length; i++) {
 			rez[i] = randomize(path[i], maxXDeviation, maxYDeviation);

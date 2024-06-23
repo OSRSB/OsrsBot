@@ -8,10 +8,12 @@ import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.util.OutputObjectComparer;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.common.Positionable;
-import net.runelite.rsb.wrappers.subwrap.WalkerTile;
+import net.runelite.rsb.wrappers.RSTile;
 
+import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,6 +23,8 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
     private static ArrayList<Field> pathFields = new ArrayList<>();
     private static int pathXIndex = -1;
     private static int pathYIndex = -1;
+
+    private final ClickBox clickBox = new ClickBox(this);
 
     public RSCharacter(MethodContext ctx) {
         super(ctx);
@@ -92,7 +96,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return <code>true</code> if the option was found; otherwise <code>false</code>.
      */
     public boolean doAction(final String action) {
-        return doAction(action, null);
+        return doAction(action, getName());
     }
 
     /**
@@ -103,8 +107,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return <code>true</code> if the option was found; otherwise <code>false</code>.
      */
     public boolean doAction(final String action, final String option) {
-        RSModel model = this.getModel();
-        return model != null && this.isValid() && this.getModel().doAction(action, option);
+        return getClickBox().doAction(action, option);
     }
 
     public RSModel getModel() {
@@ -134,15 +137,16 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * @return The % of HP
      */
     public int getHPPercent() {
-        int healthRatio = getAccessor().getHealthRatio();
+        double healthRatio = getAccessor().getHealthRatio();
+        double healthScale = getAccessor().getHealthScale();
         if (healthRatio == -1) return -1;
-        return isInCombat() ? healthRatio * 100 / 255 : 100;
+        return (int)(healthRatio / healthScale * 100);
     }
 
-    public WalkerTile getLocation() {
+    public RSTile getLocation() {
         Actor actor = getAccessor();
         if (actor == null) { return null; }
-        return new WalkerTile(actor.getWorldLocation());
+        return new RSTile(actor.getWorldLocation());
     }
 
     public String getMessage() {
@@ -282,30 +286,15 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
      * Hovers this Player/NPC
      */
     public boolean doHover() {
-        RSModel model = getModel();
-        if (model == null) {
-            return false;
-        }
-        this.getModel().hover();
-        return true;
+        return getClickBox().doHover();
     }
 
     public boolean doClick() {
-        RSModel model = getModel();
-        if (model == null) {
-            return false;
-        }
-        this.getModel().doClick(true);
-        return true;
+        return doClick(true);
     }
 
     public boolean doClick(boolean leftClick) {
-        RSModel model = getModel();
-        if (model == null) {
-            return false;
-        }
-        this.getModel().doClick(leftClick);
-        return true;
+        return getClickBox().doClick(leftClick);
     }
 
     public boolean isClickable() {
@@ -313,7 +302,15 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
         if (model == null) {
             return false;
         }
-        return model.getModel().isClickable();
+        return true;
+        //return model.getModel().isClickable();
+    }
+
+    public Shape getClickShape() {
+        return getAccessor().getConvexHull();
+    }
+    public ClickBox getClickBox() {
+        return clickBox;
     }
 
     public DIRECTION getDirectionFacing() {

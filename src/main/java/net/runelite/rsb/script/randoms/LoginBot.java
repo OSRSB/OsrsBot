@@ -65,6 +65,10 @@ public class LoginBot extends Random {
                     case 2:
                         switch (ctx.client.getCurrentLoginField()) {
                             case 0 -> {
+                                if (this.isUsernameFilled()) {
+                                    ctx.keyboard.sendKey('\n');
+                                    return random(1000, 5000);
+                                }
                                 ctx.keyboard.sendText(account.getName().toLowerCase().trim(), true);
                                 return random(1000, 5000);
                             }
@@ -86,8 +90,7 @@ public class LoginBot extends Random {
             } catch (Exception e) {
                 log.error("Login failed. Try again.");
             }
-        }
-        if (game.getClientState() == GameState.LOGGED_IN) {
+        } else if (game.getClientState() == GameState.LOGGED_IN) {
             RSWidget clickToPlay = ctx.interfaces.getComponent(GlobalWidgetInfo.LOGIN_CLICK_TO_PLAY);
             if (clickToPlay != null && clickToPlay.doClick()) {
                 return random(800, 2000);
@@ -164,6 +167,6 @@ public class LoginBot extends Random {
         String passWord = AccountManager.getPassword(account.getName());
         return interfaces.get(INTERFACE_LOGIN_SCREEN)
                 .getComponent(INTERFACE_PASSWORD).getText().toLowerCase()
-                .length() == (passWord == null ? 0 : passWord.length());
+                .length() == passWord.length();
     }
 }

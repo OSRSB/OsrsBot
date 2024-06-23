@@ -1,6 +1,7 @@
 package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.AABB;
 import net.runelite.api.Model;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
@@ -10,6 +11,7 @@ import net.runelite.api.model.Jarvis;
 import net.runelite.rsb.internal.wrappers.Filter;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
+import net.runelite.rsb.util.StdRandom;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,11 +30,7 @@ public class RSModel extends MethodProvider {
 	 * @return The vertex point index based model filter.
 	 */
 	public static Filter<RSModel> newVertexFilter(final int[] vertex_a) {
-		return new Filter<>() {
-			public boolean test(RSModel m) {
-				return Arrays.equals(m.indices1, vertex_a);
-			}
-		};
+		return m -> Arrays.equals(m.indices1, vertex_a);
 	}
 
 	protected Model model;
@@ -53,8 +51,7 @@ public class RSModel extends MethodProvider {
 			indices1 = model.getFaceIndices1();
 			indices2 = model.getFaceIndices2();
 			indices3 = model.getFaceIndices3();
-		}
-		else {
+		} else {
 			this.model = null;
 		}
 	}
@@ -67,40 +64,19 @@ public class RSModel extends MethodProvider {
 		return -1;
 	}
 
-	protected void update(){}
+	protected int getLocalZ() {
+		return Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane());
+	}
+
+	protected void update() {
+	}
 
 	/**
 	 * @param p A point on the screen
 	 * @return true of the point is within the bounds of the model
 	 */
-	private boolean contains(Point p) {
-		if (this == null) {
-			return false;
-		}
+	public boolean contains(Point p) {
 		Polygon[] triangles = getTriangles();
-		if (triangles == null) {
-			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
-			int minX = 0, maxX = 0, minY = 0, maxY = 0;
-			for (int i = 0; i < tilePoly.xpoints.length; i++) {
-				if (i == 0) {
-					minX = tilePoly.xpoints[i];
-					maxX = tilePoly.xpoints[i];
-					minY = tilePoly.ypoints[i];
-					maxY = tilePoly.ypoints[i];
-				}
-				minX = (minX > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minX;
-				maxX = (maxX < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxX;
-				minY = (minY > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minY;
-				maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
-			}
-			for (int x = minX; x < maxX; x++) {
-				for (int y = minY; y < maxY; y++) {
-					if (new Point(x, y).equals(p)) {
-						return true;
-					}
-				}
-			}
-		}
 		for (Polygon poly : triangles) {
 			if (poly.contains(new java.awt.Point(p.getX(), p.getY()))) {
 				return true;
@@ -112,13 +88,13 @@ public class RSModel extends MethodProvider {
 	/**
 	 * Clicks the RSModel.
 	 *
-	 * @param leftClick if true it left clicks.
+	 * @param leftClick if true it left-clicks.
 	 * @return true if clicked.
 	 */
 	public boolean doClick(boolean leftClick) {
 		try {
 			for (int i = 0; i < 10; i++) {
-				methods.mouse.move(getPoint());
+				methods.mouse.move(getPointNearCenter());
 				if (this.contains(methods.mouse.getLocation())) {
 					methods.mouse.click(leftClick);
 					return true;
@@ -139,12 +115,13 @@ public class RSModel extends MethodProvider {
 	 */
 	public boolean doAction(String action, String... target) {
 		try {
-			for (int i = 0; i < 10; i++) {
-				methods.mouse.move(getPoint());
-				if (this.contains(methods.mouse.getLocation())) {
-					if (methods.menu.doAction(action, target)) {
-						return true;
-					}
+			for (int i = 0; i < 3; i++) {
+				if (!this.contains(methods.mouse.getLocation())) {
+					methods.mouse.move(getPointNearCenter());
+					methods.mouse.move(getPointNearCenter());
+				}
+				if (methods.menu.doAction(action, target)) {
+					return true;
 				}
 			}
 		} catch (Exception ignored) {
@@ -188,82 +165,31 @@ public class RSModel extends MethodProvider {
 	 * Returns all the screen points.
 	 *
 	 * @return All the points that are on the screen, if the model is not on the
-	 *         screen it will return null.
+	 * screen it will return null.
 	 */
 	public Point[] getPoints() {
-		if (this == null) {
-			return null;
-		}
 		Polygon[] polys = getTriangles();
 		ArrayList<Point> points = new ArrayList<>();
-		if (polys == null) {
-			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
-			int minX = 0, maxX = 0, minY = 0, maxY = 0;
-			for (int i = 0; i < tilePoly.xpoints.length; i++) {
-				if ( i == 0) {
-					minX = tilePoly.xpoints[i];
-					maxX = tilePoly.xpoints[i];
-					minY = tilePoly.ypoints[i];
-					maxY = tilePoly.ypoints[i];
-				}
-				minX = (minX > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minX;
-				maxX = (maxX < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxX;
-				minY = (minY > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minY;
-				maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
-			}
-			for (int x = minX; x < maxX; x++) {
-			for (int y = minY; y < maxY; y++) {
-					points.add(new Point(x, y));
-				}
-			}
-		}
 
-		//Point[] points = new Point[polys.length * 3];
 		int index = 0;
 		for (Polygon poly : polys) {
 			for (int i = 0; i < 3; i++) {
 				points.add(index++, new Point(poly.xpoints[i], poly.ypoints[i]));
 			}
 		}
-		return (Point[]) points.toArray();
+		return points.toArray(new Point[0]);
 	}
 
 	/**
 	 * Gets a point on a model that is on screen.
 	 *
 	 * @return First point that it finds on screen else a random point on screen
-	 *         of an object.
+	 * of an object.
 	 */
 	public Point getPointOnScreen() {
 		ArrayList<Point> list = new ArrayList<>();
 		try {
 			Polygon[] tris = getTriangles();
-			if (tris == null) {
-				Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
-				int minX = 0, maxX = 0, minY = 0, maxY = 0;
-				for (int i = 0; i < tilePoly.xpoints.length; i++) {
-					if ( i == 0) {
-						minX = tilePoly.xpoints[i];
-						maxX = tilePoly.xpoints[i];
-						minY = tilePoly.ypoints[i];
-						maxY = tilePoly.ypoints[i];
-					}
-					minX = (minX > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minX;
-					maxX = (maxX < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxX;
-					minY = (minY > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minY;
-					maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
-				}
-				for (int x = minX; x < maxX; x++) {
-			for (int y = minY; y < maxY; y++) {
-						Point firstPoint = new Point(x, y);
-						if (methods.calc.pointOnScreen(firstPoint)) {
-							return firstPoint;
-						} else {
-							list.add(firstPoint);
-						}
-					}
-				}
-			}
 			for (Polygon p : tris) {
 				for (int j = 0; j < p.xpoints.length; j++) {
 					Point firstPoint = new Point(p.xpoints[j], p.ypoints[j]);
@@ -286,9 +212,10 @@ public class RSModel extends MethodProvider {
 	 * @return The on screen triangles of this model.
 	 */
 	public Polygon[] getTriangles() {
-		final int NO_MODEL = 2;
+		final int NO_MODEL = 1;
 		if (model == null) {
-			return null;
+			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
+			return new Polygon[]{tilePoly};
 		}
 		int count = model.getVerticesCount();
 
@@ -298,16 +225,14 @@ public class RSModel extends MethodProvider {
 		int localX = getLocalX();
 		int localY = getLocalY();
 
-		final int tileHeight = Perspective.getTileHeight(methods.client, new LocalPoint(localX, localY), methods.client.getPlane());
-
-		Perspective.modelToCanvas(methods.client, count, localX, localY, tileHeight, getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
-		ArrayList polys = new ArrayList(model.getFaceCount());
+		Perspective.modelToCanvas(methods.client, count, localX, localY, getLocalZ(), getOrientation(), model.getVerticesX(), model.getVerticesZ(), model.getVerticesY(), x2d, y2d);
+		ArrayList<Polygon> polys = new ArrayList<>(model.getFaceCount());
 
 		int[] trianglesX = model.getFaceIndices1();
 		int[] trianglesY = model.getFaceIndices2();
 		int[] trianglesZ = model.getFaceIndices3();
 
-		double averageTriangleLength = (trianglesX.length + trianglesY.length + trianglesZ.length) / 3;
+		double averageTriangleLength = (double) (trianglesX.length + trianglesY.length + trianglesZ.length) / 3;
 
 		for (int triangle = 0; triangle < count; ++triangle) {
 			if (averageTriangleLength <= NO_MODEL) {
@@ -328,28 +253,27 @@ public class RSModel extends MethodProvider {
 
 			polys.add(new Polygon(xx, yy, 3));
 		}
-		return (Polygon[]) polys.toArray(new Polygon[0]);
+		return polys.toArray(new Polygon[0]);
 	}
 
 	/**
 	 * Moves the mouse onto the RSModel.
 	 */
 	public void hover() {
-		methods.mouse.move(getPoint());
+		methods.mouse.move(getPointNearCenter());
 	}
 
 	/**
 	 * Returns true if the provided object is an RSModel with the same x, y and
-	 * z points as this model. This method compares all of the values in the
+	 * z points as this model. This method compares all the values in the
 	 * three vertex arrays.
 	 *
 	 * @return <code>true</code> if the provided object is a model with the same
-	 *         points as this.
+	 * points as this.
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof RSModel) {
-			RSModel m = (RSModel) o;
+		if (o instanceof RSModel m) {
 			return Arrays.equals(indices1, m.indices1)
 					&& Arrays.equals(xPoints, m.xPoints)
 					&& Arrays.equals(yPoints, m.yPoints)
@@ -358,37 +282,82 @@ public class RSModel extends MethodProvider {
 		return false;
 	}
 
+	public Point getCenterPoint() {
+		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
+
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
+		return new Point((max_x + min_x) / 2, (max_y + min_y) / 2);
+	}
+
+	/**
+	 * This function first chooses a random triangle from the model polygons.
+	 * Then it generates two random numbers between 0 and 1.
+	 * These numbers are used as barycentric coordinates to generate
+	 * a point that is guaranteed to be within the chosen triangle.
+	 *
+	 * @return a random point that collides with the polygons of this model.
+	 */
+	public Point getPointNearCenter() {
+		Polygon[] triangles = this.getTriangles();
+		int min_x = Integer.MAX_VALUE, max_x = Integer.MIN_VALUE, min_y = Integer.MAX_VALUE, max_y = Integer.MIN_VALUE;
+
+		for (Polygon triangle : triangles) {
+			for (int i = 0; i < triangle.npoints; ++i) {
+				if (triangle.xpoints[i] < min_x) {
+					min_x = triangle.xpoints[i];
+				}
+				if (triangle.xpoints[i] > max_x) {
+					max_x = triangle.xpoints[i];
+				}
+				if (triangle.ypoints[i] < min_y) {
+					min_y = triangle.ypoints[i];
+				}
+				if (triangle.ypoints[i] > max_y) {
+					max_y = triangle.ypoints[i];
+				}
+			}
+		}
+
+		int centerX = (max_x + min_x) / 2;
+		int centerY = (max_y + min_y) / 2;
+		
+		int x = (int)StdRandom.gaussian(min_x, max_x, centerX, (max_x - min_x) / 3);
+		int y = (int)StdRandom.gaussian(min_y, max_y, centerY, (max_y - min_y) / 3);
+		
+		return new Point(x, y);
+	}
+
 	protected Point getPointInRange(int start, int end) {
 		int locX = getLocalX();
 		int locY = getLocalY();
 		int height = methods.calc.tileHeight(locX, locY);
 		Polygon[] triangles = this.getTriangles();
-		if (triangles == null) {
-			Polygon tilePoly = Perspective.getCanvasTilePoly(methods.client, new LocalPoint(getLocalX(), getLocalY()));
-			int minX = 0, maxX = 0, minY = 0, maxY = 0;
-			for (int i = 0; i < tilePoly.xpoints.length; i++) {
-				if (i == 0) {
-					minX = tilePoly.xpoints[i];
-					maxX = tilePoly.xpoints[i];
-					minY = tilePoly.ypoints[i];
-					maxY = tilePoly.ypoints[i];
-				}
-				minX = (minX > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minX;
-				maxX = (maxX < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxX;
-				minY = (minY > tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : minY;
-				maxY = (maxY < tilePoly.xpoints[i]) ? tilePoly.xpoints[i] : maxY;
-			}
-			return (new Point(random(minX, maxX), random(minY, maxY)));
-		}
-		for (int i = start; i < end; i++) {
-			if (i < triangles.length) {
-				for (int n = 0; n < triangles[i].npoints; n++) {
-					return new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]);
-				}
-			}
-		}
-		return null;
+		ArrayList<Point> points = new ArrayList<>();
+		for (int i = start; i < end && i < triangles.length; i++)
+			for (int n = 0; n < triangles[i].npoints; n++)
+				points.add(new Point(triangles[i].xpoints[n], triangles[i].ypoints[n]));
+		if (points.isEmpty()) return null;
+		// Return a random point from the list
+		int randomIndex = StdRandom.uniform(points.size());
+		return points.get(randomIndex);
 	}
+
 
 	public int getOrientation() {
 		return 0;
@@ -407,21 +376,21 @@ public class RSModel extends MethodProvider {
 	}
 
 	public Polygon getConvexHull() {
-		int ex = model.getExtremeX();
-		if (ex == -1)
-		{
+		AABB ab = model.getAABB(0);
+		int ex = ab.getExtremeX();
+		if (ex == -1) {
 			// dynamic models don't get stored when they render where this normally happens
 			model.calculateBoundsCylinder();
-			model.calculateExtreme(0);
-			ex = model.getExtremeX();
+			model.getAABB(0);
+			ex = ab.getExtremeX();
 		}
 
-		int x1 = model.getCenterX();
-		int y1 = model.getCenterZ();
-		int z1 = model.getCenterY();
+		int x1 = ab.getCenterX();
+		int y1 = ab.getCenterZ();
+		int z1 = ab.getCenterY();
 
-		int ey = model.getExtremeZ();
-		int ez = model.getExtremeY();
+		int ey = ab.getExtremeZ();
+		int ez = ab.getExtremeY();
 
 		int x2 = x1 + ex;
 		int y2 = y1 + ey;
@@ -447,7 +416,7 @@ public class RSModel extends MethodProvider {
 		int[] x2d = new int[8];
 		int[] y2d = new int[8];
 
-		Perspective.modelToCanvas(methods.client, 8, getLocalX(), getLocalY(), Perspective.getTileHeight(methods.client, new LocalPoint(getLocalX(), getLocalY()), methods.client.getPlane()), getOrientation(), xa, ya, za, x2d, y2d);
+		Perspective.modelToCanvas(methods.client, 8, getLocalX(), getLocalY(), getLocalZ(), getOrientation(), xa, ya, za, x2d, y2d);
 		SimplePolygon simplePolygon = Jarvis.convexHull(x2d, y2d);
 		return new Polygon(simplePolygon.getX(), simplePolygon.getY(), simplePolygon.size());
 	}

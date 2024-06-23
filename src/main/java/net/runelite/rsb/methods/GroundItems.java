@@ -2,10 +2,12 @@ package net.runelite.rsb.methods;
 
 import net.runelite.api.*;
 import net.runelite.rsb.internal.wrappers.Filter;
+import net.runelite.rsb.query.RSGroundItemQueryBuilder;
 import net.runelite.rsb.wrappers.RSGroundItem;
 import net.runelite.rsb.wrappers.RSItem;
 import net.runelite.rsb.wrappers.RSTile;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * Provides access to ground items.
  */
 public class GroundItems extends MethodProvider {
-	
+
 	//This will hold the maximum number of tiles away the client can render
 	private static final int MAX_RENDER_RANGE = 25;
 
@@ -25,6 +27,10 @@ public class GroundItems extends MethodProvider {
 
 	GroundItems(final MethodContext ctx) {
 		super(ctx);
+	}
+
+	public RSGroundItemQueryBuilder query() {
+		return new RSGroundItemQueryBuilder();
 	}
 
 	/**
@@ -75,14 +81,14 @@ public class GroundItems extends MethodProvider {
 			for (int y = minY; y < maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
 				if (items != null)
- 				for (RSGroundItem item : items) {
- 					if (item.getItem() == null) {
- 						continue;
+					for (RSGroundItem item : items) {
+						if (item.getItem() == null) {
+							continue;
+						}
+						if (filter.test(item)) {
+							temp.add(item);
+						}
 					}
-					if (filter.test(item)) {
-						temp.add(item);
-					}
-				}
 			}
 		}
 		return temp.toArray(new RSGroundItem[temp.size()]);
@@ -93,8 +99,9 @@ public class GroundItems extends MethodProvider {
 	 *
 	 * @param filter Filters out unwanted matches.
 	 * @return The nearest item that is accepted by the provided Filter; or
-	 *         null.
+	 * null.
 	 */
+	@Nullable
 	public RSGroundItem getNearest(Filter<RSGroundItem> filter) {
 		int dist = 9999999;
 		int pX = methods.players.getMyPlayer().getLocation().getWorldLocation().getX();
@@ -105,7 +112,7 @@ public class GroundItems extends MethodProvider {
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
 				RSGroundItem[] items = getAllAt(x, y);
-				if (items != null)
+				if (items == null) continue;
 				for (RSGroundItem item : items) {
 					if (item.getItem() == null) {
 						continue;
@@ -127,20 +134,19 @@ public class GroundItems extends MethodProvider {
 	 *
 	 * @param ids The IDs to look for.
 	 * @return RSItemTile of the nearest item with the an ID that matches any in
-	 *         the array of IDs provided; or null if no matching ground items
-	 *         were found.
+	 * the array of IDs provided; or null if no matching ground items
+	 * were found.
 	 */
+	@Nullable
 	public RSGroundItem getNearest(final int... ids) {
-		return getNearest(new Filter<>() {
-			public boolean test(RSGroundItem item) {
-				int iid = item.getItem().getID();
-				for (int id : ids) {
-					if (id == iid) {
-						return true;
-					}
+		return getNearest(item -> {
+			int iid = item.getItem().getID();
+			for (int id : ids) {
+				if (id == iid) {
+					return true;
 				}
-				return false;
 			}
+			return false;
 		});
 	}
 

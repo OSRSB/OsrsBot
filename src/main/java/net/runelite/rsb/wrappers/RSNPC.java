@@ -3,11 +3,14 @@ package net.runelite.rsb.wrappers;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.runelite.api.*;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.cache.definitions.NpcDefinition;
 import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.Positionable;
 
+import javax.swing.text.Position;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,6 +57,17 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
         return -1;
     }
 
+    public int getMaximumHP() {
+        return methods.runeLite.getNPCManager().getHealth(getID());
+    }
+
+    public int getCurrentHP() {
+        double healthRatio = getAccessor().getHealthRatio();
+        double healthScale = getAccessor().getHealthScale();
+        int maximumHealth = getMaximumHP();
+        if (healthRatio == -1 || maximumHealth == -1) return -1;
+        return isInCombat() ? (int)(healthRatio / healthScale * maximumHealth) : maximumHealth;
+    }
     @Override
     public String getName() {
         NpcDefinition def = getDef();
@@ -84,11 +98,57 @@ public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
                 && npc.getInteracting().equals(methods.players.getMyPlayer().getAccessor());
     }
 
-    NpcDefinition getDef() {
+    public NpcDefinition getDef() {
         return this.def;
     }
 
     public RSTile getPosition() {
         return getLocation();
+    }
+
+    public int getWidth() {
+        return getAccessor().getWorldArea().getWidth();
+    }
+
+    public int getHeight() {
+        return getAccessor().getWorldArea().getHeight();
+    }
+
+    public RSTile getNearestTile(Positionable npc, Positionable from) {
+        RSTile nearestTile = null;
+        double minDistance = Float.POSITIVE_INFINITY;
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                RSTile tile = npc.getLocation().offset(i,j);
+                double distance = npc.getLocation().offset(i,j).distanceToDouble(from);
+                if (minDistance > distance) {
+                    minDistance = distance;
+                    nearestTile = tile;
+                }
+            }
+        }
+        return nearestTile;
+    }
+
+    public RSTile getNearestTile(Positionable from) {
+        return getNearestTile(getLocation(), from.getLocation());
+    }
+
+    public RSTile getNearestTile() {
+        return getNearestTile(getLocation(), methods.players.getMyPlayer());
+    }
+
+    /**
+     * Line of sight of NPCS is calculated from the player to the npc regardless of who is attacking
+     * This is the opposite of PvP where each player calculates their own LOS
+     * @param from
+     * @return
+     */
+    public boolean hasLineOfSight(Positionable from) {
+        return methods.calc.hasLineOfSight(getNearestTile(from).getWorldLocation().toWorldArea(), from.getLocation().getWorldLocation().toWorldArea());
+    }
+
+    public boolean hasLineOfSight() {
+        return methods.calc.hasLineOfSight(getNearestTile(methods.players.getMyPlayer()).getWorldLocation().toWorldArea(), methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea());
     }
 }

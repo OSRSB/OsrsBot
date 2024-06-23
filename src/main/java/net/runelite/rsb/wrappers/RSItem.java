@@ -1,6 +1,7 @@
 package net.runelite.rsb.wrappers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Item;
 import net.runelite.api.ItemComposition;
 import net.runelite.api.TileItem;
 import net.runelite.cache.definitions.ItemDefinition;
@@ -10,9 +11,11 @@ import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.MethodProvider;
 import net.runelite.rsb.methods.Web;
 import net.runelite.rsb.wrappers.common.CacheProvider;
+import net.runelite.rsb.wrappers.common.ClickBox;
 import net.runelite.rsb.wrappers.common.Clickable07;
 import net.runelite.rsb.wrappers.subwrap.RSMenuNode;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -27,13 +30,14 @@ import java.util.regex.Pattern;
 @Slf4j
 public class RSItem extends MethodProvider implements Clickable07, CacheProvider<ItemDefinition>  {
 
+	public static final int INVALID = -1;
 	private final int id;
 	private final int stackSize;
 	private final ItemDefinition def;
 	private RSWidget component;
 	private RSWidgetItem item;
 	private static Field groundActionMethod;
-
+	private final ClickBox clickBox = new ClickBox(this);
 
 	public RSItem(final MethodContext ctx, final RSWidgetItem item) {
 		super(ctx);
@@ -59,13 +63,21 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		this.def = this.getDefinition(id);
 	}
 
+	public RSItem(final MethodContext ctx, final RSWidget widget, final Item item) {
+		super(ctx);
+		this.id = item.getId();
+		this.stackSize = item.getQuantity();
+		this.component = widget;
+		this.def = this.getDefinition(id);
+	}
+
 	private ItemDefinition getDefinition(int id) {
-		if (id == -1) {
+		if (id == INVALID) {
 			return null;
 		}
 
 		ItemDefinition def = (ItemDefinition) createDefinition(id);
-		if (def.notedTemplate != -1 && def.notedID != -1) {
+		if (def != null && def.notedTemplate != -1 && def.notedID != -1) {
 			// assume def is a noted version, we need to link it
 			ItemDefinition template = (ItemDefinition) createDefinition(def.notedTemplate);
 			ItemDefinition unNoted = (ItemDefinition) createDefinition(def.notedID);
@@ -105,7 +117,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	}
 
 	/**
-	 * Returns whether or not this item has an available definition.
+	 * Returns whether this item has an available definition.
 	 *
 	 * @return <code>true</code> if an item definition is available;
 	 *         otherwise <code>false</code>.
@@ -133,7 +145,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	}
 
 	/**
-	 * Checks whether or not a valid component is being wrapped.
+	 * Checks whether a valid component is being wrapped.
 	 *
 	 * @return <code>true</code> if there is a visible wrapped component.
 	 */
@@ -147,7 +159,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 * @return <code>true</code> if there is a visible wrapped item
 	 */
 	public boolean isItemValid() {
-		return item.isValid();
+		return id != INVALID && item.isValid();
 	}
 
 	/**
@@ -157,7 +169,7 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 * @return The item's name or <code>null</code> if not found.
 	 */
 	public String getName() {
-		if (component != null && component.getName() != null) {
+		if (component != null && component.getName() != null && !component.getName().equals("")) {
 			return component.getName();
 		} else {
 			ItemDefinition definition = getDefinition();
@@ -178,7 +190,9 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 		}
 		ItemDefinition definition = getDefinition();
 		if (definition != null) {
-			return getDefinition().getInterfaceOptions();
+			String[] result = {null, null, null, null, null, "Use", "Examine"};
+			System.arraycopy(getDefinition().getInterfaceOptions(), 0, result, 0, 5);
+			return result;
 		}
 		return null;
 	}
@@ -220,12 +234,12 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	 *         successfully; otherwise <code>false</code>.
 	 */
 	public boolean doAction(final String action, final String option) {
-		return (component != null) ? component.doAction(action, option) : item.doAction(action, option);
+		return getClickBox().doAction(action, option);
 	}
 
 	public boolean doAction(Predicate<RSMenuNode> predicate) {
 		component.doClick(false);
-		for (RSMenuNode menuNode : Web.methods.chooseOption.getMenuNodes()) {
+		for (RSMenuNode menuNode : methods.chooseOption.getMenuNodes()) {
 			if (predicate.test(menuNode)) {
 				return (component != null)
 						? component.doAction(menuNode.getAction(), menuNode.getTarget())
@@ -238,24 +252,33 @@ public class RSItem extends MethodProvider implements Clickable07, CacheProvider
 	/**
 	 * Clicks the component wrapped by this RSItem if possible.
 	 *
-	 * @param left <code>true</code> if the component should be
-	 *             left-click; <code>false</code> if it should be right-clicked.
+	 * @param leftClick <code>true</code> if the component should be
+	 *             left-clicked; <code>false</code> if it should be right-clicked.
 	 * @return <code>true</code> if the component was clicked
 	 *         successfully; otherwise <code>false</code>.
 	 */
-	public boolean doClick(boolean left) {
-		return (component != null) ? component.doClick(left) : item.doClick(left);
+	public boolean doClick(boolean leftClick) {
+		return getClickBox().doClick(leftClick);
 	}
 
 	public boolean doClick() {
-		return (component != null) ? component.doClick(true) : item.doClick(true);
+		return doClick(true);
 	}
 
 	public boolean doHover() {
-		return (component != null) && component.doHover();
+		return getClickBox().doHover();
 	}
 
 	public boolean isClickable() {
 		return component.isValid() && component.isVisible() && component.isSelfVisible();
+	}
+
+	public Shape getClickShape() {
+		return (component != null) ? component.getClickShape() : item.getClickShape();
+	}
+
+	@Override
+	public ClickBox getClickBox() {
+		return clickBox;
 	}
 }

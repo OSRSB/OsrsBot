@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.google.common.math.DoubleMath;
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
+
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.binder.ConstantBindingBuilder;
@@ -17,9 +18,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Supplier;
 
+import com.google.inject.util.Providers;
 import net.runelite.api.Client;
 import net.runelite.api.hooks.Callbacks;
 import net.runelite.client.RuntimeConfig;
+import net.runelite.client.TelemetryClient;
 import net.runelite.client.account.SessionManager;
 import net.runelite.client.callback.Hooks;
 import net.runelite.client.chat.ChatMessageManager;
@@ -28,6 +31,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.config.RuneLiteConfig;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.game.ItemManager;
+import net.runelite.client.game.NPCManager;
 import net.runelite.client.menus.MenuManager;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.task.Scheduler;
@@ -39,7 +43,6 @@ import okhttp3.OkHttpClient;
 
 import javax.annotation.Nullable;
 
-
 @SuppressWarnings("removal")
 public class BotModule extends AbstractModule {
 
@@ -50,6 +53,11 @@ public class BotModule extends AbstractModule {
     private final boolean safeMode;
     private final File sessionfile;
     private final File config;
+    private boolean disableTelemetry = false;
+
+    private final String profile = "default";
+    private final boolean insecureWriteCredentials = false;
+    private final boolean noupdate = false;
 
 
     public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
@@ -109,9 +117,16 @@ public class BotModule extends AbstractModule {
             bind(MenuManager.class);
             bind(ChatMessageManager.class);
             bind(ItemManager.class);
+            bind(NPCManager.class);
             bind(Scheduler.class);
             bind(PluginManager.class);
             bind(SessionManager.class);
+
+
+            bind(String.class).annotatedWith(Names.named("profile")).toProvider(Providers.of(profile));
+            bindConstant().annotatedWith(Names.named("insecureWriteCredentials")).to(insecureWriteCredentials);
+            bind(File.class).annotatedWith(Names.named("runeLiteDir")).toInstance(RuneLite.RUNELITE_DIR);
+            bindConstant().annotatedWith(Names.named("noupdate")).to(noupdate);
 
             bind(Gson.class).toInstance(RuneLiteAPI.GSON);
 
@@ -190,5 +205,22 @@ public class BotModule extends AbstractModule {
     {
         final String prop = System.getProperty("runelite.ws.url");
         return HttpUrl.get(Strings.isNullOrEmpty(prop) ? s : prop);
+    }
+
+    @Provides
+    @Named("runelite.pluginhub.url")
+    HttpUrl providePluginHubBase(@Named("runelite.pluginhub.url") String s)
+    {
+        return HttpUrl.get(System.getProperty("runelite.pluginhub.url", s));
+    }
+
+    @Provides
+    @javax.inject.Singleton
+    TelemetryClient provideTelemetry(
+            OkHttpClient okHttpClient,
+            Gson gson,
+            @javax.inject.Named("runelite.api.base") HttpUrl apiBase)
+    {
+        return disableTelemetry ? null : new TelemetryClient(okHttpClient, gson, apiBase);
     }
 }

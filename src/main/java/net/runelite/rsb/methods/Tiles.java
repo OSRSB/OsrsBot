@@ -1,6 +1,10 @@
 package net.runelite.rsb.methods;
 
+import net.runelite.api.Client;
+import net.runelite.api.Constants;
 import net.runelite.api.Point;
+import net.runelite.api.Tile;
+import net.runelite.api.coords.WorldPoint;
 import net.runelite.rsb.wrappers.RSTile;
 
 /**
@@ -144,6 +148,26 @@ public class Tiles extends MethodProvider {
 			}
 		}
 		return close;
+	}
+
+	public Tile getTile(MethodContext ctx, WorldPoint worldPoint) {
+		return getTile(ctx, worldPoint.getX(), worldPoint.getY(), worldPoint.getPlane());
+	}
+
+	public Tile getTile(MethodContext ctx, int x, int y, int plane) {
+		Client client = ctx.client;
+		int correctedX = x < Constants.SCENE_SIZE ? x + client.getBaseX() : x;
+		int correctedY = y < Constants.SCENE_SIZE ? y + client.getBaseY() : y;
+
+		if (!WorldPoint.isInScene(client, correctedX, correctedY))
+		{
+			return null;
+		}
+
+		x = correctedX - client.getBaseX();
+		y = correctedY - client.getBaseY();
+
+		return client.getScene().getTiles()[plane][x][y];
 	}
 
 	/**

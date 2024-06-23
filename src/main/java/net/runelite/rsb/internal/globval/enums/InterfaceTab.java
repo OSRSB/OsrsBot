@@ -66,7 +66,12 @@ public enum InterfaceTab {
     EMOTES("Emotes", 0,
             GlobalWidgetInfo.FIXED_CLASSIC_EMOTES,
             GlobalWidgetInfo.RESIZABLE_CLASSIC_EMOTES,
-            GlobalWidgetInfo.RESIZABLE_MODERN_EMOTES);
+            GlobalWidgetInfo.RESIZABLE_MODERN_EMOTES),
+    // bogus widget info
+    NOTHING_SELECTED("NothingSelected", 0,
+            GlobalWidgetInfo.CHATBOX_FULL_INPUT,
+            GlobalWidgetInfo.CHATBOX_FULL_INPUT,
+            GlobalWidgetInfo.CHATBOX_FULL_INPUT);
 
     private final String name;
     private final int hotkey;

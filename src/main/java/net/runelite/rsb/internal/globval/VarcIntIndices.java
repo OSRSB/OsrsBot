@@ -5,6 +5,7 @@ public class VarcIntIndices {
     public static final int TOOLTIP_STATE = 2;
     public static final int CHATBOX_INPUT_TYPE = 5;
     public static final int CHATBOX_SCROLLBAR_POSITION = 7;
+    public static final int QUEST_SCROLLBAR_POSITION = 10;
     public static final int REPORT_WINDOW_STATE = 11;
     public static final int CHATBOX_SELECTED_TAB = 41;
     public static final int CHATBOX_HIGHLIGHTED_TAB = 42;

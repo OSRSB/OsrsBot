@@ -3,7 +3,6 @@ package net.runelite.rsb.wrappers.client_wrapper;
 import net.runelite.api.FontTypeFace;
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetItem;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -306,19 +305,6 @@ public abstract class BaseWidgetWrapper implements Widget {
     public Rectangle getBounds() {
         return wrappedWidget.getBounds();
     }
-
-    @Override
-    @Deprecated
-    public Collection<WidgetItem> getWidgetItems() {
-        return wrappedWidget.getWidgetItems();
-    }
-
-    @Override
-    @Deprecated
-    public WidgetItem getWidgetItem(int index) {
-        return wrappedWidget.getWidgetItem(index);
-    }
-
     @Override
     public int getItemId() {
         return wrappedWidget.getItemId();
@@ -735,7 +721,7 @@ public abstract class BaseWidgetWrapper implements Widget {
     }
 
     @Override
-    public void setVarTransmitTrigger(int... trigger) {
+    public void setVarTransmitTrigger(final int... trigger) {
         wrappedWidget.setVarTransmitTrigger(trigger);
     }
 
