@@ -14,7 +14,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import com.google.inject.Injector;
@@ -29,6 +32,8 @@ import net.runelite.api.widgets.WidgetItem;
 import net.runelite.api.worldmap.WorldMap;
 import net.runelite.api.worldmap.WorldMapRenderer;
 import net.runelite.client.Notifier;
+import net.runelite.client.RuntimeConfig;
+import net.runelite.client.TelemetryClient;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
@@ -44,6 +49,7 @@ import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.RSTimeUnit;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.client.modified.RuneLite;
+import net.runelite.client.RuneLiteProperties;
 
 /**
  * This class contains field required for mixins and runelite hooks to work.
@@ -72,6 +78,11 @@ public  class Hooks implements Callbacks
     private final DrawManager drawManager;
     private final Notifier notifier;
     private final ClientUI clientUi;
+    @Nullable
+    private final TelemetryClient telemetryClient;
+    @Nullable
+    private final RuntimeConfig runtimeConfig;
+    private final boolean developerMode;
 
     private Dimension lastStretchedDimensions;
     private VolatileImage stretchedImage;
@@ -131,7 +142,10 @@ public  class Hooks implements Callbacks
             ClientThread clientThread,
             DrawManager drawManager,
             Notifier notifier,
-            ClientUI clientUi
+            ClientUI clientUi,
+            @Nullable TelemetryClient telemetryClient,
+            @Nullable RuntimeConfig runtimeConfig,
+            @Named("developerMode") final boolean developerMode
     )
     {
         this.client = client;
@@ -147,6 +161,9 @@ public  class Hooks implements Callbacks
         this.drawManager = drawManager;
         this.notifier = notifier;
         this.clientUi = clientUi;
+        this.telemetryClient = telemetryClient;
+        this.runtimeConfig = runtimeConfig;
+        this.developerMode = developerMode;
         eventBus.register(this);
     }
 
@@ -217,6 +234,11 @@ public  class Hooks implements Callbacks
     public void frame()
     {
         eventBus.post(BEFORE_RENDER);
+    }
+
+    @Override
+    public void serverTick() {
+        shouldProcessGameTick = true;
     }
 
     /**
@@ -463,31 +485,6 @@ public  class Hooks implements Callbacks
     }
 
     @Override
-    public void updateNpcs()
-    {
-        if (ignoreNextNpcUpdate)
-        {
-            // After logging in an NPC update happens outside of the normal game tick, which
-            // is sent prior to skills and vars being bursted, so ignore it.
-            ignoreNextNpcUpdate = false;
-            log.debug("Skipping login updateNpc");
-        }
-        else
-        {
-            // The NPC update event seem to run every server tick,
-            // but having the game tick event after all packets
-            // have been processed is typically more useful.
-            shouldProcessGameTick = true;
-        }
-
-        // Replay deferred events, otherwise if two npc
-        // update packets get processed in one client tick, a
-        // despawn event could be published prior to the
-        // spawn event, which is deferred
-        deferredEventBus.replay();
-    }
-
-    @Override
     public void drawInterface(int interfaceId, List<WidgetItem> widgetItems)
     {
         MainBufferProvider bufferProvider = (MainBufferProvider) client.getBufferProvider();
@@ -572,5 +569,21 @@ public  class Hooks implements Callbacks
     @Override
     public void openUrl(String url) {
 
+    }
+
+    @Override
+    public boolean isRuneLiteClientOutdated() {
+        if (runtimeConfig == null || developerMode)
+        {
+            return false;
+        }
+
+        Set<String> outdatedClientVersions = runtimeConfig.getOutdatedClientVersions();
+        if (outdatedClientVersions == null)
+        {
+            return false;
+        }
+
+        return outdatedClientVersions.contains(RuneLiteProperties.getVersion());
     }
 }
