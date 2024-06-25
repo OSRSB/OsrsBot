@@ -34,9 +34,9 @@ public class RSModel extends MethodProvider {
 	}
 
 	protected Model model;
-	protected int[] xPoints;
-	protected int[] yPoints;
-	protected int[] zPoints;
+	protected float[] xPoints;
+	protected float[] yPoints;
+	protected float[] zPoints;
 	protected int[] indices1;
 	protected int[] indices2;
 	protected int[] indices3;
@@ -400,15 +400,15 @@ public class RSModel extends MethodProvider {
 		y1 -= ey;
 		z1 -= ez;
 
-		int[] xa = new int[]{
+		float[] xa = new float[]{
 				x1, x2, x1, x2,
 				x1, x2, x1, x2
 		};
-		int[] ya = new int[]{
+		float[] ya = new float[]{
 				y1, y1, y2, y2,
 				y1, y1, y2, y2
 		};
-		int[] za = new int[]{
+		float[] za = new float[]{
 				z1, z1, z1, z1,
 				z2, z2, z2, z2
 		};

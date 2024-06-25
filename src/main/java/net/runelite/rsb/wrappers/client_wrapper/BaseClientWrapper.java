@@ -286,11 +286,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getSceneMaxPlane() {
-        return wrappedClient.getSceneMaxPlane();
-    }
-
-    @Override
     public Player getLocalPlayer() {
         return wrappedClient.getLocalPlayer();
     }
@@ -1297,21 +1292,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public int getCameraX2() {
-        return wrappedClient.getCameraX2();
-    }
-
-    @Override
-    public int getCameraY2() {
-        return wrappedClient.getCameraY2();
-    }
-
-    @Override
-    public int getCameraZ2() {
-        return wrappedClient.getCameraZ2();
-    }
-
-    @Override
     public TextureProvider getTextureProvider() {
         return wrappedClient.getTextureProvider();
     }
@@ -1341,10 +1321,6 @@ public abstract class BaseClientWrapper extends Applet implements Client {
         return wrappedClient.getRasterizer3D_clipMidY2();
     }
 
-    @Override
-    public void checkClickbox(Model model, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash) {
-        wrappedClient.checkClickbox(model, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
-    }
     @Override
     public boolean isWidgetSelected() {
         return wrappedClient.isWidgetSelected();
@@ -1557,5 +1533,98 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public WorldMap getWorldMap() {
         return wrappedClient.getWorldMap();
+    }
+
+    @Override
+    public String getLauncherDisplayName() { return wrappedClient.getLauncherDisplayName(); }
+
+    @Override
+    public RenderOverview getRenderOverview() {
+        return wrappedClient.getRenderOverview();
+    }
+
+    @Override
+    public int getArraySizes(int i) {
+        return wrappedClient.getArraySizes(i);
+    }
+
+    @Override
+    public int[] getArray(int i) {
+        return wrappedClient.getArray(i);
+    }
+
+    @Override
+    public void setCameraSpeed(float v) {
+        wrappedClient.setCameraSpeed(v);
+    }
+
+    @Override
+    public void setCameraMouseButtonMask(int i) {
+        wrappedClient.setCameraMouseButtonMask(i);
+    }
+
+    @Override
+    public int getCameraMode() {
+        return wrappedClient.getCameraMode();
+    }
+
+    @Override
+    public void setCameraMode(int i) {
+        wrappedClient.setCameraMode(i);
+    }
+
+    @Override
+    public double getCameraFocalPointX() {
+        return wrappedClient.getCameraFocalPointX();
+    }
+
+    @Override
+    public double getCameraFocalPointY() {
+        return wrappedClient.getCameraFocalPointY();
+    }
+
+    @Override
+    public void setCameraFocalPointX(double v) {
+        wrappedClient.setCameraFocalPointX(v);
+    }
+
+    @Override
+    public void setCameraFocalPointY(double v) {
+        wrappedClient.setCameraFocalPointY(v);
+    }
+
+    @Override
+    public double getCameraFocalPointZ() {
+        return wrappedClient.getCameraFocalPointZ();
+    }
+
+    @Override
+    public void setCameraFocalPointZ(double v) {
+        wrappedClient.setCameraFocalPointZ(v);
+    }
+
+    @Override
+    public void setFreeCameraSpeed(int i) {
+        wrappedClient.setFreeCameraSpeed(i);
+    }
+
+    @Override
+    public void checkClickbox(Projection projection, Model model, int i, int i1, int i2, int i3, long l) {
+        wrappedClient.checkClickbox(projection, model, i, i1, i2, i3, l);
+    }
+
+    @Override
+    public void menuAction(int i, int i1, MenuAction menuAction, int i2, int i3, String s, String s1) {
+        wrappedClient.menuAction(i, i1, menuAction, i2, i3, s, s1);
+    }
+
+    @Override
+    public WorldView getWorldView(int i) {
+        return wrappedClient.getWorldView(i);
+    }
+
+    @Override
+    public WorldView getTopLevelWorldView() {
+        return wrappedClient.getTopLevelWorldView();
     }
 }

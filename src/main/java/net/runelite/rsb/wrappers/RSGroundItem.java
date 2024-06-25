@@ -115,7 +115,9 @@ public class RSGroundItem extends MethodProvider implements Clickable07, Positio
 		if (model == null) {
 			return false;
 		}
-		return model.getModel().isClickable();
+		return true;
+		// return model.getModel().isClickable();
+		// TODO: figure out what replaces isClickable
 	}
 
 	public Shape getClickShape() {

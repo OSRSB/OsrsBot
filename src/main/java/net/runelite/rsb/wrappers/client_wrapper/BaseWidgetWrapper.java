@@ -2,6 +2,7 @@ package net.runelite.rsb.wrappers.client_wrapper;
 
 import net.runelite.api.FontTypeFace;
 import net.runelite.api.Point;
+import net.runelite.api.RenderOverview;
 import net.runelite.api.widgets.Widget;
 
 import javax.annotation.Nullable;
@@ -769,4 +770,10 @@ public abstract class BaseWidgetWrapper implements Widget {
     public void setOnVarTransmitListener(Object... args) {
         wrappedWidget.setOnVarTransmitListener(args);
     }
+
+    @Override
+    public void setOnScrollWheelListener(Object... objects) {
+        wrappedWidget.setOnScrollWheelListener(objects);
+    }
+
 }

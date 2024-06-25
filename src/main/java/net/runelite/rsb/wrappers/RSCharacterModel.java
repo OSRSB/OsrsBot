@@ -12,15 +12,15 @@ public class RSCharacterModel extends RSModel {
 
 	private final Actor c;
 
-	private final int[] x_base, z_base;
+	private final float[] x_base, z_base;
 
 	RSCharacterModel(MethodContext ctx, Model model, Actor c) {
 		super(ctx, model);
 		this.c = c;
 		x_base = xPoints;
 		z_base = zPoints;
-		xPoints = new int[xPoints.length];
-		zPoints = new int[zPoints.length];
+		xPoints = new float[xPoints.length];
+		zPoints = new float[zPoints.length];
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class RSCharacterModel extends RSModel {
 			// Note that the second row of the matrix would result
 			// in no change, as the y coordinates are always unchanged
 			// by rotation about the y axis.
-			xPoints[i] = x_base[i] * cos + z_base[i] * sin >> 15;
-			zPoints[i] = z_base[i] * cos - x_base[i] * sin >> 15;
+			xPoints[i] = (int) (x_base[i] * cos + z_base[i] * sin) >> 15;
+			zPoints[i] = (int) (z_base[i] * cos - x_base[i] * sin) >> 15;
 		}
 	}
 

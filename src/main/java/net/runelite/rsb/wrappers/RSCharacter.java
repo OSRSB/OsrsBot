@@ -303,6 +303,7 @@ public abstract class RSCharacter extends MethodProvider implements Clickable07,
             return false;
         }
         return true;
+        // TODO: figure out what replaces isClickable
         //return model.getModel().isClickable();
     }
 
