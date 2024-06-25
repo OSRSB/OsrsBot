@@ -141,17 +141,73 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public void setCameraSpeed(float v) {
+        super.setCameraSpeed(v);
+    }
+
+    @Override
+    public void setCameraMouseButtonMask(int i) {
+        super.setCameraMouseButtonMask(i);
+    }
+
+    @Override
     @Deprecated
     public RenderOverview getRenderOverview() {
-        return null;
+        return super.getRenderOverview();
     }
 
     @Override
     public void setHintArrow(LocalPoint point) {
         super.setHintArrow(point);
     }
+
     @Override
-    public boolean isWidgetSelected() {return false;}
+    public int getCameraMode() {
+        return super.getCameraMode();
+    }
+
+    @Override
+    public void setCameraMode(int i) {
+        super.setCameraMode(i);
+    }
+
+    @Override
+    public double getCameraFocalPointX() {
+        return super.getCameraFocalPointX();
+    }
+
+    @Override
+    public void setCameraFocalPointX(double v) {
+        super.setCameraFocalPointX(v);
+    }
+
+    @Override
+    public void setCameraFocalPointY(double v) {
+        super.setCameraFocalPointY(v);
+    }
+
+    @Override
+    public double getCameraFocalPointZ() {
+        return super.getCameraFocalPointZ();
+    }
+
+    @Override
+    public void setFreeCameraSpeed(int i) {
+        super.setFreeCameraSpeed(i);
+    }
+
+    @Override
+    public void checkClickbox(Projection projection, Model model, int i, int i1, int i2, int i3, long l) {
+        super.checkClickbox(projection, model, i, i1, i2, i3, l);
+    }
+
+    @Override
+    public double getCameraFocalPointY() {
+        return super.getCameraFocalPointY();
+    }
+
+    @Override
+    public boolean isWidgetSelected() {return super.isWidgetSelected();}
 
     @Override
     @Nullable
@@ -160,7 +216,9 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
-    public void setWidgetSelected(boolean selected) {}
+    public void setWidgetSelected(boolean selected) {
+        super.setWidgetSelected(selected);
+    }
 
     @Override
     public void setIdleTimeout(int ticks) {
@@ -179,7 +237,22 @@ public class RSClient extends BaseClientWrapper {
 
     @Override
     public Rasterizer getRasterizer() {
-        return null;
+        return super.getRasterizer();
+    }
+
+    @Override
+    public void menuAction(int i, int i1, MenuAction menuAction, int i2, int i3, String s, String s1) {
+        super.menuAction(i, i1, menuAction, i2, i3, s, s1);
+    }
+
+    @Override
+    public WorldView getWorldView(int i) {
+        return convertResult(super.getWorldView(i));
+    }
+
+    @Override
+    public WorldView getTopLevelWorldView() {
+        return convertResult(super.getTopLevelWorldView());
     }
 
     @Nullable
@@ -189,8 +262,19 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
-    public int getSceneMaxPlane() {
-        return super.getSceneMaxPlane();
+    public int getArraySizes(int i) {
+        return super.getArraySizes(i);
+    }
+
+    @Override
+    public int[] getArray(int i) {
+        return super.getArray(i);
+    }
+
+    @Nullable
+    @Override
+    public String getLauncherDisplayName() {
+        return super.getLauncherDisplayName();
     }
 
     @Override
@@ -222,7 +306,7 @@ public class RSClient extends BaseClientWrapper {
 
         @Override
         public Widget setContentType(int contentType) {
-            return convertResult(super.setContentType(contentType));
+            return convertResult((super.setContentType(contentType)));
         }
 
         @Override
@@ -469,6 +553,11 @@ public class RSClient extends BaseClientWrapper {
         @Override
         public Widget setFilled(boolean filled) {
             return convertResult(super.setFilled(filled));
+        }
+
+        @Override
+        public void setOnScrollWheelListener(Object... objects) {
+            super.setOnScrollWheelListener(objects);
         }
 
         @Override
