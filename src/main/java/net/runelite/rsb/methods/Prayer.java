@@ -176,6 +176,20 @@ public class Prayer extends MethodProvider {
 				/ methods.skills.getCurrentLevel(Skill.PRAYER.ordinal());
 	}
 
+	public double getDrainRate() {
+		double drainRate = 0.0;
+
+		for (Prayers prayerType : Prayers.values())
+		{
+			if (methods.client.isPrayerActive(prayerType.getRunelitePrayer()))
+			{
+				drainRate += prayerType.getDrainRate();
+			}
+		}
+
+		return drainRate;
+	}
+
 	/**
 	 * Provides Prayer Book(s) Information.
 	 * This is written in preparation for future prayer books
