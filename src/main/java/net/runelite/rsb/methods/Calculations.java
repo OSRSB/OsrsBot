@@ -484,10 +484,10 @@ public class Calculations extends MethodProvider {
 	}
 
 	public boolean hasLineOfSight(WorldArea start, WorldArea end) {
-		return start.hasLineOfSightTo(methods.client, end);
+		return start.hasLineOfSightTo(methods.client.getWorldView(methods.client.getLocalPlayer().getLocalLocation().getWorldView()), end);
 	}
 	public boolean hasLineOfSight(WorldArea end) {
-		return methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea().hasLineOfSightTo(methods.client, end);
+		return methods.players.getMyPlayer().getLocation().getWorldLocation().toWorldArea().hasLineOfSightTo(methods.client.getWorldView(methods.client.getLocalPlayer().getLocalLocation().getWorldView()), end);
 	}
 
 	static class Render {
