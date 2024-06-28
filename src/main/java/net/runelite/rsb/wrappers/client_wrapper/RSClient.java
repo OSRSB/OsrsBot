@@ -569,5 +569,10 @@ public class RSClient extends BaseClientWrapper {
         public Widget setDragParent(Widget dragParent) {
             return convertResult(super.setDragParent(dragParent));
         }
+
+        @Override
+        public void clearActions() {
+            super.clearActions();
+        }
     }
 }

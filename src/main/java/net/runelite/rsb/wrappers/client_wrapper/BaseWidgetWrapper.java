@@ -776,4 +776,7 @@ public abstract class BaseWidgetWrapper implements Widget {
         wrappedWidget.setOnScrollWheelListener(objects);
     }
 
+    @Override
+    public void clearActions() { wrappedWidget.clearActions(); }
+
 }
