@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.FutureTask;
+import java.util.function.IntPredicate;
 
 /*
 Wrapper around runelite Client, adds synchronization with ClientThread for methods that require it.
@@ -159,6 +160,16 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public void setHintArrow(LocalPoint point) {
         super.setHintArrow(point);
+    }
+
+    @Override
+    public IntPredicate getAnimationInterpolationFilter() {
+        return super.getAnimationInterpolationFilter();
+    }
+
+    @Override
+    public void setAnimationInterpolationFilter(IntPredicate intPredicate) {
+        super.setAnimationInterpolationFilter(intPredicate);
     }
 
     @Override

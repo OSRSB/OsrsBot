@@ -24,6 +24,7 @@ import java.awt.*;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.IntPredicate;
 
 /*
 Base class for wrapping runelite Client, along with some weird Applet shenanigans.
@@ -1112,34 +1113,10 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     }
 
     @Override
-    public boolean isInterpolatePlayerAnimations() {
-        return wrappedClient.isInterpolatePlayerAnimations();
-    }
+    public IntPredicate getAnimationInterpolationFilter() { return wrappedClient.getAnimationInterpolationFilter(); }
 
     @Override
-    public void setInterpolatePlayerAnimations(boolean interpolate) {
-        wrappedClient.setInterpolatePlayerAnimations(interpolate);
-    }
-
-    @Override
-    public boolean isInterpolateNpcAnimations() {
-        return wrappedClient.isInterpolateNpcAnimations();
-    }
-
-    @Override
-    public void setInterpolateNpcAnimations(boolean interpolate) {
-        wrappedClient.setInterpolateNpcAnimations(interpolate);
-    }
-
-    @Override
-    public boolean isInterpolateObjectAnimations() {
-        return wrappedClient.isInterpolateObjectAnimations();
-    }
-
-    @Override
-    public void setInterpolateObjectAnimations(boolean interpolate) {
-        wrappedClient.setInterpolateObjectAnimations(interpolate);
-    }
+    public void setAnimationInterpolationFilter(IntPredicate intPredicate) { wrappedClient.setAnimationInterpolationFilter(intPredicate);}
 
     @Override
     public boolean isInInstancedRegion() {
