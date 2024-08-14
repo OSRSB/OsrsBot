@@ -243,7 +243,22 @@ public class RSClient extends BaseClientWrapper {
 
     @Override
     public void setMinimapTileDrawer(TileFunction drawTile) {
+        super.setMinimapTileDrawer(drawTile);
+    }
 
+    @Override
+    public void setCameraShakeDisabled(boolean b) {
+        super.setCameraShakeDisabled(b);
+    }
+
+    @Override
+    public boolean isCameraShakeDisabled() {
+        return super.isCameraShakeDisabled();
+    }
+
+    @Override
+    public Menu getMenu() {
+        return super.getMenu();
     }
 
     @Override
