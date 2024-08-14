@@ -30,6 +30,12 @@ public interface CacheProvider<T> {
         fillCacheFromDirectory(new File(GlobalConfiguration.Paths.getNPCsCacheDirectory()), RSNPC.class.getName());
     }
 
+    /**
+     *  Fill a cache from a directory to build out the shareable cache interface by iterating over the files in
+     *  the directory and pulling out any JSONs found in the directory.
+     * @param dir           The directory to iterate through
+     * @param className     The class intended to create an easily inheritable interface to the cache for
+     */
     private static void fillCacheFromDirectory(File dir, String className) {
         File[] directoryListing = dir.listFiles();
 

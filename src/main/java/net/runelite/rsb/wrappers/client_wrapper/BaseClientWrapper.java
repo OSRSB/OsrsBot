@@ -1,6 +1,7 @@
 package net.runelite.rsb.wrappers.client_wrapper;
 
 import net.runelite.api.*;
+import net.runelite.api.Menu;
 import net.runelite.api.Point;
 import net.runelite.api.annotations.Varp;
 import net.runelite.api.clan.ClanChannel;
@@ -1583,6 +1584,21 @@ public abstract class BaseClientWrapper extends Applet implements Client {
     @Override
     public void setFreeCameraSpeed(int i) {
         wrappedClient.setFreeCameraSpeed(i);
+    }
+
+    @Override
+    public Menu getMenu() {
+        return wrappedClient.getMenu();
+    }
+
+    @Override
+    public void setCameraShakeDisabled(boolean b) {
+        wrappedClient.setCameraShakeDisabled(b);
+    }
+
+    @Override
+    public boolean isCameraShakeDisabled() {
+        return wrappedClient.isCameraShakeDisabled();
     }
 
     @Override

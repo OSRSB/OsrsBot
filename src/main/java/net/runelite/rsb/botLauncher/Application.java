@@ -50,6 +50,7 @@ public class Application {
 		String npcCacheLocation = GlobalConfiguration.Paths.getNPCsCacheDirectory();
 		String spriteCacheLocation = GlobalConfiguration.Paths.getSpritesCacheDirectory();
 		//TODO Some sort of better validation here
+		//TODO Checking if the directories are empty or missing files. Do a diff against the expected cache.
 		//Add a version check
 
 		if ((!new File(itemCacheLocation).exists()) || new File(itemCacheLocation).getTotalSpace() < 100) {
