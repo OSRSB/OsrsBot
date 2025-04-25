@@ -70,28 +70,20 @@ public class ClientThread {
         invokes.add(r);
     }
 
+    public void invokeAtTickEnd(Runnable r)
+    {
+        invokesAtTickEnd.add(() ->
+        {
+            r.run();
+            return true;
+        });
+    }
+
     /**
      * Invokes queued actions on the client thread
      */
     void invoke() {
-        assert client.isClientThread();
-        Iterator<BooleanSupplier> ir = invokes.iterator();
-        while (ir.hasNext()) {
-            BooleanSupplier r = ir.next();
-            boolean remove = true;
-            try {
-                remove = r.getAsBoolean();
-            } catch (ThreadDeath d) {
-                throw d;
-            } catch (Throwable e) {
-                log.warn("Exception in invoke", e);
-            }
-            if (remove) {
-                ir.remove();
-            } else {
-                log.trace("Deferring task {}", r);
-            }
-        }
+        invokeList(invokes);
     }
 
     void invokeTickEnd() {

@@ -779,8 +779,8 @@ public abstract class BaseWidgetWrapper implements Widget {
     @Override
     public void clearActions() { wrappedWidget.clearActions(); }
 
-
     @Override
-    public int[] getVarTransmitTrigger() { return wrappedWidget.getVarTransmitTrigger(); }
-
+    public int[] getVarTransmitTrigger() {
+        return wrappedWidget.getVarTransmitTrigger();
+    }
 }

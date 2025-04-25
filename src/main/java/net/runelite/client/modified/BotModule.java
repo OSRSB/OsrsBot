@@ -34,6 +34,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.NPCManager;
 import net.runelite.client.menus.MenuManager;
 import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.rs.ClientLoader;
 import net.runelite.client.task.Scheduler;
 import net.runelite.client.util.DeferredEventBus;
 import net.runelite.client.util.ExecutorServiceExceptionLogger;
@@ -47,7 +48,7 @@ import javax.annotation.Nullable;
 public class BotModule extends AbstractModule {
 
     private final OkHttpClient okHttpClient;
-    private final Supplier<Applet> clientLoader;
+    private final ClientLoader clientLoader;
     private final RuntimeConfigLoader configSupplier;
     private final boolean developerMode;
     private final boolean safeMode;
@@ -60,7 +61,7 @@ public class BotModule extends AbstractModule {
     private final boolean noupdate = false;
 
 
-    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
+    public BotModule(OkHttpClient okHttpClient, ClientLoader clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
         this.configSupplier = configSupplier;
@@ -144,7 +145,7 @@ public class BotModule extends AbstractModule {
     @Singleton
     Applet provideApplet()
     {
-        return clientLoader.get();
+        return (Applet) clientLoader.get();
     }
 
     @Provides

@@ -1,5 +1,6 @@
 package net.runelite.rsb.wrappers.client_wrapper;
 
+import com.jagex.oldscape.pub.OAuthApi;
 import net.runelite.api.*;
 import net.runelite.api.annotations.Varp;
 import net.runelite.api.clan.ClanChannel;
@@ -12,27 +13,17 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.api.worldmap.WorldMap;
-import net.runelite.api.RuneLiteObjectController;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.applet.Applet;
 import java.awt.*;
-import java.lang.reflect.Method;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntPredicate;
-import com.jagex.oldscape.pub.OAuthApi;
-import com.jagex.oldscape.pub.OtlTokenRequester;
-import com.jagex.oldscape.pub.OtlTokenResponse;
-
-
-
-
 
 /*
 Base class for wrapping runelite Client, along with some weird Applet shenanigans.
@@ -81,14 +72,12 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
         return wrappedClient.getNpcs();
     }
 
-    @Override
     public NPC[] getCachedNPCs() {
-        return wrappedClient.getCachedNPCs();
+       return (NPC[]) wrappedClient.getTopLevelWorldView().npcs().stream().toArray();
     }
 
-    @Override
     public Player[] getCachedPlayers() {
-        return wrappedClient.getCachedPlayers();
+        return (Player[]) wrappedClient.getTopLevelWorldView().players().stream().toArray();
     }
 
     @Override
@@ -233,6 +222,11 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     @Override
     public int getWorld() {
         return wrappedClient.getWorld();
+    }
+
+    @Override
+    public String getWorldHost() {
+        return wrappedClient.getWorldHost();
     }
 
     @Override
@@ -782,6 +776,26 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     @Nullable
     public LocalPoint getLocalDestinationLocation() {
         return wrappedClient.getLocalDestinationLocation();
+    }
+
+    @Override
+    public void registerRuneLiteObject(RuneLiteObjectController controller) {
+        wrappedClient.registerRuneLiteObject(controller);
+    }
+
+    @Override
+    public void removeRuneLiteObject(RuneLiteObjectController controller) {
+        wrappedClient.removeRuneLiteObject(controller);
+    }
+
+    @Override
+    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {
+        return wrappedClient.isRuneLiteObjectRegistered(controller);
+    }
+
+    @Override
+    public List<MidiRequest> getActiveMidiRequests() {
+        return wrappedClient.getActiveMidiRequests();
     }
 
     @Override
@@ -1643,19 +1657,4 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     public int getDraw2DMask() {
         return wrappedClient.getDraw2DMask();
     }
-
-    @Override
-    public List<MidiRequest> getActiveMidiRequests() {
-        return wrappedClient.getActiveMidiRequests();
-    }
-
-    @Override
-    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {return wrappedClient.isRuneLiteObjectRegistered(controller);}
-
-    @Override
-    public void removeRuneLiteObject(RuneLiteObjectController controller) {wrappedClient.removeRuneLiteObject(controller);}
-    
-    @Override
-    public void registerRuneLiteObject(RuneLiteObjectController controller) {wrappedClient.registerRuneLiteObject(controller);}
-    
 }

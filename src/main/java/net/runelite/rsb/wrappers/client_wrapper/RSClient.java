@@ -8,10 +8,7 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.api.RuneLiteObjectController;
-import com.jagex.oldscape.pub.OAuthApi;
-import com.jagex.oldscape.pub.OtlTokenRequester;
-import com.jagex.oldscape.pub.OtlTokenResponse;
-import com.jagex.oldscape.pub.RefreshAccessTokenRequester;
+
 import javax.annotation.Nullable;
 import java.time.Instant;
 import java.util.*;
@@ -347,7 +344,10 @@ public class RSClient extends BaseClientWrapper {
 
     @SneakyThrows
     private void runOnClientThread(Runnable method) {
-        final var task = new FutureTask<Object>(() -> { method.run();return null; } );
+        final var task = new FutureTask<Object>(() -> {
+            method.run();
+            return null;
+        });
         runTask(task);
         task.get();
     }
@@ -357,7 +357,7 @@ public class RSClient extends BaseClientWrapper {
             return (T) new WidgetWrapper(concreteResult);
         } else if (result instanceof Widget[] concreteResult) {
             WidgetWrapper[] convertedResult = new WidgetWrapper[concreteResult.length];
-            for (int i = 0 ; i < concreteResult.length ; i++) {
+            for (int i = 0; i < concreteResult.length; i++) {
                 convertedResult[i] = new WidgetWrapper(concreteResult[i]);
             }
             return (T) convertedResult;
@@ -367,7 +367,7 @@ public class RSClient extends BaseClientWrapper {
 
     private Widget[] convertArg(Widget[] arg) {
         Widget[] convertedArg = new Widget[arg.length];
-        for (int i = 0 ; i < arg.length ; i++) {
+        for (int i = 0; i < arg.length; i++) {
             if (arg[i] instanceof WidgetWrapper widgetWrapper) {
                 convertedArg[i] = widgetWrapper.wrappedWidget;
             } else {
@@ -424,6 +424,7 @@ public class RSClient extends BaseClientWrapper {
     public Widget getWidget(int packedID) { // tested, no need to runOnClientThread
         return convertResult(super.getWidget(packedID));
     }
+
     @Override
     public MapElementConfig getMapElementConfig(int id) {
         return convertResult(super.getMapElementConfig(id));
@@ -468,6 +469,11 @@ public class RSClient extends BaseClientWrapper {
     @Override
     public void setAnimationInterpolationFilter(IntPredicate intPredicate) {
         super.setAnimationInterpolationFilter(intPredicate);
+    }
+
+    @Override
+    public String getWorldHost() {
+        return super.getWorldHost();
     }
 
     @Override
@@ -516,7 +522,9 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
-    public boolean isWidgetSelected() {return super.isWidgetSelected();}
+    public boolean isWidgetSelected() {
+        return super.isWidgetSelected();
+    }
 
     @Override
     @Nullable
@@ -586,6 +594,26 @@ public class RSClient extends BaseClientWrapper {
     }
 
     @Override
+    public void registerRuneLiteObject(RuneLiteObjectController controller) {
+        super.registerRuneLiteObject(controller);
+    }
+
+    @Override
+    public void removeRuneLiteObject(RuneLiteObjectController controller) {
+        super.removeRuneLiteObject(controller);
+    }
+
+    @Override
+    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {
+        return super.isRuneLiteObjectRegistered(controller);
+    }
+
+    @Override
+    public List<MidiRequest> getActiveMidiRequests() {
+        return super.getActiveMidiRequests();
+    }
+
+    @Override
     public int getArraySizes(int i) {
         return super.getArraySizes(i);
     }
@@ -627,75 +655,23 @@ public class RSClient extends BaseClientWrapper {
         return super.getDraw2DMask();
     }
 
-    @Override
-    public List<MidiRequest> getActiveMidiRequests() {
-        return convertResult(super.getActiveMidiRequests());
-    }
-
-    @Override
-    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {
-        return super.isRuneLiteObjectRegistered(controller);
-    }
-
-    @Override
-    public void removeRuneLiteObject(RuneLiteObjectController controller) {
-        super.removeRuneLiteObject(controller);
-    }
-
-    @Override
-    public void registerRuneLiteObject(RuneLiteObjectController controller) {
-        super.registerRuneLiteObject(controller);
-    }
-
-    public void px(OtlTokenRequester requester) {
-        px(requester);
-    }
-
-    public long qx() {
-        return qx();
-    }
-
-    public boolean pz() {
-        return pz();
-    }
-
-    public boolean pi() {
-        return pi();
-    }
-
-    public boolean ps() {
-        return ps();
-    }
-
-    public void setOtlTokenRequester(OtlTokenRequester requester) {
-        setOtlTokenRequester(requester);
-    }
-
-    public void pr(RefreshAccessTokenRequester requester) {
-        pr(requester);
-    }
-
-    public void pn(OtlTokenRequester requester) {
-        pn(requester);
-    }
-
-    public void pm(RefreshAccessTokenRequester requester) {
-        pm(requester);
-    }
-
-    public void setRefreshTokenRequester(RefreshAccessTokenRequester requester) {
-        setRefreshTokenRequester(requester);
-    }
-
-
     public void setClient(int client) {
         setClient(client);
     }
 
-    public long qu() { return qu(); }
+    public long qu() {
+        return qu();
+    }
 
-    public boolean isOnLoginScreen() { return isOnLoginScreen(); }
+    public boolean isOnLoginScreen() {
+        return isOnLoginScreen();
+    }
 
-public boolean pf() { return pf(); }
-public void pg(int a) { pg(a); }
+    public boolean pf() {
+        return pf();
+    }
+
+    public void pg(int a) {
+        pg(a);
+    }
 }

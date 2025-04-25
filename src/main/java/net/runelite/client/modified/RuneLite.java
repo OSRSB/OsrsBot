@@ -49,7 +49,6 @@ import net.runelite.client.externalplugins.ExternalPluginManager;
 import net.runelite.client.game.WorldService;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.rs.ClientLoader;
-import net.runelite.client.rs.ClientUpdateCheckMode;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetOverlay;
 import net.runelite.rsb.botLauncher.BotLite;
@@ -175,23 +174,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withValuesConvertedBy(new ConfigFileConverter())
                 .defaultsTo(DEFAULT_CONFIG_FILE);
 
-        final ArgumentAcceptingOptionSpec<ClientUpdateCheckMode> updateMode = parser
-                .accepts("rs", "Select client type")
-                .withRequiredArg()
-                .ofType(ClientUpdateCheckMode.class)
-                .defaultsTo(ClientUpdateCheckMode.AUTO)
-                .withValuesConvertedBy(new EnumConverter<>(ClientUpdateCheckMode.class) {
-                    @Override
-                    public ClientUpdateCheckMode convert(String v) {
-                        return super.convert(v.toUpperCase());
-                    }
-                });
-
         final ArgumentAcceptingOptionSpec<String> proxyInfo = parser
                 .accepts("proxy", "Designates a proxy ip address to be used to make the bot server connections")
                 .withRequiredArg().ofType(String.class);
 
-        return (ArgumentAcceptingOptionSpec<?>[]) new ArgumentAcceptingOptionSpec[]{sessionfile, configfile, updateMode, proxyInfo};
+        return (ArgumentAcceptingOptionSpec<?>[]) new ArgumentAcceptingOptionSpec[]{sessionfile, configfile, proxyInfo};
     }
 
     /**
@@ -260,7 +247,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
         {
             final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
-                    options.valueOf(optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
                     runtimeConfigLoader,
                     (String) options.valueOf("jav_config"));
 
