@@ -31,13 +31,17 @@ public class FileScriptSource implements ScriptSource {
 		if (file != null) {
 			if (file.isDirectory()) {
 				try {
-
 					ClassLoader scriptLoader = new ScriptClassLoader(file.toURI().toURL());
 					for (File file : Objects.requireNonNull(file.listFiles())) {
-						if (isJar(file)) {
-							load(new ScriptClassLoader(getJarUrl(file)), scriptDefinitions, new JarFile(file));
-						} else {
-							load(scriptLoader, scriptDefinitions, file, "");
+						try {
+							if (isJar(file)) {
+								load(new ScriptClassLoader(getJarUrl(file)), scriptDefinitions, new JarFile(file));
+							} else {
+								load(scriptLoader, scriptDefinitions, file, "");
+							}
+						} catch (Throwable t) {
+							log.warn("Failed to process script file {} — skipping ({}): {}",
+									file.getName(), t.getClass().getSimpleName(), t.getMessage());
 						}
 					}
 				} catch (IOException ioEx) {
@@ -100,11 +104,8 @@ public class FileScriptSource implements ScriptSource {
 		Class<?> clazz;
 		try {
 			clazz = loader.loadClass(name);
-		} catch (Exception ex) {
-			log.warn("Exception occurred " + name + " is not a valid script and was ignored!", ex);
-			return;
-		} catch (VerifyError verEx) {
-			log.warn("VerifyError exception occurred " + name + " is not a valid script and was ignored!", verEx);
+		} catch (Throwable t) {
+			log.warn("Failed to load class {} — skipping ({}): {}", name, t.getClass().getSimpleName(), t.getMessage());
 			return;
 		}
 		if (clazz.isAnnotationPresent(ScriptManifest.class)) {

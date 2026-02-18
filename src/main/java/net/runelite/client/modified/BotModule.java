@@ -10,7 +10,6 @@ import com.google.inject.Singleton;
 import com.google.inject.binder.ConstantBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import java.applet.Applet;
 import java.io.File;
 import java.util.Map;
 import java.util.Properties;
@@ -47,7 +46,7 @@ import javax.annotation.Nullable;
 public class BotModule extends AbstractModule {
 
     private final OkHttpClient okHttpClient;
-    private final Supplier<Applet> clientLoader;
+    private final Supplier<Client> clientLoader;
     private final RuntimeConfigLoader configSupplier;
     private final boolean developerMode;
     private final boolean safeMode;
@@ -60,7 +59,7 @@ public class BotModule extends AbstractModule {
     private final boolean noupdate = false;
 
 
-    public BotModule(OkHttpClient okHttpClient, Supplier<Applet> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
+    public BotModule(OkHttpClient okHttpClient, Supplier<Client> clientLoader, RuntimeConfigLoader configSupplier, boolean developerMode, boolean safeMode, File sessionfile, File config) {
         this.okHttpClient = okHttpClient;
         this.clientLoader = clientLoader;
         this.configSupplier = configSupplier;
@@ -142,16 +141,9 @@ public class BotModule extends AbstractModule {
 
     @Provides
     @Singleton
-    Applet provideApplet()
+    Client provideClient()
     {
         return clientLoader.get();
-    }
-
-    @Provides
-    @Singleton
-    Client provideClient(@Nullable Applet applet)
-    {
-        return applet instanceof Client ? (Client) applet : null;
     }
 
     @Provides

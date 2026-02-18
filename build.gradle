@@ -46,7 +46,9 @@ dependencies {
     implementation group: 'org.clojure', name: 'clojure', version: '1.9.0'
     implementation group: 'org.clojure', name: 'tools.nrepl', version: '0.2.12'
     implementation group: 'net.runelite', name: 'client', version: runeLiteVersion
-    implementation group: 'net.runelite', name: 'cache', version: runeLiteVersion
+    implementation(group: 'net.runelite', name: 'cache', version: runeLiteVersion) {
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
+    }
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
@@ -56,7 +58,7 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
 
-    implementation 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'
+    // implementation 'com.github.OSRSB:OSRSBPlugin:main-SNAPSHOT'  // JitPack can't resolve
     implementation group: 'com.github.joonasvali.naturalmouse', name: 'naturalmouse', version: '2.0.3'
     implementation group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     implementation group: 'net.sf.jopt-simple', name:'jopt-simple', version: '5.0.4'
@@ -66,6 +68,9 @@ sourceSets {
     main {
         java {
             srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources"]
         }
     }
 }

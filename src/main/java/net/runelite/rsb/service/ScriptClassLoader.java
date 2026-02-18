@@ -44,7 +44,7 @@ class ScriptClassLoader extends URLClassLoader implements ReflectUtil.PrivateLoo
 				if (resolve) {
 					resolveClass(clazz);
 				}
-			} catch (Exception e) {
+			} catch (Throwable t) {
 				clazz = super.loadClass(name, resolve);
 			}
 		}

@@ -9,8 +9,11 @@ import net.runelite.rsb.internal.globval.GlobalConfiguration;
 import net.runelite.rsb.wrappers.common.CacheProvider;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.*;
+import java.util.Map;
 
 @Slf4j
 public class Application {
@@ -28,11 +31,112 @@ public class Application {
 	public static void main(final String[] args) throws Throwable {
 		preParser = new ArgumentPreParser(args);
 		if (preParser.contains("--bot-runelite")) {
+			loadJagexCredentials();
+			String scriptName = preParser.consumeValue("--script");
 			addBot(preParser.contains("--headless"));
-			// checkForCacheAndLoad();
+			if (scriptName != null) {
+				autoStartScript(scriptName);
+			}
 			CLIHandler.handleCLI();
 		} else {
 			net.runelite.client.RuneLite.main(args);
+		}
+	}
+
+	/**
+	 * Auto-starts a script after the player is logged in.
+	 * Polls game state in a background thread, waiting for LOGGED_IN before launching.
+	 *
+	 * @param scriptName Script name with spaces removed (e.g. "PixelBot-Woodcutting")
+	 */
+	private static void autoStartScript(String scriptName) {
+		new Thread(() -> {
+			log.info("Auto-start queued for script: {} — log in within 45 seconds", scriptName);
+			try {
+				// Wait for client to initialize and user to log in
+				Thread.sleep(45000);
+				log.info("Starting script: {}", scriptName);
+				BotLiteInterface bot = getBots()[0];
+				bot.runScript("default", scriptName);
+				log.info("Auto-started script: {}", scriptName);
+			} catch (Exception e) {
+				log.error("Failed to auto-start script: {}", scriptName, e);
+			}
+		}, "ScriptAutoStart").start();
+	}
+
+	/**
+	 * Loads Jagex Launcher credentials from ~/.runelite/credentials.properties
+	 * and injects them as real environment variables so the game client
+	 * can authenticate via System.getenv("JX_ACCESS_TOKEN") etc.
+	 *
+	 * The launcher scripts (launch-bot.bat/sh) also set these as env vars
+	 * before starting Java. This method is a fallback for direct JAR launch.
+	 *
+	 * To generate credentials.properties:
+	 * 1. Open "RuneLite (configure)" and add --insecure-write-credentials to client arguments
+	 * 2. Launch RuneLite via Jagex Launcher and log in
+	 * 3. credentials.properties will be created in ~/.runelite/
+	 */
+	private static void loadJagexCredentials() {
+		File credFile = new File(System.getProperty("user.home"), ".runelite/credentials.properties");
+		if (!credFile.exists()) {
+			log.info("No credentials.properties found at {}. See launch-bot.bat for setup instructions.", credFile.getAbsolutePath());
+			return;
+		}
+		try (FileInputStream fis = new FileInputStream(credFile)) {
+			Properties creds = new Properties();
+			creds.load(fis);
+			int envSet = 0;
+			for (Map.Entry<Object, Object> entry : creds.entrySet()) {
+				String key = entry.getKey().toString();
+				String value = entry.getValue().toString();
+				// Set as system property (accessible via System.getProperty)
+				System.setProperty(key, value);
+				// Also inject as environment variable (accessible via System.getenv)
+				if (setEnvironmentVariable(key, value)) {
+					envSet++;
+				}
+				log.info("Loaded Jagex credential: {}", key);
+			}
+			log.info("Loaded {} credentials from {} ({} set as env vars)", creds.size(), credFile.getAbsolutePath(), envSet);
+		} catch (IOException e) {
+			log.warn("Failed to load credentials.properties", e);
+		}
+	}
+
+	/**
+	 * Injects a key-value pair into the current process's environment variables
+	 * via reflection. This is needed because System.getenv() returns an unmodifiable
+	 * map, but the RuneLite client reads JX_* tokens from environment variables.
+	 *
+	 * @return true if successfully set, false if reflection failed
+	 */
+	@SuppressWarnings("unchecked")
+	private static boolean setEnvironmentVariable(String key, String value) {
+		// Skip if already set (e.g. by launcher script)
+		if (value.equals(System.getenv(key))) {
+			return true;
+		}
+		try {
+			// On Windows, ProcessEnvironment has a theCaseInsensitiveEnvironment field
+			Class<?> processEnvClass = Class.forName("java.lang.ProcessEnvironment");
+			try {
+				Field theEnvironmentField = processEnvClass.getDeclaredField("theEnvironment");
+				theEnvironmentField.setAccessible(true);
+				Map<String, String> env = (Map<String, String>) theEnvironmentField.get(null);
+				env.put(key, value);
+			} catch (NoSuchFieldException e) {
+				// Fallback: try the unmodifiable map's backing field
+				Map<String, String> env = System.getenv();
+				Field field = env.getClass().getDeclaredField("m");
+				field.setAccessible(true);
+				((Map<String, String>) field.get(env)).put(key, value);
+			}
+			return true;
+		} catch (Exception e) {
+			log.debug("Could not set env var {} via reflection (expected on some JDKs). Use launch-bot.bat/sh instead.", key);
+			return false;
 		}
 	}
 
@@ -167,6 +271,24 @@ public class Application {
 			if (within)
 				this.remove(index);
 			return within;
+		}
+
+		/**
+		 * Consumes a key-value argument pair (e.g. --script PixelBot-Woodcutting).
+		 * Removes both the key and value from the list and returns the value.
+		 *
+		 * @param key The argument key (e.g. "--script")
+		 * @return The value following the key, or null if not found
+		 */
+		public String consumeValue(String key) {
+			int index = indexOf(key);
+			if (index >= 0 && index + 1 < size()) {
+				remove(index); // remove key
+				return remove(index); // remove and return value (now at same index)
+			} else if (index >= 0) {
+				remove(index); // remove orphan key
+			}
+			return null;
 		}
 
 	}

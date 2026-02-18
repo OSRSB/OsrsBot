@@ -55,7 +55,7 @@ public class Players extends MethodProvider {
 	 * @return All valid RSPlayers.
 	 */
 	public RSPlayer[] getAll(final Filter<RSPlayer> filter) {
-		Player[] playerArray = methods.client.getCachedPlayers();
+		Player[] playerArray = methods.client.getPlayers().toArray(new Player[0]);
 		Set<RSPlayer> players = new HashSet<>();
 		for (Player player : playerArray) {
 			if (player != null) {
@@ -80,7 +80,7 @@ public class Players extends MethodProvider {
 	public RSPlayer getNearest(final Filter<RSPlayer> filter) {
 		int min = 20;
 		RSPlayer closest = null;
-		Player[] players = methods.client.getCachedPlayers();
+		Player[] players = methods.client.getPlayers().toArray(new Player[0]);
 		for (Player player : players) {
 			if (player == null) {
 				continue;

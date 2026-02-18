@@ -7,11 +7,6 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.client.callback.ClientThread;
-import net.runelite.api.RuneLiteObjectController;
-import com.jagex.oldscape.pub.OAuthApi;
-import com.jagex.oldscape.pub.OtlTokenRequester;
-import com.jagex.oldscape.pub.OtlTokenResponse;
-import com.jagex.oldscape.pub.RefreshAccessTokenRequester;
 import javax.annotation.Nullable;
 import java.time.Instant;
 import java.util.*;
@@ -318,6 +313,36 @@ public class RSClient extends BaseClientWrapper {
         @Override
         public int[] getVarTransmitTrigger() {
             return super.getVarTransmitTrigger();
+        }
+
+        @Override
+        public int getTargetPriority() {
+            return wrappedWidget.getTargetPriority();
+        }
+
+        @Override
+        public void setTargetPriority(int priority) {
+            wrappedWidget.setTargetPriority(priority);
+        }
+
+        @Override
+        public boolean isFlippedHorizontally() {
+            return wrappedWidget.isFlippedHorizontally();
+        }
+
+        @Override
+        public void setFlippedHorizontally(boolean flipped) {
+            wrappedWidget.setFlippedHorizontally(flipped);
+        }
+
+        @Override
+        public boolean isFlippedVertically() {
+            return wrappedWidget.isFlippedVertically();
+        }
+
+        @Override
+        public void setFlippedVertically(boolean flipped) {
+            wrappedWidget.setFlippedVertically(flipped);
         }
     }
 
@@ -627,30 +652,6 @@ public class RSClient extends BaseClientWrapper {
         return super.getDraw2DMask();
     }
 
-    @Override
-    public List<MidiRequest> getActiveMidiRequests() {
-        return convertResult(super.getActiveMidiRequests());
-    }
-
-    @Override
-    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {
-        return super.isRuneLiteObjectRegistered(controller);
-    }
-
-    @Override
-    public void removeRuneLiteObject(RuneLiteObjectController controller) {
-        super.removeRuneLiteObject(controller);
-    }
-
-    @Override
-    public void registerRuneLiteObject(RuneLiteObjectController controller) {
-        super.registerRuneLiteObject(controller);
-    }
-
-    public void px(OtlTokenRequester requester) {
-        px(requester);
-    }
-
     public long qx() {
         return qx();
     }
@@ -667,27 +668,6 @@ public class RSClient extends BaseClientWrapper {
         return ps();
     }
 
-    public void setOtlTokenRequester(OtlTokenRequester requester) {
-        setOtlTokenRequester(requester);
-    }
-
-    public void pr(RefreshAccessTokenRequester requester) {
-        pr(requester);
-    }
-
-    public void pn(OtlTokenRequester requester) {
-        pn(requester);
-    }
-
-    public void pm(RefreshAccessTokenRequester requester) {
-        pm(requester);
-    }
-
-    public void setRefreshTokenRequester(RefreshAccessTokenRequester requester) {
-        setRefreshTokenRequester(requester);
-    }
-
-
     public void setClient(int client) {
         setClient(client);
     }
@@ -696,6 +676,11 @@ public class RSClient extends BaseClientWrapper {
 
     public boolean isOnLoginScreen() { return isOnLoginScreen(); }
 
-public boolean pf() { return pf(); }
-public void pg(int a) { pg(a); }
+    public boolean pf() { return pf(); }
+    public void pg(int a) { pg(a); }
+
+    @Override
+    public java.io.FileDescriptor getSocketFD() {
+        return wrappedClient.getSocketFD();
+    }
 }

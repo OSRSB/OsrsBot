@@ -17,17 +17,51 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RSNPC extends RSCharacter implements CacheProvider<NpcDefinition> {
     private static HashMap<Integer, NpcDefinition> npcDefinitionCache;
     private static HashMap<Integer, File> npcFileCache;
+    /** Static cache for definitions resolved via RuneLite client API. */
+    private static final ConcurrentHashMap<Integer, NpcDefinition> clientApiDefCache = new ConcurrentHashMap<>();
     private final SoftReference<NPC> npc;
     private final NpcDefinition def;
 
     public RSNPC(final MethodContext ctx, final NPC npc) {
         super(ctx);
         this.npc =  new SoftReference<>(npc);
-        this.def = (npc.getId() != -1) ? (NpcDefinition) createDefinition(npc.getId()) : null;
+        this.def = resolveDefinition(npc);
+    }
+
+    private NpcDefinition resolveDefinition(NPC npc) {
+        int npcId = npc.getId();
+        if (npcId == -1) return null;
+
+        // Try file-based cache first
+        NpcDefinition cached = (NpcDefinition) createDefinition(npcId);
+        if (cached != null) return cached;
+
+        // Try static client API cache
+        NpcDefinition apiCached = clientApiDefCache.get(npcId);
+        if (apiCached != null) return apiCached;
+
+        // Build from RuneLite NPC API
+        String name = npc.getName();
+        if (name != null && !name.isEmpty()) {
+            NpcDefinition fallback = new NpcDefinition(npcId);
+            fallback.setName(name);
+            try {
+                NPCComposition comp = npc.getTransformedComposition();
+                if (comp != null) {
+                    fallback.setActions(comp.getActions());
+                }
+            } catch (Exception e) {
+                // Composition not available
+            }
+            clientApiDefCache.put(npcId, fallback);
+            return fallback;
+        }
+        return null;
     }
 
     @Override

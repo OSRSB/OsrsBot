@@ -17,13 +17,22 @@ import net.runelite.rsb.internal.ScriptHandler;
 import net.runelite.rsb.internal.input.Canvas;
 import net.runelite.rsb.methods.Environment;
 import net.runelite.rsb.methods.MethodContext;
+import net.runelite.client.plugins.bot.BotPlugin;
+import net.runelite.client.ui.ClientToolbar;
+import net.runelite.client.ui.NavigationButton;
+import net.runelite.client.plugins.bot.BotPanel;
+import net.runelite.client.plugins.bot.AccountPanel;
+import net.runelite.client.plugins.bot.ScriptPanel;
+import net.runelite.client.plugins.bot.base.DebugPanel;
 import net.runelite.rsb.plugin.AccountManager;
 import net.runelite.rsb.plugin.ScriptSelector;
 import net.runelite.rsb.service.ScriptDefinition;
 
-import java.applet.Applet;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.EventListener;
 import java.util.Map;
@@ -100,7 +109,7 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         return client = injector.getInstance(Client.class);
     }
 
-    public Applet getApplet() {return applet = injector.getInstance(Applet.class);}
+    // Applet API removed in RuneLite 1.12+
 
     public ItemManager getItemManager() { return injector.getInstance(ItemManager.class);}
 
@@ -250,8 +259,8 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         return canvas;
     }
 
-    public Applet getLoader() {
-        return (Applet) this.getClient();
+    public java.awt.Canvas getLoader() {
+        return this.getClient().getCanvas();
     }
 
     /**
@@ -267,8 +276,10 @@ public class BotLite extends RuneLite implements BotLiteInterface {
      * Stops and shuts down the current bot instance
      */
     public void shutdown() {
-        getLoader().stop();
-        getLoader().setVisible(false);
+        java.awt.Canvas loader = getLoader();
+        if (loader != null) {
+            loader.setVisible(false);
+        }
         eventManager.killThread(false);
         sh.stopScript();
         psh.stopScript();
@@ -299,6 +310,94 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         else {
             this.start();
         }
+        // Register the bot sidebar panel after the UI is fully initialized.
+        // We delay this to ensure ClientUI.sidebar is created (avoids the NPE
+        // that occurs when plugins call addNavigation during early startup).
+        initBotPanel();
+    }
+
+    /**
+     * Manually initializes and registers the Bot sidebar panel with RuneLite's toolbar.
+     * This bypasses RuneLite's plugin discovery timing issues where the sidebar
+     * isn't ready when plugins call addNavigation() during startUp().
+     */
+    private void initBotPanel() {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                BotLite bot = getInjectorInstance();
+                BotPanel panel = injector.getInstance(BotPanel.class);
+
+                AccountPanel accountPanel = new AccountPanel(bot);
+                ScriptPanel scriptPanel = new ScriptPanel(bot);
+                DebugPanel debugPanel = new DebugPanel(bot);
+
+                panel.associateBot(accountPanel, scriptPanel, debugPanel);
+
+                InputStream iconStream = BotPlugin.class.getResourceAsStream("rsb.png");
+                BufferedImage icon;
+                if (iconStream != null) {
+                    Image img = ImageIO.read(iconStream);
+                    icon = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+                    Graphics g = icon.getGraphics();
+                    g.drawImage(img, 0, 0, null);
+                    g.dispose();
+                } else {
+                    log.warn("Could not load rsb.png icon for bot panel");
+                    icon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+                }
+
+                NavigationButton navButton = NavigationButton.builder()
+                        .tooltip("Bot Interface")
+                        .icon(icon)
+                        .priority(10)
+                        .panel(panel)
+                        .build();
+
+                ClientToolbar toolbar = injector.getInstance(ClientToolbar.class);
+                toolbar.addNavigation(navButton);
+                log.info("Bot panel registered in sidebar");
+            } catch (Exception e) {
+                log.error("Failed to initialize bot panel — retrying in 3s", e);
+                // Retry once after a delay in case the sidebar isn't ready yet
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(3000);
+                        SwingUtilities.invokeLater(() -> {
+                            try {
+                                initBotPanelRetry();
+                            } catch (Exception ex) {
+                                log.error("Bot panel retry also failed", ex);
+                            }
+                        });
+                    } catch (InterruptedException ignored) {}
+                }, "BotPanel-Retry").start();
+            }
+        });
+    }
+
+    private void initBotPanelRetry() {
+        try {
+            BotLite bot = getInjectorInstance();
+            BotPanel panel = injector.getInstance(BotPanel.class);
+            AccountPanel accountPanel = new AccountPanel(bot);
+            ScriptPanel scriptPanel = new ScriptPanel(bot);
+            DebugPanel debugPanel = new DebugPanel(bot);
+            panel.associateBot(accountPanel, scriptPanel, debugPanel);
+
+            BufferedImage icon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+            NavigationButton navButton = NavigationButton.builder()
+                    .tooltip("Bot Interface")
+                    .icon(icon)
+                    .priority(10)
+                    .panel(panel)
+                    .build();
+
+            ClientToolbar toolbar = injector.getInstance(ClientToolbar.class);
+            toolbar.addNavigation(navButton);
+            log.info("Bot panel registered in sidebar (retry succeeded)");
+        } catch (Exception e) {
+            log.error("Bot panel registration failed on retry", e);
+        }
     }
 
     public BotLite() throws Exception {
@@ -324,14 +423,18 @@ public class BotLite extends RuneLite implements BotLiteInterface {
     }
 
     public void runScript(String account, String scriptName) {
-        getInjectorInstance().setAccount(account);
+        try {
+            getInjectorInstance().setAccount(account);
+        } catch (Exception e) {
+            log.warn("Could not set account '{}', continuing without account: {}", account, e.getMessage());
+        }
         ScriptSelector ss = new ScriptSelector(getInjectorInstance());
         ss.load();
         ScriptDefinition def = ss.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(scriptName)).findFirst().get();
         try {
             getInjectorInstance().getScriptHandler().runScript(def.source.load(def));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to run script: {}", scriptName, e);
         }
     }
 

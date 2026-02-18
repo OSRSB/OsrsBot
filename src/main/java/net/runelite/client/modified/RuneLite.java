@@ -10,7 +10,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import java.applet.Applet;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -35,7 +34,6 @@ import javax.net.ssl.X509TrustManager;
 import javax.swing.*;
 
 import joptsimple.*;
-import joptsimple.util.EnumConverter;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
@@ -49,7 +47,6 @@ import net.runelite.client.externalplugins.ExternalPluginManager;
 import net.runelite.client.game.WorldService;
 import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.rs.ClientLoader;
-import net.runelite.client.rs.ClientUpdateCheckMode;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetOverlay;
 import net.runelite.rsb.botLauncher.BotLite;
@@ -126,10 +123,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
     @Inject
     @Nullable
-    public Applet applet;
-
-    @Inject
-    @Nullable
     private RuntimeConfig runtimeConfig;
 
     /**
@@ -175,23 +168,11 @@ public class RuneLite extends net.runelite.client.RuneLite {
                 .withValuesConvertedBy(new ConfigFileConverter())
                 .defaultsTo(DEFAULT_CONFIG_FILE);
 
-        final ArgumentAcceptingOptionSpec<ClientUpdateCheckMode> updateMode = parser
-                .accepts("rs", "Select client type")
-                .withRequiredArg()
-                .ofType(ClientUpdateCheckMode.class)
-                .defaultsTo(ClientUpdateCheckMode.AUTO)
-                .withValuesConvertedBy(new EnumConverter<>(ClientUpdateCheckMode.class) {
-                    @Override
-                    public ClientUpdateCheckMode convert(String v) {
-                        return super.convert(v.toUpperCase());
-                    }
-                });
-
         final ArgumentAcceptingOptionSpec<String> proxyInfo = parser
                 .accepts("proxy", "Designates a proxy ip address to be used to make the bot server connections")
                 .withRequiredArg().ofType(String.class);
 
-        return (ArgumentAcceptingOptionSpec<?>[]) new ArgumentAcceptingOptionSpec[]{sessionfile, configfile, updateMode, proxyInfo};
+        return (ArgumentAcceptingOptionSpec<?>[]) new ArgumentAcceptingOptionSpec[]{sessionfile, configfile, proxyInfo};
     }
 
     /**
@@ -260,7 +241,6 @@ public class RuneLite extends net.runelite.client.RuneLite {
         {
             final RuntimeConfigLoader runtimeConfigLoader = new RuntimeConfigLoader(okHttpClient);
             final ClientLoader clientLoader = new ClientLoader(okHttpClient,
-                    options.valueOf(optionSpecs[Options.UPDATE_MODE.getIndex()].ofType(ClientUpdateCheckMode.class)),
                     runtimeConfigLoader,
                     (String) options.valueOf("jav_config"));
 
@@ -277,7 +257,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
 
             injector = Guice.createInjector(new BotModule(
                     okHttpClient,
-                    clientLoader,
+                    clientLoader::get,
                     runtimeConfigLoader,
                     options.has("developer-mode"),
                     false,
@@ -319,25 +299,20 @@ public class RuneLite extends net.runelite.client.RuneLite {
             injector.injectMembers(client);
         }
 
-        // Start the applet
-        if (applet != null)
+        // Initialize the client via GameEngine API
+        if (client != null)
         {
-            // Client size must be set prior to init
-            applet.setSize(Constants.GAME_FIXED_SIZE);
-
             System.setProperty("jagex.disableBouncyCastle", "true");
             // Change user.home so the client places jagexcache in the .runelite directory
             String oldHome = System.setProperty("user.home", RUNELITE_DIR.getAbsolutePath());
             try
             {
-                applet.init();
+                client.initialize();
             }
             finally
             {
                 System.setProperty("user.home", oldHome);
             }
-
-            applet.start();
         }
 
         // Load user configuration
@@ -364,6 +339,36 @@ public class RuneLite extends net.runelite.client.RuneLite {
             WidgetOverlay.createOverlays(overlayManager, client).forEach(overlayManager::add);
             overlayManager.add(worldMapOverlay.get());
             overlayManager.add(tooltipOverlay.get());
+        }
+    }
+
+    /**
+     * Overrides parent RuneLite.start() to fix sidebar initialization order.
+     * The parent's start() loads and starts plugins BEFORE calling clientUI.init(),
+     * which causes NPEs when plugins try to add navigation buttons to a null sidebar.
+     * This override ensures the sidebar is created first via bareStart(), then loads
+     * and starts plugins, then shows the UI.
+     */
+    @Override
+    public void start() throws Exception {
+        // Step 1: Client init, config loading, sidebar creation (clientUI.init())
+        bareStart();
+
+        // Step 2: Load plugins — sidebar now exists for addNavigation calls
+        pluginManager.loadCorePlugins();
+        pluginManager.loadSideLoadPlugins();
+        externalPluginManager.loadExternalPlugins();
+        pluginManager.loadDefaultPluginConfiguration(null);
+
+        // Step 3: Start plugins — startUp() calls addNavigation safely now
+        pluginManager.startPlugins();
+
+        // Step 4: Discord, show UI, unblock client
+        discordService.init();
+        eventBus.register(discordService);
+        clientUI.show();
+        if (client != null) {
+            client.unblockStartup();
         }
     }
 
@@ -527,7 +532,7 @@ public class RuneLite extends net.runelite.client.RuneLite {
      * The values assigned are their positions within the relating ArgumentAcceptingOptionSpec array
      */
     enum Options {
-        SESSION_FILE(0),CONFIG_FILE(1), UPDATE_MODE(2), PROXY_INFO(3);
+        SESSION_FILE(0), CONFIG_FILE(1), PROXY_INFO(2);
 
         private int index;
 
