@@ -257,7 +257,13 @@ public abstract class BaseWidgetWrapper implements Widget {
 
     @Override
     public boolean isHidden() {
-        return wrappedWidget.isHidden();
+        try {
+            return wrappedWidget.isHidden();
+        } catch (IllegalStateException e) {
+            // isHidden() requires client thread in RuneLite 1.12+ (traverses parent widgets).
+            // Fall back to isSelfHidden() which only reads this widget's own flag.
+            return wrappedWidget.isSelfHidden();
+        }
     }
 
     @Override

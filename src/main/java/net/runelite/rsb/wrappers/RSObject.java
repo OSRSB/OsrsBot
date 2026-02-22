@@ -18,6 +18,7 @@ import net.runelite.rsb.wrappers.RSTile;
 
 import java.awt.*;
 import java.lang.reflect.Field;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A wrapper for a tile object which interprets the underlying tile objects type and furthermore
@@ -27,6 +28,9 @@ import java.lang.reflect.Field;
  */
 @Slf4j
 public class RSObject extends MethodProvider implements Clickable07, Positionable, CacheProvider<ObjectDefinition> {
+
+	/** Static cache for definitions resolved via RuneLite client API. */
+	private static final ConcurrentHashMap<Integer, ObjectDefinition> clientApiDefCache = new ConcurrentHashMap<>();
 
 	private final TileObject obj;
 	private final Type type;
@@ -52,7 +56,41 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 		this.type = type;
 		this.plane = plane;
 		this.id = (obj != null) ? obj.getId() : -1;
-		this.def = (id != -1) ? (ObjectDefinition) createDefinition(id) : null;
+		this.def = resolveDefinition(id);
+	}
+
+	/**
+	 * Resolves the ObjectDefinition for the given ID, trying the file cache first,
+	 * then falling back to RuneLite's client API with a static cache.
+	 */
+	private ObjectDefinition resolveDefinition(int id) {
+		if (id == -1) return null;
+
+		// Try file-based cache first (original CacheProvider behavior)
+		ObjectDefinition cached = (ObjectDefinition) createDefinition(id);
+		if (cached != null) return cached;
+
+		// Try static client API cache (avoids repeated lookups for same ID)
+		ObjectDefinition apiCached = clientApiDefCache.get(id);
+		if (apiCached != null) return apiCached;
+
+		// Fall back to RuneLite client API
+		if (methods != null && methods.client != null) {
+			try {
+				ObjectComposition comp = methods.client.getObjectDefinition(id);
+				if (comp != null && comp.getName() != null && !"null".equals(comp.getName())) {
+					ObjectDefinition fallback = new ObjectDefinition();
+					fallback.setId(id);
+					fallback.setName(comp.getName());
+					fallback.setActions(comp.getActions());
+					clientApiDefCache.put(id, fallback);
+					return fallback;
+				}
+			} catch (Exception e) {
+				// Client API unavailable
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -205,7 +243,9 @@ public class RSObject extends MethodProvider implements Clickable07, Positionabl
 	 * desired action
 	 */
 	public boolean hasAction(@NonNull final String action) {
-		for (final String a : getDef().getActions()) {
+		ObjectDefinition objectDef = getDef();
+		if (objectDef == null) return false;
+		for (final String a : objectDef.getActions()) {
 			if (action.equalsIgnoreCase(a)) return true;
 		}
 		return false;

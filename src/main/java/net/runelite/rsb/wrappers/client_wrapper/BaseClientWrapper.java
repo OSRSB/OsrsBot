@@ -12,33 +12,31 @@ import net.runelite.api.hooks.DrawCallbacks;
 import net.runelite.api.vars.AccountType;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetConfigNode;
 import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.api.worldmap.MapElementConfig;
 import net.runelite.api.worldmap.WorldMap;
-import net.runelite.api.RuneLiteObjectController;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.applet.Applet;
 import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntPredicate;
-import com.jagex.oldscape.pub.OAuthApi;
-import com.jagex.oldscape.pub.OtlTokenRequester;
-import com.jagex.oldscape.pub.OtlTokenResponse;
 
 
 
 
 
 /*
-Base class for wrapping runelite Client, along with some weird Applet shenanigans.
+Base class for wrapping runelite Client.
+In RuneLite 1.12+ the client no longer extends Applet, so we extend Panel
+(still a Component/Container) to preserve AWT event compatibility.
 */
 @SuppressWarnings("removal")
-public abstract class BaseClientWrapper extends Applet implements Client, OAuthApi
+public abstract class BaseClientWrapper extends Panel implements Client
 {
     public final Client wrappedClient;
 
@@ -48,7 +46,9 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
 
     @Override
     public Component getComponent(int n) {
-        return ((Applet) wrappedClient).getComponent(n);
+        // In 1.12+ the client is not an Applet/Container.
+        // Return the game canvas for component 0 (the only child in the old model).
+        return wrappedClient.getCanvas();
     }
 
     @Override
@@ -81,15 +81,7 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
         return wrappedClient.getNpcs();
     }
 
-    @Override
-    public NPC[] getCachedNPCs() {
-        return wrappedClient.getCachedNPCs();
-    }
-
-    @Override
-    public Player[] getCachedPlayers() {
-        return wrappedClient.getCachedPlayers();
-    }
+    // getCachedNPCs() and getCachedPlayers() removed from RuneLite Client API
 
     @Override
     public int getBoostedSkillLevel(Skill skill) {
@@ -656,7 +648,7 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     public void closeInterface(WidgetNode interfaceNode, boolean unload) { wrappedClient.closeInterface(interfaceNode, unload); }
 
     @Override
-    public HashTable<IntegerNode> getWidgetFlags() {
+    public HashTable<WidgetConfigNode> getWidgetFlags() {
         return wrappedClient.getWidgetFlags();
     }
 
@@ -790,6 +782,11 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     }
 
     @Override
+    public Projectile createProjectile(int id, WorldPoint start, int startZ, @Nullable Actor startActor, WorldPoint end, int endZ, @Nullable Actor endActor, int startCycle, int endCycle, int slope, int startHeight) {
+        return wrappedClient.createProjectile(id, start, startZ, startActor, end, endZ, endActor, startCycle, endCycle, slope, startHeight);
+    }
+
+    @Override
     public Deque<Projectile> getProjectiles() {
         return wrappedClient.getProjectiles();
     }
@@ -817,6 +814,16 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
 
     @Override
     public ModelData mergeModels(ModelData... models) {
+        return wrappedClient.mergeModels(models);
+    }
+
+    @Override
+    public Model mergeModels(Model[] models, int length) {
+        return wrappedClient.mergeModels(models, length);
+    }
+
+    @Override
+    public Model mergeModels(Model... models) {
         return wrappedClient.mergeModels(models);
     }
 
@@ -925,24 +932,11 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
         return wrappedClient.getIntStack();
     }
 
-    @Override
-    public int getStringStackSize() {
-        return wrappedClient.getStringStackSize();
-    }
-
-    @Override
-    public void setStringStackSize(int stackSize) {
-        wrappedClient.setStringStackSize(stackSize);
-    }
+    // getStringStackSize/setStringStackSize/getStringStack removed from RuneLite Client API
 
     @Override
     public void setCameraPitchTarget(int cameraPitchTarget) {
         wrappedClient.setCameraPitchTarget(cameraPitchTarget);
-    }
-
-    @Override
-    public String[] getStringStack() {
-        return wrappedClient.getStringStack();
     }
 
     @Override
@@ -1645,17 +1639,98 @@ public abstract class BaseClientWrapper extends Applet implements Client, OAuthA
     }
 
     @Override
+    public java.io.FileDescriptor getSocketFD() {
+        return wrappedClient.getSocketFD();
+    }
+
+    @Override
+    public WorldView findWorldViewFromWorldPoint(WorldPoint point) {
+        return wrappedClient.findWorldViewFromWorldPoint(point);
+    }
+
+    @Override
+    @Nullable
+    public CameraFocusableEntity getCameraFocusEntity() {
+        return wrappedClient.getCameraFocusEntity();
+    }
+
+    @Override
+    public SceneTilePaint createSceneTilePaint(int swColor, int seColor, int neColor, int nwColor, int texture, int rgb, boolean isFlat) {
+        return wrappedClient.createSceneTilePaint(swColor, seColor, neColor, nwColor, texture, rgb, isFlat);
+    }
+
+    @Override
+    public int getEnvironment() {
+        return wrappedClient.getEnvironment();
+    }
+
+    @Override
+    public Widget getFocusedInputFieldWidget() {
+        return wrappedClient.getFocusedInputFieldWidget();
+    }
+
+    @Override
+    public WidgetConfigNode getWidgetConfig(Widget widget) {
+        return wrappedClient.getWidgetConfig(widget);
+    }
+
+    @Override
+    public List<Integer> getDBTableRows(int tableId) {
+        return wrappedClient.getDBTableRows(tableId);
+    }
+
+    @Override
+    public void registerRuneLiteObject(RuneLiteObjectController obj) {
+        wrappedClient.registerRuneLiteObject(obj);
+    }
+
+    @Override
+    public void removeRuneLiteObject(RuneLiteObjectController obj) {
+        wrappedClient.removeRuneLiteObject(obj);
+    }
+
+    @Override
+    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController obj) {
+        return wrappedClient.isRuneLiteObjectRegistered(obj);
+    }
+
+    @Override
     public List<MidiRequest> getActiveMidiRequests() {
         return wrappedClient.getActiveMidiRequests();
     }
 
     @Override
-    public boolean isRuneLiteObjectRegistered(RuneLiteObjectController controller) {return wrappedClient.isRuneLiteObjectRegistered(controller);}
+    public int getObjectStackSize() {
+        return wrappedClient.getObjectStackSize();
+    }
 
     @Override
-    public void removeRuneLiteObject(RuneLiteObjectController controller) {wrappedClient.removeRuneLiteObject(controller);}
-    
+    public void setObjectStackSize(int size) {
+        wrappedClient.setObjectStackSize(size);
+    }
+
     @Override
-    public void registerRuneLiteObject(RuneLiteObjectController controller) {wrappedClient.registerRuneLiteObject(controller);}
-    
+    public Object[] getObjectStack() {
+        return wrappedClient.getObjectStack();
+    }
+
+    @Override
+    public String getWorldHost() {
+        return wrappedClient.getWorldHost();
+    }
+
+    @Override
+    public void unblockStartup() {
+        wrappedClient.unblockStartup();
+    }
+
+    @Override
+    public void setConfiguration(ClientConfiguration config) {
+        wrappedClient.setConfiguration(config);
+    }
+
+    @Override
+    public void initialize() {
+        wrappedClient.initialize();
+    }
 }

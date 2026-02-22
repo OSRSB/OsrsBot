@@ -3,7 +3,6 @@ package net.runelite.rsb.internal.input;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.methods.MethodContext;
 
-import java.applet.Applet;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -143,7 +142,7 @@ public class VirtualMouse {
             } else {
                 throw new InternalError(e.toString());
             }
-            ((Applet) methods.client).getComponent(0).dispatchEvent(e);
+            methods.client.getCanvas().dispatchEvent(e);
         } catch (NullPointerException ignored) {
             log.debug("Listener is being re-instantiated on the client", ignored);
         }

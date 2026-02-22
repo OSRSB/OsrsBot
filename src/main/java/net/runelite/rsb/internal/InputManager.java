@@ -8,7 +8,7 @@ import net.runelite.api.Client;
 import net.runelite.rsb.internal.input.Canvas;
 import net.runelite.rsb.internal.input.VirtualMouse;
 
-import java.applet.Applet;
+import java.awt.*;
 import java.awt.event.*;
 
 @Slf4j
@@ -88,7 +88,7 @@ public class InputManager {
 	}
 
 	private Canvas getCanvasWrapper() {
-		return (Canvas) getTarget().getComponent(0);
+		return bot.getCanvas();
 	}
 
 	private Client getClient() {
@@ -103,8 +103,13 @@ public class InputManager {
 		}
 	}
 
-	private Applet getTarget() {
-		return (Applet) getClient();
+	/**
+	 * Returns the game canvas as the event source Component.
+	 * In RuneLite 1.12+ the client no longer extends Applet,
+	 * so we use the canvas directly.
+	 */
+	private Component getTarget() {
+		return bot.getLoader();
 	}
 
 	public int getX() {

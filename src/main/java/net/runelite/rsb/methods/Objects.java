@@ -1,7 +1,6 @@
 package net.runelite.rsb.methods;
 
 import net.runelite.api.*;
-import net.runelite.cache.definitions.ObjectDefinition;
 import net.runelite.rsb.query.RSObjectQueryBuilder;
 import net.runelite.rsb.wrappers.RSObject;
 import net.runelite.rsb.wrappers.RSTile;
@@ -196,10 +195,10 @@ public class Objects extends MethodProvider {
     @Nullable
     public RSObject getNearest(final String... names) {
         return getNearest(o -> {
-            ObjectDefinition def = o.getDef();
-            if (def != null) {
+            String objName = o.getName();
+            if (!objName.isEmpty()) {
                 for (String name : names) {
-                    if (name.equals(def.getName())) {
+                    if (name.equals(objName)) {
                         return true;
                     }
                 }
@@ -221,10 +220,10 @@ public class Objects extends MethodProvider {
     @Nullable
     public RSObject findNearest(final int distance, final String... names) {
         return getNearest(distance, o -> {
-            ObjectDefinition def = o.getDef();
-            if (def != null) {
+            String objName = o.getName();
+            if (!objName.isEmpty()) {
                 for (String name : names) {
-                    if (name.equals(def.getName())) {
+                    if (name.equals(objName)) {
                         return true;
                     }
                 }
