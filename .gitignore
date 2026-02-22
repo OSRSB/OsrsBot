@@ -8,3 +8,24 @@ target/*
 .lsp/*
 
 output/*
+
+# Claude Code
+.claude/
+
+# Debug / decompilation artifacts
+*.log
+data/
+RuneLite_parent_decompiled.java
+clientui_bytecode.txt
+clientui_decompile.txt
+clientui_out.txt
+rl_decompile_full.txt
+rl_err.txt
+rl_full.txt
+runelite_bytecode.txt
+runelite_decompile.txt
+runelite_err.txt
+runelite_parent_bytecode.txt
+
+# Scripts
+start-script.sh
