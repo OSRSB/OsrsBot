@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.input.KeyListener;
 import net.runelite.rsb.methods.MethodContext;
 
-import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
@@ -43,7 +42,7 @@ public class VirtualKeyboard implements KeyListener {
             keyReleased(e);
         }
         EventQueue eventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
-        eventQueue.postEvent(new FocusEvent( ((Applet) methods.client).getComponent(0), FocusEvent.FOCUS_GAINED));
+        eventQueue.postEvent(new FocusEvent(methods.client.getCanvas(), FocusEvent.FOCUS_GAINED));
         eventQueue.postEvent(e);
     }
 

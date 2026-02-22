@@ -8,6 +8,8 @@ import net.runelite.rsb.script.Script;
 import net.runelite.rsb.script.ScriptManifest;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Base class for adaptive scripts. Extends Script, implements PaintListener and MessageListener.
@@ -27,6 +29,15 @@ import java.awt.*;
 public abstract class AdaptiveScript extends Script implements PaintListener, MessageListener {
 
     protected AdaptiveContext adaptive;
+
+    /** Whether auto-drop is enabled when inventory is full (default: true). */
+    protected boolean autoDropEnabled = true;
+
+    /** Item IDs to keep (never auto-drop). Tools, etc. */
+    private final Set<Integer> keepItemIds = new HashSet<>();
+
+    /** Item names to keep (never auto-drop). Case-insensitive matching. */
+    private final Set<String> keepItemNames = new HashSet<>();
 
     /**
      * Initializes the adaptive context and loads persisted data.
@@ -70,6 +81,68 @@ public abstract class AdaptiveScript extends Script implements PaintListener, Me
     public void onRepaint(Graphics render) {
         if (adaptive != null) {
             adaptive.getPaint().render(render);
+        }
+    }
+
+    // ---- Auto-drop ----
+
+    /**
+     * Checks if inventory is full and auto-drops if enabled.
+     * Called automatically, but scripts can also call this manually.
+     *
+     * @return true if items were dropped, false if no action was needed/taken
+     */
+    protected boolean checkAndAutoDrop() {
+        if (!autoDropEnabled) return false;
+        if (!inventory.isFull() && !adaptive.getChat().isInventoryFull()) return false;
+
+        log.info("Inventory full - auto-dropping items");
+        resolveKeepNames();
+        int[] keepIds = keepItemIds.stream().mapToInt(Integer::intValue).toArray();
+        inventory.dropAllExcept(true, keepIds);
+        adaptive.getChat().clearInventoryFull();
+        return true;
+    }
+
+    /**
+     * Adds item IDs to the keep-list (these items will never be auto-dropped).
+     * Typically called in onStart() to protect tools, food, etc.
+     */
+    protected void keepItems(int... ids) {
+        for (int id : ids) {
+            keepItemIds.add(id);
+        }
+    }
+
+    /**
+     * Adds item names to the keep-list (case-insensitive, never auto-dropped).
+     * These are resolved to IDs at drop time.
+     */
+    protected void keepItems(String... names) {
+        for (String name : names) {
+            keepItemNames.add(name.toLowerCase());
+        }
+    }
+
+    /**
+     * Clears the keep-list entirely.
+     */
+    protected void clearKeepList() {
+        keepItemIds.clear();
+        keepItemNames.clear();
+    }
+
+    /**
+     * Resolves keep-item names to IDs and merges with explicit keep IDs.
+     * Called internally before dropping.
+     */
+    private void resolveKeepNames() {
+        if (keepItemNames.isEmpty()) return;
+        for (String name : keepItemNames) {
+            int id = inventory.getItemID(name);
+            if (id != -1) {
+                keepItemIds.add(id);
+            }
         }
     }
 

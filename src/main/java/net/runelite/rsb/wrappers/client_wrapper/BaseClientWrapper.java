@@ -19,7 +19,6 @@ import net.runelite.api.worldmap.WorldMap;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.applet.Applet;
 import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
@@ -32,10 +31,12 @@ import java.util.function.IntPredicate;
 
 
 /*
-Base class for wrapping runelite Client, along with some weird Applet shenanigans.
+Base class for wrapping runelite Client.
+In RuneLite 1.12+ the client no longer extends Applet, so we extend Panel
+(still a Component/Container) to preserve AWT event compatibility.
 */
 @SuppressWarnings("removal")
-public abstract class BaseClientWrapper extends Applet implements Client
+public abstract class BaseClientWrapper extends Panel implements Client
 {
     public final Client wrappedClient;
 
@@ -45,7 +46,9 @@ public abstract class BaseClientWrapper extends Applet implements Client
 
     @Override
     public Component getComponent(int n) {
-        return ((Applet) wrappedClient).getComponent(n);
+        // In 1.12+ the client is not an Applet/Container.
+        // Return the game canvas for component 0 (the only child in the old model).
+        return wrappedClient.getCanvas();
     }
 
     @Override
