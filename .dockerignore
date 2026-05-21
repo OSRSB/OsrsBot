@@ -1,0 +1,24 @@
+# Source / build artifacts not needed in the image
+src/
+build/
+gradle/
+.gradle/
+.git/
+docs/
+assets/
+
+# Dev / IDE files
+*.iml
+*.iws
+*.ipr
+.idea/
+.vscode/
+*.class
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Sensitive files never go into the image
+*.key
+accounts.ini

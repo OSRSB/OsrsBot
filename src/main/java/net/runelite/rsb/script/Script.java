@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.rsb.methods.Methods;
+import net.runelite.rsb.service.SessionHealthMonitor;
 import net.runelite.rsb.util.Timer;
 
 
@@ -23,6 +24,7 @@ import java.util.Set;
 public abstract class Script extends Methods implements EventListener, Runnable {
 
 	Set<Script> delegates = new HashSet<>();
+	private SessionHealthMonitor healthMonitor;
 	public MethodContext ctx;
 
 	private volatile boolean running = false;
@@ -240,6 +242,9 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 		}
 		if (start) {
 			running = true;
+			ScriptManifest manifest = getClass().getAnnotation(ScriptManifest.class);
+			String name = manifest != null ? manifest.name() : getClass().getSimpleName();
+			healthMonitor = new SessionHealthMonitor(name);
 			ctx.runeLite.getEventManager().addListener(this);
 			ctx.runeLite.eventBus.register(this);
 			log.info("Script started.");
@@ -272,6 +277,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 						int timeOut = -1;
 						try {
 							timeOut = loop();
+							healthMonitor.onLoop();
 						} catch (ThreadDeath td) {
 							break;
 						} catch (Exception ex) {
@@ -304,6 +310,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 				onFinish();
 			}
 			running = false;
+			healthMonitor.onFinish();
 			log.info("Script stopped.");
 		} else {
 			log.error("Failed to start up.");

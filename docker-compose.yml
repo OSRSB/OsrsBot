@@ -1,0 +1,16 @@
+services:
+  osrsbot:
+    build: .
+    volumes:
+      - osrsbot_data:/data
+    environment:
+      - LOG_LEVEL=INFO
+      - LOG_DIR=/data/logs
+      - OSRSBOT_HOME=/data
+    restart: unless-stopped
+    # Expose JMX for metrics scraping (bind only to localhost)
+    ports:
+      - "127.0.0.1:9010:9010"
+
+volumes:
+  osrsbot_data:

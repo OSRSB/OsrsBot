@@ -1,4 +1,9 @@
 <configuration>
+    <!-- Override via -DLOG_LEVEL=DEBUG or the Docker ENV var of the same name -->
+    <property name="LOG_LEVEL" value="${LOG_LEVEL:-INFO}"/>
+    <!-- Override via -DLOG_DIR=/path or the Docker ENV var; falls back to ~/.osrsbot/logs -->
+    <property name="LOG_DIR" value="${LOG_DIR:-${user.home}/.osrsbot/logs}"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -6,9 +11,9 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${user.home}/.osrsbot/logs/osrsbot.log</file>
+        <file>${LOG_DIR}/osrsbot.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${user.home}/.osrsbot/logs/osrsbot.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/osrsbot.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -16,7 +21,7 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="${LOG_LEVEL}">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
