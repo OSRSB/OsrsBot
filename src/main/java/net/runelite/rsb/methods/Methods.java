@@ -1,5 +1,6 @@
 package net.runelite.rsb.methods;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.internal.globval.WidgetIndices;
 import net.runelite.rsb.wrappers.*;
 import net.runelite.rsb.wrappers.subwrap.ChooseOption;
@@ -7,19 +8,13 @@ import net.runelite.rsb.wrappers.subwrap.NPCChat;
 
 import java.awt.*;
 import java.util.function.BooleanSupplier;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Provides access to methods that can be used by RSBot scripts.
  */
+@Slf4j
 public class Methods {
 	public MethodContext ctx;
-
-	/**
-	 * The logger instance
-	 */
-	protected final Logger log = Logger.getLogger(getClass().getName());
 	/**
 	 * The instance of {@link java.util.Random} for random number generation.
 	 */
@@ -349,7 +344,6 @@ public class Methods {
 	 * @param message Object to log
 	 */
 	public void log(Color color, Object message) {
-		Object[] parameters = {color};
-		log.log(Level.INFO, message.toString(), parameters);
+		log.info(message.toString());
 	}
 }

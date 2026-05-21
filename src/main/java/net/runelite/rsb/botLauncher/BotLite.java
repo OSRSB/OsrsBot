@@ -327,11 +327,18 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         getInjectorInstance().setAccount(account);
         ScriptSelector ss = new ScriptSelector(getInjectorInstance());
         ss.load();
-        ScriptDefinition def = ss.getScripts().stream().filter(x -> x.name.replace(" ", "").equals(scriptName)).findFirst().get();
+        ScriptDefinition def = ss.getScripts().stream()
+                .filter(x -> x.name.replace(" ", "").equals(scriptName))
+                .findFirst()
+                .orElse(null);
+        if (def == null) {
+            log.warn("Script '{}' not found", scriptName);
+            return;
+        }
         try {
             getInjectorInstance().getScriptHandler().runScript(def.source.load(def));
         } catch (Exception e) {
-            log.error("Failed to run script", e);
+            log.error("Failed to run script '{}'", scriptName, e);
         }
     }
 

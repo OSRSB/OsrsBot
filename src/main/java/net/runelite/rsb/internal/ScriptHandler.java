@@ -179,9 +179,6 @@ public class ScriptHandler {
 				}
 			}
 		}
-		if (curThread == null) {
-			throw new ThreadDeath();
-		}
 	}
 
 	public boolean onBreak() {
@@ -193,9 +190,6 @@ public class ScriptHandler {
 					return onBreak(i);
 				}
 			}
-		}
-		if (curThread == null) {
-			throw new ThreadDeath();
 		}
 		return false;
 	}
@@ -210,9 +204,6 @@ public class ScriptHandler {
 					return;
 				}
 			}
-		}
-		if (curThread == null) {
-			throw new ThreadDeath();
 		}
 	}
 

@@ -35,7 +35,9 @@ public class FileScriptSource implements ScriptSource {
 					ClassLoader scriptLoader = new ScriptClassLoader(file.toURI().toURL());
 					for (File file : Objects.requireNonNull(file.listFiles())) {
 						if (isJar(file)) {
-							load(new ScriptClassLoader(getJarUrl(file)), scriptDefinitions, new JarFile(file));
+							try (JarFile jar = new JarFile(file)) {
+								load(new ScriptClassLoader(getJarUrl(file)), scriptDefinitions, jar);
+							}
 						} else {
 							load(scriptLoader, scriptDefinitions, file, "");
 						}
@@ -44,9 +46,9 @@ public class FileScriptSource implements ScriptSource {
 					log.debug("Failed to list files", ioEx);
 				}
 			} else if (isJar(file)) {
-				try {
+				try (JarFile jar = new JarFile(file)) {
 					ClassLoader scriptLoader = new ScriptClassLoader(getJarUrl(file));
-					load(scriptLoader, scriptDefinitions, new JarFile(file));
+					load(scriptLoader, scriptDefinitions, jar);
 				} catch (IOException ioEx) {
 					log.debug("Failed to list files", ioEx);
 				}

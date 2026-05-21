@@ -13,7 +13,10 @@ import java.util.function.BooleanSupplier;
 @Slf4j
 public abstract class MethodProvider {
 
-	public static MethodContext methods = null;
+	// Shared across all MethodProvider instances; volatile ensures cross-thread
+	// visibility. Multi-bot setups that construct providers concurrently are still
+	// subject to last-write-wins — a full fix requires per-thread context storage.
+	public static volatile MethodContext methods = null;
 
 	public MethodProvider(MethodContext ctx) {
 		this.methods = ctx;

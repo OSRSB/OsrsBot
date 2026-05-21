@@ -2,14 +2,14 @@ package net.runelite.rsb.script;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.logging.Level;
-
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.event.listener.PaintListener;
 import net.runelite.rsb.methods.MethodContext;
 import net.runelite.api.Point;
 import net.runelite.rsb.methods.Methods;
 import net.runelite.rsb.service.Monitoring;
 
+@Slf4j
 public abstract class Random extends Methods implements PaintListener {
 
 	protected String name;
@@ -117,14 +117,14 @@ public abstract class Random extends Methods implements PaintListener {
 				if (wait == -1) {
 					break;
 				} else if (timeout > 0 && System.currentTimeMillis() >= timeout) {
-					log.warning("Time limit reached for " + name + ".");
+					log.warn("Time limit reached for {}", name);
 					Monitoring.RandomFinished(name, false);
 					ctx.stopScript();
 				} else {
 					sleep(wait);
 				}
 			} catch (Exception ex) {
-				log.log(Level.SEVERE, "Uncaught exception: ", ex);
+				log.error("Uncaught exception in random {}", name, ex);
 				break;
 			}
 		}
