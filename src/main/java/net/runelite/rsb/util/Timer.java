@@ -1,5 +1,7 @@
 package net.runelite.rsb.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -11,6 +13,7 @@ import java.util.function.BooleanSupplier;
 /**
  * A Timer
  */
+@Slf4j
 public class Timer {
 
 	private long end;
@@ -129,7 +132,8 @@ public class Timer {
 		try {
 			return executor.submit(future).get();
 		} catch (ExecutionException | InterruptedException e) {
-			e.printStackTrace();
+			Thread.currentThread().interrupt();
+			log.warn("Sleep interrupted", e);
 		}
 		return false;
 	}

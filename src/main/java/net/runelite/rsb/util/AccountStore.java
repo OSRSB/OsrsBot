@@ -1,12 +1,16 @@
 package net.runelite.rsb.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -20,6 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * @author GigiaJ
  */
+@Slf4j
 public class AccountStore {
 
 	public static class Account {
@@ -85,6 +90,8 @@ public class AccountStore {
 	public static final String CIPHER_TRANSFORMATION = "DESede/CBC/PKCS5Padding";
 	public static final int FORMAT_VERSION = 2;
 
+	private static final int DESEDE_KEY_LENGTH = 24;
+
 	private final File file;
 	private byte[] digest;
 	private final String[] protectedAttributes = {"pin"};
@@ -93,6 +100,34 @@ public class AccountStore {
 
 	public AccountStore(File file) {
 		this.file = file;
+	}
+
+	/**
+	 * Loads or generates a per-installation encryption key stored next to the accounts file.
+	 * Returns the raw 24-byte DESede key, or null if key file operations fail.
+	 */
+	public static byte[] loadOrCreateInstallKey(File keyFile) {
+		if (keyFile.exists()) {
+			try {
+				byte[] encoded = Files.readAllBytes(keyFile.toPath());
+				byte[] key = java.util.Base64.getDecoder().decode(encoded);
+				if (key.length == DESEDE_KEY_LENGTH) {
+					return key;
+				}
+				log.warn("Install key file has unexpected length {}; regenerating", key.length);
+			} catch (IOException e) {
+				log.error("Failed to read install key file, regenerating", e);
+			}
+		}
+		byte[] key = new byte[DESEDE_KEY_LENGTH];
+		new SecureRandom().nextBytes(key);
+		try {
+			Files.write(keyFile.toPath(), java.util.Base64.getEncoder().encode(key));
+			log.info("Generated new per-installation encryption key at {}", keyFile.getAbsolutePath());
+		} catch (IOException e) {
+			log.error("Failed to save install key file; account data will not be encrypted persistently", e);
+		}
+		return key;
 	}
 
 	public Account get(String username) {
@@ -119,73 +154,90 @@ public class AccountStore {
 			file.setReadable(true);
 			file.setWritable(true);
 		}
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		try {
-			int v = Integer.parseInt(br.readLine());
-			if (v != FORMAT_VERSION) {
-				throw new IOException("unsupported format version: " + v);
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String versionLine = br.readLine();
+			if (versionLine == null || versionLine.isBlank()) {
+				return;
 			}
-		} catch (NumberFormatException ex) {
-			throw new IOException("bad format");
-		}
-		accounts.clear();
-		Account current = null;
-		for (; ;) {
-			String line = br.readLine();
-			if (line == null) {
-				break;
-			}
-			if (line.startsWith("[") && line.endsWith("]")) {
-				if (current != null) {
-					accounts.put(current.username, current);
+			try {
+				int v = Integer.parseInt(versionLine.trim());
+				if (v != FORMAT_VERSION) {
+					throw new IOException("unsupported format version: " + v);
 				}
-				String name = AccountStore.fixName(line.trim().substring(1).substring(0, line.length() - 2));
-				current = new Account(name);
-				continue;
+			} catch (NumberFormatException ex) {
+				throw new IOException("bad format");
 			}
-			if (current != null && line.matches("^\\w+=.+$")) {
-				String[] split = line.trim().split("=");
-				if (split[0].equals("password")) {
-					current.password = decrypt(split[1]);
-				} else {
-					if (Arrays.asList(protectedAttributes).contains(split[0])) {
-						split[1] = decrypt(split[1]);
+			accounts.clear();
+			Account current = null;
+			for (; ;) {
+				String line = br.readLine();
+				if (line == null) {
+					break;
+				}
+				if (line.startsWith("[") && line.endsWith("]")) {
+					if (current != null) {
+						accounts.put(current.username, current);
 					}
-					current.setAttribute(split[0], split[1]);
+					String name = AccountStore.fixName(line.trim().substring(1).substring(0, line.length() - 2));
+					current = new Account(name);
+					continue;
+				}
+				if (current != null && line.matches("^\\w+=.+$")) {
+					String[] split = line.trim().split("=", 2);
+					if (split[0].equals("password")) {
+						current.password = decrypt(split[1]);
+					} else {
+						if (Arrays.asList(protectedAttributes).contains(split[0])) {
+							split[1] = decrypt(split[1]);
+						}
+						current.setAttribute(split[0], split[1]);
+					}
 				}
 			}
+			if (current != null) {
+				accounts.put(current.username, current);
+			}
 		}
-		if (current != null) {
-			accounts.put(current.username, current);
-		}
-		br.close();
 	}
 
 	public void save() throws IOException {
-		final BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-		bw.write(Integer.toString(FORMAT_VERSION));
-		bw.newLine();
-		for (String name : accounts.keySet()) {
-			bw.append("[").append(AccountStore.fixName(name.trim())).append("]");
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+			bw.write(Integer.toString(FORMAT_VERSION));
 			bw.newLine();
-			String password = accounts.get(name).password;
-			if (password != null) {
-				bw.append("password=");
-				bw.append(encrypt(password));
-			}
-			bw.newLine();
-			for (Map.Entry<String, String> entry : accounts.get(name).attributes.entrySet()) {
-				String key = entry.getKey(), value = entry.getValue();
-				if (Arrays.asList(protectedAttributes).contains(key)) {
-					value = encrypt(value);
-				}
-				bw.append(key).append("=").append(value);
+			for (String name : accounts.keySet()) {
+				bw.append("[").append(AccountStore.fixName(name.trim())).append("]");
 				bw.newLine();
+				String password = accounts.get(name).password;
+				if (password != null) {
+					bw.append("password=");
+					bw.append(encrypt(password));
+				}
+				bw.newLine();
+				for (Map.Entry<String, String> entry : accounts.get(name).attributes.entrySet()) {
+					String key = entry.getKey(), value = entry.getValue();
+					if (Arrays.asList(protectedAttributes).contains(key)) {
+						value = encrypt(value);
+					}
+					bw.append(key).append("=").append(value);
+					bw.newLine();
+				}
 			}
 		}
-		bw.close();
 	}
 
+	/**
+	 * Sets the encryption key from a raw 24-byte DESede key (e.g. from {@link #loadOrCreateInstallKey}).
+	 */
+	public void setKeyBytes(byte[] keyBytes) {
+		if (keyBytes == null || keyBytes.length != DESEDE_KEY_LENGTH) {
+			throw new IllegalArgumentException("Key must be exactly " + DESEDE_KEY_LENGTH + " bytes");
+		}
+		digest = Arrays.copyOf(keyBytes, DESEDE_KEY_LENGTH);
+	}
+
+	/**
+	 * Sets the encryption key by hashing a password string (legacy path).
+	 */
 	public void setPassword(String password) {
 		if (password == null) {
 			digest = null;
@@ -196,7 +248,7 @@ public class AccountStore {
 			md.update(password.getBytes("iso-8859-1"), 0, password.length());
 			digest = md.digest();
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to digest password!");
+			throw new RuntimeException("Unable to digest password");
 		}
 		digest = Arrays.copyOf(digest, 24);
 		for (int i = 0, off = 20; i < 4; ++i) {

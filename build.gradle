@@ -28,17 +28,16 @@ if (supportedCheck) {
 static def getRuneLiteVersion() {
     URL url = new URL("http://repo.runelite.net/net/runelite/client/maven-metadata.xml")
     URLConnection urlConnection = url.openConnection()
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-            urlConnection.getInputStream()))
     String latestName = null
-    String inputLine
-    while ((inputLine = bufferedReader.readLine()) != null) {
-        inputLine = inputLine.trim()
-        if (inputLine.contains("<release>")) {
-            latestName = inputLine.replace("<release>", "").replace("</release>", "")
+    new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).withCloseable { bufferedReader ->
+        String inputLine
+        while ((inputLine = bufferedReader.readLine()) != null) {
+            inputLine = inputLine.trim()
+            if (inputLine.contains("<release>")) {
+                latestName = inputLine.replace("<release>", "").replace("</release>", "")
+            }
         }
     }
-    bufferedReader.close()
     return latestName
 }
 
@@ -49,6 +48,8 @@ dependencies {
     implementation group: 'net.runelite', name: 'cache', version: runeLiteVersion
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.slf4j:slf4j-simple:1.7.36'

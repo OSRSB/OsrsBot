@@ -1,5 +1,7 @@
 package net.runelite.rsb.wrappers;
 
+import lombok.extern.slf4j.Slf4j;
+
 import net.runelite.api.Actor;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.Player;
@@ -11,6 +13,7 @@ import java.lang.ref.SoftReference;
 /**
  * Represents a player.
  */
+@Slf4j
 public class RSPlayer extends RSCharacter {
 
 	private final SoftReference<Player> p;
@@ -101,7 +104,7 @@ public class RSPlayer extends RSCharacter {
 				return methods.menu.doAction(action, target);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Error performing action on player", e);
 			return false;
 		}
 	}

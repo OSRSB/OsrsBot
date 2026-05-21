@@ -291,7 +291,8 @@ public class Methods {
 				Thread.sleep(start + toSleep - now);
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Thread.currentThread().interrupt();
+			log.warn("Sleep interrupted", e);
 			return false;
 		}
 		return true;
@@ -326,7 +327,8 @@ public class Methods {
 				Thread.sleep(random.nextLong(15, 55));
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Thread.currentThread().interrupt();
+			log.warn("Sleep interrupted", e);
 			return false;
 		}
 		return false;

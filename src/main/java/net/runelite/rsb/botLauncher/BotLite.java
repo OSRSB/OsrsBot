@@ -331,7 +331,7 @@ public class BotLite extends RuneLite implements BotLiteInterface {
         try {
             getInjectorInstance().getScriptHandler().runScript(def.source.load(def));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to run script", e);
         }
     }
 

@@ -297,7 +297,7 @@ public abstract class Script extends Methods implements EventListener, Runnable 
 					onFinish();
 				} catch (ThreadDeath ignored) {
 				} catch (RuntimeException e) {
-					e.printStackTrace();
+					log.error("Error in onFinish", e);
 				}
 			} catch (Throwable t) {
 				log.error("Throwable: ", t);

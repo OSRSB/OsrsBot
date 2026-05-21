@@ -1,5 +1,7 @@
 package net.runelite.rsb.plugin;
 
+import lombok.extern.slf4j.Slf4j;
+
 import lombok.Getter;
 import net.runelite.client.ui.components.materialtabs.MaterialTab;
 import net.runelite.rsb.botLauncher.BotLite;
@@ -33,6 +35,7 @@ import javax.tools.ToolProvider;
 
 import static net.runelite.rsb.util.StringUtil.convertIntelliJPath;
 
+@Slf4j
 public class ScriptSelector extends JDialog implements ScriptListener {
 
 	public static void main(String[] args) {
@@ -134,7 +137,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Failed to load script sources", e);
 		}
 	}
 
@@ -299,7 +302,7 @@ public class ScriptSelector extends JDialog implements ScriptListener {
 			bot.getScriptHandler().runScript(def.source.load(def));
 			bot.getScriptHandler().removeScriptListener(this);
 		} catch (ServiceException exception) {
-			exception.printStackTrace();
+			log.error("Failed to start script", exception);
 		}
 	}
 

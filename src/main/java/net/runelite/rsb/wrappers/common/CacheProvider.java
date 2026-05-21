@@ -1,5 +1,7 @@
 package net.runelite.rsb.wrappers.common;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.runelite.cache.definitions.ItemDefinition;
@@ -72,7 +74,7 @@ public interface CacheProvider<T> {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to load cache definitions", e);
         }
     }
 

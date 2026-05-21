@@ -1,11 +1,14 @@
 package net.runelite.rsb.botLauncher;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
+@Slf4j
 public class BotClassLoader extends ClassLoader {
 
     private ChildClassLoader childClassLoader;
@@ -84,7 +87,7 @@ public class BotClassLoader extends ClassLoader {
                     byteSt.write(len);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Error loading class bytes", e);
             }
             //convert into byte array
             return byteSt.toByteArray();

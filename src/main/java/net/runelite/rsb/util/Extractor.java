@@ -14,17 +14,14 @@ import java.util.jar.JarOutputStream;
 @Slf4j
 public class Extractor implements Runnable {
 	private static void saveTo(InputStream in, String outPath) {
-		try {
-			OutputStream out = new FileOutputStream(new File(outPath));
+		try (InputStream is = in; OutputStream out = new FileOutputStream(new File(outPath))) {
 			byte[] buf = new byte[1024];
 			int len;
-			while ((len = in.read(buf)) > 0) {
+			while ((len = is.read(buf)) > 0) {
 				out.write(buf, 0, len);
 			}
-			in.close();
-			out.close();
-		} catch (Exception ignored) {
-			log.debug("Failed to save", ignored);
+		} catch (Exception e) {
+			log.debug("Failed to save to {}", outPath, e);
 		}
 	}
 
@@ -52,37 +49,39 @@ public class Extractor implements Runnable {
 				} catch (final UnsupportedEncodingException ignored) {
 					log.debug("Extractor run encoding issue", ignored);
 				}
-				JarFile jar = new JarFile(new File(p));
-				File out = new File(GlobalConfiguration.Paths.getScriptsExtractedCache());
-				FileOutputStream fos = null;
-				JarOutputStream jos = null;
-				Enumeration<JarEntry> entries = jar.entries();
-				while (entries.hasMoreElements()) {
-					JarEntry e = entries.nextElement();
-					if (e.getName().startsWith("scripts/")) {
-						if (fos == null) {
-							fos = new FileOutputStream(out);
-							jos = new JarOutputStream(fos);
-						}
-						InputStream in = loader.getResourceAsStream(e.getName());
-						jos.putNextEntry(new JarEntry(e.getName().substring(8)));
-						byte[] buffer = new byte[256];
-						while (true) {
-							int nRead = in.read(buffer, 0, buffer.length);
-							if (nRead < 0) {
-								break;
+				try (JarFile jar = new JarFile(new File(p))) {
+					File out = new File(GlobalConfiguration.Paths.getScriptsExtractedCache());
+					FileOutputStream fos = null;
+					JarOutputStream jos = null;
+					try {
+						Enumeration<JarEntry> entries = jar.entries();
+						while (entries.hasMoreElements()) {
+							JarEntry e = entries.nextElement();
+							if (e.getName().startsWith("scripts/")) {
+								if (fos == null) {
+									fos = new FileOutputStream(out);
+									jos = new JarOutputStream(fos);
+								}
+								try (InputStream in = loader.getResourceAsStream(e.getName())) {
+									jos.putNextEntry(new JarEntry(e.getName().substring(8)));
+									byte[] buffer = new byte[256];
+									int nRead;
+									while ((nRead = in.read(buffer, 0, buffer.length)) >= 0) {
+										jos.write(buffer, 0, nRead);
+									}
+								}
 							}
-							jos.write(buffer, 0, nRead);
 						}
-						in.close();
+					} finally {
+						if (jos != null) {
+							jos.close();
+						} else if (fos != null) {
+							fos.close();
+						}
 					}
 				}
-				if (fos != null) {
-					jos.close();
-					fos.close();
-				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error("Failed to extract scripts from JAR", e);
 			}
 		} else if (args.length > 2) {
 			if (args[0].toLowerCase().startsWith("delete")) {

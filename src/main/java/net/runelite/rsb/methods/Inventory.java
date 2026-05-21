@@ -1,5 +1,7 @@
 package net.runelite.rsb.methods;
 
+import lombok.extern.slf4j.Slf4j;
+
 import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
  *
  * @author GigiaJ
  */
+@Slf4j
 public class Inventory extends MethodProvider {
 
 	public static final int EMPTY_SLOT_ITEM_ID = 6512;
@@ -684,7 +687,7 @@ public class Inventory extends MethodProvider {
 			try {
 				selector.wait();
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.warn("Interrupted while waiting for inventory screenshot", e);
 			}
 		}
 		return selector.getSelected();

@@ -1,5 +1,7 @@
 package net.runelite.rsb.internal.instrumentate;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
@@ -9,6 +11,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
 
+@Slf4j
 public class ComponentMousePositionTransformer implements ClassFileTransformer {
 
     public byte[] transform(ClassLoader loader, String className,
@@ -16,36 +19,26 @@ public class ComponentMousePositionTransformer implements ClassFileTransformer {
               byte[] classfileBuffer) throws IllegalClassFormatException {
         byte[] byteCode = classfileBuffer;
 
-        // since this transformer will be called when all the classes are
-        // loaded by the classloader, we are restricting the instrumentation
-        // using if block only for the Component & Container classes
         if (className.equals("java/awt/Component")) {
-            System.out.println("Instrumenting......");
+            log.debug("Instrumenting java/awt/Component");
             try {
                 ClassPool classPool = ClassPool.getDefault();
-                CtClass ctClass = classPool.makeClass(new ByteArrayInputStream(
-                        classfileBuffer));
+                CtClass ctClass = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
                 classPool.getClassLoader();
 
                 CtMethod[] methods = ctClass.getDeclaredMethods();
                 for (CtMethod method : methods) {
                     if (method.getName().contains("getMousePosition")) {
                         method.setBody("{" +
-                                //"try {" +
-                                "System.out.println(\"DING\");" +
-                                //"}catch(NoClassDefFoundError e) { System.out.println(\"Cheesesticks\"); }" +
-                                "return new java.awt.Point (0,0);" +
-
-
+                                "return new java.awt.Point(0, 0);" +
                                 "}");
                     }
                 }
                 byteCode = ctClass.toBytecode();
                 ctClass.detach();
-                System.out.println("Instrumentation complete.");
+                log.debug("Instrumentation of java/awt/Component complete");
             } catch (Throwable ex) {
-                System.out.println("Exception: " + ex);
-                ex.printStackTrace();
+                log.error("Failed to instrument java/awt/Component", ex);
             }
         }
         return byteCode;

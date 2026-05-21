@@ -1,13 +1,14 @@
 package net.runelite.rsb.event;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.event.events.RSEvent;
 
 import java.util.EventListener;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
+@Slf4j
 public class EventManager implements Runnable {
 
 	public static class KillEvent extends RSEvent {
@@ -22,8 +23,6 @@ public class EventManager implements Runnable {
 			return -1;
 		}
 	}
-
-	private final Logger log = Logger.getLogger(EventManager.class.getName());
 
 	private final EventMulticaster multicaster = new EventMulticaster();
 	private final Map<Integer, EventObject> queue = new HashMap<>();
@@ -152,8 +151,9 @@ public class EventManager implements Runnable {
 					while (queue.isEmpty()) {
 						try {
 							queue.wait();
-						} catch (final Exception e) {
-							log.info("Event Queue: " + e.toString());
+						} catch (final InterruptedException e) {
+							Thread.currentThread().interrupt();
+							log.warn("Event queue wait interrupted");
 						}
 					}
 					int emptySpots = 0;
@@ -180,14 +180,13 @@ public class EventManager implements Runnable {
 					event.notifyAll();
 					return;
 				} catch (final Throwable e) {
-					e.printStackTrace();
+					log.error("Error dispatching event", e);
 				}
 				synchronized (event) {
 					event.notifyAll();
 				}
 			} catch (final Exception e) {
-				log.info("Event Queue: " + e.toString());
-				e.printStackTrace();
+				log.error("Unexpected error in event loop", e);
 			}
 		}
 	}

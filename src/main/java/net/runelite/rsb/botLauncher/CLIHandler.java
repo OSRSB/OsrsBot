@@ -1,46 +1,82 @@
 package net.runelite.rsb.botLauncher;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Set;
 
 import static net.runelite.rsb.botLauncher.Application.*;
 
+@Slf4j
 public class CLIHandler {
 
     /**
      * Starts a new thread which handles the command line arguments passed while the program is running.
-     * The switch case provides an easy-to-read implementation in which commands are available for usage.
      */
     public static void handleCLI() {
         Scanner input = new Scanner(System.in);
         new Thread(() -> {
-            while(input.hasNext()) {
-                BotLiteInterface botInterface;
-                String[] command = input.nextLine().split(" ");
-                System.out.println(Arrays.toString(command));
+            while (input.hasNextLine()) {
+                String line = input.nextLine().trim();
+                if (line.isEmpty()) {
+                    continue;
+                }
+                String[] command = line.split(" ");
+                log.debug("CLI command: {}", Arrays.toString(command));
                 switch (command[0].toLowerCase()) {
                     case "runscript":
-                        botInterface = Application.getBots()[Integer.parseInt(command[1])];
-                        botInterface.runScript(command[2], command[3]);
+                        if (command.length < 4) {
+                            log.warn("Usage: runscript <botIndex> <account> <scriptName>");
+                            break;
+                        }
+                        int runIdx = parseBotIndex(command[1]);
+                        if (runIdx < 0) break;
+                        BotLiteInterface runBot = getBotAt(runIdx);
+                        if (runBot == null) break;
+                        runBot.runScript(command[2], command[3]);
                         break;
                     case "stopscript":
-                        botInterface = Application.getBots()[Integer.parseInt(command[1])];
-                        botInterface.stopScript();
+                        if (command.length < 2) {
+                            log.warn("Usage: stopscript <botIndex>");
+                            break;
+                        }
+                        int stopIdx = parseBotIndex(command[1]);
+                        if (stopIdx < 0) break;
+                        BotLiteInterface stopBot = getBotAt(stopIdx);
+                        if (stopBot == null) break;
+                        stopBot.stopScript();
                         break;
                     case "addbot":
                         addBot(true);
                         break;
                     case "checkstate":
                         for (BotLiteInterface botInstance : bots) {
-                            System.out.println(botInstance.getClass().getClassLoader());
+                            log.info("Bot classloader: {}", botInstance.getClass().getClassLoader());
                         }
                         break;
                     default:
-                        System.out.println("Invalid command");
+                        log.warn("Unknown command: {}. Valid commands: runscript, stopscript, addbot, checkstate", command[0]);
                         break;
                 }
             }
-        }).start();
+        }, "CLI-Handler").start();
+    }
+
+    private static int parseBotIndex(String raw) {
+        try {
+            return Integer.parseInt(raw);
+        } catch (NumberFormatException e) {
+            log.warn("Bot index '{}' is not a valid integer", raw);
+            return -1;
+        }
+    }
+
+    private static BotLiteInterface getBotAt(int index) {
+        BotLiteInterface[] bots = Application.getBots();
+        if (index < 0 || index >= bots.length) {
+            log.warn("Bot index {} is out of range (0-{})", index, bots.length - 1);
+            return null;
+        }
+        return bots[index];
     }
 }

@@ -57,7 +57,7 @@ public class Bank extends MethodProvider {
 				}
 			}
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			log.error("Failed to reflect bank NPC IDs", e);
 		}
 		BANKERS = toIntArray(bankers);
 		BANK_BOOTHS = toIntArray(bankBooths);
@@ -616,7 +616,7 @@ public class Bank extends MethodProvider {
 			}
 			return isOpen();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error("Failed to open bank", e);
 			return false;
 		}
 	}
@@ -658,7 +658,7 @@ public class Bank extends MethodProvider {
 			}
 			return isDepositOpen();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.error("Failed to open deposit box", e);
 			return false;
 		}
 	}
@@ -803,7 +803,7 @@ public class Bank extends MethodProvider {
 				try {
 					i = Integer.parseInt(item.getActions()[4].toLowerCase().trim().replaceAll("\\D", ""));
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.warn("Failed to parse withdraw action count", e);
 				}
 				if (i == count) {
 					action = defaultAction;
@@ -867,7 +867,7 @@ public class Bank extends MethodProvider {
 				try {
 					i = Integer.parseInt(item.getActions()[4].toLowerCase().trim().replaceAll("\\D", ""));
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.warn("Failed to parse deposit action count", e);
 				}
 				if (i == count) {
 					action = defaultAction;

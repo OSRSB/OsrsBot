@@ -3,6 +3,7 @@ package net.runelite.rsb.internal;
 import clojure.lang.IFn;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.rsb.botLauncher.BotLite;
 import net.runelite.rsb.internal.listener.DebugSettingsListener;
 import net.runelite.rsb.script.Script;
@@ -12,6 +13,7 @@ import net.runelite.rsb.script.randoms.LoginBot;
 
 import java.util.*;
 
+@Slf4j
 public class ScriptHandler {
 
 	private final ArrayList<net.runelite.rsb.script.Random> randoms = new ArrayList<>();
@@ -64,7 +66,7 @@ public class ScriptHandler {
 
 			 */
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Failed to initialize random event handlers", e);
 		}
 		for (net.runelite.rsb.script.Random r : randoms) {
 			r.init(bot.getMethodContext());

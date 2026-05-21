@@ -1,5 +1,7 @@
 package net.runelite.rsb.internal.globval;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -8,6 +10,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 
+@Slf4j
 public class GlobalConfiguration {
 
 	public enum OperatingSystem {
@@ -282,7 +285,7 @@ public class GlobalConfiguration {
 					out.write(path);
 					out.close();
 				} catch (final Exception e) {
-					e.printStackTrace();
+					log.error("Failed to write path cache", e);
 				}
 			}
 		}

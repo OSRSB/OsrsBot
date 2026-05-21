@@ -42,11 +42,13 @@ public class AccountManager extends JDialog implements ActionListener {
 	private static final AccountStore accountStore = new AccountStore(new File(FILE_NAME));
 
 	static {
-		accountStore.setPassword("0000000000000000000000000000000000000000");
+		File keyFile = new File(new File(FILE_NAME).getParentFile(), ".osrsbot_key");
+		byte[] installKey = AccountStore.loadOrCreateInstallKey(keyFile);
+		accountStore.setKeyBytes(installKey);
 		try {
 			accountStore.load();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("Failed to load accounts file", e);
 		}
 	}
 
@@ -197,8 +199,7 @@ public class AccountManager extends JDialog implements ActionListener {
 					try {
 						accountStore.save();
 					} catch (IOException ioe) {
-						ioe.printStackTrace();
-						log.info("Failed to save accounts...  Please report this.");
+						log.error("Failed to save accounts", ioe);
 					}
 					dispose();
 
@@ -288,11 +289,11 @@ public class AccountManager extends JDialog implements ActionListener {
 			for (AccountStore.Account anAccountCollection : accountCollection) {
 				theList.add(anAccountCollection.getUsername());
 			}
-			return theList.toArray(new String[theList.size()]);
+			return theList.toArray(new String[0]);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Failed to list account names", e);
 		}
-		return null;
+		return new String[0];
 	}
 
 	public static AccountManager getInstance() {
