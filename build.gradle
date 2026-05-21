@@ -52,7 +52,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.14'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+    testImplementation 'org.mockito:mockito-core:5.10.0'
     testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion, {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
@@ -66,7 +66,12 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs= ["src/main/java"]
+            srcDirs = ["src/main/java"]
+        }
+    }
+    test {
+        java {
+            srcDirs = ["src/test/java"]
         }
     }
 }
